@@ -90,7 +90,7 @@ class DepositSaleController extends Controller
         $pdf->setOption('footer-left', "[page]/[topage]");
         $pdf->setOption('header-html', $header);
 
-        $filename = $depositSale->getReference();
+        $filename = $depositSale->getReference(). ".pdf";
 
         return new Response(
             $pdf->getOutputFromHtml($html),

@@ -96,7 +96,7 @@ class CouponController extends Controller
         $pdf->setOption('footer-html', $footer);
         $pdf->setOption('footer-left', "[page]/[topage]");
         $pdf->setOption('header-html', $header);
-        $filename = $coupon->getReference();
+        $filename = $coupon->getReference(). ".pdf";
 
         return new Response(
             $pdf->getOutputFromHtml($html),

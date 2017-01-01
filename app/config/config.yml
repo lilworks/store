@@ -254,7 +254,7 @@ liip_imagine:
                  thumbnail: { size: [1348, 523], mode: outbound }
                  #background: { size: [1350, 525], position: center, color: '#ccc' }
 knp_snappy:
-    temporary_folder: kernel.cache_dir%/snappy
+    temporary_folder: %kernel.cache_dir%/snappy
     pdf:
         enabled:    true
         binary:     %snappy_binary%

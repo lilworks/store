@@ -126,7 +126,7 @@ class OrderController extends Controller
         $pdf->setOption('footer-left', "[page]/[topage]");
         $pdf->setOption('header-html', $header);
 
-        $filename = $order->getReference();
+        $filename = $order->getReference() . ".pdf";
 
         return new Response(
             $pdf->getOutputFromHtml($html),
