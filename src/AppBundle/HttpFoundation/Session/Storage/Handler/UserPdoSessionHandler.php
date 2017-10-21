@@ -8,34 +8,15 @@ class UserPdoSessionHandler extends PdoSessionHandler
 {
 
     protected  $em;
-    protected  $pdo;
-    protected  $dbOptions;
-    protected  $context;
-    protected  $driver;
-    protected  $table;
-    protected  $dataCol;
-    protected  $lifetimeCol;
-    protected  $idCol;
-    protected  $timeCol;
-    protected $inTransaction;
-    protected $userCol;
+
+
 
     public function __construct( $pdo, array $dbOptions = array(), $context,\Doctrine\ORM\EntityManager $em)
     {
 
         $this->em = $em;
-        parent::__construct($pdo, $dbOptions);
-
         $this->context = $context;
-        $this->dbOptions = $dbOptions;
-        $this->pdo = $this->getConnection();
-        $this->driver = $this->pdo->getAttribute(\PDO::ATTR_DRIVER_NAME);
-        $this->table = "sessions";
-        $this->dataCol = "sess_data";
-        $this->lifetimeCol = "sess_lifetime";
-        $this->idCol = "sess_id";
-        $this->timeCol = "sess_time";
-        $this->userCol = "user";
+        parent::__construct($pdo, $dbOptions);
 
     }
 
