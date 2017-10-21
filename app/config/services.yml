@@ -48,6 +48,12 @@ services:
         tags:
             - { name: twig.extension }
 
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+        public:    false
+        arguments:
+            - 'mysql:dbname=%database_name%'
+            - { db_username: %database_user%, db_password: %database_password% }
+
     session.handler.pdo:
             #class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
             class:     AppBundle\HttpFoundation\Session\Storage\Handler\UserPdoSessionHandler

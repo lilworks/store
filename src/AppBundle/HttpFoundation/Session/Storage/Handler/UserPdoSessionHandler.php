@@ -44,12 +44,8 @@ class UserPdoSessionHandler extends PdoSessionHandler
      */
     public function write($id, $data)
     {
-
-
         $session = $this->em->getRepository('AppBundle:Session')->find($id);
         if( $this->context->getToken() && $this->context->getToken()->getUser() && !is_string($this->context->getToken()->getUser()) ){
-
-
             $user = $this->em->getRepository('AppBundle:User')->find($this->context->getToken()->getUser()->getId());
             if(!$session->getUser()){
                 $session->setUser($user);
@@ -57,21 +53,12 @@ class UserPdoSessionHandler extends PdoSessionHandler
                 $this->em->persist($session);
                 $this->em->flush();
             }
-
         }elseif($session && $session->getUser()){
             $session->getUser()->removeSession($session);
             $session->setUser(null);
             $this->em->persist($session);
             $this->em->flush();
         }
-
-
-
-
-
         parent::write($id,$data);
-
-
-
     }
 }
