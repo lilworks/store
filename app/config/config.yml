@@ -27,7 +27,7 @@ framework:
     session:
         handler_id: session.handler.pdo
         cookie_lifetime: 3600
-        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+        save_path:   "/tmp/sessions/store/%kernel.environment%"
     fragments:       ~
     http_method_override: true
     assets: ~

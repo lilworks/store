@@ -48,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/app/config/config.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.55912596" vertical-offset="0" max-vertical-offset="6120">
-              <caret line="29" column="77" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="77" />
+              <caret line="29" column="41" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -1287,7 +1287,7 @@
     <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.55912596" vertical-offset="0" max-vertical-offset="6120">
-          <caret line="29" column="77" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="77" />
+          <caret line="29" column="41" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
           <folding />
         </state>
       </provider>
