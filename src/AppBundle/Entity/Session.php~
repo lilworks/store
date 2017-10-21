@@ -55,14 +55,12 @@ class Session
 
 
     /**
-     * One User is One Session Token.
-     * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\Basket", mappedBy="token", cascade={"remove","persist"})
+     * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\Basket", inversedBy="token")
+     * @ORM\JoinColumn(name="basket", referencedColumnName="id")
      */
     private $basket;
 
-    
 
-    
 
     /**
      * Set id

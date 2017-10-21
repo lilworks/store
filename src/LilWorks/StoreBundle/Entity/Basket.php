@@ -47,11 +47,6 @@ class Basket
     protected $user;
 
 
-    /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Session", inversedBy="basket")
-     * @ORM\JoinColumn(name="token", referencedColumnName="sess_id", nullable = true)
-     */
-    private $token;
 
     /**
      * @var datetime
@@ -113,7 +108,10 @@ class Basket
      */
     private $tot;
 
-
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Session", mappedBy="basket")
+     */
+    private $token;
 
     /**
      * Constructor
@@ -228,30 +226,6 @@ class Basket
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Set token
-     *
-     * @param \AppBundle\Entity\Session $token
-     *
-     * @return Basket
-     */
-    public function setToken(\AppBundle\Entity\Session $token = null)
-    {
-        $this->token = $token;
-
-        return $this;
-    }
-
-    /**
-     * Get token
-     *
-     * @return \AppBundle\Entity\Session
-     */
-    public function getToken()
-    {
-        return $this->token;
     }
 
     /**
@@ -392,5 +366,29 @@ class Basket
     public function getPaymentMethod()
     {
         return $this->paymentMethod;
+    }
+
+    /**
+     * Set token
+     *
+     * @param \AppBundle\Entity\Session $token
+     *
+     * @return Basket
+     */
+    public function setToken(\AppBundle\Entity\Session $token = null)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return \AppBundle\Entity\Session
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 }

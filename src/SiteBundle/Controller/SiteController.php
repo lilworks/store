@@ -9,12 +9,13 @@ class SiteController extends Controller
 
     public function userBasketSmallAction()
     {
-        $basketService = $this->get('site.basket')->getBasket();
+        $basket = $this->get('site.basket')->getBasket();
         $user = $this->getUser();
+
 
         return $this->render('SiteBundle:Site:userbasketsmall.html.twig',array(
             'user'=>$user,
-            'basket'=>$basketService
+            'basket'=>$basket
         ));
     }
 }

@@ -35,6 +35,9 @@ class LoginListener implements EventSubscriberInterface
 
     public function onLogin($event)
     {
+
+      #  die("LOGI LISTENER");
+/*
         $session_id =  $this->container->get('session')->getId() ;
         $session = $this->em->getRepository('AppBundle:Session')->find($session_id);
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
@@ -50,5 +53,6 @@ class LoginListener implements EventSubscriberInterface
             }
 
         }
+*/
     }
 }

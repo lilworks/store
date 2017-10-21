@@ -33,6 +33,7 @@ class Country
      * @var string
      *
      * @ORM\Column(name="name", type="string",length=255,nullable=false)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -48,6 +49,7 @@ class Country
      * @var string
      *
      * @ORM\Column(name="tag", type="string",length=2,nullable=false)
+     * @Assert\NotBlank()
      */
     private $tag;
 

@@ -22,6 +22,7 @@ class ShippingMethodsCountries
     /**
      * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\ShippingMethod", inversedBy="shippingmethods_countries")
      * @ORM\JoinColumn(name="shippingMethod", referencedColumnName="id", nullable=FALSE)
+     * @Assert\NotBlank()
      */
     protected $shippingMethod;
 

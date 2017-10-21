@@ -24,7 +24,7 @@ security:
                 logout:
                     path:   fos_user_security_logout
                     invalidate_session: false
-                    handlers: [appbundle_logoutListener]
+                    #handlers: [appbundle_logoutListener]
                 anonymous:    true
 
     access_control:

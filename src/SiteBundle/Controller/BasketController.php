@@ -118,10 +118,8 @@ class BasketController extends Controller
         $session = $request->getSession();
         $session->start();
 
-
-        $currentRoute = $request->get('_route');
-
-        $basket = $em->getRepository('LilWorksStoreBundle:Basket')->findOneByToken($session->getId());
+        $sessionDb = $em->getRepository('AppBundle:Session')->find($session->getId());
+        $basket = $sessionDb->getBasket();
 
 
         $basketService->addProduct($product);

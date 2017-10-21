@@ -1,4 +1,4 @@
 parameters:
-    context: online
-    mode: slave
+    context: offline
+    mode: master
     currency: EUR

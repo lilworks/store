@@ -430,60 +430,80 @@ class Basket
 
     public function getBasket()
     {
-        $user = $this->security->getToken()->getUser();
-
         $request = $this->requestStack->getCurrentRequest();
         $session = $request->getSession();
         $session->start();
-        if( ! $basket = $this->em->getRepository('LilWorksStoreBundle:Basket')->findOneByToken($session->getId())){
-            $dbSession = $this->em->getRepository('AppBundle:Session')->find($session->getId());
+
+        $sessionDb = $this->em->getRepository('AppBundle:Session')->find($session->getId());
+        $basket =   $sessionDb->getBasket();
+
+
+        if( ! $basket ){
             $basket = new BasketEntity();
-            $basket->setToken($dbSession);
         }
-        if(count($this->security->getToken()->getRoles()) > 0){
+
+
+        return $basket;
+    }
+
+    public function createBasket(){
+        $request = $this->requestStack->getCurrentRequest();
+        $session = $request->getSession();
+        $sessionDb = $this->em->getRepository('AppBundle:Session')->find($session->getId());
+
+        $basket = new BasketEntity();
+        $basket->setToken($sessionDb);
+        $sessionDb->setBasket($basket);
+        if( count($this->security->getToken()->getRoles()) > 0){
+            $user = $this->security->getToken()->getUser();
             $basket->setUser($user);
         }
         $this->em->persist($basket);
         $this->em->flush();
+
+
         return $basket;
     }
-
     public function addProduct(Product $product)
     {
+
         $request = $this->requestStack->getCurrentRequest();
         $session = $request->getSession();
-        $session->start();
 
+        $sessionDb = $this->em->getRepository('AppBundle:Session')->find($session->getId());
+        $basket =   $sessionDb->getBasket();
+        if( ! $basket ){
+            $basket = $this->createBasket();
+        }
 
-        $basket = $this->em->getRepository('LilWorksStoreBundle:Basket')->findOneByToken($session->getId());
-
-
-        foreach($basket->getBasketsProducts() as $productInBasket){
-            if($productInBasket->getProduct()->getId() === $product->getId()){
-                if($productInBasket->getProduct()->getIsSecondHand() !=1)
-                $productInBasket->setQuantity($productInBasket->getQuantity()+1);
-                $notNew = true;
+        if($basket){
+            foreach($basket->getBasketsProducts() as $productInBasket){
+                if($productInBasket->getProduct()->getId() === $product->getId()){
+                    if($productInBasket->getProduct()->getIsSecondHand() !=1)
+                    $productInBasket->setQuantity($productInBasket->getQuantity()+1);
+                    $notNew = true;
+                }
             }
-        }
-        if(!isset($notNew)){
-            $basketsProducts = new BasketsProducts();
-            $basketsProducts->setProduct($product);
-            $basketsProducts->setBasket($basket);
-            $basketsProducts->setQuantity(1);
-            $basket->addBasketsProduct($basketsProducts);
-        }
+            if(!isset($notNew)){
+                $basketsProducts = new BasketsProducts();
+                $basketsProducts->setProduct($product);
+                $basketsProducts->setBasket($basket);
+                $basketsProducts->setQuantity(1);
+                $basket->addBasketsProduct($basketsProducts);
+            }
 
-        $this->em->persist($basket);
-        $this->em->flush();
+            $this->em->persist($basket);
+            $this->em->flush();
 
-        return true;
+            return true;
+        }
     }
 
     public function removeProduct(Product $product)
     {
         $request = $this->requestStack->getCurrentRequest();
         $session = $request->getSession();
-        $session->start();
+        #$session->start();
 
 
         $basket = $this->em->getRepository('LilWorksStoreBundle:Basket')->findOneByToken($session->getId());
@@ -501,7 +521,7 @@ class Basket
         }
 
         $this->em->persist($basket);
-        $this->em->flush();
+        #$this->em->flush();
 
         return true;
     }
@@ -524,7 +544,7 @@ class Basket
         }
 
         $this->em->persist($basket);
-        $this->em->flush();
+       # $this->em->flush();
 
         return true;
     }
