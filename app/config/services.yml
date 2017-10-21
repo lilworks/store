@@ -19,6 +19,18 @@ services:
         arguments: ['@router']
         tags:
             - { name: kernel.event_subscriber }
+
+    app.user_login:
+        class: AppBundle\EventListener\LoginListener
+        arguments: ['@service_container','@doctrine.orm.default_entity_manager']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    appbundle_logoutListener:
+        class: AppBundle\EventListener\LogoutListener
+        arguments: ['@service_container','@doctrine.orm.default_entity_manager']
+
+
     app.register_success:
             class: AppBundle\EventListener\RegisterListener
             arguments: ['@doctrine.orm.entity_manager']
