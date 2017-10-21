@@ -25,8 +25,8 @@ framework:
         engines: ['twig']
     trusted_hosts:   ~
     session:
-        handler_id: session.handler.pdo
-        #handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        #handler_id: session.handler.pdo
+        handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
         cookie_lifetime: 3600
         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
