@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="lilworks_depositSale")
+ * @ORM\Table(name="lilworks_depositsale")
  * @ORM\Entity(repositoryClass="LilWorks\StoreBundle\Entity\Repository\DepositSaleRepository")
  * @ORM\HasLifecycleCallbacks
  */
