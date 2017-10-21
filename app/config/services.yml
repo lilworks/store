@@ -51,12 +51,10 @@ services:
     session.handler.pdo:
             #class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
             class:     AppBundle\HttpFoundation\Session\Storage\Handler\UserPdoSessionHandler
-
             public:    false
-
             arguments:
                 - 'mysql:host=%database_host%;port=%database_port%;dbname=%database_name%'
-                - {lock_mode: 0 , db_table: sessions ,  db_username: '%database_user%', db_password: '%database_password%' , db_user_col: user , db_data_col: sess_data , db_id_col: sess_id,'db_time_col': sess_time, db_user_col: user}
+                - {lock_mode: 0 , db_table: sessions ,  db_username: '%database_user%', db_password: '%database_password%'   , db_data_col: sess_data , db_id_col: sess_id,'db_time_col': sess_time, db_user_col: user}
                 - "@security.token_storage"
                 - "@doctrine.orm.entity_manager"
     app.js_vars:

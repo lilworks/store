@@ -7,11 +7,6 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    pdo.db_options:
-        db_table:       sessions
-
-        db_time_col:    sess_time
-        db_user_col: user
 
 framework:
     #esi:             ~
@@ -32,6 +27,7 @@ framework:
     session:
         handler_id: session.handler.pdo
         cookie_lifetime: 3600
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
     http_method_override: true
     assets: ~
