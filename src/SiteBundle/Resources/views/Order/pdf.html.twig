@@ -1,0 +1,197 @@
+<html>
+<head>
+    {#
+    <link rel="stylesheet" href="{{ base_dir ~ asset('/assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+    #}
+    <link rel="stylesheet"
+          href="{{ base_dir ~ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+
+    <style>
+        body{
+            background-image: url('{{  asset('storeinfo/' ~ param["ORDER_LOGO_TOP"].pictureName) }}');
+        }
+        #ORDER_LOGO_TOP{
+            position: absolute;
+            top: 2;
+            left: 2;
+
+        }
+        #ORDER_TEXT_TOP {
+            margin-left: 120px;
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body >
+{% if param["ORDER_LOGO_TOP"].pictureName is defined %}
+    <img id="ORDER_LOGO_TOP" src="{{  asset('storeinfo/' ~ param["ORDER_LOGO_TOP"].pictureName) | imagine_filter('my_thumb') }}" />
+{% endif %}
+
+<div id="ORDER_TEXT_TOP">
+    {{ param["ORDER_TEXT_TOP"].value|raw }}
+</div>
+
+<h1>
+        {% trans %}order{% endtrans %}
+    </h1>
+
+
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>{% trans %}reference{% endtrans %}</th>
+                <td>{{ order.reference }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}createdAt{% endtrans %}</th>
+                <td>{% if order.createdAt %}{{ order.createdAt|date('Y-m-d H:i') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}updatedAt{% endtrans %}</th>
+                <td>{% if order.updatedAt %}{{ order.updatedAt|date('Y-m-d H:i') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}seller{% endtrans %}</th>
+                <td>
+                    {% if order.userAsSeller %}
+                        {{ order.userAsSeller.username }}
+                    {% else %}
+                    <i class="fa fa-circle-thin" style="color: red;"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}orderSteps{% endtrans %}</th>
+                <td>
+                    <ul>
+                    {% for orderOrderStep in order.ordersOrderSteps %}
+                        <li>{{ orderOrderStep.createdAt|date }} • {{ orderOrderStep.orderStep.name }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}customer{% endtrans %}</th>
+                <td>
+                    {% if order.customer %}
+                        {{ order.customer.name }}
+                        {% if order.customer.user %}
+                            {{ order.customer.user.username }} ({{ order.customer.user.email }})
+                        {% endif %}
+                    {% else %}
+                        <i class="fa fa-circle-thin" style="color: red;"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}userComment{% endtrans %}</th>
+                <td>{{ order.userComment }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}storeComment{% endtrans %}</th>
+                <td>{{ order.storeComment }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}total{% endtrans %}</th>
+
+                <td>
+                    {% set tot = order.tot|totPriceCalculator(order.ordersProducts)  %}
+                    <li>{{ tot['HT']|price('HT')|raw }}</li>
+                    <li>{{ tot['TTC']|price('TTC')|raw }}</li>
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}payment{% endtrans %}</th>
+                <td>
+                    {% set payed = 0 %}
+                    {% for payment in order.ordersPaymentMethods %}
+                        <li>{{ payment.paymentMethod.name }} {{ payment.amount|price|raw  }} {{ payment.payedAt|date('Y-m-d H:i') }}</li>
+                        {% set payed = payed+payment.amount %}
+                    {% endfor %}
+                    <div>
+                        <ul>
+                            <li>{% trans %}payed{% endtrans %}:{{ payed|price }}</li>
+                            {% set rest = tot['TTC']-payed %}
+                            <li>
+                                {% trans %}payment rest{% endtrans %}:
+                                {% if rest > 0 %}
+                                <span style="color: red;">{{ rest|price }}</span>
+                                {% else %}
+                                <span style="color: green;">{{ rest|price }}</span>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}shippingMethod{% endtrans %}</th>
+                <td>
+                    {% for orderRealShippingMethod in order.ordersRealShippingMethods %}
+                        <li>{{ orderRealShippingMethod.shippingMethod.name }} {{ orderRealShippingMethod.price|price  }} </li>
+                    {% endfor %}
+
+                </td>
+            </tr>
+            <tr>
+                <th>articles</th>
+                <td>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+
+                                <th>{% trans %}name{% endtrans %}</th>
+
+                                <th>{% trans %}shippingMethod{% endtrans %}</th>
+                                <th>{% trans %}quantity{% endtrans %}</th>
+                                <th>{% trans %}price{% endtrans %}</th>
+                                <th>{% trans %}tot{% endtrans %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in order.ordersProducts %}
+                                <tr>
+
+                                    <td>{{ product.name }}</td>
+                                    <td>
+                                        {% if  product.OrderRealShippingMethod is not null %}
+                                            {{ product.OrderRealShippingMethod.shippingMethod.name }}
+                                            {% if  product.OrderRealShippingMethod.reference is not null %}
+                                                {{ product.OrderRealShippingMethod.reference }}
+                                            {%  endif  %}
+                                        {% else %}
+                                            <i class="fa fa-circle"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ product.quantity }}</td>
+                                    <td>
+                                        {{ product.price|price|raw }}
+                                        {% if product.taxes|length > 0 %}
+                                            <ul>
+                                                {% for tax in product.taxes %}
+                                                    <li>{{ tax.name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% set price = product.price|priceCalculator(product)  %}
+                                        <li>{{ price['HT']|price('HT')|raw }}</li>
+                                        <li>{{ price['TTC']|price('TTC')|raw }}</li>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+</body>

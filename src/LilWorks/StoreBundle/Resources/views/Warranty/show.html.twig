@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.warranty.show{% endtrans %}
+    </h1>
+
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+        <a href="{{ path('warranty_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+        <a href="{{ path('warranty_new') }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+        </a>
+        <a href="{{ path('warranty_edit', { 'id': warranty.id }) }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+        </a>
+        <a href="{{ path('warranty_delete', { 'id': warranty.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+        </a>
+    </div>
+
+
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.idandtag{% endtrans %}</th>
+                <td>#{{ warranty.id }} #{{ warranty.tag }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+                <td>{{ warranty.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.description{% endtrans %}</th>
+                <td>{{ warranty.descriptionPublic|raw }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.descriptioninternal{% endtrans %}</th>
+                <td>{{ warranty.descriptionInternal|raw }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.warranty.orders{% endtrans %}</th>
+                <td>
+                    {% for product in  warranty.ordersProducts %}
+                        <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{id: product.order.id}) }}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            {% if product.pictures|length > 0 %}
+                                <img src="{{ asset('product/' ~ product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
+                            {% endif %}
+                            {{ product.order.reference }} {{ product.name }}
+                        </a>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.warranty.productsoffline{% endtrans %}</th>
+                <td>
+                            {% for product in warranty.productsOffline %}
+                                <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{id: product.id}) }}">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    {% if product.product.pictures|length > 0 %}
+                                        <img src="{{ asset('product/' ~ product.product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
+                                    {% endif %}
+                                    {{ product.brand.name }} {{ product.name }}
+                                </a>
+                            {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.warranty.productsonline{% endtrans %}</th>
+                <td>
+
+                            {% for product in warranty.productsOnline %}
+                                <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{id: product.id}) }}">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    {% if product.pictures|length > 0 %}
+                                        <img src="{{ asset('product/' ~ product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
+                                    {% endif %}
+                                    {{ product.brand.name }} {{ product.name }}
+                                </a>
+                            {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+coupon_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Coupon:index" }
+    methods:  GET
+
+coupon_show:
+    path:     /{coupon_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Coupon:show" }
+    methods:  GET
+
+coupon_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Coupon:new" }
+    methods:  [GET, POST]
+
+coupon_edit:
+    path:     /{coupon_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Coupon:edit" }
+    methods:  [GET, POST]
+
+coupon_pdf:
+    path:     /{coupon_id}/pdf
+    defaults: { _controller: "LilWorksStoreBundle:Coupon:pdf" }
+    methods:  [GET, POST]
+
+coupon_delete:
+    path:     /{coupon_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Coupon:delete" }
+    methods:  [GET, POST]

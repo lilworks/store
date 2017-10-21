@@ -1,0 +1,77 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <h2>
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+            {% trans %}Your profile{% endtrans %}
+        </h2>
+        <div>
+            <a href="{{ path('fos_user_profile_edit') }}"  class="btn btn-primary" role="button">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                {% trans %}Edit{% endtrans %}
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+        <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+
+        <h3>
+            <a href="{{ path('site_customer_phonenumbers') }}" class="btn btn-sm btn-primary" role="button">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </a>
+            {{ 'profile.show.phonenumbers'|trans }}
+        </h3>
+        <ul class="list-group">
+        {% for phonenumber in user.customer.phonenumbers %}
+            <li class="list-group-item">
+                {{ phonenumber.phonenumber }} {{ phonenumber.description }}
+            </li>
+        {% endfor %}
+        </ul>
+
+        <h3>
+            <a href="{{ path('site_customer_addresses') }}" class="btn btn-sm btn-primary" role="button">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </a>
+            {{ 'profile.show.addresses'|trans }}
+        </h3>
+
+        <ul class="list-group">
+            {% for address in user.customer.addresses %}
+                <li class="list-group-item">
+                    {{ address|addressInline|raw }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h3>{{ 'profile.show.orders'|trans }}</h3>
+        {% if user.customer.orders|length > 0 %}
+            <ul class="list-group">
+            {% for order in user.customer.orders %}
+                <li class="list-group-item">
+                    <a href="{{ path('site_order_show',{id:order.id}) }}" class="btn btn-sm btn-primary" role="button">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </a>
+                    {{ order.reference }} {{ order.createdAt|date }} {{ order.tot|price }}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+        <div class="alert" role="alert">
+            <span>
+                {{ 'profile.show.noOrder'|trans }}
+            </span>
+        </div>
+        {% endif %}
+    </div>
+</div>
+

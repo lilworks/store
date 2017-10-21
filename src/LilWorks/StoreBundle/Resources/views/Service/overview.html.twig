@@ -1,0 +1,7 @@
+<img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
+<h4>{{ overviewName }}</h4>
+<ul>
+    {% for overviewKey,overviewValue in outputs %}
+         <li>{{ overviewKey }}: {{ overviewValue }}</li>
+    {% endfor %}
+</ul>

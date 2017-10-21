@@ -1,0 +1,27 @@
+{% extends 'baseUser.html.twig' %}
+{% block body %}
+
+    <div id="tabs-phonenumbers" class="border-top-0">
+        <h3>{% trans %}phonenumbers{% endtrans %}</h3>
+
+        {{ form_start(form) }}
+
+        <ul class="phonenumbers list-inline " id="target" data-prototype="{{ form_widget(form.phonenumbers.vars.prototype)|e('html_attr') }}">
+            {% for phonenumber in form.phonenumbers %}
+                <li class="phonenumber list-inline-item">
+                    {{ phonenumber.vars.value.phonenumber }}
+                    {{ form_row(phonenumber) }}
+                </li>
+            {% endfor %}
+        </ul>
+        {{ form_widget(form.phonenumbers) }}
+        <input type="submit" class="btn  btn-primary" value="{% trans %}update{% endtrans %}" />
+        {{ form_end(form) }}
+    </div>
+    <script>
+        $( function() {
+            FCE.init('phonenumbers','phonenumbers list-inline','phonenumber list-inline-item');
+        } );
+
+    </script>
+{% endblock %}

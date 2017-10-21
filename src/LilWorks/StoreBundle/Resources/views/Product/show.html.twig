@@ -1,0 +1,325 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.product.show{% endtrans %}
+    </h1>
+
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+        <a href="{{ path('product_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+        <a href="{{ path('product_new') }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+        </a>
+        <a href="{{ path('product_edit', { product_id: product.id }) }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+        </a>
+        {% if product.ordersProducts|length == 0  %}
+            {% set disabled = '' %}
+        {% else %}
+            {% set disabled = 'disabled' %}
+        {% endif %}
+        <a href="{{ path('product_delete', { product_id: product.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+        </a>
+    </div>
+
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.idandtag{% endtrans %}</th>
+                <td>#{{ product.id }} {{ product.tag }}
+                    <a href="{{ path('site_product',{tag:product.tag}) }}" target="_blank">{% trans %}lilworks.storebundle.link.showonline{% endtrans %}</a>
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.brand{% endtrans %}</th>
+                <td>
+                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('brand_show',{ brand_id:product.brand.id }) }}">{{ product.brand.name }}</a>
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.categories{% endtrans %}</th>
+                <td>
+                    <ul class="list-inline">
+                    {% for category in product.categories %}
+                        <li class="list-inline-item">
+                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('category_show',{category_id:category.id }) }}">{{ category.name }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.ispublished{% endtrans %}</th>
+                <td>
+                    {% if product.isPublished %}
+                        <i class="fa fa-check" style="color: green;"></i>
+                    {% else %}
+                        <i class="fa fa-times" style="color: red;"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <i class="fa fa-sitemap" aria-hidden="true"></i>
+                    {% trans %}lilworks.storebundle.relatedproducts{% endtrans %}
+                </th>
+                <td>
+                    {% if  product.relatedProducts|length > 0 %}
+                        <ul class="list-inline">
+                            {% for relatedProduct in product.relatedProducts %}
+                                <li class="list-inline-item">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a  role="button" class="btn btn-sm btn-secondary" href="{{ path('brand_show',{brand_id:relatedProduct.brand.id }) }}">{{ relatedProduct.brand.name }}</a>
+                                        <a  role="button" class="btn btn-sm btn-secondary" href="{{ path('product_show',{product_id:relatedProduct.id }) }}">{{ relatedProduct.name }}</a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <i class="fa fa-sitemap" aria-hidden="true"></i>
+                    {% trans %}lilworks.storebundle.product.isrelatedto{% endtrans %}
+                </th>
+                <td>
+                    {% if  product.productsRelated|length > 0 %}
+                        <ul class="list-inline">
+                            {% for productRelated in product.productsRelated %}
+                                <li class="list-inline-item">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a  role="button" class="btn btn-sm btn-secondary" href="{{ path('brand_show',{brand_id:productRelated.brand.id }) }}">{{ productRelated.brand.name }}</a>
+                                        <a  role="button" class="btn btn-sm btn-secondary" href="{{ path('product_show',{product_id:productRelated.id }) }}">{{ productRelated.name }}</a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                    {% trans %}lilworks.storebundle.description{% endtrans %}
+                </th>
+                <td>{{ product.description|raw }}</td>
+            </tr>
+            <tr>
+                <th>
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    {% trans %}lilworks.storebundle.descriptioninternal{% endtrans %}
+                </th>
+                <td>{{ product.descriptionInternal|raw }}</td>
+            </tr>
+            <tr>
+                <th>
+                    <i class="fa fa-money" aria-hidden="true"></i>
+                    {% trans %}lilworks.storebundle.priceonline{% endtrans %}
+                </th>
+                <td>
+                    {% if product.priceOnline > 0 %}
+                        {{ product.priceOnline|number_format(2, ',', '') }} €
+                        {% if  product.taxesOnline|length > 0 %}
+                            <ul>
+                                {% for taxe in product.taxesOnline %}
+                                    <li>
+                                        {% if  taxe.type == "RATIO" %}
+                                            {{ taxe.name }}: {{ taxe.value }}%
+                                        {% elseif taxe.type == "VALUE"  %}
+                                            {{ taxe.name }}:{{ taxe.value|number_format(2, ',', '') }} €
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% else %}
+                        <span style="color: red;">{% trans %}lilworks.storebundle.notset{% endtrans %}</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <i class="fa fa-money" aria-hidden="true"></i>
+                    {% trans %}lilworks.storebundle.offline{% endtrans %}
+                </th>
+                <td>
+                    {% if product.priceOffline > 0 %}
+                        {{ product.priceOffline|number_format(2, ',', '') }} €
+                        {% if  product.taxesOffline|length > 0 %}
+                            <ul>
+                                {% for taxe in product.taxesOffline %}
+                                    <li>
+                                        {% if  taxe.type == "RATIO" %}
+                                            {{ taxe.name }}: {{ taxe.value }}%
+                                        {% elseif taxe.type == "VALUE"  %}
+                                            {{ taxe.name }}:{{ taxe.value|number_format(2, ',', '') }} €
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% else %}
+                        <span style="color: red;">{% trans %}lilworks.storebundle.notset{% endtrans %}</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <i class="fa fa-money" aria-hidden="true"></i>
+                    {% trans %}lilworks.storebundle.pricebuying{% endtrans %}
+                </th>
+                <td>
+                    {% if product.priceBuying > 0 %}
+                        {{ product.priceBuying|number_format(2, ',', '') }} €
+                    {% else %}
+                        <span style="color: red;">{% trans %}lilworks.storebundle.notset{% endtrans %}</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <i class="fa fa-money" aria-hidden="true"></i>
+                    {% trans %}lilworks.storebundle.priceretail{% endtrans %}
+                </th>
+                <td>
+                    {% if product.priceRetail > 0 %}
+                        {{ product.priceRetail|number_format(2, ',', '') }} €
+                    {% else %}
+                        <span style="color: red;">{% trans %}lilworks.storebundle.notset{% endtrans %}</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <i class="fa fa-truck"></i>
+                    {% trans %}lilworks.storebundle.shippingmethods{% endtrans %}
+                </th>
+                <td>
+                    {% if  product.shippingMethods|length > 0 %}
+                        <ul>
+                            {% for shippingMethod in product.shippingMethods %}
+                                <li>{{ shippingMethod.name }}|{{ shippingMethod.price }}€ (free for {{ shippingMethod.freeTrigger }} €)</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <span class="glyphicon glyphicon-ban-circle"></span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <i class="fa fa-shield"></i>
+                    {% trans %}lilworks.storebundle.warranties{% endtrans %}
+                </th>
+                <td>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>{% trans %}lilworks.storebundle.warrantiesoffline{% endtrans %}</th>
+                                <th>{% trans %}lilworks.storebundle.warrantiesonline{% endtrans %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {% if  product.warrantiesOffline|length > 0 %}
+                                        <ul>
+                                            {% for warranty in product.warrantiesOffline %}
+                                                <li>{{ warranty.name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <span class="glyphicon glyphicon-ban-circle"></span>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if  product.warrantiesOnline|length > 0 %}
+                                        <ul>
+                                            {% for warranty in product.warrantiesOnline %}
+                                                <li>{{ warranty.name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <span class="glyphicon glyphicon-ban-circle"></span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <i class="fa fa-picture-o"></i>
+                    {% trans %}lilworks.storebundle.pictures{% endtrans %}
+                </th>
+                <td>
+                {% for picture in product.pictures %}
+                    <img src="{{ asset('product/' ~ picture.pictureName  ) | imagine_filter('my_thumb') }}" />
+                {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.product.specification{% endtrans %}</th>
+                <td>
+                    <ul>
+                        {% if  product.width  %}<li>{% trans %}width{% endtrans %}: {{ product.width }}</li>{% endif %}
+                        {% if  product.length  %}<li>{% trans %}length{% endtrans %}: {{ product.length }}</li>{% endif %}
+                        {% if  product.height  %}<li>{% trans %}height{% endtrans %}: {{ product.height }}</li>{% endif %}
+                        {% if  product.weight  %}<li>{% trans %}weight{% endtrans %}: {{ product.weight }}</li>{% endif %}
+                        {% if  product.docFiles|length > 0 %}
+                            <ul>
+                                {% for file in product.docFiles %}
+                                    <li>
+                                        <a href="#">{{ file.docName }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+
+                        {% endif %}
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <i class="fa fa-commenting-o"></i>
+                    {% trans %}lilworks.storebundle.product.review{% endtrans %}
+                </th>
+                <td>
+                    {% if  product.reviews|length > 0 %}
+                        <ul>
+                            {% for review in product.reviews %}
+                                <li>
+                                    <p><a href="#">{{ review.user.username }}</a> • {{ review.user.email }}</p>
+                                    <p>{{ review.rate }}</p>
+                                    <p>{{ review.description }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

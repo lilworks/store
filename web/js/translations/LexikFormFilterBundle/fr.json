@@ -1,0 +1,3 @@
+{
+    "translations": {"fr":{"LexikFormFilterBundle":{"boolean.yes_or_no":"Indiff\u00e9rent","boolean.yes":"Oui","boolean.no":"Non","number.equal":"\u00c9gal \u00e0","number.greater_than":"Plus grand que","number.greater_than_equal":"Plus grand ou \u00e9gal \u00e0","number.lower_than":"Plus petit que","number.lower_than_equal":"Plus petit ou \u00e9gale \u00e0","text.starts":"Commence par","text.ends":"Termine par","text.equals":"\u00c9gal \u00e0","text.both":"Contient"}}}
+}

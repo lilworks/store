@@ -1,0 +1,29 @@
+depositSale_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:DepositSale:index" }
+    methods:  GET
+
+depositSale_show:
+    path:     /{depositsale_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:DepositSale:show" }
+    methods:  GET
+
+depositSale_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:DepositSale:new" }
+    methods:  [GET, POST]
+
+depositSale_pdf:
+    path:     /{depositsale_id}/pdf
+    defaults: { _controller: "LilWorksStoreBundle:DepositSale:pdf" }
+    methods:  [GET, POST]
+
+depositSale_edit:
+    path:     /{depositsale_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:DepositSale:edit" }
+    methods:  [GET, POST]
+
+depositSale_delete:
+    path:     /{depositsale_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:DepositSale:delete" }
+    methods:  [GET, POST]

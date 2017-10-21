@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}storeInfo edit{% endtrans %}
+    </h1>
+
+    <div class="lilworks_list_showAction">
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <a href="{{ path('storeinfo_index') }}" class="btn btn-info btn-sm">
+                    <i class="fa fa-list"></i> {% trans %}storeInfo list{% endtrans %}
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="{{ path('storeinfo_show', { 'id': storeInfo.id }) }}" class="btn btn-info btn-sm">
+                    <i class="fa fa-eye "></i> {% trans %}show{% endtrans %}
+                </a>
+            </li>
+
+            <li class="list-inline-item">
+                    <a href="{{ path('storeinfo_delete', { 'id': storeInfo.id }) }}"  class="btn btn-danger btn-sm" >
+                        <i class="fa fa-trash"></i> {% trans %}delete{% endtrans %}
+                    </a>
+            </li>
+
+        </ul>
+    </div>
+
+    {{ form_start(edit_form) }}
+
+
+
+
+            {{ form_label(edit_form) }}
+            {{ form_errors(edit_form) }}
+            {{ form_widget(edit_form) }}
+
+
+    <input type="submit" value="{% trans %}edit{% endtrans %}" class="btn btn-lg btn-primary" />
+    {{ form_end(edit_form) }}
+
+
+
+
+{% endblock %}

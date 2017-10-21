@@ -1,0 +1,159 @@
+<?php
+
+namespace LilWorks\StoreBundle\Entity;
+
+/**
+ * CustomerOffline
+ */
+class CustomerOffline
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var \AppBundle\Entity\User
+     */
+    private $user;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $orders;
+
+    /**
+     * @var \LilWorks\StoreBundle\Entity\Address
+     */
+    private $shippingAddress;
+
+    /**
+     * @var \LilWorks\StoreBundle\Entity\Address
+     */
+    private $invoiceAddress;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return CustomerOffline
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add order
+     *
+     * @param \LilWorks\StoreBundle\Entity\Order $order
+     *
+     * @return CustomerOffline
+     */
+    public function addOrder(\LilWorks\StoreBundle\Entity\Order $order)
+    {
+        $this->orders[] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Remove order
+     *
+     * @param \LilWorks\StoreBundle\Entity\Order $order
+     */
+    public function removeOrder(\LilWorks\StoreBundle\Entity\Order $order)
+    {
+        $this->orders->removeElement($order);
+    }
+
+    /**
+     * Get orders
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    /**
+     * Set shippingAddress
+     *
+     * @param \LilWorks\StoreBundle\Entity\Address $shippingAddress
+     *
+     * @return CustomerOffline
+     */
+    public function setShippingAddress(\LilWorks\StoreBundle\Entity\Address $shippingAddress = null)
+    {
+        $this->shippingAddress = $shippingAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get shippingAddress
+     *
+     * @return \LilWorks\StoreBundle\Entity\Address
+     */
+    public function getShippingAddress()
+    {
+        return $this->shippingAddress;
+    }
+
+    /**
+     * Set invoiceAddress
+     *
+     * @param \LilWorks\StoreBundle\Entity\Address $invoiceAddress
+     *
+     * @return CustomerOffline
+     */
+    public function setInvoiceAddress(\LilWorks\StoreBundle\Entity\Address $invoiceAddress = null)
+    {
+        $this->invoiceAddress = $invoiceAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get invoiceAddress
+     *
+     * @return \LilWorks\StoreBundle\Entity\Address
+     */
+    public function getInvoiceAddress()
+    {
+        return $this->invoiceAddress;
+    }
+}
+

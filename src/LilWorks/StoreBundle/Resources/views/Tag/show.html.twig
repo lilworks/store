@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.tag.show{% endtrans %}
+    </h1>
+
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+        <a href="{{ path('tag_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+        <a href="{{ path('tag_new') }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+        </a>
+        <a href="{{ path('tag_edit', { 'id': tag.id }) }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+        </a>
+        {% if tag.products|length == 0 %}
+            {% set disabled = '' %}
+        {% else %}
+            {% set disabled = 'disabled' %}
+        {% endif %}
+        <a href="{{ path('tag_delete', { 'id': tag.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+        </a>
+    </div>
+
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.id{% endtrans %}</th>
+                <td>#{{ tag.id }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+                <td>{{ tag.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.products{% endtrans %}</th>
+                <td>
+                    {% for product in  tag.products %}
+                        <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{id: product.id}) }}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            {% if product.pictures|length > 0 %}
+                                <img src="{{ asset('product/' ~ product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
+                            {% endif %}
+                            {{ product.brand.name }} {{ product.name }}
+                        </a>
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

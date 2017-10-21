@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DocsReglements" table="docs_reglements">
+    <indexes>
+      <index name="doc_id" columns="doc_id"/>
+      <index name="pai_id" columns="pai_id"/>
+    </indexes>
+    <id name="dreId" type="integer" column="dre_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dreDate" type="datetime" column="dre_date" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="dreValue" type="float" column="dre_value" precision="10" scale="0" nullable="false"/>
+    <field name="docIdTarget" type="integer" column="doc_id_target" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Pour les avoir</option>
+      </options>
+    </field>
+    <many-to-one field="pai" target-entity="Paiements" fetch="LAZY">
+      <join-columns>
+        <join-column name="pai_id" referenced-column-name="pai_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="doc" target-entity="Docs" fetch="LAZY">
+      <join-columns>
+        <join-column name="doc_id" referenced-column-name="doc_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

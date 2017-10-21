@@ -1,0 +1,31 @@
+category_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Category:index" }
+    methods:  [GET, POST]
+    options:
+         expose: true
+
+category_show:
+    path:     /{category_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Category:show" }
+    methods:  GET
+
+category_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Category:new" }
+    methods:  [GET, POST]
+
+category_edit:
+    path:     /{category_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Category:edit" }
+    methods:  [GET, POST]
+
+category_delete:
+    path:     /{category_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Category:delete" }
+    methods:  [GET, POST]
+
+category_empty:
+    path:     /{category_id}/empty
+    defaults: { _controller: "LilWorksStoreBundle:Category:empty" }
+    methods:  [GET, POST]

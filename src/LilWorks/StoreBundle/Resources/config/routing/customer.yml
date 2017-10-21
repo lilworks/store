@@ -1,0 +1,24 @@
+customer_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Customer:index" }
+    methods:  GET
+
+customer_show:
+    path:     /{customer_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Customer:show"  }
+    methods:  GET
+
+customer_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Customer:new"  }
+    methods:  [GET, POST]
+
+customer_edit:
+    path:     /{customer_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Customer:edit"  }
+    methods:  [GET, POST]
+
+customer_delete:
+    path:     /{customer_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Customer:delete"  }
+    methods:  [GET, POST]

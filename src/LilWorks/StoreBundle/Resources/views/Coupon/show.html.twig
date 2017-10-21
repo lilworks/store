@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.coupon.show{% endtrans %}
+    </h1>
+
+    <div class="lilworks_list_showAction">
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <a href="{{ path('coupon_index') }}" class="btn btn-info btn-sm">
+                    <i class="fa fa-list"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="{{ path('coupon_edit', { coupon_id: coupon.id }) }}" class="btn btn-info btn-sm">
+                    <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+                </a>
+            </li>
+            {% if coupon.ordersPaymentMethods|length == 0 %}
+            <li class="list-inline-item">
+                <a href="{{ path('coupon_delete', { coupon_id: coupon.id }) }}"  class="btn btn-warning btn-sm" >
+                    <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.id{% endtrans %}</th>
+            <td>#{{ coupon.id }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.createdat{% endtrans %}</th>
+            <td>{{ coupon.createdAt|date }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.coupon.validity{% endtrans %}</th>
+            <td>{{ coupon.validity|date }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.reference{% endtrans %}</th>
+            <td>{{ coupon.reference }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.coupon.initamount{% endtrans %}</th>
+            <td>{{ coupon.amount|price }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.coupon.restamount{% endtrans %}</th>
+            <td>{{ coupon.getAmountAvailable|price }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.customer{% endtrans %}</th>
+            <td>
+                {% if coupon.customer %}
+                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('customer_edit',{customer_id: coupon.customer.id}) }}">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>{{ coupon.customer.firstName }} {{ coupon.customer.lastName }} {{ coupon.customer.companyName }}
+                    </a>
+                {% else %}
+                    <i class="fa fa-circle-thin" style="color: red;"></i>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.coupon.isactive{% endtrans %}</th>
+            <td>{{ coupon.isActive|boolean|raw }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.coupon.splitable{% endtrans %}</th>
+            <td>{{ coupon.splitable|boolean|raw }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.coupon.availableonline{% endtrans %}</th>
+            <td>{{ coupon.availableOnline|boolean|raw }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.coupon.paymentmethods{% endtrans %}</th>
+            <td>
+                {% if coupon.ordersPaymentMethods|length > 0 %}
+                    {% for orderPaymentMethod in coupon.ordersPaymentMethods %}
+                        <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{order_id: orderPaymentMethod.order.id}) }}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>{{ orderPaymentMethod.order.reference }} {{ orderPaymentMethod.amount|price }}
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

@@ -1,0 +1,14 @@
+.serialNumber{
+    font-weight: 300;
+    font-size: .8em;
+    font-style: italic;
+}
+
+
+.sidebar ul,li{
+    list-style: none;
+    margin: 0;
+    margin-left: 5px;
+    padding: 0;
+}
+

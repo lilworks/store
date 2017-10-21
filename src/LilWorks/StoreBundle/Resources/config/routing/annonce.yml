@@ -1,0 +1,24 @@
+annonce_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Annonce:index" }
+    methods:  [GET, POST]
+
+annonce_show:
+    path:     /{id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Annonce:show" }
+    methods:  GET
+
+annonce_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Annonce:new" }
+    methods:  [GET, POST]
+
+annonce_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Annonce:edit" }
+    methods:  [GET, POST]
+
+annonce_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Annonce:delete" }
+    methods:  [GET, POST]

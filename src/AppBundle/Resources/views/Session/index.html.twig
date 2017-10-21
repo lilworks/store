@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $( window ).on( "load", FF.init() );
+            });
+        </script>
+    {% endblock %}
+
+    <h1>
+        {% trans %}appbundle.session.index{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-2">
+            {#
+            {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.user.portal','storebundle.menu.session'] , {context: 'content'}) %}
+            {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+            #}
+        </div>
+        <div class="col-lg-5">
+            <form method="get" action="." class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}appbundle.button.filter{% endtrans %}" />
+            </form>
+        </div>
+        <div class="col-lg-5">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{% trans %}appbundle.action{% endtrans %}</th>
+            <th>{% trans %}appbundle.session.id{% endtrans %}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'appbundle.user'|trans, 's.user') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'appbundle.session.basket.tot'|trans, 'b.tot') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'appbundle.session.time'|trans, 's.time') }}</th>
+            <th>{% trans %}appbundle.session.lifetimer{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for session in pagination %}
+            <tr>
+                <td>
+                    {% set formatedItems = pagination.items|idinkey %}
+                    {% set menu = knp_menu_get('list', [ session.id ] ,{results:formatedItems[session.id]   ,target:'session'} ) %}
+                    {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
+                </td>
+
+                <td>
+                    {{ session.id }}
+                </td>
+                <td>
+                    {% if session.user %}
+                        <a role="button" class="btn btn-sm btn-secondary" href="{{ path('user_show',{ user_id: session.user.id }) }}">
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ session.user.email }}
+                        </a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if session.basket and  session.basket.basketsProducts|length>0  %}
+                        {{ session.basket.tot|price }}
+                        <ul class="list">
+                            {% for product in session.basket.basketsProducts %}
+                                <li class="list-item">
+                                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_show',{product_id:product.product.id}) }}">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>{{ product.product.brand.name }} {{ product.product.name }} ({{ product.quantity }})</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </td>
+                <td>
+                    {{ session.time|date('d/m/Y H:i') }}
+
+                </td>
+                <td>
+                    {{ session.lifetime }}
+                </td>
+            </tr>
+
+        {%  endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

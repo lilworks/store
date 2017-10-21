@@ -1,0 +1,88 @@
+<div class="card" style="height: 143px;">
+    <div class="card-block" style="padding: 5px;">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#user" role="tab"><i class="fa fa-user" aria-hidden="true"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#basket" role="tab"><i class="fa fa-shopping-cart" aria-hidden="true"></i>({{ basket.basketsProducts|length }})</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#search" role="tab"><i class="fa fa-search" aria-hidden="true"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#subscribe" role="tab"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
+            </li>
+
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="user" role="tabpanel">
+                {% if user is null %}
+                    <p class="card-text">
+                            {{ 'lilworks.sitebundle.user.notconnected'|trans }}
+                    </p>
+                    <div class="btn-group" role="group">
+                        <a role="button" href="{{ path('fos_user_security_login') }}" class="btn btn-sm btn-secondary ">
+                            <i class="fa fa-user" aria-hidden="true"></i>{{ 'layout.login'|trans }}
+                        </a>
+                        <a  role="button" href="{{ path('fos_user_registration_register') }}" class="btn btn-sm btn-secondary ">
+                            <i class="fa fa-user-o" aria-hidden="true"></i>{{ 'registration.submit'|trans }}
+                        </a>
+                    </div>
+                {% else %}
+
+                <p class="card-text">
+                            {{ 'layout.logged_in_as'|trans }}
+                    </p>
+
+
+                    <div class="btn-group " role="group">
+                        <a role="button" href="{{ path('fos_user_profile_show') }}" class="btn btn-sm btn-secondary">
+                            <i class="fa fa-eye" aria-hidden="true"></i>{{ 'profile.show'|trans }}
+                        </a>
+                        <a role="button" href="{{ path('fos_user_profile_edit') }}" class="btn btn-sm btn-secondary ">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>{{ 'profile.edit'|trans }}
+                        </a>
+                        <a role="button" href="{{ path('fos_user_security_logout') }}" class="btn btn-sm btn-secondary">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'layout.logout'|trans }}
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="tab-pane" id="search" role="tabpanel">
+                <h5>{% trans %}lilworks.sitebundle.globalsearch{% endtrans %}</h5>
+                <script>
+                    function search(o){
+                        $("#search").submit();
+                    }
+                </script>
+                        <div class="input-group">
+                            <form id="search" action="{{ path('site_all') }}" method="get">
+                                <input onclick="search(this);" type="text" name="product_filter[search]" class="form-control" placeholder="...">
+                              <span class="input-group-btn">
+                                <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> {% trans %}lilworks.sitebundle.button.search{% endtrans %}</button>
+                              </span>
+                            </form>
+
+                        </div>
+            </div>
+            <div class="tab-pane" id="basket" role="tabpanel">
+
+                <p class="card-text">
+                {% transchoice  basket.basketsProducts|length %}
+                        {0} basket empty|{1} one product|]1,Inf[ %count% products
+                        {% endtranschoice %}
+                </p>
+                {% if basket.basketsProducts|length > 0 %}
+                    <a role="button" href="{{ path('site_basket_edit') }}" class="btn btn-sm btn-secondary">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'lilworks.sitebundle.basket.edit'|trans }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

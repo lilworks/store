@@ -1,0 +1,24 @@
+orderstep_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:OrderStep:index" }
+    methods:  [GET, POST]
+
+orderstep_show:
+    path:     /{id}/show
+    defaults: { _controller: "LilWorksStoreBundle:OrderStep:show" }
+    methods:  GET
+
+orderstep_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:OrderStep:new" }
+    methods:  [GET, POST]
+
+orderstep_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:OrderStep:edit" }
+    methods:  [GET, POST]
+
+orderstep_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:OrderStep:delete" }
+    methods:  [GET, POST]

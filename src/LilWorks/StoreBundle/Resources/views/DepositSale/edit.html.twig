@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('assets/vendor/summernote/dist/summernote-bs4.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.min.css') }}">
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="h{{ asset('assets/vendor/popper.js/dist/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/summernote/dist/summernote-bs4.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js') }}" charset="UTF-8"></script>
+        <script>
+            $( document ).ready(function() {
+
+                $('.datepicker').datepicker({
+                    language:'fr',
+                    format: "dd/mm/yyyy"
+                });
+
+                $('.text-editor').summernote({
+                    height: 200,
+                    minHeight: null,
+                    maxHeight: null,
+                    focus: true,
+                    toolbar: [
+                        // [groupName, [list of button]]
+                        ['style', ['bold', 'italic', 'underline', 'clear']],
+                        ['font', ['strikethrough', 'superscript', 'subscript']],
+                        ['fontsize', ['fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['height', ['height']],
+                        ['misc',['codeview','fullscreen']]
+                    ]
+                });
+            });
+        </script>
+    {% endblock %}
+
+    <h1>
+        {% trans %}lilworks.storebundle.depositsale.edit{% endtrans %}
+    </h1>
+
+
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+        <a href="{{ path('depositSale_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+        <a href="{{ path('depositSale_new') }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+        </a>
+        <a href="{{ path('depositSale_show', { 'id': depositSale.id }) }}" class="btn btn-info btn-sm">
+            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+        </a>
+        <a href="{{ path('depositSale_pdf',{id:depositSale.id}) }}" class="btn btn-primary btn-sm {% if depositSale.status is null %}disabled{% endif %}">
+            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.pdf{% endtrans %}
+        </a>
+        <a href="{{ path('depositSale_delete', { 'id': depositSale.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+        </a>
+    </div>
+
+    {{ form_start(form) }}
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+
+    <div class="row">
+        <div class="col col-lg-4">
+            {{ form_row(form.status) }}
+        </div>
+        <div class="col col-lg-4">
+            {{ form_row(form.customer) }}
+            {% if form.address %}
+                {{ form_row(form.address) }}
+            {% endif %}
+            {% if form.coupon %}
+                {{ form_row(form.coupon) }}
+            {% endif %}
+        </div>
+        <div class="col col-lg-4">
+            {{ form_row(form.product) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-lg-6">
+            {{ form_row(form.deposedAt) }}
+        </div>
+        <div class="col col-lg-6">
+            {{ form_row(form.selledAt) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-lg-6">
+            {{ form_row(form.priceBuying) }}
+        </div>
+        <div class="col col-lg-6">
+            {{ form_row(form.priceSelling) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-lg-6" >
+            {{ form_row(form.description) }}
+        </div>
+        <div class="col col-lg-6" >
+            {{ form_row(form.descriptionInternal) }}
+        </div>
+    </div>
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+    {{ form_end(form) }}
+
+{% endblock %}

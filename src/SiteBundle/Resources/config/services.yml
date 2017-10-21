@@ -1,0 +1,56 @@
+services:
+    site.carrousel:
+        class:     SiteBundle\Controller\CarrouselController
+        arguments: ['@templating','@doctrine.orm.entity_manager']
+    site.product:
+        class:     SiteBundle\Controller\ProductController
+        arguments: ['@templating','@doctrine.orm.entity_manager']
+    site.basket:
+         class: SiteBundle\Service\Basket
+         arguments: ['@doctrine.orm.entity_manager','@templating',"@request_stack","@security.token_storage","%context%"]
+    site.payment:
+         class: SiteBundle\Service\Payment
+         arguments: ['@doctrine.orm.entity_manager','@templating',"@request_stack","@security.token_storage","%kernel.root_dir%"]
+    site.twig_extension:
+         class: SiteBundle\Twig\SiteExtension
+         public: false
+         arguments: ['@translator']
+         tags:
+            - { name: twig.extension }
+    site.form.basket:
+            class: SiteBundle\Form\BasketType
+            arguments: ["@security.token_storage","@site.basket","@doctrine.orm.entity_manager"]
+            tags:
+                - { name: form.type }
+
+    site.menu_builder:
+        class: SiteBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory",'@doctrine.orm.entity_manager']
+        tags:
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: site } # The alias is what is used to retrieve the menu
+
+    site.content:
+        class: SiteBundle\Service\Content
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: site.content } # The alias is what is used to retrieve the menu
+
+
+    site.form.pib:
+            class: SiteBundle\Filter\ProductInCategoryFilterType
+            arguments: ["@request_stack","@doctrine.orm.entity_manager"]
+            tags:
+                - { name: form.type }
+#    site.filter.product_in_category:
+#        class: SiteBundle\Form\BasketType:
+#        arguments: [ "@request_stack" ]
+ #       tags: [form.type]
+
+
+#    site.menu_renderer:
+        # The class implements Knp\Menu\Renderer\RendererInterface
+#        class: SiteBundle\Menu\SiteRenderer
+#        arguments: ["kernel.charset%"] # set your own dependencies here
+#        tags:
+            # The alias is what is used to retrieve the menu
+#            - { name: knp_menu.renderer, alias: navbar }

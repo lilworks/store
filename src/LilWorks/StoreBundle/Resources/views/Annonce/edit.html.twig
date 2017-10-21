@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.annonce.edit{% endtrans %}
+    </h1>
+
+    <div class="lilworks_list_showAction">
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <a href="{{ path('annonce_index') }}" class="btn btn-info btn-sm">
+                    <i class="fa fa-list"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="{{ path('annonce_show', { 'id': annonce.id }) }}" class="btn btn-info btn-sm">
+                    <i class="fa fa-eye "></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+                </a>
+            </li>
+
+            <li class="list-inline-item">
+                    <a href="{{ path('annonce_delete', { 'id': annonce.id }) }}"  class="btn btn-danger btn-sm" >
+                        <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                    </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="row-sm-10 offset-2">
+            {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            <input type="submit" class="btn btn-primary" value="{% trans %}lilworks.storebundle.button.update{% endtrans %}" />
+            {{ form_end(edit_form) }}
+        </div>
+    </div>
+
+{% endblock %}

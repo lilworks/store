@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                FF.init();
+            });
+        </script>
+    {% endblock %}
+    <h1>
+        {% trans %}lilworks.storebundle.text.list{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+                <a href="{{ path('text_new') }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <form method="get" action="." class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}lilworks.storebundle.button.filter{% endtrans %}" />
+            </form>
+        </div>
+        <div class="col-lg-5">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.text.iscontent{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.tag{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.text{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.updatedat{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.text.backups{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for text in pagination %}
+
+            <tr>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('text_show', { 'id': text.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('text_backup', { 'id': text.id }) }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                {% trans %}lilworks.storebundle.link.backup{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('text_edit', { 'id': text.id }) }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            {% if text.isContent == 1 %}{% set disabled='' %}{% else %}{% set disabled='disabled' %}{% endif %}
+                            <a href="{{ path('text_delete', { 'id': text.id }) }}" class="btn btn-danger btn-sm {{ disabled }}">
+                                <i class="fa fa-trash "></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+                <td>{{ text.isContent|boolean|raw  }}</td>
+                <td>{{ text.tag  }}</td>
+                <td>{{ text.name  }}</td>
+                <td>{{ text.content|truncatehtml(80) }}</td>
+                <td>{{ text.updatedAt|date  }}</td>
+                <td>
+                    {% if text.backups|length>0 %}
+                        <div class="list-group">
+                        {% for backup in text.backups %}
+
+                                <a href="{{ path('text_backup_show',{id:backup.id}) }}" class="list-group-item list-group-item-action"><i class="fa fa-eye" aria-hidden="true"></i> <i class="fa fa-floppy-o" aria-hidden="true"></i> {{ backup.createdAt|date('d/m/Y H:i') }}
+                                      </a>
+                        {% endfor %}
+
+                        </div>
+                    {% endif %}
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

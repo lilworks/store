@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.text.show{% endtrans %}
+    </h1>
+
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+        <a href="{{ path('text_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+
+            <a href="{{ path('text_backup', { 'id': text.id }) }}" class="btn btn-primary btn-sm">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                {% trans %}lilworks.storebundle.link.backup{% endtrans %}
+            </a>
+
+        <a href="{{ path('text_edit', { 'id': text.id }) }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+        </a>
+
+            {% if text.isContent == 1 %}{% set disabled='' %}{% else %}{% set disabled='disabled' %}{% endif %}
+            <a href="{{ path('text_delete', { 'id': text.id }) }}" class="btn btn-danger btn-sm  btn-delete  {{ disabled }}">
+                <i class="fa fa-trash "></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+            </a>
+
+    </div>
+
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.idandtag{% endtrans %}</th>
+                <td>#{{ text.id }} {{ text.tag }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+                <td>{{ text.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.title{% endtrans %}</th>
+                <td>{{ text.title|raw }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.text{% endtrans %}</th>
+                <td>{{ text.content|raw }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.text.backups{% endtrans %}</th>
+                <td>
+                    {% if text.backups|length > 0  %}
+                        <a href="{{ path('text_backup_empty',{ id:text.id }) }}" role="button" class="btn btn-sm  btn-warning">
+                            <i class="fa fa-share-square-o "  aria-hidden="true"></i>
+                        </a>
+                        <ul>
+                        {% for backup in text.backups %}
+                            <li class="list-inline-item">
+                                <a href="{{ path('text_backup_show',{id:backup.id}) }}" role="button" class="btn btn-sm btn-secondary">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </a>
+                                <a href="{{ path('text_backup_apply',{id:backup.id}) }}" role="button" class="btn btn-sm btn-warning">
+                                    <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                                </a>
+                                <a href="{{ path('text_backup_delete',{id:backup.id}) }}" role="button" class="btn btn-sm  btn-danger">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                {{ backup.createdAt|date('d/m/Y H:i') }}
+
+
+
+
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

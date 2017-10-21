@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                FF.init();
+                RE.init('product_index');
+                Paginator.init("{{path(app.request.attributes.get('_route'),{'maxItemPerPage': '_itemNum'})}}");
+            });
+        </script>
+    {% endblock %}
+    <h1>
+        {% trans %}lilworks.storebundle.product.list{% endtrans %}
+    </h1>
+
+
+
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="col-lg-2">
+                {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.product.portal','storebundle.menu.product'] , {context: 'content'}) %}
+                {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <form method="get" action="." class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}lilworks.storebundle.button.filter{% endtrans %}" />
+            </form>
+        </div>
+        <div class="col-lg-5">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination paginator">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
+                <th>
+                    {{ rowsLiveEditor.getActions()|raw }}
+                </th>
+                <th>{% trans %}lilworks.storebundle.categories{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.brand{% endtrans %}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.name'|trans, 'p.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.product.issecondhand'|trans, 'p.idSecondHand') }}</th>
+                <th>{{ knp_pagination_sortable(pagination,  'lilworks.storebundle.ispublished'|trans, 'p.isPublished') }}</th>
+                <th>
+                    <ul>
+                        <li>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.product.priceonline'|trans, 'p.priceOnline') }}</li>
+                        <li>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.product.priceoffline', 'p.priceOffline') }}</li>
+                        <li>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.product.pricebuying', 'p.priceBuying') }}</li>
+                    </ul>
+                </th>
+                <th>{% trans %}lilworks.storebundle.shippingmethods{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.pictures{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.product.relatedproduct{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set entityName = 'LilWorksStoreBundle:Product' %}
+        {% for product in pagination %}
+            <tr>
+                <td>
+                    {% set formatedItems = pagination.items|idinkey %}
+                    {% set menu = knp_menu_get('list', [ product.id ] ,{results:formatedItems[product.id]   ,target:'product'} ) %}
+                    {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
+
+                </td>
+                <td>
+                    {{ rowsLiveEditor.getRowCheckbox( product.id )|raw }}
+                </td>
+                <td>
+                    {% if  product.categories|length > 0 %}
+                        <ul class="list-unstyled">
+                            {% for categorie in product.categories %}
+                                <li>
+                                    <a role="button" class="btn btn-secondary btn-sm" href="{{ path('category_show',{category_id:categorie.id }) }}">{{ categorie.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </td>
+                <td>
+                    <a role="button" class="btn btn-secondary btn-sm" href="{{ path('brand_show',{ brand_id: product.brand.id }) }}">{{ product.brand.name }}</a></td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Product\\NameType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'name',product)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Product\\IsSecondHandType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'isSecondHand',product)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Product\\IsPublishedType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'isPublished',product)|raw }}
+                </td>
+                <td>
+                    <ul>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Product\\PriceOnlineType' %}
+                        <li>{{ simple_live_editor.getCol(formType,entityName,'priceOnline',product)|raw }}</li>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Product\\PriceOfflineType' %}
+                        <li>{{ simple_live_editor.getCol(formType,entityName,'priceOffline',product)|raw }}</li>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Product\\PriceBuyingType' %}
+                        <li>{{ simple_live_editor.getCol(formType,entityName,'priceBuying',product)|raw }}</li>
+                    </ul>
+                </td>
+
+                <td>
+                    {% if  product.shippingMethods|length > 0 %}
+                        <ul>
+                            {% for shippingMethod in product.shippingMethods %}
+                                <li>{{ shippingMethod.name }}|{{ shippingMethod.price }}€ (free for {{ shippingMethod.freeTrigger }} €)</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <span class="glyphicon glyphicon-ban-circle"></span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if  product.pictures|length > 0 %}
+                        {{ product.pictures|length }}|<i class="fa fa-picture-o" style="color: green;"></i>
+                    {% else %}
+                        <i class="fa fa-circle"></i>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if  product.relatedProducts|length > 0 %}
+                        {{ product.relatedProducts|length }}|<i class="fa fa-sitemap" style="color: green;"></i>
+                    {% else %}
+                        <i class="fa fa-sitemap" style="color: red;"></i>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

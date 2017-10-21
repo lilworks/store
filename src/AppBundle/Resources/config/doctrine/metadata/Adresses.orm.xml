@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Adresses" table="adresses">
+    <indexes>
+      <index name="pay_id" columns="pay_id"/>
+    </indexes>
+    <id name="adrId" type="integer" column="adr_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="adrName" type="string" column="adr_name" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Si adresse differente du nom</option>
+      </options>
+    </field>
+    <field name="adrAdr" type="string" column="adr_adr" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adrCode" type="string" column="adr_code" length="6" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adrVille" type="string" column="adr_ville" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adrLieudit" type="string" column="adr_lieudit" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="pay" target-entity="Pays" fetch="LAZY">
+      <join-columns>
+        <join-column name="pay_id" referenced-column-name="pay_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

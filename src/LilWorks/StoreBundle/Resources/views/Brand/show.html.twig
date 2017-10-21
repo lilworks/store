@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.brand.show{% endtrans %}
+    </h1>
+
+    {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.user','storebundle.menu.customer'] , {context: 'content'}) %}
+    {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:knp_menu_content.html.twig'}) }}
+
+
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.idandtag{% endtrans %}</th>
+                <td>#{{ brand.id }} {{ brand.tag }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+                <td>{{ brand.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.brand.website{% endtrans %}</th>
+                <td>
+                    {% if brand.website %}
+                        <a href="{{ brand.website }}">{{ brand.website }}</a>
+                    {% else %}
+                        <i class="fa fa-circle-thin" style="color: red;"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.description{% endtrans %}</th>
+                <td>{{ brand.description|raw }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.picture{% endtrans %}</th>
+                <td>
+                    {% if brand.pictureName %}
+                        <img src="{{ asset('brand/' ~ brand.pictureName  ) | imagine_filter('my_thumb') }}" />
+                    {% else %}
+                        <i class="fa fa-circle-thin" style="color: red;"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.products{% endtrans %}</th>
+                <td>
+                    {% if brand.products|length > 0 %}
+                        {% for product in brand.products %}
+                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_show',{product_id: product.id}) }}">
+                                <i class="fa fa-pencil" aria-hidden="true"></i> {{ product.name }}
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <i class="fa fa-circle-thin" style="color: red;"></i>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

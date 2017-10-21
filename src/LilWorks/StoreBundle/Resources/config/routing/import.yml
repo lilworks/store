@@ -1,0 +1,5 @@
+import_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Import:index" }
+    methods:  [GET]
+

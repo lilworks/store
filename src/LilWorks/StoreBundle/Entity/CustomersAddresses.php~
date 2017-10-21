@@ -1,0 +1,156 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_customers_addresses")
+ */
+class CustomersAddresses
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer",name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Customer", inversedBy="customersAddresses")
+     * @ORM\JoinColumn(name="customer", referencedColumnName="id")
+     */
+    private $customer;
+
+    /**
+     * One CustomerAddress correspond to one Address.
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Address", inversedBy="customersAddresses")
+     * @ORM\JoinColumn(name="address", referencedColumnName="id")
+     */
+    private $address;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isDefaultBill", type="boolean",nullable=true)
+     */
+    private $isDefaultBill;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isDefaultShipping", type="boolean",nullable=true)
+     */
+    private $isDefaultShipping;
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set isDefaultBill
+     *
+     * @param boolean $isDefaultBill
+     *
+     * @return CustomersAddresses
+     */
+    public function setIsDefaultBill($isDefaultBill)
+    {
+        $this->isDefaultBill = $isDefaultBill;
+
+        return $this;
+    }
+
+    /**
+     * Get isDefaultBill
+     *
+     * @return boolean
+     */
+    public function getIsDefaultBill()
+    {
+        return $this->isDefaultBill;
+    }
+
+    /**
+     * Set isDefaultShipping
+     *
+     * @param boolean $isDefaultShipping
+     *
+     * @return CustomersAddresses
+     */
+    public function setIsDefaultShipping($isDefaultShipping)
+    {
+        $this->isDefaultShipping = $isDefaultShipping;
+
+        return $this;
+    }
+
+    /**
+     * Get isDefaultShipping
+     *
+     * @return boolean
+     */
+    public function getIsDefaultShipping()
+    {
+        return $this->isDefaultShipping;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \LilWorks\StoreBundle\Entity\Customer $customer
+     *
+     * @return CustomersAddresses
+     */
+    public function setCustomer(\LilWorks\StoreBundle\Entity\Customer $customer = null)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \LilWorks\StoreBundle\Entity\Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * Set address
+     *
+     * @param \LilWorks\StoreBundle\Entity\Address $address
+     *
+     * @return CustomersAddresses
+     */
+    public function setAddress(\LilWorks\StoreBundle\Entity\Address $address = null)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return \LilWorks\StoreBundle\Entity\Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+}

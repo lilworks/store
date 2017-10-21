@@ -1,0 +1,5 @@
+country:
+    storebundle.shippingmethod.freetrigger
+    storebundle.shippingmethod.priority
+    storebundle.country.alowedshippingmethods
+    storebundle.country.flag

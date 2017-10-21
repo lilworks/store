@@ -1,0 +1,54 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card text-center">
+            <div class="card-header">
+                <h4 class="card-title">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                    {% trans %}appbundle.user.login{% endtrans %}
+                </h4>
+            </div>
+            <div class="card-block">
+
+                <div class="card-text">
+                    <form action="{{ path("fos_user_security_check") }}" method="post">
+                        {% if csrf_token %}
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"  />
+                        {% endif %}
+
+                        <label  for="username"  >{{ 'security.login.email'|trans }}</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"  class="form-control"  required autofocus>
+
+                        <label for="password" >{{ 'security.login.password'|trans }}</label>
+                        <input type="password" id="password" name="_password" required="required"  class="form-control" />
+
+
+                        <div class="checkbox" >
+                            <label>
+                                <input type="checkbox" value="on" id="remember_me" name="_remember_me" value="on" > {{ 'security.login.remember_me'|trans }}
+                            </label>
+                        </div>
+
+                        <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-lg btn-primary btn-block" />
+                    </form>
+                </div>
+                {% if error %}
+                    <p class="card-text alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+                {% endif %}
+            </div>
+            <div class="card-footer text-muted">
+                <a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-hand-o-right" aria-hidden="true"></i> register</a>
+                <a href="{{ path('fos_user_resetting_request') }}"><i class="fa fa-paper-plane" aria-hidden="true"></i> forgot password</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+

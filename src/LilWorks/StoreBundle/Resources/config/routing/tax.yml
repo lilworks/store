@@ -1,0 +1,24 @@
+tax_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Tax:index" }
+    methods:  GET
+
+tax_show:
+    path:     /{tax_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Tax:show" }
+    methods:  GET
+
+tax_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Tax:new" }
+    methods:  [GET, POST]
+
+tax_edit:
+    path:     /{tax_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Tax:edit" }
+    methods:  [GET, POST]
+
+tax_delete:
+    path:     /{tax_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Tax:delete" }
+    methods:  [GET, POST]

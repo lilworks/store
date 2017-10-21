@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $( window ).on( "load", FF.init() );
+            });
+        </script>
+    {% endblock %}
+    <h1>
+        {% trans %}lilworks.storebundle.docfile.list{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+                <a href="{{ path('docfile_new') }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <form method="get" action="." class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}lilworks.storebundle.button.filter{% endtrans %}" />
+            </form>
+        </div>
+        <div class="col-lg-5">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.docfile.title{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.docfile.size{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.products{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+        {% for docfile in pagination %}
+
+            <tr>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('docfile_show', { 'id': docfile.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('docfile_edit', { 'id': docfile.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                                <a href="{{ path('docfile_delete', { 'id': docfile.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
+                                    <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                                </a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+
+                        {{ docfile.docName  }}
+                </td>
+                <td>
+
+                    {{ docfile.title  }}
+                </td>
+                <td>
+
+                    {{ docfile.docSize  }}
+                </td>
+                <td>
+                    {% if docfile.product is defined and  docfile.product is not null %}
+                    {{ docfile.product.brand.name  }} {{ docfile.product.name  }}
+                    {% else %}
+                        <i class="fa fa-circle"></i>
+                    {% endif %}
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>
+        {% trans %}storebundle.import{% endtrans %}
+    </h1>
+
+
+    <h2>imported: {{ imported|length }}</h2>
+    <ul>
+{% for user in imported %}
+    <li>{{ user[0].email }} • {{ user[1].firstName }}  {{ user[1].lastName }}  {{ user[1].companyName }}</li>
+{% endfor %}
+    </ul>
+
+
+{% endblock %}

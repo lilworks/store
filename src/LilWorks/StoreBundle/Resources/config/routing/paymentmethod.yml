@@ -1,0 +1,24 @@
+paymentmethod_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:PaymentMethod:index" }
+    methods:  GET
+
+paymentmethod_show:
+    path:     /{paymentmethod_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:PaymentMethod:show" }
+    methods:  GET
+
+paymentmethod_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:PaymentMethod:new" }
+    methods:  [GET, POST]
+
+paymentmethod_edit:
+    path:     /{paymentmethod_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:PaymentMethod:edit" }
+    methods:  [GET, POST]
+
+paymentmethod_delete:
+    path:     /{paymentmethod_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:PaymentMethod:delete" }
+    methods:  [GET, POST]

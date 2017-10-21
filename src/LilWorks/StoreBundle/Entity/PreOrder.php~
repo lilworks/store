@@ -1,0 +1,217 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_preorder")
+ * @ORM\HasLifecycleCallbacks()
+ */
+class PreOrder
+{
+
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        $this->updatedAt= new \DateTime();
+    }
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer",name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="preOrders")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id" , nullable=true)
+     */
+    protected $user;
+
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="createdAt", type="datetime",nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="updatedAt", type="datetime",nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\PreOrdersProducts", mappedBy="preOrder" ,cascade={"remove","persist"})
+     * @Assert\Valid
+     */
+    private $preOrdersProducts;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="text",nullable=true)
+     */
+    private $description;
+
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->preOrdersProducts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return PreOrder
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return PreOrder
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return PreOrder
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return PreOrder
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add preOrdersProduct
+     *
+     * @param \LilWorks\StoreBundle\Entity\PreOrdersProducts $preOrdersProduct
+     *
+     * @return PreOrder
+     */
+    public function addPreOrdersProduct(\LilWorks\StoreBundle\Entity\PreOrdersProducts $preOrdersProduct)
+    {
+        $this->preOrdersProducts[] = $preOrdersProduct;
+
+        return $this;
+    }
+
+    /**
+     * Remove preOrdersProduct
+     *
+     * @param \LilWorks\StoreBundle\Entity\PreOrdersProducts $preOrdersProduct
+     */
+    public function removePreOrdersProduct(\LilWorks\StoreBundle\Entity\PreOrdersProducts $preOrdersProduct)
+    {
+        $this->preOrdersProducts->removeElement($preOrdersProduct);
+    }
+
+    /**
+     * Get preOrdersProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPreOrdersProducts()
+    {
+        return $this->preOrdersProducts;
+    }
+}

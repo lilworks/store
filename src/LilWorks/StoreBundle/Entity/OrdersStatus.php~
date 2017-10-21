@@ -1,0 +1,167 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_orders_status")
+ */
+class OrdersStatus
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer",name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Order", inversedBy="ordersStatus")
+     * @ORM\JoinColumn(name="order_id", referencedColumnName="id", nullable=FALSE)
+     */
+    protected $order;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\OrderStatus", inversedBy="ordersStatus")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=true)
+     */
+    protected $status;
+
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="text",nullable=true)
+     */
+    private $description;
+
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="createdAt", type="datetime",nullable=true)
+     */
+    private $createdAt;
+
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+    
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return OrdersStatus
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return OrdersStatus
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set order
+     *
+     * @param \LilWorks\StoreBundle\Entity\Order $order
+     *
+     * @return OrdersStatus
+     */
+    public function setOrder(\LilWorks\StoreBundle\Entity\Order $order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return \LilWorks\StoreBundle\Entity\Order
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * Set status
+     *
+     * @param \LilWorks\StoreBundle\Entity\OrderStatus $status
+     *
+     * @return OrdersStatus
+     */
+    public function setStatus(\LilWorks\StoreBundle\Entity\OrderStatus $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \LilWorks\StoreBundle\Entity\OrderStatus
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+}

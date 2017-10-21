@@ -1,0 +1,30 @@
+{% extends 'baseFull.html.twig' %}
+
+{% block body %}
+
+
+
+
+    <div class="card">
+        <h3 class="card-header">{% trans %}lilworks.sitebundle.contact{% endtrans %}</h3>
+        <div class="card-block">
+
+            <div class="card-text">
+                {{ text|raw }}
+
+
+                {{ content|raw }}
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}

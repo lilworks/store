@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( function() {
+                FCE.init('addresses','addresses list-inline','addresse list-inline-item');
+                FCE.init('phonenumbers','phonenumbers list-inline','phonenumber list-inline-item');
+            } );
+
+        </script>
+    {% endblock %}
+
+    <h1>
+        {{ 'appbundle.customer.edit %name%'|trans({'%name%': customer.firstName ~ ' ' ~ customer.lastName ~ ' ' ~ customer.companyName }) }}
+    </h1>
+
+
+    <div id="content_menu">
+        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.user.portal','storebundle.menu.cat.customer'] , {context: 'content'}) %}
+        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+    </div>
+
+    {{ form_start(form) }}
+
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
+
+    {% for row in form %}
+        <ul class="list-unstyled">
+            {% for error in row.vars.errors %}
+                <li style="color: crimson;"><i class="fa fa-frown-o" aria-hidden="true" ></i> {{ row.vars.name }} {{ form_errors(attribute(form,row.vars.name)) }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#addresses" role="tab">{% trans %}storebundle.addresses{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#phonenumbers" role="tab">{% trans %}storebundle.phonenumbers{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#users" role="tab">{% trans %}storebundle.user{% endtrans %}</a>
+        </li>
+    </ul>
+
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="general" role="tabpanel">
+            {{ form_row(form.firstName) }}
+            {{ form_row(form.lastName) }}
+            {{ form_row(form.companyName) }}
+        </div>
+        <div class="tab-pane" id="addresses" role="tabpanel">
+            <ul class="addresses list-inline " id="target" data-prototype="{{ form_widget(form.addresses.vars.prototype)|e('html_attr') }}">
+                {% for addresse in form.addresses %}
+                    <li class="addresse list-inline-item">
+                        {{ form_row(addresse) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {{ form_widget(form.addresses) }}
+        </div>
+        <div class="tab-pane" id="phonenumbers" role="tabpanel">
+            <ul class="phonenumbers list-inline " id="target" data-prototype="{{ form_widget(form.phonenumbers.vars.prototype)|e('html_attr') }}">
+                {% for phonenumber in form.phonenumbers %}
+                    <li class="phonenumber list-inline-item">
+                        {{ form_row(phonenumber) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {{ form_widget(form.phonenumbers) }}
+        </div>
+        <div class="tab-pane" id="users" role="tabpanel">
+            {{ form_row(form.remoteUser) }}
+            {{ form_widget(form.user) }}
+        </div>
+    </div>
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
+
+    {{ form_end(form) }}
+
+{% endblock %}

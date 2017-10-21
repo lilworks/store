@@ -1,0 +1,72 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+    app.lilworks_store_configure_menu_listener:
+        class: LilWorks\StoreBundle\EventListener\ConfigureStoreMenuListener
+        arguments: ['@doctrine.orm.entity_manager','@request_stack','@logger']
+        tags:
+          - { name: kernel.event_listener, event: app.menu_configure, method: onMenuConfigure }
+
+    app.syncro:
+            class: AppBundle\Service\Syncro
+            arguments: ['@doctrine.orm.default_entity_manager','@doctrine.orm.online_entity_manager','@doctrine.orm.distant_entity_manager']
+
+    app.password_resetting:
+        class: AppBundle\EventListener\PasswordResettingListener
+        arguments: ['@router']
+        tags:
+            - { name: kernel.event_subscriber }
+    app.register_success:
+            class: AppBundle\EventListener\RegisterListener
+            arguments: ['@doctrine.orm.entity_manager']
+            tags:
+                - { name: kernel.event_subscriber }
+    app.form.registration:
+            class: AppBundle\Form\RegistrationType
+            tags:
+                - { name: form.type, alias: app_user_registration }
+
+    app.form.profile:
+            class: AppBundle\Form\ProfileType
+            tags:
+                - { name: form.type, alias: app_user_profile }
+
+    app.twig.dev_extension:
+        class: AppBundle\Twig\DevExtension
+        arguments:
+            - kernel.environment%
+        tags:
+            - { name: twig.extension }
+
+    app.twig.extension:
+        class: AppBundle\Twig\AppExtension
+        arguments:
+            - kernel.environment%
+        tags:
+            - { name: twig.extension }
+
+    session.handler.pdo:
+            #class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+            class:     AppBundle\HttpFoundation\Session\Storage\Handler\UserPdoSessionHandler
+
+            public:    false
+
+            arguments:
+                - 'mysql:host=%database_host%;port=%database_port%;dbname=%database_name%'
+                - {lock_mode: 0 , db_table: sessions ,  db_username: '%database_user%', db_password: '%database_password%' , db_user_col: user , db_data_col: sess_data , db_id_col: sess_id,'db_time_col': sess_time, db_user_col: user}
+                - "@security.token_storage"
+                - "@doctrine.orm.entity_manager"
+    app.js_vars:
+            class: stdClass
+
+
+    app.simpleLiveEditor:
+            class: AppBundle\Service\SimpleLiveEditor
+            arguments: ['@service_container','@templating','@doctrine.orm.entity_manager','@request_stack']
+
+    app.rowsEditor:
+            class: AppBundle\Service\RowsEditor
+            arguments: ['@service_container','@templating','@doctrine.orm.entity_manager','@request_stack']

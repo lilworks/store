@@ -1,0 +1,3 @@
+{
+    "translations": {"es":{"LexikFormFilterBundle":{"boolean.yes_or_no":"Indiferente","boolean.yes":"S\u00ed","boolean.no":"No","number.equal":"Igual que","number.greater_than":"Mayor que","number.greater_than_equal":"Mayor o igual que","number.lower_than":"Menor que","number.lower_than_equal":"Menor o igual que","text.starts":"Empieza por","text.ends":"Termina por","text.equals":"Igual a","text.both":"Contiene"}}}
+}

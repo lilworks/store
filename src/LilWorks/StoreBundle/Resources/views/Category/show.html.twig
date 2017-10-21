@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.category.show{% endtrans %}
+    </h1>
+
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+        <a href="{{ path('category_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+        <a href="{{ path('category_new') }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+        </a>
+        <a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+        </a>
+        {% if category.products|length == 0 %}{% set disabled = 'disabled' %}{% else %}{% set disabled = '' %}{% endif %}
+        <a href="{{ path('category_empty', { 'id': category.id }) }}"  class="btn btn-warning btn-sm btn-empty {{ disabled }}" >
+            <i class="fa fa-share-square-o"></i> {% trans %}lilworks.storebundle.link.empty{% endtrans %}
+        </a>
+        {% if category.products|length == 0 %}{% set disabled = '' %}{% else %}{% set disabled = 'disabled' %}{% endif %}
+        <a href="{{ path('category_delete', { 'id': category.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+        </a>
+    </div>
+
+
+
+
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.idandtag{% endtrans %}</th>
+            <td>#{{ category.id }} {{ category.tag }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.ispublished{% endtrans %}</th>
+            <td>
+                {% if category.isPublished %}
+                    <i class="fa fa-check" style="color: green;"></i>
+                {% else %}
+                    <i class="fa fa-times" style="color: red;"></i>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+            <td>{{ category.name }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.description{% endtrans %}</th>
+            <td>{{ category.description|raw }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.picture{% endtrans %}</th>
+            <td>
+                {% if category.pictureName %}
+                    <img src="{{ asset('category/' ~ category.pictureName  ) | imagine_filter('my_thumb') }}" />
+                {% else %}
+                    <i class="fa fa-circle" ></i>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th>{% trans %}lilworks.storebundle.supercategory{% endtrans %}</th>
+            <td>
+                {% if category.SupercategoriesCategories|length > 0 %}
+                        {% for supercategoryCategory in category.SupercategoriesCategories %}
+                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('supercategory_show',{id: supercategoryCategory.supercategory.id}) }}">
+                                <i class="fa fa-pencil" aria-hidden="true"></i> {{ supercategoryCategory.supercategory.name }}
+                            </a>
+                        {% endfor %}
+                {% else %}
+                    <i class="fa fa-circle"></i>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.products{% endtrans %}</th>
+            <td>
+                {% if category.products|length > 0 %}
+                        {% for product in category.products %}
+                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{id: product.id}) }}">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                {% if product.pictures|length>0 %}
+                                    <img src="{{ asset('product/' ~  product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
+                                {% endif %}
+                                {{ product.brand.name }} {{ product.name }}
+                            </a>
+                        {% endfor %}
+                {% else %}
+                    <i class="fa fa-circle"></i>
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

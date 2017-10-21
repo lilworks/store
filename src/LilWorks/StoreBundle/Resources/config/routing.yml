@@ -1,0 +1,97 @@
+lil_works_store_import:
+    resource: "@LilWorksStoreBundle/Resources/config/routing/import.yml"
+    prefix:   /import
+
+lil_works_store_country:
+    resource: "@LilWorksStoreBundle/Resources/config/routing/country.yml"
+    prefix:   /country
+
+lil_works_store_portal:
+    resource: "@LilWorksStoreBundle/Resources/config/routing/portal.yml"
+    prefix:   /portal
+
+
+lil_works_store_syncro:
+    resource: "@LilWorksStoreBundle/Resources/config/routing/syncro.yml"
+    prefix:   /syncro
+
+lil_works_store_product:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/product.yml"
+        prefix:   /product
+
+lil_works_store_info:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/storeinfo.yml"
+        prefix:   /storeinfo
+lil_works_store_shippingmethod:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/shippingmethod.yml"
+        prefix:   /shippingmethod
+
+lil_works_store_realshippingmethod:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/realshippingmethod.yml"
+        prefix:   /realshippingmethod
+
+lil_works_store_supercategory:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/supercategory.yml"
+        prefix:   /supercategory
+
+lil_works_store_category:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/category.yml"
+        prefix:   /category
+
+lil_works_store_brand:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/brand.yml"
+        prefix:   /brand
+
+lil_works_store_basket:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/basket.yml"
+        prefix:   /basket
+
+lil_works_store_docfile:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/docfile.yml"
+        prefix:   /docfile
+
+lil_works_store_paymentmethod:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/paymentmethod.yml"
+        prefix:   /paymentmethod
+
+lil_works_store_orderstep:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/orderstep.yml"
+        prefix:   /orderstep
+
+lil_works_store_order:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/order.yml"
+        prefix:   /order
+
+lil_works_store_coupon:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/coupon.yml"
+        prefix:   /coupon
+
+lil_works_store_depositSale:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/depositSale.yml"
+        prefix:   /depositsale
+
+lil_works_store_warranty:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/warranty.yml"
+        prefix:   /warranty
+
+lil_works_store_tax:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/tax.yml"
+        prefix:   /tax
+lil_works_store_tag:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/tag.yml"
+        prefix:   /tag
+lil_works_store_text:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/text.yml"
+        prefix:   /text
+
+lil_works_store_annonce:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/annonce.yml"
+        prefix:   /annonce
+
+lil_works_store_customer:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/customer.yml"
+        prefix:   /customer
+
+lilworks_store_homepage:
+    path:     /
+    defaults: { _controller: LilWorksStoreBundle:Default:index }

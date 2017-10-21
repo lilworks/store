@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $( window ).on( "load", FF.init() );
+            });
+        </script>
+    {% endblock %}
+    <h1>
+        {% trans %}lilworks.storebundle.warranty.list{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+                <a href="{{ path('warranty_new') }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
+                <th>
+                    {% trans %}lilworks.storebundle.warranty.affectedproductsinorders{% endtrans %}
+                </th>
+                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set entityName = 'LilWorksStoreBundle:Warranty' %}
+        {% for warranty in pagination %}
+            <tr>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('warranty_show', { 'id': warranty.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('warranty_edit', { 'id': warranty.id }) }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('warranty_delete', { 'id': warranty.id }) }}"  class="btn btn-danger btn-sm btn-delete {% if warranty.productsOffline|length > 0 or warranty.productsOffline|length > 0%}disabled{% endif %}" >
+                                <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                            </a>
+                        </li>
+                    </ul>
+
+                </td>
+                <td>{{ warranty.ordersProducts|length }}</td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Warranty\\NameType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'name',warranty)|raw }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

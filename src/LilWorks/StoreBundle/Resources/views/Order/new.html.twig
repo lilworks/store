@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( function() {
+                FCE.init('products','products list-inline','product list-inline-item');
+                FCE.init('realShippingMethods','realShippingMethods list-inline','realShippingMethod list-inline-item');
+                FCE.init('ordersOrderSteps','ordersOrderSteps list-inline','orderOrderStep list-inline-item');
+                FCE.init('ordersPaymentMethods','ordersPaymentMethods list-inline','orderPaymentMethod list-inline-item');
+            } );
+        </script>
+    {% endblock %}
+    <h1>
+        {% trans %}lilworks.storebundle.order.new{% endtrans %}
+    </h1>
+
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+        <a href="{{ path('order_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+    </div>
+
+    {{ form_start(form) }}
+
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.create{% endtrans %}" />
+
+
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}lilworks.storebundle.tab.general{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#customer" role="tab">{% trans %}lilworks.storebundle.customer{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#products" role="tab">{% trans %}lilworks.storebundle.products{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" data-toggle="tab" href="#realshippingmethods" role="tab">{% trans %}lilworks.storebundle.realshippingmethods{% endtrans %}</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link disabled" data-toggle="tab" href="#paymentmethods" role="tab">{% trans %}lilworks.storebundle.paymentmethods{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#more" role="tab">{% trans %}lilworks.storebundle.tab.more{% endtrans %}</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="general" role="tabpanel">
+            {{ form_row(form.orderType) }}
+            {% if form.orderOrderStep is defined %}
+                <ul class="ordersOrderSteps list-inline " id="target" data-prototype="{{ form_widget(form.ordersOrderSteps.vars.prototype)|e('html_attr') }}">
+                    {% for orderOrderStep in form.ordersOrderSteps %}
+                        <li class="orderOrderStep list-inline-item">
+                            {{ orderOrderStep.vars.value.createdAt|date }}
+                            {{ form_row(orderOrderStep) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {{ form_widget(form.ordersOrderSteps) }}
+            {% endif %}
+        </div>
+        <div class="tab-pane" id="customer" role="tabpanel">
+            {{ form_row(form.customer) }}
+            {% if form.shippingAddress is defined %}
+                {{ form_row(form.shippingAddress) }}
+            {% endif %}
+            {% if form.shippingAddressString is defined  %}
+                {{ form_row(form.shippingAddressString) }}
+            {% endif %}
+            {% if form.billingAddress is defined  %}
+                {{ form_row(form.billingAddress) }}
+            {% endif %}
+            {% if form.billingAddressString is defined  %}
+                {{ form_row(form.billingAddressString) }}
+            {% endif %}
+        </div>
+        <div class="tab-pane" id="products" role="tabpanel">
+            <ul class="products list-inline " id="target" data-prototype="{{ form_widget(form.ordersProducts.vars.prototype)|e('html_attr') }}">
+                {% for orderProduct in form.ordersProducts %}
+                    <li class="product list-inline-item">
+                        {%  set product = orderProduct.vars.data.product %}
+                        <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{id: product.id}) }}">
+                            <i class="fa fa-pencil"></i>
+                            {% if product.pictures|length > 0 %}
+                                <img src="{{ asset('product/' ~ product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
+                            {% endif %}
+                            {{ product.brand.name }}
+                            {{ product.name }}
+                            (<i class="fa fa-cubes" aria-hidden="true"></i>{{ product.stock }})
+                        </a>
+                        {{ form_row(orderProduct) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {{ form_widget(form.ordersProducts) }}
+        </div>
+        <div class="tab-pane" id="realshippingmethods" role="tabpanel">
+            {% if form.ordersRealShippingMethods is defined %}
+                <ul class="realShippingMethods list-inline " id="target" data-prototype="{{ form_widget(form.ordersRealShippingMethods.vars.prototype)|e('html_attr') }}">
+                    {% for realShippingMethod in form.ordersRealShippingMethods %}
+                        <li class="realShippingMethod list-inline-item">
+                            {{ form_row(realShippingMethod) }}
+                        </li>
+                    {% endfor %}
+                    {{ form_widget(form.ordersRealShippingMethods) }}
+                </ul>
+            {% endif %}
+        </div>
+        <div class="tab-pane" id="paymentmethods" role="tabpanel">
+            {% if form.ordersPaymentMethods is defined %}
+                <ul class="ordersPaymentMethods list-inline " id="target" data-prototype="{{ form_widget(form.ordersPaymentMethods.vars.prototype)|e('html_attr') }}">
+                    {% for orderPaymentMethod in form.ordersPaymentMethods %}
+                        <li class="orderPaymentMethod list-inline-item">
+                            {{ orderPaymentMethod.vars.value.payedAt|date }}
+                            {{ form_row(orderPaymentMethod) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {{ form_widget(form.ordersPaymentMethods) }}
+            {% endif %}
+        </div>
+        <div class="tab-pane" id="more" role="tabpanel">
+            {{ form_row(form.storeComment) }}
+            {{ form_row(form.userComment) }}
+        </div>
+    </div>
+
+
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.create{% endtrans %}" />
+
+    {{ form_end(form) }}
+
+
+
+{% endblock %}

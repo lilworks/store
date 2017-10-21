@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}country show{% endtrans %}
+    </h1>
+
+    <div class="lilworks_list_showAction">
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <a href="{{ path('country_index') }}" class="btn btn-info btn-sm">
+                    <i class="fa fa-list"></i> {% trans %}country list{% endtrans %}
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="{{ path('country_edit', { 'id': country.id }) }}" class="btn btn-info btn-sm">
+                    <i class="fa fa-pencil "></i> {% trans %}edit{% endtrans %}
+                </a>
+            </li>
+
+            <li class="list-inline-item">
+                {% if
+                    country.shippingmethodsCountries|length == 0 and
+                    country.addresses|length == 0
+                %}
+                    <a href="{{ path('country_delete', { 'id': country.id }) }}"  class="btn btn-danger btn-sm" >
+                        <i class="fa fa-trash"></i> {% trans %}delete{% endtrans %}
+                    </a>
+                {% else %}
+                    <del><i class="fa fa-trash"></i></del>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>{% trans %}id and tag{% endtrans %}</th>
+                <td>#{{ country.id }} {{ country.tag }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}ipublished{% endtrans %}</th>
+                <td>
+                    {% if country.isPublished %}
+                        <i class="fa fa-check" style="color: green;"></i>
+                    {% else %}
+                        <i class="fa fa-times" style="color: red;"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}name{% endtrans %}</th>
+                <td>{{ country.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}flag{% endtrans %}</th>
+                <td>
+                    {% if country.flag %}
+                        <img src="{{ asset('flags/' ~ country.flag  )  }}" />
+                    {% else %}
+                        <i class="fa fa-circle-thin" style="color: red;"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}addresses{% endtrans %}</th>
+                <td>
+                    {% if  country.addresses|length > 0 %}
+                        {{ country.addresses|length }}
+                    {% else %}
+                        <i class="fa fa-circle-thin" ></i>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}shippingmethods{% endtrans %}</th>
+                <td>
+                    {% if  country.shippingmethodsCountries|length > 0 %}
+                        <ul class="list-inline">
+                            {% for shippingMethod in country.shippingmethodsCountries %}
+                                <li class="list-inline-item page-item product">
+                                    <a href="{{ path('shippingmethod_show',{id: shippingMethod.shippingMethod.id}) }}" role="button" class="btn btn-secondary btn-sm active">
+                                        {{ shippingMethod.shippingMethod.name }}
+
+                                        {% if shippingMethod.price is not defined or shippingMethod.price is null %}
+                                            <span class="shippingMethodPrice-overwrited">
+                                                {{  shippingMethod.shippingMethod.price|price }} {% trans %}freeTrigger{% endtrans %}: {{ shippingMethod.shippingMethod.freeTrigger|price  }}
+                                            </span>
+                                        {% else %}
+                                            <span class="shippingMethodPrice-default">
+                                                {{ shippingMethod.price|price }} {% trans %}freeTrigger{% endtrans %}: {{ shippingMethod.freeTrigger|price  }}
+                                            </span>
+                                        {% endif %}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <i class="fa fa-circle-thin" ></i>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

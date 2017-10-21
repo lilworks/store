@@ -1,0 +1,7 @@
+.sle-hidden{ visibility: hidden;width: 0;height: 0; z-index: 100; }
+.sle-visible{ visibility: visible; z-index: 100; }
+.sle_colValue:hover:after{
+    font-family: FontAwesome;
+    color: red;
+    content: "\f040";
+}

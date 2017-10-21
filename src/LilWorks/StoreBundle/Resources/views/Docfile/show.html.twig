@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}docfile{% endtrans %}
+    </h1>
+
+    <div class="lilworks_list_showAction">
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <a href="{{ path('docfile_index') }}" class="btn btn-info btn-sm">
+                    <i class="fa fa-list"></i> {% trans %}docfile list{% endtrans %}
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="{{ path('docfile_edit', { 'id': docfile.id }) }}" class="btn btn-info btn-sm">
+                    <i class="fa fa-pencil "></i> {% trans %}edit{% endtrans %}
+                </a>
+            </li>
+
+            <li class="list-inline-item">
+                    <a href="{{ path('docfile_delete', { 'id': docfile.id }) }}"  class="btn btn-warning btn-sm" >
+                        <i class="fa fa-trash"></i> {% trans %}delete{% endtrans %}
+                    </a>
+
+            </li>
+        </ul>
+    </div>
+
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>{% trans %}id{% endtrans %}</th>
+                <td>#{{ docfile.id }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}name{% endtrans %}</th>
+                <td>{{ docfile.docName }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}size{% endtrans %}</th>
+                <td>{{ docfile.docSize }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}description{% endtrans %}</th>
+                <td>{{ docfile.description|raw }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+{% endblock %}

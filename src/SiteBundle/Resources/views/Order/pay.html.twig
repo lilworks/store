@@ -1,0 +1,31 @@
+{% extends 'baseFull.html.twig' %}
+
+{% block body %}
+
+
+    <h1>
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>  {% trans %}order{% endtrans %} {{ order.reference }}
+    </h1>
+
+{% set nPaymentMethods = paymentMethods|length %}
+
+    <div class="card-group">
+        {% for k,paymentMethod in paymentMethods %}
+
+            <div class="card">
+
+
+                <div class="card-block">
+                    <h4 class="card-title">{{ paymentMethod.name }}</h4>
+                    {% if paymentMethod.pictureName %}
+                        <img  src="{{ asset('paymentmethod/' ~ paymentMethod.pictureName  ) | imagine_filter('my_thumb') }}" />
+                    {% endif %}
+                    <p class="card-text">
+                        {{ paymentMethodsForm[k]|raw }}
+                    </p>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

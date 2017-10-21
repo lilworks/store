@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Users" table="users">
+    <indexes>
+      <index name="ugr_id" columns="ugr_id"/>
+      <index name="ust_id" columns="ust_id"/>
+    </indexes>
+    <id name="usrId" type="integer" column="usr_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="usrName" type="string" column="usr_name" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usrEmail" type="string" column="usr_email" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usrPassword" type="string" column="usr_password" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usrPasswordSalt" type="string" column="usr_password_salt" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usrDateregister" type="datetime" column="usr_dateregister" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="ustParam" type="string" column="ust_param" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Eventuel parametre de validation de compte</option>
+      </options>
+    </field>
+    <many-to-one field="ust" target-entity="UsersStatus" fetch="LAZY">
+      <join-columns>
+        <join-column name="ust_id" referenced-column-name="ust_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="ugr" target-entity="UsersGroups" fetch="LAZY">
+      <join-columns>
+        <join-column name="ugr_id" referenced-column-name="ugr_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

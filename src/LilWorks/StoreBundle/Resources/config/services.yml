@@ -1,0 +1,53 @@
+services:
+    lilworks_store.supercategories:
+        class: LilWorks\StoreBundle\Service\SuperCategories
+        arguments: ['@doctrine.orm.entity_manager','@templating', "@service_container"]
+
+    lilworks_store.list_menu_builder:
+        class: LilWorks\StoreBundle\Menu\ListMenuBuilder
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createListMenu, alias: list } # The alias is what is used to retrieve the menu
+
+    lilworks_store.voter.request:
+        class: LilWorks\StoreBundle\Voter\RequestVoter
+        arguments: ['@request_stack','@logger']
+        tags:
+            - { name: knp_menu.voter }
+
+    lilworks.order.form.product:
+        class: LilWorks\StoreBundle\Form\ProductType
+        tags:
+            - { name: form.type }
+        arguments: ['@?doctrine']
+
+    lilworks.store.paramLoader:
+        class: LilWorks\StoreBundle\Service\ParamLoader
+        tags:
+            - { name: lilworks_store.paramLoader }
+        arguments: ['%mode%', '%context%','%currency%',"@service_container"]
+
+    lilworks.store.twig_extension_product:
+        class: LilWorks\StoreBundle\Twig\ProductsExtension
+        public: false
+        arguments: ['@translator']
+        tags:
+            - { name: twig.extension }
+
+    lilworks.store.overview:
+        class: LilWorks\StoreBundle\Service\Overview
+        tags:
+            - { name: lilworks_store.overview }
+        arguments: ['@doctrine.orm.entity_manager','@templating']
+
+    lilworks.store.order.utils:
+        class: LilWorks\StoreBundle\Service\OrderUtils
+        tags:
+            - { name: lilworks_store_order.utils }
+        arguments: ['@doctrine.orm.entity_manager','%mode%','%context%']
+
+    lilworks.store.entity.file.cleaner:
+        class: LilWorks\StoreBundle\Service\EntityFileCleaner
+        tags:
+            - { name: lilworks.store.entity.file.cleaner }
+        arguments: ['@doctrine.orm.entity_manager','%kernel.root_dir%']

@@ -1,0 +1,407 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "@SiteBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    pdo.db_options:
+        db_table:       sessions
+
+        db_time_col:    sess_time
+        db_user_col: user
+
+framework:
+    #esi:             ~
+    translator:  { fallbacks: [fr] }
+    default_locale: fr #"%locale%"
+    #translator: { fallbacks: [en] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    trusted_hosts:   ~
+    session:
+        handler_id: session.handler.pdo
+        cookie_lifetime: 3600
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    globals:
+        lilworks_store_param_loader: '@lilworks.store.paramLoader'
+        js_vars: '@app.js_vars'
+    form_themes:
+         - form/bootstrap_4_layout.html.twig
+         - LexikFormFilterBundle:Form:form_div_layout.html.twig
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver:   pdo_mysql
+                host:     '%database_host%'
+                port:     '%database_port%'
+                dbname:   '%database_name%'
+                user:     '%database_user%'
+                password: '%database_password%'
+                charset:  UTF8
+            online:
+                driver:   pdo_mysql
+                host:     '%database_host2%'
+                port:     '%database_port2%'
+                dbname:   '%database_name2%'
+                user:     '%database_user2%'
+                password: '%database_password2%'
+                charset:  UTF8
+            distant:
+                driver:   pdo_mysql
+                host:     '%database_host_distant%'
+                port:     '%database_port_distant%'
+                dbname:   '%database_name_distant%'
+                user:     '%database_user_distant%'
+                password: '%database_password_distant%'
+                charset:  UTF8
+            import:
+                driver:   pdo_mysql
+                host:     '%database_host_import%'
+                port:     '%database_port_import%'
+                dbname:   '%database_name_import%'
+                user:     '%database_user_import%'
+                password: '%database_password_import%'
+                charset:  UTF8
+
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        default_entity_manager: default
+        entity_managers:
+            default:
+                dql:
+                   string_functions:
+                       GROUP_CONCAT: AppBundle\DQL\GroupConcatFunction
+                       md5: DoctrineExtensions\Query\Mysql\Md5
+                connection: default
+                mappings:
+                    LexikTranslationBundle: ~
+                    AppBundle:  ~
+                    LilWorksStoreBundle: ~
+                    LilworksMessageBundle: ~
+
+
+            online:
+                connection: online
+                mappings:
+                    AppBundle: ~
+                    LilWorksStoreBundle: ~
+            distant:
+                connection: distant
+                mappings:
+                    LilWorksStoreBundle: ~
+            import:
+                connection: import
+                mappings:
+                    LilWorksStoreBundle:  ~
+
+
+
+
+# Swiftmailer Configuration
+swiftmailer:
+    username: '%mailer_user%'
+    password:  '%mailer_password%'
+    encryption: '%mailer_encryption%'
+    port: '%mailer_port%'
+    auth_mode: '%mailer_auth%'
+    host: '%mailer_host%'
+
+monolog:
+    handlers:
+        # this "file_log" key could be anything
+        file_log:
+            type: stream
+            # log to var/logs/(environment).log
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            # log *all* messages (debug is lowest level)
+            level: debug
+
+        syslog_handler:
+            type: syslog
+            # log error-level messages and higher
+            level: error
+
+fos_user:
+    #model_manager_name: default
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    registration:
+            form:
+                type: AppBundle\Form\RegistrationType
+    profile:
+                form:
+                    type: AppBundle\Form\ProfileType
+    from_email:
+        address: youemail@email.com
+        sender_name: You
+    service:
+        mailer: fos_user.mailer.twig_swift
+
+
+knp_menu:
+    # use "twig: false" to disable the Twig extension and the TwigRenderer
+    twig:
+        template: KnpMenuBundle::menu.html.twig
+      #  template: LilWorksStoreBundle:Menu:knp_menu.html.twig
+    #  if true, enables the helper for PHP templates
+    templating: false
+    # the renderer to use, list is also available by default
+    default_renderer: twig
+
+knp_paginator:
+    page_range: 10                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: 'KnpPaginatorBundle:Pagination:twitter_bootstrap_v4_pagination.html.twig'
+        sortable: 'KnpPaginatorBundle:Pagination:sortable_link.html.twig' # sort link template
+
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
+    filter_sets:
+        cache: ~
+        my_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [120, 90], mode: outbound }
+                background: { size: [124, 94], position: center, color: '#ccc' }
+        mini:
+                    quality: 100
+                    filters:
+                         thumbnail: { size: [32, 32], mode: outbound }
+        category_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }
+
+        card_header:
+            quality: 100
+            filters:
+                thumbnail: { size: [58, 58], mode: outbound }
+                background: { size: [60, 60], position: center, color: '#ccc' }
+        site_menu_thumb_first:
+            quality: 100
+            filters:
+                 thumbnail: { size: [40, 40], mode: outbound }
+                 background: { size: [42, 42], position: center, color: '#ccc' }
+
+        site_menu_thumb:
+            quality: 100
+            filters:
+                 thumbnail: { size: [160, 100], mode: outbound }
+                 background: { size: [162, 102], position: center, color: '#ccc' }
+
+        site_product_small:
+            quality: 100
+            filters:
+                 thumbnail: { size: [700, 400], mode: outbound }
+        product_small:
+            quality: 100
+            filters:
+                 thumbnail: { size: [118, 98], mode: outbound }
+                 background: { size: [120, 100], position: center, color: '#ccc' }
+        product:
+            quality: 100
+            filters:
+                 thumbnail: { size: [400, 300], mode: outbound }
+                 background: { size: [402, 302], position: center, color: '#ccc' }
+        annonce:
+             quality: 100
+             filters:
+                 thumbnail: { size: [1348, 523], mode: outbound }
+                 background: { size: [1350, 525], position: center, color: '#ccc' }
+knp_snappy:
+    temporary_folder: kernel.cache_dir%/snappy
+    pdf:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltopdf
+        options:    []
+    image:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltoimage
+        options:    []
+
+lexik_translation:
+    fallback_locale: [fr]         # (required) default locale(s) to use
+    managed_locales: [fr, en] # (required) locales that the bundle has to manage
+    storage:
+        type: orm                  # orm | mongodb | propel
+        #object_manager: something  # The name of the entity / document manager which uses different connection (see: http://symfony.com/doc/current/cookbook/doctrine/multiple_entity_managers.html)
+                                       # When using propel, this can be used to specify the propel connection name
+
+vich_uploader:
+    db_driver: orm # or mongodb or propel or phpcr
+    mappings:
+        brand_pictures:
+             uri_prefix:         /brand
+             upload_destination: '%kernel.root_dir%/../web/brand'
+             inject_on_load:     false
+             delete_on_update:   true
+             delete_on_remove:   true
+        paymentmethod_pictures:
+              uri_prefix:         /paymentmethod
+              upload_destination: '%kernel.root_dir%/../web/paymentmethod'
+              inject_on_load:     false
+              delete_on_update:   true
+              delete_on_remove:   true
+        storeinfo_pictures:
+                      uri_prefix:         /storeinfo
+                      upload_destination: '%kernel.root_dir%/../web/storeinfo'
+                      inject_on_load:     false
+                      delete_on_update:   true
+                      delete_on_remove:   true
+        category_pictures:
+             uri_prefix:         /category
+             upload_destination: '%kernel.root_dir%/../web/category'
+             inject_on_load:     false
+             delete_on_update:   true
+             delete_on_remove:   true
+        supercategory_pictures:
+             uri_prefix:         /supercategory
+             upload_destination: '%kernel.root_dir%/../web/supercategory'
+             inject_on_load:     false
+             delete_on_update:   true
+             delete_on_remove:   true
+        shippingmethod_pictures:
+             uri_prefix:         /shippingmethod
+             upload_destination: '%kernel.root_dir%/../web/shippingmethod'
+             inject_on_load:     false
+             delete_on_update:   true
+             delete_on_remove:   true
+        product_docfiles:
+             uri_prefix:         /docfile/product
+             upload_destination: '%kernel.root_dir%/../web/docfile/product'
+             inject_on_load:     false
+             delete_on_update:   true
+             delete_on_remove:   true
+        product_pictures:
+             uri_prefix:         /product
+             upload_destination: '%kernel.root_dir%/../web/product'
+             inject_on_load:     false
+             delete_on_update:   true
+             delete_on_remove:   true
+        annonce_pictures:
+                 uri_prefix:         /annonce
+                 upload_destination: '%kernel.root_dir%/../web/annonce'
+                 inject_on_load:     false
+                 delete_on_update:   true
+                 delete_on_remove:   true
+
+sonata_seo:
+    page:
+        title: StoreOffline
+        metas:
+            name:
+                description: StoreOffline
+                keywords: store
+cmf_seo:
+    title: seo.title
+    description: seo.description
+    translation_domain: messages
+
+#doctrine_migrations:
+#      dir_name: "%kernel.root_dir%/DoctrineMigrations"
+#      namespace: App\Migrations
+#      table_name: migration_versions
+#      name: Application Migrations
+
+
+lexik_maintenance:
+    authorized:
+        path: /path                                                         # Optional. Authorized path, accepts regexs
+        host: your-domain.com                                               # Optional. Authorized domain, accepts regexs
+        ips: ['127.0.0.1']                                                  # Optional. Authorized ip addresses
+        query: { foo: bar }                                                 # Optional. Authorized request query parameter (GET/POST)
+        cookie: { bar: baz }                                                # Optional. Authorized cookie
+        route:                                                              # Optional. Authorized route name
+        attributes:                                                         # Optional. Authorized route attributes
+    driver:
+        ttl: 3600                                                                  # Optional ttl option, can be not set
+
+         # File driver
+        #class: '\Lexik\Bundle\MaintenanceBundle\Drivers\FileDriver'                # class for file driver
+        #options: {file_path: kernel.root_dir%/../var/cache/lock}                         # file_path is the complete path for create the file
+
+         # Shared memory driver
+        #class: '\Lexik\Bundle\MaintenanceBundle\Drivers\ShmDriver'                 # class for shared memory driver
+
+         # MemCache driver
+        #class: Lexik\Bundle\MaintenanceBundle\Drivers\MemCacheDriver               # class for MemCache driver
+        #options: {key_name: 'maintenance', host: 127.0.0.1, port: 11211}           # need to define a key_name, the host and port
+
+        # Database driver:
+        class: 'Lexik\Bundle\MaintenanceBundle\Drivers\DatabaseDriver'             # class for database driver
+
+        # Option 1 : for doctrine
+        options: {connection: default}                                            # Optional. You can choice an other connection. Without option it's the doctrine default connection who will be used
+
+        # Option 2 : for dsn, you must have a column ttl type datetime in your table.
+        #options: {dsn: "mysql:dbname=maintenance;host:localhost", table: maintenance, user: root, password: root}  # the dsn configuration, name of table, user/password
+
+    #Optional. response code and status of the maintenance page
+    response:
+        code: 503
+        status: "Service Temporarily Unavailable"
+
+nomaya_social:
+    buttons:
+        facebook:
+            url:            null
+            locale:         "fr"
+            send:           false
+            width:          300
+            showFaces:      false
+            layout:         "button_count"
+        twitter:
+            url:            null
+            locale:         "fr"
+            message:        "Je veux partager ça avec vous"
+            text:           "Tweet"
+            via:            "L'Equipe cartedevisitevirtuelle.fr"
+            tag:            "ttot"
+        googleplus:
+            url:            null
+            locale :        "fr"
+            size :          "medium"
+            annotation :    "bubble"
+            width :         300
+        linkedin:
+            url:            null
+            locale:         "fr"
+            counter:        "right"
+        #pinterest:
+        #    url:            null
+    links:
+        facebook:           "http://www.facebook.com/yann.chauvel"
+        googleplus:         "https://plus.google.com/105931415830389032796"
+    theme:                  'default' # optional

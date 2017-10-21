@@ -1,0 +1,176 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_coupon_history")
+ * @ORM\HasLifecycleCallbacks()
+ */
+class CouponHistory
+{
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
+    }
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer",name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * Many CouponHistory have One Coupon.
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Coupon", inversedBy="couponHistory")
+     * @ORM\JoinColumn(name="coupon", referencedColumnName="id")
+     */
+    private $coupon;
+
+    /**
+     * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\OrdersPaymentMethods")
+     * @ORM\JoinColumn(name="orderPaymentMethod", referencedColumnName="id" , nullable=true )
+     */
+    private $orderPaymentMethod;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="amount", type="float", nullable=false)
+     * @Assert\GreaterThan(0)
+     */
+    private $amount;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="createdAt", type="datetime",nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        if(!$this->createdAt)
+            $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set amount
+     *
+     * @param float $amount
+     *
+     * @return CouponHistory
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return CouponHistory
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set coupon
+     *
+     * @param \LilWorks\StoreBundle\Entity\Coupon $coupon
+     *
+     * @return CouponHistory
+     */
+    public function setCoupon(\LilWorks\StoreBundle\Entity\Coupon $coupon = null)
+    {
+        $this->coupon = $coupon;
+
+        return $this;
+    }
+
+    /**
+     * Get coupon
+     *
+     * @return \LilWorks\StoreBundle\Entity\Coupon
+     */
+    public function getCoupon()
+    {
+        return $this->coupon;
+    }
+
+    /**
+     * Set orderPaymentMethod
+     *
+     * @param \LilWorks\StoreBundle\Entity\OrdersPaymentMethods $orderPaymentMethod
+     *
+     * @return CouponHistory
+     */
+    public function setOrderPaymentMethod(\LilWorks\StoreBundle\Entity\OrdersPaymentMethods $orderPaymentMethod = null)
+    {
+        $this->orderPaymentMethod = $orderPaymentMethod;
+
+        return $this;
+    }
+
+    /**
+     * Get orderPaymentMethod
+     *
+     * @return \LilWorks\StoreBundle\Entity\OrdersPaymentMethods
+     */
+    public function getOrderPaymentMethod()
+    {
+        return $this->orderPaymentMethod;
+    }
+}

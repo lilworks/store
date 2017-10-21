@@ -1,0 +1,44 @@
+{% if product is not null %}
+    {% set productDisplayStock = product|displayStock('badge',true,true) %}
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+            <a href="{{ path('site_product',{tag:product.tag}) }}">
+                {% if product.pictures is not null and product.pictures|length > 0 %}
+                    <img class="card-img-top img-fluid" src="{{ asset('product/'~product.pictures[0].pictureName ) | imagine_filter('site_product_small') }}" />
+                {% else %}
+                    <img class="card-img-top img-fluid" src="http://placehold.it/700x400" alt="">
+                {% endif %}
+            </a>
+            <div class="card-block">
+                <h5 class="card-title">
+                    <a href="{{ path('site_product',{tag:product.tag}) }}">{{ product.brand.name }} {{ product.name }}</a>
+                </h5>
+                <p class="card-text">
+
+                    {% if product.isSecondHand %}
+                        <span class="badge badge-warning" >
+                            {{ 'lilworks.sitebundle.issecondhand'|trans }}
+                        </span>
+                    {% endif %}
+
+                    {%  set text = product.description|striptags|trim|convert_encoding('UTF-8', 'HTML-ENTITIES') %}
+                    {{ text|length > 80 ? text|slice(0, 80) ~ '...' : text  }}
+                </p>
+            </div>
+            <div class="card-footer text-muted">
+                    {{ product.priceOnline|price }}
+                    <a href="{{ path('site_basket_add',{id:product.id}) }}" style="color: {{ productDisplayStock['basketColor'] }};">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                <br>
+                {{ productDisplayStock['message']|raw }}
+
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+            {{ 'lilworks.sitebundle.productnotfound'|trans }}
+        </div>
+    </div>
+{% endif %}

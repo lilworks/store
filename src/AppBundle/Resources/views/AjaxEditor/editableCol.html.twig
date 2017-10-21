@@ -1,0 +1,92 @@
+
+<div id="{{ colName }}_{{ colId }}">
+
+    <style>
+        .ajaxEditorColForm-hidden{
+            visibility: hidden;
+        }
+        .ajaxEditorColForm-visible{
+            visibility: visible;
+        }
+        .ajaxEditorColValue_notSet{
+            font-style: italic;
+            color: #c1e2b3;
+        }
+    </style>
+
+    <div class="ajaxEditorCol" id="ajaxEditorCol_{{ colName }}_{{ colId }}">
+        {% if colMode == "string" or colMode == "integer" %}
+            {% if value == "" %}
+                <span class="ajaxEditorColValue_notSet">
+                    {% trans %}not set{% endtrans %}
+                </span>
+            {% else %}
+                {{ value }}
+            {% endif %}
+        {% elseif colMode == "boolean" %}
+            {% if value == 1 %}
+                <i class="fa fa-check" aria-hidden="true" style="color: green;"></i>
+            {% else %}
+                <i class="fa fa-times" aria-hidden="true" style="color: red;"></i>
+            {% endif %}
+        {% elseif colMode == "picture" %}
+            {% if value %}
+                <img src="{{ asset(options["cols"][colName]["folder"] ~ '/' ~ value ) | imagine_filter('my_thumb') }}" />
+            {% else %}
+                <i class="fa fa-circle-thin" style="color: red;"></i>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="ajaxEditorColForm ajaxEditorColForm-hidden" colId="{{ colId }}" colName="{{ colName }}" id="ajaxEditorColForm_{{ colName }}">
+
+        {{ form_start(form ,{'attr': {'id': 'ajaxEditorForm_' ~ colName ~ '_' ~ id  }}) }}
+
+        {% if form.id is defined %}
+            {{ form_widget(form.id, {'value' :id}) }}
+        {% endif %}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+        {{ form_errors(form) }}
+    </div>
+
+</div>
+
+
+
+{% if postEdit is not defined or postEdit is null %}
+<script>
+    var formId = "ajaxEditorForm_{{ colName }}_{{ id }}";
+    $('#'+formId).on('submit', function (e) {
+        var colName = '{{ colName }}';
+
+        {% if colMode == "boolean"  %}
+
+            var buttonToChange = "ajaxEditorList_action_boolean_{{ colName }}_{{ id }}";
+
+            $("#"+buttonToChange).closest("a").find('i').remove();
+
+            var buttonToChangeHtml = $("#"+buttonToChange).closest("a").html();
+
+            var newValue = $(this).find("select[id$='"+colName+"']").find(":selected").val();
+            if(newValue == 1){
+                newValue = '<i class="fa fa-check" aria-hidden="true" style="color: green;"></i>';
+                $("#"+buttonToChange).closest("a").html('<i class="fa fa-times" aria-hidden="true" style="color: red;"></i>'+buttonToChangeHtml);
+            }else{
+                newValue = '<i class="fa fa-times" aria-hidden="true" style="color: red;"></i>';
+                $("#"+buttonToChange).closest("a").html('<i class="fa fa-check" aria-hidden="true" style="color: green;"></i>'+buttonToChangeHtml);
+            }
+        {% else %}
+            var newValue = $(this).find("input[id$='"+colName+"']").val();
+        {% endif %}
+
+        console.log($(this));
+        //ajaxEditor.submitCol( $(this), e ,'{{ colName }}','{{ id }}', newValue );
+        ajaxEditor.submitColFile( this, e ,'{{ colName }}','{{ id }}', newValue );
+    });
+    $('#'+formId).find('.ajaxEditor_btn_cancel').on('click', function (e) {
+        $(this).closest("form").parent().removeClass('ajaxEditorColForm-visible');
+        $(this).closest("form").parent().addClass('ajaxEditorColForm-hidden');
+    });
+</script>
+{% endif %}

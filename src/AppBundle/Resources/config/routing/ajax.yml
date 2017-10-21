@@ -1,0 +1,27 @@
+liveEditorList:
+    path:     /live-editor-list
+    defaults: { _controller: "AppBundle:Ajax:liveEditorList" }
+    methods:  [GET, POST]
+    options:
+        expose: true
+
+searchEntityByFieldAction:
+    path:     /search-entity-by-field
+    defaults: { _controller: "AppBundle:Ajax:searchEntityByField" }
+    methods:  [GET,POST]
+    options:
+        expose: true
+
+postAcceptor:
+    path:     /post-acceptor
+    defaults: { _controller: "AppBundle:Ajax:postAcceptor" }
+    methods:  [GET,POST]
+    options:
+        expose: true
+
+style:
+    path:     /style
+    defaults: { _controller: "LilWorksStoreBundle:Ajax:style" }
+    methods:  [GET, POST]
+    options:
+        expose: false

@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.shippingmethod.list{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+                <a href="{{ path('shippingmethod_new') }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.ispublished{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.price{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.shippingmethod.freetrigger{% endtrans %}</th>
+                <th>{{ knp_pagination_sortable(pagination,  'lilworks.storebundle.shippingmethod.priority'|trans, 'p.priority') }}</th>
+                <th>{% trans %}lilworks.storebundle.shippingmethod.delay{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.country{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.shippingmethod.orderproductcount{% endtrans %} • {% trans %}lilworks.storebundle.shippingmethod.productcount{% endtrans %}</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+        {% set entityName = 'LilWorksStoreBundle:ShippingMethod' %}
+
+        {% for shippingMethod in pagination %}
+            <tr>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('shippingmethod_show', { 'id': shippingMethod.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('shippingmethod_edit', { 'id': shippingMethod.id }) }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+                            </a>
+                        </li>
+                        {% if
+                        shippingMethod.products|length == 0 and
+                        shippingMethod.ordersRealShippingMethods|length == 0 and
+                        shippingMethod.shippingmethodsCountries|length == 0
+                        %}
+                            {% set disabled = "" %}
+                        {% else %}
+                            {% set disabled = "disabled" %}
+                        {% endif %}
+                        <li>
+                            <a href="{{ path('shippingmethod_delete', { 'id': shippingMethod.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
+                                <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\ShippingMethod\\IsPublishedType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'isPublished',shippingMethod)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\ShippingMethod\\NameType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'name',shippingMethod)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\ShippingMethod\\PriceType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'price',shippingMethod)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\ShippingMethod\\FreeTriggerType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'freeTrigger',shippingMethod)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\ShippingMethod\\PriorityType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'priority',shippingMethod)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\ShippingMethod\\DelayType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'delay',shippingMethod)|raw }}
+                </td>
+                <td>
+                    {% if shippingMethod.shippingmethodsCountries|length > 0  %}
+                        {% for shippingmethodCountrie in shippingMethod.shippingmethodsCountries %}
+                            <a href="{{ path('country_show',{id: shippingmethodCountrie.country.id }) }}">
+                                <img src="{{ asset('flags/' ~ shippingmethodCountrie.country.flag  )  }}" />
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <i class="fa fa-circle-thin" style="color: red;"></i>
+                    {% endif %}
+                </td>
+                <td>
+                    {{ shippingMethod.ordersRealShippingMethods|length }} •
+                    {{ shippingMethod.products|length }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

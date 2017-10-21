@@ -1,0 +1,96 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_customers_phonenumbers")
+ */
+class CustomersPhoneNumbers
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer",name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Customer", inversedBy="customersPhonenumbers")
+     * @ORM\JoinColumn(name="customer", referencedColumnName="id")
+     */
+    private $customer;
+
+    /**
+     * One CustomerAddress correspond to one Address.
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\PhoneNumber", inversedBy="customersPhonenumbers")
+     * @ORM\JoinColumn(name="phonenumber", referencedColumnName="id")
+     */
+    private $phonenumber;
+
+
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \LilWorks\StoreBundle\Entity\Customer $customer
+     *
+     * @return CustomersPhoneNumbers
+     */
+    public function setCustomer(\LilWorks\StoreBundle\Entity\Customer $customer = null)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \LilWorks\StoreBundle\Entity\Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * Set phonenumber
+     *
+     * @param \LilWorks\StoreBundle\Entity\PhoneNumber $phonenumber
+     *
+     * @return CustomersPhoneNumbers
+     */
+    public function setPhonenumber(\LilWorks\StoreBundle\Entity\PhoneNumber $phonenumber = null)
+    {
+        $this->phonenumber = $phonenumber;
+
+        return $this;
+    }
+
+    /**
+     * Get phonenumber
+     *
+     * @return \LilWorks\StoreBundle\Entity\PhoneNumber
+     */
+    public function getPhonenumber()
+    {
+        return $this->phonenumber;
+    }
+}

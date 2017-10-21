@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $( window ).on( "load", FF.init() );
+            });
+        </script>
+    {% endblock %}
+    <h1>
+        {% trans %}lilworks.storebundle.coupon.list{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="{{ path('coupon_new') }}" class="btn btn-info btn-sm">
+                        <i class="fa fa-plus"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-5">
+            <form method="get" action="." class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}lilworks.storebundle.button.filter{% endtrans %}" />
+            </form>
+        </div>
+        <div class="col-lg-5">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.createdat{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.coupon.validity{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.coupon.isactive{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.reference{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.customer{% endtrans %}</th>
+            <th>
+                <ul>
+                    <li>{% trans %}lilworks.storebundle.coupon.initamount{% endtrans %}</li>
+                    <li>{% trans %}lilworks.storebundle.coupon.restamount{% endtrans %}</li>
+                </ul>
+            </th>
+            <th>{% trans %}lilworks.storebundle.coupon.paymentmethods{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.coupon.availableonline{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.coupon.splitable{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for coupon in pagination %}
+
+            <tr>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('coupon_show', { coupon_id: coupon.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('coupon_edit', { coupon_id: coupon.id }) }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('coupon_pdf',{coupon_id:coupon.id}) }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.pdf{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            {% if coupon.ordersPaymentMethods|length != 0 %}{% set disabled = 'disabled' %}{% else %}{% set disabled = '' %}{% endif %}
+                            <a href="{{ path('coupon_delete', { coupon_id: coupon.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
+                                <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+                <td>{{ coupon.createdAt|date('d/m/Y') }}</td>
+                <td>
+                    {% if coupon.validity %}
+                        {{ coupon.validity|date('d/m/Y') }}
+                    {% else %}
+                        <i class="fa fa-circle" aria-hidden="true"></i>
+                    {% endif %}
+                </td>
+                <td>
+                    {{ coupon.isActive|boolean(0)|raw }}
+                </td>
+                <td>
+                    {{ coupon.reference }}
+                </td>
+                <td>
+                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('customer_edit',{customer_id: coupon.customer.id}) }}">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>{{ coupon.customer.firstName }} {{ coupon.customer.lastName }} {{ coupon.customer.companyName }}
+                    </a>
+                </td>
+                <td>
+                    <ul>
+                        <li>{{ coupon.amount|price }}</li>
+                        <li>{{ coupon.getAmountAvailable|price }}</li>
+                    </ul>
+                </td>
+                <td>
+                    {% if coupon.ordersPaymentMethods|length > 0 %}
+                        {% for orderPaymentMethod in coupon.ordersPaymentMethods %}
+                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{order_id: orderPaymentMethod.order.id}) }}">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>{{ orderPaymentMethod.order.reference }} {{ orderPaymentMethod.amount|price }}
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <i class="fa fa-circle" aria-hidden="true"></i>
+                    {% endif %}
+                </td>
+                <td>{{ coupon.availableOnline|boolean|raw }}</td>
+                <td>{{ coupon.splitable|boolean|raw }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

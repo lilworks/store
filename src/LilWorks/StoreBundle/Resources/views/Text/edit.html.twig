@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/tinymce/langs.fr_FR.js') }}"></script>
+        <script>
+
+            $( document ).ready(function() {
+                initTinyMce.text('.editor-text',['{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}','{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']);
+                initTinyMce.css('.editor-css');
+            });
+
+        </script>
+    {% endblock %}
+
+    <h1>
+        {% trans %}lilworks.storebundle.text.edit{% endtrans %}
+    </h1>
+
+
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+        <a href="{{ path('text_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+        <a href="{{ path('text_show', { 'id': text.id }) }}" class="btn btn-info btn-sm">
+            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+        </a>
+
+            <a href="{{ path('text_backup', { 'id': text.id }) }}" class="btn btn-primary btn-sm">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                {% trans %}lilworks.storebundle.link.backup{% endtrans %}
+            </a>
+
+            {% if text.isContent == 1 %}{% set disabled='' %}{% else %}{% set disabled='disabled' %}{% endif %}
+            <a href="{{ path('text_delete', { 'id': text.id }) }}" class="btn btn-danger btn-sm btn-delete {{ disabled }}">
+                <i class="fa fa-trash "></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+            </a>
+
+    </div>
+
+    {{ form_start(form) }}
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+    <div class="row">
+        <div class="col-sm-12">
+            {{ form_widget(form) }}
+            <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+        </div>
+    </div>
+
+
+    {{ form_end(form) }}
+
+{% endblock %}

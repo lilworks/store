@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {{ 'storebundle.country.show %name%'|trans({'%name%':country.name }) }}
+    </h1>
+
+    <div id="content_menu">
+        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.shipping.portal','storebundle.menu.country'] , {context: 'content'}) %}
+        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+    </div>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>{% trans %}storebundle.idandtag{% endtrans %}</th>
+                <td>#{{ country.id }} {{ country.tag }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}storebundle.ispublished{% endtrans %}</th>
+                <td>
+                    {{ country.isPublished|boolean|raw }}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}storebundle.name{% endtrans %}</th>
+                <td>{{ country.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}storebundle.country.flag{% endtrans %}</th>
+                <td>
+                    {% if country.flag %}
+                        <img src="{{ asset('flags/' ~ country.flag  )  }}" />
+                    {% else %}
+                        <i class="fa fa-circle-thin" style="color: red;"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}storebundle.addresses{% endtrans %}</th>
+                <td>
+                    {% if  country.addresses|length > 0 %}
+                        {{ country.addresses|length }}
+                    {% else %}
+                        <i class="fa fa-circle-thin" ></i>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}storebundle.country.alowedshippingmethods{% endtrans %}</th>
+                <td>
+                    {% if  country.shippingmethodsCountries|length > 0 %}
+                        <ul class="list-inline">
+                            {% for shippingMethod in country.shippingmethodsCountries %}
+                                <li class="list-inline-item page-item product">
+                                    <a href="{{ path('shippingmethod_show',{shippingmethod_id: shippingMethod.shippingMethod.id}) }}" role="button" class="btn btn-secondary btn-sm">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        {{ shippingMethod.shippingMethod.name }}
+
+                                        {% if shippingMethod.price is not defined or shippingMethod.price is null %}
+                                            <span class="shippingmethod-overwrited">
+                                                {{  shippingMethod.shippingMethod.price|price }}
+                                            </span>
+                                        {% else %}
+                                            <span class="shippingmethod-default">
+                                                {{ shippingMethod.price|price }}
+                                            </span>
+                                        {% endif %}
+                                        {% if shippingMethod.freeTrigger is not defined or shippingMethod.freeTrigger is null %}
+                                            <span class="shippingmethod-overwrited">
+                                                {% trans %}storebundle.shippingmethod.freetrigger{% endtrans %}: {{ shippingMethod.shippingMethod.freeTrigger|price  }}
+                                            </span>
+                                        {% else %}
+                                            <span class="shippingmethod-default">
+                                                {% trans %}storebundle.shippingmethod.freetrigger{% endtrans %}: {{ shippingMethod.freeTrigger|price  }}
+                                            </span>
+                                        {% endif %}
+                                        {% if shippingMethod.priority is not defined or shippingMethod.priority is null %}
+                                            <span class="shippingmethod-overwrited">
+                                                {% trans %}storebundle.shippingmethod.priority{% endtrans %}: {{ shippingMethod.shippingMethod.priority  }}
+                                            </span>
+                                        {% else %}
+                                            <span class="shippingmethod-default">
+                                                {% trans %}storebundle.shippingmethod.priority{% endtrans %}: {{ shippingMethod.priority  }}
+                                            </span>
+                                        {% endif %}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <i class="fa fa-circle-thin" ></i>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

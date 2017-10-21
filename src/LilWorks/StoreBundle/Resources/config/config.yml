@@ -1,0 +1,4 @@
+parameters:
+    context: online
+    mode: slave
+    currency: EUR

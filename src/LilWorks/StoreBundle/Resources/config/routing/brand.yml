@@ -1,0 +1,25 @@
+brand_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Brand:index" }
+    methods:  [GET, POST]
+
+brand_show:
+    path:     /{brand_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Brand:show" }
+    methods:  GET
+
+brand_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Brand:new" }
+    methods:  [GET, POST]
+
+brand_edit:
+    path:     /{brand_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Brand:edit" }
+    methods:  [GET, POST]
+
+
+brand_delete:
+    path:     /{brand_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Brand:delete" }
+    methods:  [GET, POST]

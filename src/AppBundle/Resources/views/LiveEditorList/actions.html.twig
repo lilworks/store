@@ -1,0 +1,136 @@
+<input type="checkbox" id="liveEditorList_checkAll" />
+
+<ul class="list-inline">
+    <li>
+        delete
+        <a href="#" class="btn btn-info btn-danger btn-sm" id="liveEditorList_action_delete">
+            <i class="fa fa-trash"></i>
+        </a>
+    </li>
+    <li>
+        publish
+        <a href="#" class="btn btn-info btn-sm"  id="liveEditorList_action_publish">
+            <i class="fa fa-check" aria-hidden="true" style="color: green;"></i>
+        </a>
+        <a href="#" class="btn btn-info btn-sm"  id="liveEditorList_action_unpublish">
+            <i class="fa fa-times" aria-hidden="true" style="color: red;"></i>
+        </a>
+    </li>
+</ul>
+
+<script>
+
+    var LiveEditorList = {
+
+        init:function(selectorsId,entityName){
+
+            var objSelectorsId = JSON.parse(selectorsId.replace(/&quot;/g,'"'));
+
+            $('#liveEditorList_checkAll').change(function() {
+                if($(this).is(':checked')){
+                    $.each(objSelectorsId.selectorsId, function(key,value){
+                        $('#liveEditorList_checkbox_'+value).prop('checked',true);
+                    });
+                }else{
+                    $.each(objSelectorsId.selectorsId, function(key,value){
+                        $('#liveEditorList_checkbox_'+value).prop('checked',false);
+                    });
+                }
+
+            });
+
+            $('#liveEditorList_action_delete').click(function() {
+               $('.liveEditorList_checkbox:checked').each(function(key,value){
+
+                    var id = $(value).attr('liveEditorList_checkbox_id');
+
+                   if($(value).is(':checked')){
+
+                       var url = Routing.generate('liveEditorList');
+                       console.log(url);
+                       $.ajax({
+                           type: $(this).attr('method'),
+                           url: url,
+                           data: {
+                               id: id ,
+                               entityName:entityName,
+                               action:'remove'
+                           }
+                       })
+                               .done(function (data) {
+
+                                   $('[liveEditorLine="'+id+'"]').remove();
+                               })
+                               .fail(function (jqXHR, textStatus, errorThrown) {
+                               });
+
+                   }
+               });
+            });
+            $('#liveEditorList_action_publish').click(function() {
+                $('.liveEditorList_checkbox:checked').each(function(key,value){
+
+
+
+                    var id = $(value).attr('liveEditorList_checkbox_id');
+
+                    if($(value).is(':checked')){
+
+                        var url = Routing.generate('liveEditorList');
+
+                        $.ajax({
+                            type: $(this).attr('method'),
+                            url: url,
+                            data: {
+                                id: id ,
+                                entityName:entityName,
+                                action:'publish'
+                            }
+                        })
+                                .done(function (data) {
+                                    $('[liveEditorList_ispublish_row="'+id+'"]').replaceWith(data);
+                                })
+                                .fail(function (jqXHR, textStatus, errorThrown) {
+                                });
+
+                    }
+
+
+                });
+            });
+            $('#liveEditorList_action_unpublish').click(function() {
+                $('.liveEditorList_checkbox:checked').each(function(key,value){
+
+                    var id = $(value).attr('liveEditorList_checkbox_id');
+
+                    if($(value).is(':checked')){
+
+                        var url = Routing.generate('liveEditorList');
+
+                        $.ajax({
+                            type: $(this).attr('method'),
+                            url: url,
+                            data: {
+                                id: id ,
+                                entityName:entityName,
+                                action:'unpublish'
+                            }
+                        })
+                                .done(function (data) {
+                                    $('[liveEditorList_ispublish_row="'+id+'"]').replaceWith(data);
+                                })
+                                .fail(function (jqXHR, textStatus, errorThrown) {
+                                });
+
+                    }
+
+
+                });
+            });
+        }
+
+    };
+    LiveEditorList.init('{{ js_vars|json_encode }}','{{ entityName }}');
+
+</script>
+

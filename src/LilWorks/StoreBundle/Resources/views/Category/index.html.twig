@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $( window ).on( "load",
+                        FF.init()
+                );
+                RE.init('category_index');
+                Paginator.init("{{path(app.request.attributes.get('_route'),{'maxItemPerPage': '_itemNum'})}}");
+            });
+        </script>
+
+    {% endblock %}
+
+    <h1>
+        {% trans %}lilworks.storebundle.category.list{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+                <a href="{{ path('category_new') }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <form method="get" action="." class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}lilworks.storebundle.button.filter{% endtrans %}" />
+            </form>
+        </div>
+        <div class="col-lg-5">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
+            <th>
+                {{ rowsLiveEditor.getActions()|raw }}
+            </th>
+            <th>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.ispublished'|trans, 'c.isPublished') }}</th>
+            <th>{% trans %}lilworks.storebundle.products{% endtrans %}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.name'|trans, 'c.name') }}</th>
+            <th>{% trans %}lilworks.storebundle.picture{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set entityName = 'LilWorksStoreBundle:Category' %}
+        {% for category in pagination %}
+            <tr>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('category_show', { 'id': category.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            {% if category.products|length == 0 %}{% set disabled = 'disabled' %}{% else %}{% set disabled = '' %}{% endif %}
+                                <a href="{{ path('category_empty', { 'id': category.id }) }}"  class="btn btn-warning btn-sm btn-empty {{ disabled }}" >
+                                    <i class="fa fa-share-square-o"></i> {% trans %}lilworks.storebundle.link.empty{% endtrans %}
+                                </a>
+                        </li>
+                        <li>
+                            {% if category.products|length == 0 %}{% set disabled = '' %}{% else %}{% set disabled = 'disabled' %}{% endif %}
+                                <a href="{{ path('category_delete', { 'id': category.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
+                                    <i class="fa fa-trash"></i>  {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                                </a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    {{ rowsLiveEditor.getRowCheckbox( category.id )|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Category\\IsPublishedType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'isPublished',category)|raw }}
+                </td>
+                <td>{{ category.products|length }}</td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Category\\NameType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'name',category)|raw }}
+                </td>
+                <td>
+                    {% if category.pictureName %}
+                        <img src="{{ asset('category/' ~ category.pictureName  ) | imagine_filter('my_thumb') }}" />
+                    {% else %}
+                        <i class="fa fa-circle" ></i>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

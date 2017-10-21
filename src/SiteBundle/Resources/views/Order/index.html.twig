@@ -1,0 +1,113 @@
+{% extends 'baseUser.html.twig' %}
+
+{% block body %}
+
+    <h1>
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>  {% trans %}your order{% endtrans %}
+    </h1>
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} No order found|{1} found one order|]1,Inf[ found %count% orders
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{% trans %}action{% endtrans %}</th>
+            <th>{% trans %}createdAt{% endtrans %}</th>
+            <th>{% trans %}updatedAt{% endtrans %}</th>
+            <th>{% trans %}reference{% endtrans %}</th>
+            <th>{% trans %}tot{% endtrans %}</th>
+            <th>{% trans %}payed{% endtrans %}</th>
+            <th>{% trans %}products{% endtrans %}</th>
+            <th>{% trans %}orderSteps{% endtrans %}</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for order in pagination %}
+            <tr>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('site_order_edit', { 'id': order.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i> {% trans %}show{% endtrans %}
+                            </a>
+                        </li>
+
+                        {% if order.ordersOrderSteps|length > 0 and
+                        order.ordersOrderSteps[0].orderStep.tag == "DONE"
+                        %}
+                            <li>
+
+                                <a href="{{ path('site_order_pdf', { 'id': order.id }) }}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-file"></i> {% trans %}download pdf{% endtrans %}
+                                </a>
+
+                            </li>
+
+                        {% endif %}
+
+                        {% if order.ordersOrderSteps|length > 0 and
+                        order.ordersOrderSteps[0].orderStep.tag == "WAITING_PAYMENT"
+                        %}
+                            <li>
+
+                                <a href="{{ path('site_order_pay', { 'id': order.id }) }}" class="btn btn-success btn-sm">
+                                    <i class="fa fa-euro"></i> {% trans %}pay{% endtrans %}
+                                </a>
+
+                            </li>
+                        <li>
+
+                            <a href="{{ path('site_order_remove', { 'id': order.id }) }}" class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i> {% trans %}cancel{% endtrans %}
+                            </a>
+
+                        </li>
+                        {% endif %}
+                    </ul>
+                </td>
+                <td>
+                    {{ order.createdAt|date }}
+                </td>
+
+                <td>{{ order.updatedAt|date }}</td>
+                <td>{{ order.reference }}</td>
+                <td>{{ order.tot|price }}</td>
+                <td>
+                    {% if order.payed == order.tot %}
+                        <span style="color: green;">{{ order.payed|price }}</span>
+                    {% else %}
+                        <span style="color: red;">{{ order.payed|price }}</span>
+                    {% endif %}
+                </td>
+                <td>{{ order.ordersProducts|length }}</td>
+                <td>
+                    {% if order.ordersOrderSteps|length > 0%}
+                        {{ order.ordersOrderSteps[0].orderStep.name }}
+                    {% endif %}
+                </td>
+
+
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+{% endblock %}

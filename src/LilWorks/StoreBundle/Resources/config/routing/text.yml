@@ -1,0 +1,49 @@
+text_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Text:index" }
+    methods:  [GET, POST]
+
+text_show:
+    path:     /{text_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Text:show" }
+    methods:  GET
+
+text_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Text:new" }
+    methods:  [GET, POST]
+
+text_edit:
+    path:     /{text_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Text:edit" }
+    methods:  [GET, POST]
+
+
+text_backup:
+    path:     /{text_id}/backup
+    defaults: { _controller: "LilWorksStoreBundle:Text:backup" }
+    methods:  [GET, POST]
+
+text_backup_apply:
+    path:     /{textbackup_id}/backup-apply
+    defaults: { _controller: "LilWorksStoreBundle:Text:backupApply" }
+    methods:  [GET, POST]
+
+text_backup_delete:
+    path:     /{textbackup_id}/backup-delete
+    defaults: { _controller: "LilWorksStoreBundle:Text:backupDelete" }
+    methods:  [GET, POST]
+text_backup_show:
+    path:     /{textbackup_id}/backup-show
+    defaults: { _controller: "LilWorksStoreBundle:Text:backupShow" }
+    methods:  [GET, POST]
+text_backup_empty:
+    path:     /{text_id}/backup-empty
+    defaults: { _controller: "LilWorksStoreBundle:Text:backupEmpty" }
+    methods:  [GET, POST]
+
+
+text_delete:
+    path:     /{text_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Text:delete" }
+    methods:  [GET, POST]

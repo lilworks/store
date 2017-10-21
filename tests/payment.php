@@ -1,0 +1,36 @@
+<?php
+$spplus = array(
+    "MODULE_NAME"=>'spplus',
+    "SYS_NAME"=>'vads_version',
+    "SYS_NAME_VALUE"=>'v2',
+    "SYS_LANGUAGE_NAME"=>'vads_language',
+    "SITE_ID_NAME"=>'vads_site_id',
+    "SITE_ID_VALUE"=>'12345678',
+    "AMOUNT_NAME"=>'vads_amount',
+    "CURRENCY_NAME"=>'vads_currency',
+    "TRANS_ID_NAME"=>'vads_trans_id',
+    "METHOD_NAME"=>'vads_payment_card',
+    "MODALITY_NAME"=>'vads_payment_config',
+    "SYS_AUTO_NAME"=>'vads_validation_mode',
+    "SYS_AUTO_VALUE"=>0,
+    "PAYMENT_DELAY_NAME"=>'vads_capture_delay',
+    "PAYMENT_DELAY_VALUE"=>0,
+    "CUSTOMER_EMAIL_NAME"=>'vads_cust_email ',
+    "RETURN_URL_NAME"=>'vads_url_return',
+    "RETURN_URL_VALUE"=>'test.html',
+    "SIGNATURE_NAME"=>'signature',
+    "SIGNATURE_VALUE"=>'1122334455667788',
+    "TRANS_DATE_NAME"=>'vads_transdate',
+    "SYS_MODE_NAME"=>'vads_ctx_mode',
+    "SYS_MODE_VALUE"=>'TEST',
+    "SYS_MOD_NAME"=>'vads_action_mode',
+    "SYS_MOD_VALUE"=>'INTERACTIVE',
+    "SYS_PAGEACTION_NAME"=>'vads_page_action',
+    "SYS_PAGEACTION_VALUE"=>'PAYMENT',
+    "RETURN_RESULT_NAME"=>'vads_result',
+    "RETURN_RESULT_OK_VALUE"=>'00',
+    "RETURN_EXTRA_RESULT_NAME"=>'vads_extra_result',
+
+);
+
+var_dump(serialize($spplus));

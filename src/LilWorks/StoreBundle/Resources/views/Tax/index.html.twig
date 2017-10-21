@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.tax.list{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+                <a href="{{ path('tax_new') }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.tax.value{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.tax.type{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.tax.productsoffline{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.tax.productsonline{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.tax.ordersproducts{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set entityName = 'LilWorksStoreBundle:Tax' %}
+        {% for tax in pagination %}
+            <tr>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('tax_show', { 'id': tax.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('tax_edit', { 'id': tax.id }) }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('tax_delete', { 'id': tax.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
+                                <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Tax\\NameType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'name',tax)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Tax\\ValueType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'value',tax)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Tax\\TypeType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'type',tax)|raw }}
+                </td>
+                <td>
+                    {{ tax.productsOnline|length }}
+                </td>
+                <td>
+                    {{ tax.productsOffline|length }}
+                </td>
+                <td>
+                    {{ tax.ordersProducts|length }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

@@ -1,0 +1,141 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_order_status")
+ */
+class OrderStatus
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer",name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\OrdersStatus", mappedBy="status")
+     */
+    private $ordersStatus;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string",length=100,nullable=false)
+     */
+    private $name;
+
+
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="text",nullable=true)
+     */
+    private $description;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ordersStatus = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return OrderStatus
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return OrderStatus
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Add ordersStatus
+     *
+     * @param \LilWorks\StoreBundle\Entity\OrdersStatus $ordersStatus
+     *
+     * @return OrderStatus
+     */
+    public function addOrdersStatus(\LilWorks\StoreBundle\Entity\OrdersStatus $ordersStatus)
+    {
+        $this->ordersStatus[] = $ordersStatus;
+
+        return $this;
+    }
+
+    /**
+     * Remove ordersStatus
+     *
+     * @param \LilWorks\StoreBundle\Entity\OrdersStatus $ordersStatus
+     */
+    public function removeOrdersStatus(\LilWorks\StoreBundle\Entity\OrdersStatus $ordersStatus)
+    {
+        $this->ordersStatus->removeElement($ordersStatus);
+    }
+
+    /**
+     * Get ordersStatus
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrdersStatus()
+    {
+        return $this->ordersStatus;
+    }
+}

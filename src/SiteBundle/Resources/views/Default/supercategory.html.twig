@@ -1,0 +1,115 @@
+{% extends 'base2col.html.twig' %}
+
+{% block body %}
+
+
+
+
+
+<div class="col-md-3">
+    <div class="card">
+        <div class="card-header">
+            {% trans %}filter{% endtrans %}
+        </div>
+        <div class="card-block">
+            <p class="card-text">
+            <form method="get"  class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="filter" />
+            </form>
+            </p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+
+</div>
+<!-- /.col-lg-3 -->
+<div class="col-md-9">
+
+
+
+<div class="card">
+        <div class="card-header">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>
+                        <img src="{{ asset('supercategory/'~supercategory.pictureName) | imagine_filter('card_header') }}" />
+                        {{ supercategory.name }}
+                        {% if pagination is defined %}
+                            ({{ pagination.getTotalItemCount }})
+                        {% endif %}
+                    </h3>
+                </div>
+                <div class="col-md-6">
+                    <div class="dropdown show" style="float: right;">
+                        <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ 'lilworks.sitebundle.categories' }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            {% for supercategorycategory in supercategory.supercategoriescategories %}
+                                {% set category = supercategorycategory.category %}
+                                {% if category.isPublished %}
+                                    <a class="dropdown-item" href="{{ path('site_category',{'tag':category.tag}) }}">
+                                        <img src="{{ asset('category/'~category.pictureName) | imagine_filter('mini') }}" />
+                                        {{ category.name }} ({{ category.products|length }})
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+        <div class="card-block">
+            <div class="card-text">
+
+
+
+
+
+                {% if pagination is defined %}
+                    <div class="pagination">
+                        {{ knp_pagination_render(pagination) }}
+
+
+            <span class="alert alert-info" role="alert" >
+                <i class="fa fa-sort" aria-hidden="true"></i>
+                {{ knp_pagination_sortable(pagination, 'priceOnline', 'p.priceOnline') }}
+            </span>
+                    </div>
+                {% endif %}
+
+                <div class="row">
+
+
+
+                    {% for product in pagination %}
+                        {{ productService.getProduct(product.id)|raw }}
+                    {% endfor %}
+
+
+                </div>
+
+
+                {% if pagination is defined %}
+                    <div class="pagination">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+{% endblock %}

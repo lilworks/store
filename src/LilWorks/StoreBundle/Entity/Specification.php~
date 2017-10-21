@@ -1,0 +1,204 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_specification")
+ */
+class Specification
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\Docfile", mappedBy="specification")
+     */
+    private $docfiles;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="weight", type="float",length=100,nullable=true)
+     */
+    private $weight;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="width", type="float",length=100,nullable=true)
+     */
+    private $width;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="length", type="float",length=100,nullable=true)
+     */
+    private $length;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="height", type="float",length=100,nullable=true)
+     */
+    private $height;
+
+
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->docfiles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set weight
+     *
+     * @param float $weight
+     *
+     * @return Specification
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Get weight
+     *
+     * @return float
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * Set width
+     *
+     * @param float $width
+     *
+     * @return Specification
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get width
+     *
+     * @return float
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set length
+     *
+     * @param float $length
+     *
+     * @return Specification
+     */
+    public function setLength($length)
+    {
+        $this->length = $length;
+
+        return $this;
+    }
+
+    /**
+     * Get length
+     *
+     * @return float
+     */
+    public function getLength()
+    {
+        return $this->length;
+    }
+
+    /**
+     * Set height
+     *
+     * @param float $height
+     *
+     * @return Specification
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get height
+     *
+     * @return float
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Add docfile
+     *
+     * @param \LilWorks\StoreBundle\Entity\Docfile $docfile
+     *
+     * @return Specification
+     */
+    public function addDocfile(\LilWorks\StoreBundle\Entity\Docfile $docfile)
+    {
+        $this->docfiles[] = $docfile;
+
+        return $this;
+    }
+
+    /**
+     * Remove docfile
+     *
+     * @param \LilWorks\StoreBundle\Entity\Docfile $docfile
+     */
+    public function removeDocfile(\LilWorks\StoreBundle\Entity\Docfile $docfile)
+    {
+        $this->docfiles->removeElement($docfile);
+    }
+
+    /**
+     * Get docfiles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDocfiles()
+    {
+        return $this->docfiles;
+    }
+}

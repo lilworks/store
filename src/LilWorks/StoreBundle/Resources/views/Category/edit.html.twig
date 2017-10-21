@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('assets/vendor/summernote/dist/summernote-bs4.css') }}">
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="h{{ asset('assets/vendor/popper.js/dist/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/summernote/dist/summernote-bs4.min.js') }}"></script>
+        <script>
+            $( document ).ready(function() {
+
+                $('.text-editor').summernote({
+                    height: 200,
+                    minHeight: null,
+                    maxHeight: null,
+                    focus: true,
+                    toolbar: [
+                        // [groupName, [list of button]]
+                        ['style', ['bold', 'italic', 'underline', 'clear']],
+                        ['font', ['strikethrough', 'superscript', 'subscript']],
+                        ['fontsize', ['fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['height', ['height']],
+                        ['misc',['codeview','fullscreen']]
+                    ]
+                });
+
+            });
+        </script>
+    {% endblock %}
+
+    <h1>
+        {% trans %}lilworks.storebundle.category.edit{% endtrans %}
+    </h1>
+
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+        <a href="{{ path('category_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+        <a href="{{ path('category_new') }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+        </a>
+        <a href="{{ path('category_show', { 'id': category.id }) }}" class="btn btn-info btn-sm">
+            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+        </a>
+
+        {% if category.products|length == 0 %}{% set disabled = 'disabled' %}{% else %}{% set disabled = '' %}{% endif %}
+        <a href="{{ path('category_empty',{id:category.id}) }}" class="btn btn-warning btn-sm btn-empty {{ disabled }}">
+            <i class="fa fa-share" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.empty{% endtrans %}
+        </a>
+
+        {% if category.products|length == 0 %}{% set disabled = '' %}{% else %}{% set disabled = 'disabled' %}{% endif %}
+        <a href="{{ path('category_delete', { 'id': category.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+        </a>
+    </div>
+
+
+    {{ form_start(form) }}
+
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+
+
+
+    <div class="row">
+        <div class="row-12 offset-2" >
+            {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.isPublished) }}
+            {% if  form.vars.data.pictureName %}
+            <img src="{{ asset('category/' ~  form.vars.data.pictureName  ) | imagine_filter('category_thumb') }}" />
+            {% endif %}
+            {{ form_row(form.pictureFile) }}
+            {{ form_row(form.products) }}
+            {{ form_row(form.description) }}
+            <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

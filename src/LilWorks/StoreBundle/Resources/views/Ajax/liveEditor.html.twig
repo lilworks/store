@@ -1,0 +1,46 @@
+<div  class="liveEditorCurrent_show">
+    {% if type == 'text' or type == 'number' %}
+        <i class="fa fa-pencil" aria-hidden="true"></i>{{ current }}
+    {% elseif type == 'checkbox' or type == 'choice'  %}
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        {% if current == 'true' %}
+            <span class="fa fa-check" aria-hidden="true" style="color: green;"></span>
+        {% else %}
+            <span class="fa fa-times" aria-hidden="true" style="color: red;"></span>
+        {% endif %}
+    {% endif %}
+</div>
+
+<div class="liveEditor_hidden">
+    {{ form_start(form,{'attr': {'id': 'liveEditor_' ~ entity ~ '_' ~ eid ~ '_' ~ fieldName }}) }}
+    {{ form_widget(form.save,{ 'id': 'liveEditor_save_' ~ entity ~ '_' ~ eid ~ '_' ~ fieldName }) }}{{ form_widget(form.cancel,{'id': 'liveEditor_cancel_' ~ entity ~ '_' ~ eid ~ '_' ~ fieldName }) }}
+
+    <input type="hidden" name="entity" value="{{ entity }}">
+    <input type="hidden" name="fieldName" value="{{ fieldName }}">
+    <input type="hidden" name="eid" value="{{ eid }}">
+
+    {{ form_end(form) }}
+    {{ form_errors(form) }}
+</div>
+
+
+<style>
+    .liveEditor_hidden{
+        display: none;
+    }
+    .liveEditor_show{
+        display: block;
+    }
+    .liveEditorCurrent_hidden{
+        display: none;
+    }
+    .liveEditorCurrent_show{
+        display: block;
+    }
+    .liveEditorCurrent_show i{
+        display: none;
+    }
+    .liveEditorCurrent_show:hover i{
+        display: inline;
+    }
+</style>

@@ -1,0 +1,32 @@
+supercategory_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:SuperCategory:index" }
+    methods:  [GET, POST]
+    options:
+         expose: true
+
+
+supercategory_show:
+    path:     /{supercategory_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:SuperCategory:show" }
+    methods:  GET
+
+supercategory_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:SuperCategory:new" }
+    methods:  [GET, POST]
+
+supercategory_edit:
+    path:     /{supercategory_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:SuperCategory:edit" }
+    methods:  [GET, POST]
+
+supercategory_empty:
+    path:     /{supercategory_id}/empty
+    defaults: { _controller: "LilWorksStoreBundle:SuperCategory:empty" }
+    methods:  [GET, POST]
+
+supercategory_delete:
+    path:     /{supercategory_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:SuperCategory:delete" }
+    methods:  [GET, POST]

@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $( window ).on( "load", FF.init() );
+            });
+        </script>
+    {% endblock %}
+
+    <h1>
+        {% trans %}lilworks.storebundle.brand.list{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-2">
+            {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.product','storebundle.menu.brand'] , {context: 'content'}) %}
+            {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:knp_menu_content.html.twig'}) }}
+        </div>
+        <div class="col-lg-5">
+            <form method="get" action="." class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}lilworks.storebundle.button.filter{% endtrans %}" />
+            </form>
+        </div>
+        <div class="col-lg-5">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.brand.productcount{% endtrans %}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.ispublished'|trans, 'b.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.name'|trans, 'b.name') }}</th>
+                <th>{% trans %}lilworks.storebundle.website{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.picture{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set entityName = 'LilWorksStoreBundle:Brand' %}
+
+        {% for brand in pagination %}
+
+            <tr>
+                <td>
+                    {% set formatedItems = pagination.items|idinkey %}
+                    {% set menu = knp_menu_get('list', [ brand.id ] ,{results:formatedItems[brand.id]   ,target:'brand'} ) %}
+                    {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
+                </td>
+                <td>{{ brand.products|length  }}</td>
+
+
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Brand\\IsPublishedType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'isPublished',brand)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Brand\\NameType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'name',brand)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Brand\\WebsiteType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'website',brand)|raw }}
+                </td>
+                <td>
+                    {% if brand.pictureName %}
+                        <img src="{{ asset('brand/' ~ brand.pictureName  ) | imagine_filter('my_thumb') }}" />
+                    {% else %}
+                        <i class="fa fa-circle"></i>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

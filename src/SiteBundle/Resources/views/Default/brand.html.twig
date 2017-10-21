@@ -1,0 +1,61 @@
+{% extends 'base2col.html.twig' %}
+
+{% block body %}
+
+
+
+
+
+
+    <h1>
+        <img src="{{ asset('brand/'~brand.pictureName) | imagine_filter('my_thumb') }}" />
+        {{ brand.name }}
+    </h1>
+
+
+
+    {% if pagination is defined %}
+
+        <div class="pagination">
+
+
+            {{ knp_pagination_render(pagination) }}
+
+            <span class="alert alert-success" role="alert">
+                {% transchoice pagination.getTotalItemCount %}
+                {0} no product found|{1} found one product|]1,Inf[ found %count% products
+                {% endtranschoice %}
+            </span>
+
+            <span class="alert alert-info" role="alert" >
+                <i class="fa fa-sort" aria-hidden="true"></i>
+                {{ knp_pagination_sortable(pagination, 'priceOnline', 'p.priceOnline') }}
+            </span>
+        </div>
+
+    {% endif %}
+
+    <div class="row">
+
+
+
+        {% for product in pagination %}
+            {{ productService.getProduct(product.id)|raw }}
+        {% endfor %}
+
+
+    </div>
+
+
+    {% if pagination is defined %}
+        <div class="pagination">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    {% endif %}
+
+
+
+
+
+
+{% endblock %}

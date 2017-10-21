@@ -1,0 +1,26 @@
+product_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Product:index" }
+    methods:  [GET, POST]
+    options:
+         expose: true
+
+product_show:
+    path:     /{product_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Product:show" }
+    methods:  GET
+
+product_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Product:new" }
+    methods:  [GET, POST]
+
+product_edit:
+    path:     /{product_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Product:edit" }
+    methods:  [GET, POST]
+
+product_delete:
+    path:     /{product_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Product:delete" }
+    methods:  [GET, POST]

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="SubcatsCategories" table="subcats_categories">
+    <indexes>
+      <index name="aca_id" columns="aca_id"/>
+    </indexes>
+    <id name="subId" type="boolean" column="sub_id"/>
+    <id name="acaId" type="boolean" column="aca_id"/>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,16 @@
+{% extends 'baseFull.html.twig' %}
+
+{% block body %}
+    <div class="card">
+    <div class="card-block">
+
+        {% if text.title %}
+            <h2 class="card-header">{{ text.title|raw }}</h2>
+        {% endif %}
+
+        <div class="card-block">
+            {{ text.content|raw }}
+        </div>
+
+    </div></div>
+{% endblock %}

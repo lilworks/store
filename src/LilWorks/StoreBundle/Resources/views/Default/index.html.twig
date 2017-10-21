@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>{% trans %}store overview{% endtrans %}</h1>
+
+<section class="row text-center placeholders">
+    {% for overview in overviews %}
+        <div class="col-6 col-sm-3 placeholder">
+            {{ overview|raw }}
+        </div>
+    {% endfor %}
+</section>
+
+{% endblock %}
+

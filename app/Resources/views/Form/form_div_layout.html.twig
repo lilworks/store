@@ -1,0 +1,29 @@
+{% block form_errors %}
+    OVERRIDED
+    {% spaceless %}
+        {% set a = false %}
+        {% for child in form.children  %}
+            {% if child.get("errors") %}
+                {% set a = 'true' %}
+            {% endif %}
+        {% endfor %}
+        {% if a == true %}
+            <div class="alert">
+                {% for children in form.children %}
+                    {{  form_errors(children) }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if errors|length > 0 %}
+            <ul>
+                {% for error in errors %}
+                    {{
+                    error.messagePluralization is null
+                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                    }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}

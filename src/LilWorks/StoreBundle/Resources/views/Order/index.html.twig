@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $( window ).on( "load", FF.init() );
+            });
+        </script>
+    {% endblock %}
+    <h1>
+        {% trans %}lilworks.storebundle.order.list{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+                <a href="{{ path('order_new') }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <form method="get" action="." class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}lilworks.storebundle.button.filter{% endtrans %}" />
+            </form>
+        </div>
+        <div class="col-lg-5">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.order.type{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.reference{% endtrans %}</th>
+                <th>
+                    <ul>
+                        <li>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.createdat'|trans, 'o.createdAt') }}</li>
+                        <li>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.updatedat'|trans, 'o.updatedAt') }}</li>
+                    </ul>
+                </th>
+                <th>{% trans %}lilworks.storebundle.order.seller{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.customer{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.order.products{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.order.lastorderstep{% endtrans %}</th>
+                <th>
+                    <ul>
+                        <li>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.tot'|trans, 'o.tot') }}</li>
+                        <li>{% trans %}lilworks.storebundle.order.payed{% endtrans %}</li>
+                        <li>{% trans %}lilworks.storebundle.order.resttopay{% endtrans %}</li>
+                    </ul>
+                </th>
+                <th>{% trans %}lilworks.storebundle.order.payments{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.order.shippingmethods{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in pagination %}
+            <tr>
+
+                <td>
+                    {% set formatedItems = pagination.items|idinkey %}
+                    {% set menu = knp_menu_get('list', [ order.id ] ,{results:formatedItems[order.id]   ,target:'order'} ) %}
+                    {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
+                </td>
+                <td>
+                    {% if order.orderType  %}
+                        <span class="badge badge-default">{{ order.orderType.name }}</span>
+                    {% endif %}
+                </td>
+                <td>{{ order.reference }}</td>
+                <td>
+                    {% if order.createdAt %}{{ order.createdAt|date('m/d/Y H:i') }}{% endif %}
+                    {% if order.updatedAt and order.createdAt != order.updatedAt %}<br>{{ order.updatedAt|date('m/d/Y H:i') }}{% endif %}
+                </td>
+
+                <td>{{ order.userAsSeller }}</td>
+                <td>
+                    {% if order.customer %}
+                        <a role="button" class="btn btn-sm btn-secondary" href="{{ path('customer_edit',{customer_id:order.customer.id}) }}">
+                            <i class="fa fa-pencil"></i>{{ order.customer.firstName ~ " " ~ order.customer.lastName ~ " " ~ order.customer.companyName}}
+                        </a>
+                    {% else %}
+                        <i class="fa fa-circle"></i>
+                    {% endif %}
+                </td>
+                <td>
+                    {% for orderProduct in order.ordersProducts %}
+                        <div class="badge badge-default">
+
+                        {% if orderProduct.name is defined %}
+                            {{ orderProduct.name }}
+                        {% else %}
+                            {{ orderProduct.product.brand.name }} {{ orderProduct.product.name }}
+                        {% endif %}
+                            {% if orderProduct.price is defined %}
+                                {{ orderProduct.price|price }}
+                            {% else %}
+                                {{ orderProduct.product.priceOnline|price }}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if order.ordersOrderSteps|length>0 %}
+                        <div class="badge badge-default">{{ order.ordersOrderSteps[0].orderStep.name }}</div>
+                    {% endif %}
+                </td>
+                <td>
+                    <ul>
+                        <li>{{ order.tot|price }}</li>
+                        <li>{{ order.payed|price }}</li>
+                        <li>
+                            {% set rest = order.tot-order.payed  %}
+                            {% if rest > 0 %}
+                                <span style="color: red;">{{ rest|price }}</span>
+                            {% elseif rest < 0 %}
+                                <span style="color: orange;">{% trans %}lilworks.storebundle.order.tomuchpayed{% endtrans %}{{ rest|price }}</span>
+                            {% else %}
+                                <span style="color: green;">{{ rest|price }}</span>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    {% for orderPaymentMethod in order.ordersPaymentMethods %}
+                        <div class="badge badge-default">
+                        {{ orderPaymentMethod.paymentMethod.name }} {{ orderPaymentMethod.amount|price }}
+                        </div>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for orderRealShippingMethod in order.ordersRealShippingMethods %}
+
+                        <div class="badge badge-default">
+                        {{ orderRealShippingMethod.shippingMethod.name }}
+                        </div>
+
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

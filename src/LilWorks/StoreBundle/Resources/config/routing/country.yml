@@ -1,0 +1,24 @@
+country_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Country:index" }
+    methods:  GET
+
+country_show:
+    path:     /{country_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Country:show" }
+    methods:  GET
+
+country_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Country:new" }
+    methods:  [GET, POST]
+
+country_edit:
+    path:     /{country_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Country:edit" }
+    methods:  [GET, POST]
+
+country_delete:
+    path:     /{country_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Country:delete" }
+    methods:  [GET, POST]

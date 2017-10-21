@@ -1,0 +1,26 @@
+<ul class="list-inline">
+    {% if actions["delete"] is not null and actions["delete"]|length > 0  %}
+    <li class="list-inline-item">
+        <a action="delete" role="button" class="rowsEditorBtn btn btn-sm btn-danger" href="#"><i class="fa fa-trash"></i></a>
+    </li>
+    {% endif %}
+
+    {% if actions["empty"] is not null and actions["empty"]|length > 0  %}
+    <li class="list-inline-item">
+        <a action="empty" role="button" class="rowsEditorBtn btn btn-sm btn-warning" href="#"><i class="fa fa-share-square-o "></i></a>
+    </li>
+    {% endif %}
+
+    {% for k,col in actions["cols"]  %}
+        {% if col[0] == 'boolean' %}
+            <li class="list-inline-item">
+                <a action="setBoolean" col="{{ k }}" style="color:green;" role="button" class="rowsEditorBtn btn btn-sm btn-secondary" href="#"><i class="fa fa-check"></i></a>
+            </li>
+            <li class="list-inline-item">
+                <a action="unSetBoolean" col="{{ k }}" style="color:red;"  role="button" class="rowsEditorBtn btn btn-sm btn-secondary" href="#"><i class="fa fa-times"></i></a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<input type="checkbox" id="rowsEditor">

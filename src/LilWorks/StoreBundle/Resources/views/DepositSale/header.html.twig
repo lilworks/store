@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table, tr, td, th, tbody, thead, tfoot {
+            page-break-inside: avoid !important;
+        }
+        table{
+            border-bottom: 1px solid #66666;
+        }
+        body{
+            font-family: "Myriad Pro", "Myriad Web", "Tahoma", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            color: 888888;
+        }
+
+        h1{
+            color: #000000;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            color: #880000;
+            letter-spacing: 16px;
+            text-align: right;
+        }
+        p{
+            line-height: 2px;
+        }
+        img{
+            margin: 0;
+        }
+        #address{
+            text-align: right;
+        }
+    </style>
+
+</head>
+<body>
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {% if base_dir is defined %}
+                                    <img src="{{ asset( base_dir ~ '/storeinfo/logo_ferre.png') }}" style="width: 82px">
+                                {% else %}
+                                    <img src="{{ asset(  '/storeinfo/logo_ferre.png') }}" style="width: 82px">
+                                {% endif %}
+                            </td>
+                            <td>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h1>Le spécialiste de la guitare à Grenoble depuis 1976</h1>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table style="width: 100%;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <p>SN Ferremusique, SARL au capital de 8000€</p>
+                                                                <p>siret: 394 968 762 00010 - APE 4759 B</p>
+                                                                <p>tva intracom fr: 82394968762</p>
+                                                            </td>
+                                                            <td id="address">
+                                                                <p>1 rue de génissieu, 38000 Grenoble</p>
+                                                                <p>tel: 04 76 87 56 56</p>
+                                                                <p>fax: 04 76 47 39 27</p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a id="link" href="http://www.ferremusique.com">http://www.ferremusique.com</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

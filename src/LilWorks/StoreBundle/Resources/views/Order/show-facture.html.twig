@@ -1,0 +1,235 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.order.facture.show{% endtrans %}
+        <span class="badge badge-default">{{ order.reference }}</span>
+    </h1>
+
+
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+        <a href="{{ path('order_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+        <a href="{{ path('order_new') }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+        </a>
+        <a href="{{ path('order_edit', { order_id: order.id }) }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+        </a>
+        <a href="{{ path('order_pdf',{order_id:order.id}) }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.pdf{% endtrans %}
+        </a>
+        <a href="{{ path('order_delete', { order_id: order.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+        </a>
+    </div>
+
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.reference{% endtrans %}</th>
+                <td>{{ order.reference }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.createdat{% endtrans %}</th>
+                <td>{% if order.createdAt %}{{ order.createdAt|date('Y-m-d H:i') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.updatedat{% endtrans %}</th>
+                <td>{% if order.updatedAt %}{{ order.updatedAt|date('Y-m-d H:i') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.order.seller{% endtrans %}</th>
+                <td>
+                    {% if order.userAsSeller %}
+                        {{ order.userAsSeller.username }}
+                    {% else %}
+                    <i class="fa fa-circle-thin" style="color: red;"></i>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <th>{% trans %}lilworks.storebundle.orderstep{% endtrans %}</th>
+                <td>
+                    <ul>
+                    {% for orderOrderStep in order.ordersOrderSteps %}
+                        <li>{{ orderOrderStep.createdAt|date }} • {{ orderOrderStep.orderStep.name }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.customer{% endtrans %}</th>
+                <td>
+                    {% if order.customer %}
+                        {{ order.customer.firstName }} {{ order.customer.lastName }} {{ order.customer.companyName }}
+                    {% else %}
+                        <i class="fa fa-circle-thin" style="color: red;"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.order.shippingaddress{% endtrans %}</th>
+                <td>
+                    {% if order.shippingAddress is defined and order.shippingAddress is not null %}
+                        {{ order.shippingAddress|addressInline|raw }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.order.billingaddress{% endtrans %}</th>
+                <td>
+                    {% if order.billingAddress is defined and order.billingAddress is not null %}
+                        {{ order.billingAddress|addressInline|raw }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.order.usercomment{% endtrans %}</th>
+                <td>{{ order.userComment }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.order.storecomment{% endtrans %}</th>
+                <td>{{ order.storeComment }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.tot{% endtrans %}</th>
+
+                <td>
+                    {% set tot = order.tot|totPriceCalculator(order.ordersProducts)  %}
+                    <li>{{ tot['HT']|price('HT')|raw }}</li>
+                    <li>{{ tot['TTC']|price('TTC')|raw }}</li>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{id:order.id})~'#paymentmethods' }}">
+                        <i class="fa fa-pencil"></i>{% trans %}payments{% endtrans %}
+                    </a>
+                </th>
+                <td>
+                    {% set payed = 0 %}
+                    {% for payment in order.ordersPaymentMethods %}
+                        <li> {{ payment.payedAt|date('d/m/Y') }} | {{ payment.paymentMethod.name }} {{ payment.amount|price|raw  }}</li>
+                        {% set payed = payed+payment.amount %}
+                    {% endfor %}
+                    <div>
+                        <ul>
+                            <li>{% trans %}lilworks.storebundle.order.payed{% endtrans %}:{{ payed|price }}</li>
+                            {% set rest = tot['TTC']-payed %}
+                            <li>
+                                {% trans %}lilworks.storebundle.order.resttopay{% endtrans %}:
+                                {% if rest > 0 %}
+                                    <span style="color: red;">{{ rest|price }}</span>
+                                {% else %}
+                                    <span style="color: green;">{{ rest|price }}</span>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{id:order.id})~'#shippingmethods' }}">
+                        <i class="fa fa-pencil"></i>{% trans %}lilworks.storebundle.shippingmethods{% endtrans %}
+                    </a>
+                </th>
+                <td>
+                    {% if  order.ordersRealShippingMethods|length > 0 %}
+                        <ul>
+                            {% for orderRealShippingMethod in order.ordersRealShippingMethods %}
+                                <li>
+                                    {{ orderRealShippingMethod.shippingMethod.name }}
+                                    {#
+                                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('realshippingmethod_show',{id:realShippingMethod.id}) }}">{{ realShippingMethod.reference }} {{ realShippingMethod.price|price }}</a>
+                                    #}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <i class="fa fa-circle"></i>
+                    {% endif %}
+                </td>
+            </tr>
+
+
+            <tr>
+                <th>
+                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{id:order.id})~'#products' }}">
+                        <i class="fa fa-pencil"></i>{% trans %}products{% endtrans %}
+                    </a>
+                </th>
+                <td>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{% trans %}lilworks.storebundle.id{% endtrans %}</th>
+                                <th>{% trans %}lilworks.storebundle.product{% endtrans %}</th>
+                                <th>{% trans %}lilworks.storebundle.shippingmethod{% endtrans %}</th>
+                                <th>{% trans %}lilworks.storebundle.warranties{% endtrans %}</th>
+                                <th>{% trans %}lilworks.storebundle.quantity{% endtrans %}</th>
+                                <th>{% trans %}lilworks.storebundle.priceperunity{% endtrans %}</th>
+                                <th>{% trans %}lilworks.storebundle.tot{% endtrans %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in order.ordersProducts %}
+                                <tr>
+                                    <td>{{ product.product.id }}</td>
+                                    <td>{{ product.name }}
+                                        {% if product.serialNumber %}
+                                        <br><span class="serialNumber">{{ product.serialNumber }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if  product.orderRealShippingMethod is not null %}
+                                            {{ product.orderRealShippingMethod.shippingMethod.name }} |
+                                            {{ product.orderRealShippingMethod.reference }}
+                                        {% else %}
+                                            <i class="fa fa-circle"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if  product.warranties|length > 0 %}
+                                            <ul>
+                                                {% for warranty in product.warranties %}
+                                                    <li>{{ warranty.name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% else %}
+                                            <i class="fa fa-circle"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ product.quantity }}</td>
+                                    <td>
+                                        {{ product.price|price|raw }}
+                                        {% if product.taxes|length > 0 %}
+                                            <ul>
+                                                {% for tax in product.taxes %}
+                                                    <li>{{ tax.name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% set price = product.price|priceCalculator(product)  %}
+                                        <li>{{ price['HT']|price('HT')|raw }}</li>
+                                        <li>{{ price['TTC']|price('TTC')|raw }}</li>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

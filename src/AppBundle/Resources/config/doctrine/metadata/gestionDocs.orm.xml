@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="gestionDocs" table="docs">
+    <indexes>
+      <index name="cli_id" columns="cli_id"/>
+      <index name="usr_id" columns="usr_id"/>
+    </indexes>
+    <id name="docId" type="integer" column="doc_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="docName" type="string" column="doc_name" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="docDate" type="datetime" column="doc_date" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="docDateExpire" type="datetime" column="doc_date_expire" nullable="true"/>
+    <field name="docDateArchive" type="datetime" column="doc_date_archive" nullable="true"/>
+    <field name="docParent" type="integer" column="doc_parent" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dtyId" type="boolean" column="dty_id" nullable="false"/>
+    <field name="dstId" type="boolean" column="dst_id" nullable="false">
+      <options>
+        <option name="default">2</option>
+      </options>
+    </field>
+    <field name="docTot" type="float" column="doc_tot" precision="10" scale="0" nullable="true">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="docRest" type="float" column="doc_rest" precision="10" scale="0" nullable="true">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="docDesc" type="text" column="doc_desc" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="docDescInterne" type="text" column="doc_desc_interne" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="usr" target-entity="gestionUsers" fetch="LAZY">
+      <join-columns>
+        <join-column name="usr_id" referenced-column-name="usr_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cli" target-entity="gestionClients" fetch="LAZY">
+      <join-columns>
+        <join-column name="cli_id" referenced-column-name="cli_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="art" target-entity="gestionArticles" inversed-by="doc" fetch="LAZY">
+      <join-table name="docs_articles">
+        <join-columns>
+          <join-column name="doc_id" referenced-column-name="doc_id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="art_id" referenced-column-name="art_id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

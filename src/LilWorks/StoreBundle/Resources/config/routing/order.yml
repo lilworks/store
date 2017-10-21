@@ -1,0 +1,34 @@
+order_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Order:index" }
+    methods:  GET
+
+order_show:
+    path:     /{order_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Order:show" }
+    methods:  GET
+
+order_pdf:
+    path:     /{order_id}/pdf
+    defaults: { _controller: "LilWorksStoreBundle:Order:pdf" }
+    methods:  GET
+
+order_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Order:new" }
+    methods:  [GET, POST]
+
+order_edit:
+    path:     /{order_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Order:edit" }
+    methods:  [GET, POST]
+
+order_delete:
+    path:     /{order_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Order:delete" }
+    methods:  [GET, POST,DELETE]
+
+order_devistofacture:
+    path:     /{order_id}/devistofacture
+    defaults: { _controller: "LilWorksStoreBundle:Order:devistofacture" }
+    methods:  [GET, POST,DELETE]

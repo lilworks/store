@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Articles" table="articles">
+    <indexes>
+      <index name="ama_id" columns="ama_id"/>
+      <index name="aca_id" columns="aca_id"/>
+    </indexes>
+    <id name="artId" type="integer" column="art_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="artTag" type="string" column="art_tag" length="250" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="artName" type="string" column="art_name" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="artDesc" type="text" column="art_desc" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="artDescInterne" type="text" column="art_desc_interne" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="artIsoccas" type="binary" column="art_isoccas" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="artIslivrable" type="binary" column="art_islivrable" nullable="false">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="artPublished" type="binary" column="art_published" nullable="false">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="artStock" type="boolean" column="art_stock" nullable="true">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="artDispo" type="binary" column="art_dispo" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="acaId" type="integer" column="aca_id" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="amaId" type="integer" column="ama_id" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="artCreated" type="datetime" column="art_created" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="artArchived" type="binary" column="art_archived" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-many field="doc" target-entity="Docs" mapped-by="art" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

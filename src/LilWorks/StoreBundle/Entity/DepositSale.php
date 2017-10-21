@@ -1,0 +1,448 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_depositSale")
+ * @ORM\Entity(repositoryClass="LilWorks\StoreBundle\Entity\Repository\DepositSaleRepository")
+ * @ORM\HasLifecycleCallbacks
+ */
+class DepositSale
+{
+
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        if($this->getCreatedAt() == null)
+            $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+    }
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer",name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Customer", inversedBy="depositSales")
+     * @ORM\JoinColumn(name="customer", referencedColumnName="id" , nullable=false)
+     * @Assert\NotBlank()
+     */
+    protected $customer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\DepositSaleStatus")
+     * @ORM\JoinColumn(name="status", referencedColumnName="id",nullable=true)
+     */
+    private $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Address")
+     * @ORM\JoinColumn(name="address", referencedColumnName="id",onDelete="SET NULL")
+     */
+    private $address;
+
+    /**
+     * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\Coupon")
+     * @ORM\JoinColumn(name="coupon", referencedColumnName="id" , nullable = true)
+     */
+    private $coupon;
+
+    /**
+     * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\Product", inversedBy="depositSale")
+     * @ORM\JoinColumn(name="product", referencedColumnName="id")
+     */
+    private $product;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="priceSelling", type="float", nullable=true)
+     * @Assert\GreaterThan(0)
+     */
+    private $priceSelling;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="reference", type="text",length=20, nullable=true)
+     */
+    private $reference;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="priceBuying", type="float", nullable=false)
+     * @Assert\GreaterThan(0)
+     */
+    private $priceBuying;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="deposedAt", type="date",nullable=false)
+     * @Assert\NotBlank()
+     */
+    private $deposedAt;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="selledAt", type="date",nullable=true)
+     */
+    private $selledAt;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="createdAt", type="datetime",nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="descriptionInternal", type="text", nullable=true)
+     */
+    private $descriptionInternal;
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set priceSelling
+     *
+     * @param float $priceSelling
+     *
+     * @return DepositSale
+     */
+    public function setPriceSelling($priceSelling)
+    {
+        $this->priceSelling = $priceSelling;
+
+        return $this;
+    }
+
+    /**
+     * Get priceSelling
+     *
+     * @return float
+     */
+    public function getPriceSelling()
+    {
+        return $this->priceSelling;
+    }
+
+    /**
+     * Set reference
+     *
+     * @param string $reference
+     *
+     * @return DepositSale
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Get reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Set priceBuying
+     *
+     * @param float $priceBuying
+     *
+     * @return DepositSale
+     */
+    public function setPriceBuying($priceBuying)
+    {
+        $this->priceBuying = $priceBuying;
+
+        return $this;
+    }
+
+    /**
+     * Get priceBuying
+     *
+     * @return float
+     */
+    public function getPriceBuying()
+    {
+        return $this->priceBuying;
+    }
+
+    /**
+     * Set deposedAt
+     *
+     * @param \DateTime $deposedAt
+     *
+     * @return DepositSale
+     */
+    public function setDeposedAt($deposedAt)
+    {
+        $this->deposedAt = $deposedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get deposedAt
+     *
+     * @return \DateTime
+     */
+    public function getDeposedAt()
+    {
+        return $this->deposedAt;
+    }
+
+    /**
+     * Set selledAt
+     *
+     * @param \DateTime $selledAt
+     *
+     * @return DepositSale
+     */
+    public function setSelledAt($selledAt)
+    {
+        $this->selledAt = $selledAt;
+
+        return $this;
+    }
+
+    /**
+     * Get selledAt
+     *
+     * @return \DateTime
+     */
+    public function getSelledAt()
+    {
+        return $this->selledAt;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return DepositSale
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return DepositSale
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set descriptionInternal
+     *
+     * @param string $descriptionInternal
+     *
+     * @return DepositSale
+     */
+    public function setDescriptionInternal($descriptionInternal)
+    {
+        $this->descriptionInternal = $descriptionInternal;
+
+        return $this;
+    }
+
+    /**
+     * Get descriptionInternal
+     *
+     * @return string
+     */
+    public function getDescriptionInternal()
+    {
+        return $this->descriptionInternal;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \LilWorks\StoreBundle\Entity\Customer $customer
+     *
+     * @return DepositSale
+     */
+    public function setCustomer(\LilWorks\StoreBundle\Entity\Customer $customer)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \LilWorks\StoreBundle\Entity\Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * Set status
+     *
+     * @param \LilWorks\StoreBundle\Entity\DepositSaleStatus $status
+     *
+     * @return DepositSale
+     */
+    public function setStatus(\LilWorks\StoreBundle\Entity\DepositSaleStatus $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \LilWorks\StoreBundle\Entity\DepositSaleStatus
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set address
+     *
+     * @param \LilWorks\StoreBundle\Entity\Address $address
+     *
+     * @return DepositSale
+     */
+    public function setAddress(\LilWorks\StoreBundle\Entity\Address $address = null)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return \LilWorks\StoreBundle\Entity\Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set coupon
+     *
+     * @param \LilWorks\StoreBundle\Entity\Coupon $coupon
+     *
+     * @return DepositSale
+     */
+    public function setCoupon(\LilWorks\StoreBundle\Entity\Coupon $coupon = null)
+    {
+        $this->coupon = $coupon;
+
+        return $this;
+    }
+
+    /**
+     * Get coupon
+     *
+     * @return \LilWorks\StoreBundle\Entity\Coupon
+     */
+    public function getCoupon()
+    {
+        return $this->coupon;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \LilWorks\StoreBundle\Entity\Product $product
+     *
+     * @return DepositSale
+     */
+    public function setProduct(\LilWorks\StoreBundle\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \LilWorks\StoreBundle\Entity\Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+}

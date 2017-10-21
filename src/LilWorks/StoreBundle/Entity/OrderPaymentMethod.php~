@@ -1,0 +1,143 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_order_payment_method")
+ */
+class OrderPaymentMethod
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer",name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\OrdersPaymentMethods", mappedBy="paymentMethod" ,cascade={"persist"})
+     */
+    private $ordersPaymentMethods;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="method", type="string",length=100,nullable=false)
+     */
+    private $method;
+
+
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="text",nullable=true)
+     */
+    private $description;
+
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ordersPaymentMethods = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set method
+     *
+     * @param string $method
+     *
+     * @return OrderPaymentMethod
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
+
+        return $this;
+    }
+
+    /**
+     * Get method
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return OrderPaymentMethod
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Add ordersPaymentMethod
+     *
+     * @param \LilWorks\StoreBundle\Entity\OrdersPaymentMethods $ordersPaymentMethod
+     *
+     * @return OrderPaymentMethod
+     */
+    public function addOrdersPaymentMethod(\LilWorks\StoreBundle\Entity\OrdersPaymentMethods $ordersPaymentMethod)
+    {
+        $this->ordersPaymentMethods[] = $ordersPaymentMethod;
+
+        return $this;
+    }
+
+    /**
+     * Remove ordersPaymentMethod
+     *
+     * @param \LilWorks\StoreBundle\Entity\OrdersPaymentMethods $ordersPaymentMethod
+     */
+    public function removeOrdersPaymentMethod(\LilWorks\StoreBundle\Entity\OrdersPaymentMethods $ordersPaymentMethod)
+    {
+        $this->ordersPaymentMethods->removeElement($ordersPaymentMethod);
+    }
+
+    /**
+     * Get ordersPaymentMethods
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrdersPaymentMethods()
+    {
+        return $this->ordersPaymentMethods;
+    }
+}

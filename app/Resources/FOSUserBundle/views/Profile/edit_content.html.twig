@@ -1,0 +1,69 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+<div class="col-lg-4">
+    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+    <div class="card">
+        <div class="card-header">
+            {% trans %}lilworks.storebundle.user{% endtrans %}
+        </div>
+        <div class="card-block">
+            {{ form_row(form.username) }}
+            {{ form_row(form.email) }}
+            {#{{ form_row(form.plainPassword) }}#}
+            {{ form_row(form.customer.firstName) }}
+            {{ form_row(form.customer.lastName) }}
+            {{ form_row(form.customer.companyName) }}
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="card">
+        <div class="card-header">
+            {% trans %}lilworks.storebundle.addresses{% endtrans %}
+        </div>
+        <div class="card-block">
+            <ul class="addresses list-inline " id="target" data-prototype="{{ form_widget(form.customer.addresses.vars.prototype)|e('html_attr') }}">
+                {% for addresse in form.customer.addresses %}
+                    <li class="addresse list-inline-item">
+                        {{ form_row(addresse) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {{ form_widget(form.customer.addresses) }}
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="card">
+        <div class="card-header">
+            {% trans %}lilworks.storebundle.phonenumbers{% endtrans %}
+        </div>
+        <div class="card-block">
+            <ul class="phonenumbers list-inline " id="target" data-prototype="{{ form_widget(form.customer.phonenumbers.vars.prototype)|e('html_attr') }}">
+                {% for phonenumber in form.customer.phonenumbers %}
+                    <li class="phonenumber list-inline-item">
+                        {{ form_row(phonenumber) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {{ form_widget(form.customer.phonenumbers) }}
+        </div>
+    </div>
+</div>
+
+
+<input type="submit" class="btn btn-primary" value="{% trans %}edit{% endtrans %}" />
+{{ form_end(form) }}
+
+<script>
+    $( function() {
+        FCE.init('phonenumbers','phonenumbers list-inline','phonenumber list-inline-item');
+        FCE.init('addresses','addresses list-inline','addresse list-inline-item');
+    } );
+
+</script>
+
+</div>

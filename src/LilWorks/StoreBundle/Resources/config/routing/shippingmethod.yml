@@ -1,0 +1,24 @@
+shippingmethod_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:ShippingMethod:index" }
+    methods:  GET
+
+shippingmethod_show:
+    path:     /{shippingmethod_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:ShippingMethod:show" }
+    methods:  GET
+
+shippingmethod_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:ShippingMethod:new" }
+    methods:  [GET, POST]
+
+shippingmethod_edit:
+    path:     /{shippingmethod_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:ShippingMethod:edit" }
+    methods:  [GET, POST]
+
+shippingmethod_delete:
+    path:     /{shippingmethod_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:ShippingMethod:delete" }
+    methods:  [GET, POST]

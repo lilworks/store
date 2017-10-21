@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    {% if base_dir is defined %}
+    <link rel="stylesheet"
+          href="{{ base_dir ~ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+    {% else %}
+        <link rel="stylesheet"
+              href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+    {% endif %}
+
+</head>
+<body>
+
+<h2>Justificatif de rétribution après la vente d'un produit en dépôt-vente: {{ depositSale.reference }}</h2>
+
+
+<div style="text-align: right">
+{{ depositSale.customer.firstName }} {{ depositSale.customer.lastName }} {{ depositSale.customer.companyName }}
+<p>{{ depositSale.address|addressInline }}</p>
+</div>
+
+
+<table class="table table-striped">
+    <tbody>
+
+    <tr>
+        <th>{% trans %}lilworks.storebundle.product{% endtrans %}</th>
+        <td>
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                {% if  depositSale.product.pictures|length>0 %}
+                    <img src="{{ asset('product/' ~  depositSale.product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
+                {% endif %}
+                {{ depositSale.product.brand.name }} {{ depositSale.product.name }}
+        </td>
+    </tr>
+    <tr>
+        <th>{% trans %}lilworks.storebundle.depositsale.deposedat{% endtrans %}</th>
+        <td>
+            {{ depositSale.deposedAt|date("d/m/Y") }}
+        </td>
+    </tr>
+    <tr>
+        <th>{% trans %}lilworks.storebundle.depositsale.selledat{% endtrans %}</th>
+        <td>
+            {% if depositSale.selledAt %}
+                {{ depositSale.selledAt|date("d/m/Y") }}
+            {% else %}
+                <span style="color: red;"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+            {% endif %}
+        </td>
+    </tr>
+    {% if depositSale.description %}
+    <tr>
+        <th>{% trans %}lilworks.storebundle.description{% endtrans %}</th>
+        <td>{{ depositSale.description|raw }}</td>
+    </tr>
+    {% endif %}
+
+    <tr>
+        <th>{% trans %}lilworks.storebundle.depositsale.pricebuying{% endtrans %}</th>
+        <td>
+            {% if depositSale.coupon %}
+                Vous avez choisi d'être rétribué par un avoir:
+                {{ depositSale.coupon.reference }} {{ depositSale.coupon.amount|price }}
+            {% elseif depositSale.priceBuying %}
+                {{ depositSale.priceBuying|price }}
+            {% endif %}
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+
+</html>

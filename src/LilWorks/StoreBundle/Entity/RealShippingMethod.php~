@@ -1,0 +1,330 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_realShippingMethods")
+ */
+class RealShippingMethod
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer",name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\ShippingMethod", inversedBy="realShippingMethods",fetch="EAGER")
+     * @ORM\JoinColumn(name="shippingMethod", referencedColumnName="id")
+     */
+    private $shippingMethod;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Order", inversedBy="realShippingMethods")
+     * @ORM\JoinColumn(name="order_id", referencedColumnName="id" , nullable=true)
+     */
+    protected $order;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Basket", inversedBy="realShippingMethods")
+     * @ORM\JoinColumn(name="basket_id", referencedColumnName="id" , nullable=true)
+     */
+    protected $basket;
+
+    /**
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\OrdersProducts", mappedBy="realShippingMethod", cascade={"remove","persist"})
+     */
+    private $ordersProducts;
+
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reference", type="string",length=255,nullable=false)
+     */
+    private $reference;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="float",length=255,nullable=true)
+     */
+    private $price;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="shippedAt", type="datetime",nullable=true)
+     */
+    private $shippedAt;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="receivedAt", type="datetime",nullable=true)
+     */
+    private $receivedAt;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="text",nullable=true)
+     */
+    private $description;
+
+
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ordersProducts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set reference
+     *
+     * @param string $reference
+     *
+     * @return RealShippingMethod
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Get reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return RealShippingMethod
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set shippedAt
+     *
+     * @param \DateTime $shippedAt
+     *
+     * @return RealShippingMethod
+     */
+    public function setShippedAt($shippedAt)
+    {
+        $this->shippedAt = $shippedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get shippedAt
+     *
+     * @return \DateTime
+     */
+    public function getShippedAt()
+    {
+        return $this->shippedAt;
+    }
+
+    /**
+     * Set receivedAt
+     *
+     * @param \DateTime $receivedAt
+     *
+     * @return RealShippingMethod
+     */
+    public function setReceivedAt($receivedAt)
+    {
+        $this->receivedAt = $receivedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get receivedAt
+     *
+     * @return \DateTime
+     */
+    public function getReceivedAt()
+    {
+        return $this->receivedAt;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return RealShippingMethod
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set shippingMethod
+     *
+     * @param \LilWorks\StoreBundle\Entity\ShippingMethod $shippingMethod
+     *
+     * @return RealShippingMethod
+     */
+    public function setShippingMethod(\LilWorks\StoreBundle\Entity\ShippingMethod $shippingMethod = null)
+    {
+        $this->shippingMethod = $shippingMethod;
+
+        return $this;
+    }
+
+    /**
+     * Get shippingMethod
+     *
+     * @return \LilWorks\StoreBundle\Entity\ShippingMethod
+     */
+    public function getShippingMethod()
+    {
+        return $this->shippingMethod;
+    }
+
+    /**
+     * Set order
+     *
+     * @param \LilWorks\StoreBundle\Entity\Order $order
+     *
+     * @return RealShippingMethod
+     */
+    public function setOrder(\LilWorks\StoreBundle\Entity\Order $order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return \LilWorks\StoreBundle\Entity\Order
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * Add ordersProduct
+     *
+     * @param \LilWorks\StoreBundle\Entity\OrdersProducts $ordersProduct
+     *
+     * @return RealShippingMethod
+     */
+    public function addOrdersProduct(\LilWorks\StoreBundle\Entity\OrdersProducts $ordersProduct)
+    {
+        $this->ordersProducts[] = $ordersProduct;
+
+        return $this;
+    }
+
+    /**
+     * Remove ordersProduct
+     *
+     * @param \LilWorks\StoreBundle\Entity\OrdersProducts $ordersProduct
+     */
+    public function removeOrdersProduct(\LilWorks\StoreBundle\Entity\OrdersProducts $ordersProduct)
+    {
+        $this->ordersProducts->removeElement($ordersProduct);
+    }
+
+    /**
+     * Get ordersProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrdersProducts()
+    {
+        return $this->ordersProducts;
+    }
+
+
+
+    /**
+     * Set basket
+     *
+     * @param \LilWorks\StoreBundle\Entity\Basket $basket
+     *
+     * @return RealShippingMethod
+     */
+    public function setBasket(\LilWorks\StoreBundle\Entity\Basket $basket = null)
+    {
+        $this->basket = $basket;
+
+        return $this;
+    }
+
+    /**
+     * Get basket
+     *
+     * @return \LilWorks\StoreBundle\Entity\Basket
+     */
+    public function getBasket()
+    {
+        return $this->basket;
+    }
+}

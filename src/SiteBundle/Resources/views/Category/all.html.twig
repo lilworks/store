@@ -1,0 +1,9 @@
+<small>
+    <ul class="list list-inline">
+    {% for category in categories %}
+        <li class="list-inline-item">
+            <a href="{{ path('site_category',{tag:category.tag}) }}">{{ category.name }} ({{ category.products|length }})</a>
+        </li>
+    {% endfor %}
+    </ul>
+</small>

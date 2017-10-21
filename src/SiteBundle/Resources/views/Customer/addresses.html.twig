@@ -1,0 +1,27 @@
+{% extends 'baseUser.html.twig' %}
+{% block body %}
+
+    <div id="tabs-addresses" class="border-top-0">
+        <h3>{% trans %}addresses{% endtrans %}</h3>
+
+        {{ form_start(form) }}
+
+        <ul class="addresses list-inline " id="target" data-prototype="{{ form_widget(form.addresses.vars.prototype)|e('html_attr') }}">
+            {% for address in form.addresses %}
+                <li class="address list-inline-item">
+                    {{ address.vars.value|addressInline|raw }}
+                    {{ form_row(address) }}
+                </li>
+            {% endfor %}
+        </ul>
+        {{ form_widget(form.addresses) }}
+        <input type="submit" class="btn  btn-primary" value="{% trans %}update{% endtrans %}" />
+        {{ form_end(form) }}
+    </div>
+    <script>
+        $( function() {
+            FCE.init('addresses','address list-inline','address list-inline-item');
+        } );
+
+    </script>
+{% endblock %}

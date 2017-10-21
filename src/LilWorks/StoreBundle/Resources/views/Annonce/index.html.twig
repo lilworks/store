@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.annonce.list{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="{{ path('annonce_new') }}" class="btn btn-info btn-sm">
+                        <i class="fa fa-plus"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-5">
+            <div class="col-lg-3">
+                <form method="get" action="." class="formFilter">
+                    {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="filter" />
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+
+    </div>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.ispublished{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.pos'|trans, 'a.pos') }}</th>
+                <th>{% trans %}lilworks.storebundle.url{% endtrans %}</th>
+                <th>{% trans %}lilworks.storebundle.picture{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set entityName = 'LilWorksStoreBundle:Annonce' %}
+
+
+        {% for annonce in pagination %}
+
+            <tr>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('annonce_show', { 'id': annonce.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('annonce_edit', { 'id': annonce.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+
+                                <a href="{{ path('annonce_delete', { 'id': annonce.id }) }}"  class="btn btn-danger btn-sm" >
+                                    <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                                </a>
+                        </li>
+                    </ul>
+                </td>
+
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Annonce\\IsPublishedType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'isPublished',annonce)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Annonce\\NameType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'name',annonce)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Annonce\\PosType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'pos',annonce)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Annonce\\LinkType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'link',annonce)|raw }}
+                </td>
+
+                <td>
+                    {% if annonce.pictureName %}
+                        <img src="{{ asset('annonce/' ~ annonce.pictureName  ) | imagine_filter('my_thumb') }}" />
+                    {% else %}
+                        <i class="fa fa-circle"></i>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $( window ).on( "load", FF.init() );
+    </script>
+
+
+{% endblock %}

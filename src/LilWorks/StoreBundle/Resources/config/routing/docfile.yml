@@ -1,0 +1,24 @@
+docfile_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Docfile:index" }
+    methods:  [GET, POST]
+
+docfile_show:
+    path:     /{docfile_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Docfile:show" }
+    methods:  GET
+
+docfile_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Docfile:new" }
+    methods:  [GET, POST]
+
+docfile_edit:
+    path:     /{docfile_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Docfile:edit" }
+    methods:  [GET, POST]
+
+docfile_delete:
+    path:     /{docfile_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Docfile:delete" }
+    methods:  [GET, POST]

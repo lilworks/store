@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $( window ).on( "load", FF.init() );
+            });
+        </script>
+    {% endblock %}
+    <h1>
+        {% trans %}lilworks.storebundle.depositsale.list{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+                <a href="{{ path('depositSale_new') }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <form method="get" action="." class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}lilworks.storebundle.button.filter{% endtrans %}" />
+            </form>
+        </div>
+        <div class="col-lg-5">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.depositsale.status{% endtrans %}</th>
+            <th>
+                {{ knp_pagination_sortable(pagination, 'lilworks.storebundle.depositsale.deposedat'|trans, 'ds.deposedAt') }}
+            </th>
+            <th>
+                {{ knp_pagination_sortable(pagination, 'lilworks.storebundle.depositsale.selledat'|trans, 'ds.selledAt') }}
+            </th>
+            <th>{% trans %}lilworks.storebundle.reference{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.customer{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.depositsale.product{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.depositsale.pricebuying{% endtrans %}</th>
+            <th>{% trans %}lilworks.storebundle.depositsale.priceselling{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for depositSale in pagination %}
+            <tr>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('depositSale_show', { depositsale_id: depositSale.id }) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('depositSale_edit', { depositsale_id: depositSale.id }) }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('depositSale_pdf',{depositsale_id:depositSale.id}) }}" class="btn btn-primary btn-sm {% if depositSale.status is null %}disabled{% endif %}">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.pdf{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('depositSale_delete', { depositsale_id: depositSale.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
+                                <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    {% if  depositSale.status %}
+                        <span style="color: {{ depositSale.status.color }};">{{ depositSale.status.name }}</span>
+                    {% else %}
+                        <span style="color: red;"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if  depositSale.deposedAt is not null %}
+                        {{ depositSale.deposedAt|date('d/m/Y') }}
+                    {% else %}
+                        <span style="color: red;"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if depositSale.selledAt is null %}
+                        <span style="color: red;"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+                    {% else %}
+                        {{ depositSale.selledAt|date('d/m/Y') }}
+                    {% endif %}
+                </td>
+                <td>{{ depositSale.reference }}</td>
+                <td>
+                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('customer_edit',{customer_id: depositSale.customer.id}) }}">
+                        <i class="fa fa-pencil"></i>{{ depositSale.customer.firstName }} {{ depositSale.customer.lastName }} {{ depositSale.customer.companyName }}
+                    </a>
+                </td>
+                <td>
+                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{product_id: depositSale.product.id}) }}">
+                        <i class="fa fa-pencil"></i>{{ depositSale.product.brand.name }} {{  depositSale.product.name }}
+                    </a>
+                </td>
+                <td>{{ depositSale.priceBuying|price }}</td>
+                <td>{{ depositSale.priceSelling|price }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

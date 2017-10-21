@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ArticlesIllustrations" table="articles_illustrations">
+    <indexes>
+      <index name="art_id" columns="art_id"/>
+    </indexes>
+    <id name="ailId" type="integer" column="ail_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ailFile" type="string" column="ail_file" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ailName" type="string" column="ail_name" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ailDesc" type="text" column="ail_desc" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ailPos" type="integer" column="ail_pos" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="ailType" type="string" column="ail_type" length="30" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ailW" type="integer" column="ail_w" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="ailH" type="integer" column="ail_h" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="ailPublished" type="binary" column="ail_published" nullable="false">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <many-to-one field="art" target-entity="Articles" fetch="LAZY">
+      <join-columns>
+        <join-column name="art_id" referenced-column-name="art_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

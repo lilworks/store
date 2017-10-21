@@ -1,0 +1,4 @@
+name: LocalMigrations
+migrations_namespace: AppBundle\Migrations\Local
+table_name: Migrations
+migrations_directory: src/AppBundle/Migrations/Local

@@ -1,0 +1,84 @@
+parameters:
+    optionFile: supercategory
+    entityName: LilWorksStoreBundle:SuperCategory
+    rowActions:
+        show:
+            route: supercategory_show
+            linkName: show
+            params:
+                 param:
+                    paramName: id
+                    paramValue: id
+        edit:
+            route: supercategory_edit
+            linkName: edit
+            params:
+                  param:
+                        paramName: id
+                        paramValue: id
+    globalActions:
+        actionId1:
+            action: boolean
+            route: app_ajaxEditor_put
+            linkName: (un)publish
+            params:
+                param:
+                    paramName: isPublished
+                    paramValue: id
+        actionId2:
+            action: empty
+            route: supercategory_empty
+            linkName: empty
+            params:
+                param:
+                    paramName: id
+                    paramValue: id
+        actionId3:
+            action: remove
+            route: supercategory_delete
+            linkName: remove
+            params:
+                param:
+                    paramName: id
+                    paramValue: id
+    cols:
+        tag:
+           name: tag
+           editable:
+              type: string
+              form: LilWorks\StoreBundle\Form\Ajax\Supercategory\TagType
+        name:
+           name: name
+           editable:
+              type: string
+              form: LilWorks\StoreBundle\Form\Ajax\Supercategory\NameType
+           dependencies: [ tag ]
+        isPublished:
+           name: published
+           editable:
+              type: boolean
+              form: LilWorks\StoreBundle\Form\Ajax\Supercategory\IsPublishedType
+        pos:
+           name: position
+           editable:
+              type: integer
+              form: LilWorks\StoreBundle\Form\Ajax\Supercategory\PosType
+        supercategoriesCategories:
+           name: categories
+           mode: count
+           flags:
+                actionId3:
+                    mode: noteq
+                    value: 0
+                actionId2:
+                    mode: eq
+                    value: 0
+        pictureFile:
+            name: picture
+            #mode: image
+            folder: supercategory
+            editable:
+                 type: picture
+                 form: LilWorks\StoreBundle\Form\Ajax\Supercategory\PictureFileType
+
+

@@ -1,0 +1,24 @@
+shippingmethodscountries_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:ShippingMethodsCountries:index" }
+    methods:  GET
+
+shippingmethodscountries_show:
+    path:     /{id}/show
+    defaults: { _controller: "LilWorksStoreBundle:ShippingMethodsCountries:show" }
+    methods:  GET
+
+shippingmethodscountries_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:ShippingMethodsCountries:new" }
+    methods:  [GET, POST]
+
+shippingmethodscountries_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:ShippingMethodsCountries:edit" }
+    methods:  [GET, POST]
+
+shippingmethodscountries_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:ShippingMethodsCountries:delete" }
+    methods:  DELETE

@@ -1,0 +1,266 @@
+<div class="row">
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-6">
+        <div class="pagination">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped ">
+    <thead>
+    <tr>
+        <th>
+            {% trans %}actions{% endtrans %}
+        </th>
+        <th>
+            {% trans %}selectors{% endtrans %}
+            <input type="checkbox" id="ajaxEditor_checkAll" />
+            <ul class="list-inline">
+            {% for globalActionKey,globalAction in globalActions %}
+
+                {% if globalAction.action == 'remove'  %}
+                        <li>
+                            {{ globalAction.linkName }}
+                            <a href="#" class="btn btn-info btn-danger btn-sm" id="liveEditorList_action_delete">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </li>
+                {% elseif globalAction.action == 'empty'  %}
+                    <li>
+                        {{ globalAction.linkName }}
+                        <a href="#" class="btn btn-info btn-warning btn-sm" id="liveEditorList_action_empty">
+                            <i class="fa fa-arrow-circle-down"></i>
+                        </a>
+                    </li>
+                {% elseif globalAction.action == 'boolean'  %}
+                    {% if globalAction.linkName is iterable %}
+                        {{ globalAction.linkName[0] ~  '/' ~  globalAction.linkName[1] }}
+                    {% else %}
+                        {{ globalAction.linkName }}
+                    {% endif %}
+                    <li>
+                        <a href="#" class="btn btn-info btn-sm"  id="liveEditorList_action_boolean">
+                            <i class="fa fa-check" aria-hidden="true" style="color: green;"></i>
+                        </a>
+                        <a href="#" class="btn btn-info btn-sm"  id="liveEditorList_action_boolean">
+                            <i class="fa fa-times" aria-hidden="true" style="color: red;"></i>
+                        </a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+            </ul>
+        </th>
+
+        {% for col in cols %}
+            {% set colName =  col.name %}
+            <th>
+                {{ colName }}
+            </th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+        {% for row in pagination %}
+            <tr>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for rowActionKey,rowAction in rowActions %}
+                            {% if rowActionKey == 'show'  %}
+                                {% set routeParams =  {} %}
+                                {% for param in rowAction.params %}
+                                    {% set routeParams = routeParams|merge({ (param.paramName) : attribute(row,param.paramValue) }) %}
+                                        <li>
+                                            <a href="{{ path(rowAction.route, routeParams ) }}" class="btn btn-info btn-sm">
+                                                <i class="fa fa-eye"></i>  {{ rowAction.linkName }}
+                                            </a>
+                                        </li>
+                                {% endfor %}
+                            {% endif %}
+                            {% if  rowActionKey == 'edit'  %}
+                                {% set routeParams =  {} %}
+                                {% for param in rowAction.params %}
+                                    {% set routeParams = routeParams|merge({ (param.paramName): attribute(row,param.paramValue) }) %}
+                                    <li>
+                                        <a href="{{ path(rowAction.route, routeParams ) }}" class="btn btn-info btn-sm">
+                                            <i class="fa fa-pencil"></i>  {{ rowAction.linkName }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                        {% for globalActionKey,globalAction in globalActions %}
+                            {% if globalAction.action == 'boolean'  %}
+                                <li>
+                                    {% for param in globalAction.params %}
+                                        {% set routeParams =  {} %}
+                                        {%  if(attribute(row,param.paramName))   %}
+                                            {% set routeParams = {'col':param.paramName  , 'value': 0  , 'id': attribute(row,param.paramValue)} %}
+                                            <a href="{{ path(globalAction.route, routeParams ) }}" class="btn btn-info btn-sm"  id="ajaxEditorList_action_boolean_{{ param.paramName }}_{{ attribute(row,param.paramValue) }}">
+                                                <i class="fa fa-times" aria-hidden="true" style="color: red;"></i> {{ globalAction.linkName }}
+                                            </a>
+                                        {% else %}
+                                            {% set routeParams = {'col':param.paramName , 'value': 1 , 'id': attribute(row,param.paramValue) } %}
+                                            <a href="{{ path(globalAction.route, routeParams ) }}" class="btn btn-info btn-sm"  id="ajaxEditorList_action_boolean_{{ param.paramName }}_{{ attribute(row,param.paramValue) }}">
+                                                <i class="fa fa-check" aria-hidden="true" style="color: green;"></i> {{ globalAction.linkName }}
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </li>
+                            {% endif %}
+                            {% if globalAction.action == 'empty'  %}
+                                {% set routeParams =  {} %}
+                                {% for actionKey,param in globalAction.params %}
+                                    {% if flagsRow[globalActionKey][attribute(row,param.paramValue)] is not defined  %}
+                                        {% set routeParams = routeParams|merge({ (param.paramName): attribute(row,param.paramValue) }) %}
+                                        <li>
+                                            <a href="{{ path(globalAction.route, routeParams ) }}"  class="btn btn-warning btn-sm" >
+                                                <i class="fa fa-arrow-circle-down"></i> {{ globalAction.linkName }}
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li><del><i class="fa fa-arrow-circle-down"></i></del></li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            {% if globalAction.action == 'remove'  %}
+                                {% set routeParams =  {} %}
+                                {% for actionKey,param in globalAction.params %}
+                                    {% if flagsRow[globalActionKey][attribute(row,param.paramValue)] is not defined  %}
+                                        {% set routeParams = routeParams|merge({ (param.paramName): attribute(row,param.paramValue) }) %}
+                                        <li>
+                                            <a href="{{ path(globalAction.route, routeParams ) }}"  class="btn btn-danger btn-sm" >
+                                                <i class="fa fa-trash"></i> {{ globalAction.linkName }}
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li><del><i class="fa fa-trash"></i></del></li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <input type="checkbox"
+                           ajaxEditor_checkbox_id="{{ row.id }}"
+                           id="ajaxEditor_checkbox_{{ row.id }}"
+                           class="ajaxEditor_checkbox" />
+                </td>
+                {% for colKey,col in cols %}
+                {% if col.editable is not defined %}
+                    <td>
+                        {% if col.mode is not defined %}
+                            {{ attribute(row,colKey) }}
+                        {% elseif col.mode == "count" %}
+                            {{ attribute(row,colKey)|length }}
+                        {% elseif col.mode == "image" %}
+                            {% if attribute(row,colKey) %}
+                                <img src="{{ asset(col.folder ~'/' ~ attribute(row,colKey) ) | imagine_filter('my_thumb') }}" />
+                            {% else %}
+                                <i class="fa fa-circle-thin" style="color: red;"></i>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                {% else %}
+                    <td>
+                        {% if col.mode is not defined %}
+                            {{ ajaxEditor.getEditableCol(
+                                    colKey,
+                                    col.editable.type,
+                                    col.editable.form,
+                                    attribute(row,'id'),
+                                    attribute(row,colKey)
+                            )|raw }}
+                        {% endif %}
+                    </td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script>
+
+$(".ajaxEditorCol").click(function(){
+    $(this).next().attr( "class", "ajaxEditorColForm-visible" );
+});
+
+var ajaxEditor = {
+
+    init: function(){
+
+        $("#ajaxEditor_checkAll").click(function(){
+            if( $(this).is(':checked') ){
+                $(".ajaxEditor_checkbox").attr('checked',true);
+            } else {
+                $(".ajaxEditor_checkbox").attr('checked',false);
+            }
+
+        });
+    },
+
+    submitColFile: function(form,event,colName,id,newValue){
+        event.preventDefault();
+
+        url = Routing.generate('app_ajaxEditorRemote_getColFileAction');
+
+        $.ajax({
+            method: 'post',
+            url: url,
+            contentType:false,
+            processData:false,
+            cache:false,
+            data: new FormData(form)
+        })
+                .done(function (data) {
+
+
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {});
+    },
+    submitCol: function(form,event,colName,id,newValue){
+
+        event.preventDefault();
+
+        url = Routing.generate('app_ajaxEditorRemote_getColAction');
+
+        $.ajax({
+            method: 'post',
+            type: $(this).attr('method'),
+            url: url,
+            data: {
+                optionFile: '{{ options["optionFile"] }}',
+                colName: colName,
+                id: id,
+                newValue: newValue,
+                form: form.serialize()
+            }
+        })
+                .done(function (data) {
+                    var response = jQuery.parseJSON(data);
+
+                    if(response.newValue == ""){
+                        response.newValue = '{% trans %}not set{% endtrans %}';
+                    }
+                    $("#ajaxEditorCol_"+colName+"_"+id).parent().find(".ajaxEditorColForm-visible").addClass("ajaxEditorColForm-hidden");
+                    $("#ajaxEditorCol_"+colName+"_"+id).parent().find(".ajaxEditorColForm-visible").removeClass("ajaxEditorColForm-visible");
+                    $("#ajaxEditorCol_"+colName+"_"+id).html(response.newValue);
+
+                    if(response.dependencies){
+                        $.each(response.dependencies, function(k, v) {
+                            $("#ajaxEditorCol_"+k+"_"+id).html(v);
+                        });
+                    }
+
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+
+
+                });
+    }
+};
+ajaxEditor.init();
+</script>

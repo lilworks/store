@@ -1,0 +1,87 @@
+site_homepage:
+    path: /
+    defaults: { _controller: SiteBundle:Default:index }
+site_contact:
+    path: /contact
+    defaults: { _controller: MessageBundle:Default:form }
+site_category:
+    path: /category/{tag}
+    defaults: { _controller: SiteBundle:Default:category }
+site_product:
+    path: /product/{tag}
+    defaults: { _controller: SiteBundle:Default:product }
+site_all:
+    path: /all
+    defaults: { _controller: SiteBundle:Default:all }
+site_supercategory:
+    path: /supercategory/{tag}
+    defaults: { _controller: SiteBundle:Default:supercategory }
+site_brand:
+    path: /brand/{tag}
+    defaults: { _controller: SiteBundle:Default:brand }
+site_order:
+    path: /order
+    defaults: { _controller: "SiteBundle:Order:index"  }
+    methods:  [GET, POST]
+site_order_edit:
+    path: /order/{id}/edit
+    defaults: { _controller: "SiteBundle:Order:edit"  }
+    methods:  [GET, POST]
+site_order_remove:
+    path: /order/{id}/remove
+    defaults: { _controller: "SiteBundle:Order:remove"  }
+    methods:  [GET, POST]
+site_order_pay:
+    path: /order/{id}/pay
+    defaults: { _controller: "SiteBundle:Order:pay"  }
+    methods:  [GET, POST]
+
+site_order_payed:
+    path: /order/{id}/payed
+    defaults: { _controller: "SiteBundle:Order:payed"  }
+    methods:  [GET, POST]
+
+site_order_pdf:
+    path: /order/{id}/pdf
+    defaults: { _controller: "SiteBundle:Order:pdf"  }
+    methods:  [GET, POST]
+site_order_show:
+    path: /order/{id}/edit
+    defaults: { _controller: "SiteBundle:Order:edit"  }
+    methods:  [GET, POST]
+site_content:
+    path: /content/{tag}
+    defaults: { _controller: "SiteBundle:Text:content"  }
+    methods:  [GET, POST]
+
+site_basket_add:
+    path: /basket/{id}/add
+    defaults: { _controller: "SiteBundle:Basket:add" }
+    methods:  [GET, POST]
+site_basket_remove:
+    path: /basket/{id}/remove
+    defaults: { _controller: "SiteBundle:Basket:remove" }
+site_basket_delete:
+    path: /basket/{id}/delete
+    defaults: { _controller: "SiteBundle:Basket:delete" }
+
+site_basket_show:
+    path: /basket/show
+    defaults: { _controller: SiteBundle:Basket:show }
+
+site_customer_phonenumbers:
+    path: /customer/phonenumbers
+    defaults: { _controller: SiteBundle:Customer:phonenumbers }
+
+site_customer_addresses:
+    path: /customer/addresses
+    defaults: { _controller: SiteBundle:Customer:addresses }
+
+
+site_basket_edit:
+    path: /basket/edit
+    defaults: { _controller: SiteBundle:Basket:edit }
+
+site_basket_order:
+    path: /basket/order
+    defaults: { _controller: SiteBundle:Basket:order }

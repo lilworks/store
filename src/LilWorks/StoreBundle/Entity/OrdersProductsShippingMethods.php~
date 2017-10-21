@@ -1,0 +1,171 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_orders_products_shippingMethods")
+ */
+class OrdersProductsShippingMethods
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer",name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\ShippingMethod", inversedBy="ordersProductsShippingMethods")
+     * @ORM\JoinColumn(name="shippingMethod", referencedColumnName="id")
+     */
+    private $shippingMethod;
+
+    /**
+     * One OrdersProductsShippingMethods has Many orderProduct.
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\OrdersProducts", mappedBy="shippingMethod")
+     */
+    private $ordersProducts;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reference", type="string",length=255,nullable=false)
+     */
+    private $reference;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="float",length=255,nullable=true)
+     */
+    private $price;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ordersProducts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set reference
+     *
+     * @param string $reference
+     *
+     * @return OrdersProductsShippingMethods
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Get reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Set shippingMethod
+     *
+     * @param \LilWorks\StoreBundle\Entity\ShippingMethod $shippingMethod
+     *
+     * @return OrdersProductsShippingMethods
+     */
+    public function setShippingMethod(\LilWorks\StoreBundle\Entity\ShippingMethod $shippingMethod = null)
+    {
+        $this->shippingMethod = $shippingMethod;
+
+        return $this;
+    }
+
+    /**
+     * Get shippingMethod
+     *
+     * @return \LilWorks\StoreBundle\Entity\ShippingMethod
+     */
+    public function getShippingMethod()
+    {
+        return $this->shippingMethod;
+    }
+
+    /**
+     * Add ordersProduct
+     *
+     * @param \LilWorks\StoreBundle\Entity\OrdersProducts $ordersProduct
+     *
+     * @return OrdersProductsShippingMethods
+     */
+    public function addOrdersProduct(\LilWorks\StoreBundle\Entity\OrdersProducts $ordersProduct)
+    {
+        $this->ordersProducts[] = $ordersProduct;
+
+        return $this;
+    }
+
+    /**
+     * Remove ordersProduct
+     *
+     * @param \LilWorks\StoreBundle\Entity\OrdersProducts $ordersProduct
+     */
+    public function removeOrdersProduct(\LilWorks\StoreBundle\Entity\OrdersProducts $ordersProduct)
+    {
+        $this->ordersProducts->removeElement($ordersProduct);
+    }
+
+    /**
+     * Get ordersProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrdersProducts()
+    {
+        return $this->ordersProducts;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return OrdersProductsShippingMethods
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+}

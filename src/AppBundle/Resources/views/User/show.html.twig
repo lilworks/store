@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {{ 'appbundle.user.show %username%'|trans({'%username%':user.username}) }}
+    </h1>
+
+    {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.user.portal','storebundle.menu.user'] , {context: 'content'}) %}
+    {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+
+
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <th>{% trans %}appbundle.username{% endtrans %}</th>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}appbundle.email{% endtrans %}</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}appbundle.user.enabled{% endtrans %}</th>
+            <td>{{ user.enabled|boolean|raw }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}appbundle.customer{% endtrans %}</th>
+            <td>
+                {% if user.customer %}
+                    <a class="btn btn-sm btn-secondary" role="button" href="{{ path('customer_edit',{customer_id:user.customer.id}) }}">
+                        <i class="fa fa-pencil"></i>
+                        {{ user.customer.firstName }} {{ user.customer.lastName }} {{ user.customer.companyName }}
+                    </a>
+
+                {% else %}
+                    <i class="fa fa-circle"></i>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans %}appbundle.orders{% endtrans %}</th>
+            <td>
+                {% if user.customer and user.customer.orders|length>0 %}
+                    {% for order in user.customer.orders %}
+                        <a class="btn btn-sm btn-secondary" role="button" href="{{ path('order_edit',{order_id:order.id}) }}">
+                            <i class="fa fa-pencil"></i>
+                            {{ order.createdAt|date('d/m/Y') }} {{ order.reference }}
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <i class="fa fa-circle"></i>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans %}appbundle.depositsales{% endtrans %}</th>
+            <td>
+                {% if user.customer and user.customer.depositSales|length>0 %}
+                    {% for depositSale in user.customer.depositSales %}
+                        <a class="btn btn-sm btn-secondary" role="button" href="{{ path('depositSale_edit',{depositsale_id:depositSale.id}) }}">
+                            <i class="fa fa-pencil"></i>
+                            {{ depositSale.product.brand.name }} {{ depositSale.product.name }}
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <i class="fa fa-circle"></i>
+                {% endif %}
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+{% endblock %}

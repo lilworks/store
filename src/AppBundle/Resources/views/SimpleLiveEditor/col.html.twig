@@ -1,0 +1,70 @@
+{% set formField = attribute(form,colName) %}
+
+{% if formField.vars.attr.colType is defined %}
+    {% set colType = formField.vars.attr.colType %}
+{% else %}
+    {% set colType = "undefined" %}
+{% endif %}
+<div class="sle_colValue" id="sle_colValue_{{ colName }}_{{ rowId }}">
+    {% if colMetadata.type == "boolean" %}
+        {% if currentValue is not defined or currentValue is null or currentValue == 0 %}
+            <i class="fa fa-times" aria-hidden="true" style="color: red;"></i>
+        {% else %}
+            <i class="fa fa-check" aria-hidden="true" style="color: green;"></i>
+        {% endif %}
+    {% else %}
+        {% if currentValue is not defined or currentValue is null %}
+            <span style="font-style: italic; font-weight: 100; color: cornflowerblue;">
+                {% trans %}not set{% endtrans %}
+            </span>
+        {% else %}
+            {% if colType == 'price' %}
+                {{ currentValue|price }}
+            {% elseif colType == 'htmlText' %}
+                {{ currentValue|raw }}
+            {% elseif colType == 'datetime' %}
+                {{ currentValue|date }}
+            {% else %}
+                {% if choicesOptions|length > 0 %}
+                    {% for choiceLabel,choiceOption in choicesOptions %}
+                        {% if choiceOption == currentValue%}
+                            {{ choiceLabel }}
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {{ currentValue }}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+</div>
+
+<div class="sle_formCol">
+    {{ form_start(form,{'attr': {
+                'class':'sle-hidden',
+                'id': 'sle_form_' ~ colName ~ '_' ~ rowId ,
+                'entityName':entityName ,
+                'formType':formType,
+                'colName':colName,
+                'rowId':rowId }}) }}
+    {{ form_widget(form.save ,{'attr':{'class':'btn btn-success btn-sm sle-save'}} ) }}{{ form_widget(form.cancel,{'attr':{'class':'btn btn-warning btn-sm sle-cancel'}}) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    {{ form_errors(form) }}
+</div>
+
+<script>
+    $("#sle_colValue_{{ colName }}_{{ rowId }}").click(function(){
+        SLE.formColVisibility($(this));
+    });
+
+    $("#sle_form_{{ colName }}_{{ rowId }}").on('submit',function(e){
+        SLE.submitCol($(this),e,$(this).attr('formType'),$(this).attr('entityName'),$(this).attr('colName'),$(this).attr('rowId'));
+    });
+
+    $("#sle_form_{{ colName }}_{{ rowId }}").find(".sle-cancel").on('click',function(){
+        SLE.formColCancel($(this).closest('form').parent());
+    });
+
+
+</script>

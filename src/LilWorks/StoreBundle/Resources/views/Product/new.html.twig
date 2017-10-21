@@ -1,0 +1,187 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('assets/vendor/summernote/dist/summernote-bs4.css') }}">
+        <style>
+            .hidden-row{
+                visibility: hidden;
+            }
+
+        </style>
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="h{{ asset('assets/vendor/popper.js/dist/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/summernote/dist/summernote-bs4.min.js') }}"></script>
+        <script>
+            $( function() {
+                FCE.init('docfiles','docfiles list-inline','docfile list-inline-item');
+                FCE.init('pictures','pictures list-inline','picture list-inline-item');
+                FCE.init('tags','tags list-inline','tag list-inline-item');
+
+
+
+                var SEF_category = Object.create(SEF);
+                SEF_category.init("{{ form.categories.vars['id'] }}","{{ form.categories.vars['full_name'] }}","{{ form.categories.vars['multiple'] }}","LilWorksStoreBundle:Category","name");
+
+                var SEF_related = Object.create(SEF);
+                SEF_related.init("{{ form.relatedProducts.vars['id'] }}","{{ form.relatedProducts.vars['full_name'] }}","{{ form.categories.vars['multiple'] }}","LilWorksStoreBundle:Product","name");
+
+                var SEF_brand = Object.create(SEF);
+                SEF_brand.init("{{ form.brand.vars['id'] }}","{{ form.brand.vars['full_name'] }}","{{ form.brand.vars['multiple'] }}","LilWorksStoreBundle:Brand","name");
+
+                $('.text-editor').summernote({
+                    height: 200,
+                    minHeight: null,
+                    maxHeight: null,
+                    focus: true,
+                    toolbar: [
+                        // [groupName, [list of button]]
+                        ['style', ['bold', 'italic', 'underline', 'clear']],
+                        ['font', ['strikethrough', 'superscript', 'subscript']],
+                        ['fontsize', ['fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['height', ['height']],
+                        ['misc',['codeview','fullscreen']]
+                    ]
+                });
+            } );
+        </script>
+    {% endblock %}
+
+
+    <h1>
+        {% trans %}lilworks.storebundle.product.new{% endtrans %}
+    </h1>
+
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+        <a href="{{ path('product_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+    </div>
+
+    {{ form_start(form) }}
+
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.create{% endtrans %}" />
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}lilworks.storebundle.tab.general{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#descriptions" role="tab">{% trans %}lilworks.storebundle.description{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#prices" role="tab">{% trans %}lilworks.storebundle.price{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#warranties" role="tab">{% trans %}lilworks.storebundle.warranties{% endtrans %}</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" data-toggle="tab" href="#shippingmethods" role="tab">{% trans %}lilworks.storebundle.shippingmethods{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#stocks" role="tab">{% trans %}lilworks.storebundle.stocks{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#specifications" role="tab">{% trans %}lilworks.storebundle.product.specifications{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#pictures" role="tab">{% trans %}lilworks.storebundle.pictures{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#more" role="tab">{% trans %}lilworks.storebundle.tab.more{% endtrans %}</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="general" role="tabpanel">
+            {{ form_row(form.name) }}
+            {{ form_row(form.brand) }}
+            {{ form_row(form.categories) }}
+            {{ form_row(form.isPublished) }}
+            {{ form_row(form.isSecondHand) }}
+        </div>
+        <div class="tab-pane" id="descriptions" role="tabpanel">
+            {{ form_row(form.description) }}
+            {{ form_row(form.descriptionInternal) }}
+        </div>
+        <div class="tab-pane" id="prices" role="tabpanel">
+            {{ form_row(form.priceOnline) }}
+            {{ form_row(form.taxesOnline) }}
+            {{ form_row(form.priceOffline) }}
+            {{ form_row(form.taxesOffline) }}
+            {{ form_row(form.priceBuying) }}
+            {{ form_row(form.priceRetail) }}
+        </div>
+        <div class="tab-pane" id="warranties" role="tabpanel">
+            {{ form_row(form.warrantiesOnline) }}
+            {{ form_row(form.warrantiesOffline) }}
+        </div>
+        <div class="tab-pane" id="shippingmethods" role="tabpanel">
+            {{ form_row(form.shippingMethods) }}
+        </div>
+        <div class="tab-pane" id="stocks" role="tabpanel">
+            {{ form_row(form.stock) }}
+            {{ form_row(form.leadTime) }}
+            {{ form_row(form.alwaysAvailable) }}
+        </div>
+        <div class="tab-pane" id="specifications" role="tabpanel">
+            {{ form_row(form.width) }}
+            {{ form_row(form.height) }}
+            {{ form_row(form.length) }}
+            {{ form_row(form.weight) }}
+
+            <h3>{% trans %}docfiles{% endtrans %}</h3>
+            <ul class="docfiles list-inline " id="target" data-prototype="{{ form_widget(form.docfiles.vars.prototype)|e('html_attr') }}">
+                {% for docfile in form.docfiles %}
+                    <li class="docfile list-inline-item">
+                        {{ docfile.vars.value.docName }}
+                        {{ form_row(docfile) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {{ form_widget(form.docfiles) }}
+        </div>
+        <div class="tab-pane" id="pictures" role="tabpanel">
+
+            <h3>{% trans %}pictures{% endtrans %}</h3>
+            <ul class="pictures list-inline " id="target" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e('html_attr') }}">
+                {% for picture in form.pictures %}
+                    <li class="picture list-inline-item">
+                        <img class="rounded" src="{{ asset('product/' ~ picture.vars.value.pictureName  ) | imagine_filter('my_thumb') }}" />
+                        {{ form_row(picture) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {{ form_widget(form.pictures) }}
+
+        </div>
+
+        <div class="tab-pane" id="more" role="tabpanel">
+            {{ form_row(form.isReviewable) }}
+            {{ form_row(form.relatedProducts) }}
+            <h3>{% trans %}tags{% endtrans %}</h3>
+            <ul class="tags list-inline " id="target" data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">
+                {% for tag in form.tags %}
+                    <li class="tag list-inline-item">
+                        {{ form_row(tag) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {{ form_widget(form.tags) }}
+        </div>
+    </div>
+
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.create{% endtrans %}" />
+
+    {{ form_end(form) }}
+
+{% endblock %}

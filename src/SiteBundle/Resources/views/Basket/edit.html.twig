@@ -1,0 +1,206 @@
+{% extends 'baseFull.html.twig' %}
+
+
+
+{% block body %}
+
+
+
+
+
+
+<h1>
+    <i class="fa fa-shopping-cart" aria-hidden="true"></i>  {% trans %}lilworks.sitebundle.basket{% endtrans %}
+</h1>
+
+    {{ form_start(form) }}
+
+    <div class="btn-group" role="group" aria-label="basket buttons">
+        {{ form_row(form.empty) }}
+        {{ form_row(form.update) }}
+        {% if form.order is defined %}
+            {{ form_row(form.order) }}
+        {% endif %}
+    </div>
+
+    <table class="table table-striped">
+
+        <thead>
+        <th>{% trans %}lilworks.sitebundle.product{% endtrans %}</th>
+        <th>{% trans %}lilworks.sitebundle.quantity{% endtrans %}</th>
+        <th>{% trans %}lilworks.sitebundle.priceunity{% endtrans %}</th>
+        <th>{% trans %}lilworks.sitebundle.producttot{% endtrans %}</th>
+        </thead>
+
+        <tbody>
+        {%   for k,product in form.basketsProducts.vars.data %}
+
+            <tr>
+                <td>
+                    {% if product.product.pictures[0].pictureName is defined %}
+                        <img src="{{ asset('product/'~product.product.pictures[0].pictureName) | imagine_filter('mini') }}" />
+                    {% endif %}
+                    {{ product.product.brand.name }} {{ product.product.name }}
+                    {{ product.product|stock(product.quantity)|raw }}
+                    {% if product.product.isSecondHand == 1 %}
+                        <span class="alert alert-danger btn-sm" role="alert">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            {% trans %}lilworks.sitebundle.issecondhand{% endtrans %}
+                        </span>
+                    {% endif %}
+                    {{ product.product.warrantiesOnline|warranties|raw }}
+                </td>
+                <td>
+                    {{ form_errors(form.basketsProducts[k]) }}
+                    {{ form_widget(form.basketsProducts[k]) }}
+                    <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <a role="button" href="{{ path('site_basket_delete',{id:product.product.id}) }}" class="btn btn-secondary"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            {% if product.product.isSecondHand != 1 %}
+                                <a role="button" href="{{ path('site_basket_remove',{id:product.product.id}) }}" class="btn btn-secondary"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                                <a role="button" href="{{ path('site_basket_add',{id:product.product.id}) }}" class="btn btn-secondary"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                            {% endif %}
+                            <a role="button" href="{{ path('site_product',{tag:product.product.tag}) }}" class="btn btn-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    {{ product.product.priceOnline|price }}
+                    {{ product.product.taxesOnline|taxes|raw }}
+                </td>
+                <td>{{ (product.product.priceOnline * product.quantity)|price }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            {% set totals = basket.basketsProducts|totalCalculator %}
+            <td class="bg-info" colspan="4" >
+                {% trans %}total: {% endtrans %}
+                <style>
+                    .priceTTC{
+                        font-size: 1.6em;
+                        font-weight: bold;
+                    }
+                    .priceSM{
+                        font-size: 1.8em;
+                        font-weight: bold;
+                    }
+                </style>
+                <div class="priceTTC">{{ totals['ttc']|price }}<sup>TTC</sup></div>
+                <div class="priceHt">{{ totals['ht']|price }}<sup>HT</sup></div>
+                {% if form.shippingMethod is defined and form.shippingMethod.vars.data is not null %}
+                    <div class="card">
+                    <div class="card-header">{% trans %}lilworks.sitebundle.totwithshipping{% endtrans %}</div>
+                     <div class="card-block priceSM">
+                         {{ basket.tot|price }}<sup>TTC</sup>
+                     </div>
+                    </div>
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+    {% if user is null or basket.user.username is null %}
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        {{ 'sitebundle.connexion'|trans }}
+                    </div>
+                    <div class="card-block">
+                        <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary">
+                            {{ 'layout.login'|trans }}
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        {{ 'sitebundle.register'|trans }}
+                    </div>
+                    <div class="card-block">
+                        <a href="{{ path('fos_user_registration_register') }}"  class="btn btn-primary">
+                            {{ 'registration.submit'|trans }}
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>{% trans %}lilworks.sitebundle.shippingaddress{% endtrans %}</h4>
+                    </div>
+                    <div class="card-block">
+                        {{ form_errors(form.shippingAddress) }}
+                        {{ form_widget(form.shippingAddress) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>{% trans %}lilworks.sitebundle.billingaddress{% endtrans %}</h4>
+                    </div>
+                    <div class="card-block">
+                        {{ form_errors(form.billingAddress) }}
+                        {{ form_widget(form.billingAddress) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card" style="margin-top: 10px;">
+                    <div class="card-header">
+                        <h4>{% trans %}lilworks.sitebundle.shippingmethod{% endtrans %}</h4>
+                    </div>
+                    <div class="card-block">
+                        {% if form.basketsRealShippingMethods is defined %}
+                            {{ form_errors(form.basketsRealShippingMethods) }}
+                            {{ form_widget(form.basketsRealShippingMethods) }}
+                        {% else %}
+                            {% trans %}lilworks.sitebundle.selectaddressfirst{% endtrans %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {#
+            <div class="col-lg-6">
+                <div class="card" style="margin-top: 10px;">
+                    <div class="card-header">
+                        <h4>{% trans %}payment methods{% endtrans %}</h4>
+                    </div>
+                    <div class="card-block">
+                        {% if form.paymentMethod is defined %}
+                            {{ form_errors(form.paymentMethod) }}
+                            {{ form_widget(form.paymentMethod) }}
+                        {% else %}
+                            {% trans %}you need to select a billing address or a shipping method first{% endtrans %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+#}
+        </div>
+    {% endif %}
+
+
+
+
+
+    {{ form_end(form) }}
+
+
+{% endblock %}

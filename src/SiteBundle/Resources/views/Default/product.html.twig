@@ -1,0 +1,148 @@
+{% extends 'base2col.html.twig' %}
+
+{% block body %}
+<style>
+    .price{
+        font-size: 42px;
+    }
+</style>
+
+
+
+    <div class="col-md-3">
+
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-success" href="{{ path('site_basket_add',{id:product.id}) }}">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> {% trans %}lilworks.sitebundle.addtobasket{% endtrans %}
+                </a>
+            </div>
+            <div class="card-text">
+
+            <span class="price">
+
+                {{ product.priceOnline|price }}
+            </span>
+                {% if product.taxesOnline|length > 0 %}
+                    <ul class="list list-unstyled">
+                        {% for taxe in product.taxesOnline %}
+                            <li>
+                                {{ taxe.name }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+
+            <div>
+                <ul class="list-group">
+                    {% for warranty in product.warrantiesOnline  %}
+                        <li class="list-group-item">{{ warranty.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div >
+                {% if product.isSecondHand == true %}
+                    <div class="alert alert-danger" role="alert">
+                    <span>
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        {% trans %}isSecondHand{% endtrans %}
+                    </span>
+                    </div>
+                {% elseif product.alwaysAvailable == true %}
+                    <div class="alert alert-success" role="alert">
+                    <span>
+                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                        {% trans %}product always available{% endtrans %}
+                    </span>
+                    </div>
+                {% elseif product.stock > 0 %}
+                    <div class="alert alert-info" role="alert">
+                    <span>
+                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                        {% transchoice product.stock %}
+                        {1} only 1 product left|{2} only 2 products left|]2,Inf[ %count% products left
+                        {% endtranschoice %}
+                    </span>
+                    </div>
+                {% elseif product.stock == 0 and product.leadTime > 0 %}
+                    <div class="alert alert-danger" role="alert">
+                    <span>
+                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                        {% transchoice product.leadTime %}
+                        {1} available in 1 day |]2,Inf[ available in %count% days
+                        {% endtranschoice %}
+                    </span>
+                    </div>
+
+                {% elseif  product.leadTime == 0 %}
+                    <div class="alert alert-success" role="alert">
+                    <span>
+                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                        {% trans %}immediatly available{% endtrans %}
+                    </span>
+                    </div>
+                {% endif %}
+
+
+                <div class="list-group">
+                    <a href="{{ path('site_brand',{tag:product.brand.tag}) }}" class="list-group-item list-group-item-action">
+                        <img src="{{ asset('brand/' ~ product.brand.pictureName  ) | imagine_filter('mini') }}" /> {{ product.brand.name }}
+                    </a>
+                    {% for category in product.categories  %}
+                        <a href="{{ path('site_category',{tag:category.tag}) }}" class="list-group-item list-group-item-action">
+                            <img src="{{ asset('category/' ~ category.pictureName  ) | imagine_filter('mini') }}" /> {{ category.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+<div class="col-md-9">
+
+
+    <div class="card">
+        <div class="card-header">
+            <h1>
+                {{ product.brand.name ~ ' ' ~ product.name }}
+            </h1>
+        </div>
+        <div class="card-block">
+            <div class="card-text">
+                {% if product.pictures|length > 0  %}
+                    <ul class="list list-inline">
+                        {% for picture in product.pictures %}
+                            <li class="list-inline-item">
+                                <a data-toggle="lightbox" data-gallery="product-gallery" href="{{ asset('product/'~picture.pictureName )}}" >
+                                    <img class="card-img"  src="{{ asset('product/'~picture.pictureName ) | imagine_filter('product_small') }}" />
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {{ product.description|raw }}
+
+                {% if product.relatedProducts|length > 0  %}
+                    <h5>{% trans %}relatedProducts{% endtrans %}</h5>
+                    <div class="row">
+                        {% for relatedProduct in product.relatedProducts %}
+                            {{ productService.getProduct(relatedProduct.id)|raw }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+    {{ socialButtons() }}
+{% endblock %}

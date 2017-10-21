@@ -1,0 +1,183 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+
+@media (max-width: 576px) {
+
+    #textHeaderInvisible{
+        visibility: hidden;
+        height: 0;
+    }
+    #logo{
+        visibility: hidden;
+    }
+
+    #header-text{
+        font-size: .7em;
+        text-align: justify;
+    }
+    #header-card{
+
+    }
+
+}
+
+
+body {
+
+    font-family: 'Raleway', 'Trebuchet MS';
+    /*background: #f3f3f3 url("//d85wutc1n854v.cloudfront.net/live/imgs/content_inner_bg.png") repeat scroll 0 0;
+    */
+
+    background: #ffffff url("https://www.transparenttextures.com/patterns/scribble-light.png") repeat scroll 0 0;
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+div.mce-fullscreen {
+    z-index: 1050; !important;
+}
+select.form-control {
+    -webkit-appearance: menulist; !important;
+}
+
+#header{
+    border-bottom: 1px solid #888;
+    background-color: #191c1d;
+    background-image: url("https://www.transparenttextures.com/patterns/fabric-of-squares.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+    padding-top: 8px;
+    z-index:2;
+}
+#header-card{
+    height: 162px;
+}
+
+#logo{
+    z-index:1;
+    width:132px;
+    position: absolute;
+    top:6px;
+    left: 6px;
+
+}
+#content{
+    margin-top: 12px;
+}
+.navbar-toggler {
+    z-index: 1;
+}
+
+#navigation{
+    -moz-box-shadow: 8px 8px 12px #aaa;
+    -webkit-box-shadow: 8px 8px 12px #aaa;
+    box-shadow: 8px 8px 12px #555;
+}
+.my-dropdown{
+    position: static;
+}
+.my-dropdown>a:after{
+    display:none;
+}
+.my-dropdown-menu {
+    width: 100%;
+    background: #ccc url("//d85wutc1n854v.cloudfront.net/live/imgs/darkgrain.png") repeat scroll 0 0;
+    -moz-box-shadow: 8px 8px 12px #aaa;
+    -webkit-box-shadow: 8px 8px 12px #aaa;
+    box-shadow: 8px 8px 12px #555;
+
+
+}
+.no-dropdown{
+    text-decoration: none;
+    color: #CCC;
+}
+#navbar-site{
+    font-size: 16px;
+}
+.menu_level_1{
+    border: 1px solid #eee;
+}
+
+.menu-item-category-first{
+
+    display: block;
+    height: 50px;
+    border-bottom: 1px solid #CCC;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 4px;
+    text-shadow: 0 1px 0 #eee,
+    0 2px 0 #e5e5e5,
+    -1px 3px 0 #C8C8C8,
+    -1px 4px 0 #C1C1C1,
+    -2px 5px 0 #B9B9B9,
+    -2px 6px 0 #B2B2B2,
+    -2px 7px 2px rgba(0,0,0, 0.6),
+    -2px 7px 8px rgba(0,0,0, 0.2),
+    -2px 7px 45px rgba(0,0,0, 0.4);
+}
+.menu-item-category-first>a{
+    font-size: 25px;
+    text-decoration: none;
+    color: #222;
+}
+.menu-item-category-first>a:hover{
+    font-size: 25px;
+    text-decoration: none;
+    color: #FF0900;
+}
+.menu-item-category>a:hover{
+    background: #eee url("//d85wutc1n854v.cloudfront.net/live/imgs/darkgrain.png") repeat scroll 0 0;;
+    color: #FF0900;
+}
+.menu-item-category{
+    font-size: 13px;
+    text-align: center;
+    vertical-align: top;
+    display: inline-block;
+    width: 200px;
+    text-shadow: 0 1px 0 #eee,
+    0 2px 0 #e5e5e5,
+    -1px 3px 0 #C8C8C8,
+    -1px 4px 0 #C1C1C1,
+    -2px 5px 0 #B9B9B9,
+    -2px 6px 0 #B2B2B2,
+    -2px 7px 2px rgba(0,0,0, 0.6),
+    -2px 7px 8px rgba(0,0,0, 0.2),
+    -2px 7px 45px rgba(0,0,0, 0.4);
+}
+
+.menu-item-category img{
+    margin: auto;
+    display: block;
+}
+
+
+
+footer{
+    margin-top: 12px;
+    -moz-box-shadow: -8px -8px 12px #aaa;
+    -webkit-box-shadow: -8px -8px 12px #aaa;
+    box-shadow: -8px -8px 12px #555;
+}
+
+
+.footerLinks ul{
+    font-size: 30px;
+    line-height: 58px;
+}
+.footerLinks ul>li{
+    list-style: none;
+}
+.footerLinks ul>li>a{
+    color: #FFF;
+}
+.text-footer{
+    color: #ccc;
+    text-align: right;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+}
+
+
+.twig-taxes , .twig-warranties{
+    font-size: .7em;
+}

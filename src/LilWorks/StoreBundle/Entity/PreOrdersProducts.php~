@@ -1,0 +1,133 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_preorder_products")
+ */
+class PreOrdersProducts
+{
+
+
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer",name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var integer
+     * @Assert\GreaterThanOrEqual(0)
+     * @ORM\Column(name="quantity", type="integer" , nullable=false)
+     */
+    private $quantity;
+
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Product", inversedBy="preOrdersProducts")
+     * @ORM\JoinColumn(name="product", referencedColumnName="id" , nullable=false)
+     */
+    protected $product;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\PreOrder", inversedBy="preOrdersProducts")
+     * @ORM\JoinColumn(name="preOrder", referencedColumnName="id", nullable=false)
+     */
+    protected $preOrder;
+
+
+
+    
+
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set quantity
+     *
+     * @param integer $quantity
+     *
+     * @return PreOrdersProducts
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * Get quantity
+     *
+     * @return integer
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \LilWorks\StoreBundle\Entity\Product $product
+     *
+     * @return PreOrdersProducts
+     */
+    public function setProduct(\LilWorks\StoreBundle\Entity\Product $product)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \LilWorks\StoreBundle\Entity\Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * Set preOrder
+     *
+     * @param \LilWorks\StoreBundle\Entity\PreOrder $preOrder
+     *
+     * @return PreOrdersProducts
+     */
+    public function setPreOrder(\LilWorks\StoreBundle\Entity\PreOrder $preOrder)
+    {
+        $this->preOrder = $preOrder;
+
+        return $this;
+    }
+
+    /**
+     * Get preOrder
+     *
+     * @return \LilWorks\StoreBundle\Entity\PreOrder
+     */
+    public function getPreOrder()
+    {
+        return $this->preOrder;
+    }
+}

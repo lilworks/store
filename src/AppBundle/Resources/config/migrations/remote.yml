@@ -1,0 +1,4 @@
+name: RemoteMigrations
+migrations_namespace: AppBundle\Migrations\Remote
+table_name: Migrations
+migrations_directory: src/AppBundle/Migrations/Remote

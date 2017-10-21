@@ -1,0 +1,17 @@
+app_user:
+    resource: "@AppBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+app_session:
+    resource: "@AppBundle/Resources/config/routing/session.yml"
+    prefix:   /session
+
+app_ajax:
+    resource: "@AppBundle/Resources/config/routing/ajax.yml"
+    prefix:   /ajax
+
+app_simpleLiveEditor_submitCol:
+    path:     /app-simpleLiveEditor-submitCol/{formType}/{entityName}/{colName}/{rowId}
+    defaults: { _controller: app.simpleLiveEditor:submitCol }
+    options:
+         expose: true

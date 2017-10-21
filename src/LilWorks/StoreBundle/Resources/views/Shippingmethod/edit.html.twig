@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}lilworks.storebundle.shippingmethod.edit{% endtrans %}
+    </h1>
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions" id="actions">
+        <a href="{{ path('shippingmethod_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+        <a href="{{ path('shippingmethod_new') }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+        </a>
+        <a href="{{ path('shippingmethod_show', { 'id': shippingMethod.id }) }}" class="btn btn-info btn-sm">
+            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+        </a>
+        {% if
+            shippingMethod.products|length == 0 and
+            shippingMethod.ordersRealShippingMethods|length == 0 and
+            shippingMethod.shippingmethodsCountries|length == 0
+        %}
+            {% set disabled = "" %}
+        {% else %}
+            {% set disabled = "disabled" %}
+        {% endif %}
+        <a href="{{ path('shippingmethod_delete', { 'id': shippingMethod.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+        </a>
+
+    </div>
+
+    {{ form_start(form) }}
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}lilworks.storebundle.tab.general{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#products" role="tab">{% trans %}lilworks.storebundle.products{% endtrans %}</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="general" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-4">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="col-lg-4">
+                    {{ form_row(form.price) }}
+                </div>
+                <div class="col-lg-4">
+                    {{ form_row(form.freeTrigger) }}
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    {{ form_row(form.isPublished) }}
+                </div>
+                <div class="col-lg-3">
+                    {{ form_row(form.priority) }}
+                </div>
+                <div class="col-lg-3">
+                    {{ form_row(form.delay) }}
+                </div>
+                <div class="col-lg-3">
+                    {{ form_row(form.pictureFile) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    {{ form_row(form.description) }}
+                </div>
+                <div class="col-lg-6">
+                    {{ form_row(form.descriptionInternal) }}
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="products" role="tabpanel">
+            {{ form_row(form.products) }}
+        </div>
+    </div>
+
+
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+
+    {{ form_end(form) }}
+
+
+{% endblock %}

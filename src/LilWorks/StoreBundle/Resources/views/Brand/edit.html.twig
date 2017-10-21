@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('assets/vendor/summernote/dist/summernote-bs4.css') }}">
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="h{{ asset('assets/vendor/popper.js/dist/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/summernote/dist/summernote-bs4.min.js') }}"></script>
+        <script>
+            $( document ).ready(function() {
+
+                $('.text-editor').summernote({
+                    height: 200,
+                    minHeight: null,
+                    maxHeight: null,
+                    focus: true,
+                    toolbar: [
+                        // [groupName, [list of button]]
+                        ['style', ['bold', 'italic', 'underline', 'clear']],
+                        ['font', ['strikethrough', 'superscript', 'subscript']],
+                        ['fontsize', ['fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['height', ['height']],
+                        ['misc',['codeview','fullscreen']]
+                    ]
+                });
+            });
+        </script>
+    {% endblock %}
+
+    <h1>
+        {% trans %}lilworks.storebundle.brand.edit{% endtrans %}
+    </h1>
+
+    {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.user','storebundle.menu.customer'] , {context: 'content'}) %}
+    {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:knp_menu_content.html.twig'}) }}
+
+    {{ form_start(form) }}
+
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+
+
+    <div class="row">
+        <div class="row-sm-10 offset-2">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

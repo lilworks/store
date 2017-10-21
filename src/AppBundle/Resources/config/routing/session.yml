@@ -1,0 +1,23 @@
+session_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Session:index" }
+    methods:  GET
+
+session_show:
+    path:     /{session_id}/show
+    defaults: { _controller: "AppBundle:Session:show" }
+    methods:  GET
+session_edit:
+    path:     /{session_id}/edit
+    defaults: { _controller: "AppBundle:Session:show" }
+    methods:  GET
+
+session_delete:
+    path:     /{session_id}/detete
+    defaults: { _controller: "AppBundle:Session:show" }
+    methods:  GET
+
+
+
+
+

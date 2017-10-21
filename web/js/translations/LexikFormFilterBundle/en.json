@@ -1,0 +1,3 @@
+{
+    "translations": {"en":{"LexikFormFilterBundle":{"boolean.yes_or_no":"Yes or No","boolean.yes":"Yes","boolean.no":"No","number.equal":"Equal","number.greater_than":"Greater than","number.greater_than_equal":"Greater than or Equal","number.lower_than":"Lower than","number.lower_than_equal":"Lower than or Equal","text.starts":"Starts with","text.ends":"Ends with","text.equals":"Equals","text.both":"Contains"}}}
+}

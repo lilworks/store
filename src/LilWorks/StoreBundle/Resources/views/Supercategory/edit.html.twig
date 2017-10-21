@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+
+        <script>
+            $( function() {
+                FCE.init('superCategoriesCategories','superCategoriesCategories list-inline','superCategorieCategorie list-inline-item');
+
+
+
+                tinymce.init({
+                    selector: '.editor-text',
+                    width: "100%",
+                    height: 200,
+                    forced_root_block : "",
+                    verify_html : false,
+                    toolbar: 'insert | undo redo | code | formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+                    menubar: "tools",
+                    plugins: [
+                        'advlist autolink lists link image charmap print preview anchor textcolor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table contextmenu paste code help'
+                    ],
+                    content_css: [
+                        '{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}',
+                        '{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']
+                });
+            } );
+
+
+        </script>
+    {% endblock %}
+
+
+
+    <h1>
+        {% trans %}lilworks.storebundle.supercategory.edit{% endtrans %}
+    </h1>
+
+
+    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
+        <a href="{{ path('supercategory_index') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+        </a>
+        <a href="{{ path('supercategory_show',{id:superCategory.id}) }}" class="btn btn-info btn-sm">
+            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+        </a>
+        {% if superCategory.supercategoriesCategories|length == 0 %}
+            {% set disabled="" %}
+        {% else %}
+            {% set disabled="disabled" %}
+        {% endif %}
+        <a href="{{ path('supercategory_delete', { 'id': superCategory.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
+            <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+        </a>
+    </div>
+
+
+    {{ form_start(form) }}
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+
+
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}lilworks.storebundle.tab.general{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#categories" role="tab">{% trans %}lilworks.storebundle.categories{% endtrans %}</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="general" role="tabpanel">
+            {{ form_row(form.name) }}
+            {{ form_row(form.pos) }}
+            {{ form_row(form.isPublished) }}
+            {{ form_row(form.pictureFile) }}
+            {{ form_row(form.description) }}
+        </div>
+        <div class="tab-pane" id="categories" role="tabpanel">
+            {% if form.superCategoriesCategories is defined %}
+                <ul class="superCategoriesCategories list-inline " id="target" data-prototype="{{ form_widget(form.superCategoriesCategories.vars.prototype)|e('html_attr') }}">
+                    {% for superCategorieCategorie in form.superCategoriesCategories %}
+                        <li class="superCategorieCategorie list-inline-item">
+                            {{ form_row(superCategorieCategorie) }}
+                        </li>
+                    {% endfor %}
+                    {{ form_widget(form.superCategoriesCategories) }}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+    {{ form_end(form) }}
+
+{% endblock %}

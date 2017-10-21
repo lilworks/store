@@ -1,0 +1,24 @@
+tag_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Tag:index" }
+    methods:  GET
+
+tag_show:
+    path:     /{tag_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Tag:show" }
+    methods:  GET
+
+tag_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Tag:new" }
+    methods:  [GET, POST]
+
+tag_edit:
+    path:     /{tag_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Tag:edit" }
+    methods:  [GET, POST]
+
+tag_delete:
+    path:     /{tag_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Tag:delete" }
+    methods:  DELETE

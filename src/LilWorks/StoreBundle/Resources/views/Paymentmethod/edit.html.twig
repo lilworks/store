@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}paymentmethod edit{% endtrans %}
+    </h1>
+
+    <div id="content_menu">
+        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.user.portal','storebundle.menu.cat.customer'] , {context: 'content'}) %}
+        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+    </div>
+
+    <div class="row">
+        <div class="row-sm-10 offset-2">
+            {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            <input type="submit" class="btn btn-primary" value="{% trans %}edit{% endtrans %}" />
+            {{ form_end(edit_form) }}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,158 @@
+<?php
+namespace LilWorks\StoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="lilworks_orders_shippingmethods")
+ */
+class OrdersShippingMethods
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer",name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Order", inversedBy="ordersShippingMethods")
+     * @ORM\JoinColumn(name="order", referencedColumnName="id", nullable=FALSE)
+     */
+    protected $order;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\ShippingMethod", inversedBy="ordersShippingMethods")
+     * @ORM\JoinColumn(name="country", referencedColumnName="id", nullable=FALSE)
+     */
+    protected $shippingMethod;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reference", type="string",length=255,nullable=false)
+     */
+    private $reference;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="text",nullable=true)
+     */
+    private $description;
+
+
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set reference
+     *
+     * @param string $reference
+     *
+     * @return OrdersShippingMethods
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Get reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return OrdersShippingMethods
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set order
+     *
+     * @param \LilWorks\StoreBundle\Entity\Order $order
+     *
+     * @return OrdersShippingMethods
+     */
+    public function setOrder(\LilWorks\StoreBundle\Entity\Order $order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return \LilWorks\StoreBundle\Entity\Order
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * Set shippingMethod
+     *
+     * @param \LilWorks\StoreBundle\Entity\ShippingMethod $shippingMethod
+     *
+     * @return OrdersShippingMethods
+     */
+    public function setShippingMethod(\LilWorks\StoreBundle\Entity\ShippingMethod $shippingMethod)
+    {
+        $this->shippingMethod = $shippingMethod;
+
+        return $this;
+    }
+
+    /**
+     * Get shippingMethod
+     *
+     * @return \LilWorks\StoreBundle\Entity\ShippingMethod
+     */
+    public function getShippingMethod()
+    {
+        return $this->shippingMethod;
+    }
+}

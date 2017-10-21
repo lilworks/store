@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $( window ).on( "load", FF.init() );
+            });
+        </script>
+    {% endblock %}
+
+    <h1>
+        {% trans %}appbundle.user.index{% endtrans %}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-4">
+            {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.user.portal','storebundle.menu.user'] , {context: 'content'}) %}
+            {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+        </div>
+        <div class="col-lg-8">
+
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+
+            {{ knp_pagination_render(pagination) }}
+
+            <form method="get" action="." class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}appbundle.button.filter{% endtrans %}" />
+            </form>
+        </div>
+    </div>
+
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{% trans %}appbundle.action{% endtrans %}</th>
+            <th>{% trans %}appbundle.user.enabled{% endtrans %}</th>
+
+            <th>
+                <ul>
+                    <li>{{ knp_pagination_sortable(pagination, 'appbundle.username'|trans, 'u.username') }}</li>
+                    <li>{{ knp_pagination_sortable(pagination, 'appbundle.email'|trans, 'u.email') }}</li>
+                </ul>
+            </th>
+            <th>
+                <ul>
+                    <li>{{ knp_pagination_sortable(pagination, 'appbundle.lastLogin'|trans, 'u.lastLogin') }}</li>
+                    <li>{{ knp_pagination_sortable(pagination, 'appbundle.passwordRequestedAt'|trans, 'u.passwordRequestedAt') }}</li>
+                </ul>
+            </th>
+            <th>{% trans %}appbundle.customer{% endtrans %}</th>
+            <th>{% trans %}appbundle.orders{% endtrans %}</th>
+            <th>{% trans %}appbundle.depositsales{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in pagination %}
+
+            <tr>
+                <td>
+                    {% set formatedItems = pagination.items|idinkey %}
+                    {% set menu = knp_menu_get('list', [ user.id ] ,{results:formatedItems[user.id]   ,target:'user'} ) %}
+                    {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
+                </td>
+                <td>
+                    {{ user.enabled|boolean|raw }}
+                </td>
+
+                <td>
+                    <ul>
+                        <li>{{ user.username }}</li>
+                        <li>{{ user.email }}</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>{{ user.lastlogin|date('d/m/Y H:i') }}</li>
+                        <li>{{ user.passwordRequestedAt|date('d/m/Y H:i') }}</li>
+                    </ul>
+                </td>
+                <td>
+                    {% if user.customer %}
+                        <a class="btn btn-sm btn-secondary" role="button" href="{{ path('customer_edit',{customer_id:user.customer.id}) }}">
+                            <i class="fa fa-pencil"></i>
+                            {{ user.customer.firstName }} {{ user.customer.lastName }} {{ user.customer.companyName }}
+                        </a>
+
+                    {% else %}
+                        <i class="fa fa-circle"></i>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if user.customer and user.customer.orders|length>0 %}
+                        {% for order in user.customer.orders %}
+                            <a class="btn btn-sm btn-secondary" role="button" href="{{ path('order_edit',{order_id:order.id}) }}">
+                                <i class="fa fa-pencil"></i>
+                                {{ order.createdAt|date('d/m/Y') }} {{ order.reference }}
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <i class="fa fa-circle"></i>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if user.customer and user.customer.depositSales|length>0 %}
+                        {% for depositSale in user.customer.depositSales %}
+                            <a class="btn btn-sm btn-secondary" role="button" href="{{ path('depositSale_edit',{depositsale_id:depositSale.id}) }}">
+                                <i class="fa fa-pencil"></i>
+                                {{ depositSale.product.brand.name }} {{ depositSale.product.name }}
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <i class="fa fa-circle"></i>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

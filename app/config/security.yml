@@ -1,0 +1,36 @@
+security:
+    session_fixation_strategy:  none
+    acl:
+        connection: default
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_CUSTOMER:    ROLE_USER
+        ROLE_ADMIN:       [ROLE_USER,ROLE_CUSTOMER]
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+            main:
+                pattern: ^/
+                form_login:
+                    provider: fos_userbundle
+                    login_path: fos_user_security_login
+                    check_path: fos_user_security_check
+                logout:
+                    path:   fos_user_security_logout
+                    invalidate_session: false
+                anonymous:    true
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/change-password, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/order, role: ROLE_CUSTOMER }
+        - { path: ^/store/, role: ROLE_ADMIN }
+        - { path: ^/app/, role: ROLE_ADMIN }
