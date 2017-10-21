@@ -37,7 +37,7 @@ class MenuBuilder
             ->getQuery()
             ->getResult()
         ;
-
+/*
         $emptyCategories = $this->em->createQueryBuilder()
             ->from('LilWorksStoreBundle:Category','c')
             ->select('c.id')
@@ -46,7 +46,7 @@ class MenuBuilder
             ->getQuery()
             ->getArrayResult()
             ;
-
+*/
         $countProductsInCategory = $this->em->createQueryBuilder()
             ->select('c.id,p.isPublished,c.isPublished,b.isPublished,COUNT(p) as pcount')
             ->from('LilWorksStoreBundle:Category','c')
