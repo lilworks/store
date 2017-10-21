@@ -42,7 +42,7 @@ twig:
         lilworks_store_param_loader: '@lilworks.store.paramLoader'
         js_vars: '@app.js_vars'
     form_themes:
-         - form/bootstrap_4_layout.html.twig
+         - Form/bootstrap_4_layout.html.twig
          - LexikFormFilterBundle:Form:form_div_layout.html.twig
 
 # Doctrine Configuration
