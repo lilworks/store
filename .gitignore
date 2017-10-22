@@ -1,6 +1,7 @@
 app/config/parameters.yml
 app/config/parameters.yml.safe
 src/LilWorks/StoreBundle/Resources/config/parameters/syncro.yml
+src/LilWorks/StoreBundle/Resources/config/config.yml
 build/
 phpunit.xml
 var/*
