@@ -1,21 +1,14 @@
 <?php
-
 namespace LilWorks\StoreBundle\Controller;
 
-use AppBundle\Entity\User;
-use Database\Query\Grammars\Grammar;
+
 use Database\Query\Grammars\MySqlGrammar;
 use PDO;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Yaml\Yaml;
-use Symfony\Component\Config\Loader\LoaderResolver;
-use Symfony\Component\Config\Loader\DelegatingLoader;
-use LilWorks\StoreBundle\Loader\YamlSyncroLoader;
-use Ijanki\Bundle\FtpBundle\Exception\FtpException;
-use Symfony\Component\Finder\Finder;
+
 
 use DbSync\DbSync;
 use DbSync\Transfer\Transfer;
@@ -65,6 +58,8 @@ class SyncroController extends Controller
         // if offline first need to retreive stock from online
         $onlineDestockings = $emRemote->getRepository("LilWorksStoreBundle:OnlineDestocking")->findAll();
         foreach( $onlineDestockings as $onlineDestocking  ){
+
+
             $q  = $onlineDestocking->getOrderProduct()->getQuantity();
             $p = $onlineDestocking->getOrderProduct()->getProduct();
 

@@ -109,6 +109,7 @@ doctrine:
             distant:
                 connection: distant
                 mappings:
+                    AppBundle: ~
                     LilWorksStoreBundle: ~
             import:
                 connection: import

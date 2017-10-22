@@ -47,11 +47,21 @@
       <file leaf-file-name="SyncroController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/SyncroController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.125" vertical-offset="735" max-vertical-offset="4335">
-              <caret line="78" column="16" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="16" />
+            <state vertical-scroll-proportion="-26.25" vertical-offset="375" max-vertical-offset="4260">
+              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
               <folding>
-                <element signature="e#51#77#0#PHP" expanded="true" />
+                <element signature="e#51#92#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6722151" vertical-offset="1140" max-vertical-offset="6150">
+              <caret line="111" column="20" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -59,17 +69,17 @@
       <file leaf-file-name="OnlineDestocking.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/OnlineDestocking.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-27.166666" vertical-offset="953" max-vertical-offset="1725">
+            <state vertical-scroll-proportion="-66.875" vertical-offset="0" max-vertical-offset="1725">
               <caret line="108" column="4" selection-start-line="108" selection-start-column="4" selection-end-line="108" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.2972259" vertical-offset="225" max-vertical-offset="3420">
+            <state vertical-scroll-proportion="9.375" vertical-offset="225" max-vertical-offset="3420">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -89,7 +99,7 @@
       <file leaf-file-name="OrdersProducts.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/OrdersProducts.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="23.1" vertical-offset="1230" max-vertical-offset="7260">
+            <state vertical-scroll-proportion="17.7" vertical-offset="960" max-vertical-offset="7260">
               <caret line="5" column="9" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="9" />
               <folding />
             </state>
@@ -109,7 +119,7 @@
       <file leaf-file-name="Syncro.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/Syncro.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.875" vertical-offset="11370" max-vertical-offset="12180">
+            <state vertical-scroll-proportion="-201.25" vertical-offset="6705" max-vertical-offset="12180">
               <caret line="797" column="0" selection-start-line="797" selection-start-column="0" selection-end-line="806" selection-end-column="0" />
               <folding>
                 <marker date="1506934409000" expanded="true" signature="2239:2518" placeholder="SELECT o FRO..LilWorksStoreBundle..." />
@@ -129,16 +139,6 @@
                 <marker date="1506934409000" expanded="true" signature="24484:24675" placeholder="SELECT fu.id..fos_user..." />
                 <marker date="1506934409000" expanded="true" signature="24722:24910" placeholder="SELECT fu.id..fos_user..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Table.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/mrjgreen/db-sync/src/Table.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.52" vertical-offset="439" max-vertical-offset="5070">
-              <caret line="54" column="37" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -201,7 +201,6 @@
         <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/Basket/small.html.twig" />
         <option value="$PROJECT_DIR$/app/config/security.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/EventListener/LoginListener.php" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/Basket.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Session.php" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Controller/SiteController.php" />
@@ -219,8 +218,9 @@
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Syncro/index.html.twig" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/Product.php" />
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/SyncroController.php" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/OnlineDestocking.php" />
+        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/SyncroController.php" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
       </list>
     </option>
   </component>
@@ -1407,7 +1407,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23175965" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23175965" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920793" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1779,14 +1779,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3681592" vertical-offset="724" max-vertical-offset="6135">
-          <caret line="68" column="16" selection-start-line="68" selection-start-column="12" selection-end-line="68" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/PDO.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33289126" vertical-offset="9919" max-vertical-offset="20430">
@@ -1827,9 +1819,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Syncro/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.375" vertical-offset="0" max-vertical-offset="600">
+          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/Order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="35.0" vertical-offset="840" max-vertical-offset="10350">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="9.375" vertical-offset="225" max-vertical-offset="3420">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/OrdersProducts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="17.7" vertical-offset="960" max-vertical-offset="7260">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/Product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="18990">
+          <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/Syncro.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.875" vertical-offset="11370" max-vertical-offset="12180">
+        <state vertical-scroll-proportion="-201.25" vertical-offset="6705" max-vertical-offset="12180">
           <caret line="797" column="0" selection-start-line="797" selection-start-column="0" selection-end-line="806" selection-end-column="0" />
           <folding>
             <marker date="1506934409000" expanded="true" signature="2239:2518" placeholder="SELECT o FRO..LilWorksStoreBundle..." />
@@ -1852,60 +1884,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Syncro/index.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/OnlineDestocking.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.375" vertical-offset="0" max-vertical-offset="600">
-          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/Product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="18990">
-          <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+        <state vertical-scroll-proportion="-66.875" vertical-offset="0" max-vertical-offset="1725">
+          <caret line="108" column="4" selection-start-line="108" selection-start-column="4" selection-end-line="108" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/SyncroController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.125" vertical-offset="735" max-vertical-offset="4335">
-          <caret line="78" column="16" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="16" />
+        <state vertical-scroll-proportion="-26.25" vertical-offset="375" max-vertical-offset="4260">
+          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding>
-            <element signature="e#51#77#0#PHP" expanded="true" />
+            <element signature="e#51#92#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/OrdersProducts.php">
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="23.1" vertical-offset="1230" max-vertical-offset="7260">
-          <caret line="5" column="9" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/OnlineDestocking.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-27.166666" vertical-offset="953" max-vertical-offset="1725">
-          <caret line="108" column="4" selection-start-line="108" selection-start-column="4" selection-end-line="108" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/Order.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="35.0" vertical-offset="840" max-vertical-offset="10350">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.2972259" vertical-offset="225" max-vertical-offset="3420">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.6722151" vertical-offset="1140" max-vertical-offset="6150">
+          <caret line="111" column="20" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
           <folding />
         </state>
       </provider>
