@@ -1,4 +1,0 @@
-parameters:
-    context: offline
-    mode: master
-    currency: EUR
