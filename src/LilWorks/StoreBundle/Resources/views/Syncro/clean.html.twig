@@ -2,14 +2,16 @@
 
 {% block body %}
     <h1>
-        {% trans %}lilworks.storebundle.product.cleanpicturefolder{% endtrans %}
+        {% trans %}storebundle.product.cleanpicturefolder{% endtrans %}
     </h1>
 
 
 
 
     {% for k,removedFiles in done %}
+
         <h2>{{ k }}</h2>
+
         <ul>
         {% transchoice removedFiles|length %}
         {0} no file removed|{1} one file removed|]1,Inf[ %count% files removed

@@ -2,8 +2,32 @@ syncro_index:
     path:     /
     defaults: { _controller: "LilWorksStoreBundle:Syncro:index" }
     methods:  GET
-
 syncro_cleanentityfolder:
     path:     /cleanentityfolder
     defaults: { _controller: "LilWorksStoreBundle:Syncro:cleanEntityFolder" }
-    methods:  [GET, POST]
+    methods:  GET
+syncro_stock:
+    path:     /stock
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:stock" }
+    methods:  GET
+syncro_product:
+    path:     /product
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:product" }
+    methods:  GET
+syncro_user:
+    path:     /user
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:user" }
+    methods:  GET
+syncro_customer:
+    path:     /customer
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:customer" }
+    methods:  GET
+syncro_text:
+    path:     /text
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:text" }
+    methods:  GET
+syncro_all:
+    path:     /all
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:all" }
+    methods:  GET
+

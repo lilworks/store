@@ -23,6 +23,9 @@ class Product
         $this->tag = $sanitizer->sanitize($this->getName());
         if(!$this->priceOnline)
             $this->priceOnline = $this->priceOffline;
+
+        if($this->stock < 0)
+            $this->stock = 0;
     }
 
     /**

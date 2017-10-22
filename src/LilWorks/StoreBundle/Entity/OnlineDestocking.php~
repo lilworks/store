@@ -31,8 +31,8 @@ class OnlineDestocking
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\OrdersProducts", inversedBy="onlineDestocking" )
-     * @ORM\JoinColumn(name="product", referencedColumnName="id",nullable=false)
+     * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\OrdersProducts")
+     * @ORM\JoinColumn(name="orderProduct", referencedColumnName="id")
      */
     private $orderProduct;
 
@@ -44,6 +44,7 @@ class OnlineDestocking
      * @ORM\Column(name="destockedAt", type="datetime",nullable=true)
      */
     private $destockedAt;
+
 
 
 
@@ -90,7 +91,7 @@ class OnlineDestocking
      *
      * @return OnlineDestocking
      */
-    public function setOrderProduct(\LilWorks\StoreBundle\Entity\OrdersProducts $orderProduct)
+    public function setOrderProduct(\LilWorks\StoreBundle\Entity\OrdersProducts $orderProduct = null)
     {
         $this->orderProduct = $orderProduct;
 

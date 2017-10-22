@@ -11,11 +11,12 @@ class StoreBuilder implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    private $factory;
-
 
     public function build(FactoryInterface $factory ,array $options)
     {
+
+        $this->container->getParameter('mode');
+        $this->container->getParameter('context');
 
         $this->requestStack = $this->container->get('request_stack');
 
@@ -80,6 +81,10 @@ class StoreBuilder implements ContainerAwareInterface
         }
 
         $this->factory = $factory;
+
+
+
+
         $menu = $this->factory->createItem('root',array(
                 'childrenAttributes'=>$attr[0]['child'],
         ));
@@ -365,6 +370,9 @@ class StoreBuilder implements ContainerAwareInterface
         );
 
 
+
+
+
         //////// END PRODUCT
         // level 0
         $paymentMenuCatPortal = $menu->addChild('storebundle.menu.cat.payment.portal', array(
@@ -456,6 +464,9 @@ class StoreBuilder implements ContainerAwareInterface
             )
         );
         //////// END Shipping
+
+
+
         // level 0
         $configMenuCatPortal = $menu->addChild('storebundle.menu.cat.config.portal', array(
             'route' => 'portal_config',

@@ -6,14 +6,9 @@ use AppBundle\Entity\User;
 use Database\Query\Grammars\Grammar;
 use Database\Query\Grammars\MySqlGrammar;
 use PDO;
-use Database\Connection;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use DbSync\DbSync;
-use DbSync\Transfer\Transfer;
-use DbSync\Hash\ShaHash;
-use DbSync\Table;
-use DbSync\ColumnConfiguration;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Config\Loader\LoaderResolver;
@@ -22,6 +17,12 @@ use LilWorks\StoreBundle\Loader\YamlSyncroLoader;
 use Ijanki\Bundle\FtpBundle\Exception\FtpException;
 use Symfony\Component\Finder\Finder;
 
+use DbSync\DbSync;
+use DbSync\Transfer\Transfer;
+use DbSync\Hash\ShaHash;
+use DbSync\Table;
+use DbSync\ColumnConfiguration;
+use Database\Connection;
 
 class SyncroController extends Controller
 {
@@ -51,9 +52,87 @@ class SyncroController extends Controller
         ));
     }
 
+
+    public function stockAction()
+    {
+
+
+
+        $emLocal = $this->getDoctrine()->getEntityManager('default');
+        $emRemote = $this->getDoctrine()->getEntityManager('distant');
+
+
+        // if offline first need to retreive stock from online
+        $onlineDestockings = $emRemote->getRepository("LilWorksStoreBundle:OnlineDestocking")->findAll();
+        foreach( $onlineDestockings as $onlineDestocking  ){
+            $q  = $onlineDestocking->getOrderProduct()->getQuantity();
+            $p = $onlineDestocking->getOrderProduct()->getProduct();
+
+            $product = $emLocal->getRepository("LilWorksStoreBundle:Product")->find($p->getId());
+            $product->setStock($product->getStock() - ($q) );
+
+            $emRemote->remove($onlineDestocking);
+            $emLocal->persist($product);
+
+        }
+        $emRemote->flush();
+        $emLocal->flush();
+
+
+
+        $paramsLocal = $emLocal->getConnection()->getParams();
+        $paramsRemote = $emRemote->getConnection()->getParams();
+
+
+        $pdoLocal = new PDO('mysql:dbname='.$paramsLocal["dbname"].';host='.$paramsLocal["host"].';port='.$paramsLocal["port"].';',$paramsLocal["user"],$paramsLocal["password"]);
+        $pdoRemote = new PDO('mysql:dbname='.$paramsRemote["dbname"].';host='.$paramsRemote["host"].';port='.$paramsRemote["port"].';',$paramsRemote["user"],$paramsRemote["password"]);
+
+        $grammar = new MySqlGrammar();
+        $localConnection = new Connection($pdoLocal,$grammar);
+        $remoteConnection = new Connection($pdoRemote,$grammar);
+
+
+
+        $sync = new DbSync(new Transfer(new ShaHash(), 1024, 8));
+
+        $sync->dryRun(true);
+
+
+        $sourceTable = new Table($localConnection, $paramsLocal["dbname"], 'lilworks_product');
+        $targetTable = new Table($remoteConnection, $paramsRemote["dbname"], 'lilworks_product');
+
+        // if you only want specific columns
+        $columnConfig = new ColumnConfiguration(array('stock'), array());
+
+        $result = $sync->sync($sourceTable, $targetTable, $columnConfig);
+
+
+
+
+        // after that update online
+
+        $translator = $this->get('translator');
+        $seoPage = $this->get('sonata.seo.page');
+        $seoPage->setTitle($translator->trans('storebundle.htmltitle.syncro.stock'));
+
+        return $this->render('LilWorksStoreBundle:Syncro:index.html.twig', array(
+            'result'=>$result
+
+        ));
+
+
+    }
     public function indexAction()
     {
 
+
+        $translator = $this->get('translator');
+        $seoPage = $this->get('sonata.seo.page');
+        $seoPage->setTitle($translator->trans('storebundle.htmltitle.syncro.index'));
+
+        return $this->render('LilWorksStoreBundle:Syncro:index.html.twig',array(
+
+        ));
 
 
        #$this->get('app.syncro')->getNewRemoteOrders();
@@ -198,13 +277,7 @@ class SyncroController extends Controller
 
 die();
 */
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.syncro.index'));
 
-        return $this->render('LilWorksStoreBundle:Syncro:index.html.twig',array(
-
-        ));
     }
 
 }

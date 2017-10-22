@@ -2,7 +2,33 @@
 
 {% block body %}
 
+    <h1>
+        {% trans %}storebundle.product.syncro{% endtrans %}
+    </h1>
+
+    <ul class="list-inline">
+        <li>
+            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_stock') }}"><i class="fa fa-cubes"></i> {% trans %}storebundle.product.syncro.stock{% endtrans %}</a>
+        </li>
+        <li>
+            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_product') }}"><i class="fa fa-cube"></i> {% trans %}storebundle.product.syncro.product{% endtrans %}</a>
+        </li>
+        <li>
+            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_customer') }}"><i class="fa fa-handshake-o"></i> {% trans %}storebundle.product.syncro.customer{% endtrans %}</a>
+        </li>
+        <li>
+            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_user') }}"><i class="fa fa-user"></i> {% trans %}storebundle.product.syncro.user{% endtrans %}</a>
+        </li>
+        <li>
+            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_text') }}"><i class="fa fa-file-text"></i> {% trans %}storebundle.product.syncro.text{% endtrans %}</a>
+        </li>
+        <li>
+            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_all') }}"><i class="fa fa-th"></i> {% trans %}storebundle.product.syncro.all{% endtrans %}</a>
+        </li>
+    </ul>
 
 
-
+    {% if result is defined %}
+        {{ dump(result) }}
+    {% endif %}
 {% endblock %}
