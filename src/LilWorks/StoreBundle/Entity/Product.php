@@ -62,7 +62,7 @@ class Product
     private $brand;
 
     /**
-     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\OrdersProducts", mappedBy="product" )
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\OrdersProducts", mappedBy="product" ,cascade={"remove","persist"})
      */
     private $ordersProducts;
 
@@ -88,14 +88,15 @@ class Product
     private $warrantiesOnline;
 
     /**
-     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Product", mappedBy="relatedProducts")
+     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Product", mappedBy="relatedProducts",cascade={"remove","persist"})
      */
     private $productsRelated;
     /**
-     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Product", inversedBy="productsRelated")
+     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Product", inversedBy="productsRelated",cascade={"remove","persist"})
      * @ORM\JoinTable(name="lilworks_products_related_products",
-     *      joinColumns={@ORM\JoinColumn(name="product", referencedColumnName="id")},
+     *      joinColumns={ @ORM\JoinColumn(name="product", referencedColumnName="id", onDelete="CASCADE" , nullable=true )},
      *      inverseJoinColumns={@ORM\JoinColumn(name="related_product", referencedColumnName="id")}
+     *
      *      )
      */
     private $relatedProducts;

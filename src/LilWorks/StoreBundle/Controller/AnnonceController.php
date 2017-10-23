@@ -6,6 +6,8 @@ use LilWorks\StoreBundle\Entity\Annonce;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use LilWorks\StoreBundle\Filter\AnnonceFilterType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * Annonce controller.
@@ -89,8 +91,7 @@ class AnnonceController extends Controller
     }
 
     /**
-     * Finds and displays a annonce entity.
-     *
+     * @ParamConverter("annonce", options={"mapping": {"annonce_id"   : "id"}})
      */
     public function showAction(Annonce $annonce)
     {
@@ -105,8 +106,7 @@ class AnnonceController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing annonce entity.
-     *
+     * @ParamConverter("annonce", options={"mapping": {"annonce_id"   : "id"}})
      */
     public function editAction(Request $request, Annonce $annonce)
     {
@@ -126,13 +126,12 @@ class AnnonceController extends Controller
 
         return $this->render('LilWorksStoreBundle:Annonce:edit.html.twig', array(
             'annonce' => $annonce,
-            'edit_form' => $editForm->createView()
+            'form' => $editForm->createView()
         ));
     }
 
     /**
-     * Deletes a annonce entity.
-     *
+     * @ParamConverter("annonce", options={"mapping": {"annonce_id"   : "id"}})
      */
     public function deleteAction(Request $request,Annonce $annonce)
     {
@@ -145,9 +144,8 @@ class AnnonceController extends Controller
         if ( !$referer || is_null($referer) ) {
             return $this->redirectToRoute('annonce_index');
         } else {
-            return $this->redirectToRoute($referer);
+            return $this->redirect($referer);
         }
-
 
     }
 

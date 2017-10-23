@@ -387,3 +387,4 @@ storebundle.menu.docfile: documentations
 storebundle.menu.paymentmethod: paiements
 storebundle.menu.annonce: annonces
 storebundle.menu.annonce.new: 'nouvelle annonce'
+storebundle.syncro.onlinedestockings.explain: 'Les produits achetés lors de commandes sur la boutique en ligne sont décomptés sur la base de données de la boutique en ligne. Pour être pris en compte dans la gestion, ils doivent être rapatriés.'

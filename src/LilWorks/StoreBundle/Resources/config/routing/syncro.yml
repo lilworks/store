@@ -10,6 +10,28 @@ syncro_stock:
     path:     /stock
     defaults: { _controller: "LilWorksStoreBundle:Syncro:stock" }
     methods:  GET
+syncro_brand:
+    path:     /brand
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:brand" }
+    methods:  GET
+
+syncro_category:
+    path:     /category
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:category" }
+    methods:  GET
+syncro_supercategory:
+    path:     /supercategory
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:supercategory" }
+    methods:  GET
+
+syncro_onlinedestocking:
+    path:     /onlinedestocking
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:onlinedestocking" }
+    methods:  GET
+syncro_annonce:
+    path:     /annonce
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:annonce" }
+    methods:  GET
 syncro_product:
     path:     /product
     defaults: { _controller: "LilWorksStoreBundle:Syncro:product" }

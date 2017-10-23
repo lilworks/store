@@ -100,7 +100,7 @@ class ProductController extends Controller
             $em->persist($product);
             $em->flush();
 
-            return $this->redirectToRoute('product_show', array('id' => $product->getId()));
+            return $this->redirectToRoute('product_show', array('product_id' => $product->getId()));
         }
 
         $translator = $this->get('translator');
@@ -164,7 +164,7 @@ class ProductController extends Controller
             $em->persist($product);
             $em->flush();
 
-            return $this->redirectToRoute('product_edit', array('id' => $product->getId()));
+            return $this->redirectToRoute('product_edit', array('product_id' => $product->getId()));
         }
         $translator = $this->get('translator');
         $seoPage = $this->get('sonata.seo.page');

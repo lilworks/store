@@ -46,6 +46,8 @@ class SyncroController extends Controller
     }
 
 
+
+
     public function stockAction()
     {
 
@@ -117,17 +119,89 @@ class SyncroController extends Controller
 
 
     }
+
+    public function productAction()
+    {
+        $syncro = $this->get('app.syncro');
+        $products = $syncro->products(false);
+
+        return $this->redirectToRoute('syncro_index');
+    }
+
+
+    public function annonceAction()
+    {
+        $syncro = $this->get('app.syncro');
+        $annonces = $syncro->annonces(false);
+        return $this->redirectToRoute('syncro_index');
+    }
+
+    public function textAction()
+    {
+        $syncro = $this->get('app.syncro');
+        $annonces = $syncro->texts(false);
+        return $this->redirectToRoute('syncro_index');
+    }
+    public function brandAction()
+    {
+        $syncro = $this->get('app.syncro');
+        $annonces = $syncro->brands(false);
+        return $this->redirectToRoute('syncro_index');
+    }
+
+
+    public function categoryAction()
+    {
+        $syncro = $this->get('app.syncro');
+        $annonces = $syncro->categories(false);
+        return $this->redirectToRoute('syncro_index');
+    }
+
+
+    public function supercategoryAction()
+    {
+        $syncro = $this->get('app.syncro');
+        $annonces = $syncro->supercategories(false);
+        return $this->redirectToRoute('syncro_index');
+    }
+
+
+
     public function indexAction()
     {
+
+        $syncro = $this->get('app.syncro');
+
+        $products = $syncro->products(true);
+        $brands = $syncro->brands(true);
+        $categories = $syncro->categories(true);
+        $supercategories = $syncro->supercategories(true);
+        $texts = $syncro->texts(true);
+        $annonces = $syncro->annonces(true);
+
 
 
         $translator = $this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
         $seoPage->setTitle($translator->trans('storebundle.htmltitle.syncro.index'));
 
-        return $this->render('LilWorksStoreBundle:Syncro:index.html.twig',array(
+        /*
+         if( FALSE === $this->getDoctrine()->getEntityManager('distant')->getConnection()->isConnected() ){
+            return $this->render('LilWorksStoreBundle:Syncro:no-connection.html.twig',array());
+        }
+*/
 
+        return $this->render('LilWorksStoreBundle:Syncro:index.html.twig',array(
+            'onlineDestockings'=>$this->getDoctrine()->getEntityManager('distant')->getRepository("LilWorksStoreBundle:OnlineDestocking")->findAll(),
+            'products'=>$products,
+            'texts'=>$texts,
+            'brands'=>$brands,
+            'categories'=>$categories,
+            'supercategories'=>$supercategories,
+            'annonces'=>$annonces,
+            'flashBag'=>$this->get('session')->getFlashBag()->get('syncro')
         ));
+
 
 
        #$this->get('app.syncro')->getNewRemoteOrders();

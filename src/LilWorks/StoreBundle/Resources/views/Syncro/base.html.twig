@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        {% trans %}storebundle.syncro.list{% endtrans %}
+    </h1>
+
+
+
+    {% if flashBag|length > 0 %}
+        <div class="alert alert-info" role="alert">
+            <h3>{{ flashBag[0]['name']|trans }}</h3>
+            <h4>{% trans %}storebundle.syncro.db{% endtrans %}</h4>
+            {% if  flashBag[0]['dbResult'] is defined  and flashBag[0]['dbResult'].getRowsTransferred > 0 %}
+                {% trans %}storebundle.syncro.db.syncronized{% endtrans %}
+            {% else %}
+                {% trans %}storebundle.syncro.db.nothingtodo{% endtrans %}
+            {% endif %}
+            <h4>{% trans %}storebundle.syncro.ftp{% endtrans %}</h4>
+            {% if  flashBag[0]['ftpResult'] is defined   %}
+                <ul>
+                    <li>{{ 'storebundle.syncro.ftp.deletedUnusedFiles %count%'|trans({'%count%':flashBag[0]['ftpResult']['deletedUnusedFiles']|length }) }}</li>
+                    <li>{{ 'storebundle.syncro.ftp.alreadyInFiles %count%'|trans({'%count%':flashBag[0]['ftpResult']['alreadyInFiles']|length }) }}</li>
+                    <li>{{ 'storebundle.syncro.ftp.uploadedFiles %count%'|trans({'%count%':flashBag[0]['ftpResult']['uploadedFiles']|length }) }}</li>
+                </ul>
+            {% endif %}
+
+        </div>
+    {% endif %}
+    {% block syncro %}
+    {% endblock %}
+
+
+
+
+{% endblock %}

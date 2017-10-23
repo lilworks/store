@@ -137,17 +137,7 @@
             {{ form_row(form.height) }}
             {{ form_row(form.length) }}
             {{ form_row(form.weight) }}
-
-            <h3>{% trans %}docfiles{% endtrans %}</h3>
-            <ul class="docfiles list-inline " id="target" data-prototype="{{ form_widget(form.docfiles.vars.prototype)|e('html_attr') }}">
-                {% for docfile in form.docfiles %}
-                    <li class="docfile list-inline-item">
-                        {{ docfile.vars.value.docName }}
-                        {{ form_row(docfile) }}
-                    </li>
-                {% endfor %}
-            </ul>
-            {{ form_widget(form.docfiles) }}
+            {{ form_row(form.docfiles) }}
         </div>
         <div class="tab-pane" id="pictures" role="tabpanel">
 
@@ -167,15 +157,7 @@
         <div class="tab-pane" id="more" role="tabpanel">
             {{ form_row(form.isReviewable) }}
             {{ form_row(form.relatedProducts) }}
-            <h3>{% trans %}tags{% endtrans %}</h3>
-            <ul class="tags list-inline " id="target" data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">
-                {% for tag in form.tags %}
-                    <li class="tag list-inline-item">
-                        {{ form_row(tag) }}
-                    </li>
-                {% endfor %}
-            </ul>
-            {{ form_widget(form.tags) }}
+            {{ form_row(form.tags) }}
         </div>
     </div>
 

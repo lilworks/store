@@ -12,7 +12,7 @@ services:
 
     app.syncro:
             class: AppBundle\Service\Syncro
-            arguments: ['@doctrine.orm.default_entity_manager','@doctrine.orm.online_entity_manager','@doctrine.orm.distant_entity_manager']
+            arguments: ['@service_container', '@doctrine.orm.default_entity_manager','@doctrine.orm.distant_entity_manager']
 
     app.password_resetting:
         class: AppBundle\EventListener\PasswordResettingListener

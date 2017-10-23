@@ -1,34 +1,200 @@
-{% extends 'base.html.twig' %}
+{% extends 'LilWorksStoreBundle:Syncro:base.html.twig' %}
 
-{% block body %}
-
-    <h1>
-        {% trans %}storebundle.product.syncro{% endtrans %}
-    </h1>
-
-    <ul class="list-inline">
-        <li>
-            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_stock') }}"><i class="fa fa-cubes"></i> {% trans %}storebundle.product.syncro.stock{% endtrans %}</a>
-        </li>
-        <li>
-            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_product') }}"><i class="fa fa-cube"></i> {% trans %}storebundle.product.syncro.product{% endtrans %}</a>
-        </li>
-        <li>
-            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_customer') }}"><i class="fa fa-handshake-o"></i> {% trans %}storebundle.product.syncro.customer{% endtrans %}</a>
-        </li>
-        <li>
-            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_user') }}"><i class="fa fa-user"></i> {% trans %}storebundle.product.syncro.user{% endtrans %}</a>
-        </li>
-        <li>
-            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_text') }}"><i class="fa fa-file-text"></i> {% trans %}storebundle.product.syncro.text{% endtrans %}</a>
-        </li>
-        <li>
-            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_all') }}"><i class="fa fa-th"></i> {% trans %}storebundle.product.syncro.all{% endtrans %}</a>
-        </li>
-    </ul>
+{% block syncro %}
 
 
-    {% if result is defined %}
-        {{ dump(result) }}
-    {% endif %}
+
+    <div class="card-group">
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                    {% trans %}storebundle.syncro.onlinedestocking{% endtrans %}
+                </h4>
+                <div class="card-text">
+
+                    {% if onlineDestockings|length>0 %}
+                        <ul>
+                            {% for onlineDestocking in onlineDestockings %}
+                                <li>
+                                    <a role="button" class="btn btn-sm btn-secondary" href="#">
+                                        {{ onlineDestocking.orderProduct.order.reference }}
+                                        {{ onlineDestocking.orderProduct.product.brand.name }}
+                                        {{ onlineDestocking.orderProduct.product.name }}  x {{ onlineDestocking.orderProduct.quantity }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="alert alert-danger" role="alert">
+                            {% trans %}storebundle.syncro.onlinedestockings.ko{% endtrans %}
+                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_onlinedestocking') }}">
+                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
+                                {% trans %}storebundle.syncro.syncronize{% endtrans %}
+                            </a>
+                        </div>
+
+                    {% else %}
+                        <div class="alert alert-success" role="alert">
+                            {% trans %}storebundle.syncro.onlinedestockings.ok{% endtrans %}
+                        </div>
+                    {% endif %}
+
+
+                    <p class="card-text">
+                        {% trans %}storebundle.syncro.onlinedestockings.explain{% endtrans %}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-cube" aria-hidden="true"></i>
+                    {% trans %}storebundle.syncro.product{% endtrans %}
+                </h4>
+                <div class="card-text">
+                    {% if products.getRowsTransferred == 0 %}
+                <div class="alert alert-success" role="alert">
+                    {% trans %}storebundle.syncro.products.ok{% endtrans %}
+                </div>
+                {% else %}
+                    <div class="alert alert-danger" role="alert">
+                        {% trans %}storebundle.syncro.products.ko{% endtrans %}
+                        <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_product') }}">
+                            <i class="fa fa-external-link-square" aria-hidden="true"></i>
+                            {% trans %}storebundle.syncro.syncronize{% endtrans %}
+                        </a>
+
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-copyright" aria-hidden="true"></i>
+                    {% trans %}storebundle.syncro.brand{% endtrans %}
+                </h4>
+                <div class="card-text">
+                    {% if brands.getRowsTransferred == 0 %}
+                        <div class="alert alert-success" role="alert">
+                            {% trans %}storebundle.syncro.brands.ok{% endtrans %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger" role="alert">
+                            {% trans %}storebundle.syncro.brands.ko{% endtrans %}
+                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_brand') }}">
+                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
+                                {% trans %}storebundle.syncro.syncronize{% endtrans %}
+                            </a>
+
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-bullseye" aria-hidden="true"></i>
+                    {% trans %}storebundle.syncro.category{% endtrans %}
+                </h4>
+                <div class="card-text">
+                    {% if categories.getRowsTransferred == 0 %}
+                        <div class="alert alert-success" role="alert">
+                            {% trans %}storebundle.syncro.categories.ok{% endtrans %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger" role="alert">
+                            {% trans %}storebundle.syncro.categories.ko{% endtrans %}
+                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_category') }}">
+                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
+                                {% trans %}storebundle.syncro.syncronize{% endtrans %}
+                            </a>
+
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-object-group" aria-hidden="true"></i>
+                    {% trans %}storebundle.syncro.supercategory{% endtrans %}
+                </h4>
+                <div class="card-text">
+                    {% if supercategories.getRowsTransferred == 0 %}
+                        <div class="alert alert-success" role="alert">
+                            {% trans %}storebundle.syncro.supercategories.ok{% endtrans %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger" role="alert">
+                            {% trans %}storebundle.syncro.supercategories.ko{% endtrans %}
+                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_supercategory') }}">
+                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
+                                {% trans %}storebundle.syncro.syncronize{% endtrans %}
+                            </a>
+
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                    {% trans %}storebundle.syncro.text{% endtrans %}
+                </h4>
+                <div class="card-text">
+                    {% if texts.getRowsTransferred == 0 %}
+                        <div class="alert alert-success" role="alert">
+                            {% trans %}storebundle.syncro.texts.ok{% endtrans %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger" role="alert">
+                            {% trans %}storebundle.syncro.texts.ko{% endtrans %}
+                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_text') }}">
+                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
+                                {% trans %}storebundle.syncro.syncronize{% endtrans %}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                    {% trans %}storebundle.syncro.annonce{% endtrans %}
+                </h4>
+                <div class="card-text">
+                    {% if annonces.getRowsTransferred == 0 %}
+                        <div class="alert alert-success" role="alert">
+                            {% trans %}storebundle.syncro.annonces.ok{% endtrans %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger" role="alert">
+                            {% trans %}storebundle.syncro.annonces.ko{% endtrans %}
+                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_annonce') }}">
+                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
+                                {% trans %}storebundle.syncro.syncronize{% endtrans %}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
 {% endblock %}

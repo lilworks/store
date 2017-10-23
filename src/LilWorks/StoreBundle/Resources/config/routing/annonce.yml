@@ -4,7 +4,7 @@ annonce_index:
     methods:  [GET, POST]
 
 annonce_show:
-    path:     /{id}/show
+    path:     /{annonce_id}/show
     defaults: { _controller: "LilWorksStoreBundle:Annonce:show" }
     methods:  GET
 
@@ -14,11 +14,11 @@ annonce_new:
     methods:  [GET, POST]
 
 annonce_edit:
-    path:     /{id}/edit
+    path:     /{annonce_id}/edit
     defaults: { _controller: "LilWorksStoreBundle:Annonce:edit" }
     methods:  [GET, POST]
 
 annonce_delete:
-    path:     /{id}/delete
+    path:     /{annonce_id}/delete
     defaults: { _controller: "LilWorksStoreBundle:Annonce:delete" }
     methods:  [GET, POST]

@@ -1,26 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+
     <h1>
-        {% trans %}lilworks.storebundle.annonce.new{% endtrans %}
+        {{ 'appbundle.annonce.new'|trans }}
     </h1>
 
-    <div class="lilworks_list_showAction">
-        <ul class="list-inline">
-            <li class="list-inline-item">
-                <a href="{{ path('annonce_index') }}" class="btn btn-info btn-sm">
-                    <i class="fa fa-list"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
-                </a>
-            </li>
-        </ul>
+
+    <div id="content_menu">
+        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.config.portal','storebundle.menu.annonce'] , {context: 'content'}) %}
+        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
     </div>
+
+    {{ form_start(form) }}
+
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
 
     <div class="row">
         <div class="row-sm-10 offset-2">
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <input type="submit" class="btn  btn-primary" value="{% trans %}lilworks.storebundle.button.create{% endtrans %}" />
             {{ form_end(form) }}
         </div>
     </div>
+
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
+
+    {{ form_end(form) }}
+
 {% endblock %}
