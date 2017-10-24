@@ -15,7 +15,15 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class PaymentMethod
 {
+    /**
+     * @ORM\PreFlush()
+     */
+    public function preFlush()
+    {
+        if($this->updatedAt == null)
+            $this->updatedAt = new \DateTime();
 
+    }
     /**
      * @ORM\Id
      * @ORM\Column(type="integer",name="id")
@@ -78,7 +86,7 @@ class PaymentMethod
     private $pictureFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      *
      * @var string
      */

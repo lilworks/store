@@ -20,22 +20,22 @@ class BrandType extends AbstractType
 
             ->add('name',null,array(
                 'required'=>true,
-                'label'=>'lilworks.storebundle.name',
+                'label'=>'storebundle.name',
             ))
             ->add('isPublished',null,array(
-                'required'=>true,
-                'label'=>'lilworks.storebundle.ispublished',
+                #'required'=>true,
+                'label'=>'storebundle.ispublished',
             ))
             ->add('website',UrlType::class,array(
-                'label'=>'lilworks.storebundle.brand.website',
+                'label'=>'storebundle.brand.website',
                 'required'=>false
             ))
             ->add('pictureFile',FileType::class,array(
-                'label'=>'lilworks.storebundle.picture',
+                'label'=>'storebundle.picture',
                 'required'=>false
             ))
             ->add('products', EntityType::class, array(
-                'label'=>'lilworks.storebundle.products',
+                'label'=>'storebundle.products',
                 'class'    => 'LilWorksStoreBundle:Product' ,
                 'choice_label' => function ($obj) { return    $obj->getName() ; },
                 'query_builder' => function (EntityRepository $er) {
@@ -55,8 +55,8 @@ class BrandType extends AbstractType
                 )
             ))
             ->add('description',null,array(
-                'label'=>'lilworks.storebundle.description',
-                'attr' => ['class' => 'text-editor'],
+                'label'=>'storebundle.description',
+                'attr' => ['class' => 'editor-text'],
             ))
             ;
     }
@@ -67,7 +67,8 @@ class BrandType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'LilWorks\StoreBundle\Entity\Brand'
+            'data_class' => 'LilWorks\StoreBundle\Entity\Brand',
+            'csrf_protection' => false,
         ));
     }
 

@@ -104,7 +104,7 @@ class CategoryController extends Controller
             $em->persist($category);
             $em->flush();
 
-            return $this->redirectToRoute('category_show', array('id' => $category->getId()));
+            return $this->redirectToRoute('category_show', array('category_id' => $category->getId()));
         }
 
         $translator = $this->get('translator');
@@ -149,10 +149,10 @@ class CategoryController extends Controller
                     $product->addCategory($category);
                     $em->persist($product);
                 }
-
             }
+
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
+            return $this->redirectToRoute('category_edit', array('category_id' => $category->getId()));
         }
 
         $translator = $this->get('translator');

@@ -4,194 +4,81 @@
 
 
 
-    <div class="card-group">
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">
-                    <i class="fa fa-cubes" aria-hidden="true"></i>
-                    {% trans %}storebundle.syncro.onlinedestocking{% endtrans %}
-                </h4>
-                <div class="card-text">
 
-                    {% if onlineDestockings|length>0 %}
-                        <ul>
-                            {% for onlineDestocking in onlineDestockings %}
-                                <li>
-                                    <a role="button" class="btn btn-sm btn-secondary" href="#">
-                                        {{ onlineDestocking.orderProduct.order.reference }}
-                                        {{ onlineDestocking.orderProduct.product.brand.name }}
-                                        {{ onlineDestocking.orderProduct.product.name }}  x {{ onlineDestocking.orderProduct.quantity }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
+    <div class="row" >
+        {% for db in syncro %}
+        <div class="col-sm-4" >
+            <div class="card" style="margin-top: 5px;">
+                <div class="card-block">
+                    <h3 class="card-title">
+                        {% if db["icon"] is defined %}
+                            {% if db["icon"] is not iterable %}
+                                <i class="{{ db["icon"] }}"></i>
+                            {% else %}
+                                {% for i in db["icon"] %}
+                                    <i class="{{ i }}"></i>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                        {{ ('storebundle.synchro.'~db['name'])|trans }}
+                    </h3>
 
-                        <div class="alert alert-danger" role="alert">
-                            {% trans %}storebundle.syncro.onlinedestockings.ko{% endtrans %}
-                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_onlinedestocking') }}">
-                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
-                                {% trans %}storebundle.syncro.syncronize{% endtrans %}
-                            </a>
-                        </div>
-
-                    {% else %}
-                        <div class="alert alert-success" role="alert">
-                            {% trans %}storebundle.syncro.onlinedestockings.ok{% endtrans %}
-                        </div>
+                    {% if db["folder"] is defined %}
+                    <div class="card-text">
+                        <i class="fa fa-folder-open" aria-hidden="true"></i>
+                        {{ db["folder"] }}
+                    </div>
                     {% endif %}
 
 
-                    <p class="card-text">
-                        {% trans %}storebundle.syncro.onlinedestockings.explain{% endtrans %}
-                    </p>
 
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">
-                    <i class="fa fa-cube" aria-hidden="true"></i>
-                    {% trans %}storebundle.syncro.product{% endtrans %}
-                </h4>
-                <div class="card-text">
-                    {% if products.getRowsTransferred == 0 %}
-                <div class="alert alert-success" role="alert">
-                    {% trans %}storebundle.syncro.products.ok{% endtrans %}
-                </div>
-                {% else %}
-                    <div class="alert alert-danger" role="alert">
-                        {% trans %}storebundle.syncro.products.ko{% endtrans %}
-                        <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_product') }}">
+
+                    <div class="card-text">
+
+
+                        {% if db["syncro"] == true %}
+                            <div class="alert alert-success" role="alert">
+                                {% trans %}storebundle.syncro.issyncronized{% endtrans %}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-danger" role="alert">
+                                {% trans %}storebundle.syncro.products.ko{% endtrans %}
+                            </div>
+                        {% endif %}
+
+                    </div>
+                    {% if db["dependencies"] is defined %}
+                        {#
+                        <div class="card-text">
+                            <ul>
+                                {% for k,dependency in db["dependencies"]  %}
+                                    <li>
+                                        {{ dump(db['dStatus'][k]) }}
+                                        {% if db['dStatus'][k] == 'true' %}
+                                            <span style="color: green;"> {{ ('storebundle.synchro.'~dependency)|trans }}</span>
+                                        {% else %}
+                                            <span style="color: red;"> {{ ('storebundle.synchro.'~dependency)|trans }}</span>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        #}
+                    {% endif %}
+
+                    {% if db["syncro"] == false %}
+
+                        <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_action',{what:db['name']}) }}">
                             <i class="fa fa-external-link-square" aria-hidden="true"></i>
                             {% trans %}storebundle.syncro.syncronize{% endtrans %}
                         </a>
 
-                    </div>
-                {% endif %}
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">
-                    <i class="fa fa-copyright" aria-hidden="true"></i>
-                    {% trans %}storebundle.syncro.brand{% endtrans %}
-                </h4>
-                <div class="card-text">
-                    {% if brands.getRowsTransferred == 0 %}
-                        <div class="alert alert-success" role="alert">
-                            {% trans %}storebundle.syncro.brands.ok{% endtrans %}
-                        </div>
-                    {% else %}
-                        <div class="alert alert-danger" role="alert">
-                            {% trans %}storebundle.syncro.brands.ko{% endtrans %}
-                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_brand') }}">
-                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
-                                {% trans %}storebundle.syncro.syncronize{% endtrans %}
-                            </a>
-
-                        </div>
                     {% endif %}
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">
-                    <i class="fa fa-bullseye" aria-hidden="true"></i>
-                    {% trans %}storebundle.syncro.category{% endtrans %}
-                </h4>
-                <div class="card-text">
-                    {% if categories.getRowsTransferred == 0 %}
-                        <div class="alert alert-success" role="alert">
-                            {% trans %}storebundle.syncro.categories.ok{% endtrans %}
-                        </div>
-                    {% else %}
-                        <div class="alert alert-danger" role="alert">
-                            {% trans %}storebundle.syncro.categories.ko{% endtrans %}
-                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_category') }}">
-                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
-                                {% trans %}storebundle.syncro.syncronize{% endtrans %}
-                            </a>
-
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">
-                    <i class="fa fa-object-group" aria-hidden="true"></i>
-                    {% trans %}storebundle.syncro.supercategory{% endtrans %}
-                </h4>
-                <div class="card-text">
-                    {% if supercategories.getRowsTransferred == 0 %}
-                        <div class="alert alert-success" role="alert">
-                            {% trans %}storebundle.syncro.supercategories.ok{% endtrans %}
-                        </div>
-                    {% else %}
-                        <div class="alert alert-danger" role="alert">
-                            {% trans %}storebundle.syncro.supercategories.ko{% endtrans %}
-                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_supercategory') }}">
-                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
-                                {% trans %}storebundle.syncro.syncronize{% endtrans %}
-                            </a>
-
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">
-                    <i class="fa fa-file-text" aria-hidden="true"></i>
-                    {% trans %}storebundle.syncro.text{% endtrans %}
-                </h4>
-                <div class="card-text">
-                    {% if texts.getRowsTransferred == 0 %}
-                        <div class="alert alert-success" role="alert">
-                            {% trans %}storebundle.syncro.texts.ok{% endtrans %}
-                        </div>
-                    {% else %}
-                        <div class="alert alert-danger" role="alert">
-                            {% trans %}storebundle.syncro.texts.ko{% endtrans %}
-                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_text') }}">
-                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
-                                {% trans %}storebundle.syncro.syncronize{% endtrans %}
-                            </a>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">
-                    <i class="fa fa-bullhorn" aria-hidden="true"></i>
-                    {% trans %}storebundle.syncro.annonce{% endtrans %}
-                </h4>
-                <div class="card-text">
-                    {% if annonces.getRowsTransferred == 0 %}
-                        <div class="alert alert-success" role="alert">
-                            {% trans %}storebundle.syncro.annonces.ok{% endtrans %}
-                        </div>
-                    {% else %}
-                        <div class="alert alert-danger" role="alert">
-                            {% trans %}storebundle.syncro.annonces.ko{% endtrans %}
-                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('syncro_annonce') }}">
-                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
-                                {% trans %}storebundle.syncro.syncronize{% endtrans %}
-                            </a>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
-
 
 
 

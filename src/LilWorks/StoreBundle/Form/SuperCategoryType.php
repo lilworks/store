@@ -20,24 +20,24 @@ class SuperCategoryType extends AbstractType
 
         $builder
             ->add('name',null,array(
-                'label'=>'lilworks.storebundle.name'
+                'label'=>'storebundle.name'
             ))
             ->add('pos',null,array(
-                'label'=>'lilworks.storebundle.pos'
+                'label'=>'storebundle.pos'
             ))
             ->add('isPublished',null,array(
-                'label'=>'lilworks.storebundle.ispublished'
+                'label'=>'storebundle.ispublished'
             ))
             ->add('pictureFile',FileType::class,array(
-                'label'=>'lilworks.storebundle.picture',
+                'label'=>'storebundle.picture',
                 'required'=>false
             ))
             ->add('description',null,array(
-                'label'=>'lilworks.storebundle.description',
+                'label'=>'storebundle.description',
                 'attr' => ['class' => 'editor-text'],
             ))
                 ->add('superCategoriesCategories', CollectionType::class, array(
-                    'label'=>'lilworks.storebundle.categories',
+                    'label'=>'storebundle.categories',
                     'entry_options'=>array('superCategory'=>$superCategory),
                     'mapped'=>true,
                     'allow_add'=>true,

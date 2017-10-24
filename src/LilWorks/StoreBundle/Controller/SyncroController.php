@@ -166,20 +166,26 @@ class SyncroController extends Controller
     }
 
 
+    public function actionAction($what)
+    {
+        $syncro = $this->get('app.syncro');
+        $config = $syncro->statusDb();
 
+        foreach($config as $v){
+            if(isset($v['folder'])){
+                $syncro->syncroFolder($v['folder']);
+                break;
+            }
+        }
+
+        $syncro->dbsync($what,false);
+
+        return $this->redirectToRoute('syncro_index');
+    }
     public function indexAction()
     {
 
         $syncro = $this->get('app.syncro');
-
-        $products = $syncro->products(true);
-        $brands = $syncro->brands(true);
-        $categories = $syncro->categories(true);
-        $supercategories = $syncro->supercategories(true);
-        $texts = $syncro->texts(true);
-        $annonces = $syncro->annonces(true);
-
-
 
         $translator = $this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
@@ -191,161 +197,12 @@ class SyncroController extends Controller
         }
 */
 
+
         return $this->render('LilWorksStoreBundle:Syncro:index.html.twig',array(
-            'onlineDestockings'=>$this->getDoctrine()->getEntityManager('distant')->getRepository("LilWorksStoreBundle:OnlineDestocking")->findAll(),
-            'products'=>$products,
-            'texts'=>$texts,
-            'brands'=>$brands,
-            'categories'=>$categories,
-            'supercategories'=>$supercategories,
-            'annonces'=>$annonces,
-            'flashBag'=>$this->get('session')->getFlashBag()->get('syncro')
+            'flashBag'=>$this->get('session')->getFlashBag()->get('syncro'),
+            'syncro'=> $syncro->statusDb()
         ));
 
-
-
-       #$this->get('app.syncro')->getNewRemoteOrders();
-       # $this->get('app.syncro')->test();
-
-
-
-        /*
-        $emRemote = $this->getDoctrine()->getEntityManager('online');
-        $myFuckingUserRemote = $emRemote->getRepository("LilWorksStoreBundle:Order")->find(7782);
-        $a = $myFuckingUserRemote->getCustomer()->getAddresses();
-        var_dump(
-            $a[0]->getCity()
-
-            );
-        die();
-        $myFuckingCustomerRemote = $myFuckingUserRemote->getCustomer();
-        $myFuckingOrderRemote = $myFuckingCustomerRemote->getOrders();
-
-
-        $emLocal = $this->getDoctrine()->getEntityManager();
-
-        $mynewUser =  new User();
-        $mynewUser = clone $myFuckingUserRemote;
-        $mynewUser->setId(null);
-        $emLocal->persist($mynewUser);
-
-        $metadata = $emLocal->getClassMetaData(get_class($mynewUser));
-        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
-
-        //$emLocal->flush();
-        die();
-
-        $configDirectories = array(__DIR__.'/../Resources/config/parameters');
-        $locator = new FileLocator($configDirectories);
-        $loaderResolver = new LoaderResolver(array(new YamlSyncroLoader($locator)));
-        $delegatingLoader = new DelegatingLoader($loaderResolver);
-
-
-        $config = $delegatingLoader->load(__DIR__.'/../Resources/config/parameters/syncro.yml');
-
-
-
-        $finder = new Finder();
-
-
-
-
-
-        try {
-            $ftp = $this->container->get('ijanki_ftp');
-            $ftp->connect($config['parameters']["remote"]["ftp"]["host"]);
-            $ftp->login(
-                $config['parameters']["remote"]["ftp"]["user"],
-                $config['parameters']["remote"]["ftp"]["password"]
-            );
-        } catch (FtpException $e) {
-            echo 'Error: ', $e->getMessage();
-        }
-
-
-
-        $em = $this->getDoctrine()->getManager();
-
-        $blockSize=1024;
-        $transferSize=8;
-        $sync = new DbSync(new Transfer(new ShaHash(), $blockSize, $transferSize));
-
-        $targetDb = "storeOnline";
-        $sourceDb = "storeOffline";
-
-        $pdoOffline = new PDO('mysql:dbname=storeOffline;host=127.0.0.1;port=8889;','root','root');
-        $pdoOnline = new PDO('mysql:dbname=storeOnline;host=127.0.0.1;port=8889;','root','root');
-        $grammar = new MySqlGrammar();
-
-        foreach($config['parameters']['objects'] as $object){
-
-            if(!isset($object["table"])){
-               $entityName = $object["name"];
-               $table = $em->getClassMetadata($entityName)->getTableName();
-
-           }else{
-               $table =  $object["table"];
-           }
-
-
-
-            $sourceTable = $targetTable = $table;
-
-
-            $sync->dryRun(false);
-
-            $sync->delete(false);
-
-            $onlineConnection = new Connection($pdoOnline,$grammar);
-            $offlineConnection = new Connection($pdoOffline,$grammar);
-
-
-            $sourceTable = new Table($offlineConnection, $sourceDb, $sourceTable);
-            $targetTable = new Table($onlineConnection, $targetDb, $targetTable);
-            $syncResult = $sync->sync($sourceTable, $targetTable);
-
-            echo "<h1>$table</h1>";
-            foreach($config['parameters']['objects'] as $object) {
-                if(isset($object["folders"]) && count($object["folders"])>0) {
-
-                    foreach ($object["folders"] as $folder) {
-
-                        $remoteList = $ftp->nlist($config['parameters']["remote"]["ftp"]["directory"]."/".$folder);
-
-                        $finder->files()->in($folder);
-                        foreach ($finder as $file) {
-                            // Dump the absolute path
-                      //      var_dump($file->getRealPath());
-
-                            // Dump the relative path to the file, omitting the filename
-                        //    var_dump($file->getRelativePath());
-
-                            // Dump the relative path to the file
-                          //  var_dump($file->getRelativePathname());
-                            if(!in_array($file->getRelativePathname(),$remoteList)){
-
-                                echo $file->getRealPath();
-                                echo    "<br>";
-
-                                echo    "<br></hr>";
-
-                                $ftp->put(
-                                    $config['parameters']["remote"]["ftp"]["directory"]."/".$folder."/".$file->getRelativePathname(),
-                                    $file->getRealPath(),
-                                     FTP_BINARY
-                                    );
-                            }
-
-                        }
-                    }
-                }
-            }
-
-
-        }
-
-die();
-*/
 
     }
 

@@ -2,26 +2,26 @@
 
 {% block body %}
     <h1>
-        {% trans %}lilworks.storebundle.order.devis.show{% endtrans %}
+        {% trans %}storebundle.order.devis.show{% endtrans %}
         <span class="badge badge-default">{{ order.reference }}</span>
     </h1>
 
 
     <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
         <a href="{{ path('order_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
         </a>
         <a href="{{ path('order_new') }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}storebundle.link.new{% endtrans %}
         </a>
         <a href="{{ path('order_edit', { order_id: order.id }) }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}storebundle.link.edit{% endtrans %}
         </a>
         <a href="{{ path('order_pdf',{order_id:order.id}) }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.pdf{% endtrans %}
+            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}storebundle.link.pdf{% endtrans %}
         </a>
         <a href="{{ path('order_delete', { order_id: order.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
-            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}storebundle.link.delete{% endtrans %}
         </a>
     </div>
 

@@ -10,20 +10,20 @@
         </script>
     {% endblock %}
     <h1>
-        {% trans %}lilworks.storebundle.depositsale.list{% endtrans %}
+        {% trans %}storebundle.depositsale.list{% endtrans %}
     </h1>
 
     <div class="row">
         <div class="col-lg-2">
             <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
                 <a href="{{ path('depositSale_new') }}" class="btn btn-primary btn-sm">
-                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}storebundle.link.new{% endtrans %}
                 </a>
             </div>
         </div>
         <div class="col-lg-5">
             <form method="get" action="." class="formFilter">
-                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}lilworks.storebundle.button.filter{% endtrans %}" />
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}storebundle.button.filter{% endtrans %}" />
             </form>
         </div>
         <div class="col-lg-5">
@@ -39,19 +39,19 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
-            <th>{% trans %}lilworks.storebundle.depositsale.status{% endtrans %}</th>
+            <th>{% trans %}storebundle.action{% endtrans %}</th>
+            <th>{% trans %}storebundle.depositsale.status{% endtrans %}</th>
             <th>
-                {{ knp_pagination_sortable(pagination, 'lilworks.storebundle.depositsale.deposedat'|trans, 'ds.deposedAt') }}
+                {{ knp_pagination_sortable(pagination, 'storebundle.depositsale.deposedat'|trans, 'ds.deposedAt') }}
             </th>
             <th>
-                {{ knp_pagination_sortable(pagination, 'lilworks.storebundle.depositsale.selledat'|trans, 'ds.selledAt') }}
+                {{ knp_pagination_sortable(pagination, 'storebundle.depositsale.selledat'|trans, 'ds.selledAt') }}
             </th>
-            <th>{% trans %}lilworks.storebundle.reference{% endtrans %}</th>
-            <th>{% trans %}lilworks.storebundle.customer{% endtrans %}</th>
-            <th>{% trans %}lilworks.storebundle.depositsale.product{% endtrans %}</th>
-            <th>{% trans %}lilworks.storebundle.depositsale.pricebuying{% endtrans %}</th>
-            <th>{% trans %}lilworks.storebundle.depositsale.priceselling{% endtrans %}</th>
+            <th>{% trans %}storebundle.reference{% endtrans %}</th>
+            <th>{% trans %}storebundle.customer{% endtrans %}</th>
+            <th>{% trans %}storebundle.depositsale.product{% endtrans %}</th>
+            <th>{% trans %}storebundle.depositsale.pricebuying{% endtrans %}</th>
+            <th>{% trans %}storebundle.depositsale.priceselling{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -61,22 +61,22 @@
                     <ul class="list-unstyled">
                         <li>
                             <a href="{{ path('depositSale_show', { depositsale_id: depositSale.id }) }}" class="btn btn-info btn-sm">
-                                <i class="fa fa-eye"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+                                <i class="fa fa-eye"></i> {% trans %}storebundle.link.show{% endtrans %}
                             </a>
                         </li>
                         <li>
                             <a href="{{ path('depositSale_edit', { depositsale_id: depositSale.id }) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+                                <i class="fa fa-pencil "></i> {% trans %}storebundle.link.edit{% endtrans %}
                             </a>
                         </li>
                         <li>
                             <a href="{{ path('depositSale_pdf',{depositsale_id:depositSale.id}) }}" class="btn btn-primary btn-sm {% if depositSale.status is null %}disabled{% endif %}">
-                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.pdf{% endtrans %}
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}storebundle.link.pdf{% endtrans %}
                             </a>
                         </li>
                         <li>
                             <a href="{{ path('depositSale_delete', { depositsale_id: depositSale.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
-                                <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                                <i class="fa fa-trash"></i> {% trans %}storebundle.link.delete{% endtrans %}
                             </a>
                         </li>
                     </ul>

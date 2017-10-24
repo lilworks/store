@@ -28,7 +28,7 @@
     <tbody>
 
     <tr>
-        <th>{% trans %}lilworks.storebundle.product{% endtrans %}</th>
+        <th>{% trans %}storebundle.product{% endtrans %}</th>
         <td>
             <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{id: depositSale.product.id}) }}">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -40,13 +40,13 @@
         </td>
     </tr>
     <tr>
-        <th>{% trans %}lilworks.storebundle.depositsale.deposedat{% endtrans %}</th>
+        <th>{% trans %}storebundle.depositsale.deposedat{% endtrans %}</th>
         <td>
             {{ depositSale.deposedAt|date("d/m/Y") }}
         </td>
     </tr>
     <tr>
-        <th>{% trans %}lilworks.storebundle.depositsale.selledat{% endtrans %}</th>
+        <th>{% trans %}storebundle.depositsale.selledat{% endtrans %}</th>
         <td>
             {% if depositSale.selledAt %}
                 {{ depositSale.selledAt|date("d/m/Y") }}
@@ -56,7 +56,7 @@
         </td>
     </tr>
     <tr>
-        <th>{% trans %}lilworks.storebundle.description{% endtrans %}</th>
+        <th>{% trans %}storebundle.description{% endtrans %}</th>
         <td>{{ depositSale.description|raw }}</td>
     </tr>
 

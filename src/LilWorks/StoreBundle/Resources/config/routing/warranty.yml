@@ -21,4 +21,4 @@ warranty_edit:
 warranty_delete:
     path:     /{warranty_id}/delete
     defaults: { _controller: "LilWorksStoreBundle:Warranty:delete" }
-    methods:  DELETE
+    methods:  GET

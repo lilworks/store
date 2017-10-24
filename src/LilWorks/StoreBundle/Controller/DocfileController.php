@@ -74,10 +74,15 @@ class DocfileController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($docfile);
+            foreach( $docfile->getProducts() as $p){
+                if(!$p->getDocfiles()->contains($docfile)){
+                    $p->addDocfile($docfile);
+                    $docfile->addProduct($p);
+                    $em->persist($p);
+                }
+            }
             $em->flush();
-
-            return $this->redirectToRoute('docfile_show', array('id' => $docfile->getId()));
+            return $this->redirectToRoute('docfile_show', array('docfile_id' => $docfile->getId()));
         }
 
         $translator = $this->get('translator');
@@ -110,13 +115,15 @@ class DocfileController extends Controller
      */
     public function editAction(Request $request, Docfile $docfile)
     {
+
+
         $editForm = $this->createForm('LilWorks\StoreBundle\Form\DocfileType', $docfile);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('docfile_edit', array('id' => $docfile->getId()));
+            return $this->redirectToRoute('docfile_edit', array('docfile_id' => $docfile->getId()));
         }
 
         $translator = $this->get('translator');

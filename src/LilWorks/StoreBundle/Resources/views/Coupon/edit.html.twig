@@ -42,21 +42,21 @@
     {% endblock %}
 
     <h1>
-        {% trans %}lilworks.storebundle.coupon.edit{% endtrans %}
+        {% trans %}storebundle.coupon.edit{% endtrans %}
     </h1>
     <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions" id="actions">
         <a href="{{ path('coupon_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
         </a>
         <a href="{{ path('coupon_new') }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}storebundle.link.new{% endtrans %}
         </a>
         <a href="{{ path('coupon_show', { coupon_id: coupon.id }) }}" class="btn btn-info btn-sm">
-            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}storebundle.link.show{% endtrans %}
         </a>
         {% if coupon.ordersPaymentMethods|length != 0 %}{% set disabled = 'disabled' %}{% else %}{% set disabled = '' %}{% endif %}
         <a href="{{ path('coupon_delete', { coupon_id: coupon.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
-            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}storebundle.link.delete{% endtrans %}
         </a>
 
     </div>
@@ -64,7 +64,7 @@
 
 
     {{ form_start(form) }}
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
     <div class="row">
         <div class="col col-lg-6">
             {{ form_row(form.customer) }}
@@ -94,7 +94,7 @@
             {{ form_row(form.description) }}
         </div>
     </div>
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
     {{ form_end(form) }}
 
 {% endblock %}

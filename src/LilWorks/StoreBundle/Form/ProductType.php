@@ -19,19 +19,22 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
+        $product = $builder->getData();
+
+
         $builder
             ->add('name',null,array(
-                'label'=>'lilworks.storebundle.name',
+                'label'=>'storebundle.name',
             #    'validation_groups'=>array('general')
             ))
             ->add('isPublished',null,array(
-                'label'=>'lilworks.storebundle.ispublished',
+                'label'=>'storebundle.ispublished',
             ))
             ->add('isSecondHand',null,array(
-                'label'=>'lilworks.storebundle.product.issecondhand',
+                'label'=>'storebundle.product.issecondhand',
             ))
             ->add('brand', EntityType::class, array(
-                'label'=>'lilworks.storebundle.brand',
+                'label'=>'storebundle.brand',
                 'class'    => 'LilWorksStoreBundle:Brand' ,
                 'choice_label' => function ($obj) { return   $obj->getName() ; },
                 'query_builder' => function (EntityRepository $er)   {
@@ -52,7 +55,7 @@ class ProductType extends AbstractType
             ))
 
             ->add('categories', EntityType::class, array(
-                'label'=>'lilworks.storebundle.categories',
+                'label'=>'storebundle.categories',
                 'class'    => 'LilWorksStoreBundle:Category' ,
                 'choice_label' => function ($obj) { return   $obj->getName() ; },
                 'query_builder' => function (EntityRepository $er)  {
@@ -74,16 +77,24 @@ class ProductType extends AbstractType
             ))
 
             ->add('relatedProducts', EntityType::class, array(
-                'label'=>'lilworks.storebundle.product.relatedproducts',
+                'label'=>'storebundle.product.relatedproducts',
                 'class'    => 'LilWorksStoreBundle:Product' ,
                 'choice_label' => function ($obj) { return  $obj->getBrand()->getName() . " " . $obj->getName() ; },
-                'query_builder' => function (EntityRepository $er)  {
+                'query_builder' => function (EntityRepository $er) use ($product)  {
+                    if($product && $product->getId()>0){
+                        return $er->createQueryBuilder('rp')
+                            ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = rp.brand')
+                            ->where('b.id != :id')
+                            ->setParameter('id',$product->getId())
+                            ->orderBy('b.name','asc')
+                            ;
+                    }
                     return $er->createQueryBuilder('rp')
                         ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = rp.brand')
                         ->orderBy('b.name','asc')
                         ;
                 },
-                'required' => true ,
+                'required' => false ,
                 'mapped'=> true,
                 'expanded' => false ,
                 'multiple' => true,
@@ -97,20 +108,20 @@ class ProductType extends AbstractType
 
 
             ->add('description',null,array(
-                'label'=>'lilworks.storebundle.description',
-                'attr' => ['class' => 'text-editor'],
+                'label'=>'storebundle.description',
+                'attr' => ['class' => 'editor-text'],
             ))
             ->add('descriptionInternal',null,array(
-                'label'=>'lilworks.storebundle.descriptioninternal',
-                'attr' => ['class' => 'text-editor'],
+                'label'=>'storebundle.descriptioninternal',
+                'attr' => ['class' => 'editor-text'],
             ))
 
             ->add('priceOffline',MoneyType::class,array(
-                'label'=>'lilworks.storebundle.product.priceoffline',
+                'label'=>'storebundle.product.priceoffline',
                 'required'=>true
             ))
             ->add('taxesOffline', EntityType::class, array(
-                'label'=>'lilworks.storebundle.product.taxesoffline',
+                'label'=>'storebundle.product.taxesoffline',
                 'class'    => 'LilWorksStoreBundle:Tax' ,
                 'choice_label' => function ($obj) { return   $obj->getName() . ' | ' . $obj->getValue(); },
                 'required' => false ,
@@ -120,11 +131,11 @@ class ProductType extends AbstractType
             ))
 
             ->add('priceOnline',MoneyType::class,array(
-                'label'=>'lilworks.storebundle.product.priceonline',
+                'label'=>'storebundle.product.priceonline',
                 #'validation_groups'=>array('prices')
             ))
             ->add('taxesOnline', EntityType::class, array(
-                'label'=>'lilworks.storebundle.product.taxesonline',
+                'label'=>'storebundle.product.taxesonline',
                 'class'    => 'LilWorksStoreBundle:Tax' ,
                 'choice_label' => function ($obj) { return   $obj->getName() . ' | ' . $obj->getValue(); },
                 'required' => false ,
@@ -135,16 +146,16 @@ class ProductType extends AbstractType
             ))
 
             ->add('priceBuying',MoneyType::class,array(
-                'label'=>'lilworks.storebundle.product.pricebuying',
+                'label'=>'storebundle.product.pricebuying',
                 'required'=>false
             ))
             ->add('priceRetail',MoneyType::class,array(
-                'label'=>'lilworks.storebundle.product.priceretail',
+                'label'=>'storebundle.product.priceretail',
                 'required'=>false
             ))
 
             ->add('warrantiesOffline', EntityType::class, array(
-                'label'=>'lilworks.storebundle.product.warrantiesoffline',
+                'label'=>'storebundle.product.warrantiesoffline',
                 'class'    => 'LilWorksStoreBundle:Warranty' ,
                 'choice_label' => function ($obj) { return   $obj->getName();},
                 'required' => false ,
@@ -154,7 +165,7 @@ class ProductType extends AbstractType
             ))
 
             ->add('warrantiesOnline', EntityType::class, array(
-                'label'=>'lilworks.storebundle.product.warrantiesonline',
+                'label'=>'storebundle.product.warrantiesonline',
                 'class'    => 'LilWorksStoreBundle:Warranty' ,
                 'choice_label' => function ($obj) { return   $obj->getName();},
                 'required' => false ,
@@ -163,7 +174,7 @@ class ProductType extends AbstractType
                 'multiple' => true
             ))
             ->add('shippingMethods', EntityType::class, array(
-                'label'=>'lilworks.storebundle.product.shippingmethods',
+                'label'=>'storebundle.product.shippingmethods',
                 'class'    => 'LilWorksStoreBundle:ShippingMethod' ,
                 'choice_label' => function ($obj) { return   $obj->getName();},
                 'required' => false ,
@@ -174,7 +185,7 @@ class ProductType extends AbstractType
             ));
 
             $builder->add('pictures', CollectionType::class, array(
-                'label'=>'lilworks.storebundle.pictures',
+                'label'=>'storebundle.pictures',
                 'mapped'=>true,
                 'allow_add'=>true,
                 'required' => false,
@@ -193,7 +204,7 @@ class ProductType extends AbstractType
 
 
             $builder->add('tags', EntityType::class, array(
-                'label'=>'lilworks.storebundle.product.tags',
+                'label'=>'storebundle.product.tags',
                 'class'    => 'LilWorksStoreBundle:Tag' ,
                 'choice_label' => function ($obj) { return  $obj->getTag() ; },
                 'query_builder' => function (EntityRepository $er)  {
@@ -213,26 +224,20 @@ class ProductType extends AbstractType
                 )
             ))
             ->add('weight',null,array(
-                'label'=>'lilworks.storebundle.product.weight',
+                'label'=>'storebundle.product.weight',
             ))
             ->add('length',null,array(
-                'label'=>'lilworks.storebundle.product.length',
+                'label'=>'storebundle.product.length',
             ))
             ->add('width',null,array(
-                'label'=>'lilworks.storebundle.product.width',
+                'label'=>'storebundle.product.width',
             ))
             ->add('height',null,array(
-                'label'=>'lilworks.storebundle.product.height',
+                'label'=>'storebundle.product.height',
             ))
 
-
-
-
-
-
-
                 ->add('docfiles', EntityType::class, array(
-                    'label'=>'lilworks.storebundle.product.docfiles',
+                    'label'=>'storebundle.product.docfiles',
                     'class'    => 'LilWorksStoreBundle:Docfile' ,
                     'choice_label' => function ($obj) { return  $obj->getTitle() . " " . $obj->getDocName() ; },
                     'query_builder' => function (EntityRepository $er)  {
@@ -253,19 +258,19 @@ class ProductType extends AbstractType
                 ))
 
             ->add('stock',null,array(
-                'label'=>'lilworks.storebundle.stock',
+                'label'=>'storebundle.stock',
                 'required'=>false
             ))
             ->add('leadTime',null,array(
-                'label'=>'lilworks.storebundle.product.leadtime',
+                'label'=>'storebundle.product.leadtime',
                 'required'=>false
             ))
             ->add('alwaysAvailable',null,array(
-                'label'=>'lilworks.storebundle.product.isalwaysavailable',
+                'label'=>'storebundle.product.isalwaysavailable',
                 'required'=>false
             ))
             ->add('isReviewable',null,array(
-                'label'=>'lilworks.storebundle.product.isreviewable',
+                'label'=>'storebundle.product.isreviewable',
                 'required'=>false
             ))
         ;

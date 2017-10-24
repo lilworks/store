@@ -2,60 +2,40 @@
 
 {% block body %}
     <h1>
-        {% trans %}supercategory{% endtrans %}
+        {{ 'storebundle.supercategory.show %name%'|trans({'%name%':superCategory.name}) }}
     </h1>
 
-    <div class="lilworks_list_showAction">
-        <ul class="list-inline">
-            <li class="list-inline-item">
-                <a href="{{ path('supercategory_index') }}" class="btn btn-info btn-sm">
-                    <i class="fa fa-list"></i> {% trans %}supercategory list{% endtrans %}
-                </a>
-            <li class="list-inline-item">
-            <li>
-                <a href="{{ path('supercategory_edit', { 'id': superCategory.id }) }}" class="btn btn-info btn-sm">
-                    <i class="fa fa-pencil "></i> {% trans %}edit{% endtrans %}
-                </a>
-            </li>
-            <li class="list-inline-item">
-                {% if
-                    superCategory.superCategoriesCategories|length == 0
-                %}
-                    <a href="{{ path('supercategory_delete', { 'id': superCategory.id }) }}"  class="btn btn-danger btn-sm" >
-                        <i class="fa fa-trash"></i> {% trans %}delete{% endtrans %}
-                    </a>
-                {% else %}
-                    <del><i class="fa fa-trash"></i></del>
-                {% endif %}
-            </li>
-        </ul>
+
+    <div id="content_menu">
+        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.product.portal','storebundle.menu.supercategory'] , {context: 'content'}) %}
+        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
     </div>
 
 
     <table class="table table-striped">
         <tbody>
             <tr>
-                <th>{% trans %}id and tag{% endtrans %}</th>
+                <th>{% trans %}storebundle.idandtag{% endtrans %}</th>
                 <td>#{{ superCategory.id }} {{ superCategory.tag }}</td>
             </tr>
             <tr>
-                <th>{% trans %}name{% endtrans %}</th>
+                <th>{% trans %}storebundle.name{% endtrans %}</th>
                 <td>{{ superCategory.name }}</td>
             </tr>
             <tr>
-                <th>{% trans %}pos{% endtrans %}</th>
+                <th>{% trans %}storebundle.pos{% endtrans %}</th>
                 <td>{{ superCategory.pos }}</td>
             </tr>
             <tr>
-                <th>{% trans %}ispublished{% endtrans %}</th>
-                <td>{% if superCategory.isPublished %}Yes{% else %}No{% endif %}</td>
+                <th>{% trans %}storebundle.ispublished{% endtrans %}</th>
+                <td>{{ superCategory.isPublished|boolean|raw }}</td>
             </tr>
             <tr>
-                <th>{% trans %}description{% endtrans %}</th>
-                <td>{{ superCategory.description }}</td>
+                <th>{% trans %}storebundle.description{% endtrans %}</th>
+                <td>{{ superCategory.description|raw }}</td>
             </tr>
             <tr>
-                <th>{% trans %}picture{% endtrans %}</th>
+                <th>{% trans %}storebundle.picture{% endtrans %}</th>
                 <td>
                     {% if superCategory.pictureName %}
                         <img src="{{ asset('superCategory/' ~ superCategory.pictureName  ) | imagine_filter('my_thumb') }}" />
@@ -65,13 +45,13 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}categories{% endtrans %}</th>
+                <th>{% trans %}storebundle.categories{% endtrans %}</th>
                 <td>
                     {% if superCategory.supercategoriesCategories|length > 0 %}
                         <ul class="list-inline">
                             {% for superCategory in superCategory.supercategoriesCategories %}
                                 <li class="list-inline-item page-item">
-                                    <a  href="{{ path('category_show',{id: superCategory.category.id}) }}" role="button" class="btn btn-secondary btn-sm {% if superCategory.category.isPublished %}btn-success{% else %}btn-warning{% endif %}">{{ superCategory.category.name }}</a>
+                                    <a  href="{{ path('category_show',{category_id: superCategory.category.id}) }}" role="button" class="btn btn-secondary btn-sm {% if superCategory.category.isPublished %}btn-success{% else %}btn-warning{% endif %}">{{ superCategory.category.name }}</a>
                                 </li>
                             {% endfor %}
                         </ul>

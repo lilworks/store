@@ -2,26 +2,26 @@
 
 {% block body %}
     <h1>
-        {% trans %}lilworks.storebundle.order.facture.show{% endtrans %}
+        {% trans %}storebundle.order.facture.show{% endtrans %}
         <span class="badge badge-default">{{ order.reference }}</span>
     </h1>
 
 
     <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
         <a href="{{ path('order_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
         </a>
         <a href="{{ path('order_new') }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}storebundle.link.new{% endtrans %}
         </a>
         <a href="{{ path('order_edit', { order_id: order.id }) }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}storebundle.link.edit{% endtrans %}
         </a>
         <a href="{{ path('order_pdf',{order_id:order.id}) }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.pdf{% endtrans %}
+            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}storebundle.link.pdf{% endtrans %}
         </a>
         <a href="{{ path('order_delete', { order_id: order.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
-            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}storebundle.link.delete{% endtrans %}
         </a>
     </div>
 
@@ -29,19 +29,19 @@
     <table class="table table-striped">
         <tbody>
             <tr>
-                <th>{% trans %}lilworks.storebundle.reference{% endtrans %}</th>
+                <th>{% trans %}storebundle.reference{% endtrans %}</th>
                 <td>{{ order.reference }}</td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.createdat{% endtrans %}</th>
+                <th>{% trans %}storebundle.createdat{% endtrans %}</th>
                 <td>{% if order.createdAt %}{{ order.createdAt|date('Y-m-d H:i') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.updatedat{% endtrans %}</th>
+                <th>{% trans %}storebundle.updatedat{% endtrans %}</th>
                 <td>{% if order.updatedAt %}{{ order.updatedAt|date('Y-m-d H:i') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.order.seller{% endtrans %}</th>
+                <th>{% trans %}storebundle.order.seller{% endtrans %}</th>
                 <td>
                     {% if order.userAsSeller %}
                         {{ order.userAsSeller.username }}
@@ -52,7 +52,7 @@
             </tr>
 
             <tr>
-                <th>{% trans %}lilworks.storebundle.orderstep{% endtrans %}</th>
+                <th>{% trans %}storebundle.orderstep{% endtrans %}</th>
                 <td>
                     <ul>
                     {% for orderOrderStep in order.ordersOrderSteps %}
@@ -62,7 +62,7 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.customer{% endtrans %}</th>
+                <th>{% trans %}storebundle.customer{% endtrans %}</th>
                 <td>
                     {% if order.customer %}
                         {{ order.customer.firstName }} {{ order.customer.lastName }} {{ order.customer.companyName }}
@@ -72,7 +72,7 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.order.shippingaddress{% endtrans %}</th>
+                <th>{% trans %}storebundle.order.shippingaddress{% endtrans %}</th>
                 <td>
                     {% if order.shippingAddress is defined and order.shippingAddress is not null %}
                         {{ order.shippingAddress|addressInline|raw }}
@@ -80,7 +80,7 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.order.billingaddress{% endtrans %}</th>
+                <th>{% trans %}storebundle.order.billingaddress{% endtrans %}</th>
                 <td>
                     {% if order.billingAddress is defined and order.billingAddress is not null %}
                         {{ order.billingAddress|addressInline|raw }}
@@ -88,15 +88,15 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.order.usercomment{% endtrans %}</th>
+                <th>{% trans %}storebundle.order.usercomment{% endtrans %}</th>
                 <td>{{ order.userComment }}</td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.order.storecomment{% endtrans %}</th>
+                <th>{% trans %}storebundle.order.storecomment{% endtrans %}</th>
                 <td>{{ order.storeComment }}</td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.tot{% endtrans %}</th>
+                <th>{% trans %}storebundle.tot{% endtrans %}</th>
 
                 <td>
                     {% set tot = order.tot|totPriceCalculator(order.ordersProducts)  %}
@@ -118,10 +118,10 @@
                     {% endfor %}
                     <div>
                         <ul>
-                            <li>{% trans %}lilworks.storebundle.order.payed{% endtrans %}:{{ payed|price }}</li>
+                            <li>{% trans %}storebundle.order.payed{% endtrans %}:{{ payed|price }}</li>
                             {% set rest = tot['TTC']-payed %}
                             <li>
-                                {% trans %}lilworks.storebundle.order.resttopay{% endtrans %}:
+                                {% trans %}storebundle.order.resttopay{% endtrans %}:
                                 {% if rest > 0 %}
                                     <span style="color: red;">{{ rest|price }}</span>
                                 {% else %}
@@ -135,7 +135,7 @@
             <tr>
                 <th>
                     <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{id:order.id})~'#shippingmethods' }}">
-                        <i class="fa fa-pencil"></i>{% trans %}lilworks.storebundle.shippingmethods{% endtrans %}
+                        <i class="fa fa-pencil"></i>{% trans %}storebundle.shippingmethods{% endtrans %}
                     </a>
                 </th>
                 <td>
@@ -168,13 +168,13 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>{% trans %}lilworks.storebundle.id{% endtrans %}</th>
-                                <th>{% trans %}lilworks.storebundle.product{% endtrans %}</th>
-                                <th>{% trans %}lilworks.storebundle.shippingmethod{% endtrans %}</th>
-                                <th>{% trans %}lilworks.storebundle.warranties{% endtrans %}</th>
-                                <th>{% trans %}lilworks.storebundle.quantity{% endtrans %}</th>
-                                <th>{% trans %}lilworks.storebundle.priceperunity{% endtrans %}</th>
-                                <th>{% trans %}lilworks.storebundle.tot{% endtrans %}</th>
+                                <th>{% trans %}storebundle.id{% endtrans %}</th>
+                                <th>{% trans %}storebundle.product{% endtrans %}</th>
+                                <th>{% trans %}storebundle.shippingmethod{% endtrans %}</th>
+                                <th>{% trans %}storebundle.warranties{% endtrans %}</th>
+                                <th>{% trans %}storebundle.quantity{% endtrans %}</th>
+                                <th>{% trans %}storebundle.priceperunity{% endtrans %}</th>
+                                <th>{% trans %}storebundle.tot{% endtrans %}</th>
                             </tr>
                         </thead>
                         <tbody>

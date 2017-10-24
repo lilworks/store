@@ -19,35 +19,35 @@ class ShippingMethodType extends AbstractType
     {
         $builder
             ->add('name',null,array(
-                'label'=>'lilworks.storebundle.name'
+                'label'=>'storebundle.name'
             ))
             ->add('isPublished',null,array(
-                'label'=>'lilworks.storebundle.ispublished'
+                'label'=>'storebundle.ispublished'
             ))
             ->add('price',MoneyType::class,array(
-                'label'=>'lilworks.storebundle.price'
+                'label'=>'storebundle.price'
             ))
             ->add('freeTrigger',null,array(
-                'label'=>'lilworks.storebundle.shippingmethod.freetrigger'
+                'label'=>'storebundle.shippingmethod.freetrigger'
             ))
             ->add('priority',null,array(
-                'label'=>'lilworks.storebundle.shippingmethod.priority'
+                'label'=>'storebundle.shippingmethod.priority'
             ))
             ->add('delay',null,array(
-                'label'=>'lilworks.storebundle.shippingmethod.delay'
+                'label'=>'storebundle.shippingmethod.delay'
             ))
             ->add('pictureFile',FileType::class,array(
-                'label'=>'lilworks.storebundle.picture',
+                'label'=>'storebundle.picture',
                 'required'=>false
             ))
             ->add('description',null,array(
-                'label'=>'lilworks.storebundle.description',
+                'label'=>'storebundle.description',
             ))
             ->add('descriptionInternal',null,array(
-                'label'=>'lilworks.storebundle.descriptioninternal',
+                'label'=>'storebundle.descriptioninternal',
             ));
         $builder->add('products', EntityType::class, array(
-            'label'=>'lilworks.storebundle.products',
+            'label'=>'storebundle.products',
             'class'    => 'LilWorksStoreBundle:Product' ,
             'required' => false ,
             'mapped'=> true,
@@ -62,7 +62,6 @@ class ShippingMethodType extends AbstractType
                     ->orderBy('b.name','asc')
                     ;
             },
-            'required' => true ,
             'mapped'=> true,
             'expanded' => false ,
             'multiple' => true,

@@ -23,6 +23,9 @@ class Category
      */
     public function preFlush()
     {
+        if($this->updatedAt == null)
+            $this->updatedAt = new \DateTime();
+
         $sanitizer = new TagSanitizer();
         $this->tag = $sanitizer->sanitize($this->getName());
     }
@@ -55,7 +58,7 @@ class Category
     private $isPublished;
 
     /**
-     * @Vich\UploadableField(mapping="brand_pictures", fileNameProperty="pictureName")
+     * @Vich\UploadableField(mapping="category_pictures", fileNameProperty="pictureName")
      *
      * @var File
      */
@@ -89,7 +92,13 @@ class Category
      */
     private $tag;
 
-
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+    
     /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
@@ -115,18 +124,15 @@ class Category
     }
 
 
+    
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->warrantiesOffline = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->warrantiesOnline = new \Doctrine\Common\Collections\ArrayCollection();
         $this->supercategories_categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
-    
 
     /**
      * Get id
@@ -259,6 +265,30 @@ class Category
     }
 
     /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Category
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
      * Add product
      *
      * @param \LilWorks\StoreBundle\Entity\Product $product
@@ -267,7 +297,6 @@ class Category
      */
     public function addProduct(\LilWorks\StoreBundle\Entity\Product $product)
     {
-        $product->addCategory($this);
         $this->products[] = $product;
 
         return $this;
@@ -280,7 +309,6 @@ class Category
      */
     public function removeProduct(\LilWorks\StoreBundle\Entity\Product $product)
     {
-        $product->removeCategory($this);
         $this->products->removeElement($product);
     }
 

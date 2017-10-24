@@ -17,10 +17,10 @@ class WarrantyType extends AbstractType
     {
         $builder
             ->add('name',null,array(
-                'label'=>'lilworks.storebundle.name',
+                'label'=>'storebundle.name',
             ))
             ->add('productsOnline', EntityType::class, array(
-                'label'=>'lilworks.storebundle.productsonline',
+                'label'=>'storebundle.productsonline',
                 'class'    => 'LilWorksStoreBundle:Product' ,
                 'choice_label' => function ($obj) { return    $obj->getBrand()->getName() ." ". $obj->getName() ; },
                 'query_builder' => function (EntityRepository $er) {
@@ -42,7 +42,7 @@ class WarrantyType extends AbstractType
                 )
             ))
             ->add('productsOffline', EntityType::class, array(
-                'label'=>'lilworks.storebundle.productsoffline',
+                'label'=>'storebundle.productsoffline',
                 'class'    => 'LilWorksStoreBundle:Product' ,
                 'choice_label' => function ($obj) { return    $obj->getBrand()->getName() ." ". $obj->getName() ; },
                 'query_builder' => function (EntityRepository $er) {
@@ -63,12 +63,12 @@ class WarrantyType extends AbstractType
                 )
             ))
             ->add('descriptionPublic',null,array(
-                'label'=>'lilworks.storebundle.description',
-                'attr' => ['class' => 'text-editor'],
+                'label'=>'storebundle.description',
+                'attr' => ['class' => 'editor-text'],
             ))
             ->add('descriptionInternal',null,array(
-                'label'=>'lilworks.storebundle.descriptioninternal',
-                'attr' => ['class' => 'text-editor'],
+                'label'=>'storebundle.descriptioninternal',
+                'attr' => ['class' => 'editor-text'],
             ));
 
 

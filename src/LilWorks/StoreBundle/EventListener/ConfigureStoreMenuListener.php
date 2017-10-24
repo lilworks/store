@@ -137,10 +137,15 @@ class ConfigureStoreMenuListener
         if($id) {
             $entityName = "LilWorksStoreBundle:ShippingMethod";
             $entity = $this->em->getRepository($entityName)->find($id);
-
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
+            if(
+                count($entity->getProducts())==0 &&
+                count($entity->getShippingmethodsCountries())==0 &&
+                count($entity->getOrdersRealShippingMethods())==0
+            ){
             $this->setAction('delete', $entity, $menu);
+            }
         }
 
     }
@@ -185,6 +190,8 @@ class ConfigureStoreMenuListener
 
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
+
+            if(count($entity->getProductsOnline())==0 && count($entity->getProductsOffline())==0 && count($entity->getOrdersProducts())==0)
             $this->setAction('delete', $entity, $menu);
         }
 
@@ -200,13 +207,13 @@ class ConfigureStoreMenuListener
 
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
-            $this->setAction('delete', $entity, $menu);
+
+            if(count($entity->getOrdersPaymentMethods())==0)
+                $this->setAction('delete', $entity, $menu);
         }
 
     }
     public function docfile($menu,$id){
-
-
         $this->setAction('index',null,$menu);
         $this->setAction('new',null,$menu);
         if($id) {
@@ -215,7 +222,8 @@ class ConfigureStoreMenuListener
 
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
-            $this->setAction('delete', $entity, $menu);
+            if(count($entity->getProducts())==0)
+               $this->setAction('delete', $entity, $menu);
         }
 
     }
@@ -230,7 +238,8 @@ class ConfigureStoreMenuListener
 
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
-            $this->setAction('delete', $entity, $menu);
+            if(count($entity->getProducts())==0)
+                $this->setAction('delete', $entity, $menu);
         }
 
     }

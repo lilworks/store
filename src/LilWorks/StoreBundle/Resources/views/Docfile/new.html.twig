@@ -4,25 +4,25 @@
 
 
     <h1>
-        {% trans %}lilworks.storebundle.docfile.new{% endtrans %}
+        {% trans %}storebundle.docfile.new{% endtrans %}
     </h1>
 
 
     <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
         <a href="{{ path('docfile_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
         </a>
     </div>
 
     {{ form_start(form) }}
 
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.create{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
 
     <div class="row">
         <div class="row-sm-10 offset-2">
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.create{% endtrans %}" />
+            <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
             {{ form_end(form) }}
         </div>
     </div>

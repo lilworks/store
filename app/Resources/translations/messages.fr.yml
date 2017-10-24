@@ -187,7 +187,7 @@ lilworks.storebundle.link.empty: vider
 lilworks.storebundle.brand.new: 'création d''une marque'
 storebundle.htmltitle.category.index: 'liste des catégories'
 lilworks.storebundle.menu.category.index: catégories
-lilworks.storebundle.menu.category.new: 'nouvelle catégorie'
+lilworks.storebundle.menu.category.new: 'liste des catégories'
 lilworks.storebundle.supercategory: 'groupe de categories'
 lilworks.storebundle.category.show: 'détails d''une catégorie'
 lilworks.storebundle.brand.website: 'site de la marque'
@@ -388,3 +388,53 @@ storebundle.menu.paymentmethod: paiements
 storebundle.menu.annonce: annonces
 storebundle.menu.annonce.new: 'nouvelle annonce'
 storebundle.syncro.onlinedestockings.explain: 'Les produits achetés lors de commandes sur la boutique en ligne sont décomptés sur la base de données de la boutique en ligne. Pour être pris en compte dans la gestion, ils doivent être rapatriés.'
+storebundle.synchro.lilworks_category: 'table categorie'
+storebundle.synchro.lilworks_supercategory: 'table des groupes de catécories'
+storebundle.synchro.lilworks_supercategories_categories: 'table de liaison catégories/groupes de catégories'
+storebundle.synchro.lilworks_brand: 'table des marques'
+storebundle.synchro.lilworks_tax: 'table des taxes'
+storebundle.synchro.lilworks_products_taxesOnline: 'tables des taxes des produits en ligne'
+storebundle.synchro.lilworks_warranty: 'table des garanties'
+storebundle.synchro.lilworks_products_warranties_online: 'table des garanties des produits en ligne'
+storebundle.synchro.lilworks_picture: 'table des images des produits'
+storebundle.synchro.lilworks_docfile: 'table des documentations'
+storebundle.synchro.lilworks_products_docfiles: 'table de liaison des produits aux documentations'
+storebundle.synchro.lilworks_tag: 'table des tags'
+storebundle.synchro.lilworks_products_tags: 'table de liaison des produits aux tags'
+storebundle.synchro.lilworks_product: 'table des produits'
+storebundle.synchro.lilworks_products_categories: 'table de liaison des produits aux catégories'
+storebundle.synchro.lilworks_annonce: 'table des annonces'
+storebundle.synchro.lilworks_text: 'table des textes'
+storebundle.syncro.issyncronized: 'est synchronisé'
+storebundle.syncro.list: 'liste des synchronisations'
+storebundle.menu.customer.index: 'accueil clients'
+storebundle.menu.supercategory.index: 'accueil groupe de catégories'
+storebundle.menu.tag.index: 'accueil tag'
+storebundle.menu.docfile.index: 'accueil documentation'
+storebundle.menu.paymentmethod.index: 'accueil moyens de paiement'
+storebundle.menu.tax.index: 'accueil taxes'
+storebundle.menu.shippingmethod.index: 'accueil services de livraison'
+storebundle.menu.country.index: 'accueil pays'
+storebundle.menu.text.index: 'accueil textes'
+storebundle.menu.syncro: synchronisation
+storebundle.menu.delete: supprimer
+storebundle.menu.edit: modifier
+storebundle.menu.show: détails
+storebundle.shippingmethod.productcount: 'nombre de produits'
+storebundle.shippingmethod.orderproductcount: 'nombre de produits dans les factures/devis'
+storebundle.country: pays
+storebundle.shippingmethod.delay: 'temps de livraison'
+storebundle.shippingmethod.priority: priorité
+storebundle.shippingmethod.freetrigger: 'seuil de gratuité'
+storebundle.price: prix
+storebundle.name: nom
+storebundle.ispublished: 'est publié'
+storebundle.action: actions
+storebundle.shippingmethod.list: 'liste des services de livraison'
+storebundle.menu.annonce.index: 'accueil annonces'
+site.htmltitle.home: accueil
+profile.show: profil
+profile.edit: 'modifier profil'
+layout.logout: deconnection
+sitebundle.globalsearch: 'recherche globale'
+sitebundle.button.search: chercher

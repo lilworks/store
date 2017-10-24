@@ -2,24 +2,24 @@
 
 {% block body %}
     <h1>
-        {% trans %}lilworks.storebundle.depositsale.show{% endtrans %}
+        {% trans %}storebundle.depositsale.show{% endtrans %}
     </h1>
 
     <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
         <a href="{{ path('depositSale_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
         </a>
         <a href="{{ path('depositSale_new') }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}storebundle.link.new{% endtrans %}
         </a>
         <a href="{{ path('depositSale_edit', { depositsale_id: depositSale.id }) }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}storebundle.link.edit{% endtrans %}
         </a>
         <a href="{{ path('depositSale_pdf',{ depositsale_id:depositSale.id}) }}" class="btn btn-primary btn-sm {% if depositSale.status is null %}disabled{% endif %}">
-            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.pdf{% endtrans %}
+            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}storebundle.link.pdf{% endtrans %}
         </a>
         <a href="{{ path('depositSale_delete', { depositsale_id: depositSale.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
-            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}storebundle.link.delete{% endtrans %}
         </a>
     </div>
 
@@ -29,11 +29,11 @@
     <table class="table table-striped">
         <tbody>
         <tr>
-            <th>{% trans %}lilworks.storebundle.reference{% endtrans %}</th>
+            <th>{% trans %}storebundle.reference{% endtrans %}</th>
             <td>{{ depositSale.reference }}</td>
         </tr>
         <tr>
-            <th>{% trans %}lilworks.storebundle.customer{% endtrans %}</th>
+            <th>{% trans %}storebundle.customer{% endtrans %}</th>
             <td>
                 <a role="button" class="btn btn-sm btn-secondary" href="{{ path('customer_edit',{customer_id: depositSale.customer.id}) }}">
                     <i class="fa fa-pencil" aria-hidden="true"></i> {{ depositSale.customer.firstName }} {{ depositSale.customer.lastName }} {{ depositSale.customer.companyName }}
@@ -42,7 +42,7 @@
             </td>
         </tr>
         <tr>
-            <th>{% trans %}lilworks.storebundle.address{% endtrans %}</th>
+            <th>{% trans %}storebundle.address{% endtrans %}</th>
             <td>
                 {% if depositSale.address %}
                     {{ depositSale.address|addressInline }}
@@ -52,7 +52,7 @@
             </td>
         </tr>
         <tr>
-            <th>{% trans %}lilworks.storebundle.product{% endtrans %}</th>
+            <th>{% trans %}storebundle.product{% endtrans %}</th>
             <td>
                 <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{product_id: depositSale.product.id}) }}">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -64,14 +64,14 @@
             </td>
         </tr>
         <tr>
-            <th>{% trans %}lilworks.storebundle.depositsale.deposedat{% endtrans %}</th>
+            <th>{% trans %}storebundle.depositsale.deposedat{% endtrans %}</th>
             <td>
                 {{ depositSale.deposedAt|date("d/m/Y") }}
             </td>
         </tr>
 
         <tr>
-            <th>{% trans %}lilworks.storebundle.depositsale.selledat{% endtrans %}</th>
+            <th>{% trans %}storebundle.depositsale.selledat{% endtrans %}</th>
             <td>
                 {% if depositSale.selledAt %}
                     {{ depositSale.selledAt|date("d/m/Y") }}
@@ -81,7 +81,7 @@
             </td>
         </tr>
         <tr>
-            <th>{% trans %}lilworks.storebundle.depositsale.coupon{% endtrans %}</th>
+            <th>{% trans %}storebundle.depositsale.coupon{% endtrans %}</th>
             <td>
                 {% if depositSale.coupon  %}
                 <a role="button" class="btn btn-sm btn-secondary" href="{{ path('coupon_edit',{coupon_id: depositSale.coupon.id}) }}">
@@ -94,11 +94,11 @@
             </td>
         </tr>
         <tr>
-            <th>{% trans %}lilworks.storebundle.description{% endtrans %}</th>
+            <th>{% trans %}storebundle.description{% endtrans %}</th>
             <td>{{ depositSale.description|raw }}</td>
         </tr>
         <tr>
-            <th>{% trans %}lilworks.storebundle.descriptioninternal{% endtrans %}</th>
+            <th>{% trans %}storebundle.descriptioninternal{% endtrans %}</th>
             <td>{{ depositSale.descriptionInternal|raw }}</td>
         </tr>
 

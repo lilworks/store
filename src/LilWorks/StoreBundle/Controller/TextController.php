@@ -214,7 +214,7 @@ class TextController extends Controller
             $em->persist($text);
             $em->flush();
 
-            return $this->redirectToRoute('text_show', array('id' => $text->getId()));
+            return $this->redirectToRoute('text_show', array('text_id' => $text->getId()));
         }
 
         $translator = $this->get('translator');
@@ -255,7 +255,7 @@ class TextController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($text);
             $em->flush();
-            return $this->redirectToRoute('text_edit', array('id' => $text->getId()));
+            return $this->redirectToRoute('text_edit', array('text_id' => $text->getId()));
         }
 
         $translator = $this->get('translator');

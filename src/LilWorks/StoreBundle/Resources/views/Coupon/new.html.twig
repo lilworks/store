@@ -40,17 +40,17 @@
     {% endblock %}
 
     <h1>
-        {% trans %}lilworks.storebundle.coupon.new{% endtrans %}
+        {% trans %}storebundle.coupon.new{% endtrans %}
     </h1>
     <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
         <a href="{{ path('coupon_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
         </a>
     </div>
 
 
     {{ form_start(form) }}
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
     <div class="row">
         <div class="col col-lg-6">
             {{ form_row(form.customer) }}
@@ -75,7 +75,7 @@
             {{ form_row(form.description) }}
         </div>
     </div>
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
     {{ form_end(form) }}
 
 {% endblock %}

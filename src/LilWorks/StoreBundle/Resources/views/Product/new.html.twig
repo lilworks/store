@@ -2,101 +2,63 @@
 
 {% block body %}
 
-    {% block stylesheets %}
-        {{ parent() }}
-        <link rel="stylesheet" href="{{ asset('assets/vendor/summernote/dist/summernote-bs4.css') }}">
-        <style>
-            .hidden-row{
-                visibility: hidden;
-            }
-
-        </style>
-    {% endblock %}
-
     {% block javascripts %}
         {{ parent() }}
-        <script src="h{{ asset('assets/vendor/popper.js/dist/popper.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/summernote/dist/summernote-bs4.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/tinymce/langs.fr_FR.js') }}"></script>
         <script>
-            $( function() {
-                FCE.init('docfiles','docfiles list-inline','docfile list-inline-item');
+
+            $( document ).ready(function() {
+                initTinyMce.text('.editor-text',['{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}','{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']);
                 FCE.init('pictures','pictures list-inline','picture list-inline-item');
-                FCE.init('tags','tags list-inline','tag list-inline-item');
+            });
 
-
-
-                var SEF_category = Object.create(SEF);
-                SEF_category.init("{{ form.categories.vars['id'] }}","{{ form.categories.vars['full_name'] }}","{{ form.categories.vars['multiple'] }}","LilWorksStoreBundle:Category","name");
-
-                var SEF_related = Object.create(SEF);
-                SEF_related.init("{{ form.relatedProducts.vars['id'] }}","{{ form.relatedProducts.vars['full_name'] }}","{{ form.categories.vars['multiple'] }}","LilWorksStoreBundle:Product","name");
-
-                var SEF_brand = Object.create(SEF);
-                SEF_brand.init("{{ form.brand.vars['id'] }}","{{ form.brand.vars['full_name'] }}","{{ form.brand.vars['multiple'] }}","LilWorksStoreBundle:Brand","name");
-
-                $('.text-editor').summernote({
-                    height: 200,
-                    minHeight: null,
-                    maxHeight: null,
-                    focus: true,
-                    toolbar: [
-                        // [groupName, [list of button]]
-                        ['style', ['bold', 'italic', 'underline', 'clear']],
-                        ['font', ['strikethrough', 'superscript', 'subscript']],
-                        ['fontsize', ['fontsize']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['height', ['height']],
-                        ['misc',['codeview','fullscreen']]
-                    ]
-                });
-            } );
         </script>
     {% endblock %}
 
 
     <h1>
-        {% trans %}lilworks.storebundle.product.new{% endtrans %}
+        {% trans %}storebundle.product.new{% endtrans %}
     </h1>
 
-    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
-        <a href="{{ path('product_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
-        </a>
+    <div id="content_menu">
+        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.product.portal','storebundle.menu.product'] , {context: 'content'}) %}
+        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
     </div>
+
 
     {{ form_start(form) }}
 
 
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.create{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
 
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}lilworks.storebundle.tab.general{% endtrans %}</a>
+            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#descriptions" role="tab">{% trans %}lilworks.storebundle.description{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#descriptions" role="tab">{% trans %}storebundle.description{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#prices" role="tab">{% trans %}lilworks.storebundle.price{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#prices" role="tab">{% trans %}storebundle.price{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#warranties" role="tab">{% trans %}lilworks.storebundle.warranties{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#warranties" role="tab">{% trans %}storebundle.warranties{% endtrans %}</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link" data-toggle="tab" href="#shippingmethods" role="tab">{% trans %}lilworks.storebundle.shippingmethods{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#shippingmethods" role="tab">{% trans %}storebundle.shippingmethods{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#stocks" role="tab">{% trans %}lilworks.storebundle.stocks{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#stocks" role="tab">{% trans %}storebundle.stocks{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#specifications" role="tab">{% trans %}lilworks.storebundle.product.specifications{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#specifications" role="tab">{% trans %}storebundle.product.specifications{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#pictures" role="tab">{% trans %}lilworks.storebundle.pictures{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#pictures" role="tab">{% trans %}storebundle.pictures{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#more" role="tab">{% trans %}lilworks.storebundle.tab.more{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#more" role="tab">{% trans %}storebundle.tab.more{% endtrans %}</a>
         </li>
     </ul>
 
@@ -162,7 +124,7 @@
     </div>
 
 
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.create{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
 
     {{ form_end(form) }}
 

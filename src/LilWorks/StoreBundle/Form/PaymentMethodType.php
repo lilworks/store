@@ -17,11 +17,22 @@ class PaymentMethodType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('isPublished')
-            ->add('description')
-            ->add('pictureFile',FileType::class,array('required'=>false))
-            ->add('datas')
+            ->add('name',null,array(
+                'label'=>'storebundle.name',
+            ))
+            ->add('isPublished',null,array(
+                'label'=>'storebundle.ispublished',
+            ))
+            ->add('description',null,array(
+                'label'=>'storebundle.description',
+            ))
+            ->add('pictureFile',FileType::class,array(
+                'label'=>'storebundle.picture',
+                'required'=>false
+            ))
+            ->add('datas',null,array(
+                'label'=>'storebundle.paymentmethod.data',
+            ))
         ;
 
 

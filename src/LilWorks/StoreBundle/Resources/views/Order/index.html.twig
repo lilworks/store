@@ -10,20 +10,20 @@
         </script>
     {% endblock %}
     <h1>
-        {% trans %}lilworks.storebundle.order.list{% endtrans %}
+        {% trans %}storebundle.order.list{% endtrans %}
     </h1>
 
     <div class="row">
         <div class="col-lg-2">
             <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
                 <a href="{{ path('order_new') }}" class="btn btn-primary btn-sm">
-                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}storebundle.link.new{% endtrans %}
                 </a>
             </div>
         </div>
         <div class="col-lg-5">
             <form method="get" action="." class="formFilter">
-                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}lilworks.storebundle.button.filter{% endtrans %}" />
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}storebundle.button.filter{% endtrans %}" />
             </form>
         </div>
         <div class="col-lg-5">
@@ -41,28 +41,28 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
-                <th>{% trans %}lilworks.storebundle.order.type{% endtrans %}</th>
-                <th>{% trans %}lilworks.storebundle.reference{% endtrans %}</th>
+                <th>{% trans %}storebundle.action{% endtrans %}</th>
+                <th>{% trans %}storebundle.order.type{% endtrans %}</th>
+                <th>{% trans %}storebundle.reference{% endtrans %}</th>
                 <th>
                     <ul>
-                        <li>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.createdat'|trans, 'o.createdAt') }}</li>
-                        <li>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.updatedat'|trans, 'o.updatedAt') }}</li>
+                        <li>{{ knp_pagination_sortable(pagination, 'storebundle.createdat'|trans, 'o.createdAt') }}</li>
+                        <li>{{ knp_pagination_sortable(pagination, 'storebundle.updatedat'|trans, 'o.updatedAt') }}</li>
                     </ul>
                 </th>
-                <th>{% trans %}lilworks.storebundle.order.seller{% endtrans %}</th>
-                <th>{% trans %}lilworks.storebundle.customer{% endtrans %}</th>
-                <th>{% trans %}lilworks.storebundle.order.products{% endtrans %}</th>
-                <th>{% trans %}lilworks.storebundle.order.lastorderstep{% endtrans %}</th>
+                <th>{% trans %}storebundle.order.seller{% endtrans %}</th>
+                <th>{% trans %}storebundle.customer{% endtrans %}</th>
+                <th>{% trans %}storebundle.order.products{% endtrans %}</th>
+                <th>{% trans %}storebundle.order.lastorderstep{% endtrans %}</th>
                 <th>
                     <ul>
-                        <li>{{ knp_pagination_sortable(pagination, 'lilworks.storebundle.tot'|trans, 'o.tot') }}</li>
-                        <li>{% trans %}lilworks.storebundle.order.payed{% endtrans %}</li>
-                        <li>{% trans %}lilworks.storebundle.order.resttopay{% endtrans %}</li>
+                        <li>{{ knp_pagination_sortable(pagination, 'storebundle.tot'|trans, 'o.tot') }}</li>
+                        <li>{% trans %}storebundle.order.payed{% endtrans %}</li>
+                        <li>{% trans %}storebundle.order.resttopay{% endtrans %}</li>
                     </ul>
                 </th>
-                <th>{% trans %}lilworks.storebundle.order.payments{% endtrans %}</th>
-                <th>{% trans %}lilworks.storebundle.order.shippingmethods{% endtrans %}</th>
+                <th>{% trans %}storebundle.order.payments{% endtrans %}</th>
+                <th>{% trans %}storebundle.order.shippingmethods{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
@@ -126,7 +126,7 @@
                             {% if rest > 0 %}
                                 <span style="color: red;">{{ rest|price }}</span>
                             {% elseif rest < 0 %}
-                                <span style="color: orange;">{% trans %}lilworks.storebundle.order.tomuchpayed{% endtrans %}{{ rest|price }}</span>
+                                <span style="color: orange;">{% trans %}storebundle.order.tomuchpayed{% endtrans %}{{ rest|price }}</span>
                             {% else %}
                                 <span style="color: green;">{{ rest|price }}</span>
                             {% endif %}

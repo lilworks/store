@@ -10,7 +10,7 @@
         </script>
     {% endblock %}
     <h1>
-        {% trans %}lilworks.storebundle.coupon.list{% endtrans %}
+        {% trans %}storebundle.coupon.list{% endtrans %}
     </h1>
 
     <div class="row">
@@ -18,14 +18,14 @@
             <ul class="list-inline">
                 <li class="list-inline-item">
                     <a href="{{ path('coupon_new') }}" class="btn btn-info btn-sm">
-                        <i class="fa fa-plus"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+                        <i class="fa fa-plus"></i> {% trans %}storebundle.link.new{% endtrans %}
                     </a>
                 </li>
             </ul>
         </div>
         <div class="col-lg-5">
             <form method="get" action="." class="formFilter">
-                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}lilworks.storebundle.button.filter{% endtrans %}" />
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}storebundle.button.filter{% endtrans %}" />
             </form>
         </div>
         <div class="col-lg-5">
@@ -41,21 +41,21 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
-            <th>{% trans %}lilworks.storebundle.createdat{% endtrans %}</th>
-            <th>{% trans %}lilworks.storebundle.coupon.validity{% endtrans %}</th>
-            <th>{% trans %}lilworks.storebundle.coupon.isactive{% endtrans %}</th>
-            <th>{% trans %}lilworks.storebundle.reference{% endtrans %}</th>
-            <th>{% trans %}lilworks.storebundle.customer{% endtrans %}</th>
+            <th>{% trans %}storebundle.action{% endtrans %}</th>
+            <th>{% trans %}storebundle.createdat{% endtrans %}</th>
+            <th>{% trans %}storebundle.coupon.validity{% endtrans %}</th>
+            <th>{% trans %}storebundle.coupon.isactive{% endtrans %}</th>
+            <th>{% trans %}storebundle.reference{% endtrans %}</th>
+            <th>{% trans %}storebundle.customer{% endtrans %}</th>
             <th>
                 <ul>
-                    <li>{% trans %}lilworks.storebundle.coupon.initamount{% endtrans %}</li>
-                    <li>{% trans %}lilworks.storebundle.coupon.restamount{% endtrans %}</li>
+                    <li>{% trans %}storebundle.coupon.initamount{% endtrans %}</li>
+                    <li>{% trans %}storebundle.coupon.restamount{% endtrans %}</li>
                 </ul>
             </th>
-            <th>{% trans %}lilworks.storebundle.coupon.paymentmethods{% endtrans %}</th>
-            <th>{% trans %}lilworks.storebundle.coupon.availableonline{% endtrans %}</th>
-            <th>{% trans %}lilworks.storebundle.coupon.splitable{% endtrans %}</th>
+            <th>{% trans %}storebundle.coupon.paymentmethods{% endtrans %}</th>
+            <th>{% trans %}storebundle.coupon.availableonline{% endtrans %}</th>
+            <th>{% trans %}storebundle.coupon.splitable{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -66,23 +66,23 @@
                     <ul class="list-unstyled">
                         <li>
                             <a href="{{ path('coupon_show', { coupon_id: coupon.id }) }}" class="btn btn-info btn-sm">
-                                <i class="fa fa-eye"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+                                <i class="fa fa-eye"></i> {% trans %}storebundle.link.show{% endtrans %}
                             </a>
                         </li>
                         <li>
                             <a href="{{ path('coupon_edit', { coupon_id: coupon.id }) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+                                <i class="fa fa-pencil "></i> {% trans %}storebundle.link.edit{% endtrans %}
                             </a>
                         </li>
                         <li>
                             <a href="{{ path('coupon_pdf',{coupon_id:coupon.id}) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.pdf{% endtrans %}
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}storebundle.link.pdf{% endtrans %}
                             </a>
                         </li>
                         <li>
                             {% if coupon.ordersPaymentMethods|length != 0 %}{% set disabled = 'disabled' %}{% else %}{% set disabled = '' %}{% endif %}
                             <a href="{{ path('coupon_delete', { coupon_id: coupon.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
-                                <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+                                <i class="fa fa-trash"></i> {% trans %}storebundle.link.delete{% endtrans %}
                             </a>
                         </li>
                     </ul>

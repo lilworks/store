@@ -58,6 +58,14 @@ class ListMenuBuilder
         $this->setAction('delete',$menu,$entity->getId());
         return $menu;
     }
+    public function text($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        if($entity->getIsContent()){
+            $this->setAction('delete',$menu,$entity->getId());
+        }
+        return $menu;
+    }
     public function annonce($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
@@ -78,15 +86,64 @@ class ListMenuBuilder
             $this->setAction('delete',$menu,$entity->getId());
         return $menu;
     }
-
-    public function product($entity,$menu){
+    public function docfile($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
-        if(count($entity->getOrdersProductS()) == 0 && count($entity->getDepositSale()) == 0)
+        if(count($entity->getProducts()) == 0)
             $this->setAction('delete',$menu,$entity->getId());
         return $menu;
     }
-
+    public function tag($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        if(count($entity->getProducts()) == 0){
+            $this->setAction('delete',$menu,$entity->getId());
+        }
+        return $menu;
+    }
+    public function product($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        if(count($entity->getOrdersProducts()) == 0 && count($entity->getDepositSale()) == 0)
+            $this->setAction('delete',$menu,$entity->getId());
+        return $menu;
+    }
+    public function category($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        if(count($entity->getProducts()) == 0 && count($entity->getSupercategoriesCategories()) == 0)
+            $this->setAction('delete',$menu,$entity->getId());
+        return $menu;
+    }
+    public function warranty($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        if(
+            count($entity->getProductsOffline()) == 0 &&
+            count($entity->getProductsOnline()) == 0 &&
+            count($entity->getOrdersProducts()) == 0
+        )
+            $this->setAction('delete',$menu,$entity->getId());
+        return $menu;
+    }
+    public function tax($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        if(
+            count($entity->getProductsOffline()) == 0 &&
+            count($entity->getProductsOnline()) == 0 &&
+            count($entity->getOrdersProducts()) == 0
+        )
+            $this->setAction('delete',$menu,$entity->getId());
+        return $menu;
+    }
+    public function supercategory($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        if(count( count($entity->getSupercategoriesCategories()) == 0))
+            $this->setAction('delete',$menu,$entity->getId());
+        return $menu;
+    }
     public function customer($entity,$menu){
             $this->setAction('show',$menu,$entity->getId());
             $this->setAction('edit',$menu,$entity->getId());
@@ -110,10 +167,30 @@ class ListMenuBuilder
         }
         return $menu;
     }
+    public function paymentmethod($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        if(count($entity->getOrdersPaymentMethods())==0){
+            $this->setAction('delete',$menu,$entity->getId());
+        }
+        return $menu;
+    }
+    public function shippingmethod($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        if(
+            count($entity->getShippingmethodsCountries())==0 &&
+            count($entity->getOrdersRealShippingMethods())==0 &&
+            count($entity->getProducts())==0
+        ){
+            $this->setAction('delete',$menu,$entity->getId());
+        }
+        return $menu;
+    }
     public  function setAction($action, $menu,$id,$route=null,$routeParamName=null,$keyForTranslate=null){
 
         if(!$keyForTranslate)
-            $keyForTranslate = 'lilworks.storebundle.menu.'.$action;
+            $keyForTranslate = 'storebundle.menu.'.$action;
         if(!$routeParamName)
             $routeParamName = $this->options['target'].'_id';
         if(!$route)

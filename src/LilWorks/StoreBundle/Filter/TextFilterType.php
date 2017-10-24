@@ -13,13 +13,13 @@ class TextFilterType extends AbstractType
     {
         $builder
             ->add('name', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.storebundle.name'
+                'label'=>'storebundle.name'
             ))
             ->add('title', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.storebundle.title'
+                'label'=>'storebundle.title'
             ))
             ->add('isContent', Filters\BooleanFilterType::class,array(
-                'label'=>'lilworks.storebundle.text.iscontent'
+                'label'=>'storebundle.text.iscontent'
             ))
         ;
     }

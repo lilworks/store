@@ -89,7 +89,7 @@ class Brand
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isPublished", type="boolean")
+     * @ORM\Column(name="isPublished", type="boolean",nullable=true)
      */
     private $isPublished;
 

@@ -42,7 +42,7 @@ class Product
     private $depositSale;
 
     /**
-     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Category", inversedBy="products",cascade={"remove","persist"} )
+     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Category", inversedBy="products",cascade={"persist"} )
      * @ORM\JoinTable(name="lilworks_products_categories")
      * @ORM\OrderBy({"name" = "ASC"})
      */
@@ -75,24 +75,24 @@ class Product
 
     /**
      * Many Products have Many Warranties.
-     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Warranty", inversedBy="productsOffline")
+     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Warranty", inversedBy="productsOffline",cascade={"persist"})
      * @ORM\JoinTable(name="lilworks_products_warranties_offline")
      */
     private $warrantiesOffline;
 
     /**
      * Many Products have Many Warranties.
-     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Warranty", inversedBy="productsOnline")
+     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Warranty", inversedBy="productsOnline",cascade={"persist"})
      * @ORM\JoinTable(name="lilworks_products_warranties_online")
      */
     private $warrantiesOnline;
 
     /**
-     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Product", mappedBy="relatedProducts",cascade={"remove","persist"})
+     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Product", mappedBy="relatedProducts",cascade={"persist"})
      */
     private $productsRelated;
     /**
-     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Product", inversedBy="productsRelated",cascade={"remove","persist"})
+     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\Product", inversedBy="productsRelated",cascade={"persist"})
      * @ORM\JoinTable(name="lilworks_products_related_products",
      *      joinColumns={ @ORM\JoinColumn(name="product", referencedColumnName="id", onDelete="CASCADE" , nullable=true )},
      *      inverseJoinColumns={@ORM\JoinColumn(name="related_product", referencedColumnName="id")}

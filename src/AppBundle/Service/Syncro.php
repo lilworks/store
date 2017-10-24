@@ -31,12 +31,35 @@ class Syncro
     protected $paramsLocal;
     protected $paramsDistant;
 
+    protected $dbs;
+
     protected $sync;
     protected $ftp;
     protected $cleaner;
     protected $session;
 
     public function __construct($container, \Doctrine\ORM\EntityManager $emDefault,\Doctrine\ORM\EntityManager $emDistant){
+
+
+        $this->dbs = array(
+            array('name'=>'lilworks_category', 'folder'=>'category' , 'icon'=>'fa fa-bullseye','dependencies'=>array('lilworks_supercategories_categories')),
+            array('name'=>'lilworks_supercategory', 'folder'=>'supercategory','icon'=>'fa fa-object-group'),
+            array('name'=>'lilworks_supercategories_categories','icon'=>array('fa fa-object-group','fa fa-bullseye'),'dependencies'=>array('lilworks_category','lilworks_supercategory')),
+            array('name'=>'lilworks_brand', 'folder'=>'brand','icon'=>'fa fa-copyright','dependencies'=>array('lilworks_product')),
+            array('name'=>'lilworks_tax','icon'=>'fa fa-pie-chart','dependencies'=>array('lilworks_products_taxesOnline')),
+            array('name'=>'lilworks_products_taxesOnline','icon'=>array('fa fa-cube','fa fa-pie-chart'),'dependencies'=>array('lilworks_tax','lilworks_product')),
+            array('name'=>'lilworks_warranty','icon'=>'fa fa-wrench','dependencies'=>array('lilworks_products_warranties_online')),
+            array('name'=>'lilworks_products_warranties_online','icon'=>array('fa fa-cube','fa fa-wrench'),'dependencies'=>array('lilworks_warranty','lilworks_product')),
+            array('name'=>'lilworks_picture', 'folder'=>'product','icon'=>'fa fa-cube','dependencies'=>array('lilworks_product')),
+            array('name'=>'lilworks_docfile', 'folder'=>'docfile/product','dependencies'=>array('lilworks_products_docfiles')),
+            array('name'=>'lilworks_products_docfiles','icon'=>array('fa fa-cube','fa fa-file-text'),'dependencies'=>array('lilworks_docfile','lilworks_product')),
+            array('name'=>'lilworks_tag','icon'=>'fa fa-tag','dependencies'=>array('lilworks_products_tags')),
+            array('name'=>'lilworks_products_tags','icon'=>array('fa fa-tag','fa fa-bullseye'),'dependencies'=>array('lilworks_tag','lilworks_product')),
+            array('name'=>'lilworks_product','icon'=>'fa fa-cube','dependencies'=>array('lilworks_brand')),
+            array('name'=>'lilworks_products_categories','icon'=>array('fa fa-cube','fa fa-bullseye'),'dependencies'=>array('lilworks_category','lilworks_product')),
+            array('name'=>'lilworks_annonce','icon'=>'fa fa-bullhorn'),
+            array('name'=>'lilworks_text', 'folder'=>'ajaxupload' ,'icon'=>'fa fa-file-text')
+        );
 
         $this->cleaner = $container->get("lilworks.store.entity.file.cleaner");
         $this->session = $container->get("session");
@@ -75,170 +98,41 @@ class Syncro
 
     }
 
-    public function annonces($dry = true){
-        $ftpResult  = array();
-        if($dry === true){
-            $this->sync->dryRun(true);
-        }else{
-            // clean local folder of unused image
-            $this->cleaner->clean("annonce","LilWorksStoreBundle:Annonce","pictureName");
-            $this->sync->dryRun(false);
-            $this->sync->delete(true);
-            $ftpResult = $this->syncroFolder('annonce');
+    public function statusDb(){
+        $this->sync->dryRun(true);
+        foreach($this->dbs as $k=>$db){
+            $r=$this->dbsync($db['name'] , true);
+            if($r->getRowsTransferred()>0){
+                $this->dbs[$k]['syncro']=false;
+            }else{
+                $this->dbs[$k]['syncro']='true';
+            }
         }
 
-        $sourceTable = new Table($this->defaultConnection, $this->paramsDefault["dbname"], 'lilworks_annonce');
-        $targetTable = new Table($this->distantConnection, $this->paramsDistant["dbname"], 'lilworks_annonce');
-        $dbResult = $this->sync->sync($sourceTable, $targetTable);
-
-
-
-        if($dry === false){
-            $this->session->getFlashBag()->clear();
-            $this->session->getFlashBag()->add(
-                'syncro',
-                array( 'name'=>'annonces', 'ftpResult'=>$ftpResult,'dbResult'=>$dbResult)
-            );
+        /*
+        foreach($this->dbs as $k=>$db){
+            if(isset($db['dependencies'])){
+                foreach($db['dependencies'] as $k2=>$v2){
+                    foreach($this->dbs as $k3=>$v3){
+                        if($v3['name'] == $v2){
+                            if(!isset($this->dbs[$k]['dStatus']))
+                                $this->dbs[$k]['dStatus'] = array();
+                            $this->dbs[$k]['dStatus'][$k2]=$this->dbs[$k]['syncro'];
+                            break 1;
+                        }
+                    }
+                }
+            }
         }
-        return $this->sync->sync($sourceTable, $targetTable);
-    }
-    public function products($dry = true){
-        $ftpResult  = array();
-        if($dry === true){
-            $this->sync->dryRun(true);
-        }else{
-            // clean local folder of unused image
-            $this->cleaner->clean("product","LilWorksStoreBundle:Picture","pictureName");
-            $this->sync->dryRun(false);
-            $this->sync->delete(true);
-            $ftpResult = $this->syncroFolder('product');
-        }
+        */
 
-        $sourceTable = new Table($this->defaultConnection, $this->paramsDefault["dbname"], 'lilworks_product');
-        $targetTable = new Table($this->distantConnection, $this->paramsDistant["dbname"], 'lilworks_product');
 
-        $dbResult = $this->sync->sync($sourceTable, $targetTable);
-
-        if($dry === false) {
-            $this->session->getFlashBag()->clear();
-            $this->session->getFlashBag()->add(
-                'syncro',
-                array('name'=>'products','ftpResult' => $ftpResult, 'dbResult' => $dbResult)
-            );
-        }
-
-        return $this->sync->sync($sourceTable, $targetTable);
+        return $this->dbs;
     }
 
-    public function texts($dry = true){
-        if($dry === true){
-            $this->sync->dryRun(true);
-            $this->sync->delete(true);
-        }else{
-            $this->sync->dryRun(false);
-        }
-
-        $sourceTable = new Table($this->defaultConnection, $this->paramsDefault["dbname"], 'lilworks_text');
-        $targetTable = new Table($this->distantConnection, $this->paramsDistant["dbname"], 'lilworks_text');
-
-        // if you only want specific columns
-        #$columnConfig = new ColumnConfiguration(array('stock'), array());
-
-        return $this->sync->sync($sourceTable, $targetTable);
-    }
-
-    public function brands($dry = true){
-        $ftpResult  = array();
-        if($dry === true){
-            $this->sync->dryRun(true);
-        }else{
-            // clean local folder of unused image
-            $this->cleaner->clean("brand","LilWorksStoreBundle:Brand","pictureName");
-            $this->sync->dryRun(false);
-            $this->sync->delete(true);
-            $ftpResult = $this->syncroFolder('brand');
-        }
-
-        $sourceTable = new Table($this->defaultConnection, $this->paramsDefault["dbname"], 'lilworks_brand');
-        $targetTable = new Table($this->distantConnection, $this->paramsDistant["dbname"], 'lilworks_brand');
-
-        $dbResult = $this->sync->sync($sourceTable, $targetTable);
-
-        if($dry === false) {
-            $this->session->getFlashBag()->clear();
-            $this->session->getFlashBag()->add(
-                'syncro',
-                array('name'=>'brands','ftpResult' => $ftpResult, 'dbResult' => $dbResult)
-            );
-        }
-
-        return $this->sync->sync($sourceTable, $targetTable);
-    }
-    public function categories($dry = true){
-        $ftpResult  = array();
-        if($dry === true){
-            $this->sync->dryRun(true);
-        }else{
-            // clean local folder of unused image
-            $this->cleaner->clean("category","LilWorksStoreBundle:Category","pictureName");
-            $this->sync->dryRun(false);
-            $this->sync->delete(true);
-            $ftpResult = $this->syncroFolder('category');
-        }
-
-        $sourceTable = new Table($this->defaultConnection, $this->paramsDefault["dbname"], 'lilworks_category');
-        $targetTable = new Table($this->distantConnection, $this->paramsDistant["dbname"], 'lilworks_category');
-
-        $dbResult = $this->sync->sync($sourceTable, $targetTable);
-
-        if($dry === false) {
-            $this->session->getFlashBag()->clear();
-            $this->session->getFlashBag()->add(
-                'syncro',
-                array('name'=>'categories','ftpResult' => $ftpResult, 'dbResult' => $dbResult)
-            );
-        }
-
-        // update manyToMany assoc
-        $sourceTable = new Table($this->defaultConnection, $this->paramsDefault["dbname"], 'lilworks_supercategories_categories');
-        $targetTable = new Table($this->distantConnection, $this->paramsDistant["dbname"], 'lilworks_supercategories_categories');
-        $this->sync->sync($sourceTable, $targetTable);
 
 
-        return $dbResult;
-    }
-    public function supercategories($dry = true){
-        $ftpResult  = array();
-        if($dry === true){
-            $this->sync->dryRun(true);
-        }else{
-            // clean local folder of unused image
-            $this->cleaner->clean("supercategory","LilWorksStoreBundle:SuperCategory","pictureName");
-            $this->sync->dryRun(false);
-            $this->sync->delete(true);
-            $ftpResult = $this->syncroFolder('supercategory');
-        }
 
-        $sourceTable = new Table($this->defaultConnection, $this->paramsDefault["dbname"], 'lilworks_supercategory');
-        $targetTable = new Table($this->distantConnection, $this->paramsDistant["dbname"], 'lilworks_supercategory');
-
-        $dbResult = $this->sync->sync($sourceTable, $targetTable);
-
-        if($dry === false) {
-            $this->session->getFlashBag()->clear();
-            $this->session->getFlashBag()->add(
-                'syncro',
-                array('name'=>'supercategories','ftpResult' => $ftpResult, 'dbResult' => $dbResult)
-            );
-        }
-
-        // update manyToMany assoc
-        $sourceTable = new Table($this->defaultConnection, $this->paramsDefault["dbname"], 'lilworks_supercategories_categories');
-        $targetTable = new Table($this->distantConnection, $this->paramsDistant["dbname"], 'lilworks_supercategories_categories');
-        $this->sync->sync($sourceTable, $targetTable);
-
-        return $dbResult;
-    }
     public function findInFolder($dir){
         $dir = $this->container->getParameter('kernel.root_dir') . "/../web/" . $dir;
         $finder = new Finder();
@@ -260,7 +154,23 @@ class Syncro
         return $files;
     }
 
-    private function syncroFolder($folder){
+
+
+
+
+    public function dbsync($tablename ,$dry){
+        if($dry === true){
+            $this->sync->dryRun(true);
+        }else{
+            $this->sync->dryRun(false);
+            $this->sync->delete(true);
+        }
+        $sourceTable = new Table($this->defaultConnection, $this->paramsDefault["dbname"], $tablename);
+        $targetTable = new Table($this->distantConnection, $this->paramsDistant["dbname"], $tablename);
+        return $this->sync->sync($sourceTable, $targetTable);
+    }
+
+    public function syncroFolder($folder){
         $files = $this->findInFolder($folder);
         $this->ftp->chdir($folder);
 
@@ -287,6 +197,7 @@ class Syncro
         }
         return $result;
     }
+
 
 
 }

@@ -2,6 +2,7 @@
 
 namespace LilWorks\StoreBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use LilWorks\StoreBundle\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,10 +81,16 @@ class TagController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($tag);
+            foreach( $tag->getProducts() as $p){
+                if(!$p->getTags()->contains($tag)){
+                    $p->addTag($tag);
+                    $tag->addProduct($p);
+                    $em->persist($p);
+                }
+            }
             $em->flush();
 
-            return $this->redirectToRoute('tag_show', array('id' => $tag->getId()));
+            return $this->redirectToRoute('tag_show', array('tag_id' => $tag->getId()));
         }
 
         $translator = $this->get('translator');
@@ -116,13 +123,32 @@ class TagController extends Controller
      */
     public function editAction(Request $request, Tag $tag)
     {
+        $originalProducts = new ArrayCollection();
+        foreach ($tag->getProducts() as $p) {
+            $originalProducts->add($p);
+        }
+
         $editForm = $this->createForm('LilWorks\StoreBundle\Form\TagType', $tag);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('tag_edit', array('id' => $tag->getId()));
+            $em = $this->getDoctrine()->getManager();
+            foreach($originalProducts as $p){
+                if( false === $tag->getProducts()->contains($p) ){
+                    $p->removeWarrantiesOnline($tag);
+                    $tag->removeProduct($p);
+                    $em->persist($p);
+                }
+            }
+            foreach( $tag->getProducts() as $p){
+                if(!$p->getTags()->contains($tag)){
+                    $p->addTag($tag);
+                    $tag->addProduct($p);
+                    $em->persist($p);
+                }
+            }
+            $em->flush();
+            return $this->redirectToRoute('tag_edit', array('tag_id' => $tag->getId()));
         }
 
         $translator = $this->get('translator');

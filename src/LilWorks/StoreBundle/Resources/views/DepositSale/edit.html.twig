@@ -43,31 +43,31 @@
     {% endblock %}
 
     <h1>
-        {% trans %}lilworks.storebundle.depositsale.edit{% endtrans %}
+        {% trans %}storebundle.depositsale.edit{% endtrans %}
     </h1>
 
 
     <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
         <a href="{{ path('depositSale_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
         </a>
         <a href="{{ path('depositSale_new') }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}storebundle.link.new{% endtrans %}
         </a>
         <a href="{{ path('depositSale_show', { 'id': depositSale.id }) }}" class="btn btn-info btn-sm">
-            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}storebundle.link.show{% endtrans %}
         </a>
         <a href="{{ path('depositSale_pdf',{id:depositSale.id}) }}" class="btn btn-primary btn-sm {% if depositSale.status is null %}disabled{% endif %}">
-            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.pdf{% endtrans %}
+            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}storebundle.link.pdf{% endtrans %}
         </a>
         <a href="{{ path('depositSale_delete', { 'id': depositSale.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
-            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}storebundle.link.delete{% endtrans %}
         </a>
     </div>
 
     {{ form_start(form) }}
 
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
 
     <div class="row">
         <div class="col col-lg-4">
@@ -111,7 +111,7 @@
         </div>
     </div>
 
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
     {{ form_end(form) }}
 
 {% endblock %}

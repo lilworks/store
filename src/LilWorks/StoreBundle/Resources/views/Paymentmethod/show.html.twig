@@ -3,11 +3,11 @@
 {% block body %}
 
     <h1>
-        {% trans %}paymentmethod show{% endtrans %}
+        {{ 'storebundle.paymentmethod.show %name%'|trans({'%name%':paymentMethod.name}) }}
     </h1>
 
     <div id="content_menu">
-        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.user.portal','storebundle.menu.cat.customer'] , {context: 'content'}) %}
+        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.payment.portal','storebundle.menu.paymentmethod'] , {context: 'content'}) %}
         {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
     </div>
 
@@ -15,41 +15,30 @@
     <table class="table table-striped">
         <tbody>
         <tr>
-            <th>{% trans %}id{% endtrans %}</th>
+            <th>{% trans %}storebundle.id{% endtrans %}</th>
             <td>#{{ paymentMethod.id }}</td>
         </tr>
         <tr>
-            <th>{% trans %}ipublished{% endtrans %}</th>
+            <th>{% trans %}storebundle.ispublished{% endtrans %}</th>
             <td>
                 {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\PaymentMethod\\IsPublishedType' %}
                 {{ simple_live_editor.getCol(formType,entityName,'isPublished',paymentMethod)|raw }}
             </td>
         </tr>
         <tr>
-            <th>{% trans %}name{% endtrans %}</th>
+            <th>{% trans %}storebundle.name{% endtrans %}</th>
             <td>
                 {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\PaymentMethod\\NameType' %}
                 {{ simple_live_editor.getCol(formType,entityName,'name',paymentMethod)|raw }}
             </td>
         </tr>
         <tr>
-            <th>{% trans %}description{% endtrans %}</th>
+            <th>{% trans %}storebundle.description{% endtrans %}</th>
             <td>
                 {{ paymentMethod.description|raw }}
             </td>
         </tr>
 
-        <tr>
-            <th>{% trans %}allowed countries{% endtrans %}</th>
-            <td>
-                <ul class="list-unstyled">
-                    {% for order in paymentMethod.ordersPaymentMethods %}
-                        <li>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </td>
-        </tr>
 
 
 

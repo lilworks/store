@@ -1,42 +1,53 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $( window ).on( "load", FF.init() );
+            });
+        </script>
+    {% endblock %}
+
     <h1>
-        {% trans %}lilworks.storebundle.shippingmethod.list{% endtrans %}
+        {% trans %}storebundle.shippingmethod.list{% endtrans %}
     </h1>
 
+
+
     <div class="row">
-        <div class="col-lg-6">
-            <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
-                <a href="{{ path('shippingmethod_new') }}" class="btn btn-primary btn-sm">
-                    <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
-                </a>
+        <div class="col-md-6">
+            <div id="content_menu">
+                {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.shipping.portal','storebundle.menu.shippingmethod'] , {context: 'content'}) %}
+                {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
             </div>
         </div>
-
-        <div class="col-lg-6">
+        <div class="col-md-6">
             {% transchoice pagination.getTotalItemCount %}
             {0} no result found|{1} found one result|]1,Inf[ found %count% results
             {% endtranschoice %}
-            <div class="pagination">
-                {{ knp_pagination_render(pagination) }}
-            </div>
+            {{ knp_pagination_render(pagination) }}
+            {% if  formFilter is defined %}
+            <form method="get" action="." class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-secondary" name="submit-filter" value="{% trans %}storebundle.button.filter{% endtrans %}" />
+            </form>
+            {% endif %}
         </div>
     </div>
-
 
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>{% trans %}lilworks.storebundle.action{% endtrans %}</th>
-                <th>{% trans %}lilworks.storebundle.ispublished{% endtrans %}</th>
-                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
-                <th>{% trans %}lilworks.storebundle.price{% endtrans %}</th>
-                <th>{% trans %}lilworks.storebundle.shippingmethod.freetrigger{% endtrans %}</th>
-                <th>{{ knp_pagination_sortable(pagination,  'lilworks.storebundle.shippingmethod.priority'|trans, 'p.priority') }}</th>
-                <th>{% trans %}lilworks.storebundle.shippingmethod.delay{% endtrans %}</th>
-                <th>{% trans %}lilworks.storebundle.country{% endtrans %}</th>
-                <th>{% trans %}lilworks.storebundle.shippingmethod.orderproductcount{% endtrans %} • {% trans %}lilworks.storebundle.shippingmethod.productcount{% endtrans %}</th>
+                <th>{% trans %}storebundle.action{% endtrans %}</th>
+                <th>{% trans %}storebundle.ispublished{% endtrans %}</th>
+                <th>{% trans %}storebundle.name{% endtrans %}</th>
+                <th>{% trans %}storebundle.price{% endtrans %}</th>
+                <th>{% trans %}storebundle.shippingmethod.freetrigger{% endtrans %}</th>
+                <th>{{ knp_pagination_sortable(pagination,  'storebundle.shippingmethod.priority'|trans, 'p.priority') }}</th>
+                <th>{% trans %}storebundle.shippingmethod.delay{% endtrans %}</th>
+                <th>{% trans %}storebundle.country{% endtrans %}</th>
+                <th>{% trans %}storebundle.shippingmethod.orderproductcount{% endtrans %} • {% trans %}storebundle.shippingmethod.productcount{% endtrans %}</th>
 
             </tr>
         </thead>
@@ -47,34 +58,10 @@
         {% for shippingMethod in pagination %}
             <tr>
                 <td>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="{{ path('shippingmethod_show', { 'id': shippingMethod.id }) }}" class="btn btn-info btn-sm">
-                                <i class="fa fa-eye"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ path('shippingmethod_edit', { 'id': shippingMethod.id }) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-pencil "></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
-                            </a>
-                        </li>
-                        {% if
-                        shippingMethod.products|length == 0 and
-                        shippingMethod.ordersRealShippingMethods|length == 0 and
-                        shippingMethod.shippingmethodsCountries|length == 0
-                        %}
-                            {% set disabled = "" %}
-                        {% else %}
-                            {% set disabled = "disabled" %}
-                        {% endif %}
-                        <li>
-                            <a href="{{ path('shippingmethod_delete', { 'id': shippingMethod.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
-                                <i class="fa fa-trash"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
-                            </a>
-                        </li>
-                    </ul>
+                    {% set formatedItems = pagination.items|idinkey %}
+                    {% set menu = knp_menu_get('list', [ shippingMethod.id ] ,{results:formatedItems[shippingMethod.id]   ,target:'shippingmethod'} ) %}
+                    {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
                 </td>
-
                 <td>
                     {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\ShippingMethod\\IsPublishedType' %}
                     {{ simple_live_editor.getCol(formType,entityName,'isPublished',shippingMethod)|raw }}

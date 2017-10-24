@@ -88,7 +88,7 @@ class BrandController extends Controller
             $em->persist($brand);
             $em->flush();
 
-            return $this->redirectToRoute('brand_show', array('id' => $brand->getId()));
+            return $this->redirectToRoute('brand_show', array('brand_id' => $brand->getId()));
         }
 
         $translator = $this->get('translator');
@@ -137,7 +137,7 @@ class BrandController extends Controller
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('brand_edit', array('id' => $brand->getId()));
+            return $this->redirectToRoute('brand_edit', array('brand_id' => $brand->getId()));
         }
 
 

@@ -2,6 +2,7 @@
 
 namespace LilWorks\StoreBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use LilWorks\StoreBundle\Entity\Warranty;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,10 +61,24 @@ class WarrantyController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($warranty);
+            foreach( $warranty->getProductsOnline() as $p){
+                if(!$p->getWarrantiesOnline()->contains($warranty)){
+                    $p->addWarrantiesOnline($warranty);
+                    $warranty->addProductsOnline($p);
+                    $em->persist($p);
+                }
+            }
+
+            foreach( $warranty->getProductsOffline() as $p){
+                if(!$p->getWarrantiesOffline()->contains($warranty)) {
+                    $p->addWarrantiesOffline($warranty);
+                    $warranty->addProductsOffline($p);
+                    $em->persist($p);
+                }
+            }
             $em->flush();
 
-            return $this->redirectToRoute('warranty_show', array('id' => $warranty->getId()));
+            return $this->redirectToRoute('warranty_show', array('warranty_id' => $warranty->getId()));
         }
 
 
@@ -97,13 +112,56 @@ class WarrantyController extends Controller
      */
     public function editAction(Request $request, Warranty $warranty)
     {
+
+
+        $originalProductsOnline = new ArrayCollection();
+        foreach ($warranty->getProductsOnline() as $p) {
+            $originalProductsOnline->add($p);
+        }
+        $originalProductsOffline = new ArrayCollection();
+        foreach ($warranty->getProductsOffline() as $p) {
+            $originalProductsOffline->add($p);
+        }
+
         $editForm = $this->createForm('LilWorks\StoreBundle\Form\WarrantyType', $warranty);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('warranty_edit', array('id' => $warranty->getId()));
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            foreach($originalProductsOnline as $p){
+                if( false === $warranty->getProductsOnline()->contains($p) ){
+                    $p->removeWarrantiesOnline($warranty);
+                    $warranty->removeProductsOnline($p);
+                    $em->persist($p);
+                }
+            }
+            foreach( $warranty->getProductsOnline() as $p){
+                if(!$p->getWarrantiesOnline()->contains($warranty)){
+                    $p->addWarrantiesOnline($warranty);
+                    $warranty->addProductsOnline($p);
+                    $em->persist($p);
+                }
+            }
+            foreach($originalProductsOffline as $p){
+                if( false === $warranty->getProductsOffline()->contains($p) ){
+                    $p->removeWarrantiesOffline($warranty);
+                    $warranty->removeProductsOffline($p);
+                    $em->persist($p);
+                }
+            }
+            foreach( $warranty->getProductsOffline() as $p){
+                if(!$p->getWarrantiesOffline()->contains($warranty)) {
+                    $p->addWarrantiesOffline($warranty);
+                    $warranty->addProductsOffline($p);
+                    $em->persist($p);
+                }
+            }
+            $em->flush();
+
+            return $this->redirectToRoute('warranty_edit', array('warranty_id' => $warranty->getId()));
+
         }
 
 

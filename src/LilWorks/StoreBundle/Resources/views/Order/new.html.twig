@@ -13,40 +13,40 @@
         </script>
     {% endblock %}
     <h1>
-        {% trans %}lilworks.storebundle.order.new{% endtrans %}
+        {% trans %}storebundle.order.new{% endtrans %}
     </h1>
 
     <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
         <a href="{{ path('order_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
         </a>
     </div>
 
     {{ form_start(form) }}
 
 
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.create{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
 
 
 
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}lilworks.storebundle.tab.general{% endtrans %}</a>
+            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#customer" role="tab">{% trans %}lilworks.storebundle.customer{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#customer" role="tab">{% trans %}storebundle.customer{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#products" role="tab">{% trans %}lilworks.storebundle.products{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#products" role="tab">{% trans %}storebundle.products{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link disabled" data-toggle="tab" href="#realshippingmethods" role="tab">{% trans %}lilworks.storebundle.realshippingmethods{% endtrans %}</a>
+            <a class="nav-link disabled" data-toggle="tab" href="#realshippingmethods" role="tab">{% trans %}storebundle.realshippingmethods{% endtrans %}</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link disabled" data-toggle="tab" href="#paymentmethods" role="tab">{% trans %}lilworks.storebundle.paymentmethods{% endtrans %}</a>
+            <a class="nav-link disabled" data-toggle="tab" href="#paymentmethods" role="tab">{% trans %}storebundle.paymentmethods{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#more" role="tab">{% trans %}lilworks.storebundle.tab.more{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#more" role="tab">{% trans %}storebundle.tab.more{% endtrans %}</a>
         </li>
     </ul>
 
@@ -133,7 +133,7 @@
 
 
 
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.create{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
 
     {{ form_end(form) }}
 

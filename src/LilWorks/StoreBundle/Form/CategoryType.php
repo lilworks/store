@@ -20,18 +20,18 @@ class CategoryType extends AbstractType
         $builder
 
             ->add('name',null,array(
-                'label'=>'lilworks.storebundle.name',
+                'label'=>'storebundle.name',
             ))
             ->add('isPublished',null,array(
-                'label'=>'lilworks.storebundle.ispublished',
+                'label'=>'storebundle.ispublished',
             ))
 
             ->add('pictureFile',FileType::class,array(
-                'label'=>'lilworks.storebundle.picture',
+                'label'=>'storebundle.picture',
                 'required'=>false
             ))
             ->add('products', EntityType::class, array(
-                'label'=>'lilworks.storebundle.products',
+                'label'=>'storebundle.products',
                 'class'    => 'LilWorksStoreBundle:Product' ,
                 'choice_label' => function ($obj) { return    $obj->getBrand()->getName() ." ". $obj->getName() ; },
                 'query_builder' => function (EntityRepository $er) {
@@ -52,8 +52,8 @@ class CategoryType extends AbstractType
                 )
             ))
             ->add('description',null,array(
-                'label'=>'lilworks.storebundle.description',
-                'attr' => ['class' => 'text-editor'],
+                'label'=>'storebundle.description',
+                'attr' => ['class' => 'editor-text'],
             ))
 
         ;

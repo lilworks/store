@@ -2,45 +2,30 @@
 
 {% block body %}
     <h1>
-        {% trans %}lilworks.storebundle.tag.show{% endtrans %}
+        {{ 'storebundle.tag.show %name%'|trans({'%name%':tag.name}) }}
     </h1>
 
-    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
-        <a href="{{ path('tag_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
-        </a>
-        <a href="{{ path('tag_new') }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
-        </a>
-        <a href="{{ path('tag_edit', { 'id': tag.id }) }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
-        </a>
-        {% if tag.products|length == 0 %}
-            {% set disabled = '' %}
-        {% else %}
-            {% set disabled = 'disabled' %}
-        {% endif %}
-        <a href="{{ path('tag_delete', { 'id': tag.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
-            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
-        </a>
+    <div id="content_menu">
+        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.product.portal','storebundle.menu.tag'] , {context: 'content'}) %}
+        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
     </div>
 
 
     <table class="table table-striped">
         <tbody>
             <tr>
-                <th>{% trans %}lilworks.storebundle.id{% endtrans %}</th>
+                <th>{% trans %}storebundle.id{% endtrans %}</th>
                 <td>#{{ tag.id }}</td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+                <th>{% trans %}storebundle.name{% endtrans %}</th>
                 <td>{{ tag.name }}</td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.products{% endtrans %}</th>
+                <th>{% trans %}storebundle.products{% endtrans %}</th>
                 <td>
                     {% for product in  tag.products %}
-                        <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{id: product.id}) }}">
+                        <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{product_id: product.id}) }}">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                             {% if product.pictures|length > 0 %}
                                 <img src="{{ asset('product/' ~ product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />

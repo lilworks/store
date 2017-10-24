@@ -112,7 +112,7 @@ class SuperCategoryController extends Controller
             $em->persist($superCategory);
             $em->flush();
 
-            return $this->redirectToRoute('supercategory_show', array('id' => $superCategory->getId()));
+            return $this->redirectToRoute('supercategory_show', array('supercategory_id' => $superCategory->getId()));
         }
 
         $translator = $this->get('translator');
@@ -185,7 +185,7 @@ class SuperCategoryController extends Controller
             $em->persist($superCategory);
             $em->flush();
 
-            return $this->redirectToRoute('supercategory_edit', array('id' => $superCategory->getId()));
+            return $this->redirectToRoute('supercategory_edit', array('supercategory_id' => $superCategory->getId()));
         }
 
         $translator = $this->get('translator');

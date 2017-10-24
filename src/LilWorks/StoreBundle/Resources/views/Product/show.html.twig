@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>
-        {% trans %}lilworks.storebundle.product.show{% endtrans %}
+        {% trans %}storebundle.product.show{% endtrans %}
     </h1>
 
     <div id="content_menu">
@@ -14,23 +14,23 @@
     <table class="table table-striped">
         <tbody>
             <tr>
-                <th>{% trans %}lilworks.storebundle.idandtag{% endtrans %}</th>
+                <th>{% trans %}storebundle.idandtag{% endtrans %}</th>
                 <td>#{{ product.id }} {{ product.tag }}
-                    <a href="{{ path('site_product',{tag:product.tag}) }}" target="_blank">{% trans %}lilworks.storebundle.link.showonline{% endtrans %}</a>
+                    <a href="{{ path('site_product',{tag:product.tag}) }}" target="_blank">{% trans %}storebundle.link.showonline{% endtrans %}</a>
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.brand{% endtrans %}</th>
+                <th>{% trans %}storebundle.brand{% endtrans %}</th>
                 <td>
                     <a role="button" class="btn btn-sm btn-secondary" href="{{ path('brand_show',{ brand_id:product.brand.id }) }}">{{ product.brand.name }}</a>
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+                <th>{% trans %}storebundle.name{% endtrans %}</th>
                 <td>{{ product.name }}</td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.categories{% endtrans %}</th>
+                <th>{% trans %}storebundle.categories{% endtrans %}</th>
                 <td>
                     <ul class="list-inline">
                     {% for category in product.categories %}
@@ -42,7 +42,7 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.ispublished{% endtrans %}</th>
+                <th>{% trans %}storebundle.ispublished{% endtrans %}</th>
                 <td>
                     {% if product.isPublished %}
                         <i class="fa fa-check" style="color: green;"></i>
@@ -54,7 +54,26 @@
             <tr>
                 <th>
                     <i class="fa fa-sitemap" aria-hidden="true"></i>
-                    {% trans %}lilworks.storebundle.relatedproducts{% endtrans %}
+                    {% trans %}storebundle.tags{% endtrans %}
+                </th>
+                <td>
+                    {% if  product.tags|length > 0 %}
+                        <ul class="list-inline">
+                            {% for tag in product.tags %}
+                                <li class="list-inline-item">
+                                    <a  role="button" class="btn btn-sm btn-secondary" href="{{ path('tag_show',{tag_id:tag.id }) }}">{{ tag.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <i class="fa fa-sitemap" aria-hidden="true"></i>
+                    {% trans %}storebundle.relatedproducts{% endtrans %}
                 </th>
                 <td>
                     {% if  product.relatedProducts|length > 0 %}
@@ -76,7 +95,7 @@
             <tr>
                 <th>
                     <i class="fa fa-sitemap" aria-hidden="true"></i>
-                    {% trans %}lilworks.storebundle.product.isrelatedto{% endtrans %}
+                    {% trans %}storebundle.product.isrelatedto{% endtrans %}
                 </th>
                 <td>
                     {% if  product.productsRelated|length > 0 %}
@@ -98,21 +117,21 @@
             <tr>
                 <th>
                     <i class="fa fa-file-text" aria-hidden="true"></i>
-                    {% trans %}lilworks.storebundle.description{% endtrans %}
+                    {% trans %}storebundle.description{% endtrans %}
                 </th>
                 <td>{{ product.description|raw }}</td>
             </tr>
             <tr>
                 <th>
                     <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                    {% trans %}lilworks.storebundle.descriptioninternal{% endtrans %}
+                    {% trans %}storebundle.descriptioninternal{% endtrans %}
                 </th>
                 <td>{{ product.descriptionInternal|raw }}</td>
             </tr>
             <tr>
                 <th>
                     <i class="fa fa-money" aria-hidden="true"></i>
-                    {% trans %}lilworks.storebundle.priceonline{% endtrans %}
+                    {% trans %}storebundle.priceonline{% endtrans %}
                 </th>
                 <td>
                     {% if product.priceOnline > 0 %}
@@ -131,7 +150,7 @@
                             </ul>
                         {% endif %}
                     {% else %}
-                        <span style="color: red;">{% trans %}lilworks.storebundle.notset{% endtrans %}</span>
+                        <span style="color: red;">{% trans %}storebundle.notset{% endtrans %}</span>
                     {% endif %}
                 </td>
             </tr>
@@ -139,7 +158,7 @@
             <tr>
                 <th>
                     <i class="fa fa-money" aria-hidden="true"></i>
-                    {% trans %}lilworks.storebundle.offline{% endtrans %}
+                    {% trans %}storebundle.offline{% endtrans %}
                 </th>
                 <td>
                     {% if product.priceOffline > 0 %}
@@ -158,40 +177,40 @@
                             </ul>
                         {% endif %}
                     {% else %}
-                        <span style="color: red;">{% trans %}lilworks.storebundle.notset{% endtrans %}</span>
+                        <span style="color: red;">{% trans %}storebundle.notset{% endtrans %}</span>
                     {% endif %}
                 </td>
             </tr>
             <tr>
                 <th>
                     <i class="fa fa-money" aria-hidden="true"></i>
-                    {% trans %}lilworks.storebundle.pricebuying{% endtrans %}
+                    {% trans %}storebundle.pricebuying{% endtrans %}
                 </th>
                 <td>
                     {% if product.priceBuying > 0 %}
                         {{ product.priceBuying|number_format(2, ',', '') }} €
                     {% else %}
-                        <span style="color: red;">{% trans %}lilworks.storebundle.notset{% endtrans %}</span>
+                        <span style="color: red;">{% trans %}storebundle.notset{% endtrans %}</span>
                     {% endif %}
                 </td>
             </tr>
             <tr>
                 <th>
                     <i class="fa fa-money" aria-hidden="true"></i>
-                    {% trans %}lilworks.storebundle.priceretail{% endtrans %}
+                    {% trans %}storebundle.priceretail{% endtrans %}
                 </th>
                 <td>
                     {% if product.priceRetail > 0 %}
                         {{ product.priceRetail|number_format(2, ',', '') }} €
                     {% else %}
-                        <span style="color: red;">{% trans %}lilworks.storebundle.notset{% endtrans %}</span>
+                        <span style="color: red;">{% trans %}storebundle.notset{% endtrans %}</span>
                     {% endif %}
                 </td>
             </tr>
             <tr>
                 <th>
                     <i class="fa fa-truck"></i>
-                    {% trans %}lilworks.storebundle.shippingmethods{% endtrans %}
+                    {% trans %}storebundle.shippingmethods{% endtrans %}
                 </th>
                 <td>
                     {% if  product.shippingMethods|length > 0 %}
@@ -208,14 +227,14 @@
             <tr>
                 <th>
                     <i class="fa fa-shield"></i>
-                    {% trans %}lilworks.storebundle.warranties{% endtrans %}
+                    {% trans %}storebundle.warranties{% endtrans %}
                 </th>
                 <td>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>{% trans %}lilworks.storebundle.warrantiesoffline{% endtrans %}</th>
-                                <th>{% trans %}lilworks.storebundle.warrantiesonline{% endtrans %}</th>
+                                <th>{% trans %}storebundle.warrantiesoffline{% endtrans %}</th>
+                                <th>{% trans %}storebundle.warrantiesonline{% endtrans %}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -224,11 +243,13 @@
                                     {% if  product.warrantiesOffline|length > 0 %}
                                         <ul>
                                             {% for warranty in product.warrantiesOffline %}
-                                                <li>{{ warranty.name }}</li>
+                                                <li>
+                                                    <a class="btn btn-sm btn-secondary" href="{{ path('warranty_show',{warranty_id:warranty.id}) }}">{{ warranty.name }}</a>
+                                                </li>
                                             {% endfor %}
                                         </ul>
                                     {% else %}
-                                        <span class="glyphicon glyphicon-ban-circle"></span>
+                                        <span class="fa fa-circle"></span>
                                     {% endif %}
                                 </td>
 
@@ -236,11 +257,13 @@
                                     {% if  product.warrantiesOnline|length > 0 %}
                                         <ul>
                                             {% for warranty in product.warrantiesOnline %}
-                                                <li>{{ warranty.name }}</li>
+                                                <li>
+                                                    <a class="btn btn-sm btn-secondary" href="{{ path('warranty_show',{warranty_id:warranty.id}) }}">{{ warranty.name }}</a>
+                                                </li>
                                             {% endfor %}
                                         </ul>
                                     {% else %}
-                                        <span class="glyphicon glyphicon-ban-circle"></span>
+                                        <span class="fa fa-circle"></span>
                                     {% endif %}
                                 </td>
                             </tr>
@@ -251,7 +274,7 @@
             <tr>
                 <th>
                     <i class="fa fa-picture-o"></i>
-                    {% trans %}lilworks.storebundle.pictures{% endtrans %}
+                    {% trans %}storebundle.pictures{% endtrans %}
                 </th>
                 <td>
                 {% for picture in product.pictures %}
@@ -260,21 +283,23 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}lilworks.storebundle.product.specification{% endtrans %}</th>
+                <th>{% trans %}storebundle.product.spec{% endtrans %}</th>
                 <td>
                     <ul>
-                        {% if  product.width  %}<li>{% trans %}width{% endtrans %}: {{ product.width }}</li>{% endif %}
-                        {% if  product.length  %}<li>{% trans %}length{% endtrans %}: {{ product.length }}</li>{% endif %}
-                        {% if  product.height  %}<li>{% trans %}height{% endtrans %}: {{ product.height }}</li>{% endif %}
-                        {% if  product.weight  %}<li>{% trans %}weight{% endtrans %}: {{ product.weight }}</li>{% endif %}
+                        {% if  product.width  %}<li>{% trans %}storebundle.product.width{% endtrans %}: {{ product.width }}</li>{% endif %}
+                        {% if  product.length  %}<li>{% trans %}storebundle.product.length{% endtrans %}: {{ product.length }}</li>{% endif %}
+                        {% if  product.height  %}<li>{% trans %}storebundle.product.height{% endtrans %}: {{ product.height }}</li>{% endif %}
+                        {% if  product.weight  %}<li>{% trans %}storebundle.product.weight{% endtrans %}: {{ product.weight }}</li>{% endif %}
                         {% if  product.docFiles|length > 0 %}
-                            <ul>
+                            {% if product.docFiles|length > 0%}
+                            <ul>{% trans %}storebundle.product.docfile{% endtrans %}
                                 {% for file in product.docFiles %}
                                     <li>
-                                        <a href="#">{{ file.docName }}</a>
+                                        <a class="btn btn-sm btn-secondary" href="{{ path('docfile_show',{docfile_id:file.id}) }}">{{ file.docName }}</a>
                                     </li>
                                 {% endfor %}
                             </ul>
+                            {% endif %}
                         {% else %}
 
                         {% endif %}
@@ -285,7 +310,7 @@
             <tr>
                 <th>
                     <i class="fa fa-commenting-o"></i>
-                    {% trans %}lilworks.storebundle.product.review{% endtrans %}
+                    {% trans %}storebundle.product.review{% endtrans %}
                 </th>
                 <td>
                     {% if  product.reviews|length > 0 %}

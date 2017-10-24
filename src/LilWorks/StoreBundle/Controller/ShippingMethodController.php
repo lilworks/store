@@ -2,10 +2,12 @@
 
 namespace LilWorks\StoreBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use LilWorks\StoreBundle\Entity\ShippingMethod;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 /**
  * Shippingmethod controller.
  *
@@ -57,10 +59,16 @@ class ShippingMethodController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            foreach( $shippingMethod->getProducts() as $p){
+                if(!$p->getShippingMethods()->contains($shippingMethod)){
+                    $p->addShippingMethod($shippingMethod);
+                    $shippingMethod->addProduct($p);
+                    $em->persist($p);
+                }
+            }
             $em->persist($shippingMethod);
             $em->flush();
-
-            return $this->redirectToRoute('shippingmethod_show', array('id' => $shippingMethod->getId()));
+            return $this->redirectToRoute('shippingmethod_show', array('shippingmethod_id' => $shippingMethod->getId()));
         }
 
         $translator = $this->get('translator');
@@ -75,8 +83,7 @@ class ShippingMethodController extends Controller
     }
 
     /**
-     * Finds and displays a shippingMethod entity.
-     *
+     * @ParamConverter("shippingMethod", options={"mapping": {"shippingmethod_id"   : "id"}})
      */
     public function showAction(ShippingMethod $shippingMethod)
     {
@@ -93,18 +100,38 @@ class ShippingMethodController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing shippingMethod entity.
-     *
+     * @ParamConverter("shippingMethod", options={"mapping": {"shippingmethod_id"   : "id"}})
      */
     public function editAction(Request $request, ShippingMethod $shippingMethod)
     {
+        $originalProducts = new ArrayCollection();
+        foreach ($shippingMethod->getProducts() as $p) {
+            $originalProducts->add($p);
+        }
+
+
         $editForm = $this->createForm('LilWorks\StoreBundle\Form\ShippingMethodType', $shippingMethod);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('shippingmethod_edit', array('id' => $shippingMethod->getId()));
+            $em = $this->getDoctrine()->getManager();
+            foreach($originalProducts as $p){
+                if( false === $shippingMethod->getProducts()->contains($p) ){
+                    $p->removeShippingMethod($shippingMethod);
+                    $shippingMethod->removeProduct($p);
+                    $em->persist($p);
+                }
+            }
+            foreach( $shippingMethod->getProducts() as $p){
+                if(!$p->getShippingMethods()->contains($shippingMethod)){
+                    $p->addShippingMethod($shippingMethod);
+                    $shippingMethod->addProduct($p);
+                    $em->persist($p);
+                }
+            }
+            $em->persist($shippingMethod);
+            $em->flush();
+            return $this->redirectToRoute('shippingmethod_edit', array('shippingmethod_id' => $shippingMethod->getId()));
         }
 
         $translator = $this->get('translator');
@@ -120,8 +147,7 @@ class ShippingMethodController extends Controller
     }
 
     /**
-     * Deletes a shippingMethod entity.
-     *
+     * @ParamConverter("shippingMethod", options={"mapping": {"shippingmethod_id"   : "id"}})
      */
     public function deleteAction(Request $request,ShippingMethod $shippingMethod)
     {
@@ -134,7 +160,7 @@ class ShippingMethodController extends Controller
         if ( !$referer || is_null($referer) ) {
             return $this->redirectToRoute('shippingmethod_index');
         } else {
-            return $this->redirectToRoute($referer);
+            return $this->redirect($referer);
         }
 
 

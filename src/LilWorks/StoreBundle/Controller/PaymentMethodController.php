@@ -60,7 +60,7 @@ class PaymentMethodController extends Controller
             $em->persist($paymentMethod);
             $em->flush();
 
-            return $this->redirectToRoute('paymentmethod_show', array('id' => $paymentMethod->getId()));
+            return $this->redirectToRoute('paymentmethod_show', array('paymentmethod_id' => $paymentMethod->getId()));
         }
 
         $translator = $this->get('translator');
@@ -102,7 +102,7 @@ class PaymentMethodController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('paymentmethod_edit', array('id' => $paymentMethod->getId()));
+            return $this->redirectToRoute('paymentmethod_edit', array('paymentmethod_id' => $paymentMethod->getId()));
         }
 
         $translator = $this->get('translator');
@@ -112,7 +112,7 @@ class PaymentMethodController extends Controller
 
         return $this->render('LilWorksStoreBundle:PaymentMethod:edit.html.twig', array(
             'paymentMethod' => $paymentMethod,
-            'edit_form' => $editForm->createView()
+            'form' => $editForm->createView()
         ));
     }
 

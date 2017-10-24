@@ -20,14 +20,14 @@ class DocfileType extends AbstractType
         $builder
 
             ->add('docFile',FileType::class,array(
-                'label'=>'lilworks.storebundle.file',
+                'label'=>'storebundle.file',
                 'required'=>true
             ))
             ->add('title',null,array(
-                'label'=>'lilworks.storebundle.docfiletitle'
+                'label'=>'storebundle.docfiletitle'
             ))
             ->add('products', EntityType::class, array(
-                'label'=>'lilworks.storebundle.products',
+                'label'=>'storebundle.products',
                 'class'    => 'LilWorksStoreBundle:Product' ,
                 'choice_label' => function ($obj) { return    $obj->getBrand()->getName() ." ". $obj->getName() ; },
                 'query_builder' => function (EntityRepository $er) {
@@ -48,7 +48,7 @@ class DocfileType extends AbstractType
                 )
             ))
             ->add('description',null,array(
-                'label'=>'lilworks.storebundle.description'
+                'label'=>'storebundle.description'
             ))
             ;
     }

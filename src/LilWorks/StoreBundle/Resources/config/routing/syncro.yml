@@ -2,6 +2,13 @@ syncro_index:
     path:     /
     defaults: { _controller: "LilWorksStoreBundle:Syncro:index" }
     methods:  GET
+
+syncro_action:
+    path:     /action/{what}
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:action" }
+    methods:  GET
+
+
 syncro_cleanentityfolder:
     path:     /cleanentityfolder
     defaults: { _controller: "LilWorksStoreBundle:Syncro:cleanEntityFolder" }

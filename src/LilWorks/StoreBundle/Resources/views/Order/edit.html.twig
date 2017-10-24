@@ -45,7 +45,7 @@
         </script>
     {% endblock %}
     <h1>
-        {% trans %}lilworks.storebundle.order.edit{% endtrans %}
+        {% trans %}storebundle.order.edit{% endtrans %}
         {% if  order.reference %}
             <span class="badge badge-default">{{ order.reference }}</span>
         {% endif %}
@@ -61,47 +61,47 @@
     {#
     <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
         <a href="{{ path('order_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
         </a>
         <a href="{{ path('order_new') }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}storebundle.link.new{% endtrans %}
         </a>
         <a href="{{ path('order_show', { order_id: order.id }) }}" class="btn btn-info btn-sm">
-            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.show{% endtrans %}
+            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}storebundle.link.show{% endtrans %}
         </a>
         <a href="{{ path('order_pdf',{order_id:order.id}) }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.pdf{% endtrans %}
+            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}storebundle.link.pdf{% endtrans %}
         </a>
         <a href="{{ path('order_delete', { order_id: order.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
-            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}storebundle.link.delete{% endtrans %}
         </a>
     </div>
     #}
     {{ form_start(form) }}
 
 
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
 
 
 
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}lilworks.storebundle.tab.general{% endtrans %}</a>
+            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#customer" role="tab">{% trans %}lilworks.storebundle.customer{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#customer" role="tab">{% trans %}storebundle.customer{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#products" role="tab">{% trans %}lilworks.storebundle.products{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#products" role="tab">{% trans %}storebundle.products{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#realshippingmethods" role="tab">{% trans %}lilworks.storebundle.realshippingmethods{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#realshippingmethods" role="tab">{% trans %}storebundle.realshippingmethods{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {% if order.orderType.tag == "DEVIS" %}disabled{% endif %}" data-toggle="tab" href="#paymentmethods" role="tab">{% trans %}lilworks.storebundle.paymentmethods{% endtrans %}</a>
+            <a class="nav-link {% if order.orderType.tag == "DEVIS" %}disabled{% endif %}" data-toggle="tab" href="#paymentmethods" role="tab">{% trans %}storebundle.paymentmethods{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#more" role="tab">{% trans %}lilworks.storebundle.tab.more{% endtrans %}</a>
+            <a class="nav-link" data-toggle="tab" href="#more" role="tab">{% trans %}storebundle.tab.more{% endtrans %}</a>
         </li>
     </ul>
 
@@ -186,6 +186,6 @@
             {{ form_row(form.userComment) }}
         </div>
     </div>
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}lilworks.storebundle.button.edit{% endtrans %}" />
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
     {{ form_end(form) }}
 {% endblock %}

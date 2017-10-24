@@ -2,18 +2,18 @@
 
 {% block body %}
     <h1>
-        {% trans %}lilworks.storebundle.tax.show{% endtrans %}
+        {% trans %}storebundle.tax.show{% endtrans %}
     </h1>
 
     <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
         <a href="{{ path('tax_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.list{% endtrans %}
+            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
         </a>
         <a href="{{ path('tax_new') }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.new{% endtrans %}
+            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}storebundle.link.new{% endtrans %}
         </a>
         <a href="{{ path('tax_edit', { 'id': tax.id }) }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.edit{% endtrans %}
+            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}storebundle.link.edit{% endtrans %}
         </a>
         {% if tax.productsOffline|length == 0 and tax.productsOnline|length == 0 and tax.ordersProducts|length == 0%}
             {% set disabled = '' %}
@@ -21,7 +21,7 @@
             {% set disabled = 'disabled' %}
         {% endif %}
         <a href="{{ path('tax_delete', { 'id': tax.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
-            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}lilworks.storebundle.link.delete{% endtrans %}
+            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}storebundle.link.delete{% endtrans %}
         </a>
     </div>
 
@@ -29,19 +29,19 @@
     <table class="table table-striped">
         <tbody>
         <tr>
-            <th>{% trans %}lilworks.storebundle.name{% endtrans %}</th>
+            <th>{% trans %}storebundle.name{% endtrans %}</th>
             <td>{{ tax.name }}</td>
         </tr>
         <tr>
-            <th>{% trans %}lilworks.storebundle.tax.value{% endtrans %}</th>
+            <th>{% trans %}storebundle.tax.value{% endtrans %}</th>
             <td>{{ tax.value }}</td>
         </tr>
         <tr>
-            <th>{% trans %}lilworks.storebundle.tax.type{% endtrans %}</th>
+            <th>{% trans %}storebundle.tax.type{% endtrans %}</th>
             <td>{{ tax.type|raw }}</td>
         </tr>
         <tr>
-            <th>{% trans %}lilworks.storebundle.tax.ordersproducts{% endtrans %}</th>
+            <th>{% trans %}storebundle.tax.ordersproducts{% endtrans %}</th>
             <td>
                 {% for product in  tax.ordersProducts %}
                     <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{id: product.order.id}) }}">
@@ -55,7 +55,7 @@
             </td>
         </tr>
         <tr>
-            <th>{% trans %}lilworks.storebundle.tax.productsoffline{% endtrans %}</th>
+            <th>{% trans %}storebundle.tax.productsoffline{% endtrans %}</th>
             <td>
                 {% for product in tax.productsOffline %}
                     <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{id: product.id}) }}">
@@ -69,7 +69,7 @@
             </td>
         </tr>
         <tr>
-            <th>{% trans %}lilworks.storebundle.tax.productsonline{% endtrans %}</th>
+            <th>{% trans %}storebundle.tax.productsonline{% endtrans %}</th>
             <td>
 
                 {% for product in tax.productsOnline %}

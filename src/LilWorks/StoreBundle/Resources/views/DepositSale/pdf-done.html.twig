@@ -27,7 +27,7 @@
     <tbody>
 
     <tr>
-        <th>{% trans %}lilworks.storebundle.product{% endtrans %}</th>
+        <th>{% trans %}storebundle.product{% endtrans %}</th>
         <td>
                 <i class="fa fa-pencil" aria-hidden="true"></i>
                 {% if  depositSale.product.pictures|length>0 %}
@@ -37,13 +37,13 @@
         </td>
     </tr>
     <tr>
-        <th>{% trans %}lilworks.storebundle.depositsale.deposedat{% endtrans %}</th>
+        <th>{% trans %}storebundle.depositsale.deposedat{% endtrans %}</th>
         <td>
             {{ depositSale.deposedAt|date("d/m/Y") }}
         </td>
     </tr>
     <tr>
-        <th>{% trans %}lilworks.storebundle.depositsale.selledat{% endtrans %}</th>
+        <th>{% trans %}storebundle.depositsale.selledat{% endtrans %}</th>
         <td>
             {% if depositSale.selledAt %}
                 {{ depositSale.selledAt|date("d/m/Y") }}
@@ -54,13 +54,13 @@
     </tr>
     {% if depositSale.description %}
     <tr>
-        <th>{% trans %}lilworks.storebundle.description{% endtrans %}</th>
+        <th>{% trans %}storebundle.description{% endtrans %}</th>
         <td>{{ depositSale.description|raw }}</td>
     </tr>
     {% endif %}
 
     <tr>
-        <th>{% trans %}lilworks.storebundle.depositsale.pricebuying{% endtrans %}</th>
+        <th>{% trans %}storebundle.depositsale.pricebuying{% endtrans %}</th>
         <td>
             {% if depositSale.coupon %}
                 Vous avez choisi d'être rétribué par un avoir:

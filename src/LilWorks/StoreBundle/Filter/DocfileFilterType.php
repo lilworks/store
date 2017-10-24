@@ -11,7 +11,15 @@ class DocfileFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('docName', Filters\TextFilterType::class);
+        $builder
+            ->add('docName', Filters\TextFilterType::class,array(
+                'label'=>'storebundle.docfile.name'
+            ))
+            ->add('title', Filters\TextFilterType::class,array(
+                'label'=>'storebundle.docfile.title'
+            ))
+
+        ;
     }
 
     public function getBlockPrefix()

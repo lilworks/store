@@ -2,6 +2,7 @@
 
 namespace LilWorks\StoreBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use LilWorks\StoreBundle\Entity\Tax;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -113,37 +114,53 @@ class TaxController extends Controller
      */
     public function editAction(Request $request, Tax $tax)
     {
+
+        $originalProductsOnline = new ArrayCollection();
+        foreach ($tax->getProductsOnline() as $p) {
+            $originalProductsOnline->add($p);
+        }
+        $originalProductsOffline = new ArrayCollection();
+        foreach ($tax->getProductsOffline() as $p) {
+            $originalProductsOffline->add($p);
+        }
         $editForm = $this->createForm('LilWorks\StoreBundle\Form\TaxType', $tax);
         $editForm->handleRequest($request);
 
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if( count($tax->getProductsOffline())>0){
 
-                foreach($tax->getProductsOffline() as $product){
-                    // REMOVE ALL ENTITY
-                    foreach($product->getTaxesOffline() as $taxOffline){
-                        $product->removeTaxOffline($taxOffline);
-                    }
-                    $product->addTaxOffline($tax);
-                    $em->persist($product);
+
+            foreach($originalProductsOnline as $p){
+                if( false === $tax->getProductsOnline()->contains($p) ){
+                    $p->removeTaxOnline($tax);
+                    $tax->removeProductsOnline($p);
+                    $em->persist($p);
                 }
             }
-            if( count($tax->getProductsOnline())>0){
-
-                foreach($tax->getProductsOnline() as $product){
-                    // REMOVE ALL ENTITY
-                    foreach($product->getTaxesOnline() as $taxOnline){
-                        $product->removeTaxOnline($taxOnline);
-                    }
-                    $product->addTaxOnline($tax);
-                    $em->persist($product);
+            foreach( $tax->getProductsOnline() as $p){
+                if(!$p->getTaxesOnline()->contains($tax)){
+                    $p->addTaxOnline($tax);
+                    $tax->addProductsOnline($p);
+                    $em->persist($p);
+                }
+            }
+            foreach($originalProductsOffline as $p){
+                if( false === $tax->getProductsOffline()->contains($p) ){
+                    $p->removeTaxOffline($tax);
+                    $tax->removeProductsOffline($p);
+                    $em->persist($p);
+                }
+            }
+            foreach( $tax->getProductsOffline() as $p){
+                if(!$p->getTaxesOffline()->contains($tax)) {
+                    $p->addTaxOffline($tax);
+                    $tax->addProductsOffline($p);
+                    $em->persist($p);
                 }
             }
             $em->flush();
-
-
-            return $this->redirectToRoute('tax_edit', array('id' => $tax->getId()));
+            return $this->redirectToRoute('tax_edit', array('tax_id' => $tax->getId()));
         }
 
         $translator = $this->get('translator');
