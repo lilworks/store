@@ -434,8 +434,9 @@ class Basket
         $session = $request->getSession();
         $session->start();
 
-        $sessionDb = $this->em->getRepository('AppBundle:Session')->find($session->getId());
-        $basket =   $sessionDb->getBasket();
+        if($sessionDb = $this->em->getRepository('AppBundle:Session')->find($session->getId())){
+            $basket =   $sessionDb->getBasket();
+        }
 
 
         if( ! $basket ){
