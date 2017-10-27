@@ -96,483 +96,487 @@ class ImportController extends Controller
         $statement->execute();
 
         $max = 1000;
-        $i=0;
+        $i=1;
         $resultClient = $statement->fetchAll();
+
         foreach($resultClient as $clientOffline ) {
-            $customer = new Customer();
+            $formatedNames = $this->getNames($clientOffline['cli_name']);
+
+            $customer  = $em->getRepository("LilWorksStoreBundle:Customer")->findOneBy(array(
+                'firstName'=>$formatedNames['first'],
+                'lastName'=>$formatedNames['last'],
+                'companyName'=>$clientOffline['cli_company'],
+            ));
 
 
-            if ($clientOffline['cli_company'] != "") {
-                $customer->setCompanyName($clientOffline['cli_company']);
-            }
+            if(!$customer){
+                $customer = new Customer();
 
-
-            if ($clientOffline['cli_name'] != "") {
-                $formatedNames = $this->getNames($clientOffline['cli_name']);
-                $customer->setLastName($formatedNames['last']);
-                $customer->setFirstName($formatedNames['first']);
-
-                $date = new \DateTime();
-                $date->setTimestamp(strtotime($clientOffline['cli_created']));
-
-                $customer->setCreatedAt(
-                    $date
-                );
-
-                $customer->setEmail($clientOffline['cli_email']);
-                $customer->setCompanyName($clientOffline['cli_company']);
-            } else {
-                $customer->setFirstName('UNKNOW');
-                $customer->setLastName('UNKNOW');
-            }
-
-
-            if( $clientOffline['liv_adr_id'] > 0){
-                $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id LIMIT 1");
-                $statement->bindValue('id', $clientOffline['liv_adr_id']);
-                $statement->execute();
-                if($resultAddress = $statement->fetch()){
-                    $address = new Address();
-                    $address->setCustomer($customer);
-                    $address->setName($resultAddress["adr_name"]);
-                    $address->setStreet($resultAddress["adr_adr"]);
-                    $address->setComplement($resultAddress["adr_lieudit"]);
-                    $address->setZipCode($resultAddress["adr_code"]);
-                    $address->setCity($resultAddress["adr_ville"]);
-
-                    $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
-                    $statement->bindValue('id', $resultAddress["pay_id"]);
-                    $statement->execute();
-                    $resultAddressPays = $statement->fetchAll();
-                    $resultAddressPays = $resultAddressPays[0];
-                    $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
-
-                    $address->setCountry($country);
-                    $em->persist($address);
+                if ($clientOffline['cli_company'] != "") {
+                    $customer->setCompanyName($clientOffline['cli_company']);
                 }
 
 
-            }
+                if ($clientOffline['cli_name'] != "") {
 
-            if($clientOffline['fac_adr_id']>0){
+                    $customer->setLastName($formatedNames['last']);
+                    $customer->setFirstName($formatedNames['first']);
 
-                $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id LIMIT 1");
-                $statement->bindValue('id', $clientOffline['fac_adr_id']);
-                $statement->execute();
-                if($resultAddress = $statement->fetch()){
-                    $address = new Address();
-                    $address->setCustomer($customer);
-                    $address->setName($resultAddress["adr_name"]);
-                    $address->setStreet($resultAddress["adr_adr"]);
-                    $address->setComplement($resultAddress["adr_lieudit"]);
-                    $address->setZipCode($resultAddress["adr_code"]);
-                    $address->setCity($resultAddress["adr_ville"]);
+                    $date = new \DateTime();
+                    $date->setTimestamp(strtotime($clientOffline['cli_created']));
 
-                    $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
-                    $statement->bindValue('id', $resultAddress["pay_id"]);
-                    $statement->execute();
-                    $resultAddressPays = $statement->fetchAll();
-                    $resultAddressPays = $resultAddressPays[0];
-                    $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
+                    $customer->setCreatedAt(
+                        $date
+                    );
 
-                    $address->setCountry($country);
-
-                    $em->persist($address);
+                    $customer->setEmail($clientOffline['cli_email']);
+                    $customer->setCompanyName($clientOffline['cli_company']);
+                } else {
+                    $customer->setFirstName('UNKNOW');
+                    $customer->setLastName('UNKNOW');
                 }
 
 
+                if ($clientOffline['liv_adr_id'] > 0) {
+                    $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id LIMIT 1");
+                    $statement->bindValue('id', $clientOffline['liv_adr_id']);
+                    $statement->execute();
+                    if ($resultAddress = $statement->fetch()) {
+                        $address = new Address();
+                        $address->setCustomer($customer);
+                        $address->setName($resultAddress["adr_name"]);
+                        $address->setStreet($resultAddress["adr_adr"]);
+                        $address->setComplement($resultAddress["adr_lieudit"]);
+                        $address->setZipCode($resultAddress["adr_code"]);
+                        $address->setCity($resultAddress["adr_ville"]);
 
-            }
+                        $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
+                        $statement->bindValue('id', $resultAddress["pay_id"]);
+                        $statement->execute();
+                        $resultAddressPays = $statement->fetchAll();
+                        $resultAddressPays = $resultAddressPays[0];
+                        $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
 
-            $statement = $connection->prepare("SELECT * FROM telephones WHERE cli_id = :id ");
-            $statement->bindValue('id', $clientOffline['cli_id']);
-            $statement->execute();
-            $resultPhonenumbers = $statement->fetchAll();
-            foreach($resultPhonenumbers as $resultPhonenumber){
-                $phonenumber = new PhoneNumber();
-                $phonenumber->setCustomer($customer);
-                $phonenumber->setPhonenumber($resultPhonenumber['tel_num']);
-                $em->persist($phonenumber);
-            }
-
-
-
-
-            $statement = $connection->prepare("SELECT * FROM docs WHERE cli_id = :id ");
-            $statement->bindValue('id', $clientOffline['cli_id']);
-            $statement->execute();
-            $resultDocs = $statement->fetchAll();
-            foreach($resultDocs as $doc){
-
-
-                $date = new \DateTime();
-
-
-
-                if(!$doc['doc_name']){
-                    $order = new Order();
-                    $order->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
-                    $order->setCustomer($customer);
-                    $order->setReference($date->setTimestamp(strtotime($doc['doc_date']))->format('Y'). '-?????');
-                    $order->setTot($doc['doc_tot']);
-                    $order->setDescription($doc['doc_desc']);
-                    $order->setDescriptionInternal($doc['doc_desc_interne']);
-
-                    foreach($customer->getAddresses() as $address){
-                        $order->setBillingAddress();
-                        $order->setShippingAddress();
-                        break 1;
+                        $address->setCountry($country);
+                        $em->persist($address);
                     }
 
 
-                    $statementPayment = $connection->prepare("SELECT * FROM docs_reglements WHERE doc_id = :id ");
-                    $statementPayment->bindValue('id', $doc['doc_id']);
-                    $statementPayment->execute();
-                    $resultPayment = $statementPayment->fetchAll();
+                }
 
-                    foreach($resultPayment as $payment){
-                        if($pm  = $em->getRepository("LilWorksStoreBundle:PaymentMethod")->find($payment['pai_id'])){
-                            $opm = new OrdersPaymentMethods();
-                            $opm->setAmount($payment['dre_value']);
-                            $opm->setPaymentMethod($pm);
-                            $opm->setOrder($order);
-                            $opm->setPayedAt($date->setTimestamp(strtotime($payment['dre_date'])));
-                            $pm->addOrdersPaymentMethod($opm);
-                            $em->persist($opm);
+                if ($clientOffline['fac_adr_id'] > 0) {
+
+                    $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id LIMIT 1");
+                    $statement->bindValue('id', $clientOffline['fac_adr_id']);
+                    $statement->execute();
+                    if ($resultAddress = $statement->fetch()) {
+                        $address = new Address();
+                        $address->setCustomer($customer);
+                        $address->setName($resultAddress["adr_name"]);
+                        $address->setStreet($resultAddress["adr_adr"]);
+                        $address->setComplement($resultAddress["adr_lieudit"]);
+                        $address->setZipCode($resultAddress["adr_code"]);
+                        $address->setCity($resultAddress["adr_ville"]);
+
+                        $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
+                        $statement->bindValue('id', $resultAddress["pay_id"]);
+                        $statement->execute();
+                        $resultAddressPays = $statement->fetchAll();
+                        $resultAddressPays = $resultAddressPays[0];
+                        $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
+
+                        $address->setCountry($country);
+
+                        $em->persist($address);
+                    }
+
+
+                }
+
+                $statement = $connection->prepare("SELECT * FROM telephones WHERE cli_id = :id ");
+                $statement->bindValue('id', $clientOffline['cli_id']);
+                $statement->execute();
+                $resultPhonenumbers = $statement->fetchAll();
+                foreach ($resultPhonenumbers as $resultPhonenumber) {
+                    $phonenumber = new PhoneNumber();
+                    $phonenumber->setCustomer($customer);
+                    $phonenumber->setPhonenumber($resultPhonenumber['tel_num']);
+                    $em->persist($phonenumber);
+                }
+
+
+                $statement = $connection->prepare("SELECT * FROM docs WHERE cli_id = :id ");
+                $statement->bindValue('id', $clientOffline['cli_id']);
+                $statement->execute();
+                $resultDocs = $statement->fetchAll();
+                foreach ($resultDocs as $doc) {
+
+
+                    $date = new \DateTime();
+
+
+                    if (!$doc['doc_name']) {
+                        $order = new Order();
+                        $order->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
+                        $order->setCustomer($customer);
+                        $order->setReference($date->setTimestamp(strtotime($doc['doc_date']))->format('Y') . '-?????');
+                        $order->setTot($doc['doc_tot']);
+                        $order->setDescription($doc['doc_desc']);
+                        $order->setDescriptionInternal($doc['doc_desc_interne']);
+
+                        foreach ($customer->getAddresses() as $address) {
+                            $order->setBillingAddress();
+                            $order->setShippingAddress();
+                            break 1;
                         }
-                    }
-
-                    if($doc['dst_id'] == 1){
-                        $os  = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(9);
-                    }elseif($doc['dst_id'] == 2){
-                        $os  = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(1);
-                    }elseif($doc['dst_id'] == 3){
-                        $os  = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(6);
-                    }elseif($doc['dst_id'] == 4){
-                        $os  = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(7);
-                    }
-                    if($os){
-                        $oos = new OrdersOrderSteps();
-                        $oos->setOrderStep($os);
-                        $oos->setOrder($order);
-                        $oos->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
-                        $em->persist($oos);
-                    }
 
 
-                    $statementProduct = $connection->prepare("SELECT * FROM docs_articles WHERE doc_id = :id ");
-                    $statementProduct->bindValue('id', $doc['doc_id']);
-                    $statementProduct->execute();
-                    $resultProduct = $statementProduct->fetchAll();
-                    foreach($resultProduct as $product){
-                        $statementProductName = $connection->prepare("SELECT * FROM articles WHERE art_id = :id LIMIT 1");
-                        $statementProductName->bindValue('id', $product['art_id']);
-                        $statementProductName->execute();
-                        if($resultProductName = $statementProductName->fetch()){
-                           if( $p  = $em->getRepository("LilWorksStoreBundle:Product")->findOneByName($resultProductName['art_name'])){
-                               $orderProduct = new OrdersProducts();
-                               $orderProduct->setProduct($p);
-                               $orderProduct->setOrder($order);
-                               $orderProduct->setQuantity($product['dar_q']);
-                               $orderProduct->setName($product['dar_name']);
-                               $orderProduct->setPrice($product['dar_pu']);
-                               $orderProduct->setSerialNumber($product['dar_serial']);
-                               $orderProduct->setDestocking(1);
-                               $orderProduct->setWarrantieString($product['dar_warranty']);
-                               $p->addOrdersProduct($orderProduct);
+                        $statementPayment = $connection->prepare("SELECT * FROM docs_reglements WHERE doc_id = :id ");
+                        $statementPayment->bindValue('id', $doc['doc_id']);
+                        $statementPayment->execute();
+                        $resultPayment = $statementPayment->fetchAll();
 
-                               if($product['tax_id_tva'] == 1){
-                                   $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(1);
-                               }elseif($product['tax_id_tva'] == 2){
-                                   $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(3);
-                               }elseif($product['tax_id_tva'] == 3){
-                                   $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(4);
-                               }elseif($product['tax_id_tva'] == 4){
-                                   $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(2);
-                               }elseif($product['tax_id_tva'] == 5){
-                                   $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(6);
-                               }elseif($product['tax_id_tva'] == 6){
-                                   $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(7);
-                               }
-                               if($tva){
-                                   $orderProduct->addTax($tva);
-                                   $tva->addOrdersProduct($orderProduct);
-                               }
-
-                               if($product['tax_id_eco'] == 1){
-                                   $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(1);
-                               }elseif($product['tax_id_eco'] == 2){
-                                   $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(3);
-                               }elseif($product['tax_id_eco'] == 3){
-                                   $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(4);
-                               }elseif($product['tax_id_eco'] == 4){
-                                   $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(2);
-                               }elseif($product['tax_id_eco'] == 5){
-                                   $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(6);
-                               }elseif($product['tax_id_eco'] == 6){
-                                   $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(7);
-                               }
-                               if($eco){
-                                   $orderProduct->addTax($eco);
-                                   $eco->addOrdersProduct($orderProduct);
-                               }
-
-                               $em->persist($orderProduct);
-                           }
-                        }
-                    }
-
-
-                    $em->persist($order);
-                }elseif(strstr($doc['doc_name'],'FA')){
-                    $order = new Order();
-                    $order->setOrderType($em->getRepository("LilWorksStoreBundle:OrderType")->find(1));
-                    $order->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
-                    $order->setCustomer($customer);
-                    $names = explode('-',$doc['doc_name']);
-                    $order->setReference($date->setTimestamp(strtotime($doc['doc_date']))->format('Y'). '-'. $names[0].$names[1]);
-                    $order->setTot($doc['doc_tot']);
-                    $order->setDescription($doc['doc_desc']);
-                    $order->setDescriptionInternal($doc['doc_desc_interne']);
-                    foreach($customer->getAddresses() as $address){
-                        $order->setBillingAddress();
-                        $order->setShippingAddress();
-                        break 1;
-                    }
-                    $statementPayment = $connection->prepare("SELECT * FROM docs_reglements WHERE doc_id = :id ");
-                    $statementPayment->bindValue('id', $doc['doc_id']);
-                    $statementPayment->execute();
-                    $resultPayment = $statementPayment->fetchAll();
-
-                    foreach($resultPayment as $payment){
-                        if($pm  = $em->getRepository("LilWorksStoreBundle:PaymentMethod")->find($payment['pai_id'])){
-                            $opm = new OrdersPaymentMethods();
-                            $opm->setAmount($payment['dre_value']);
-                            $opm->setPaymentMethod($pm);
-                            $opm->setOrder($order);
-                            $opm->setPayedAt($date->setTimestamp(strtotime($payment['dre_date'])));
-                            $pm->addOrdersPaymentMethod($opm);
-                            $em->persist($opm);
-                        }
-                    }
-
-                    if($doc['dst_id'] == 1){
-                        $os  = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(9);
-                    }elseif($doc['dst_id'] == 2){
-                        $os  = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(1);
-                    }elseif($doc['dst_id'] == 3){
-                        $os  = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(6);
-                    }elseif($doc['dst_id'] == 4){
-                        $os  = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(7);
-                    }
-                    if($os){
-                        $oos = new OrdersOrderSteps();
-                        $oos->setOrderStep($os);
-                        $oos->setOrder($order);
-                        $oos->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
-                        $em->persist($oos);
-                    }
-
-
-                    $statementProduct = $connection->prepare("SELECT * FROM docs_articles WHERE doc_id = :id ");
-                    $statementProduct->bindValue('id', $doc['doc_id']);
-                    $statementProduct->execute();
-                    $resultProduct = $statementProduct->fetchAll();
-
-                    foreach($resultProduct as $product){
-                        $statementProductName = $connection->prepare("SELECT * FROM articles WHERE art_id = :id LIMIT 1");
-                        $statementProductName->bindValue('id', $product['art_id']);
-                        $statementProductName->execute();
-                        $resultProductName = $statementProductName->fetch();
-                        if($resultProductName){
-
-                            if( $p  = $em->getRepository("LilWorksStoreBundle:Product")->findOneByName($resultProductName['art_name'])){
-                                $orderProduct = new OrdersProducts();
-                                $orderProduct->setProduct($p);
-                                $orderProduct->setOrder($order);
-                                $orderProduct->setQuantity($product['dar_q']);
-                                $orderProduct->setName($product['dar_name']);
-                                $orderProduct->setPrice($product['dar_pu']);
-                                $orderProduct->setSerialNumber($product['dar_serial']);
-                                $orderProduct->setDestocking(1);
-                                $orderProduct->setWarrantieString($product['dar_warranty']);
-                                $p->addOrdersProduct($orderProduct);
-                                if($product['tax_id_tva'] == 1){
-                                    $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(1);
-                                }elseif($product['tax_id_tva'] == 2){
-                                    $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(3);
-                                }elseif($product['tax_id_tva'] == 3){
-                                    $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(4);
-                                }elseif($product['tax_id_tva'] == 4){
-                                    $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(2);
-                                }elseif($product['tax_id_tva'] == 5){
-                                    $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(6);
-                                }elseif($product['tax_id_tva'] == 6){
-                                    $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(7);
-                                }
-                                if($tva){
-                                    $orderProduct->addTax($tva);
-                                    $tva->addOrdersProduct($orderProduct);
-                                }
-
-                                if($product['tax_id_eco'] == 1){
-                                    $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(1);
-                                }elseif($product['tax_id_eco'] == 2){
-                                    $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(3);
-                                }elseif($product['tax_id_eco'] == 3){
-                                    $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(4);
-                                }elseif($product['tax_id_eco'] == 4){
-                                    $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(2);
-                                }elseif($product['tax_id_eco'] == 5){
-                                    $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(6);
-                                }elseif($product['tax_id_eco'] == 6){
-                                    $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(7);
-                                }
-                                if($eco){
-                                    $orderProduct->addTax($eco);
-                                    $eco->addOrdersProduct($orderProduct);
-                                }
-
-                                $em->persist($orderProduct);
+                        foreach ($resultPayment as $payment) {
+                            if ($pm = $em->getRepository("LilWorksStoreBundle:PaymentMethod")->find($payment['pai_id'])) {
+                                $opm = new OrdersPaymentMethods();
+                                $opm->setAmount($payment['dre_value']);
+                                $opm->setPaymentMethod($pm);
+                                $opm->setOrder($order);
+                                $opm->setPayedAt($date->setTimestamp(strtotime($payment['dre_date'])));
+                                $pm->addOrdersPaymentMethod($opm);
+                                $em->persist($opm);
                             }
                         }
-                    }
+
+                        if ($doc['dst_id'] == 1) {
+                            $os = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(9);
+                        } elseif ($doc['dst_id'] == 2) {
+                            $os = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(1);
+                        } elseif ($doc['dst_id'] == 3) {
+                            $os = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(6);
+                        } elseif ($doc['dst_id'] == 4) {
+                            $os = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(7);
+                        }
+                        if ($os) {
+                            $oos = new OrdersOrderSteps();
+                            $oos->setOrderStep($os);
+                            $oos->setOrder($order);
+                            $oos->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
+                            $em->persist($oos);
+                        }
 
 
+                        $statementProduct = $connection->prepare("SELECT * FROM docs_articles WHERE doc_id = :id ");
+                        $statementProduct->bindValue('id', $doc['doc_id']);
+                        $statementProduct->execute();
+                        $resultProduct = $statementProduct->fetchAll();
+                        foreach ($resultProduct as $product) {
+                            $statementProductName = $connection->prepare("SELECT * FROM articles WHERE art_id = :id LIMIT 1");
+                            $statementProductName->bindValue('id', $product['art_id']);
+                            $statementProductName->execute();
+                            if ($resultProductName = $statementProductName->fetch()) {
+                                if ($p = $em->getRepository("LilWorksStoreBundle:Product")->findOneByName($resultProductName['art_name'])) {
+                                    $orderProduct = new OrdersProducts();
+                                    $orderProduct->setProduct($p);
+                                    $orderProduct->setOrder($order);
+                                    $orderProduct->setQuantity($product['dar_q']);
+                                    $orderProduct->setName($product['dar_name']);
+                                    $orderProduct->setPrice($product['dar_pu']);
+                                    $orderProduct->setSerialNumber($product['dar_serial']);
+                                    $orderProduct->setDestocking(1);
+                                    $orderProduct->setWarrantieString($product['dar_warranty']);
+                                    $p->addOrdersProduct($orderProduct);
 
+                                    if ($product['tax_id_tva'] == 1) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(1);
+                                    } elseif ($product['tax_id_tva'] == 2) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(3);
+                                    } elseif ($product['tax_id_tva'] == 3) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(4);
+                                    } elseif ($product['tax_id_tva'] == 4) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(2);
+                                    } elseif ($product['tax_id_tva'] == 5) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(6);
+                                    } elseif ($product['tax_id_tva'] == 6) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(7);
+                                    }
+                                    if ($tva) {
+                                        $orderProduct->addTax($tva);
+                                        $tva->addOrdersProduct($orderProduct);
+                                    }
 
-                    $em->persist($order);
-                }elseif(strstr($doc['doc_name'],'DE')){
-                    $order = new Order();
-                    $order->setOrderType($em->getRepository("LilWorksStoreBundle:OrderType")->find(2));
-                    $order->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
-                    $order->setCustomer($customer);
-                    $names = explode('-',$doc['doc_name']);
-                    $order->setReference($date->setTimestamp(strtotime($doc['doc_date']))->format('Y'). '-'. $names[0].$names[1]);
-                    $order->setTot($doc['doc_tot']);
-                    $order->setDescription($doc['doc_desc']);
-                    $order->setDescriptionInternal($doc['doc_desc_interne']);
+                                    if ($product['tax_id_eco'] == 1) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(1);
+                                    } elseif ($product['tax_id_eco'] == 2) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(3);
+                                    } elseif ($product['tax_id_eco'] == 3) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(4);
+                                    } elseif ($product['tax_id_eco'] == 4) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(2);
+                                    } elseif ($product['tax_id_eco'] == 5) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(6);
+                                    } elseif ($product['tax_id_eco'] == 6) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(7);
+                                    }
+                                    if (isset($eco)) {
+                                        $orderProduct->addTax($eco);
+                                        $eco->addOrdersProduct($orderProduct);
+                                    }
 
-                    if($doc['dst_id'] == 1){
-                        $os  = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(9);
-                    }elseif($doc['dst_id'] == 2){
-                        $os  = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(1);
-                    }elseif($doc['dst_id'] == 3){
-                        $os  = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(6);
-                    }elseif($doc['dst_id'] == 4){
-                        $os  = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(7);
-                    }
-                    if($os){
-                        $oos = new OrdersOrderSteps();
-                        $oos->setOrderStep($os);
-                        $oos->setOrder($order);
-                        $oos->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
-                        $em->persist($oos);
-                    }
-
-
-                    $statementProduct = $connection->prepare("SELECT * FROM docs_articles WHERE doc_id = :id ");
-                    $statementProduct->bindValue('id', $doc['doc_id']);
-                    $statementProduct->execute();
-                    $resultProduct = $statementProduct->fetchAll();
-                    foreach($resultProduct as $product){
-                        $statementProductName = $connection->prepare("SELECT * FROM articles WHERE art_id = :id LIMIT 1");
-                        $statementProductName->bindValue('id', $product['art_id']);
-                        $statementProductName->execute();
-                        if($resultProductName = $statementProductName->fetch()){
-                            if( $p  = $em->getRepository("LilWorksStoreBundle:Product")->findOneByName($resultProductName['art_name'])){
-                                $orderProduct = new OrdersProducts();
-                                $orderProduct->setProduct($p);
-                                $orderProduct->setOrder($order);
-                                $orderProduct->setQuantity($product['dar_q']);
-                                $orderProduct->setName($product['dar_name']);
-                                $orderProduct->setPrice($product['dar_pu']);
-                                $orderProduct->setSerialNumber($product['dar_serial']);
-                                $orderProduct->setDescription(1);
-                                $orderProduct->setWarrantieString($product['dar_warranty']);
-                                $p->addOrdersProduct($orderProduct);
-                                if($product['tax_id_tva'] == 1){
-                                    $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(1);
-                                }elseif($product['tax_id_tva'] == 2){
-                                    $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(3);
-                                }elseif($product['tax_id_tva'] == 3){
-                                    $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(4);
-                                }elseif($product['tax_id_tva'] == 4){
-                                    $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(2);
-                                }elseif($product['tax_id_tva'] == 5){
-                                    $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(6);
-                                }elseif($product['tax_id_tva'] == 6){
-                                    $tva  = $em->getRepository("LilWorksStoreBundle:Tax")->find(7);
+                                    $em->persist($orderProduct);
                                 }
-                                if($tva){
-                                    $orderProduct->addTax($tva);
-                                    $tva->addOrdersProduct($orderProduct);
-                                }
-
-                                if($product['tax_id_eco'] == 1){
-                                    $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(1);
-                                }elseif($product['tax_id_eco'] == 2){
-                                    $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(3);
-                                }elseif($product['tax_id_eco'] == 3){
-                                    $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(4);
-                                }elseif($product['tax_id_eco'] == 4){
-                                    $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(2);
-                                }elseif($product['tax_id_eco'] == 5){
-                                    $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(6);
-                                }elseif($product['tax_id_eco'] == 6){
-                                    $eco  = $em->getRepository("LilWorksStoreBundle:Tax")->find(7);
-                                }
-                                if($eco){
-                                    $orderProduct->addTax($eco);
-                                    $eco->addOrdersProduct($orderProduct);
-                                }
-
-                                $em->persist($orderProduct);
                             }
                         }
-                    }
 
 
-                    $em->persist($order);
-                }elseif(strstr($doc['doc_name'],'AV')){
-                    $coupon = new Coupon();
-                    $coupon->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
-                    $coupon->setCustomer($customer);
-                    $names = explode('-',$doc['doc_name']);
-                    $coupon->setReference($date->setTimestamp(strtotime($doc['doc_date']))->format('Y'). '-'. $names[0].$names[1]);
-                    $coupon->setAmount($doc['doc_tot']);
-                    $coupon->setDescription($doc['doc_desc']);
-                    $coupon->setDescriptionInternal($doc['doc_desc_interne']);
-                    foreach($customer->getAddresses() as $address){
-                        $coupon->setAddress($address);
-                        break 1;
+                        $em->persist($order);
+                    } elseif (strstr($doc['doc_name'], 'FA')) {
+                        $order = new Order();
+                        $order->setOrderType($em->getRepository("LilWorksStoreBundle:OrderType")->find(1));
+                        $order->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
+                        $order->setCustomer($customer);
+                        $names = explode('-', $doc['doc_name']);
+                        $order->setReference($date->setTimestamp(strtotime($doc['doc_date']))->format('Y') . '-' . $names[0] . $names[1]);
+                        $order->setTot($doc['doc_tot']);
+                        $order->setDescription($doc['doc_desc']);
+                        $order->setDescriptionInternal($doc['doc_desc_interne']);
+                        foreach ($customer->getAddresses() as $address) {
+                            $order->setBillingAddress();
+                            $order->setShippingAddress();
+                            break 1;
+                        }
+                        $statementPayment = $connection->prepare("SELECT * FROM docs_reglements WHERE doc_id = :id ");
+                        $statementPayment->bindValue('id', $doc['doc_id']);
+                        $statementPayment->execute();
+                        $resultPayment = $statementPayment->fetchAll();
+
+                        foreach ($resultPayment as $payment) {
+                            if ($pm = $em->getRepository("LilWorksStoreBundle:PaymentMethod")->find($payment['pai_id'])) {
+                                $opm = new OrdersPaymentMethods();
+                                $opm->setAmount($payment['dre_value']);
+                                $opm->setPaymentMethod($pm);
+                                $opm->setOrder($order);
+                                $opm->setPayedAt($date->setTimestamp(strtotime($payment['dre_date'])));
+                                $pm->addOrdersPaymentMethod($opm);
+                                $em->persist($opm);
+                            }
+                        }
+
+                        if ($doc['dst_id'] == 1) {
+                            $os = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(9);
+                        } elseif ($doc['dst_id'] == 2) {
+                            $os = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(1);
+                        } elseif ($doc['dst_id'] == 3) {
+                            $os = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(6);
+                        } elseif ($doc['dst_id'] == 4) {
+                            $os = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(7);
+                        }
+                        if ($os) {
+                            $oos = new OrdersOrderSteps();
+                            $oos->setOrderStep($os);
+                            $oos->setOrder($order);
+                            $oos->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
+                            $em->persist($oos);
+                        }
+
+
+                        $statementProduct = $connection->prepare("SELECT * FROM docs_articles WHERE doc_id = :id ");
+                        $statementProduct->bindValue('id', $doc['doc_id']);
+                        $statementProduct->execute();
+                        $resultProduct = $statementProduct->fetchAll();
+
+                        foreach ($resultProduct as $product) {
+                            $statementProductName = $connection->prepare("SELECT * FROM articles WHERE art_id = :id LIMIT 1");
+                            $statementProductName->bindValue('id', $product['art_id']);
+                            $statementProductName->execute();
+                            $resultProductName = $statementProductName->fetch();
+                            if ($resultProductName) {
+
+                                if ($p = $em->getRepository("LilWorksStoreBundle:Product")->findOneByName($resultProductName['art_name'])) {
+                                    $orderProduct = new OrdersProducts();
+                                    $orderProduct->setProduct($p);
+                                    $orderProduct->setOrder($order);
+                                    $orderProduct->setQuantity($product['dar_q']);
+                                    $orderProduct->setName($product['dar_name']);
+                                    $orderProduct->setPrice($product['dar_pu']);
+                                    $orderProduct->setSerialNumber($product['dar_serial']);
+                                    $orderProduct->setDestocking(1);
+                                    $orderProduct->setWarrantieString($product['dar_warranty']);
+                                    $p->addOrdersProduct($orderProduct);
+                                    if ($product['tax_id_tva'] == 1) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(1);
+                                    } elseif ($product['tax_id_tva'] == 2) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(3);
+                                    } elseif ($product['tax_id_tva'] == 3) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(4);
+                                    } elseif ($product['tax_id_tva'] == 4) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(2);
+                                    } elseif ($product['tax_id_tva'] == 5) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(6);
+                                    } elseif ($product['tax_id_tva'] == 6) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(7);
+                                    }
+                                    if (isset($tva)){
+                                        $orderProduct->addTax($tva);
+                                        $tva->addOrdersProduct($orderProduct);
+                                    }
+
+                                    if ($product['tax_id_eco'] == 1) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(1);
+                                    } elseif ($product['tax_id_eco'] == 2) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(3);
+                                    } elseif ($product['tax_id_eco'] == 3) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(4);
+                                    } elseif ($product['tax_id_eco'] == 4) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(2);
+                                    } elseif ($product['tax_id_eco'] == 5) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(6);
+                                    } elseif ($product['tax_id_eco'] == 6) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(7);
+                                    }
+                                    if (isset($eco)){
+                                        $orderProduct->addTax($eco);
+                                        $eco->addOrdersProduct($orderProduct);
+                                    }
+
+                                    $em->persist($orderProduct);
+                                }
+                            }
+                        }
+
+
+                        $em->persist($order);
+                    } elseif (strstr($doc['doc_name'], 'DE')) {
+                        $order = new Order();
+                        $order->setOrderType($em->getRepository("LilWorksStoreBundle:OrderType")->find(2));
+                        $order->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
+                        $order->setCustomer($customer);
+                        $names = explode('-', $doc['doc_name']);
+                        $order->setReference($date->setTimestamp(strtotime($doc['doc_date']))->format('Y') . '-' . $names[0] . $names[1]);
+                        $order->setTot($doc['doc_tot']);
+                        $order->setDescription($doc['doc_desc']);
+                        $order->setDescriptionInternal($doc['doc_desc_interne']);
+
+                        if ($doc['dst_id'] == 1) {
+                            $os = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(9);
+                        } elseif ($doc['dst_id'] == 2) {
+                            $os = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(1);
+                        } elseif ($doc['dst_id'] == 3) {
+                            $os = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(6);
+                        } elseif ($doc['dst_id'] == 4) {
+                            $os = $em->getRepository("LilWorksStoreBundle:OrderStep")->find(7);
+                        }
+                        if ($os) {
+                            $oos = new OrdersOrderSteps();
+                            $oos->setOrderStep($os);
+                            $oos->setOrder($order);
+                            $oos->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
+                            $em->persist($oos);
+                        }
+
+
+                        $statementProduct = $connection->prepare("SELECT * FROM docs_articles WHERE doc_id = :id ");
+                        $statementProduct->bindValue('id', $doc['doc_id']);
+                        $statementProduct->execute();
+                        $resultProduct = $statementProduct->fetchAll();
+                        foreach ($resultProduct as $product) {
+                            $statementProductName = $connection->prepare("SELECT * FROM articles WHERE art_id = :id LIMIT 1");
+                            $statementProductName->bindValue('id', $product['art_id']);
+                            $statementProductName->execute();
+                            if ($resultProductName = $statementProductName->fetch()) {
+                                if ($p = $em->getRepository("LilWorksStoreBundle:Product")->findOneByName($resultProductName['art_name'])) {
+                                    $orderProduct = new OrdersProducts();
+                                    $orderProduct->setProduct($p);
+                                    $orderProduct->setOrder($order);
+                                    $orderProduct->setQuantity($product['dar_q']);
+                                    $orderProduct->setName($product['dar_name']);
+                                    $orderProduct->setPrice($product['dar_pu']);
+                                    $orderProduct->setSerialNumber($product['dar_serial']);
+                                    $orderProduct->setDescription(1);
+                                    $orderProduct->setWarrantieString($product['dar_warranty']);
+                                    $p->addOrdersProduct($orderProduct);
+                                    if ($product['tax_id_tva'] == 1) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(1);
+                                    } elseif ($product['tax_id_tva'] == 2) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(3);
+                                    } elseif ($product['tax_id_tva'] == 3) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(4);
+                                    } elseif ($product['tax_id_tva'] == 4) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(2);
+                                    } elseif ($product['tax_id_tva'] == 5) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(6);
+                                    } elseif ($product['tax_id_tva'] == 6) {
+                                        $tva = $em->getRepository("LilWorksStoreBundle:Tax")->find(7);
+                                    }
+                                    if (isset($tva)){
+                                        $orderProduct->addTax($tva);
+                                        $tva->addOrdersProduct($orderProduct);
+                                    }
+
+                                    if ($product['tax_id_eco'] == 1) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(1);
+                                    } elseif ($product['tax_id_eco'] == 2) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(3);
+                                    } elseif ($product['tax_id_eco'] == 3) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(4);
+                                    } elseif ($product['tax_id_eco'] == 4) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(2);
+                                    } elseif ($product['tax_id_eco'] == 5) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(6);
+                                    } elseif ($product['tax_id_eco'] == 6) {
+                                        $eco = $em->getRepository("LilWorksStoreBundle:Tax")->find(7);
+                                    }
+                                    if ($eco) {
+                                        $orderProduct->addTax($eco);
+                                        $eco->addOrdersProduct($orderProduct);
+                                    }
+
+                                    $em->persist($orderProduct);
+                                }
+                            }
+                        }
+
+
+                        $em->persist($order);
+                    } elseif (strstr($doc['doc_name'], 'AV')) {
+                        $coupon = new Coupon();
+                        $coupon->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
+                        $coupon->setCustomer($customer);
+                        $names = explode('-', $doc['doc_name']);
+                        $coupon->setReference($date->setTimestamp(strtotime($doc['doc_date']))->format('Y') . '-' . $names[0] . $names[1]);
+                        $coupon->setAmount($doc['doc_tot']);
+                        $coupon->setDescription($doc['doc_desc']);
+                        $coupon->setDescriptionInternal($doc['doc_desc_interne']);
+                        foreach ($customer->getAddresses() as $address) {
+                            $coupon->setAddress($address);
+                            break 1;
+                        }
+                        $em->persist($coupon);
+                    } elseif (strstr($doc['doc_name'], 'DV')) {
+                        $depositSale = new DepositSale();
+                        $depositSale->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
+                        $depositSale->setDeposedAt($date->setTimestamp(strtotime($doc['doc_date'])));
+                        $depositSale->setCustomer($customer);
+                        $depositSale->setPriceBuying($doc['doc_tot']);
+                        $names = explode('-', $doc['doc_name']);
+                        $depositSale->setReference($date->setTimestamp(strtotime($doc['doc_date']))->format('Y') . '-' . $names[0] . $names[1]);
+                        $depositSale->setPriceBuying($doc['doc_name']);
+                        $depositSale->setDescription($doc['doc_desc']);
+                        $depositSale->setDescriptionInternal($doc['doc_desc_interne']);
+                        foreach ($customer->getAddresses() as $address) {
+                            $depositSale->setAddress($address);
+                            break 1;
+                        }
+                        $em->persist($depositSale);
                     }
-                    $em->persist($coupon);
-                }elseif(strstr($doc['doc_name'],'DV')){
-                    $depositSale = new DepositSale();
-                    $depositSale->setCreatedAt($date->setTimestamp(strtotime($doc['doc_date'])));
-                    $depositSale->setDeposedAt($date->setTimestamp(strtotime($doc['doc_date'])));
-                    $depositSale->setCustomer($customer);
-                    $depositSale->setPriceBuying($doc['doc_tot']);
-                    $names = explode('-',$doc['doc_name']);
-                    $depositSale->setReference($date->setTimestamp(strtotime($doc['doc_date']))->format('Y'). '-'. $names[0].$names[1]);
-                    $depositSale->setPriceBuying($doc['doc_name']);
-                    $depositSale->setDescription($doc['doc_desc']);
-                    $depositSale->setDescriptionInternal($doc['doc_desc_interne']);
-                    foreach($customer->getAddresses() as $address){
-                        $depositSale->setAddress($address);
-                        break 1;
-                    }
-                    $em->persist($depositSale);
                 }
+
+
+                $em->persist($customer);
+                $i++;
+                if ($i > $max)
+                    break;
             }
-
-
-
-            $em->persist($customer);
-            $i++;
-            if($i>$max)
-                break;
         }
 
 
@@ -895,6 +899,175 @@ class ImportController extends Controller
         return $this->render('LilWorksStoreBundle:Import:offline.html.twig', array(
         ));
     }
+
+
+
+    public function onlineClient(){
+        $emImport = $this->getDoctrine()->getManager('import');
+        $em = $this->getDoctrine()->getManager();
+        $connection = $emImport->getConnection();
+
+        $statement = $connection->prepare("SELECT * FROM users ");
+        $statement->execute();
+        $results = $statement->fetchAll();
+        foreach($results as $result) {
+            $localUser = $em->getRepository("AppBundle:User")->findOneByEmailCanonical(strtolower($result['usr_email']));
+            if (!$localUser) {
+                $user = new User();
+                $user->setUsername($result['usr_email']);
+                $user->setEmail($result['usr_email']);
+                $user->setPlainPassword(
+                    $this->decrypt($result['usr_password'], $result['usr_password_salt'])
+                );
+            }
+        }
+
+        $date = new \DateTime();
+        $date->setTimestamp(strtotime($result['usr_dateregister']));
+        $user->setPasswordRequestedAt($date);
+
+        $user->setEnabled(1);
+
+
+        $statement = $connection->prepare("SELECT * FROM clients WHERE usr_id = :id ");
+        $statement->bindValue('id', $result['usr_id']);
+        $statement->execute();
+        $resultClient = $statement->fetchAll();
+
+        $statement = $connection->prepare("SELECT * FROM commandes WHERE usr_id = :id ");
+        $statement->bindValue('id', $result['usr_id']);
+        $statement->execute();
+        $resultClientCommande = $statement->fetchAll();
+
+        if(count($resultClient)>0 && count($resultClientCommande)>0 ){
+
+            $em->persist($user);
+
+            $resultClient = $resultClient[0];
+            $customer = new Customer();
+            $customer->setUser($user);
+            if($resultClient['cli_company'] != ""){
+                $customer->setCompanyName($resultClient['cli_company']);
+            }
+
+
+
+            if($resultClient['cli_name'] != ""){
+                $formatedNames = $this->getNames($resultClient['cli_name']);
+                $customer->setLastName($formatedNames['first']);
+                $customer->setFirstName($formatedNames['last']);
+
+
+                $customer->setCreatedAt(
+                    $date
+                );
+
+
+                $customer->setCompanyName($resultClient['cli_company']);
+            }else{
+                $customer->setFirstName('UNKNOW');
+                $customer->setLastName('UNKNOW');
+            }
+
+
+            if($resultClient['liv_adr_id']>0){
+                $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id ");
+                $statement->bindValue('id', $resultClient['liv_adr_id']);
+                $statement->execute();
+                $resultAddress = $statement->fetchAll();
+                $resultAddress=$resultAddress[0];
+                $address = new Address();
+                $address->setCustomer($customer);
+                $address->setName($resultAddress["adr_name"]);
+                $address->setStreet($resultAddress["adr_adr"]);
+                $address->setComplement($resultAddress["adr_lieudit"]);
+                $address->setZipCode($resultAddress["adr_code"]);
+                $address->setCity($resultAddress["adr_ville"]);
+
+                $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
+                $statement->bindValue('id', $resultAddress["pay_id"]);
+                $statement->execute();
+                $resultAddressPays = $statement->fetchAll();
+                $resultAddressPays = $resultAddressPays[0];
+                $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
+
+                $address->setCountry($country);
+                $em->persist($address);
+
+            }
+
+            if($resultClient['fac_adr_id']>0){
+
+                $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id ");
+                $statement->bindValue('id', $resultClient['fac_adr_id']);
+                $statement->execute();
+                $resultAddress = $statement->fetchAll();
+
+                $resultAddress=$resultAddress[0];
+                $address = new Address();
+                $address->setCustomer($customer);
+                $address->setName($resultAddress["adr_name"]);
+                $address->setStreet($resultAddress["adr_adr"]);
+                $address->setComplement($resultAddress["adr_lieudit"]);
+                $address->setZipCode($resultAddress["adr_code"]);
+                $address->setCity($resultAddress["adr_ville"]);
+
+                $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
+                $statement->bindValue('id', $resultAddress["pay_id"]);
+                $statement->execute();
+                $resultAddressPays = $statement->fetchAll();
+                $resultAddressPays = $resultAddressPays[0];
+                $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
+
+                $address->setCountry($country);
+
+                $em->persist($address);
+
+            }
+
+            $statement = $connection->prepare("SELECT * FROM telephones WHERE cli_id = :id ");
+            $statement->bindValue('id', $resultClient['usr_id']);
+            $statement->execute();
+            $resultPhonenumbers = $statement->fetchAll();
+            foreach($resultPhonenumbers as $resultPhonenumber){
+                $phonenumber = new PhoneNumber();
+                $phonenumber->setCustomer($customer);
+                $phonenumber->setPhonenumber($resultPhonenumber['tel_num']);
+                $em->persist($phonenumber);
+            }
+
+
+            $em->persist($customer);
+
+            array_push($imported,array($user,$customer));
+        }
+
+        #$em->flush();
+
+        $statement = $connection->prepare("SELECT * FROM commandes c LEFT JOIN users u ON u.usr_id = c.usr_id;");
+        $statement->execute();
+        $resultCommandes = $statement->fetchAll();
+        foreach($resultCommandes as $commande){
+
+            $user = $em->getRepository('AppBundle:User')->findOneByEmail($commande['usr_email']);
+            if($user && $user->getCustomer()){
+                $order = new Order();
+                $order->setReference($commande["com_ref"]);
+                $order->setCustomer($user->getCustomer());
+
+            }
+
+
+
+        }
+
+
+        #$em->flush();
+
+        return $this->render('LilWorksStoreBundle:Import:online.html.twig', array(
+        ));
+    }
+
     public function onlineProductAction(Request $request)
     {
 
@@ -922,7 +1095,7 @@ class ImportController extends Controller
 
                $date = new \DateTime();
                $date->setTimestamp(strtotime($result['usr_dateregister']));
-                $user->setPasswordRequestedAt($date);
+               $user->setPasswordRequestedAt($date);
 
                $user->setEnabled(1);
 

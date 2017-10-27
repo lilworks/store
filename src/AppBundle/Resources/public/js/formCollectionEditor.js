@@ -2,7 +2,7 @@
  * FormCollectionEditor
  */
 var FCE = {
-    init: function(name,ulClass,liClass){
+    init: function(name,ulClass,liClass,someInit ){
 
         var oFCE = this;
 
@@ -40,6 +40,8 @@ var FCE = {
         });
 
 
+
+
     },
 
 
@@ -74,6 +76,13 @@ var FCE = {
 
             return false;
         });
+
+
+        $('.datepicker').datepicker({
+            language:'fr',
+            format: "dd/mm/yyyy"
+        });
+
 
     },
 

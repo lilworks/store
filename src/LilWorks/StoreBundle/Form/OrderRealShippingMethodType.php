@@ -20,7 +20,7 @@ class OrderRealShippingMethodType extends AbstractType
 
         $builder
             ->add('shippingMethod', EntityType::class, array(
-                'label'=>'lilworks.storebundle.shippingmethod',
+                'label'=>'storebundle.shippingmethod',
                 'class'    => 'LilWorksStoreBundle:ShippingMethod' ,
                 'choice_label' => function ($obj) { return   $obj->getName() ; },
                 'query_builder' => function (EntityRepository $er) use ($shippingAddress,$context){
@@ -43,27 +43,27 @@ class OrderRealShippingMethodType extends AbstractType
             ))
 
             ->add('shippedAt',null,array(
-                'label'=>'lilworks.storebundle.shippingmethod.shippedat',
+                'label'=>'storebundle.shippingmethod.shippedat',
                 'attr' => ['class' => 'datepicker'],
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yy',
                 'required'=>false
             ))
             ->add('receivedAt',null,array(
-                'label'=>'lilworks.storebundle.shippingmethod.receivedat',
+                'label'=>'storebundle.shippingmethod.receivedat',
                 'attr' => ['class' => 'datepicker'],
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yy',
                 'required'=>false
             ))
             ->add('reference',null,array(
-                'label'=>'lilworks.storebundle.reference',
+                'label'=>'storebundle.reference',
             ))
             ->add('price',MoneyType::class,array(
-                'label'=>'lilworks.storebundle.shippingmethod.price',
+                'label'=>'storebundle.shippingmethod.price',
             ))
             ->add('description',null,array(
-                'label'=>'lilworks.storebundle.description',
+                'label'=>'storebundle.description',
             ))
 
 

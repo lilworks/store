@@ -17,15 +17,26 @@ class OrdersOrderStepsType extends AbstractType
         $builder
 
             ->add('orderStep', EntityType::class, array(
-            'class'    => 'LilWorksStoreBundle:OrderStep' ,
-            'choice_label' => function ($obj) { return   $obj->getName() ; },
-            'required' => true ,
-            'mapped'=> true,
-            'expanded' => false ,
-            'multiple' => false
+                'label'=>'storebundle.orderstep',
+                'class'    => 'LilWorksStoreBundle:OrderStep' ,
+                'choice_label' => function ($obj) { return   $obj->getName() ; },
+                'required' => true ,
+                'mapped'=> true,
+                'expanded' => false ,
+                'multiple' => false
         ))
-            ->add('createdAt',null,array('required'=>false))
-            ->add('description',null,array('required'=>false));
+            ->add('createdAt',null,array(
+                'label'=>'storebundle.createdat',
+                'required'=>false,
+                'attr' => ['class' => 'datepicker'],
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yy',
+                'required'=>false
+            ))
+            ->add('description',null,array(
+                'label'=>'storebundle.description',
+                'required'=>false
+            ));
     }
     
     /**

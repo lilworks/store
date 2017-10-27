@@ -1,5 +1,4 @@
 <?php
-
 namespace LilWorks\StoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -7,7 +6,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
-
 
 class AnnonceType extends AbstractType
 {
@@ -18,11 +16,24 @@ class AnnonceType extends AbstractType
     {
         $builder
 
-            ->add('name')
-            ->add('link',UrlType::class,array('required'=>false))
-            ->add('pos')
-            ->add('pictureFile',FileType::class,array('required'=>false))
-            ->add('description',null,array('attr'=> array('class'=>'tinymce')))
+            ->add('name',null,array(
+                'label'=>'storebundle.name',
+            ))
+            ->add('link',UrlType::class,array(
+                'label'=>'storebundle.name',
+                'required'=>false
+            ))
+            ->add('pos',null,array(
+                'label'=>'storebundle.pos',
+            ))
+            ->add('pictureFile',FileType::class,array(
+                'label'=>'storebundle.picture',
+                'required'=>false
+            ))
+            ->add('description',null,array(
+                'label'=>'storebundle.description',
+                'attr'=> array('class'=>'editor-text')
+            ))
             ;
     }
     

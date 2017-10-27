@@ -39,7 +39,7 @@
             <tr>
                 <th>{% trans %}storebundle.action{% endtrans %}</th>
                 <th>{% trans %}storebundle.order.type{% endtrans %}</th>
-                <th>{% trans %}storebundle.reference{% endtrans %}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'storebundle.reference'|trans, 'o.reference') }}</th>
                 <th>
                     <ul>
                         <li>{{ knp_pagination_sortable(pagination, 'storebundle.createdat'|trans, 'o.createdAt') }}</li>
@@ -138,11 +138,11 @@
                 </td>
                 <td>
                     {% for orderRealShippingMethod in order.ordersRealShippingMethods %}
-
-                        <div class="badge badge-default">
-                        {{ orderRealShippingMethod.shippingMethod.name }}
-                        </div>
-
+                        {% if orderRealShippingMethod.shippingMethod is not null %}
+                            <div class="badge badge-default">
+                                {{ orderRealShippingMethod.shippingMethod.name }}
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </td>
             </tr>

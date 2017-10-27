@@ -139,6 +139,7 @@ class ConfigureStoreMenuListener
             $entity = $this->em->getRepository($entityName)->find($id);
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
+
             if(
                 count($entity->getProducts())==0 &&
                 count($entity->getShippingmethodsCountries())==0 &&
@@ -326,6 +327,7 @@ class ConfigureStoreMenuListener
 
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
+            $this->setAction('pdf', $entity, $menu);
 
             #if($lastStep != "DONE" && $lastStep != "PAYED")
             $this->setAction('delete', $entity, $menu);
@@ -344,6 +346,7 @@ class ConfigureStoreMenuListener
 
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
+            $this->setAction('pdf', $entity, $menu);
 
             if ($lastStep != "DONE" && $lastStep != "PAYED")
                 $this->setAction('delete', $entity, $menu);
@@ -360,9 +363,11 @@ class ConfigureStoreMenuListener
 
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
+            $this->setAction('pdf', $entity, $menu);
             $this->setAction('delete', $entity, $menu);
         }
     }
+
     public function session($menu,$id,$options){
 
 

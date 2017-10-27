@@ -97,17 +97,17 @@ class OrderController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-        $textHeader = $em->getRepository("LilWorksStoreBundle:Text")->findOneByName('pdfHeader');
-        $textFooter = $em->getRepository("LilWorksStoreBundle:Text")->findOneByName('pdfFooter');
+        $textHeader = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-header');
+        $textFooter = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-footer');
 
-        $header = $this->renderView('LilWorksStoreBundle:DepositSale:header.html.twig', array(
+        $header = $this->renderView('LilWorksStoreBundle:Pdf:header.html.twig', array(
             'css'=>$textHeader->getCss(),
-            'text'=>$textHeader->getText()
+            'text'=>$textHeader->getContent()
         ));
 
-        $footer = $this->renderView('LilWorksStoreBundle:DepositSale:footer.html.twig', array(
+        $footer = $this->renderView('LilWorksStoreBundle:Pdf:footer.html.twig', array(
             'css'=>$textFooter->getCss(),
-            'text'=>$textFooter->getText()
+            'text'=>$textFooter->getContent()
         ));
 
         $html = $this->renderView('LilWorksStoreBundle:Order:pdf.html.twig', array(
@@ -176,7 +176,7 @@ class OrderController extends Controller
             $em->persist($order);
             $em->flush();
 
-            return $this->redirectToRoute('order_edit', array('id' => $order->getId()));
+            return $this->redirectToRoute('order_edit', array('order_id' => $order->getId()));
         }
 
         $translator = $this->get('translator');
@@ -324,7 +324,7 @@ class OrderController extends Controller
 
 
 
-            return $this->redirectToRoute('order_edit', array('id' => $order->getId()));
+            return $this->redirectToRoute('order_edit', array('order_id' => $order->getId()));
         }
 
         $translator = $this->get('translator');

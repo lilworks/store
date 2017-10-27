@@ -24,20 +24,14 @@ class OrdersProductsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $orderId=$options["orderId"];
         $context=$options["context"];
-
-
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($orderId,$context) {
             $orderProduct = $event->getData();
             $form = $event->getForm();
 
-
-
             if($orderProduct){
-
 
                 if($context == "online"){
                     $dataTax = $orderProduct->getProduct()->getTaxesOnline();
@@ -74,18 +68,22 @@ class OrdersProductsType extends AbstractType
                 $form
 
                     ->add('name',null,array(
+                        'label'=>'storebundle.name',
                         'required'=>true,
                         'data'=>$dataName
                     ))
                     ->add('quantity',null,array(
+                        'label'=>'storebundle.quantity',
                         'required'=>true,
                         'data' => $dataQuantity
                     ))
                     ->add('price',MoneyType::class,array(
+                        'label'=>'storebundle.price',
                         'required'=>true,
                         'data'=>$dataPrice
                     ))
                     ->add('taxes', EntityType::class, array(
+                        'label'=>'storebundle.taxes',
                         'class'    => 'LilWorksStoreBundle:Tax' ,
                         'choice_label' => function ($obj) {
                             if( $obj->getType() == "RATIO"){
@@ -117,10 +115,12 @@ class OrdersProductsType extends AbstractType
                         'multiple' => true
                     ))
                     ->add('isSecondHand',null,array(
+                        'label'=>'storebundle.issecondhand',
                         'data'=>$dataIsSecondHand,
                         'required'=>true,
                     ))
                     ->add('orderRealShippingMethod', EntityType::class, array(
+                        'label'=>'storebundle.shippingmethod',
                         'class'    => 'LilWorksStoreBundle:OrdersRealShippingMethods' ,
                         'choice_label' => function ($obj) {
                             return   $obj->getShippingMethod()->getName() . " " . $obj->getReference() ;
@@ -136,11 +136,16 @@ class OrdersProductsType extends AbstractType
                         'expanded' => true ,
                         'multiple' => false
                     ))
-
-
-
-                    ->add('serialNumber',null,array('required'=>false) )
+                    ->add('serialNumber',null,array(
+                        'label'=>'storebundle.product.serialnumber',
+                        'required'=>false
+                    ))
+                    ->add('description',null,array(
+                        'label'=>'storebundle.description',
+                        'required'=>false
+                    ))
                     ->add('warranties', EntityType::class, array(
+                        'label'=>'storebundle.warranties',
                         'class'    => 'LilWorksStoreBundle:Warranty' ,
                         'choice_label' => function ($obj) { return   $obj->getName() ; },
                         'query_builder' => function (EntityRepository $er) use ($orderProduct){
@@ -159,6 +164,7 @@ class OrdersProductsType extends AbstractType
             }else{
                 $form
                     ->add('product', EntityType::class, array(
+                        'label'=>'storebundle.product',
                         'class'    => 'LilWorksStoreBundle:Product' ,
                         'choice_label' => function ($obj) { return   $obj->getBrand()->getName() . " " . $obj->getName() . " (" . $obj->getStock() .")" ; },
                         'query_builder' => function (EntityRepository $er) use ($context){

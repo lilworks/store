@@ -82,6 +82,12 @@ class CouponType extends AbstractType
                 'choice_label' => function ($obj) {
                     return   $obj->getFirstName() . " " . $obj->getLastName(). " " . $obj->getCompanyName()  ;
                 },
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
             ))
             #->add('reference')
             ->add('amount',MoneyType::class,array(

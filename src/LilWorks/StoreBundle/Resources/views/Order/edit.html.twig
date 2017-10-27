@@ -2,15 +2,31 @@
 
 {% block body %}
 
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.min.css') }}">
+    {% endblock %}
+
     {% block javascripts %}
         {{ parent() }}
+        <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/tinymce/langs.fr_FR.js') }}"></script>
+        <script src="h{{ asset('assets/vendor/popper.js/dist/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js') }}" charset="UTF-8"></script>
         <script>
             $( function() {
-
                 FCE.init('products','products list-inline','product list-inline-item');
                 FCE.init('realShippingMethods','realShippingMethods list-inline','realShippingMethod list-inline-item');
                 FCE.init('ordersOrderSteps','ordersOrderSteps list-inline','orderOrderStep list-inline-item');
                 FCE.init('ordersPaymentMethods','ordersPaymentMethods list-inline','orderPaymentMethod list-inline-item');
+                initTinyMce.text('.editor-text',['{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}','{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']);
+
+                $('.datepicker').datepicker({
+                    language:'fr',
+                    format: "dd/mm/yyyy"
+                });
+
             } );
         </script>
     {% endblock %}
@@ -49,7 +65,7 @@
             <a class="nav-link" data-toggle="tab" href="#realshippingmethods" role="tab">{% trans %}storebundle.realshippingmethods{% endtrans %}</a>
         </li>
         <li class="nav-item">
-        {#    <a class="nav-link {% if order.orderType is defined and  order.orderType.tag == "DEVIS" %}disabled{% endif %}" data-toggle="tab" href="#paymentmethods" role="tab">{% trans %}storebundle.paymentmethods{% endtrans %}</a>#}
+            <a class="nav-link {% if order.orderType is defined and  order.orderType.tag == "DEVIS" %}disabled{% endif %}" data-toggle="tab" href="#paymentmethods" role="tab">{% trans %}storebundle.paymentmethods{% endtrans %}</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#more" role="tab">{% trans %}storebundle.tab.more{% endtrans %}</a>

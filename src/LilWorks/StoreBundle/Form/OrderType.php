@@ -202,6 +202,7 @@ class OrderType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'LilWorks\StoreBundle\Entity\Order',
             'context'=>null,
+            'cascade_validation' => true,
         ));
         $resolver->setRequired('orderUtils');
     }
