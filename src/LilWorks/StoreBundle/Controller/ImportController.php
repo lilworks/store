@@ -910,6 +910,10 @@ class ImportController extends Controller
         $statement = $connection->prepare("SELECT * FROM users ");
         $statement->execute();
         $results = $statement->fetchAll();
+
+        // only fai
+        $fai = $em->getRepository("LilWorksStoreBundle:OrderType")->find(3);
+
         foreach($results as $result) {
             $localUser = $em->getRepository("AppBundle:User")->findOneByEmailCanonical(strtolower($result['usr_email']));
             if (!$localUser) {
@@ -1039,6 +1043,84 @@ class ImportController extends Controller
 
                     $em->persist($customer);
 
+                    $statement = $connection->prepare("SELECT * FROM commandes c LEFT JOIN users u ON u.usr_id = c.usr_id;");
+                    $statement->execute();
+                    $resultCommandes = $statement->fetchAll();
+
+                    $date = new \DateTime();
+                    foreach($resultCommandes as $commande){
+
+
+
+                        $user = $em->getRepository('AppBundle:User')->findOneByEmail($commande['usr_email']);
+
+                        if($user && $user->getCustomer()){
+                            $order = new Order();
+                            $order->setOrderType($fai);
+                            $order->setReference($commande["com_ref"]);
+                            $order->setCustomer($user->getCustomer());
+
+                            $date->setTimestamp(strtotime($commande['com_date']));
+                            $order->setCreatedAt($date);
+                            if($commande['com_date_update']){
+                                $date->setTimestamp(strtotime($commande['com_date_update']));
+                                $order->setUpdatedAt($date);
+                            }
+                            $order->setDescription($commande['com_desc']);
+                            $order->setDescriptionInternal($commande['com_desc_interne']);
+                            $order->setTot($commande['com_tot']);
+
+
+
+                            $statementArticles = $connection->prepare("SELECT * FROM commandes_articles ca WHERE ca.com_id = :com_id");
+                            $statementArticles->bindValue('com_id', $commande['com_id']);
+                            $statementArticles->execute();
+                            $resultArticles = $statementArticles->fetchAll();
+                            foreach($resultArticles as $article){
+                                $orderProduct = new OrdersProducts();
+                                $orderProduct->setOrder($order);
+                                $orderProduct->setQuantity($article["car_q"]);
+                                $orderProduct->setName($article["car_article"]);
+                                $orderProduct->setPrice($article["car_pu"]);
+                                if($article["car_eco"]){
+                                    if($tax = $em->getRepository('LilWorksStoreBundle:Tax')->findOneByValue($article["car_eco"])){
+                                        $orderProduct->addTax($tax);
+                                        $tax->addOrdersProduct($orderProduct);
+                                        $em->persist($tax);
+                                    }
+                                }
+                                if($article["car_tva"]){
+                                    if($tax = $em->getRepository('LilWorksStoreBundle:Tax')->findOneByValue($article["car_eco"])){
+                                        $orderProduct->addTax($tax);
+                                        $tax->addOrdersProduct($orderProduct);
+                                        $em->persist($tax);
+                                    }
+                                }
+
+                                $em->persist($orderProduct);
+                            }
+
+
+                            $spplus = $em->getRepository('LilWorksStoreBundle:PaymentMethod')->find(4);
+                            $che = $em->getRepository('LilWorksStoreBundle:PaymentMethod')->find(2);
+
+                            $statementPaiements = $connection->prepare("SELECT * FROM commandes_paiements cp WHERE cp.com_ref = :com_ref");
+                            $statementPaiements->bindValue('com_ref', $commande['com_ref']);
+                            $statementPaiements->execute();
+                            $resultPaiements = $statementPaiements->fetchAll();
+                            foreach($resultPaiements as $paiement){
+                                $OrderPaymentMethod = new OrdersPaymentMethods();
+                                $OrderPaymentMethod->setOrder($order);
+                                $OrderPaymentMethod->setPaymentMethod(($commande['com_moye'] == "CHE")?$che:$spplus);
+
+                                $em->persist($OrderPaymentMethod);
+                            }
+
+                        }
+
+
+
+                    }
 
                 }
             }
@@ -1049,85 +1131,8 @@ class ImportController extends Controller
 
 
 
-        $em->flush();
-
-        $statement = $connection->prepare("SELECT * FROM commandes c LEFT JOIN users u ON u.usr_id = c.usr_id;");
-        $statement->execute();
-        $resultCommandes = $statement->fetchAll();
-
-        $date = new \DateTime();
-        foreach($resultCommandes as $commande){
 
 
-
-            $user = $em->getRepository('AppBundle:User')->findOneByEmail($commande['usr_email']);
-
-            if($user && $user->getCustomer()){
-                $order = new Order();
-                $order->setReference($commande["com_ref"]);
-                $order->setCustomer($user->getCustomer());
-
-                $date->setTimestamp(strtotime($commande['com_date']));
-                $order->setCreatedAt($date);
-                if($commande['com_date_update']){
-                    $date->setTimestamp(strtotime($commande['com_date_update']));
-                    $order->setUpdatedAt($date);
-                }
-                $order->setDescription($commande['com_desc']);
-                $order->setDescriptionInternal($commande['com_desc_interne']);
-                $order->setTot($commande['com_tot']);
-
-
-
-                $statementArticles = $connection->prepare("SELECT * FROM commandes_articles ca WHERE ca.com_id = :com_id");
-                $statementArticles->bindValue('com_id', $commande['com_id']);
-                $statementArticles->execute();
-                $resultArticles = $statementArticles->fetchAll();
-                foreach($resultArticles as $article){
-                    $orderProduct = new OrdersProducts();
-                    $orderProduct->setOrder($order);
-                    $orderProduct->setQuantity($article["car_q"]);
-                    $orderProduct->setName($article["car_article"]);
-                    $orderProduct->setPrice($article["car_pu"]);
-                    if($article["car_eco"]){
-                        if($tax = $em->getRepository('LilWorksStoreBundle:Tax')->findOneByValue($article["car_eco"])){
-                            $orderProduct->addTax($tax);
-                            $tax->addOrdersProduct($orderProduct);
-                            $em->persist($tax);
-                        }
-                    }
-                    if($article["car_tva"]){
-                        if($tax = $em->getRepository('LilWorksStoreBundle:Tax')->findOneByValue($article["car_eco"])){
-                            $orderProduct->addTax($tax);
-                            $tax->addOrdersProduct($orderProduct);
-                            $em->persist($tax);
-                        }
-                    }
-
-                    $em->persist($orderProduct);
-                }
-
-
-                $spplus = $em->getRepository('LilWorksStoreBundle:PaymentMethod')->find(4);
-                $che = $em->getRepository('LilWorksStoreBundle:PaymentMethod')->find(2);
-
-                $statementPaiements = $connection->prepare("SELECT * FROM commandes_paiements cp WHERE cp.com_ref = :com_ref");
-                $statementPaiements->bindValue('com_ref', $commande['com_ref']);
-                $statementPaiements->execute();
-                $resultPaiements = $statementPaiements->fetchAll();
-                foreach($resultPaiements as $paiement){
-                    $OrderPaymentMethod = new OrdersPaymentMethods();
-                    $OrderPaymentMethod->setOrder($order);
-                    $OrderPaymentMethod->setPaymentMethod(($commande['com_moye'] == "CHE")?$che:$spplus);
-
-                    $em->persist($OrderPaymentMethod);
-                }
-
-            }
-
-
-
-        }
 
 
         $em->flush();
