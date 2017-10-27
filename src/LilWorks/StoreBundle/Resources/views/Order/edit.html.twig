@@ -1,42 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% block stylesheets %}
-        {{ parent() }}
-        <link rel="stylesheet" href="{{ asset('assets/vendor/summernote/dist/summernote-bs4.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.min.css') }}">
-    {% endblock %}
 
     {% block javascripts %}
         {{ parent() }}
-        <script src="h{{ asset('assets/vendor/popper.js/dist/popper.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/summernote/dist/summernote-bs4.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js') }}" charset="UTF-8"></script>
-
         <script>
             $( function() {
-                $('.datepicker').datepicker({
-                    language:'fr',
-                    format: "dd/mm/yyyy"
-                });
 
-                $('.text-editor').summernote({
-                    height: 200,
-                    minHeight: null,
-                    maxHeight: null,
-                    focus: true,
-                    toolbar: [
-                        // [groupName, [list of button]]
-                        ['style', ['bold', 'italic', 'underline', 'clear']],
-                        ['font', ['strikethrough', 'superscript', 'subscript']],
-                        ['fontsize', ['fontsize']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['height', ['height']],
-                        ['misc',['codeview','fullscreen']]
-                    ]
-                });
                 FCE.init('products','products list-inline','product list-inline-item');
                 FCE.init('realShippingMethods','realShippingMethods list-inline','realShippingMethod list-inline-item');
                 FCE.init('ordersOrderSteps','ordersOrderSteps list-inline','orderOrderStep list-inline-item');
@@ -58,25 +28,6 @@
         {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.document.portal','storebundle.menu.order'] , {context: 'content'}) %}
         {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
     </div>
-    {#
-    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
-        <a href="{{ path('order_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
-        </a>
-        <a href="{{ path('order_new') }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}storebundle.link.new{% endtrans %}
-        </a>
-        <a href="{{ path('order_show', { order_id: order.id }) }}" class="btn btn-info btn-sm">
-            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}storebundle.link.show{% endtrans %}
-        </a>
-        <a href="{{ path('order_pdf',{order_id:order.id}) }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}storebundle.link.pdf{% endtrans %}
-        </a>
-        <a href="{{ path('order_delete', { order_id: order.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
-            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}storebundle.link.delete{% endtrans %}
-        </a>
-    </div>
-    #}
     {{ form_start(form) }}
 
 
@@ -98,7 +49,7 @@
             <a class="nav-link" data-toggle="tab" href="#realshippingmethods" role="tab">{% trans %}storebundle.realshippingmethods{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {% if order.orderType.tag == "DEVIS" %}disabled{% endif %}" data-toggle="tab" href="#paymentmethods" role="tab">{% trans %}storebundle.paymentmethods{% endtrans %}</a>
+        {#    <a class="nav-link {% if order.orderType is defined and  order.orderType.tag == "DEVIS" %}disabled{% endif %}" data-toggle="tab" href="#paymentmethods" role="tab">{% trans %}storebundle.paymentmethods{% endtrans %}</a>#}
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#more" role="tab">{% trans %}storebundle.tab.more{% endtrans %}</a>

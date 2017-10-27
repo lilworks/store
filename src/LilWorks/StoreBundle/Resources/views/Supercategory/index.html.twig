@@ -25,9 +25,11 @@
             {0} no result found|{1} found one result|]1,Inf[ found %count% results
             {% endtranschoice %}
             {{ knp_pagination_render(pagination) }}
+            {% if  formFilter is defined %}
             <form method="get" action="." class="formFilter">
                 {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-secondary" name="submit-filter" value="{% trans %}storebundle.button.filter{% endtrans %}" />
             </form>
+            {% endif %}
         </div>
     </div>
 
@@ -48,6 +50,7 @@
         </thead>
         <tbody>
         {% set entityName = 'LilWorksStoreBundle:SuperCategory' %}
+
         {% for superCategory in pagination %}
             <tr>
                 <td>

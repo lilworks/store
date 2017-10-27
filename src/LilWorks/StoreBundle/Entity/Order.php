@@ -186,7 +186,21 @@ class Order
      */
     private $payed;
 
-    
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="text",nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="descriptionInternal", type="text",nullable=true)
+     */
+    private $descriptionInternal;
+
+
     /**
      * Constructor
      */
@@ -682,5 +696,53 @@ class Order
     public function getShippingAddress()
     {
         return $this->shippingAddress;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Order
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set descriptionInternal
+     *
+     * @param string $descriptionInternal
+     *
+     * @return Order
+     */
+    public function setDescriptionInternal($descriptionInternal)
+    {
+        $this->descriptionInternal = $descriptionInternal;
+
+        return $this;
+    }
+
+    /**
+     * Get descriptionInternal
+     *
+     * @return string
+     */
+    public function getDescriptionInternal()
+    {
+        return $this->descriptionInternal;
     }
 }

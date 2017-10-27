@@ -14,6 +14,7 @@ class ProductFilterType extends AbstractType
     {
 
         $builder->add('categories', Filters\CollectionAdapterFilterType::class, array(
+            'label'=>'storebundle.category',
             'entry_type' => CategoriesFilterType::class,
             'add_shared' => function (FilterBuilderExecuterInterface $qbe)  {
                 $closure = function (QueryBuilder $filterBuilder, $alias, $joinAlias, Expr $expr) {
@@ -28,10 +29,20 @@ class ProductFilterType extends AbstractType
         ));
 
         $builder
-            ->add('name', Filters\TextFilterType::class)
-            ->add('isPublished', Filters\BooleanFilterType::class)
-            ->add('isSecondHand', Filters\BooleanFilterType::class)
+            ->add('name', Filters\TextFilterType::class,array(
+                'label'=>'storebundle.name'
+            ))
+            ->add('isPublished', Filters\BooleanFilterType::class,array(
+                'label'=>'storebundle.ispublished'
+            ))
+            ->add('isSecondHand', Filters\BooleanFilterType::class,array(
+                'label'=>'storebundle.product.issecondhand'
+            ))
+            ->add('isArchived', Filters\BooleanFilterType::class,array(
+                'label'=>'storebundle.product.isarchived'
+            ))
             ->add('brand', Filters\EntityFilterType::class, array(
+                'label'=>'storebundle.brand',
                 'class'    =>  'LilWorksStoreBundle:Brand',
                 'choice_label' => function ($obj) { return   $obj->getName() ; },
             ));

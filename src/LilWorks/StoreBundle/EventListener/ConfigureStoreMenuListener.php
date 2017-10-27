@@ -62,11 +62,11 @@ class ConfigureStoreMenuListener
 
 
         if(!$menuName)
-            $menuName='storebundle.menu.'.$this->target.'.'.$action;
+            $menuName=strtolower('storebundle.menu.'.$this->target.'.'.$action);
         if(!$routeName)
-            $routeName=$this->target.'_'.$action;
+            $routeName= strtolower($this->target.'_'.$action);
         if(!$routeParam && $entity )
-            $routeParam[$this->target.'_id'] = $entity->getId();
+            $routeParam[strtolower($this->target.'_id')] = $entity->getId();
 
 
         $actionMenu = $menu->addChild($menuName, array(

@@ -13,28 +13,25 @@
         {% trans %}storebundle.coupon.list{% endtrans %}
     </h1>
 
+
+
     <div class="row">
-        <div class="col-lg-2">
-            <ul class="list-inline">
-                <li class="list-inline-item">
-                    <a href="{{ path('coupon_new') }}" class="btn btn-info btn-sm">
-                        <i class="fa fa-plus"></i> {% trans %}storebundle.link.new{% endtrans %}
-                    </a>
-                </li>
-            </ul>
+        <div class="col-md-6">
+            <div id="content_menu">
+                {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.document.portal','storebundle.menu.coupon'] , {context: 'content'}) %}
+                {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+            </div>
         </div>
-        <div class="col-lg-5">
-            <form method="get" action="." class="formFilter">
-                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}storebundle.button.filter{% endtrans %}" />
-            </form>
-        </div>
-        <div class="col-lg-5">
+        <div class="col-md-6">
             {% transchoice pagination.getTotalItemCount %}
             {0} no result found|{1} found one result|]1,Inf[ found %count% results
             {% endtranschoice %}
-            <div class="pagination">
-                {{ knp_pagination_render(pagination) }}
-            </div>
+            {{ knp_pagination_render(pagination) }}
+            {% if formFilter is defined %}
+                <form method="get" action="." class="formFilter">
+                    {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-secondary" name="submit-filter" value="{% trans %}storebundle.button.filter{% endtrans %}" />
+                </form>
+            {% endif %}
         </div>
     </div>
 
@@ -42,14 +39,14 @@
         <thead>
         <tr>
             <th>{% trans %}storebundle.action{% endtrans %}</th>
-            <th>{% trans %}storebundle.createdat{% endtrans %}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'storebundle.createdat'|trans, 'c.createdAt') }}</th>
             <th>{% trans %}storebundle.coupon.validity{% endtrans %}</th>
             <th>{% trans %}storebundle.coupon.isactive{% endtrans %}</th>
-            <th>{% trans %}storebundle.reference{% endtrans %}</th>
-            <th>{% trans %}storebundle.customer{% endtrans %}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'storebundle.reference'|trans, 'c.reference') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'storebundle.customer'|trans, 'c.customer') }}</th>
             <th>
                 <ul>
-                    <li>{% trans %}storebundle.coupon.initamount{% endtrans %}</li>
+                    <li>{{ knp_pagination_sortable(pagination, 'storebundle.initamount'|trans, 'c.amount') }}</li>
                     <li>{% trans %}storebundle.coupon.restamount{% endtrans %}</li>
                 </ul>
             </th>
@@ -63,29 +60,9 @@
 
             <tr>
                 <td>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="{{ path('coupon_show', { coupon_id: coupon.id }) }}" class="btn btn-info btn-sm">
-                                <i class="fa fa-eye"></i> {% trans %}storebundle.link.show{% endtrans %}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ path('coupon_edit', { coupon_id: coupon.id }) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-pencil "></i> {% trans %}storebundle.link.edit{% endtrans %}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ path('coupon_pdf',{coupon_id:coupon.id}) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}storebundle.link.pdf{% endtrans %}
-                            </a>
-                        </li>
-                        <li>
-                            {% if coupon.ordersPaymentMethods|length != 0 %}{% set disabled = 'disabled' %}{% else %}{% set disabled = '' %}{% endif %}
-                            <a href="{{ path('coupon_delete', { coupon_id: coupon.id }) }}"  class="btn btn-danger btn-sm btn-delete {{ disabled }}" >
-                                <i class="fa fa-trash"></i> {% trans %}storebundle.link.delete{% endtrans %}
-                            </a>
-                        </li>
-                    </ul>
+                    {% set formatedItems = pagination.items|idinkey %}
+                    {% set menu = knp_menu_get('list', [ coupon.id ] ,{results:formatedItems[coupon.id]   ,target:'coupon'} ) %}
+                    {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
                 </td>
                 <td>{{ coupon.createdAt|date('d/m/Y') }}</td>
                 <td>

@@ -59,7 +59,7 @@ class DepositSale
 
     /**
      * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\Product", inversedBy="depositSale")
-     * @ORM\JoinColumn(name="product", referencedColumnName="id")
+     * @ORM\JoinColumn(name="product", referencedColumnName="id",nullable=true)
      */
     private $product;
 
@@ -122,6 +122,12 @@ class DepositSale
      */
     private $descriptionInternal;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="serialNumber", type="string",length=255,nullable=true)
+     */
+    private $serialNumber;
 
 
     /**
@@ -444,5 +450,29 @@ class DepositSale
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Set serialNumber
+     *
+     * @param string $serialNumber
+     *
+     * @return DepositSale
+     */
+    public function setSerialNumber($serialNumber)
+    {
+        $this->serialNumber = $serialNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get serialNumber
+     *
+     * @return string
+     */
+    public function getSerialNumber()
+    {
+        return $this->serialNumber;
     }
 }

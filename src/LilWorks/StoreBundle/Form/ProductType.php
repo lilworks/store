@@ -30,6 +30,9 @@ class ProductType extends AbstractType
             ->add('isPublished',null,array(
                 'label'=>'storebundle.ispublished',
             ))
+            ->add('isArchived',null,array(
+                'label'=>'storebundle.isarchived',
+            ))
             ->add('isSecondHand',null,array(
                 'label'=>'storebundle.product.issecondhand',
             ))
@@ -85,12 +88,14 @@ class ProductType extends AbstractType
                         return $er->createQueryBuilder('rp')
                             ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = rp.brand')
                             ->where('b.id != :id')
+                            ->andWhere('rp.isArchived != 1')
                             ->setParameter('id',$product->getId())
                             ->orderBy('b.name','asc')
                             ;
                     }
                     return $er->createQueryBuilder('rp')
                         ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = rp.brand')
+                        ->where('rp.isArchived != 1')
                         ->orderBy('b.name','asc')
                         ;
                 },

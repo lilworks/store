@@ -6,7 +6,7 @@
     </h1>
 
     {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.document.portal','storebundle.menu.order'] , {context: 'content'}) %}
-    {{ knp_menu_render(menu , { depth:1, 'template': 'LilWorksStoreBundle:Menu:knp_menu_content.html.twig'}) }}
+    {{ knp_menu_render(menu , { depth:1, 'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
 
 
 

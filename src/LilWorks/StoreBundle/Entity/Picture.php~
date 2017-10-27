@@ -10,10 +10,19 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity
  * @ORM\Table(name="lilworks_picture")
+ * @ORM\HasLifecycleCallbacks()
  * @Vich\Uploadable
  */
 class Picture
 {
+    /**
+     * @ORM\PreFlush()
+     */
+    public function preFlush()
+    {
+        if($this->updatedAt == null)
+            $this->updatedAt = new \DateTime();
+    }
     /**
      * @ORM\Id
      * @ORM\Column(type="integer",name="id")

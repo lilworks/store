@@ -99,6 +99,13 @@ class Coupon
     private $description;
 
     /**
+     * @var text
+     *
+     * @ORM\Column(name="descriptionInternal", type="text",nullable=true)
+     */
+    private $descriptionInternal;
+    
+    /**
      * @var datetime
      *
      * @ORM\Column(name="createdAt", type="datetime",nullable=true)
@@ -426,5 +433,29 @@ class Coupon
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * Set descriptionInternal
+     *
+     * @param string $descriptionInternal
+     *
+     * @return Coupon
+     */
+    public function setDescriptionInternal($descriptionInternal)
+    {
+        $this->descriptionInternal = $descriptionInternal;
+
+        return $this;
+    }
+
+    /**
+     * Get descriptionInternal
+     *
+     * @return string
+     */
+    public function getDescriptionInternal()
+    {
+        return $this->descriptionInternal;
     }
 }

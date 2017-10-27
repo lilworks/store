@@ -29,7 +29,7 @@ class DepositSaleType extends AbstractType
 
             if($depositSale->getCustomer()){
                 $form->add('address', EntityType::class, array(
-                    'label'=>'lilworks.storebundle.address',
+                    'label'=>'storebundle.address',
                     'class'    => 'LilWorksStoreBundle:Address' ,
                     'required' => true ,
                     'mapped'=> true,
@@ -57,7 +57,7 @@ class DepositSaleType extends AbstractType
                     },
                 ));
                 $form->add('coupon', EntityType::class, array(
-                    'label'=>'lilworks.storebundle.depositsale.coupon',
+                    'label'=>'storebundle.depositsale.coupon',
                     'class'    => 'LilWorksStoreBundle:Coupon' ,
                     'required' => false ,
                     'mapped'=> true,
@@ -87,7 +87,7 @@ class DepositSaleType extends AbstractType
 
             $builder
                 ->add('status', EntityType::class, array(
-                    'label'=>'lilworks.storebundle.depositsale.status',
+                    'label'=>'storebundle.depositsale.status',
                     'class'    => 'LilWorksStoreBundle:DepositSaleStatus' ,
                     'required' => false ,
                     'mapped'=> true,
@@ -98,7 +98,7 @@ class DepositSaleType extends AbstractType
                     },
                 ))
             ->add('customer', EntityType::class, array(
-                'label'=>'lilworks.storebundle.customer',
+                'label'=>'storebundle.customer',
                 'class'    => 'LilWorksStoreBundle:Customer' ,
                 'required' => false ,
                 'mapped'=> true,
@@ -109,9 +109,9 @@ class DepositSaleType extends AbstractType
                 },
             ))
             ->add('product', EntityType::class, array(
-                'label'=>'lilworks.storebundle.product',
+                'label'=>'storebundle.product',
                 'class'    => 'LilWorksStoreBundle:Product' ,
-                'required' => true ,
+                'required' => false ,
                 'mapped'=> true,
                 'expanded' => false ,
                 'multiple' => false,
@@ -120,39 +120,44 @@ class DepositSaleType extends AbstractType
                 },
                 'query_builder' => function (EntityRepository $er)  {
                     return $er->createQueryBuilder('p')
+                        ->leftJoin('p.brand','b')
                         ->leftJoin('LilWorksStoreBundle:DepositSale','ds','WITH','ds.product = p.id')
                         ->where('p.isSecondHand = 1')
-                        ->andWhere('ds.product IS NULL');
+                        ->andWhere('p.isArchived != 1')
+                        ->andWhere('ds.product IS NULL')
+                        ->orderBy('b.name','asc')
+                        ->addOrderBy('p.name','asc')
+                        ;
 
                 },
             ))
 
             ->add('priceBuying',MoneyType::class,array(
-                'label'=>'lilworks.storebundle.depositsale.pricebuying',
+                'label'=>'storebundle.depositsale.pricebuying',
             ))
             ->add('priceSelling',MoneyType::class,array(
-                'label'=>'lilworks.storebundle.depositsale.priceselling',
+                'label'=>'storebundle.depositsale.priceselling',
             ))
 
             ->add('deposedAt',null,array(
                 'attr' => ['class' => 'datepicker'],
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yy',
-                'label'=>'lilworks.storebundle.depositsale.deposedat',
+                'label'=>'storebundle.depositsale.deposedat',
             ))
             ->add('selledAt',null,array(
-                'label'=>'lilworks.storebundle.depositsale.selledat',
+                'label'=>'storebundle.depositsale.selledat',
                 'attr' => ['class' => 'datepicker'],
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yy',
             ))
             ->add('description',null,array(
-                'label'=>'lilworks.storebundle.description',
-                'attr' => ['class' => 'text-editor'],
+                'label'=>'storebundle.description',
+                'attr' => ['class' => 'editor-text'],
             ))
             ->add('descriptionInternal',null,array(
-                 'label'=>'lilworks.storebundle.descriptioninternal',
-                 'attr' => ['class' => 'text-editor'],
+                 'label'=>'storebundle.descriptioninternal',
+                 'attr' => ['class' => 'editor-text'],
             ))
 
             ;

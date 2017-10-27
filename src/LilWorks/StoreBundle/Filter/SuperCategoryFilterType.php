@@ -13,12 +13,16 @@ class SuperCategoryFilterType extends AbstractType
         $builder
             ->add('name', Filters\TextFilterType::class,array(
                 'label'=>'storebundle.name'
-            ));
+            ))
+            ->add('isPublished', Filters\BooleanFilterType::class,array(
+                'label'=>'storebundle.ispublished'
+            ))
+        ;
     }
 
     public function getBlockPrefix()
     {
-        return 'item_filter';
+        return 'supercategory_filter';
     }
 
     public function configureOptions(OptionsResolver $resolver)

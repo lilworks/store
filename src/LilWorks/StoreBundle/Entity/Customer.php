@@ -108,6 +108,13 @@ class Customer
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string",length=255,nullable=true)
+     * @Assert\NotBlank()
+     */
+    private $email;
+    /**
      * Constructor
      */
     public function __construct()
@@ -466,5 +473,29 @@ class Customer
     public function getDepositSales()
     {
         return $this->depositSales;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Customer
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }

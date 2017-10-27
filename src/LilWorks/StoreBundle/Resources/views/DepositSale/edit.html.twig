@@ -2,67 +2,25 @@
 
 {% block body %}
 
-    {% block stylesheets %}
-        {{ parent() }}
-        <link rel="stylesheet" href="{{ asset('assets/vendor/summernote/dist/summernote-bs4.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.min.css') }}">
-    {% endblock %}
-
     {% block javascripts %}
         {{ parent() }}
-        <script src="h{{ asset('assets/vendor/popper.js/dist/popper.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/summernote/dist/summernote-bs4.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js') }}" charset="UTF-8"></script>
+        <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/tinymce/langs.fr_FR.js') }}"></script>
         <script>
+
             $( document ).ready(function() {
-
-                $('.datepicker').datepicker({
-                    language:'fr',
-                    format: "dd/mm/yyyy"
-                });
-
-                $('.text-editor').summernote({
-                    height: 200,
-                    minHeight: null,
-                    maxHeight: null,
-                    focus: true,
-                    toolbar: [
-                        // [groupName, [list of button]]
-                        ['style', ['bold', 'italic', 'underline', 'clear']],
-                        ['font', ['strikethrough', 'superscript', 'subscript']],
-                        ['fontsize', ['fontsize']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['height', ['height']],
-                        ['misc',['codeview','fullscreen']]
-                    ]
-                });
+                initTinyMce.text('.editor-text',['{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}','{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']);
             });
         </script>
     {% endblock %}
-
     <h1>
-        {% trans %}storebundle.depositsale.edit{% endtrans %}
+        {{ 'appbundle.depositsale.edit %reference%'|trans({'%reference%': depositSale.reference }) }}
     </h1>
 
 
-    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
-        <a href="{{ path('depositSale_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
-        </a>
-        <a href="{{ path('depositSale_new') }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}storebundle.link.new{% endtrans %}
-        </a>
-        <a href="{{ path('depositSale_show', { 'id': depositSale.id }) }}" class="btn btn-info btn-sm">
-            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}storebundle.link.show{% endtrans %}
-        </a>
-        <a href="{{ path('depositSale_pdf',{id:depositSale.id}) }}" class="btn btn-primary btn-sm {% if depositSale.status is null %}disabled{% endif %}">
-            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}storebundle.link.pdf{% endtrans %}
-        </a>
-        <a href="{{ path('depositSale_delete', { 'id': depositSale.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
-            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}storebundle.link.delete{% endtrans %}
-        </a>
+    <div id="content_menu">
+        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.document.portal','storebundle.menu.depositsale'] , {context: 'content'}) %}
+        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
     </div>
 
     {{ form_start(form) }}

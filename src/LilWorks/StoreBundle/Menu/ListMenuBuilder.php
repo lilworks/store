@@ -9,16 +9,19 @@ class ListMenuBuilder
     private $options;
     private $config = array(
 
+
         'ICO_SHOW'=>'fa fa-eye',
         'ICO_EDIT'=>'fa fa-pencil',
         'ICO_DELETE'=>'fa fa-trash',
         'ICO_PDF'=>'fa fa-file-pdf',
+        'ICO_EMPTY'=>'fa fa-share-square-o',
 
         'BTN_GENERAL'=>'btn btn-sm',
         'BTN_SHOW'=>'btn-info',
         'BTN_EDIT'=>'btn-primary',
         'BTN_DELETE'=>'btn-danger btn-delete',
         'BTN_PDF'=>'btn-primary',
+        'BTN_EMPTY'=>'btn-warning  btn-delete',
 
 
     );
@@ -39,7 +42,7 @@ class ListMenuBuilder
 
         $target = $options['target'];
         $this->options = $options;
-        $menu = $this->factory->createItem('root' ,array('childrenAttributes' => array('class' => "list-inline")));
+        $menu = $this->factory->createItem('root' ,array('childrenAttributes' => array('class' => "")));
         $menu->setExtra('translation_domain', 'LilWorksStoreBundle');
 
         $toAction = $menu->addChild($options['results']->getId());
@@ -137,11 +140,18 @@ class ListMenuBuilder
             $this->setAction('delete',$menu,$entity->getId());
         return $menu;
     }
+    // SuperCategory
     public function supercategory($entity,$menu){
+
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
-        if(count( count($entity->getSupercategoriesCategories()) == 0))
+
+
+        if(count($entity->getSupercategoriesCategories()) == 0)
             $this->setAction('delete',$menu,$entity->getId());
+        else
+            $this->setAction('empty',$menu,$entity->getId());
+
         return $menu;
     }
     public function customer($entity,$menu){
@@ -159,6 +169,25 @@ class ListMenuBuilder
 
         return $menu;
     }
+    public function depositsale($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('pdf',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        $this->setAction('delete',$menu,$entity->getId());
+
+        return $menu;
+    }
+    public function coupon($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('pdf',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+
+        if(count($entity->getOrdersPaymentMethods()) == 0)
+            $this->setAction('delete',$menu,$entity->getId());
+
+        return $menu;
+    }
+
     public function country($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
@@ -190,11 +219,11 @@ class ListMenuBuilder
     public  function setAction($action, $menu,$id,$route=null,$routeParamName=null,$keyForTranslate=null){
 
         if(!$keyForTranslate)
-            $keyForTranslate = 'storebundle.menu.'.$action;
+            $keyForTranslate = 'storebundle.'.$action;
         if(!$routeParamName)
-            $routeParamName = $this->options['target'].'_id';
+            $routeParamName = strtolower($this->options['target'].'_id');
         if(!$route)
-            $route = $this->options['target'] . '_' . $action;
+            $route = strtolower($this->options['target'] . '_' . $action);
 
         $action = strtoupper($action);
 

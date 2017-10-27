@@ -82,7 +82,7 @@ class TaxController extends Controller
             $em->persist($tax);
             $em->flush();
 
-            return $this->redirectToRoute('tax_show', array('id' => $tax->getId()));
+            return $this->redirectToRoute('tax_show', array('tax_id' => $tax->getId()));
         }
 
         $translator = $this->get('translator');

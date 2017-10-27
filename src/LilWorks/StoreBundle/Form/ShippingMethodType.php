@@ -59,6 +59,7 @@ class ShippingMethodType extends AbstractType
             'query_builder' => function (EntityRepository $er)  {
                 return $er->createQueryBuilder('p')
                     ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = p.brand')
+                    ->where('p.isArchived != 1')
                     ->orderBy('b.name','asc')
                     ;
             },

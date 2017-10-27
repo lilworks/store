@@ -21,12 +21,11 @@ class SuperCategoriesCategoriesType extends AbstractType
 
         $superCategory = $options['superCategory'];
 
+
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) use ($superCategory) {
             $form = $event->getForm();
 
             if($superCategory->getId()){
-
-
                 if($form->getData() && $form->getData()->getCategory()->getId()){
                     $category_id = $form->getData()->getCategory()->getId();
                     $form->add('category', EntityType::class, array(
@@ -37,6 +36,7 @@ class SuperCategoriesCategoriesType extends AbstractType
 
                             return $er->createQueryBuilder('c')
                                 ->where('c.id = :category_id')
+                                ->orderBy('c.name','asc')
                                 ->setParameter('category_id',$category_id)
                                 ;
                         },
@@ -57,15 +57,25 @@ class SuperCategoriesCategoriesType extends AbstractType
                         'choice_label' => function ($obj) { return   $obj->getName() ; },
                         'query_builder' => function (EntityRepository $er) use ($categoriesAdded) {
 
-                            return $er->createQueryBuilder('c')
-                                ->where('c.id NOT IN (:categories)')
-                                ->setParameter('categories',$categoriesAdded)
-                                ;
+                            if(count($categoriesAdded)>0){
+                                return $er->createQueryBuilder('c')
+                                    ->where('c.id NOT IN (:categories)')
+                                    ->orderBy('c.name','asc')
+                                    ->setParameter('categories',$categoriesAdded)
+                                    ;
+                            }else{
+                                return $er->createQueryBuilder('c')->orderBy('c.name','asc')
+
+                                    ;
+                            }
+
                         },
                         'required' => false ,
                         'mapped'=> true,
                         'expanded' => false ,
                         'multiple' => false
+
+
                     ));
                 }
 

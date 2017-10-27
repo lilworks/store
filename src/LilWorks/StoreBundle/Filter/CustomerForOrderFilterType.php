@@ -14,13 +14,13 @@ class CustomerForOrderFilterType extends AbstractType
     {
         $builder
             ->add('firstName', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.storebundle.firstname'
+                'label'=>'storebundle.firstname'
             ))
             ->add('lastName', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.storebundle.lastname'
+                'label'=>'storebundle.lastname'
             ))
             ->add('companyName', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.storebundle.companyname'
+                'label'=>'storebundle.companyname'
             ))
         ;
 

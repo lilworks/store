@@ -40,6 +40,7 @@ class BrandType extends AbstractType
                 'choice_label' => function ($obj) { return    $obj->getName() ; },
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
+                        ->where('p.isArchived != 1')
                         ->orderBy('p.name','asc')
                         ;
                 },

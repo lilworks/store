@@ -22,7 +22,13 @@ class WarrantyType extends AbstractType
             ->add('productsOnline', EntityType::class, array(
                 'label'=>'storebundle.productsonline',
                 'class'    => 'LilWorksStoreBundle:Product' ,
-                'choice_label' => function ($obj) { return    $obj->getBrand()->getName() ." ". $obj->getName() ; },
+                'choice_label' => function ($obj) {
+                    $c = "";
+                    foreach($obj->getCategories() as $category){
+                        $c.=$category->getTag();
+                    }
+                    return    $obj->getBrand()->getName() ." ". $obj->getName() . ' (' .  $c . ')' ;
+                },
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
                         ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = p.brand')
@@ -44,7 +50,13 @@ class WarrantyType extends AbstractType
             ->add('productsOffline', EntityType::class, array(
                 'label'=>'storebundle.productsoffline',
                 'class'    => 'LilWorksStoreBundle:Product' ,
-                'choice_label' => function ($obj) { return    $obj->getBrand()->getName() ." ". $obj->getName() ; },
+                'choice_label' => function ($obj) {
+                    $c = "";
+                    foreach($obj->getCategories() as $category){
+                        $c.=$category->getTag();
+                    }
+                    return    $obj->getBrand()->getName() ." ". $obj->getName() . ' (' .  $c . ')' ;
+                },
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
                         ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = p.brand')

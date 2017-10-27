@@ -42,15 +42,12 @@ class ProductController extends Controller
 
         if ($request->query->has($formFilter->getName())) {
 
-            // manually bind values from the request
             $formFilter->submit($request->query->get($formFilter->getName()));
 
-            // initialize a query builder
             $filterBuilder = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('LilWorksStoreBundle:Product')
                 ->createQueryBuilder('p');
 
-            // build the query from the given form object
             $qb = $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($formFilter, $filterBuilder);
 
         }else{

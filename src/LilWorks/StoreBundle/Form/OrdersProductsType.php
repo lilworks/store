@@ -164,9 +164,11 @@ class OrdersProductsType extends AbstractType
                         'query_builder' => function (EntityRepository $er) use ($context){
                             $q = $er->createQueryBuilder('p')
                                 ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = p.brand')
+                                ->where('p.isArchived != 1')
                                 ->orderBy('b.name , p.name', 'ASC');
                             if($context == "online")
-                                $q->where("p.isPublished = 1");
+                                $q->where("p.isPublished = 1")
+                                    ->andWhere('p.isArchived != 1');
 
                             return $q;
                         },

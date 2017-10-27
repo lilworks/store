@@ -19,6 +19,9 @@ class Product
      */
     public function preFlush()
     {
+        if($this->isArchived)
+            $this->isPublished = 0 ;
+        
         $sanitizer = new TagSanitizer();
         $this->tag = $sanitizer->sanitize($this->getName());
         if(!$this->priceOnline)
@@ -271,6 +274,13 @@ class Product
      * @ORM\Column(name="isReviewable", type="boolean",nullable=true)
      */
     private $isReviewable;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isArchived", type="boolean",nullable=true)
+     */
+    private $isArchived;
 
     /**
      * Constructor
@@ -1259,5 +1269,29 @@ class Product
     public function getDocfiles()
     {
         return $this->docfiles;
+    }
+
+    /**
+     * Set isArchived
+     *
+     * @param boolean $isArchived
+     *
+     * @return Product
+     */
+    public function setIsArchived($isArchived)
+    {
+        $this->isArchived = $isArchived;
+
+        return $this;
+    }
+
+    /**
+     * Get isArchived
+     *
+     * @return boolean
+     */
+    public function getIsArchived()
+    {
+        return $this->isArchived;
     }
 }

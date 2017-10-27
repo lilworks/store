@@ -9,6 +9,7 @@ use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderExecuterInterface;
 
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\EntityRepository;
 
 class CouponFilterType extends AbstractType
 {
@@ -16,23 +17,36 @@ class CouponFilterType extends AbstractType
     {
         $builder
             ->add('reference', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.storebundle.reference'
+                'label'=>'storebundle.reference'
             ))
-        ;
-        $builder->add('customer', Filters\CollectionAdapterFilterType::class, array(
-            'label'=>'lilworks.storebundle.customer',
-            'entry_type' => CustomerForOrderFilterType::class,
-            'add_shared' => function (FilterBuilderExecuterInterface $qbe)  {
-                $closure = function (QueryBuilder $filterBuilder, $alias, $joinAlias, Expr $expr) {
-                    // add the join clause to the doctrine query builder
-                    // the where clause for the label and color fields will be added automatically with the right alias later by the Lexik\Filter\QueryBuilderUpdater
-                    $filterBuilder->leftJoin($alias . '.customer', $joinAlias);
-                };
+            ->add('isSplitable', Filters\BooleanFilterType::class,array(
+                'label'=>'storebundle.coupon.issplitable'
+            ))
+            ->add('isAvailableOnline', Filters\BooleanFilterType::class,array(
+                'label'=>'storebundle.coupon.isavailableonline'
+            ))
+            ->add('isActive', Filters\BooleanFilterType::class,array(
+                'label'=>'storebundle.coupon.isactive'
+            ))
+            ->add('validity', Filters\DateRangeFilterType::class,array(
+                'label'=>'storebundle.coupon.validity'
+            ))
 
-                // then use the query builder executor to define the join and its alias.
-                $qbe->addOnce($qbe->getAlias().'.customer', 'cu', $closure);
+            ->add('customer', Filters\EntityFilterType::class,array(
+            'label'=>'lilworks.storebundle.customer',
+            'class'=>'LilWorksStoreBundle:Customer',
+            'choice_label' => function ($obj) {
+                return   $obj->getFirstName() . " " . $obj->getLastName(). " " . $obj->getCompanyName()  ;
             },
-        ));
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('c')
+                    ->leftJoin('LilWorksStoreBundle:Coupon','co','WITH','co.customer = c.id')
+                    ->where('co.id is not null')
+
+                    ;
+            },
+        ))
+        ;
 
     }
 

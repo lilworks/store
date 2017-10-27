@@ -117,10 +117,14 @@
                     <ul>
                         {% for depositSale in customer.depositSales  %}
                         {% set linkparams = {
-                        0:{icon:'eye',route:path('depositSale_show',{depositsale_id:depositSale.id})},
-                        1:{icon:'pencil',route:path('depositSale_edit',{depositsale_id:depositSale.id})}}
+                        0:{icon:'eye',route:path('depositsale_show',{depositsale_id:depositSale.id})},
+                        1:{icon:'pencil',route:path('depositsale_edit',{depositsale_id:depositSale.id})}}
                         %}
-                        {{ (depositSale.reference  ~' '~  depositSale.product.brand.name ~ ' ' ~ depositSale.product.name )|linkbtn(linkparams)|raw }}
+                            {% if depositSale.product is  null %}
+                                {{ depositSale.reference|linkbtn(linkparams)|raw }}
+                            {% else %}
+                                {{ (depositSale.reference  ~' '~  depositSale.product.brand.name ~ ' ' ~ depositSale.product.name )|linkbtn(linkparams)|raw }}
+                            {% endif %}
                         {% endfor %}
                     </ul>
                     {% else %}

@@ -2,6 +2,8 @@ lil_works_store_import:
     resource: "@LilWorksStoreBundle/Resources/config/routing/import.yml"
     prefix:   /import
 
+
+
 lil_works_store_country:
     resource: "@LilWorksStoreBundle/Resources/config/routing/country.yml"
     prefix:   /country
@@ -66,8 +68,8 @@ lil_works_store_coupon:
         resource: "@LilWorksStoreBundle/Resources/config/routing/coupon.yml"
         prefix:   /coupon
 
-lil_works_store_depositSale:
-        resource: "@LilWorksStoreBundle/Resources/config/routing/depositSale.yml"
+lil_works_store_depositsale:
+        resource: "@LilWorksStoreBundle/Resources/config/routing/depositsale.yml"
         prefix:   /depositsale
 
 lil_works_store_warranty:

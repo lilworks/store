@@ -3,3 +3,29 @@ import_index:
     defaults: { _controller: "LilWorksStoreBundle:Import:index" }
     methods:  [GET]
 
+import_offline_client:
+    path:     /offline-client
+    defaults: { _controller: "LilWorksStoreBundle:Import:offlineClient" }
+    methods:  [GET]
+
+import_offline_product:
+    path:     /offline-product
+    defaults: { _controller: "LilWorksStoreBundle:Import:offlineProduct" }
+    methods:  [GET]
+
+
+import_online_client:
+    path:     /online-client
+    defaults: { _controller: "LilWorksStoreBundle:Import:onlineClient" }
+    methods:  [GET]
+
+import_online_product:
+    path:     /online-product
+    defaults: { _controller: "LilWorksStoreBundle:Import:onlineProduct" }
+    methods:  [GET]
+
+
+import_test:
+    path:     /test
+    defaults: { _controller: "LilWorksStoreBundle:Import:test" }
+    methods:  [GET]

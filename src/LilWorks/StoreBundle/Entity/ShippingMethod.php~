@@ -46,7 +46,7 @@ class ShippingMethod
     private $basketsRealShippingMethods;
 
     /**
-     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\OrdersRealShippingMethods", mappedBy="shippingMethod")
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\OrdersRealShippingMethods", mappedBy="shippingMethod",cascade={"persist"})
      */
     private $ordersRealShippingMethods;
 

@@ -128,9 +128,8 @@ class SuperCategoryController extends Controller
     /**
      * @ParamConverter("superCategory", options={"mapping": {"supercategory_id"   : "id"}})
      */
-    public function showAction(SuperCategory $superCategory)
+    public function showAction(Request $request,SuperCategory $superCategory = null)
     {
-
 
         $translator = $this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
