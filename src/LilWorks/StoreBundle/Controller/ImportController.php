@@ -953,11 +953,14 @@ class ImportController extends Controller
                     if($resultClient['cli_company'] != ""){
                         $customer->setCompanyName($resultClient['cli_company']);
                     }
-                    $formatedNames = $this->getNames($resultClient['cli_name']);
-                    $customer->setLastName($formatedNames['last']);
-                    $customer->setFirstName($formatedNames['first']);
-                    $customer->setCompanyName($resultClient['cli_company']);
-
+                    if($resultClient['cli_name']){
+                        $formatedNames = $this->getNames($resultClient['cli_name']);
+                        $customer->setLastName($formatedNames['last']);
+                        $customer->setFirstName($formatedNames['first']);
+                        $customer->setCompanyName($resultClient['cli_company']);
+                    }else{
+                        $customer->setFirstName($resultUser['usr_name']);
+                    }
                     if($resultClient['liv_adr_id']>0 ){
                         $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id ");
                         $statement->bindValue('id', $resultClient['liv_adr_id']);
@@ -1064,10 +1067,14 @@ class ImportController extends Controller
                         $customer->setCompanyName($resultClient['cli_company']);
                     }
 
-                    $formatedNames = $this->getNames($resultClient['cli_name']);
-                    $customer->setLastName($formatedNames['last']);
-                    $customer->setFirstName($formatedNames['first']);
-                    $customer->setCompanyName($resultClient['cli_company']);
+                    if($resultClient['cli_name']){
+                        $formatedNames = $this->getNames($resultClient['cli_name']);
+                        $customer->setLastName($formatedNames['last']);
+                        $customer->setFirstName($formatedNames['first']);
+                        $customer->setCompanyName($resultClient['cli_company']);
+                    }else{
+                        $customer->setFirstName($resultUser['usr_name']);
+                    }
 
                     if($resultClient['liv_adr_id']>0 ){
                         $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id ");
