@@ -903,7 +903,7 @@ class ImportController extends Controller
 
 
     public function onlineClientAction(){
-        $max = 10;
+        $max = 250;
         $i=0;
         $emImport = $this->getDoctrine()->getManager('import');
         $em = $this->getDoctrine()->getManager();
