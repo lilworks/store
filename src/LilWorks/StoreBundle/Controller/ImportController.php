@@ -903,8 +903,8 @@ class ImportController extends Controller
 
 
     public function onlineClientAction(){
-        $max = 100;
-        $i=0;
+        #$max = 100;
+        #$i=0;
         $emImport = $this->getDoctrine()->getManager('import');
         $em = $this->getDoctrine()->getManager();
         $connection = $emImport->getConnection();
@@ -918,9 +918,9 @@ class ImportController extends Controller
         foreach($resultsUser as $resultUser){
 
             $user = $em->getRepository("AppBundle:User")->findOneByEmailCanonical(strtolower($resultUser['usr_email']));
-            if(!$user){
-
+            if(!$user) {
                 $user = new User();
+            }
                 $user->setUsername($resultUser['usr_email']);
                 $user->setEmail($resultUser['usr_email']);
                 $user->setPlainPassword(
@@ -1134,10 +1134,10 @@ class ImportController extends Controller
 
 
 
-                if( $i>=$max )
-                    break;
-                $i++;
-            }
+                #if( $i>=$max )
+                #    break;
+                #$i++;
+
             $em->flush();
         }
 
