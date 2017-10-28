@@ -3,7 +3,7 @@
 namespace LilWorks\StoreBundle\Form;
 
 
-use LilWorks\StoreBundle\Entity\Tax;
+
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use Symfony\Component\Form\AbstractType;
@@ -12,8 +12,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use LilWorks\StoreBundle\Form\RealShippingMethodType;
 use Doctrine\ORM\EntityRepository;
 
 class OrdersProductsType extends AbstractType
@@ -33,37 +31,71 @@ class OrdersProductsType extends AbstractType
 
             if($orderProduct){
 
-                if($context == "online"){
-                    $dataTax = $orderProduct->getProduct()->getTaxesOnline();
-                    $dataWarranty = $orderProduct->getProduct()->getWarrantiesOnline();
-                }else{
-                    $dataTax = $orderProduct->getProduct()->getTaxesOffline();
-                    $dataWarranty = $orderProduct->getProduct()->getWarrantiesOffline();
-                }
+                if($orderProduct->getProduct()){
+                    if($context == "online"){
+                        $dataTax = $orderProduct->getProduct()->getTaxesOnline();
+                        $dataWarranty = $orderProduct->getProduct()->getWarrantiesOnline();
+                    }else{
+                        $dataTax = $orderProduct->getProduct()->getTaxesOffline();
+                        $dataWarranty = $orderProduct->getProduct()->getWarrantiesOffline();
+                    }
 
-                if(is_null($orderProduct->getIsSecondHand())){
-                    $dataIsSecondHand = $orderProduct->getProduct()->getIsSecondHand();
-                }else{
-                    $dataIsSecondHand = $orderProduct->getIsSecondHand();
-                }
+                    if(is_null($orderProduct->getIsSecondHand())){
+                        $dataIsSecondHand = $orderProduct->getProduct()->getIsSecondHand();
+                    }else{
+                        $dataIsSecondHand = $orderProduct->getIsSecondHand();
+                    }
 
-                if(is_null($orderProduct->getPrice())){
-                    $dataPrice = ($context == "online") ? $orderProduct->getProduct()->getPriceOnline() : $orderProduct->getProduct()->getPriceOffline();
-                }else{
-                    $dataPrice = $orderProduct->getPrice();
-                }
-                if(is_null($orderProduct->getName()) || $orderProduct->getName() == ""){
-                    $dataName = $orderProduct->getProduct()->getBrand()->getName() . " " . $orderProduct->getProduct()->getName();
+                    if(is_null($orderProduct->getPrice())){
+                        $dataPrice = ($context == "online") ? $orderProduct->getProduct()->getPriceOnline() : $orderProduct->getProduct()->getPriceOffline();
+                    }else{
+                        $dataPrice = $orderProduct->getPrice();
+                    }
+                    if(is_null($orderProduct->getName()) || $orderProduct->getName() == ""){
+                        $dataName = $orderProduct->getProduct()->getBrand()->getName() . " " . $orderProduct->getProduct()->getName();
+                    }else{
+                        $dataName = $orderProduct->getName() ;
+                    }
+
+                    if(is_null($orderProduct->getQuantity()) || $orderProduct->getQuantity() == 0){
+                        $dataQuantity = 1;
+                    }else{
+                        $dataQuantity = ($dataIsSecondHand)?1:$orderProduct->getQuantity();
+                    }
                 }else{
                     $dataName = $orderProduct->getName() ;
-                }
-
-                if(is_null($orderProduct->getQuantity()) || $orderProduct->getQuantity() == 0){
-                    $dataQuantity = 1;
-                }else{
+                    $dataIsSecondHand = $orderProduct->getIsSecondHand();
                     $dataQuantity = ($dataIsSecondHand)?1:$orderProduct->getQuantity();
-                }
+                    $dataPrice = $orderProduct->getPrice();
+                    $dataWarranty= $orderProduct->getWarranties();
 
+                    $dataTax = $orderProduct->getTaxes();
+
+                    $form
+                        ->add('product', EntityType::class, array(
+                            'label'=>'storebundle.product',
+                            'class'    => 'LilWorksStoreBundle:Product' ,
+                            'choice_label' => function ($obj) { return   $obj->getBrand()->getName() . " " . $obj->getName() . " (" . $obj->getStock() .")" ; },
+                            'query_builder' => function (EntityRepository $er) use ($context){
+                                $q = $er->createQueryBuilder('p')
+                                    ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = p.brand')
+                                    ->where('p.isArchived != 1')
+                                    ->orderBy('b.name , p.name', 'ASC');
+                                if($context == "online")
+                                    $q->where("p.isPublished = 1")
+                                        ->andWhere('p.isArchived != 1');
+
+                                return $q;
+                            },
+                            'required' => false ,
+                            'mapped'=> true,
+                            'expanded' => false ,
+                            'multiple' => false
+
+                        ))
+
+                    ;
+                }
 
                 $form
 
@@ -187,11 +219,9 @@ class OrdersProductsType extends AbstractType
 
                 ;
             }
-
         });
-
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

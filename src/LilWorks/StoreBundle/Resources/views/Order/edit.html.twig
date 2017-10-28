@@ -77,15 +77,15 @@
         <div class="tab-pane active" id="general" role="tabpanel">
             {{ form_row(form.orderType) }}
             {% if order.orderType.tag == "FACTURE" %}
-            <ul class="ordersOrderSteps list-inline " id="target" data-prototype="{{ form_widget(form.ordersOrderSteps.vars.prototype)|e('html_attr') }}">
-                {% for orderOrderStep in form.ordersOrderSteps %}
-                    <li class="orderOrderStep list-inline-item">
-                        {{ orderOrderStep.vars.value.createdAt|date }}
-                        {{ form_row(orderOrderStep) }}
-                    </li>
-                {% endfor %}
-            </ul>
-            {{ form_widget(form.ordersOrderSteps) }}
+                <ul class="ordersOrderSteps list-inline " id="target" data-prototype="{{ form_widget(form.ordersOrderSteps.vars.prototype)|e('html_attr') }}">
+                    {% for orderOrderStep in form.ordersOrderSteps %}
+                        <li class="orderOrderStep list-inline-item">
+                            {{ orderOrderStep.vars.value.createdAt|date }}
+                            {{ form_row(orderOrderStep) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {{ form_widget(form.ordersOrderSteps) }}
             {% endif %}
         </div>
         <div class="tab-pane" id="customer" role="tabpanel">
@@ -108,15 +108,17 @@
                 {% for orderProduct in form.ordersProducts %}
                     <li class="product list-inline-item">
                         {%  set product = orderProduct.vars.data.product %}
-                        <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{product_id: product.id}) }}">
-                            <i class="fa fa-pencil"></i>
-                            {% if product.pictures|length > 0 %}
-                                <img src="{{ asset('product/' ~ product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
-                            {% endif %}
-                            {{ product.brand.name }}
-                            {{ product.name }}
-                            (<i class="fa fa-cubes" aria-hidden="true"></i>{{ product.stock }})
-                        </a>
+                        {% if product is not null %}
+                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{product_id: product.id}) }}">
+                                <i class="fa fa-pencil"></i>
+                                {% if product.pictures|length > 0 %}
+                                    <img src="{{ asset('product/' ~ product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
+                                {% endif %}
+                                {{ product.brand.name }}
+                                {{ product.name }}
+                                (<i class="fa fa-cubes" aria-hidden="true"></i>{{ product.stock }})
+                            </a>
+                        {% endif %}
                         {{ form_row(orderProduct) }}
                     </li>
                 {% endfor %}
@@ -137,15 +139,15 @@
         </div>
         <div class="tab-pane" id="paymentmethods" role="tabpanel">
             {% if form.ordersPaymentMethods is defined %}
-            <ul class="ordersPaymentMethods list-inline " id="target" data-prototype="{{ form_widget(form.ordersPaymentMethods.vars.prototype)|e('html_attr') }}">
+                <ul class="ordersPaymentMethods list-inline " id="target" data-prototype="{{ form_widget(form.ordersPaymentMethods.vars.prototype)|e('html_attr') }}">
                     {% for orderPaymentMethod in form.ordersPaymentMethods %}
                         <li class="orderPaymentMethod list-inline-item">
                             {{ orderPaymentMethod.vars.value.payedAt|date }}
                             {{ form_row(orderPaymentMethod) }}
                         </li>
                     {% endfor %}
-            </ul>
-            {{ form_widget(form.ordersPaymentMethods) }}
+                </ul>
+                {{ form_widget(form.ordersPaymentMethods) }}
             {% endif %}
         </div>
         <div class="tab-pane" id="more" role="tabpanel">
