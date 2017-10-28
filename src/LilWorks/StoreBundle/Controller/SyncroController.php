@@ -28,13 +28,13 @@ class SyncroController extends Controller
     public function cleanEntityFolderAction(Request $request)
     {
         $todo = array(
-            "lilworks.storebundle.product"=>array("product","LilWorksStoreBundle:Picture","pictureName"),
-            "lilworks.storebundle.brand"=>array("brand","LilWorksStoreBundle:Brand","pictureName"),
-            "lilworks.storebundle.category"=>array("category","LilWorksStoreBundle:Category","pictureName"),
-            "lilworks.storebundle.supercategory"=>array("supercategory","LilWorksStoreBundle:SuperCategory","pictureName"),
-            "lilworks.storebundle.annonce"=>array("annonce","LilWorksStoreBundle:Annonce","pictureName"),
-            "lilworks.storebundle.shippingmethod"=>array("shippingmethod","LilWorksStoreBundle:ShippingMethod","pictureName"),
-            "lilworks.storebundle.paymentmethod"=>array("paymentmethod","LilWorksStoreBundle:PaymentMethod","pictureName"),
+            "storebundle.product"=>array("product","LilWorksStoreBundle:Picture","pictureName"),
+            "storebundle.brand"=>array("brand","LilWorksStoreBundle:Brand","pictureName"),
+            "storebundle.category"=>array("category","LilWorksStoreBundle:Category","pictureName"),
+            "storebundle.supercategory"=>array("supercategory","LilWorksStoreBundle:SuperCategory","pictureName"),
+            "storebundle.annonce"=>array("annonce","LilWorksStoreBundle:Annonce","pictureName"),
+            "storebundle.shippingmethod"=>array("shippingmethod","LilWorksStoreBundle:ShippingMethod","pictureName"),
+            "storebundle.paymentmethod"=>array("paymentmethod","LilWorksStoreBundle:PaymentMethod","pictureName"),
         );
         $done = array();
         foreach($todo as $k => $cleanparam){

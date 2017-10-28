@@ -1135,7 +1135,7 @@ class ImportController extends Controller
 
 
 
-        $em->flush();
+#        $em->flush();
 
         return $this->render('LilWorksStoreBundle:Import:online.html.twig', array(
         ));
