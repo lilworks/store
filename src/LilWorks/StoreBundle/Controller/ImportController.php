@@ -1041,6 +1041,16 @@ class ImportController extends Controller
                             $em->persist($customer);
                         }
                     }
+                }else{
+                    $customer = new Customer();
+                    $customer->setFirstName('');
+                    $customer->setLastName('');
+                    $customer->setEmail($resultUser['usr_email']);
+
+                    $date = new \DateTime();
+                    $date->setTimestamp(strtotime($resultUser['usr_dateregister']));
+                    $customer->setCreatedAt($date);
+                    $em->persist($customer);
                 }
 
 
