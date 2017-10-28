@@ -47,8 +47,8 @@
       <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Order/show.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7642384" vertical-offset="1913" max-vertical-offset="3525">
-              <caret line="166" column="59" selection-start-line="166" selection-start-column="59" selection-end-line="166" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.72450334" vertical-offset="1913" max-vertical-offset="3525">
+              <caret line="164" column="126" selection-start-line="164" selection-start-column="126" selection-end-line="164" selection-end-column="126" />
               <folding />
             </state>
           </provider>
@@ -2233,8 +2233,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Order/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7642384" vertical-offset="1913" max-vertical-offset="3525">
-          <caret line="166" column="59" selection-start-line="166" selection-start-column="59" selection-end-line="166" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.72450334" vertical-offset="1913" max-vertical-offset="3525">
+          <caret line="164" column="126" selection-start-line="164" selection-start-column="126" selection-end-line="164" selection-end-column="126" />
           <folding />
         </state>
       </provider>
