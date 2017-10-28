@@ -1200,6 +1200,17 @@ class ImportController extends Controller
                             $orderProduct->setName($article["car_article"]);
                             $orderProduct->setPrice($article["car_pu"]);
 
+                            $statementArticle = $connection->prepare("SELECT * FROM boutique_articles ba WHERE ca.art_id = :art_id");
+                            $statementArticle->bindValue('art_id', $article["art_id"]);
+                            $statementArticle->execute();
+                            $resultArticle = $statementArticle->fetch();
+
+                            if($resultArticle){
+                                if($product = $em->getRepository('LilWorksStoreBundle:Product')->findOneByName($resultArticle["art_name"])){
+                                    $orderProduct->setProduct($product);
+                                }
+                            }
+
                             if($article["car_eco"]){
                                 if($tax = $em->getRepository('LilWorksStoreBundle:Tax')->findOneByValue($article["car_eco"])){
                                     $orderProduct->addTax($tax);
