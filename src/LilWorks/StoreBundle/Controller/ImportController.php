@@ -903,7 +903,6 @@ class ImportController extends Controller
 
 
 
-
     public function onlineClientAction()
     {
         $emImport = $this->getDoctrine()->getManager('import');
@@ -1199,16 +1198,16 @@ class ImportController extends Controller
                         $order->setDescriptionInternal($resultCommande['com_desc_interne']);
                         $order->setTot($resultCommande['com_tot']);
 
-
-                        if($resultCommande["com_livraison"]){
+                        if(is_null($resultCommande["com_port"])){
+                            $orderShippingMethod = new OrdersRealShippingMethods();
+                            $orderShippingMethod->setShippingMethod($magasin);
+                        }elseif($resultCommande["com_port"]>=0){
                             $orderShippingMethod = new OrdersRealShippingMethods();
                             $orderShippingMethod->setShippingMethod($ancien);
                             $orderShippingMethod->setPrice($resultCommande['com_port']);
                             $orderShippingMethod->setReference($resultCommande["com_livraison"]);
-                        }elseif($resultCommande["com_retrait"] == 1 ){
-                            $orderShippingMethod = new OrdersRealShippingMethods();
-                            $orderShippingMethod->setShippingMethod($magasin);
                         }
+
 
 
                         if($resultCommande['com_date_update'] && isset($orderShippingMethod)){
@@ -1365,4 +1364,6 @@ class ImportController extends Controller
         return $this->render('LilWorksStoreBundle:Import:online.html.twig', array());
 
     }
+
+
 }
