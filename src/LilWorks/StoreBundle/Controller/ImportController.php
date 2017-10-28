@@ -11,6 +11,7 @@ use LilWorks\StoreBundle\Entity\Order;
 use LilWorks\StoreBundle\Entity\OrdersOrderSteps;
 use LilWorks\StoreBundle\Entity\OrdersPaymentMethods;
 use LilWorks\StoreBundle\Entity\OrdersProducts;
+use LilWorks\StoreBundle\Entity\OrdersRealShippingMethods;
 use LilWorks\StoreBundle\Entity\PaymentMethod;
 use LilWorks\StoreBundle\Entity\PhoneNumber;
 use LilWorks\StoreBundle\Entity\Picture;
@@ -917,6 +918,9 @@ class ImportController extends Controller
         // payment method
         $spplus = $em->getRepository('LilWorksStoreBundle:PaymentMethod')->find(4);
         $cheque = $em->getRepository('LilWorksStoreBundle:PaymentMethod')->find(2);
+        // shipping method
+        $ancien = $em->getRepository('LilWorksStoreBundle:ShippingMethod')->find(4);
+        $magasin = $em->getRepository('LilWorksStoreBundle:ShippingMethod')->find(3);
 
         // All remote users
         foreach ($resultsUser as $resultUser) {
@@ -1195,6 +1199,36 @@ class ImportController extends Controller
                         $order->setDescriptionInternal($resultCommande['com_desc_interne']);
                         $order->setTot($resultCommande['com_tot']);
 
+
+                        if($resultCommande["com_livraison"]){
+                            $orderShippingMethod = new OrdersRealShippingMethods();
+                            $orderShippingMethod->setShippingMethod($ancien);
+                            $orderShippingMethod->setPrice($resultCommande['com_port']);
+                            $orderShippingMethod->setReference($resultCommande["com_livraison"]);
+                        }elseif($resultCommande["com_retrait"] == 1 ){
+                            $orderShippingMethod = new OrdersRealShippingMethods();
+                            $orderShippingMethod->setShippingMethod($magasin);
+                        }
+
+
+                        if($resultCommande['com_date_update'] && isset($orderShippingMethod)){
+                            $date = new \DateTime();
+                            $date->setTimestamp(strtotime($resultCommande['com_date_update']));
+                            $orderShippingMethod->setShippedAt($date);
+                            $orderShippingMethod->setReceivedAt($date);
+                        }elseif($resultCommande['com_date'] && isset($orderShippingMethod)){
+                            $date = new \DateTime();
+                            $date->setTimestamp(strtotime($resultCommande['com_date']));
+                            $orderShippingMethod->setShippedAt($date);
+                            $orderShippingMethod->setReceivedAt($date);
+                        }
+
+                        if(isset($orderShippingMethod)){
+                            $order->addOrdersRealShippingMethod($orderShippingMethod);
+                            $em->persist($orderShippingMethod);
+                        }
+
+
                         $statementArticles = $connection->prepare("SELECT * FROM commandes_articles ca WHERE ca.com_ref = :com_ref");
                         $statementArticles->bindValue('com_ref', $resultCommande['com_ref']);
                         $statementArticles->execute();
@@ -1202,6 +1236,10 @@ class ImportController extends Controller
 
                         foreach($resultArticles as $article){
                             $orderProduct = new OrdersProducts();
+                            if(isset($orderShippingMethod)){
+                                $orderShippingMethod->addOrdersProduct($orderProduct);
+                                $orderProduct->setOrderRealShippingMethod($orderShippingMethod);
+                            }
                             $orderProduct->setOrder($order);
                             $orderProduct->setQuantity($article["car_q"]);
                             $orderProduct->setName($article["car_article"]);
