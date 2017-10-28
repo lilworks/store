@@ -1303,14 +1303,16 @@ class ImportController extends Controller
 
 
                         $customer->addOrder($order);
+                        $em->persist($order);
                     }
+
                 }
 
 
             }
 
             $em->persist($customer);
-            $em->persist($order);
+
             $em->flush();
         }
 
