@@ -158,13 +158,28 @@
                         </thead>
                         <tbody>
                             {% for product in order.ordersProducts %}
+
                                 <tr>
-                                    <td>{{ product.product.id }}</td>
+                                    {% if product.product is null %}
+                                        <td>
+                                            <a class="btn btn-sm btn-warning" role="button" href="{{ path('order_edit',{order_id:order_id}) }}#products">
+                                                <i class="fa fa-pen" aria-hidden="true"></i>
+                                                {{ 'storebundle.order.productnotset'|trans }}
+                                            </a>
+
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            {{ product.product.id }}
+                                        </td>
+                                    {% endif %}
+
                                     <td>{{ product.name }}
                                         {% if product.serialNumber %}
-                                        <br><span class="serialNumber">{{ product.serialNumber }}</span>
+                                            <br><span class="serialNumber">{{ product.serialNumber }}</span>
                                         {% endif %}
                                     </td>
+
                                     <td>
                                         {% if  product.orderRealShippingMethod is not null %}
                                             {{ product.orderRealShippingMethod.shippingMethod.name }} |
