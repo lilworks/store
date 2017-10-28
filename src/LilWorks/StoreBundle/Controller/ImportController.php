@@ -1282,22 +1282,27 @@ class ImportController extends Controller
                         $statementPaiements->execute();
                         $resultPaiements = $statementPaiements->fetchAll();
 
+                        $totPayed = 0;
                         foreach($resultPaiements as $paiement){
-                            $orderPaymentMethod = new OrdersPaymentMethods();
-                            $orderPaymentMethod->setOrder($order);
+                            $totPayed+=$paiement['cpa_value'];
+                            if($totPayed<$resultCommande['com_tot']){
+                                $orderPaymentMethod = new OrdersPaymentMethods();
+                                $orderPaymentMethod->setOrder($order);
+                                
+                                if($resultCommande['com_moyen'] == "CHE"){
+                                    $orderPaymentMethod->setPaymentMethod( $cheque );
+                                }elseif($resultCommande['com_moyen'] == "CBS"){
+                                    $orderPaymentMethod->setPaymentMethod( $spplus );
+                                }
+
+                                $orderPaymentMethod->setAmount($paiement['cpa_value']);
 
 
-                            if($resultCommande['com_moyen'] == "CHE"){
-                                $orderPaymentMethod->setPaymentMethod( $cheque );
-                            }elseif($resultCommande['com_moyen'] == "CBS"){
-                                $orderPaymentMethod->setPaymentMethod( $spplus );
+                                $date = new \DateTime();
+                                $date->setTimestamp(strtotime($paiement['cpa_date']));
+                                $orderPaymentMethod->setPayedAt($date);
+                                $em->persist($orderPaymentMethod);
                             }
-
-                            $orderPaymentMethod->setAmount($paiement['cpa_value']);
-                            $date = new \DateTime();
-                            $date->setTimestamp(strtotime($paiement['cpa_date']));
-                            $orderPaymentMethod->setPayedAt($date);
-                            $em->persist($orderPaymentMethod);
                         }
 
 
