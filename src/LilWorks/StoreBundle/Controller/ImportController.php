@@ -1225,6 +1225,7 @@ class ImportController extends Controller
 
                         if(isset($orderShippingMethod)){
                             $order->addOrdersRealShippingMethod($orderShippingMethod);
+                            $orderShippingMethod->setOrder($order);
                             $em->persist($orderShippingMethod);
                         }
 
