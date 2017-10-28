@@ -903,7 +903,7 @@ class ImportController extends Controller
 
 
     public function onlineClientAction(){
-        $max = 250;
+        $max = 100;
         $i=0;
         $emImport = $this->getDoctrine()->getManager('import');
         $em = $this->getDoctrine()->getManager();
@@ -919,6 +919,7 @@ class ImportController extends Controller
 
             $user = $em->getRepository("AppBundle:User")->findOneByEmailCanonical(strtolower($resultUser['usr_email']));
             if(!$user){
+
                 $user = new User();
                 $user->setUsername($resultUser['usr_email']);
                 $user->setEmail($resultUser['usr_email']);
@@ -1137,8 +1138,9 @@ class ImportController extends Controller
                     break;
                 $i++;
             }
+            $em->flush();
         }
-        $em->flush();
+
 
         return $this->render('LilWorksStoreBundle:Import:online.html.twig', array());
 
