@@ -1109,11 +1109,11 @@ class ImportController extends Controller
                             $statementPaiements->execute();
                             $resultPaiements = $statementPaiements->fetchAll();
                             foreach($resultPaiements as $paiement){
-                                $OrderPaymentMethod = new OrdersPaymentMethods();
-                                $OrderPaymentMethod->setOrder($order);
-                                $OrderPaymentMethod->setPaymentMethod(($commande['com_moye'] == "CHE")?$che:$spplus);
-
-                                $em->persist($OrderPaymentMethod);
+                                $orderPaymentMethod = new OrdersPaymentMethods();
+                                $orderPaymentMethod->setOrder($order);
+                                $orderPaymentMethod->setPaymentMethod(($commande['com_moye'] == "CHE")?$che:$spplus);
+                                $orderPaymentMethod->setAmount($paiement['cpa_value']);
+                                $em->persist($orderPaymentMethod);
                             }
 
                         }
@@ -1135,7 +1135,7 @@ class ImportController extends Controller
 
 
 
-#        $em->flush();
+        $em->flush();
 
         return $this->render('LilWorksStoreBundle:Import:online.html.twig', array(
         ));
