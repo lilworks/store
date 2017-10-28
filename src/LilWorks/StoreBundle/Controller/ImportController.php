@@ -914,6 +914,9 @@ class ImportController extends Controller
         $resultsUser = $statementUsers->fetchAll();
 
 
+        // only fai
+        $fai = $em->getRepository("LilWorksStoreBundle:OrderType")->find(3);
+
 
         foreach($resultsUser as $resultUser){
 
@@ -921,122 +924,132 @@ class ImportController extends Controller
 
             if(!$user) {
                 $user = new User();
+
+                $user->setUsername($resultUser['usr_email']);
+                $user->setEmail($resultUser['usr_email']);
+                $user->setPlainPassword(
+                    $this->decrypt($resultUser['usr_password'], $resultUser['usr_password_salt'])
+                );
+
+                $date = new \DateTime();
+                $date->setTimestamp(strtotime($resultUser['usr_dateregister']));
+                $user->setPasswordRequestedAt($date);
+
+                $user->setEnabled(1);
+                $em->persist($user);
+
             }
-
-            $user->setUsername($resultUser['usr_email']);
-            $user->setEmail($resultUser['usr_email']);
-            $user->setPlainPassword(
-                $this->decrypt($resultUser['usr_password'], $resultUser['usr_password_salt'])
-            );
-
-            $date = new \DateTime();
-            $date->setTimestamp(strtotime($resultUser['usr_dateregister']));
-            $user->setPasswordRequestedAt($date);
-
-            $user->setEnabled(1);
-            $em->persist($user);
-
             $statementClient = $connection->prepare("SELECT * FROM clients c WHERE c.usr_id=:usr_id LIMIT 1;");
             $statementClient->bindValue('usr_id', $resultUser['usr_id']);
             $statementClient->execute();
             $resultClient = $statementClient->fetch();
 
             if($resultClient){
+
                 $formatedNames = $this->getNames($resultClient['cli_name']);
                 $customer = $em->getRepository("LilWorksStoreBundle:Customer")->findOneBy(array(
                     'email'=>$resultUser['usr_email']
                 ));
+
                 if(!$customer){
                     $customer = new Customer();
-                }
-                $customer->setEmail($resultUser['usr_email']);
 
-                $date = new \DateTime();
-                $date->setTimestamp(strtotime($resultUser['usr_dateregister']));
-                $customer->setCreatedAt($date);
+                    $customer->setEmail($resultUser['usr_email']);
 
-                $customer->setUser($user);
-                if($resultClient['cli_company'] != ""){
+                    $date = new \DateTime();
+                    $date->setTimestamp(strtotime($resultUser['usr_dateregister']));
+                    $customer->setCreatedAt($date);
+
+                    $customer->setUser($user);
+                    if($resultClient['cli_company'] != ""){
+                        $customer->setCompanyName($resultClient['cli_company']);
+                    }
+
+                    //if($resultClient['cli_name'] != ""){
+                    $formatedNames = $this->getNames($resultClient['cli_name']);
+                    $customer->setLastName($formatedNames['last']);
+                    $customer->setFirstName($formatedNames['first']);
+                    $customer->setCreatedAt(
+                        $date
+                    );
                     $customer->setCompanyName($resultClient['cli_company']);
-                }
-
-                //if($resultClient['cli_name'] != ""){
-                $formatedNames = $this->getNames($resultClient['cli_name']);
-                $customer->setLastName($formatedNames['last']);
-                $customer->setFirstName($formatedNames['first']);
-                $customer->setCreatedAt(
-                    $date
-                );
-                $customer->setCompanyName($resultClient['cli_company']);
-                //}
+                    //}
 
 
-                if($resultClient['liv_adr_id']>0){
-                    $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id ");
-                    $statement->bindValue('id', $resultClient['liv_adr_id']);
+                    if(count($customer->getAddresses()) == 0){
+                        if($resultClient['liv_adr_id']>0 ){
+
+                            $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id ");
+                            $statement->bindValue('id', $resultClient['liv_adr_id']);
+                            $statement->execute();
+                            $resultAddress = $statement->fetchAll();
+                            $resultAddress=$resultAddress[0];
+
+                            $addressLiv = new Address();
+                            $addressLiv->setCustomer($customer);
+                            $addressLiv->setName($resultAddress["adr_name"]);
+                            $addressLiv->setStreet($resultAddress["adr_adr"]);
+                            $addressLiv->setComplement($resultAddress["adr_lieudit"]);
+                            $addressLiv->setZipCode($resultAddress["adr_code"]);
+                            $addressLiv->setCity($resultAddress["adr_ville"]);
+
+                            $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
+                            $statement->bindValue('id', $resultAddress["pay_id"]);
+                            $statement->execute();
+                            $resultAddressPays = $statement->fetchAll();
+                            $resultAddressPays = $resultAddressPays[0];
+                            $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
+
+                            $addressLiv->setCountry($country);
+                            $em->persist($addressLiv);
+
+                        }
+
+                        if($resultClient['fac_adr_id']>0){
+
+                            $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id ");
+                            $statement->bindValue('id', $resultClient['fac_adr_id']);
+                            $statement->execute();
+                            $resultAddress = $statement->fetchAll();
+
+                            $resultAddress=$resultAddress[0];
+                            $addressFac = new Address();
+                            $addressFac->setCustomer($customer);
+                            $addressFac->setName($resultAddress["adr_name"]);
+                            $addressFac->setStreet($resultAddress["adr_adr"]);
+                            $addressFac->setComplement($resultAddress["adr_lieudit"]);
+                            $addressFac->setZipCode($resultAddress["adr_code"]);
+                            $addressFac->setCity($resultAddress["adr_ville"]);
+
+                            $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
+                            $statement->bindValue('id', $resultAddress["pay_id"]);
+                            $statement->execute();
+                            $resultAddressPays = $statement->fetchAll();
+                            $resultAddressPays = $resultAddressPays[0];
+                            $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
+
+                            $addressFac->setCountry($country);
+
+                            $em->persist($addressFac);
+
+                        }
+                    }
+
+                    $statement = $connection->prepare("SELECT * FROM telephones WHERE cli_id = :id ");
+                    $statement->bindValue('id', $resultClient['usr_id']);
                     $statement->execute();
-                    $resultAddress = $statement->fetchAll();
-                    $resultAddress=$resultAddress[0];
-                    $addressLiv = new Address();
-                    $addressLiv->setCustomer($customer);
-                    $addressLiv->setName($resultAddress["adr_name"]);
-                    $addressLiv->setStreet($resultAddress["adr_adr"]);
-                    $addressLiv->setComplement($resultAddress["adr_lieudit"]);
-                    $addressLiv->setZipCode($resultAddress["adr_code"]);
-                    $addressLiv->setCity($resultAddress["adr_ville"]);
+                    $resultPhonenumbers = $statement->fetchAll();
 
-                    $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
-                    $statement->bindValue('id', $resultAddress["pay_id"]);
-                    $statement->execute();
-                    $resultAddressPays = $statement->fetchAll();
-                    $resultAddressPays = $resultAddressPays[0];
-                    $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
-
-                    $addressLiv->setCountry($country);
-                    $em->persist($addressLiv);
-
+                    if(count($customer->getPhonenumbers()) == 0){
+                        foreach($resultPhonenumbers as $resultPhonenumber){
+                            $phonenumber = new PhoneNumber();
+                            $phonenumber->setCustomer($customer);
+                            $phonenumber->setPhonenumber($resultPhonenumber['tel_num']);
+                            $em->persist($phonenumber);
+                        }
+                        $em->persist($customer);
+                    }
                 }
-
-                if($resultClient['fac_adr_id']>0){
-
-                    $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id ");
-                    $statement->bindValue('id', $resultClient['fac_adr_id']);
-                    $statement->execute();
-                    $resultAddress = $statement->fetchAll();
-
-                    $resultAddress=$resultAddress[0];
-                    $addressFac = new Address();
-                    $addressFac->setCustomer($customer);
-                    $addressFac->setName($resultAddress["adr_name"]);
-                    $addressFac->setStreet($resultAddress["adr_adr"]);
-                    $addressFac->setComplement($resultAddress["adr_lieudit"]);
-                    $addressFac->setZipCode($resultAddress["adr_code"]);
-                    $addressFac->setCity($resultAddress["adr_ville"]);
-
-                    $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
-                    $statement->bindValue('id', $resultAddress["pay_id"]);
-                    $statement->execute();
-                    $resultAddressPays = $statement->fetchAll();
-                    $resultAddressPays = $resultAddressPays[0];
-                    $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
-
-                    $addressFac->setCountry($country);
-
-                    $em->persist($addressFac);
-
-                }
-
-                $statement = $connection->prepare("SELECT * FROM telephones WHERE cli_id = :id ");
-                $statement->bindValue('id', $resultClient['usr_id']);
-                $statement->execute();
-                $resultPhonenumbers = $statement->fetchAll();
-                foreach($resultPhonenumbers as $resultPhonenumber){
-                    $phonenumber = new PhoneNumber();
-                    $phonenumber->setCustomer($customer);
-                    $phonenumber->setPhonenumber($resultPhonenumber['tel_num']);
-                    $em->persist($phonenumber);
-                }
-                $em->persist($customer);
             }
 
 
@@ -1044,14 +1057,10 @@ class ImportController extends Controller
             $statementCommandes->bindValue('usr_id', $resultUser['usr_id']);
             $statementCommandes->execute();
             $resultsCommande = $statementCommandes->fetchAll();
-            // only fai
-            $fai = $em->getRepository("LilWorksStoreBundle:OrderType")->find(3);
 
             if(count($resultsCommande)>0){
                 foreach($resultsCommande as $resultCommande){
-
                     $order = $em->getRepository("LilWorksStoreBundle:Order")->findOneByReference($resultCommande['com_ref']);
-
                     if(!$order){
                         $order = new Order();
 
