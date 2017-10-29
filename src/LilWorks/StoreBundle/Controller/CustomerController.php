@@ -168,7 +168,7 @@ class CustomerController extends Controller
             foreach ($originalPhonenumbers as $phonenumber) {
                 if (false === $customer->getPhonenumbers()->contains($phonenumber)) {
                     // remove the Task from the Tag
-                    $phonenumber->getCustomer()->removePhonenumbers($phonenumber);
+                    $phonenumber->getCustomer()->removePhonenumber($phonenumber);
                     // if it was a many-to-one relationship, remove the relationship like this
                     //$shippingmethodCountry->setCountry(null);
                     $em->persist($phonenumber);
