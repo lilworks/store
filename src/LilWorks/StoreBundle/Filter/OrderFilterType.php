@@ -45,7 +45,7 @@ class OrderFilterType extends AbstractType
         $resolver->setDefaults(array(
             'csrf_protection'   => false,
             'validation_groups' => array('filtering') ,
-            'filter_condition_builder' => function (ConditionBuilderInterface $builder) {
+           /* 'filter_condition_builder' => function (ConditionBuilderInterface $builder) {
                     $builder
                         ->root('or')
                         ->field('customer.firstName')
@@ -57,7 +57,7 @@ class OrderFilterType extends AbstractType
                         ->field('reference')
                         ->end()
                     ;
-                }
+                }*/
         ));
     }
 }
