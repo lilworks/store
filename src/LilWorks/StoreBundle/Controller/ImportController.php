@@ -902,15 +902,13 @@ class ImportController extends Controller
     }
 
 
-
     public function onlineClientAction()
     {
-
         $emImport = $this->getDoctrine()->getManager('import');
         $em = $this->getDoctrine()->getManager();
         $connection = $emImport->getConnection();
 
-        $statementUsers = $connection->prepare("SELECT * FROM users u ORDER BY u.usr_id ASC");
+        $statementUsers = $connection->prepare("SELECT * FROM users u ORDER BY u.usr_id ASC LIMIT 1000;");
         $statementUsers->execute();
         $resultsUser = $statementUsers->fetchAll();
         // only fai
@@ -932,11 +930,14 @@ class ImportController extends Controller
             $statementCountUsers->bindValue('usr_email', $resultUser['usr_email']);
             $statementCountUsers->execute();
             $resultCountUser = $statementCountUsers->fetch();
+            $resultCountUser = intval($resultCountUser["count(u.usr_id)"]);
 
-
-            $user = $em->getRepository("AppBundle:User")->findOneByEmailCanonical(strtolower(strtolower($resultUser['usr_email'])));
+            $user = $em->getRepository("AppBundle:User")->findOneByEmailCanonical(strtolower($resultUser['usr_email']));
 
             // user yet in local but i want to overwrite the datas with recent see order by usr_dateregister
+
+
+
             if(
                 ($user && $resultCountUser > 1) ||
                 ($user && is_null($user->getCustomer()))
@@ -968,18 +969,17 @@ class ImportController extends Controller
                     }else{
                         $customer->setFirstName($resultUser['usr_name']);
                     }
-
-
                     if($resultClient['liv_adr_id']>0 ){
                         $statement = $connection->prepare("SELECT * FROM adresses WHERE adr_id = :id ");
                         $statement->bindValue('id', $resultClient['liv_adr_id']);
                         $statement->execute();
                         $resultAddress = $statement->fetchAll();
                         $resultAddress=$resultAddress[0];
+
                         $a = $em->getRepository('LilWorksStoreBundle:Address')->findOneBy(array(
                             "customer"=>$customer->getId(),
                             "name"=>$resultAddress["adr_name"],
-                            "street"=>$resultAddress["adr_ville"],
+                            "street"=>$resultAddress["adr_adr"],
                             "city"=>$resultAddress["adr_ville"],
                         ));
                         if(!$a) {
@@ -1011,7 +1011,7 @@ class ImportController extends Controller
                         $a = $em->getRepository('LilWorksStoreBundle:Address')->findOneBy(array(
                             "customer"=>$customer->getId(),
                             "name"=>$resultAddress["adr_name"],
-                            "street"=>$resultAddress["adr_ville"],
+                            "street"=>$resultAddress["adr_adr"],
                             "city"=>$resultAddress["adr_ville"],
                         ));
                         if(!$a){
@@ -1038,25 +1038,25 @@ class ImportController extends Controller
                     $statement->execute();
                     $resultPhonenumbers = $statement->fetchAll();
 
-                        foreach($resultPhonenumbers as $resultPhonenumber){
-                            $pn = $em->getRepository('LilWorksStoreBundle:Phonenumber')->findOneBy(array(
-                                "customer"=>$customer->getId(),
-                                "phonenumber"=>$resultPhonenumber['tel_num']
-                            ));
-                            if($pn){
-                                $phonenumber = new PhoneNumber();
-                                $phonenumber->setCustomer($customer);
-                                $phonenumber->setPhonenumber($resultPhonenumber['tel_num']);
-                                $em->persist($phonenumber);
-                            }
+                    foreach($resultPhonenumbers as $resultPhonenumber){
+                        $pn = $em->getRepository('LilWorksStoreBundle:Phonenumber')->findOneBy(array(
+                            "customer"=>$customer->getId(),
+                            "phonenumber"=>$resultPhonenumber['tel_num']
+                        ));
+                        if($pn){
+                            $phonenumber = new PhoneNumber();
+                            $phonenumber->setCustomer($customer);
+                            $phonenumber->setPhonenumber($resultPhonenumber['tel_num']);
+                            $em->persist($phonenumber);
                         }
+                    }
 
                     $em->persist($customer);
 
                 }
 
 
-            }else{ // user not in local
+            }elseif(!$user){ // user not in local
                 $userIsNew = true;
                 $user = new User();
                 $user->setUsername($resultUser['usr_email']);
@@ -1182,6 +1182,8 @@ class ImportController extends Controller
             }
 
 
+
+
             $statementCommandes = $connection->prepare("SELECT * FROM commandes co WHERE co.usr_id=:usr_id");
             $statementCommandes->bindValue('usr_id', $resultUser['usr_id']);
             $statementCommandes->execute();
@@ -1191,6 +1193,7 @@ class ImportController extends Controller
 
                 foreach($resultsCommande as $resultCommande){
                     $order = $em->getRepository("LilWorksStoreBundle:Order")->findOneByReference($resultCommande['com_ref']);
+
                     if(!$order){
                         $order = new Order();
 
@@ -1298,10 +1301,6 @@ class ImportController extends Controller
 
                             $em->persist($orderProduct);
                         }
-
-
-
-
                         $statementPaiements = $connection->prepare("SELECT * FROM commandes_paiements cp WHERE cp.com_ref = :com_ref");
                         $statementPaiements->bindValue('com_ref', $resultCommande['com_ref']);
                         $statementPaiements->execute();
@@ -1319,35 +1318,24 @@ class ImportController extends Controller
                                 }elseif($resultCommande['com_moyen'] == "CBS"){
                                     $orderPaymentMethod->setPaymentMethod( $spplus );
                                 }
-
                                 $orderPaymentMethod->setAmount($paiement['cpa_value']);
-
-
                                 $date = new \DateTime();
                                 $date->setTimestamp(strtotime($paiement['cpa_date']));
                                 $orderPaymentMethod->setPayedAt($date);
                                 $em->persist($orderPaymentMethod);
-
                                 $totPayed+=$paiement['cpa_value'];
                             }
                         }
-
-
-
                         if($resultCommande['cst_id']) {
-
                             $orderOrderStep = new OrdersOrderSteps();
                             $orderOrderStep->setOrder($order);
                             $date = new \DateTime();
-
                             if($resultCommande['com_date_update']){
                                 $date->setTimestamp(strtotime($resultCommande['com_date_update']));
                             }else{
                                 $date->setTimestamp(strtotime($resultCommande['com_date']));
                             }
                             $orderOrderStep->setCreatedAt($date);
-
-
                             if($totPayed == 0 && ( $resultCommande['cst_id'] != 5 || $resultCommande['cst_id'] != 8  )){
                                 $orderOrderStep->setOrderStep($zero);
                             }elseif($totPayed<$resultCommande['com_tot'] &&  ( $resultCommande['cst_id'] != 5 || $resultCommande['cst_id'] != 8  ) ){
@@ -1378,7 +1366,6 @@ class ImportController extends Controller
                                 );
                             }
                             $em->persist($orderOrderStep);
-
                             if(
                                 $orderOrderStep->getOrder()->getId() != 3 &&
                                 $orderOrderStep->getOrder()->getId() != 5 &&
@@ -1390,25 +1377,20 @@ class ImportController extends Controller
                                 $em->persist($orderShippingMethod);
                             }
                         }
-
-
                         $customer->addOrder($order);
                         $em->persist($order);
                     }
-
                 }
-
-
             }
-
-            $em->persist($customer);
-
+            #$em->persist($customer);
             $em->flush();
         }
 
         return $this->render('LilWorksStoreBundle:Import:online.html.twig', array());
 
     }
+
+
 
 
 }

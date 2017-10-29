@@ -78,6 +78,24 @@ class StoreBuilder implements ContainerAwareInterface
                     'curr'=>array()
                 ),
             );
+        }elseif( $options["context"] == "portal" ){
+            $attr = array(
+                0=>array(
+                    'link'=>array(),
+                    'child'=>array('class'=>'list'),
+                    'curr'=>array(),
+                ),
+                1=>array(
+                    'link'=>array('class'=>'list-item '),
+                    'child'=>array('class'=>'list'),
+                    'curr'=>array('class'=>'list-item')
+                ),
+                2=>array(
+                    'link'=>array(),
+                    'child'=>array(),
+                    'curr'=>array()
+                ),
+            );
         }
 
         $this->factory = $factory;
@@ -110,7 +128,7 @@ class StoreBuilder implements ContainerAwareInterface
         $userMenuCatPortal->setChildrenAttribute('class',$attr[1]['child']['class']);
 
         //level 1
-        $customerMenuCat = $userMenuCatPortal->addChild('storebundle.menu.cat.customer', array(
+        $customerMenuCat = $userMenuCatPortal->addChild('storebundle.menu.customer', array(
             #'route' => 'portal_user',
             'attributes'=>$attr[1]['curr'],
             'linkAttributes'=>$attr[1]['link'],
@@ -520,7 +538,7 @@ class StoreBuilder implements ContainerAwareInterface
             'childrenAttributes'=>$attr[1]['child'],
             'linkAttributes'=>$attr[1]['link'],
         ));
-        $annonceMenuCat->setAttribute('i','fa fa-arrows-h');
+        $annonceMenuCat->setAttribute('i','fa fa-bullhorn');
         $annonceMenuCat->setChildrenAttribute('class',$attr[1]['child']['class']);
         $this->container->get('event_dispatcher')->dispatch(
             ConfigureStoreMenuEvent::CONFIGURE,

@@ -356,6 +356,7 @@ class ConfigureStoreMenuListener
 
 
         $this->setAction('index',null,$menu);
+        $this->setAction('new',null,$menu);
 
         if($id) {
             $entityName = "LilWorksStoreBundle:DepositSale";

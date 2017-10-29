@@ -3,8 +3,8 @@ portal_user:
     defaults: { _controller: "LilWorksStoreBundle:Portal:user" }
     methods:  GET
 portal_document:
-    path:     /order
-    defaults: { _controller: "LilWorksStoreBundle:Portal:order" }
+    path:     /document
+    defaults: { _controller: "LilWorksStoreBundle:Portal:document" }
     methods:  GET
 portal_product:
     path:     /product
@@ -19,6 +19,6 @@ portal_shipping:
     defaults: { _controller: "LilWorksStoreBundle:Portal:shipping" }
     methods:  GET
 portal_config:
-    path:     /site
-    defaults: { _controller: "LilWorksStoreBundle:Portal:site" }
+    path:     /config
+    defaults: { _controller: "LilWorksStoreBundle:Portal:config" }
     methods:  GET

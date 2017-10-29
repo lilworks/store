@@ -1,6 +1,78 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    
+
+
+    <h1>{{ 'storebundle.menu.cat.document.portal'|trans }}</h1>
+
+
+    <div class="card-columns">
+
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-file-o" aria-hidden="true"></i>
+                    {{ 'storebundle.orders'|trans }}
+                </h4>
+                <p class="card-text">
+                <ul>
+                    <li>{{ 'storebundle.all'|trans }}: {{ ordersAll|length }}</li>
+                </ul>
+                </p>
+
+                <blockquote class="card-block card-blockquote">
+                    <footer>
+                        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.document.portal','storebundle.menu.order'] , {context: 'portal'}) %}
+                        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-gavel" aria-hidden="true"></i>
+                    {{ 'storebundle.depositsales'|trans }}
+                </h4>
+                <p class="card-text">
+                <ul>
+                    <li>{{ 'storebundle.all'|trans }}: {{ depositsalesAll|length }}</li>
+                </ul>
+                </p>
+
+                <blockquote class="card-block card-blockquote">
+                    <footer>
+                        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.document.portal','storebundle.menu.depositsale'] , {context: 'portal'}) %}
+                        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-university" aria-hidden="true"></i>
+                    {{ 'storebundle.coupons'|trans }}
+                </h4>
+                <p class="card-text">
+                <ul>
+                    <li>{{ 'storebundle.all'|trans }}: {{ couponsAll|length }}</li>
+                </ul>
+                </p>
+
+                <blockquote class="card-block card-blockquote">
+                    <footer>
+                        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.document.portal','storebundle.menu.coupon'] , {context: 'portal'}) %}
+                        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+
+    </div>
+
+
 
 {% endblock %}

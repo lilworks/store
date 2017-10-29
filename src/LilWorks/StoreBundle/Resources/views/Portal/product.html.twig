@@ -1,6 +1,145 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    
+
+
+    <h1>{{ 'storebundle.menu.cat.product.portal'|trans }}</h1>
+
+
+    <div class="card-columns">
+
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-cube" aria-hidden="true"></i>
+                    {{ 'storebundle.products'|trans }}
+                </h4>
+                <p class="card-text">
+                    <ul>
+                        <li>{{ 'storebundle.all'|trans }}: {{ productsAll|length }}</li>
+                        <li>{{ 'storebundle.allpublished'|trans }}: {{ productsPublished|length }}</li>
+                        <li>{{ 'storebundle.allarchived'|trans }}: {{ productsArchived|length }}</li>
+                    </ul>
+                </p>
+
+                <blockquote class="card-block card-blockquote">
+                    <footer>
+                            {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.product.portal','storebundle.menu.product'] , {context: 'portal'}) %}
+                            {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-copyright"></i>
+                    {{ 'storebundle.brands'|trans }}
+                </h4>
+                <p class="card-text">
+                    <ul>
+                        <li>{{ 'storebundle.all'|trans }}: {{ brandsAll|length }}</li>
+                        <li>{{ 'storebundle.allpublished'|trans }}: {{ brandsPublished|length }}</li>
+                    </ul>
+                </p>
+
+                <blockquote class="card-block card-blockquote">
+                    <footer>
+                        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.product.portal','storebundle.menu.brand'] , {context: 'portal'}) %}
+                        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-bullseye"></i>
+                    {{ 'storebundle.categories'|trans }}
+                </h4>
+                <p class="card-text">
+                <ul>
+                    <li>{{ 'storebundle.all'|trans }}: {{ categoriesAll|length }}</li>
+                    <li>{{ 'storebundle.allpublished'|trans }}: {{ categoriesPublished|length }}</li>
+                </ul>
+                </p>
+
+                <blockquote class="card-block card-blockquote">
+                    <footer>
+                        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.product.portal','storebundle.menu.category'] , {context: 'portal'}) %}
+                        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-object-group"></i>
+                    {{ 'storebundle.supercategories'|trans }}
+                </h4>
+                <p class="card-text">
+                <ul>
+                    <li>{{ 'storebundle.all'|trans }}: {{ supercategoriesAll|length }}</li>
+                    <li>{{ 'storebundle.allpublished'|trans }}: {{ supercategoriesPublished|length }}</li>
+                </ul>
+                </p>
+
+                <blockquote class="card-block card-blockquote">
+                    <footer>
+                        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.product.portal','storebundle.menu.supercategory'] , {context: 'portal'}) %}
+                        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-tag"></i>
+                    {{ 'storebundle.tags'|trans }}
+                </h4>
+                <p class="card-text">
+                <ul>
+                    <li>{{ 'storebundle.all'|trans }}: {{ tagsAll|length }}</li>
+                </ul>
+                </p>
+
+                <blockquote class="card-block card-blockquote">
+                    <footer>
+                        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.product.portal','storebundle.menu.tag'] , {context: 'portal'}) %}
+                        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <i class="fa fa-wrench"></i>
+                    {{ 'storebundle.warranties'|trans }}
+                </h4>
+                <p class="card-text">
+                <ul>
+                    <li>{{ 'storebundle.all'|trans }}: {{ warrantiesAll|length }}</li>
+                </ul>
+
+                </p>
+
+                <blockquote class="card-block card-blockquote">
+                    <footer>
+                        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.product.portal','storebundle.menu.warranty'] , {context: 'portal'}) %}
+                        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+
 
 {% endblock %}
