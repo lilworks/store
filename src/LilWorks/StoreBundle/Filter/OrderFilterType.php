@@ -23,13 +23,13 @@ class OrderFilterType extends AbstractType
         ;
 
         $builder->add('customer', Filters\CollectionAdapterFilterType::class, array(
-            'label'=>'storebundle.category',
+            'label'=>'storebundle.customer',
             'entry_type' => CustomerForOrderFilterType::class,
             'add_shared' => function (FilterBuilderExecuterInterface $qbe)  {
                 $closure = function (QueryBuilder $filterBuilder, $alias, $joinAlias, Expr $expr) {
                     $filterBuilder->leftJoin($alias . '.customer', $joinAlias);
                 };
-                $qbe->addOnce($qbe->getAlias().'.customer', 'c', $closure);
+                $qbe->addOnce($qbe->getAlias().'.customer', 'cus', $closure);
 
             },
         ));
