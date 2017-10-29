@@ -908,7 +908,7 @@ class ImportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $connection = $emImport->getConnection();
 
-        $statementUsers = $connection->prepare("SELECT * FROM users u ORDER BY u.usr_id ASC LIMIT 1000;");
+        $statementUsers = $connection->prepare("SELECT * FROM users u ORDER BY u.usr_id ASC");
         $statementUsers->execute();
         $resultsUser = $statementUsers->fetchAll();
         // only fai
