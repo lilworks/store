@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <h1>
+        {{ 'storebundle.menu.cat.index.portal'|trans }}
+    </h1>
+
+
+    <div>
+
+        {{ date|localizeddate('long', 'none') }}
+        {{ 'storebundle.weeknum %week%'|trans({'%week%':date|date('W')}) }}
+    </div>
+
+
+
+{% endblock %}

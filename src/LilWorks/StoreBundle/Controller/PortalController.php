@@ -14,6 +14,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class PortalController extends Controller
 {
 
+    public function indexAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $translator = $this->get('translator');
+        $seoPage = $this->get('sonata.seo.page');
+        $seoPage->setTitle($translator->trans('storebundle.htmltitle.portal.index'));
+
+        return $this->render('LilWorksStoreBundle:Portal:index.html.twig', array(
+            'date'=>new \DateTime()
+        ));
+    }
+
+
     public function userAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();

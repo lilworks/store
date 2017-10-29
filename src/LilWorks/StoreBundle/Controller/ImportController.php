@@ -977,7 +977,7 @@ class ImportController extends Controller
                         $resultAddress=$resultAddress[0];
 
                         $a = $em->getRepository('LilWorksStoreBundle:Address')->findOneBy(array(
-                            "customer"=>$customer->getId(),
+                            #"customer"=>$customer->getId(),
                             "name"=>$resultAddress["adr_name"],
                             "street"=>$resultAddress["adr_adr"],
                             "city"=>$resultAddress["adr_ville"],
@@ -1009,7 +1009,7 @@ class ImportController extends Controller
                         $resultAddress=$resultAddress[0];
 
                         $a = $em->getRepository('LilWorksStoreBundle:Address')->findOneBy(array(
-                            "customer"=>$customer->getId(),
+                            #"customer"=>$customer->getId(),
                             "name"=>$resultAddress["adr_name"],
                             "street"=>$resultAddress["adr_adr"],
                             "city"=>$resultAddress["adr_ville"],
@@ -1040,7 +1040,7 @@ class ImportController extends Controller
 
                     foreach($resultPhonenumbers as $resultPhonenumber){
                         $pn = $em->getRepository('LilWorksStoreBundle:Phonenumber')->findOneBy(array(
-                            "customer"=>$customer->getId(),
+                            #"customer"=>$customer->getId(),
                             "phonenumber"=>$resultPhonenumber['tel_num']
                         ));
                         if($pn){
@@ -1051,7 +1051,7 @@ class ImportController extends Controller
                         }
                     }
 
-                    $em->persist($customer);
+                  #  $em->persist($customer);
 
                 }
 
@@ -1105,24 +1105,31 @@ class ImportController extends Controller
                         $statement->execute();
                         $resultAddress = $statement->fetchAll();
                         $resultAddress=$resultAddress[0];
+                        $a = $em->getRepository('LilWorksStoreBundle:Address')->findOneBy(array(
+                            #"customer"=>$customer->getId(),
+                            "name"=>$resultAddress["adr_name"],
+                            "street"=>$resultAddress["adr_adr"],
+                            "city"=>$resultAddress["adr_ville"],
+                        ));
+                        if(!$a) {
+                            $addressLiv = new Address();
+                            $addressLiv->setCustomer($customer);
+                            $addressLiv->setName($resultAddress["adr_name"]);
+                            $addressLiv->setStreet($resultAddress["adr_adr"]);
+                            $addressLiv->setComplement($resultAddress["adr_lieudit"]);
+                            $addressLiv->setZipCode($resultAddress["adr_code"]);
+                            $addressLiv->setCity($resultAddress["adr_ville"]);
 
-                        $addressLiv = new Address();
-                        $addressLiv->setCustomer($customer);
-                        $addressLiv->setName($resultAddress["adr_name"]);
-                        $addressLiv->setStreet($resultAddress["adr_adr"]);
-                        $addressLiv->setComplement($resultAddress["adr_lieudit"]);
-                        $addressLiv->setZipCode($resultAddress["adr_code"]);
-                        $addressLiv->setCity($resultAddress["adr_ville"]);
+                            $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
+                            $statement->bindValue('id', $resultAddress["pay_id"]);
+                            $statement->execute();
+                            $resultAddressPays = $statement->fetchAll();
+                            $resultAddressPays = $resultAddressPays[0];
+                            $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
 
-                        $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
-                        $statement->bindValue('id', $resultAddress["pay_id"]);
-                        $statement->execute();
-                        $resultAddressPays = $statement->fetchAll();
-                        $resultAddressPays = $resultAddressPays[0];
-                        $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
-
-                        $addressLiv->setCountry($country);
-                        $em->persist($addressLiv);
+                            $addressLiv->setCountry($country);
+                            $em->persist($addressLiv);
+                        }
 
                     }
 
@@ -1134,24 +1141,32 @@ class ImportController extends Controller
                         $resultAddress = $statement->fetchAll();
 
                         $resultAddress=$resultAddress[0];
-                        $addressFac = new Address();
-                        $addressFac->setCustomer($customer);
-                        $addressFac->setName($resultAddress["adr_name"]);
-                        $addressFac->setStreet($resultAddress["adr_adr"]);
-                        $addressFac->setComplement($resultAddress["adr_lieudit"]);
-                        $addressFac->setZipCode($resultAddress["adr_code"]);
-                        $addressFac->setCity($resultAddress["adr_ville"]);
+                        $a = $em->getRepository('LilWorksStoreBundle:Address')->findOneBy(array(
+                            #"customer"=>$customer->getId(),
+                            "name"=>$resultAddress["adr_name"],
+                            "street"=>$resultAddress["adr_adr"],
+                            "city"=>$resultAddress["adr_ville"],
+                        ));
+                        if(!$a) {
+                            $addressFac = new Address();
+                            $addressFac->setCustomer($customer);
+                            $addressFac->setName($resultAddress["adr_name"]);
+                            $addressFac->setStreet($resultAddress["adr_adr"]);
+                            $addressFac->setComplement($resultAddress["adr_lieudit"]);
+                            $addressFac->setZipCode($resultAddress["adr_code"]);
+                            $addressFac->setCity($resultAddress["adr_ville"]);
 
-                        $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
-                        $statement->bindValue('id', $resultAddress["pay_id"]);
-                        $statement->execute();
-                        $resultAddressPays = $statement->fetchAll();
-                        $resultAddressPays = $resultAddressPays[0];
-                        $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
+                            $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
+                            $statement->bindValue('id', $resultAddress["pay_id"]);
+                            $statement->execute();
+                            $resultAddressPays = $statement->fetchAll();
+                            $resultAddressPays = $resultAddressPays[0];
+                            $country = $em->getRepository('LilWorksStoreBundle:Country')->findOneByTag($resultAddressPays['pay_short']);
 
-                        $addressFac->setCountry($country);
+                            $addressFac->setCountry($country);
 
-                        $em->persist($addressFac);
+                            $em->persist($addressFac);
+                        }
 
                     }
 
@@ -1162,15 +1177,20 @@ class ImportController extends Controller
 
                     if(count($customer->getPhonenumbers()) == 0){
                         foreach($resultPhonenumbers as $resultPhonenumber){
-                            $phonenumber = new PhoneNumber();
-                            $phonenumber->setCustomer($customer);
-                            $phonenumber->setPhonenumber($resultPhonenumber['tel_num']);
-                            $em->persist($phonenumber);
+                            $pn = $em->getRepository('LilWorksStoreBundle:Phonenumber')->findOneBy(array(
+                                #"customer"=>$customer->getId(),
+                                "phonenumber"=>$resultPhonenumber['tel_num']
+                            ));
+                            if($pn) {
+                                $phonenumber = new PhoneNumber();
+                                $phonenumber->setCustomer($customer);
+                                $phonenumber->setPhonenumber($resultPhonenumber['tel_num']);
+                                $em->persist($phonenumber);
+                            }
                         }
-                        $em->persist($customer);
+
                     }
-
-
+                   # $em->persist($customer);
                 }else{
                     $customer->setLastName($resultUser['usr_name']);
                 }

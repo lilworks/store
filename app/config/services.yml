@@ -4,6 +4,12 @@ parameters:
 #    parameter_name: value
 
 services:
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
     app.lilworks_store_configure_menu_listener:
         class: LilWorks\StoreBundle\EventListener\ConfigureStoreMenuListener
         arguments: ['@doctrine.orm.entity_manager','@request_stack','@logger']

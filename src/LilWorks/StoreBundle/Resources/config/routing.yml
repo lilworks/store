@@ -96,4 +96,4 @@ lil_works_store_customer:
 
 lilworks_store_homepage:
     path:     /
-    defaults: { _controller: LilWorksStoreBundle:Default:index }
+    defaults: { _controller: LilWorksStoreBundle:Portal:index }
