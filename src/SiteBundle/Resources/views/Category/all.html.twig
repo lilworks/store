@@ -2,8 +2,9 @@
 <small>
     <ul class="list list-inline">
     {% for category in categories %}
+
         <li class="list-inline-item">
-            <a href="{{ path('site_category',{tag:category.tag}) }}">{{ category.name }} ({{ category.products|length }})</a>
+            <a href="{{ path('site_category',{tag:category['category'].tag}) }}">{{ category['category'].name }} ({{ category['countProduct'] }}) </a>
         </li>
     {% endfor %}
     </ul>

@@ -12,12 +12,15 @@ class CategoryController extends Controller
 
         $categories =  $this->getDoctrine()->getManager()
             ->createQueryBuilder()
-            ->select('c')
+            ->select('c as category ,count(p) as countProduct')
             ->from('LilWorksStoreBundle:Category','c')
             ->join('c.products','p')
             ->where('c.isPublished = 1')
+            ->andWhere('p.isPublished = 1')
+            ->andWhere('p.isArchived != 1')
             ->having('COUNT(p) > 0')
             ->groupBy('c.id ')
+            ->orderBy('c.name','asc')
             ->getQuery()
             ->getResult()
             ;

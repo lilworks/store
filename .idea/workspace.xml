@@ -34,14 +34,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SiteBundle/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0277411" vertical-offset="395" max-vertical-offset="5882">
+            <state vertical-scroll-proportion="-32.416668" vertical-offset="395" max-vertical-offset="5882">
               <caret line="69" column="22" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
               <folding>
                 <element signature="e#41#86#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CategoryController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Controller/CategoryController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4359313" vertical-offset="0" max-vertical-offset="757">
+              <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="all.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Category/all.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="255">
+              <caret line="6" column="141" selection-start-line="6" selection-start-column="141" selection-end-line="6" selection-end-column="141" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -52,18 +72,6 @@
             <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90">
               <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Conversation.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/Conversation.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.125" vertical-offset="510" max-vertical-offset="4245">
-              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="53" selection-end-column="22" />
-              <folding>
-                <element signature="e#47#79#0#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -147,8 +155,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Filter/AnnonceFilterType.php" />
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Filter/BrandFilterType.php" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Filter/CategoriesFilterType.php" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Filter/CountryFilterType.php" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Filter/CustomerFilterType.php" />
@@ -198,6 +204,8 @@
         <option value="$PROJECT_DIR$/src/SiteBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/contact.html.twig" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Form/ConversationMessageType.php" />
+        <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/Category/all.html.twig" />
+        <option value="$PROJECT_DIR$/src/SiteBundle/Controller/CategoryController.php" />
       </list>
     </option>
   </component>
@@ -456,6 +464,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Emails" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SiteBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Category" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1732,22 +1770,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Portal/config.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.208333" vertical-offset="25" max-vertical-offset="990">
-          <caret line="18" column="84" selection-start-line="18" selection-start-column="84" selection-end-line="18" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Portal/shipping.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="975">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1500">
@@ -2136,14 +2158,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
-          <caret line="39" column="44" selection-start-line="0" selection-start-column="0" selection-end-line="41" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Emails/conversation.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="757">
@@ -2188,11 +2202,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SiteBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0277411" vertical-offset="395" max-vertical-offset="5882">
+        <state vertical-scroll-proportion="-32.416668" vertical-offset="395" max-vertical-offset="5882">
           <caret line="69" column="22" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
           <folding>
             <element signature="e#41#86#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
+          <caret line="39" column="44" selection-start-line="0" selection-start-column="0" selection-end-line="41" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Category/all.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="255">
+          <caret line="6" column="141" selection-start-line="6" selection-start-column="141" selection-end-line="6" selection-end-column="141" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Controller/CategoryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4359313" vertical-offset="0" max-vertical-offset="757">
+          <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
