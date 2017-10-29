@@ -1252,8 +1252,6 @@ class ImportController extends Controller
                             $orderShippingMethod->setReference($resultCommande["com_livraison"]);
                         }
 
-
-
                         if($resultCommande['com_date_update'] && isset($orderShippingMethod)){
                             $date = new \DateTime();
                             $date->setTimestamp(strtotime($resultCommande['com_date_update']));
