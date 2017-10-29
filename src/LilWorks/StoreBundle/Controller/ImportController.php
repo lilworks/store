@@ -1254,6 +1254,10 @@ class ImportController extends Controller
                                 if($product = $em->getRepository('LilWorksStoreBundle:Product')->findOneByName($resultArticle["art_name"])){
                                     $orderProduct->setProduct($product);
                                 }
+
+                                if($resultArticle['art_isoccas'] == 1){
+                                    $orderProduct->getIsSecondHand(1);
+                                }
                             }
 
                             if($article["car_eco"]){
