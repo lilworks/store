@@ -920,6 +920,9 @@ class ImportController extends Controller
         // shipping method
         $ancien = $em->getRepository('LilWorksStoreBundle:ShippingMethod')->find(4);
         $magasin = $em->getRepository('LilWorksStoreBundle:ShippingMethod')->find(3);
+        //payment
+        $zero = $em->getRepository('LilWorksStoreBundle:PaymentMethod')->find(1);
+        $partial = $em->getRepository('LilWorksStoreBundle:PaymentMethod')->find(2);
 
         // All remote users
         foreach ($resultsUser as $resultUser) {
@@ -1177,6 +1180,7 @@ class ImportController extends Controller
                         if(isset($addressFac)){
                             $order->setBillingAddress($addressFac);
                         }
+
                         if(isset($addressLiv)){
                             $order->setBillingAddress($addressLiv);
                         }
@@ -1312,6 +1316,7 @@ class ImportController extends Controller
                         }
 
 
+
                         if($resultCommande['cst_id']) {
 
                             $orderOrderStep = new OrdersOrderSteps();
@@ -1325,7 +1330,12 @@ class ImportController extends Controller
                             }
                             $orderOrderStep->setCreatedAt($date);
 
-                            if ($resultCommande['cst_id'] == 1) {
+
+                            if($totPayed == 0 && ( $resultCommande['cst_id'] != 5 || $resultCommande['cst_id'] != 8  )){
+                                $order->addOrdersOrderStep($zero);
+                            }elseif($totPayed<$resultCommande['com_tot'] &&  ( $resultCommande['cst_id'] != 5 || $resultCommande['cst_id'] != 8  ) ){
+                                $order->addOrdersOrderStep($partial);
+                            }elseif ($resultCommande['cst_id'] == 1) {
                                 $orderOrderStep->setOrderStep(
                                     $em->getRepository('LilWorksStoreBundle:OrderStep')->find(1)
                                 );
@@ -1341,17 +1351,13 @@ class ImportController extends Controller
                                 $orderOrderStep->setOrderStep(
                                     $em->getRepository('LilWorksStoreBundle:OrderStep')->find(6)
                                 );
-                            } elseif ($resultCommande['cst_id'] == 5) {
+                            } elseif ($resultCommande['cst_id'] == 5 || $resultCommande['cst_id'] == 8) {
                                 $orderOrderStep->setOrderStep(
                                     $em->getRepository('LilWorksStoreBundle:OrderStep')->find(7)
                                 );
                             } elseif ($resultCommande['cst_id'] == 6 || $resultCommande['cst_id'] == 7) {
                                 $orderOrderStep->setOrderStep(
                                     $em->getRepository('LilWorksStoreBundle:OrderStep')->find(3)
-                                );
-                            } elseif ($resultCommande['cst_id'] == 8) {
-                                $orderOrderStep->setOrderStep(
-                                    $em->getRepository('LilWorksStoreBundle:OrderStep')->find(7)
                                 );
                             }
                             $em->persist($orderOrderStep);
