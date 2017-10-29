@@ -1366,8 +1366,9 @@ class ImportController extends Controller
                             if(
                                 $orderOrderStep->getOrder()->getId() != 3 &&
                                 $orderOrderStep->getOrder()->getId() != 5 &&
-                                $orderOrderStep->getOrder()->getId() != 6  ){
-                            }
+                                $orderOrderStep->getOrder()->getId() != 6  )
+                            {
+
                                 $orderShippingMethod->setShippedAt(null);
                                 $orderShippingMethod->setReceivedAt(null);
                                 $em->persist($orderShippingMethod);
