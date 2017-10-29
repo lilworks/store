@@ -53,6 +53,12 @@ class ProductFilterType extends AbstractType
                         ->orderBy('b.name','asc')
                         ;
                 },
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
             ));
 
     }
