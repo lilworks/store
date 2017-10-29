@@ -59,7 +59,7 @@ class DepositSale
 
     /**
      * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\Product", inversedBy="depositSale")
-     * @ORM\JoinColumn(name="product", referencedColumnName="id")
+     * @ORM\JoinColumn(name="product", referencedColumnName="id",nullable=true)
      */
     private $product;
 

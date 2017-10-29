@@ -63,9 +63,9 @@ class Address
     private $complement;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="zipCode", type="integer",nullable=false)
+     * @ORM\Column(name="zipCode", type="string",nullable=false)
      */
     private $zipCode;
 
@@ -88,6 +88,7 @@ class Address
      * @ORM\JoinColumn(name="country", referencedColumnName="id")
      */
     protected $country;
+
 
 
 
@@ -149,8 +150,6 @@ class Address
         return $this->companyName;
     }
 
-    
-
     /**
      * Set street
      *
@@ -202,7 +201,7 @@ class Address
     /**
      * Set zipCode
      *
-     * @param integer $zipCode
+     * @param string $zipCode
      *
      * @return Address
      */
@@ -216,7 +215,7 @@ class Address
     /**
      * Get zipCode
      *
-     * @return integer
+     * @return string
      */
     public function getZipCode()
     {

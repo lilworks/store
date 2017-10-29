@@ -44,6 +44,7 @@ class OrdersPaymentMethods
     /**
      * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\PaymentMethod", inversedBy="ordersPaymentMethods")
      * @ORM\JoinColumn(name="paymentMethod", referencedColumnName="id", nullable=FALSE)
+     * @Assert\NotBlank()
      */
     protected $paymentMethod;
 

@@ -107,6 +107,7 @@ class Order
 
     /**
      * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\OrdersPaymentMethods", mappedBy="order" ,cascade={"remove","persist"})
+     * @Assert\Valid()
      */
     private $ordersPaymentMethods;
 
