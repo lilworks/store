@@ -921,8 +921,8 @@ class ImportController extends Controller
         $ancien = $em->getRepository('LilWorksStoreBundle:ShippingMethod')->find(4);
         $magasin = $em->getRepository('LilWorksStoreBundle:ShippingMethod')->find(3);
         //payment
-        $zero = $em->getRepository('LilWorksStoreBundle:PaymentMethod')->find(1);
-        $partial = $em->getRepository('LilWorksStoreBundle:PaymentMethod')->find(2);
+        $zero = $em->getRepository('LilWorksStoreBundle:OrderStep')->find(1);
+        $partial = $em->getRepository('LilWorksStoreBundle:OrderStep')->find(2);
 
         // All remote users
         foreach ($resultsUser as $resultUser) {
@@ -1332,9 +1332,9 @@ class ImportController extends Controller
 
 
                             if($totPayed == 0 && ( $resultCommande['cst_id'] != 5 || $resultCommande['cst_id'] != 8  )){
-                                $order->addOrdersOrderStep($zero);
+                                $orderOrderStep->setOrderStep($zero);
                             }elseif($totPayed<$resultCommande['com_tot'] &&  ( $resultCommande['cst_id'] != 5 || $resultCommande['cst_id'] != 8  ) ){
-                                $order->addOrdersOrderStep($partial);
+                                $orderOrderStep->setOrderStep($partial);
                             }elseif ($resultCommande['cst_id'] == 1) {
                                 $orderOrderStep->setOrderStep(
                                     $em->getRepository('LilWorksStoreBundle:OrderStep')->find(1)
