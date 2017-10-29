@@ -48,8 +48,8 @@ class ProductFilterType extends AbstractType
                 'choice_label' => function ($obj) { return   $obj->getName() ; },
                 'query_builder' => function (EntityRepository $er)  {
                     return $er->createQueryBuilder('b')
-                        ->leftJoin('b.products','p')
-                        ->where('count(p) > 0')
+                        #->leftJoin('b.products','p')
+                        #->where('count(p) > 0')
                         ->orderBy('b.name','asc')
                         ;
                 },
