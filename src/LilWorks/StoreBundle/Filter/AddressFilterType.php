@@ -18,16 +18,16 @@ class AddressFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('street', Filters\TextFilterType::class,array(
-            'label'=>'lilworks.storebundle.address.street'
+            'label'=>'storebundle.address.street'
         ));
         $builder->add('zipCode', Filters\TextFilterType::class,array(
-            'label'=>'lilworks.storebundle.address.zipcode'
+            'label'=>'storebundle.address.zipcode'
         ));
         $builder->add('city', Filters\TextFilterType::class,array(
-            'label'=>'lilworks.storebundle.address.city'
+            'label'=>'storebundle.address.city'
         ));
         $builder->add('country', CountryFilterType::class, array(
-            'label'=>'lilworks.storebundle.address.country',
+            'label'=>'storebundle.address.country',
             'add_shared' => function (FilterBuilderExecuterInterface $qbe) {
                 $closure = function (QueryBuilder $filterBuilder, $alias, $joinAlias, Expr $expr) {
                     $filterBuilder->leftJoin($alias . '.country', $joinAlias);

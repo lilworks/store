@@ -14,17 +14,17 @@ class CustomerFilterType extends AbstractType
     {
         $builder
             ->add('firstName', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.storebundle.firstname'
+                'label'=>'storebundle.firstname'
             ))
             ->add('lastName', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.storebundle.lastname'
+                'label'=>'storebundle.lastname'
             ))
             ->add('companyName', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.storebundle.companyname'
+                'label'=>'storebundle.companyname'
             ))
         ;
         $builder->add('phonenumbers', Filters\CollectionAdapterFilterType::class, array(
-            'label'=>'lilworks.storebundle.phonenumbers',
+            'label'=>'storebundle.phonenumbers',
             'entry_type' => PhonenumberFilterType::class,
             'add_shared' => function (FilterBuilderExecuterInterface $qbe)  {
                 $closure = function (QueryBuilder $filterBuilder, $alias, $joinAlias, Expr $expr) {
@@ -38,7 +38,7 @@ class CustomerFilterType extends AbstractType
             },
         ));
         $builder->add('addresses', Filters\CollectionAdapterFilterType::class, array(
-            'label'=>'lilworks.storebundle.addresses',
+            'label'=>'storebundle.addresses',
             'entry_type' => AddressFilterType::class,
             'add_shared' => function (FilterBuilderExecuterInterface $qbe)  {
                 $closure = function (QueryBuilder $filterBuilder, $alias, $joinAlias, Expr $expr) {

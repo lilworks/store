@@ -24,7 +24,7 @@ class DocfileFilterType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'item_filter';
+        return 'docfile_filter';
     }
 
     public function configureOptions(OptionsResolver $resolver)

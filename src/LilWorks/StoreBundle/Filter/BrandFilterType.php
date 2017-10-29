@@ -12,7 +12,7 @@ class BrandFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', Filters\TextFilterType::class,array(
-            'label'=>'lilworks.storebundle.brand'
+            'label'=>'storebundle.brand'
         ));
     }
 

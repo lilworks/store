@@ -11,7 +11,9 @@ class CountryFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', Filters\TextFilterType::class);
+        $builder->add('name', Filters\TextFilterType::class,array(
+            'label'=>'storebundle.name'
+        ));
     }
 
     public function getParent()

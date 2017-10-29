@@ -1,39 +1,28 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale|split('_')[0] }}">
 <head>
-
     <script src="/assets/vendor/PACE/pace.min.js"></script>
-
     <link rel="stylesheet" href="/assets/vendor/PACE/themes/red/pace-theme-minimal.css">
     <link rel="stylesheet" href="/assets/vendor/jquery-confirm2/dist/jquery-confirm.min.css">
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
     <meta name="author" content="lil-works">
-
     {{ sonata_seo_title() }}
     {{ sonata_seo_metadatas() }}
-
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/app/css/dashboard.css') }}">
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
     <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-
     {% javascripts '@LilWorksStoreBundle/Resources/public/js/*' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-
-
     <script src="{{ asset('bundles/app/js/simpleLiveEditor.js') }}"></script>
     <script src="{{ asset('bundles/app/js/rowsEditor.js') }}"></script>
     <script src="{{ asset('bundles/app/js/init-tinymce.js') }}"></script>
@@ -42,27 +31,16 @@
     <script src="{{ asset('bundles/app/js/utils.js') }}"></script>
     <script src="{{ asset('bundles/app/js/alert.js') }}"></script>
     <script src="{{ asset('bundles/app/js/tab.js') }}"></script>
-
-
     <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
     <script src="{{ url('bazinga_jstranslation_js') }}"></script>
-
     <link rel="stylesheet" href="{{ asset('bundles/app/css/simpleLiveEditor.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/lilworksstore/css/store.css') }}">
-
-
-
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/lilworks_store.css') }}" />
-
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-social/bootstrap-social.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" />
     <script src="{{ asset('assets/vendor/bootstrap-select/dist/js/bootstrap-select.js') }}"></script>
-
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-
-
-
     <link href="{{ asset('bundles/app/image/favicon.png') }}" rel="icon" type="image/png" >
     <script>
         window.paceOptions = {
@@ -70,14 +48,8 @@
             restartOnRequestAfter: false
         };
     </script>
-
 </head>
-
 <body>
-
-
-
-
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
     <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -86,37 +58,23 @@
         {% set t = lilworks_store_context ~ '<sup>' ~ lilworks_store_mode ~ '</sup>' %}
         {{ t|raw }}
     </a>
-
     <div class="collapse navbar-collapse" id="navbarCollapse">
         {% set top = knp_menu_get('AppBundle:StoreBuilder:build', [], {context: 'topBar'}) %}
         {{ knp_menu_render(top,{depth: 1,template : 'LilWorksStoreBundle:Menu:sideBar.html.twig'}) }}
-
     </div>
 </nav>
-
 <div class="container-fluid">
     <div class="row">
         <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
-
             {% set side = knp_menu_get('AppBundle:StoreBuilder:build', [] , {context: 'sideBar'}) %}
             {{ knp_menu_render(side , {template : 'LilWorksStoreBundle:Menu:sideBar.html.twig'}) }}
-
-
         </nav>
-
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             {% block body %}
             {% endblock %}
         </main>
-<script>
-tagit.init();
-</script>
-
-
     </div>
 </div>
-
-
 <script src="{{ asset('assets/vendor/tether/dist/js/tether.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="/assets/vendor/jquery-confirm2/dist/jquery-confirm.min.js"></script>

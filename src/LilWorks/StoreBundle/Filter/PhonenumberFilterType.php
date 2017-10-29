@@ -11,7 +11,7 @@ class PhonenumberFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('phonenumber', Filters\TextFilterType::class,array(
-            'label'=>'lilworks.storebundle.phonenumber'
+            'label'=>'storebundle.phonenumber'
         ));
 
     }

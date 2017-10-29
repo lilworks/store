@@ -4,8 +4,6 @@ namespace LilWorks\StoreBundle\Filter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\ORM\Query\Expr;
-use Doctrine\ORM\QueryBuilder;
-use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderExecuterInterface;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type as Filters;
 use Doctrine\ORM\EntityRepository;
 
@@ -15,17 +13,17 @@ class DepositSaleFilterType extends AbstractType
     {
         $builder
             ->add('reference', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.storebundle.reference'
+                'label'=>'storebundle.reference'
             ))
             ->add('status', Filters\EntityFilterType::class,array(
-                'label'=>'lilworks.storebundle.depositsale.status',
+                'label'=>'storebundle.depositsale.status',
                 'class'=>'LilWorksStoreBundle:DepositSaleStatus',
                 'choice_label' => function ($obj) {
                     return   $obj->getName() ;
                 }
             ))
             ->add('customer', Filters\EntityFilterType::class,array(
-                'label'=>'lilworks.storebundle.customer',
+                'label'=>'storebundle.customer',
                 'class'=>'LilWorksStoreBundle:Customer',
                 'choice_label' => function ($obj) {
                     return   $obj->getFirstName() . " " . $obj->getLastName(). " " . $obj->getCompanyName()  ;
@@ -37,7 +35,7 @@ class DepositSaleFilterType extends AbstractType
                 },
             ))
             ->add('product', Filters\EntityFilterType::class,array(
-                'label'=>'lilworks.storebundle.product',
+                'label'=>'storebundle.product',
                 'class'=>'LilWorksStoreBundle:Product',
                 'choice_label' => function ($obj) {
                     return   $obj->getBrand()->getName() . " " . $obj->getName()  ;
@@ -56,7 +54,7 @@ class DepositSaleFilterType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'depositSale_filter';
+        return 'depositsale_filter';
     }
 
 

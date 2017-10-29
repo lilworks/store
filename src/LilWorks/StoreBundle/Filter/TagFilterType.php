@@ -20,6 +20,6 @@ class TagFilterType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'options_filter';
+        return 'tag_filter';
     }
 }

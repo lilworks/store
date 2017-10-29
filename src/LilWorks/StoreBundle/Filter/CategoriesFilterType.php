@@ -14,14 +14,13 @@ class CategoriesFilterType extends AbstractType
     {
         $builder
             ->add('name', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.storebundle.name'
+                'label'=>'storebundle.name'
             ))
-
             ;
     }
 
     public function getBlockPrefix()
     {
-        return 'options_filter';
+        return 'categories_filter';
     }
 }

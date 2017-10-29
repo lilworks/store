@@ -11,12 +11,14 @@ class AnnonceFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', Filters\TextFilterType::class);
+        $builder->add('name', Filters\TextFilterType::class,array(
+            'label'=>'storebundle.name'
+        ));
     }
 
     public function getBlockPrefix()
     {
-        return 'item_filter';
+        return 'annonce_filter';
     }
 
     public function configureOptions(OptionsResolver $resolver)
