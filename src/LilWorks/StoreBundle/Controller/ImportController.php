@@ -1399,6 +1399,8 @@ class ImportController extends Controller
                         }
                         $customer->addOrder($order);
                         $em->persist($order);
+                    }else{
+                        $em->detach($order);
                     }
                 }
             }
