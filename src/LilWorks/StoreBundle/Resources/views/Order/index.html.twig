@@ -46,8 +46,7 @@
                         <li>{{ knp_pagination_sortable(pagination, 'storebundle.updatedat'|trans, 'o.updatedAt') }}</li>
                     </ul>
                 </th>
-                {#<th>{{ knp_pagination_sortable(pagination, 'storebundle.customer'|trans, 'o.customer') }}</th>#}
-                <th>{% trans %}storebundle.customer{% endtrans %}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'storebundle.customer'|trans, 'c.lastName') }}</th>
                 <th>{% trans %}storebundle.order.products{% endtrans %}</th>
                 <th>{% trans %}storebundle.order.lastorderstep{% endtrans %}</th>
                 <th>
