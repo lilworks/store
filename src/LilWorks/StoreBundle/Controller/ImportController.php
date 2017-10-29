@@ -1284,11 +1284,11 @@ class ImportController extends Controller
 
                         $totPayed = 0;
                         foreach($resultPaiements as $paiement){
-                            $totPayed+=$paiement['cpa_value'];
+
                             if($totPayed<$resultCommande['com_tot']){
                                 $orderPaymentMethod = new OrdersPaymentMethods();
                                 $orderPaymentMethod->setOrder($order);
-                                
+
                                 if($resultCommande['com_moyen'] == "CHE"){
                                     $orderPaymentMethod->setPaymentMethod( $cheque );
                                 }elseif($resultCommande['com_moyen'] == "CBS"){
@@ -1302,6 +1302,8 @@ class ImportController extends Controller
                                 $date->setTimestamp(strtotime($paiement['cpa_date']));
                                 $orderPaymentMethod->setPayedAt($date);
                                 $em->persist($orderPaymentMethod);
+
+                                $totPayed+=$paiement['cpa_value'];
                             }
                         }
 
