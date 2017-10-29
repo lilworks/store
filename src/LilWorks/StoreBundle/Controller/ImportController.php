@@ -905,6 +905,7 @@ class ImportController extends Controller
 
     public function onlineClientAction()
     {
+
         $emImport = $this->getDoctrine()->getManager('import');
         $em = $this->getDoctrine()->getManager();
         $connection = $emImport->getConnection();
@@ -1361,6 +1362,16 @@ class ImportController extends Controller
                                 );
                             }
                             $em->persist($orderOrderStep);
+
+                            if(
+                                $orderOrderStep->getOrder()->getId() != 3 &&
+                                $orderOrderStep->getOrder()->getId() != 5 &&
+                                $orderOrderStep->getOrder()->getId() != 6  ){
+                            }
+                                $orderShippingMethod->setShippedAt(null);
+                                $orderShippingMethod->setReceivedAt(null);
+                                $em->persist($orderShippingMethod);
+                            }
                         }
 
 
