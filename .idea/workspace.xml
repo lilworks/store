@@ -90,21 +90,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Order/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.375" vertical-offset="495" max-vertical-offset="2340">
-              <caret line="48" column="100" selection-start-line="48" selection-start-column="100" selection-end-line="48" selection-end-column="100" />
+            <state vertical-scroll-proportion="0.3084833" vertical-offset="495" max-vertical-offset="2355">
+              <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/OrderController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48200515" vertical-offset="225" max-vertical-offset="5460">
-              <caret line="47" column="40" selection-start-line="47" selection-start-column="40" selection-end-line="47" selection-end-column="40" />
+            <state vertical-scroll-proportion="-19.916666" vertical-offset="197" max-vertical-offset="5355">
+              <caret line="52" column="13" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -186,8 +186,8 @@
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Filter/PhonenumberFilterType.php" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Filter/TagFilterType.php" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/ImportController.php" />
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Order/index.html.twig" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/OrderController.php" />
+        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Order/index.html.twig" />
       </list>
     </option>
   </component>
@@ -1304,18 +1304,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Order/index.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/OrderController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.375" vertical-offset="495" max-vertical-offset="2340">
-          <caret line="48" column="100" selection-start-line="48" selection-start-column="100" selection-end-line="48" selection-end-column="100" />
+        <state vertical-scroll-proportion="-19.916666" vertical-offset="197" max-vertical-offset="5355">
+          <caret line="52" column="13" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/OrderController.php">
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Order/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48200515" vertical-offset="225" max-vertical-offset="5460">
-          <caret line="47" column="40" selection-start-line="47" selection-start-column="40" selection-end-line="47" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.3084833" vertical-offset="495" max-vertical-offset="2355">
+          <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
           <folding />
         </state>
       </provider>
