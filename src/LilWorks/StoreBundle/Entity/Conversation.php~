@@ -8,10 +8,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="lilworks_conversation")
+ * @ORM\HasLifecycleCallbacks
  */
 class Conversation
 {
 
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        if($this->getCreatedAt() == null)
+            $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+    }
+    
     /**
      * @ORM\Id
      * @ORM\Column(type="integer",name="id")
@@ -26,6 +38,13 @@ class Conversation
      * @ORM\Column(name="email", type="string",length=255,nullable=true)
      */
     private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="conversationSubject", type="string",length=255,nullable=false)
+     */
+    private $conversationSubject;
 
     /**
      * @var boolean
@@ -49,9 +68,16 @@ class Conversation
 
 
     /**
-     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\ConversationMessage", mappedBy="conversation")
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\ConversationMessage", mappedBy="conversation",cascade={"persist","remove"})
      */
     private $messages;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="createdAt", type="datetime")
+     */
+    private $createdAt;
 
     /**
      * Constructor
@@ -199,5 +225,53 @@ class Conversation
     public function getMessages()
     {
         return $this->messages;
+    }
+
+    /**
+     * Set conversationSubject
+     *
+     * @param string $conversationSubject
+     *
+     * @return Conversation
+     */
+    public function setConversationSubject($conversationSubject)
+    {
+        $this->conversationSubject = $conversationSubject;
+
+        return $this;
+    }
+
+    /**
+     * Get conversationSubject
+     *
+     * @return string
+     */
+    public function getConversationSubject()
+    {
+        return $this->conversationSubject;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Conversation
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

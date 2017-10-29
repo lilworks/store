@@ -369,6 +369,22 @@ class ConfigureStoreMenuListener
         }
     }
 
+    public function conversation($menu,$id,$options){
+
+
+        $this->setAction('index',null,$menu);
+        $this->setAction('new',null,$menu);
+
+        if($id) {
+            $entityName = "LilWorksStoreBundle:Conversation";
+            $entity = $this->em->getRepository($entityName)->find($id);
+
+            $this->setAction('show', $entity, $menu);
+            $this->setAction('edit', $entity, $menu);
+            $this->setAction('delete', $entity, $menu);
+        }
+    }
+
     public function session($menu,$id,$options){
 
 

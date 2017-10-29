@@ -1,0 +1,49 @@
+{% extends 'baseFull.html.twig' %}
+
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="card">
+                <div class="card-block">
+                    {% if content.title %}
+                        <h2 class="card-title">{{ content.title|raw }}</h2>
+                    {% endif %}
+                    <div class="card-text">
+                        {{ content.content|raw }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="card">
+                <div class="card-block">
+                    <h2 class="card-title">{{ 'sitebundle.conversationmessage'|trans }}</h2>
+                    <div class="card-text">
+                        {% if conversationMessage.id %}
+                            <div class="alert alert-success" role="alert">
+                                <strong>{{ 'sitebundle.conversationmessage.sent'|trans }}</strong>
+                                <a class="btn btn-sm btn-secondary" href="{{ path('site_contact') }}">
+                                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                                    {{ 'sitebundle.button.back'|trans }}
+                                </a>
+                            </div>
+                        {% else %}
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            {{ form_end(form) }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}

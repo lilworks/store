@@ -8,10 +8,20 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="lilworks_conversation_message")
+ * @ORM\HasLifecycleCallbacks
  */
 class ConversationMessage
 {
-
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        if($this->getCreatedAt() == null)
+            $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+    }
     /**
      * @ORM\Id
      * @ORM\Column(type="integer",name="id")
@@ -30,7 +40,7 @@ class ConversationMessage
     /**
      * @var datetime
      *
-     * @ORM\Column(name="readedAt", type="datetime")
+     * @ORM\Column(name="readedAt", type="datetime",nullable=true)
      */
     private $readedAt;
 

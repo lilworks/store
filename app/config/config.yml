@@ -127,6 +127,7 @@ swiftmailer:
     port: '%mailer_port%'
     auth_mode: '%mailer_auth%'
     host: '%mailer_host%'
+    sender_address: '%sender_address%'
 
 monolog:
     handlers:

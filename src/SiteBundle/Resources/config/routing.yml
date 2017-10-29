@@ -3,7 +3,7 @@ site_homepage:
     defaults: { _controller: SiteBundle:Default:index }
 site_contact:
     path: /contact
-    defaults: { _controller: MessageBundle:Default:form }
+    defaults: { _controller: SiteBundle:Default:contact }
 site_category:
     path: /category/{tag}
     defaults: { _controller: SiteBundle:Default:category }

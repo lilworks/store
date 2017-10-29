@@ -1,0 +1,24 @@
+conversation_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Conversation:index" }
+    methods:  GET
+
+conversation_show:
+    path:     /{conversation_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Conversation:show" }
+    methods:  GET
+
+conversation_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Conversation:new" }
+    methods:  [GET, POST]
+
+conversation_edit:
+    path:     /{conversation_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Conversation:edit" }
+    methods:  [GET, POST]
+
+conversation_delete:
+    path:     /{conversation_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Conversation:delete" }
+    methods:  [GET, POST]

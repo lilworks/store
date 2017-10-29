@@ -2,6 +2,8 @@
 
 namespace SiteBundle\Controller;
 
+use LilWorks\StoreBundle\Entity\Conversation;
+use LilWorks\StoreBundle\Entity\ConversationMessage;
 use LilWorks\StoreBundle\Entity\Product;
 use LilWorks\StoreBundle\Entity\Category;
 use LilWorks\StoreBundle\Entity\SuperCategory;
@@ -28,6 +30,57 @@ class DefaultController extends Controller
         return $this->render('SiteBundle:Default:index.html.twig',array(
             'carrousel'=>$carrousel,
             'basket'=>$basket,
+        ));
+    }
+    public function contactAction(Request $request)
+    {
+        $translator = $this->get('translator');
+        $sent = null;
+        $basket = $this->get('site.basket');
+        $conversationMessage = new ConversationMessage();
+
+        $form = $this->createForm('SiteBundle\Form\ConversationMessageType',$conversationMessage);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            if(!$conversationMessage->getConversation()){
+                $conversation = new Conversation();
+                $conversation->setUser($this->getUser());
+                $conversation->setConversationSubject($conversationMessage->getMessageSubject());
+                $conversation->addMessage($conversationMessage);
+                $conversation->setEmail($form['email']->getData());
+                $conversationMessage->setConversation($conversation);
+               $em->persist($conversation);
+            }
+            $em->flush();
+
+            if( $conversationMessage->getGetCopy() == 1 || $conversation->getSendmail() == 1){
+                $message = (new \Swift_Message(
+                    $translator->trans('site.conversation.emailsubject') . ' • ' .$conversationMessage->getMessageSubject()
+                ))
+                    ->setTo($conversation->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'SiteBundle:Emails:conversation.html.twig',
+                            array('conversation' => $conversation)
+                        ),
+                        'text/html'
+                    );
+                $this->get('swiftmailer.mailer')->send($message);
+            }
+        }
+
+
+        $seoPage = $this->get('sonata.seo.page');
+        $seoPage->setTitle($translator->trans('site.htmltitle.contact'));
+
+        return $this->render('SiteBundle:Default:contact.html.twig',array(
+            'basket'=>$basket,
+            'form' => $form->createView(),
+            'content'=>$this->get('site.content')->getText('contact'),
+            'conversationMessage'=>$conversationMessage
         ));
     }
 

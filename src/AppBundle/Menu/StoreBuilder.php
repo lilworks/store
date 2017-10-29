@@ -512,6 +512,24 @@ class StoreBuilder implements ContainerAwareInterface
             )
         );
         // level 1
+        $conversationMenuCat =  $configMenuCatPortal->addChild('storebundle.menu.conversation', array(
+            #'route' => 'user_index',
+            'attributes'=>$attr[1]['curr'],
+            'childrenAttributes'=>$attr[1]['child'],
+            'linkAttributes'=>$attr[1]['link'],
+        ));
+        $conversationMenuCat->setAttribute('i','fa fa-comments');
+        $conversationMenuCat->setChildrenAttribute('class',$attr[1]['child']['class']);
+        $this->container->get('event_dispatcher')->dispatch(
+            ConfigureStoreMenuEvent::CONFIGURE,
+            new ConfigureStoreMenuEvent( $factory,
+                $conversationMenuCat ,
+                'conversation' ,
+                $this->requestStack->getCurrentRequest()->get('conversation_id'),
+                array('context'=> $options["context"],  'link'=>$attr[1]['link'],'curr'=>$attr[1]['curr'])
+            )
+        );
+        // level 1
         if( $this->container->getParameter('mode') == "master"){
         $syncroMenuCat =  $configMenuCatPortal->addChild('storebundle.menu.syncro', array(
             #'route' => 'user_index',
