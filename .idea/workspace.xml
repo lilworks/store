@@ -60,54 +60,54 @@
       <file leaf-file-name="ImportController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/ImportController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4238683" vertical-offset="19731" max-vertical-offset="20880">
-              <caret line="1336" column="61" selection-start-line="1336" selection-start-column="61" selection-end-line="1336" selection-end-column="61" />
+            <state vertical-scroll-proportion="0.13580246" vertical-offset="13566" max-vertical-offset="20880">
+              <caret line="911" column="87" selection-start-line="911" selection-start-column="87" selection-end-line="911" selection-end-column="87" />
               <folding>
                 <element signature="e#51#77#0#PHP" expanded="true" />
-                <marker date="1509237510000" expanded="true" signature="3404:3425" placeholder="SELECT * FRO..clients..." />
-                <marker date="1509237510000" expanded="true" signature="5020:5069" placeholder="SELECT * FRO..adresses..." />
-                <marker date="1509237510000" expanded="true" signature="5796:5833" placeholder="SELECT * FRO..pays..." />
-                <marker date="1509237510000" expanded="true" signature="6494:6543" placeholder="SELECT * FRO..adresses..." />
-                <marker date="1509237510000" expanded="true" signature="7270:7307" placeholder="SELECT * FRO..pays..." />
-                <marker date="1509237510000" expanded="true" signature="7908:7951" placeholder="SELECT * FRO..telephones..." />
-                <marker date="1509237510000" expanded="true" signature="8510:8547" placeholder="SELECT * FRO..docs..." />
-                <marker date="1509237510000" expanded="true" signature="9702:9750" placeholder="SELECT * FRO..docs_reglements..." />
-                <marker date="1509237510000" expanded="true" signature="11751:11797" placeholder="SELECT * FRO..docs_articles..." />
-                <marker date="1509237510000" expanded="true" signature="12141:12190" placeholder="SELECT * FRO..articles..." />
-                <marker date="1509237510000" expanded="true" signature="17361:17409" placeholder="SELECT * FRO..docs_reglements..." />
-                <marker date="1509237510000" expanded="true" signature="19410:19456" placeholder="SELECT * FRO..docs_articles..." />
-                <marker date="1509237510000" expanded="true" signature="19801:19850" placeholder="SELECT * FRO..articles..." />
-                <marker date="1509237510000" expanded="true" signature="25828:25874" placeholder="SELECT * FRO..docs_articles..." />
-                <marker date="1509237510000" expanded="true" signature="26218:26267" placeholder="SELECT * FRO..articles..." />
-                <marker date="1509237510000" expanded="true" signature="32904:33322" placeholder="SELECT dr.dr..docs..." />
-                <marker date="1509237510000" expanded="true" signature="34612:35054" placeholder="SELECT a.*,a..articles..." />
-                <marker date="1509237510000" expanded="true" signature="35525:35544" placeholder="SELECT * FRO..users..." />
-                <marker date="1509237510000" expanded="true" signature="36497:36527" placeholder="SELECT * FRO..articles_marques..." />
-                <marker date="1509237510000" expanded="true" signature="37162:37195" placeholder="SELECT * FRO..articles_categories..." />
-                <marker date="1509237510000" expanded="true" signature="37859:37889" placeholder="SELECT * FRO..boutique_subcats..." />
-                <marker date="1509237510000" expanded="true" signature="38605:38646" placeholder="SELECT * FRO..boutique_subcats_categories..." />
-                <marker date="1509237510000" expanded="true" signature="38817:38874" placeholder="SELECT * FRO..boutique_subcats..." />
-                <marker date="1509237510000" expanded="true" signature="39096:39156" placeholder="SELECT * FRO..articles_categories..." />
-                <marker date="1509237510000" expanded="true" signature="40165:42023" placeholder="SELECT a.*, ..articles..." />
-                <marker date="1509237510000" expanded="true" signature="44955:45010" placeholder="SELECT * FRO..articles_illustrations..." />
-                <marker date="1509237510000" expanded="true" signature="46073:46171" placeholder="SELECT * FRO..users..." />
-                <marker date="1509237510000" expanded="true" signature="47064:47130" placeholder="SELECT count..users..." />
-                <marker date="1509237510000" expanded="true" signature="47853:47907" placeholder="SELECT * FRO..clients..." />
-                <marker date="1509237510000" expanded="true" signature="49143:49184" placeholder="SELECT * FRO..adresses..." />
-                <marker date="1509237510000" expanded="true" signature="50000:50037" placeholder="SELECT * FRO..pays..." />
-                <marker date="1509237510000" expanded="true" signature="50688:50729" placeholder="SELECT * FRO..adresses..." />
-                <marker date="1509237510000" expanded="true" signature="51545:51582" placeholder="SELECT * FRO..pays..." />
-                <marker date="1509237510000" expanded="true" signature="52173:52216" placeholder="SELECT * FRO..telephones..." />
-                <marker date="1509237510000" expanded="true" signature="53982:54036" placeholder="SELECT * FRO..clients..." />
-                <marker date="1509237510000" expanded="true" signature="55025:55066" placeholder="SELECT * FRO..adresses..." />
-                <marker date="1509237510000" expanded="true" signature="55882:55919" placeholder="SELECT * FRO..pays..." />
-                <marker date="1509237510000" expanded="true" signature="56570:56611" placeholder="SELECT * FRO..adresses..." />
-                <marker date="1509237510000" expanded="true" signature="57427:57464" placeholder="SELECT * FRO..pays..." />
-                <marker date="1509237510000" expanded="true" signature="58056:58099" placeholder="SELECT * FRO..telephones..." />
-                <marker date="1509237510000" expanded="true" signature="59094:59144" placeholder="SELECT * FRO..commandes..." />
-                <marker date="1509237510000" expanded="true" signature="62673:62736" placeholder="SELECT * FRO..commandes_articles..." />
-                <marker date="1509237510000" expanded="true" signature="63724:63784" placeholder="SELECT * FRO..boutique_articles..." />
-                <marker date="1509237510000" expanded="true" signature="65549:65613" placeholder="SELECT * FRO..commandes_paiements..." />
+                <marker date="1509239081000" expanded="true" signature="3404:3425" placeholder="SELECT * FRO..clients..." />
+                <marker date="1509239081000" expanded="true" signature="5020:5069" placeholder="SELECT * FRO..adresses..." />
+                <marker date="1509239081000" expanded="true" signature="5796:5833" placeholder="SELECT * FRO..pays..." />
+                <marker date="1509239081000" expanded="true" signature="6494:6543" placeholder="SELECT * FRO..adresses..." />
+                <marker date="1509239081000" expanded="true" signature="7270:7307" placeholder="SELECT * FRO..pays..." />
+                <marker date="1509239081000" expanded="true" signature="7908:7951" placeholder="SELECT * FRO..telephones..." />
+                <marker date="1509239081000" expanded="true" signature="8510:8547" placeholder="SELECT * FRO..docs..." />
+                <marker date="1509239081000" expanded="true" signature="9702:9750" placeholder="SELECT * FRO..docs_reglements..." />
+                <marker date="1509239081000" expanded="true" signature="11751:11797" placeholder="SELECT * FRO..docs_articles..." />
+                <marker date="1509239081000" expanded="true" signature="12141:12190" placeholder="SELECT * FRO..articles..." />
+                <marker date="1509239081000" expanded="true" signature="17361:17409" placeholder="SELECT * FRO..docs_reglements..." />
+                <marker date="1509239081000" expanded="true" signature="19410:19456" placeholder="SELECT * FRO..docs_articles..." />
+                <marker date="1509239081000" expanded="true" signature="19801:19850" placeholder="SELECT * FRO..articles..." />
+                <marker date="1509239081000" expanded="true" signature="25828:25874" placeholder="SELECT * FRO..docs_articles..." />
+                <marker date="1509239081000" expanded="true" signature="26218:26267" placeholder="SELECT * FRO..articles..." />
+                <marker date="1509239081000" expanded="true" signature="32904:33322" placeholder="SELECT dr.dr..docs..." />
+                <marker date="1509239081000" expanded="true" signature="34612:35054" placeholder="SELECT a.*,a..articles..." />
+                <marker date="1509239081000" expanded="true" signature="35525:35544" placeholder="SELECT * FRO..users..." />
+                <marker date="1509239081000" expanded="true" signature="36497:36527" placeholder="SELECT * FRO..articles_marques..." />
+                <marker date="1509239081000" expanded="true" signature="37162:37195" placeholder="SELECT * FRO..articles_categories..." />
+                <marker date="1509239081000" expanded="true" signature="37859:37889" placeholder="SELECT * FRO..boutique_subcats..." />
+                <marker date="1509239081000" expanded="true" signature="38605:38646" placeholder="SELECT * FRO..boutique_subcats_categories..." />
+                <marker date="1509239081000" expanded="true" signature="38817:38874" placeholder="SELECT * FRO..boutique_subcats..." />
+                <marker date="1509239081000" expanded="true" signature="39096:39156" placeholder="SELECT * FRO..articles_categories..." />
+                <marker date="1509239081000" expanded="true" signature="40165:42023" placeholder="SELECT a.*, ..articles..." />
+                <marker date="1509239081000" expanded="true" signature="44955:45010" placeholder="SELECT * FRO..articles_illustrations..." />
+                <marker date="1509239081000" expanded="true" signature="46073:46116" placeholder="SELECT * FRO..users..." />
+                <marker date="1509239081000" expanded="true" signature="47009:47075" placeholder="SELECT count..users..." />
+                <marker date="1509239081000" expanded="true" signature="47798:47852" placeholder="SELECT * FRO..clients..." />
+                <marker date="1509239081000" expanded="true" signature="49088:49129" placeholder="SELECT * FRO..adresses..." />
+                <marker date="1509239081000" expanded="true" signature="49945:49982" placeholder="SELECT * FRO..pays..." />
+                <marker date="1509239081000" expanded="true" signature="50633:50674" placeholder="SELECT * FRO..adresses..." />
+                <marker date="1509239081000" expanded="true" signature="51490:51527" placeholder="SELECT * FRO..pays..." />
+                <marker date="1509239081000" expanded="true" signature="52118:52161" placeholder="SELECT * FRO..telephones..." />
+                <marker date="1509239081000" expanded="true" signature="53927:53981" placeholder="SELECT * FRO..clients..." />
+                <marker date="1509239081000" expanded="true" signature="54970:55011" placeholder="SELECT * FRO..adresses..." />
+                <marker date="1509239081000" expanded="true" signature="55827:55864" placeholder="SELECT * FRO..pays..." />
+                <marker date="1509239081000" expanded="true" signature="56515:56556" placeholder="SELECT * FRO..adresses..." />
+                <marker date="1509239081000" expanded="true" signature="57372:57409" placeholder="SELECT * FRO..pays..." />
+                <marker date="1509239081000" expanded="true" signature="58001:58044" placeholder="SELECT * FRO..telephones..." />
+                <marker date="1509239081000" expanded="true" signature="59039:59089" placeholder="SELECT * FRO..commandes..." />
+                <marker date="1509239081000" expanded="true" signature="62618:62681" placeholder="SELECT * FRO..commandes_articles..." />
+                <marker date="1509239081000" expanded="true" signature="63669:63729" placeholder="SELECT * FRO..boutique_articles..." />
+                <marker date="1509239081000" expanded="true" signature="65494:65558" placeholder="SELECT * FRO..commandes_paiements..." />
               </folding>
             </state>
           </provider>
@@ -2192,54 +2192,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/ImportController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4238683" vertical-offset="19731" max-vertical-offset="20880">
-          <caret line="1336" column="61" selection-start-line="1336" selection-start-column="61" selection-end-line="1336" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.13580246" vertical-offset="13566" max-vertical-offset="20880">
+          <caret line="911" column="87" selection-start-line="911" selection-start-column="87" selection-end-line="911" selection-end-column="87" />
           <folding>
             <element signature="e#51#77#0#PHP" expanded="true" />
-            <marker date="1509237510000" expanded="true" signature="3404:3425" placeholder="SELECT * FRO..clients..." />
-            <marker date="1509237510000" expanded="true" signature="5020:5069" placeholder="SELECT * FRO..adresses..." />
-            <marker date="1509237510000" expanded="true" signature="5796:5833" placeholder="SELECT * FRO..pays..." />
-            <marker date="1509237510000" expanded="true" signature="6494:6543" placeholder="SELECT * FRO..adresses..." />
-            <marker date="1509237510000" expanded="true" signature="7270:7307" placeholder="SELECT * FRO..pays..." />
-            <marker date="1509237510000" expanded="true" signature="7908:7951" placeholder="SELECT * FRO..telephones..." />
-            <marker date="1509237510000" expanded="true" signature="8510:8547" placeholder="SELECT * FRO..docs..." />
-            <marker date="1509237510000" expanded="true" signature="9702:9750" placeholder="SELECT * FRO..docs_reglements..." />
-            <marker date="1509237510000" expanded="true" signature="11751:11797" placeholder="SELECT * FRO..docs_articles..." />
-            <marker date="1509237510000" expanded="true" signature="12141:12190" placeholder="SELECT * FRO..articles..." />
-            <marker date="1509237510000" expanded="true" signature="17361:17409" placeholder="SELECT * FRO..docs_reglements..." />
-            <marker date="1509237510000" expanded="true" signature="19410:19456" placeholder="SELECT * FRO..docs_articles..." />
-            <marker date="1509237510000" expanded="true" signature="19801:19850" placeholder="SELECT * FRO..articles..." />
-            <marker date="1509237510000" expanded="true" signature="25828:25874" placeholder="SELECT * FRO..docs_articles..." />
-            <marker date="1509237510000" expanded="true" signature="26218:26267" placeholder="SELECT * FRO..articles..." />
-            <marker date="1509237510000" expanded="true" signature="32904:33322" placeholder="SELECT dr.dr..docs..." />
-            <marker date="1509237510000" expanded="true" signature="34612:35054" placeholder="SELECT a.*,a..articles..." />
-            <marker date="1509237510000" expanded="true" signature="35525:35544" placeholder="SELECT * FRO..users..." />
-            <marker date="1509237510000" expanded="true" signature="36497:36527" placeholder="SELECT * FRO..articles_marques..." />
-            <marker date="1509237510000" expanded="true" signature="37162:37195" placeholder="SELECT * FRO..articles_categories..." />
-            <marker date="1509237510000" expanded="true" signature="37859:37889" placeholder="SELECT * FRO..boutique_subcats..." />
-            <marker date="1509237510000" expanded="true" signature="38605:38646" placeholder="SELECT * FRO..boutique_subcats_categories..." />
-            <marker date="1509237510000" expanded="true" signature="38817:38874" placeholder="SELECT * FRO..boutique_subcats..." />
-            <marker date="1509237510000" expanded="true" signature="39096:39156" placeholder="SELECT * FRO..articles_categories..." />
-            <marker date="1509237510000" expanded="true" signature="40165:42023" placeholder="SELECT a.*, ..articles..." />
-            <marker date="1509237510000" expanded="true" signature="44955:45010" placeholder="SELECT * FRO..articles_illustrations..." />
-            <marker date="1509237510000" expanded="true" signature="46073:46171" placeholder="SELECT * FRO..users..." />
-            <marker date="1509237510000" expanded="true" signature="47064:47130" placeholder="SELECT count..users..." />
-            <marker date="1509237510000" expanded="true" signature="47853:47907" placeholder="SELECT * FRO..clients..." />
-            <marker date="1509237510000" expanded="true" signature="49143:49184" placeholder="SELECT * FRO..adresses..." />
-            <marker date="1509237510000" expanded="true" signature="50000:50037" placeholder="SELECT * FRO..pays..." />
-            <marker date="1509237510000" expanded="true" signature="50688:50729" placeholder="SELECT * FRO..adresses..." />
-            <marker date="1509237510000" expanded="true" signature="51545:51582" placeholder="SELECT * FRO..pays..." />
-            <marker date="1509237510000" expanded="true" signature="52173:52216" placeholder="SELECT * FRO..telephones..." />
-            <marker date="1509237510000" expanded="true" signature="53982:54036" placeholder="SELECT * FRO..clients..." />
-            <marker date="1509237510000" expanded="true" signature="55025:55066" placeholder="SELECT * FRO..adresses..." />
-            <marker date="1509237510000" expanded="true" signature="55882:55919" placeholder="SELECT * FRO..pays..." />
-            <marker date="1509237510000" expanded="true" signature="56570:56611" placeholder="SELECT * FRO..adresses..." />
-            <marker date="1509237510000" expanded="true" signature="57427:57464" placeholder="SELECT * FRO..pays..." />
-            <marker date="1509237510000" expanded="true" signature="58056:58099" placeholder="SELECT * FRO..telephones..." />
-            <marker date="1509237510000" expanded="true" signature="59094:59144" placeholder="SELECT * FRO..commandes..." />
-            <marker date="1509237510000" expanded="true" signature="62673:62736" placeholder="SELECT * FRO..commandes_articles..." />
-            <marker date="1509237510000" expanded="true" signature="63724:63784" placeholder="SELECT * FRO..boutique_articles..." />
-            <marker date="1509237510000" expanded="true" signature="65549:65613" placeholder="SELECT * FRO..commandes_paiements..." />
+            <marker date="1509239081000" expanded="true" signature="3404:3425" placeholder="SELECT * FRO..clients..." />
+            <marker date="1509239081000" expanded="true" signature="5020:5069" placeholder="SELECT * FRO..adresses..." />
+            <marker date="1509239081000" expanded="true" signature="5796:5833" placeholder="SELECT * FRO..pays..." />
+            <marker date="1509239081000" expanded="true" signature="6494:6543" placeholder="SELECT * FRO..adresses..." />
+            <marker date="1509239081000" expanded="true" signature="7270:7307" placeholder="SELECT * FRO..pays..." />
+            <marker date="1509239081000" expanded="true" signature="7908:7951" placeholder="SELECT * FRO..telephones..." />
+            <marker date="1509239081000" expanded="true" signature="8510:8547" placeholder="SELECT * FRO..docs..." />
+            <marker date="1509239081000" expanded="true" signature="9702:9750" placeholder="SELECT * FRO..docs_reglements..." />
+            <marker date="1509239081000" expanded="true" signature="11751:11797" placeholder="SELECT * FRO..docs_articles..." />
+            <marker date="1509239081000" expanded="true" signature="12141:12190" placeholder="SELECT * FRO..articles..." />
+            <marker date="1509239081000" expanded="true" signature="17361:17409" placeholder="SELECT * FRO..docs_reglements..." />
+            <marker date="1509239081000" expanded="true" signature="19410:19456" placeholder="SELECT * FRO..docs_articles..." />
+            <marker date="1509239081000" expanded="true" signature="19801:19850" placeholder="SELECT * FRO..articles..." />
+            <marker date="1509239081000" expanded="true" signature="25828:25874" placeholder="SELECT * FRO..docs_articles..." />
+            <marker date="1509239081000" expanded="true" signature="26218:26267" placeholder="SELECT * FRO..articles..." />
+            <marker date="1509239081000" expanded="true" signature="32904:33322" placeholder="SELECT dr.dr..docs..." />
+            <marker date="1509239081000" expanded="true" signature="34612:35054" placeholder="SELECT a.*,a..articles..." />
+            <marker date="1509239081000" expanded="true" signature="35525:35544" placeholder="SELECT * FRO..users..." />
+            <marker date="1509239081000" expanded="true" signature="36497:36527" placeholder="SELECT * FRO..articles_marques..." />
+            <marker date="1509239081000" expanded="true" signature="37162:37195" placeholder="SELECT * FRO..articles_categories..." />
+            <marker date="1509239081000" expanded="true" signature="37859:37889" placeholder="SELECT * FRO..boutique_subcats..." />
+            <marker date="1509239081000" expanded="true" signature="38605:38646" placeholder="SELECT * FRO..boutique_subcats_categories..." />
+            <marker date="1509239081000" expanded="true" signature="38817:38874" placeholder="SELECT * FRO..boutique_subcats..." />
+            <marker date="1509239081000" expanded="true" signature="39096:39156" placeholder="SELECT * FRO..articles_categories..." />
+            <marker date="1509239081000" expanded="true" signature="40165:42023" placeholder="SELECT a.*, ..articles..." />
+            <marker date="1509239081000" expanded="true" signature="44955:45010" placeholder="SELECT * FRO..articles_illustrations..." />
+            <marker date="1509239081000" expanded="true" signature="46073:46116" placeholder="SELECT * FRO..users..." />
+            <marker date="1509239081000" expanded="true" signature="47009:47075" placeholder="SELECT count..users..." />
+            <marker date="1509239081000" expanded="true" signature="47798:47852" placeholder="SELECT * FRO..clients..." />
+            <marker date="1509239081000" expanded="true" signature="49088:49129" placeholder="SELECT * FRO..adresses..." />
+            <marker date="1509239081000" expanded="true" signature="49945:49982" placeholder="SELECT * FRO..pays..." />
+            <marker date="1509239081000" expanded="true" signature="50633:50674" placeholder="SELECT * FRO..adresses..." />
+            <marker date="1509239081000" expanded="true" signature="51490:51527" placeholder="SELECT * FRO..pays..." />
+            <marker date="1509239081000" expanded="true" signature="52118:52161" placeholder="SELECT * FRO..telephones..." />
+            <marker date="1509239081000" expanded="true" signature="53927:53981" placeholder="SELECT * FRO..clients..." />
+            <marker date="1509239081000" expanded="true" signature="54970:55011" placeholder="SELECT * FRO..adresses..." />
+            <marker date="1509239081000" expanded="true" signature="55827:55864" placeholder="SELECT * FRO..pays..." />
+            <marker date="1509239081000" expanded="true" signature="56515:56556" placeholder="SELECT * FRO..adresses..." />
+            <marker date="1509239081000" expanded="true" signature="57372:57409" placeholder="SELECT * FRO..pays..." />
+            <marker date="1509239081000" expanded="true" signature="58001:58044" placeholder="SELECT * FRO..telephones..." />
+            <marker date="1509239081000" expanded="true" signature="59039:59089" placeholder="SELECT * FRO..commandes..." />
+            <marker date="1509239081000" expanded="true" signature="62618:62681" placeholder="SELECT * FRO..commandes_articles..." />
+            <marker date="1509239081000" expanded="true" signature="63669:63729" placeholder="SELECT * FRO..boutique_articles..." />
+            <marker date="1509239081000" expanded="true" signature="65494:65558" placeholder="SELECT * FRO..commandes_paiements..." />
           </folding>
         </state>
       </provider>

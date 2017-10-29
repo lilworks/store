@@ -909,7 +909,7 @@ class ImportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $connection = $emImport->getConnection();
 
-        $statementUsers = $connection->prepare("SELECT * FROM users u LEFT JOIN clients cl ON cl.usr_id = u.usr_id ORDER BY u.usr_dateregister ASC");
+        $statementUsers = $connection->prepare("SELECT * FROM users u ORDER BY u.usr_id ASC");
         $statementUsers->execute();
         $resultsUser = $statementUsers->fetchAll();
         // only fai
