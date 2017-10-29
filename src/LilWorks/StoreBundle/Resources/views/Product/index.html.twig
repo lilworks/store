@@ -40,7 +40,7 @@
                     {{ rowsLiveEditor.getActions()|raw }}
                 </th>
                 <th>{% trans %}storebundle.categories{% endtrans %}</th>
-                <th>{% trans %}storebundle.brand{% endtrans %}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'storebundle.brand'|trans, 'p.brand') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'storebundle.name'|trans, 'p.name') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'storebundle.product.issecondhand'|trans, 'p.isSecondHand') }}</th>
                 <th>{{ knp_pagination_sortable(pagination,  'storebundle.ispublished'|trans, 'p.isPublished') }}</th>

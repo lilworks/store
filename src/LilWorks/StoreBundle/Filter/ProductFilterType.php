@@ -7,6 +7,7 @@ use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderExecuterInterface;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type as Filters;
+use Doctrine\ORM\EntityRepository;
 
 class ProductFilterType extends AbstractType
 {
@@ -45,6 +46,13 @@ class ProductFilterType extends AbstractType
                 'label'=>'storebundle.brand',
                 'class'    =>  'LilWorksStoreBundle:Brand',
                 'choice_label' => function ($obj) { return   $obj->getName() ; },
+                'query_builder' => function (EntityRepository $er)  {
+                    return $er->createQueryBuilder('b')
+                        ->leftJoin('b.products','p')
+                        ->where('count(p) > 0')
+                        ->orderBy('b.name','asc')
+                        ;
+                },
             ));
 
     }
