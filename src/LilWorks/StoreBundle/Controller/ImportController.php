@@ -1195,8 +1195,8 @@ class ImportController extends Controller
                     $customer->setLastName($resultUser['usr_name']);
                 }
 
-                #$em->persist($user);
-                #$em->persist($customer);
+                $em->persist($user);
+                $em->persist($customer);
 
                 #$em->flush();
             }
@@ -1404,8 +1404,6 @@ class ImportController extends Controller
             }
             #$em->persist($customer);
 
-            $em->persist($user);
-            $em->persist($customer);
 
             $em->flush();
         }
