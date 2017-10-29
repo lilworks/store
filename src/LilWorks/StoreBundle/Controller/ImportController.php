@@ -988,7 +988,7 @@ class ImportController extends Controller
                             $addressLiv->setName($resultAddress["adr_name"]);
                             $addressLiv->setStreet($resultAddress["adr_adr"]);
                             $addressLiv->setComplement($resultAddress["adr_lieudit"]);
-                            $addressLiv->setZipCode($resultAddress["adr_code"]);
+                            $addressLiv->setZipCode( (is_int($resultAddress["adr_code"]))?$resultAddress["adr_code"]:00000 );
                             $addressLiv->setCity($resultAddress["adr_ville"]);
                             $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
                             $statement->bindValue('id', $resultAddress["pay_id"]);
@@ -1020,7 +1020,7 @@ class ImportController extends Controller
                             $addressFac->setName($resultAddress["adr_name"]);
                             $addressFac->setStreet($resultAddress["adr_adr"]);
                             $addressFac->setComplement($resultAddress["adr_lieudit"]);
-                            $addressFac->setZipCode($resultAddress["adr_code"]);
+                            $addressFac->setZipCode( (is_int($resultAddress["adr_code"]))?$resultAddress["adr_code"]:00000 );
                             $addressFac->setCity($resultAddress["adr_ville"]);
                             $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
                             $statement->bindValue('id', $resultAddress["pay_id"]);
@@ -1117,7 +1117,7 @@ class ImportController extends Controller
                             $addressLiv->setName($resultAddress["adr_name"]);
                             $addressLiv->setStreet($resultAddress["adr_adr"]);
                             $addressLiv->setComplement($resultAddress["adr_lieudit"]);
-                            $addressLiv->setZipCode($resultAddress["adr_code"]);
+                            $addressLiv->setZipCode( (is_int($resultAddress["adr_code"]))?$resultAddress["adr_code"]:00000 );
                             $addressLiv->setCity($resultAddress["adr_ville"]);
 
                             $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
@@ -1153,7 +1153,7 @@ class ImportController extends Controller
                             $addressFac->setName($resultAddress["adr_name"]);
                             $addressFac->setStreet($resultAddress["adr_adr"]);
                             $addressFac->setComplement($resultAddress["adr_lieudit"]);
-                            $addressFac->setZipCode($resultAddress["adr_code"]);
+                            $addressFac->setZipCode( (is_int($resultAddress["adr_code"]))?$resultAddress["adr_code"]:00000 );
                             $addressFac->setCity($resultAddress["adr_ville"]);
 
                             $statement = $connection->prepare("SELECT * FROM pays WHERE pay_id = :id ");
