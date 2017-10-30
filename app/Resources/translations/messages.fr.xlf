@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-10-30T15:57:13Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="ccdc11b3b3e9331033af4d3c92dc063d73b52bff" resname="            {0} no result found|{1} found one result|]1,Inf[ found %count% results&#10;            ">
+        <source xml:space="preserve">            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            </source>
+        <target xml:space="preserve">            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            </target>
+        <jms:reference-file line="31">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+        <jms:reference-file line="25">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="326b426f9ac7a96ed6baf62f8838565416d27df8" resname="actions">
+        <source>actions</source>
+        <target>actions</target>
+        <jms:reference-file line="15">/../../../../../../../.././src/AppBundle/Resources/views/AjaxEditor/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="26e9227fbd62588f7574cd60a086367f6e4e5db3" resname="appbundle.action">
+        <source>appbundle.action</source>
+        <target>appbundle.action</target>
+        <jms:reference-file line="45">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+        <jms:reference-file line="42">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="02b0cbc2e2694a9ff861bd01aa21e64596e4b275" resname="appbundle.button.filter">
+        <source>appbundle.button.filter</source>
+        <target>appbundle.button.filter</target>
+        <jms:reference-file line="27">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+        <jms:reference-file line="32">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1e8befa0fbe5efee0b1b41e4227e4dbcc6e0e3b8" resname="appbundle.customer">
+        <source>appbundle.customer</source>
+        <target>appbundle.customer</target>
+        <jms:reference-file line="20">/../../../../../../../.././src/AppBundle/Filter/SessionFilterType.php</jms:reference-file>
+        <jms:reference-file line="29">/../../../../../../../.././src/AppBundle/Form/UserType.php</jms:reference-file>
+        <jms:reference-file line="57">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+        <jms:reference-file line="27">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="51ebabd94e048911ba46e748f7acb219b550eaf3" resname="appbundle.depositsales">
+        <source>appbundle.depositsales</source>
+        <target>appbundle.depositsales</target>
+        <jms:reference-file line="59">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+        <jms:reference-file line="56">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3a34a1614b21b728592b7befe25e3228f92d62cb" resname="appbundle.email">
+        <source>appbundle.email</source>
+        <target>appbundle.email</target>
+        <jms:reference-file line="23">/../../../../../../../.././src/AppBundle/Form/UserType.php</jms:reference-file>
+        <jms:reference-file line="48">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+        <jms:reference-file line="19">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="71cc59de9c1ac438f26fc7884cea23b7dfa22842" resname="appbundle.htmltitle.user.index">
+        <source>appbundle.htmltitle.user.index</source>
+        <target>appbundle.htmltitle.user.index</target>
+        <jms:reference-file line="58">/../../../../../../../.././src/AppBundle/Controller/UserController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c68771df5e9ca8351ed41ea0c5d306d84ede1eba" resname="appbundle.htmltitle.user.index  %username%">
+        <source>appbundle.htmltitle.user.index  %username%</source>
+        <target>appbundle.htmltitle.user.index  %username%</target>
+        <jms:reference-file line="125">/../../../../../../../.././src/AppBundle/Controller/UserController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0952b29391fecebaae9f71c7d600931294689e97" resname="appbundle.htmltitle.user.index %username%">
+        <source>appbundle.htmltitle.user.index %username%</source>
+        <target>appbundle.htmltitle.user.index %username%</target>
+        <jms:reference-file line="101">/../../../../../../../.././src/AppBundle/Controller/UserController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3b80c006890024c0115637a2d63f737be8fb3f11" resname="appbundle.htmltitle.user.new">
+        <source>appbundle.htmltitle.user.new</source>
+        <target>appbundle.htmltitle.user.new</target>
+        <jms:reference-file line="85">/../../../../../../../.././src/AppBundle/Controller/UserController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="59608672539d7b795f91796bc6f60c5bcc0831b8" resname="appbundle.lastLogin">
+        <source>appbundle.lastLogin</source>
+        <target>appbundle.lastLogin</target>
+        <jms:reference-file line="53">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="64bf7e9b034e32b2651a7176d2f72ced616dcdba" resname="appbundle.orders">
+        <source>appbundle.orders</source>
+        <target>appbundle.orders</target>
+        <jms:reference-file line="58">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+        <jms:reference-file line="41">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6b7e2c0e4250f9cc768999963e2d2ae38e8c91d6" resname="appbundle.passwordRequestedAt">
+        <source>appbundle.passwordRequestedAt</source>
+        <target>appbundle.passwordRequestedAt</target>
+        <jms:reference-file line="54">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f0f478cd5cf90997aca0c8d3c0ca1f249cdce7a9" resname="appbundle.session.basket.tot">
+        <source>appbundle.session.basket.tot</source>
+        <target>appbundle.session.basket.tot</target>
+        <jms:reference-file line="48">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ee6235ea689f509efd49573ad35b4defcbc2a105" resname="appbundle.session.id">
+        <source>appbundle.session.id</source>
+        <target>appbundle.session.id</target>
+        <jms:reference-file line="17">/../../../../../../../.././src/AppBundle/Filter/SessionFilterType.php</jms:reference-file>
+        <jms:reference-file line="46">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="07c50b48751c9dc23b61bcf38a49e772e0911e04" resname="appbundle.session.index">
+        <source>appbundle.session.index</source>
+        <target>appbundle.session.index</target>
+        <jms:reference-file line="15">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6538c795f986e41e636bb8410c59a37f79209be4" resname="appbundle.session.lifetimer">
+        <source>appbundle.session.lifetimer</source>
+        <target>appbundle.session.lifetimer</target>
+        <jms:reference-file line="50">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="89dece7ea7ac213658b947740eb96061e046c282" resname="appbundle.session.time">
+        <source>appbundle.session.time</source>
+        <target>appbundle.session.time</target>
+        <jms:reference-file line="49">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d949c9f54ea02a093c650cbc32c840d4724e770a" resname="appbundle.user">
+        <source>appbundle.user</source>
+        <target>appbundle.user</target>
+        <jms:reference-file line="47">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="36f90118b160a82b24237a0921516ea0fa7c2d0a" resname="appbundle.user.edit %username%">
+        <source>appbundle.user.edit %username%</source>
+        <target>appbundle.user.edit %username%</target>
+        <jms:reference-file line="6">/../../../../../../../.././src/AppBundle/Resources/views/User/edit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5d680df29eb9ec2513c1213fe20cc5f468b00b6c" resname="appbundle.user.enabled">
+        <source>appbundle.user.enabled</source>
+        <target>appbundle.user.enabled</target>
+        <jms:reference-file line="26">/../../../../../../../.././src/AppBundle/Form/UserType.php</jms:reference-file>
+        <jms:reference-file line="43">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+        <jms:reference-file line="23">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6fb8e0d5e965cf86a7a98c393c04e283ad37f679" resname="appbundle.user.index">
+        <source>appbundle.user.index</source>
+        <target>appbundle.user.index</target>
+        <jms:reference-file line="15">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6cf5bbd72255db930adad44fae5cf794b5f7e03e" resname="appbundle.user.new">
+        <source>appbundle.user.new</source>
+        <target>appbundle.user.new</target>
+        <jms:reference-file line="6">/../../../../../../../.././src/AppBundle/Resources/views/User/new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="cf343e75efdd6f1826cec67680400793ae6af946" resname="appbundle.user.show %username%">
+        <source>appbundle.user.show %username%</source>
+        <target>appbundle.user.show %username%</target>
+        <jms:reference-file line="5">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9bc7b95d1393bcff47741a0688ff80de2fb22e22" resname="appbundle.username">
+        <source>appbundle.username</source>
+        <target>appbundle.username</target>
+        <jms:reference-file line="20">/../../../../../../../.././src/AppBundle/Form/UserType.php</jms:reference-file>
+        <jms:reference-file line="47">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="65b45258f65d09cbf82ed5e3f401a7016f37118a" resname="lilworks.storebundle.address.city">
+        <source>lilworks.storebundle.address.city</source>
+        <target>lilworks.storebundle.address.city</target>
+        <jms:reference-file line="31">/../../../../../../../.././src/AppBundle/Form/AddressType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ee57bcf2bef25f4e81d3c1db771764b2881ba19f" resname="lilworks.storebundle.address.complement">
+        <source>lilworks.storebundle.address.complement</source>
+        <target>lilworks.storebundle.address.complement</target>
+        <jms:reference-file line="25">/../../../../../../../.././src/AppBundle/Form/AddressType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a1d2c235ef779838d0e5da20934c683fa55bf2cc" resname="lilworks.storebundle.address.country">
+        <source>lilworks.storebundle.address.country</source>
+        <target>lilworks.storebundle.address.country</target>
+        <jms:reference-file line="34">/../../../../../../../.././src/AppBundle/Form/AddressType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="aa01a0c5a8589d8ae15f725605aabd0a372c55ba" resname="lilworks.storebundle.address.name">
+        <source>lilworks.storebundle.address.name</source>
+        <target>lilworks.storebundle.address.name</target>
+        <jms:reference-file line="19">/../../../../../../../.././src/AppBundle/Form/AddressType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="00182204d2b178e7cabf8eea769e81f2e49b422d" resname="lilworks.storebundle.address.street">
+        <source>lilworks.storebundle.address.street</source>
+        <target>lilworks.storebundle.address.street</target>
+        <jms:reference-file line="22">/../../../../../../../.././src/AppBundle/Form/AddressType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ee8f820d4827f124395d71ed0a16b01c46cbc74c" resname="lilworks.storebundle.address.zipcode">
+        <source>lilworks.storebundle.address.zipcode</source>
+        <target>lilworks.storebundle.address.zipcode</target>
+        <jms:reference-file line="28">/../../../../../../../.././src/AppBundle/Form/AddressType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="40e7d9a391684fd1840b9e371fa6edddf3f13af7" resname="lilworks.storebundle.addresses">
+        <source>lilworks.storebundle.addresses</source>
+        <target>lilworks.storebundle.addresses</target>
+        <jms:reference-file line="50">/../../../../../../../.././src/AppBundle/Form/CustomerType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="72714e347e11e4c57fc871472805717c69846172" resname="lilworks.storebundle.companyname">
+        <source>lilworks.storebundle.companyname</source>
+        <target>lilworks.storebundle.companyname</target>
+        <jms:reference-file line="33">/../../../../../../../.././src/AppBundle/Form/CustomerType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b039cb5b44ef52cc253818cd0e8e065761e2c96a" resname="lilworks.storebundle.customer">
+        <source>lilworks.storebundle.customer</source>
+        <target>lilworks.storebundle.customer</target>
+        <jms:reference-file line="24">/../../../../../../../.././src/AppBundle/Form/ProfileType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="375926f034c972b2fb2a4681a41b7c5b85950378" resname="lilworks.storebundle.description">
+        <source>lilworks.storebundle.description</source>
+        <target>lilworks.storebundle.description</target>
+        <jms:reference-file line="22">/../../../../../../../.././src/AppBundle/Form/PhoneNumberType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="28b8b39dc292d3a87803a8b0a6be03d274e8eba8" resname="lilworks.storebundle.firstname">
+        <source>lilworks.storebundle.firstname</source>
+        <target>lilworks.storebundle.firstname</target>
+        <jms:reference-file line="24">/../../../../../../../.././src/AppBundle/Form/CustomerType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="311b17f4f3da41f4ceaa50f832e69bde33df66f8" resname="lilworks.storebundle.lastname">
+        <source>lilworks.storebundle.lastname</source>
+        <target>lilworks.storebundle.lastname</target>
+        <jms:reference-file line="29">/../../../../../../../.././src/AppBundle/Form/CustomerType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="203741be90aa6ef262eedffdeefdcf33508c61e1" resname="lilworks.storebundle.phonenumber">
+        <source>lilworks.storebundle.phonenumber</source>
+        <target>lilworks.storebundle.phonenumber</target>
+        <jms:reference-file line="18">/../../../../../../../.././src/AppBundle/Form/PhoneNumberType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e9b3c9925457588743fe54a85dc4dabd78c10b81" resname="lilworks.storebundle.phonenumbers">
+        <source>lilworks.storebundle.phonenumbers</source>
+        <target>lilworks.storebundle.phonenumbers</target>
+        <jms:reference-file line="38">/../../../../../../../.././src/AppBundle/Form/CustomerType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ef374c577ee18d782c8ec29e6d1cf434f623b4e1" resname="not set">
+        <source>not set</source>
+        <target>not set</target>
+        <jms:reference-file line="21">/../../../../../../../.././src/AppBundle/Resources/views/AjaxEditor/editableCol.html.twig</jms:reference-file>
+        <jms:reference-file line="246">/../../../../../../../.././src/AppBundle/Resources/views/AjaxEditor/index.html.twig</jms:reference-file>
+        <jms:reference-file line="18">/../../../../../../../.././src/AppBundle/Resources/views/SimpleLiveEditor/col.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4526367997387b37f294cb80e8d570d377c93185" resname="selectors">
+        <source>selectors</source>
+        <target>selectors</target>
+        <jms:reference-file line="18">/../../../../../../../.././src/AppBundle/Resources/views/AjaxEditor/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ab9412ffe6e47aa44c34caf7375e52e7766e1ebc" resname="storebundle.button.create">
+        <source>storebundle.button.create</source>
+        <target>storebundle.button.create</target>
+        <jms:reference-file line="16">/../../../../../../../.././src/AppBundle/Resources/views/User/new.html.twig</jms:reference-file>
+        <jms:reference-file line="23">/../../../../../../../.././src/AppBundle/Resources/views/User/new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9d1e3bfda7cd9bf09c7d6acd3088b61f32cd5f9b" resname="storebundle.button.edit">
+        <source>storebundle.button.edit</source>
+        <target>storebundle.button.edit</target>
+        <jms:reference-file line="16">/../../../../../../../.././src/AppBundle/Resources/views/User/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="23">/../../../../../../../.././src/AppBundle/Resources/views/User/edit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="246f4f0efdb2b94f162a5d0d08a4841190a1c785" resname="storebundle.customer">
+        <source>storebundle.customer</source>
+        <target>storebundle.customer</target>
+        <jms:reference-file line="23">/../../../../../../../.././src/AppBundle/Filter/UserFilterType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5fb9faee060e790ad658168b2e079fa540fd4a38" resname="storebundle.email">
+        <source>storebundle.email</source>
+        <target>storebundle.email</target>
+        <jms:reference-file line="20">/../../../../../../../.././src/AppBundle/Filter/UserFilterType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="20cb2ff1be0e478274b3f5cff079f031c7f3eb3b" resname="storebundle.username">
+        <source>storebundle.username</source>
+        <target>storebundle.username</target>
+        <jms:reference-file line="17">/../../../../../../../.././src/AppBundle/Filter/UserFilterType.php</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -23,14 +23,14 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{% trans %}action{% endtrans %}</th>
-            <th>{% trans %}createdAt{% endtrans %}</th>
-            <th>{% trans %}updatedAt{% endtrans %}</th>
-            <th>{% trans %}reference{% endtrans %}</th>
-            <th>{% trans %}tot{% endtrans %}</th>
-            <th>{% trans %}payed{% endtrans %}</th>
-            <th>{% trans %}products{% endtrans %}</th>
-            <th>{% trans %}orderSteps{% endtrans %}</th>
+            <th>{% trans %}sitebundle.action{% endtrans %}</th>
+            <th>{% trans %}sitebundle.createdat{% endtrans %}</th>
+            <th>{% trans %}sitebundle.updatedat{% endtrans %}</th>
+            <th>{% trans %}sitebundle.reference{% endtrans %}</th>
+            <th>{% trans %}sitebundle.tot{% endtrans %}</th>
+            <th>{% trans %}sitebundle.payed{% endtrans %}</th>
+            <th>{% trans %}sitebundle.products{% endtrans %}</th>
+            <th>{% trans %}sitebundle.ordersteps{% endtrans %}</th>
 
         </tr>
         </thead>
@@ -42,7 +42,7 @@
                     <ul class="list-unstyled">
                         <li>
                             <a href="{{ path('site_order_edit', { 'id': order.id }) }}" class="btn btn-info btn-sm">
-                                <i class="fa fa-eye"></i> {% trans %}show{% endtrans %}
+                                <i class="fa fa-eye"></i> {% trans %}sitebundle.show{% endtrans %}
                             </a>
                         </li>
 
@@ -52,7 +52,7 @@
                             <li>
 
                                 <a href="{{ path('site_order_pdf', { 'id': order.id }) }}" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-file"></i> {% trans %}download pdf{% endtrans %}
+                                    <i class="fa fa-file"></i> {% trans %}sitebundle.pdf{% endtrans %}
                                 </a>
 
                             </li>
@@ -65,14 +65,14 @@
                             <li>
 
                                 <a href="{{ path('site_order_pay', { 'id': order.id }) }}" class="btn btn-success btn-sm">
-                                    <i class="fa fa-euro"></i> {% trans %}pay{% endtrans %}
+                                    <i class="fa fa-euro"></i> {% trans %}sitebundle.pay{% endtrans %}
                                 </a>
 
                             </li>
                         <li>
 
                             <a href="{{ path('site_order_remove', { 'id': order.id }) }}" class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash"></i> {% trans %}cancel{% endtrans %}
+                                <i class="fa fa-trash"></i> {% trans %}sitebundle.cancel{% endtrans %}
                             </a>
 
                         </li>

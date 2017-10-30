@@ -8,6 +8,12 @@ conversation_show:
     defaults: { _controller: "LilWorksStoreBundle:Conversation:show" }
     methods:  GET
 
+
+conversation_respond:
+    path:     /{conversation_id}/respond
+    defaults: { _controller: "LilWorksStoreBundle:Conversation:respond" }
+    methods:  GET
+
 conversation_new:
     path:     /new
     defaults: { _controller: "LilWorksStoreBundle:Conversation:new" }

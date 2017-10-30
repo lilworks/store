@@ -2,39 +2,19 @@
 
 {% block body %}
     <h1>
-        {% trans %}orderStep list{% endtrans %}
+        {% trans %}storebundle.orderstep.index{% endtrans %}
     </h1>
 
-    <div class="row">
-        <div class="col-lg-6">
-            <ul class="list-inline">
-                <li class="list-inline-item">
-                    <a href="{{ path('orderstep_new') }}" class="btn btn-info btn-sm">
-                        <i class="fa fa-plus"></i> {% trans %}new orderStep{% endtrans %}
-                    </a>
-                </li>
-            </ul>
-        </div>
 
-        <div class="col-lg-6">
-            {% transchoice pagination.getTotalItemCount %}
-            {0} no orderStep found|{1} found one orderStep|]1,Inf[ found %count% orderSteps
-            {% endtranschoice %}
-            <div class="pagination">
-                {{ knp_pagination_render(pagination) }}
-            </div>
-        </div>
-
-    </div>
 
 
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>{% trans %}action{% endtrans %}</th>
-                <th>{% trans %}ordersCount{% endtrans %}</th>
-                <th>{% trans %}name{% endtrans %}</th>
-                <th>{% trans %}tag{% endtrans %}</th>
+                <th>{% trans %}storebundle.action{% endtrans %}</th>
+                <th>{% trans %}storebundle.orders{% endtrans %}</th>
+                <th>{% trans %}store.name{% endtrans %}</th>
+                <th>{% trans %}store.tag{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
@@ -42,29 +22,7 @@
         {% for orderStep in pagination %}
 
             <tr>
-                <td>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="{{ path('orderstep_show', { 'id': orderStep.id }) }}" class="btn btn-info btn-sm">
-                                <i class="fa fa-eye"></i> {% trans %}show{% endtrans %}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ path('orderstep_edit', { 'id': orderStep.id }) }}" class="btn btn-info btn-sm">
-                                <i class="fa fa-pencil "></i> {% trans %}edit{% endtrans %}
-                            </a>
-                        </li>
-                        <li>
-                            {% if orderStep.ordersOrderSteps|length == 0 %}
-                                <a href="{{ path('orderstep_delete', { 'id': orderStep.id }) }}"  class="btn btn-danger btn-sm" >
-                                    <i class="fa fa-trash"></i> {% trans %}delete{% endtrans %}
-                                </a>
-                            {% else %}
-                                <del><i class="fa fa-trash"></i></del>
-                            {% endif %}
-                        </li>
-                    </ul>
-                </td>
+
                 <td>{{ orderStep.ordersOrderSteps|length  }}</td>
 
 

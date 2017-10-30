@@ -17,19 +17,19 @@ class DefaultController extends Controller
     public function indexAction()
     {
 
-        $overviewProduct = $this->container->get('lilworks.store.overview')
+        $overviewProduct = $this->container->get('store.overview')
             ->init("LilWorksStoreBundle:Product",array('name'=>'products' , 'all','published'=>'isPublished'))
             ->getOverview();
 
-        $overviewOrder = $this->container->get('lilworks.store.overview')
+        $overviewOrder = $this->container->get('store.overview')
             ->init("LilWorksStoreBundle:Order",array('name'=>'orders' ,'all'))
             ->getOverview();
 
-        $overviewCategory = $this->container->get('lilworks.store.overview')
+        $overviewCategory = $this->container->get('store.overview')
             ->init("LilWorksStoreBundle:Category",array('name'=>'categories' ,'all','published'=>'isPublished'))
             ->getOverview();
 
-        $overviewBrand = $this->container->get('lilworks.store.overview')
+        $overviewBrand = $this->container->get('store.overview')
             ->init("LilWorksStoreBundle:Brand",array('name'=>'brands' ,'all'))
             ->getOverview();
 

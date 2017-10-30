@@ -10,7 +10,7 @@
 
 
 <h1>
-    <i class="fa fa-shopping-cart" aria-hidden="true"></i>  {% trans %}lilworks.sitebundle.basket{% endtrans %}
+    <i class="fa fa-shopping-cart" aria-hidden="true"></i>  {% trans %}sitebundle.basket{% endtrans %}
 </h1>
 
     {{ form_start(form) }}
@@ -26,10 +26,10 @@
     <table class="table table-striped">
 
         <thead>
-        <th>{% trans %}lilworks.sitebundle.product{% endtrans %}</th>
-        <th>{% trans %}lilworks.sitebundle.quantity{% endtrans %}</th>
-        <th>{% trans %}lilworks.sitebundle.priceunity{% endtrans %}</th>
-        <th>{% trans %}lilworks.sitebundle.producttot{% endtrans %}</th>
+        <th>{% trans %}sitebundle.product{% endtrans %}</th>
+        <th>{% trans %}sitebundle.quantity{% endtrans %}</th>
+        <th>{% trans %}sitebundle.priceunity{% endtrans %}</th>
+        <th>{% trans %}sitebundle.producttot{% endtrans %}</th>
         </thead>
 
         <tbody>
@@ -45,7 +45,7 @@
                     {% if product.product.isSecondHand == 1 %}
                         <span class="alert alert-danger btn-sm" role="alert">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
-                            {% trans %}lilworks.sitebundle.issecondhand{% endtrans %}
+                            {% trans %}sitebundle.issecondhand{% endtrans %}
                         </span>
                     {% endif %}
                     {{ product.product.warrantiesOnline|warranties|raw }}
@@ -89,7 +89,7 @@
                 <div class="priceHt">{{ totals['ht']|price }}<sup>HT</sup></div>
                 {% if form.shippingMethod is defined and form.shippingMethod.vars.data is not null %}
                     <div class="card">
-                    <div class="card-header">{% trans %}lilworks.sitebundle.totwithshipping{% endtrans %}</div>
+                    <div class="card-header">{% trans %}sitebundle.totwithshipping{% endtrans %}</div>
                      <div class="card-block priceSM">
                          {{ basket.tot|price }}<sup>TTC</sup>
                      </div>
@@ -139,7 +139,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4>{% trans %}lilworks.sitebundle.shippingaddress{% endtrans %}</h4>
+                        <h4>{% trans %}sitebundle.shippingaddress{% endtrans %}</h4>
                     </div>
                     <div class="card-block">
                         {{ form_errors(form.shippingAddress) }}
@@ -150,7 +150,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4>{% trans %}lilworks.sitebundle.billingaddress{% endtrans %}</h4>
+                        <h4>{% trans %}sitebundle.billingaddress{% endtrans %}</h4>
                     </div>
                     <div class="card-block">
                         {{ form_errors(form.billingAddress) }}
@@ -164,14 +164,14 @@
             <div class="col-lg-12">
                 <div class="card" style="margin-top: 10px;">
                     <div class="card-header">
-                        <h4>{% trans %}lilworks.sitebundle.shippingmethod{% endtrans %}</h4>
+                        <h4>{% trans %}sitebundle.shippingmethod{% endtrans %}</h4>
                     </div>
                     <div class="card-block">
                         {% if form.basketsRealShippingMethods is defined %}
                             {{ form_errors(form.basketsRealShippingMethods) }}
                             {{ form_widget(form.basketsRealShippingMethods) }}
                         {% else %}
-                            {% trans %}lilworks.sitebundle.selectaddressfirst{% endtrans %}
+                            {% trans %}sitebundle.selectaddressfirst{% endtrans %}
                         {% endif %}
                     </div>
                 </div>

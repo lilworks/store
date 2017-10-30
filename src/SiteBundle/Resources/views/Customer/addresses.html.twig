@@ -2,7 +2,7 @@
 {% block body %}
 
     <div id="tabs-addresses" class="border-top-0">
-        <h3>{% trans %}addresses{% endtrans %}</h3>
+        <h3>{% trans %}sitebundle.addresses{% endtrans %}</h3>
 
         {{ form_start(form) }}
 
@@ -15,7 +15,7 @@
             {% endfor %}
         </ul>
         {{ form_widget(form.addresses) }}
-        <input type="submit" class="btn  btn-primary" value="{% trans %}update{% endtrans %}" />
+        <input type="submit" class="btn  btn-primary" value="{% trans %}sitebundle.button.edit{% endtrans %}" />
         {{ form_end(form) }}
     </div>
     <script>

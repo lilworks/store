@@ -28,10 +28,10 @@ class ProductsExtension  extends \Twig_Extension
 
 
         $contents = [
-            'alwaysavailable'=>['text'=>$this->translator->trans('lilworks.storebundle.product.alwaysavailable'),'icon'=>'<i class="fa fa-cubes"></i>'],
-            'contactus'=>['text'=>$this->translator->trans('lilworks.storebundle.product.notavailable.contactus'),'icon'=>'<i class="fa fa-cubes"></i><i class="fa fa-phone"></i>'],
-            'leadtime'=>['text'=>$this->translator->trans('lilworks.storebundle.product.notavailable.leadtime %leadtime%',array('%leadtime%'=>$product->getLeadTime())),'icon'=>'<i class="fa fa-cubes"></i>'],
-            'available'=>['text'=>$this->translator->trans('lilworks.storebundle.product.available'),'icon'=>'<i class="fa fa-cubes"></i>'],
+            'alwaysavailable'=>['text'=>$this->translator->trans('storebundle.product.alwaysavailable'),'icon'=>'<i class="fa fa-cubes"></i>'],
+            'contactus'=>['text'=>$this->translator->trans('storebundle.product.notavailable.contactus'),'icon'=>'<i class="fa fa-cubes"></i><i class="fa fa-phone"></i>'],
+            'leadtime'=>['text'=>$this->translator->trans('storebundle.product.notavailable.leadtime %leadtime%',array('%leadtime%'=>$product->getLeadTime())),'icon'=>'<i class="fa fa-cubes"></i>'],
+            'available'=>['text'=>$this->translator->trans('storebundle.product.available'),'icon'=>'<i class="fa fa-cubes"></i>'],
         ];
         if( is_null($text) )
             foreach($contents as $k=>$content)

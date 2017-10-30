@@ -16,9 +16,14 @@ class FreeTriggerType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('freeTrigger',MoneyType::class,array('label' => false,'attr'=>array('colType'=>'price')))
-            ->add('save', SubmitType::class)
-            ->add('cancel', ButtonType::class)
+
+        $builder->add('freeTrigger',MoneyType::class,array('label' => false))
+            ->add('save', SubmitType::class,array(
+                'label'=>'storebundle.save'
+            ))
+            ->add('cancel', ButtonType::class,array(
+                'label'=>'storebundle.cancel'
+            ))
         ;
     }
     

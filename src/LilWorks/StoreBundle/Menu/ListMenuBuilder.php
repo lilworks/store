@@ -15,6 +15,7 @@ class ListMenuBuilder
         'ICO_DELETE'=>'fa fa-trash',
         'ICO_PDF'=>'fa fa-file-pdf',
         'ICO_EMPTY'=>'fa fa-share-square-o',
+        'ICO_RESPOND'=>'fa fa-reply',
 
         'BTN_GENERAL'=>'btn btn-sm',
         'BTN_SHOW'=>'btn-info',
@@ -22,6 +23,7 @@ class ListMenuBuilder
         'BTN_DELETE'=>'btn-danger btn-delete',
         'BTN_PDF'=>'btn-primary',
         'BTN_EMPTY'=>'btn-warning  btn-delete',
+        'BTN_RESPOND'=>'btn-primary',
 
 
     );
@@ -62,12 +64,19 @@ class ListMenuBuilder
         return $menu;
     }
     public function conversation($entity,$menu){
+
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('respond',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        $this->setAction('delete',$menu,$entity->getId());
+        return $menu;
+    }
+    public function subscriber($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
         $this->setAction('delete',$menu,$entity->getId());
         return $menu;
     }
-
     public function text($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());

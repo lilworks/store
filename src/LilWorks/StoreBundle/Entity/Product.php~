@@ -24,6 +24,7 @@ class Product
         
         $sanitizer = new TagSanitizer();
         $this->tag = $sanitizer->sanitize($this->getName());
+
         if(!$this->priceOnline)
             $this->priceOnline = $this->priceOffline;
 

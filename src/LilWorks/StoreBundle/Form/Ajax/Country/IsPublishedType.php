@@ -22,12 +22,16 @@ class IsPublishedType extends AbstractType
         $builder
             ->add('isPublished',ChoiceType::class,array(
                 'choices' => array(
-                    'no' => 0,
-                    'yes' => 1
+                    'storebundle.no' => 0,
+                    'storebundle.yes' => 1
                 ),
                 'label' => false,'required' => true))
-            ->add('save', SubmitType::class)
-            ->add('cancel', ButtonType::class)
+            ->add('save', SubmitType::class,array(
+                'label'=>'storebundle.save'
+            ))
+            ->add('cancel', ButtonType::class,array(
+                'label'=>'storebundle.cancel'
+            ))
         ;
     }
     

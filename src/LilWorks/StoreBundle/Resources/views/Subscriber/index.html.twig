@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $( window ).on( "load", FF.init() );
+            });
+        </script>
+    {% endblock %}
+
+    <h1>
+        {% trans %}storebundle.subscriber.list{% endtrans %}
+    </h1>
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div id="content_menu">
+                {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.config.portal','storebundle.menu.subscriber'] , {context: 'content'}) %}
+                {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            {{ knp_pagination_render(pagination) }}
+            {% if formFilter is defined %}
+            <form method="get" action="." class="formFilter">
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-secondary" name="submit-filter" value="{% trans %}storebundle.button.filter{% endtrans %}" />
+            </form>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{% trans %}storebundle.action{% endtrans %}</th>
+                <th>{% trans %}storebundle.ispublished{% endtrans %}</th>
+                <th>{% trans %}storebundle.name{% endtrans %}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'storebundle.pos'|trans, 'a.pos') }}</th>
+                <th>{% trans %}storebundle.url{% endtrans %}</th>
+                <th>{% trans %}storebundle.picture{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set entityName = 'LilWorksStoreBundle:Annonce' %}
+
+
+        {% for annonce in pagination %}
+
+            <tr>
+                <td>
+                    {% set formatedItems = pagination.items|idinkey %}
+                    {% set menu = knp_menu_get('list', [ annonce.id ] ,{results:formatedItems[annonce.id]   ,target:'annonce'} ) %}
+                    {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
+                </td>
+
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Annonce\\IsPublishedType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'isPublished',annonce)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Annonce\\NameType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'name',annonce)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Annonce\\PosType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'pos',annonce)|raw }}
+                </td>
+                <td>
+                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Annonce\\LinkType' %}
+                    {{ simple_live_editor.getCol(formType,entityName,'link',annonce)|raw }}
+                </td>
+
+                <td>
+                    {% if annonce.pictureName %}
+                        <img src="{{ asset('annonce/' ~ annonce.pictureName  ) | imagine_filter('my_thumb') }}" />
+                    {% else %}
+                        <i class="fa fa-circle"></i>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $( window ).on( "load", FF.init() );
+    </script>
+
+
+{% endblock %}

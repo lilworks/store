@@ -26,8 +26,12 @@ class TypeType extends AbstractType
                     '%' => 'RATIO'
                 ),
                 'label' => false,'required' => true))
-            ->add('save', SubmitType::class)
-            ->add('cancel', ButtonType::class)
+            ->add('save', SubmitType::class,array(
+                'label'=>'storebundle.save'
+            ))
+            ->add('cancel', ButtonType::class,array(
+                'label'=>'storebundle.cancel'
+            ))
         ;
     }
     

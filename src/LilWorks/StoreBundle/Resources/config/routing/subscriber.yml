@@ -1,0 +1,34 @@
+subscriber_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:Subscriber:index" }
+    methods:  GET
+
+subscriber_show:
+    path:     /{subscriber_id}/show
+    defaults: { _controller: "LilWorksStoreBundle:Subscriber:show" }
+    methods:  GET
+
+subscriber_export:
+    path:     /export
+    defaults: { _controller: "LilWorksStoreBundle:Subscriber:export" }
+    methods:  GET
+
+subscriber_import:
+    path:     /import
+    defaults: { _controller: "LilWorksStoreBundle:Subscriber:import" }
+    methods:  GET
+
+subscriber_new:
+    path:     /new
+    defaults: { _controller: "LilWorksStoreBundle:Subscriber:new" }
+    methods:  [GET, POST]
+
+subscriber_edit:
+    path:     /{subscriber_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Subscriber:edit" }
+    methods:  [GET, POST]
+
+subscriber_delete:
+    path:     /{subscriber_id}/delete
+    defaults: { _controller: "LilWorksStoreBundle:Subscriber:delete" }
+    methods:  [GET, POST]

@@ -48,8 +48,23 @@
             restartOnRequestAfter: false
         };
     </script>
+
+
+    <style>
+        {% if context == 'online' %}
+        body {
+            background-image: url({{ asset('bundles/lilworksstore/image/5b82b10b.png') }});
+        }
+        {% else %}
+
+        body {
+            background-image: url({{ asset('bundles/lilworksstore/image/8b442bf0.png') }});
+        }
+        {% endif %}
+    </style>
 </head>
 <body>
+
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
     <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

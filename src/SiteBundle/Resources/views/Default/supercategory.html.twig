@@ -9,15 +9,14 @@
 <div class="col-md-3">
     <div class="card">
         <div class="card-header">
-            {% trans %}filter{% endtrans %}
+            {% trans %}sitebundle.filter{% endtrans %}
         </div>
         <div class="card-block">
             <p class="card-text">
             <form method="get"  class="formFilter">
-                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="filter" />
+                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}sitebundle.button.filter{% endtrans %}" />
             </form>
             </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
     </div>
 
@@ -43,7 +42,7 @@
                 <div class="col-md-6">
                     <div class="dropdown show" style="float: right;">
                         <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ 'lilworks.sitebundle.categories' }}
+                            {{ 'sitebundle.categories' }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             {% for supercategorycategory in supercategory.supercategoriescategories %}

@@ -15,13 +15,13 @@ class CategoryFilterType extends AbstractType
     {
         $builder
             ->add('name', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.storebundle.name'
+                'label'=>'storebundle.name'
             ))
             ->add('isPublished', Filters\BooleanFilterType::class,array(
-                'label'=>'lilworks.storebundle.ispublished'
+                'label'=>'storebundle.ispublished'
             ))
             ->add('products', EntityType::class, array(
-                'label'=>'lilworks.storebundle.products',
+                'label'=>'storebundle.products',
                 'class'    => 'LilWorksStoreBundle:Product' ,
                 'choice_label' => function ($obj) { return    $obj->getBrand()->getName() ." ". $obj->getName() ; },
                 'query_builder' => function (EntityRepository $er) {

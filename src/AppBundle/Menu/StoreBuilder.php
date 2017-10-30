@@ -439,7 +439,7 @@ class StoreBuilder implements ContainerAwareInterface
         //////// END PAYMENT
         // level 0
         $shippingMenuCatPortal = $menu->addChild('storebundle.menu.cat.shipping.portal', array(
-            'route' => 'portal_payment',
+            'route' => 'portal_shipping',
             'attributes'=>$attr[1]['curr'],
             'linkAttributes'=>$attr[1]['link'],
         ));
@@ -511,24 +511,48 @@ class StoreBuilder implements ContainerAwareInterface
                 array('context'=> $options["context"],  'link'=>$attr[1]['link'],'curr'=>$attr[1]['curr'])
             )
         );
-        // level 1
-        $conversationMenuCat =  $configMenuCatPortal->addChild('storebundle.menu.conversation', array(
-            #'route' => 'user_index',
-            'attributes'=>$attr[1]['curr'],
-            'childrenAttributes'=>$attr[1]['child'],
-            'linkAttributes'=>$attr[1]['link'],
-        ));
-        $conversationMenuCat->setAttribute('i','fa fa-comments');
-        $conversationMenuCat->setChildrenAttribute('class',$attr[1]['child']['class']);
-        $this->container->get('event_dispatcher')->dispatch(
-            ConfigureStoreMenuEvent::CONFIGURE,
-            new ConfigureStoreMenuEvent( $factory,
-                $conversationMenuCat ,
-                'conversation' ,
-                $this->requestStack->getCurrentRequest()->get('conversation_id'),
-                array('context'=> $options["context"],  'link'=>$attr[1]['link'],'curr'=>$attr[1]['curr'])
-            )
-        );
+
+
+
+        if( $this->container->getParameter('context') == "online"){
+            // level 1
+            $conversationMenuCat =  $configMenuCatPortal->addChild('storebundle.menu.conversation', array(
+                #'route' => 'user_index',
+                'attributes'=>$attr[1]['curr'],
+                'childrenAttributes'=>$attr[1]['child'],
+                'linkAttributes'=>$attr[1]['link'],
+            ));
+            $conversationMenuCat->setAttribute('i','fa fa-comments');
+            $conversationMenuCat->setChildrenAttribute('class',$attr[1]['child']['class']);
+            $this->container->get('event_dispatcher')->dispatch(
+                ConfigureStoreMenuEvent::CONFIGURE,
+                new ConfigureStoreMenuEvent( $factory,
+                    $conversationMenuCat ,
+                    'conversation' ,
+                    $this->requestStack->getCurrentRequest()->get('conversation_id'),
+                    array('context'=> $options["context"],  'link'=>$attr[1]['link'],'curr'=>$attr[1]['curr'])
+                )
+            );
+
+            // level 1
+            $subscriberMenuCat =  $configMenuCatPortal->addChild('storebundle.menu.subscriber', array(
+                #'route' => 'user_index',
+                'attributes'=>$attr[1]['curr'],
+                'childrenAttributes'=>$attr[1]['child'],
+                'linkAttributes'=>$attr[1]['link'],
+            ));
+            $subscriberMenuCat->setAttribute('i','fa fa-newspaper-o');
+            $subscriberMenuCat->setChildrenAttribute('class',$attr[1]['child']['class']);
+            $this->container->get('event_dispatcher')->dispatch(
+                ConfigureStoreMenuEvent::CONFIGURE,
+                new ConfigureStoreMenuEvent( $factory,
+                    $subscriberMenuCat ,
+                    'subscriber' ,
+                    null,
+                    array('context'=> $options["context"],  'link'=>$attr[1]['link'],'curr'=>$attr[1]['curr'])
+                )
+            );
+        }
         // level 1
         if( $this->container->getParameter('mode') == "master"){
         $syncroMenuCat =  $configMenuCatPortal->addChild('storebundle.menu.syncro', array(
@@ -549,6 +573,7 @@ class StoreBuilder implements ContainerAwareInterface
             )
         );
         }
+
         // level 1
         $annonceMenuCat =  $configMenuCatPortal->addChild('storebundle.menu.annonce', array(
             #'route' => 'user_index',

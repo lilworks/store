@@ -49,15 +49,15 @@
         </thead>
         <tbody>
 
-        {% for rconversation in pagination %}
-            {% set conversation = rconversation["conversation"] %}
-            {{ dump(conversation.id) }}
+
+        {% for conversation in pagination %}
             <tr>
-                <td>{#
+                <td>
+
                     {% set formatedItems = pagination.items|idinkey %}
                     {% set menu = knp_menu_get('list', [ conversation.id ] ,{results:formatedItems[conversation.id]   ,target:'conversation'} ) %}
                     {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
-                    #}
+
                 </td>
                 <td>
                     {% if conversation.user.id is defined %}
@@ -80,7 +80,7 @@
                     {{ conversation.messages|length }}
                 </td>
                 <td>
-                    {{ rconversation["countUnreaded"] }}
+                    {{ conversation.unreaded }}
                 </td>
             </tr>
         {% endfor %}

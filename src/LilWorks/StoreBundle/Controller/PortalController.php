@@ -120,14 +120,21 @@ class PortalController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        $context = $this->getParameter('context');
+        $mode = $this->getParameter('mode');
+
         $translator = $this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
         $seoPage->setTitle($translator->trans('storebundle.htmltitle.portal.config'));
 
         return $this->render('LilWorksStoreBundle:Portal:config.html.twig', array(
+            'context'=>$context,
+            'mode'=>$mode,
             "annoncesAll"=>$em->getRepository("LilWorksStoreBundle:Annonce")->findAll(),
             "annoncesPublished"=>$em->getRepository("LilWorksStoreBundle:Annonce")->findByIsPublished(1),
             "textsAll"=>$em->getRepository("LilWorksStoreBundle:Text")->findAll(),
+            "subscribersAll"=>$em->getRepository("LilWorksStoreBundle:Subscriber")->findAll(),
+            "conversationsAll"=>$em->getRepository("LilWorksStoreBundle:Conversation")->findAll(),
         ));
     }
 

@@ -23,18 +23,16 @@ class IsPublishedType extends AbstractType
         $builder
             ->add('isPublished',ChoiceType::class,array(
                 'choices' => array(
-                    'no' => 0,
-                    'yes' => 1
+                    'storebundle.no' => 0,
+                    'storebundle.yes' => 1
                 ),
                 'label' => false,'required' => true))
-            #->add('isSecondHand',CheckboxType::class,array('label' => false,'required' => false,'empty_data' => 0))
-            ->add('save', SubmitType::class, array(
-            'attr' => array('class' => 'liveEditor_btn_save btn btn-success btn-sm'),
+            ->add('save', SubmitType::class,array(
+                'label'=>'storebundle.save'
             ))
-            ->add('cancel', ButtonType::class, array(
-                'attr' => array('class' => 'liveEditor_btn_cancel btn btn-warning btn-sm'),
+            ->add('cancel', ButtonType::class,array(
+                'label'=>'storebundle.cancel'
             ))
-
         ;
     }
     

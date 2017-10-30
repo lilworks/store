@@ -3,10 +3,13 @@ lilworks_store_homepage:
     path:     /
     defaults: { _controller: LilWorksStoreBundle:Portal:index }
 
-
 lil_works_store_import:
     resource: "@LilWorksStoreBundle/Resources/config/routing/import.yml"
     prefix:   /import
+
+lil_works_store_subscriber:
+    resource: "@LilWorksStoreBundle/Resources/config/routing/subscriber.yml"
+    prefix:   /subscriber
 
 lil_works_store_conversation:
     resource: "@LilWorksStoreBundle/Resources/config/routing/conversation.yml"
@@ -19,7 +22,6 @@ lil_works_store_country:
 lil_works_store_portal:
     resource: "@LilWorksStoreBundle/Resources/config/routing/portal.yml"
     prefix:   /portal
-
 
 lil_works_store_syncro:
     resource: "@LilWorksStoreBundle/Resources/config/routing/syncro.yml"

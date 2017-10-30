@@ -14,7 +14,7 @@
         <div class="card">
             <div class="card-header">
                 <a class="btn btn-success" href="{{ path('site_basket_add',{id:product.id}) }}">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> {% trans %}lilworks.sitebundle.addtobasket{% endtrans %}
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> {% trans %}sitebundle.addtobasket{% endtrans %}
                 </a>
             </div>
             <div class="card-text">
@@ -48,14 +48,14 @@
                     <div class="alert alert-danger" role="alert">
                     <span>
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
-                        {% trans %}isSecondHand{% endtrans %}
+                        {% trans %}sitebundle.product.issecondhand{% endtrans %}
                     </span>
                     </div>
                 {% elseif product.alwaysAvailable == true %}
                     <div class="alert alert-success" role="alert">
                     <span>
                     <i class="fa fa-cubes" aria-hidden="true"></i>
-                        {% trans %}product always available{% endtrans %}
+                        {% trans %}sitebundle.product.alwaysavailable{% endtrans %}
                     </span>
                     </div>
                 {% elseif product.stock > 0 %}
@@ -81,7 +81,7 @@
                     <div class="alert alert-success" role="alert">
                     <span>
                     <i class="fa fa-cubes" aria-hidden="true"></i>
-                        {% trans %}immediatly available{% endtrans %}
+                        {% trans %}sitebundle.product.available{% endtrans %}
                     </span>
                     </div>
                 {% endif %}
@@ -130,7 +130,7 @@
                 {{ product.description|raw }}
 
                 {% if product.relatedProducts|length > 0  %}
-                    <h5>{% trans %}relatedProducts{% endtrans %}</h5>
+                    <h5>{% trans %}sitebundle.relatedproducts{% endtrans %}</h5>
                     <div class="row">
                         {% for relatedProduct in product.relatedProducts %}
                             {{ productService.getProduct(relatedProduct.id)|raw }}

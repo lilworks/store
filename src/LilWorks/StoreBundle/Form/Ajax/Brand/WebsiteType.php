@@ -16,14 +16,14 @@ class WebsiteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('website',UrlType::class,array('label' => false,'required'=>false))
-            ->add('save', SubmitType::class, array(
-            'attr' => array('class' => 'liveEditor_btn_save btn btn-success btn-sm'),
+
+        $builder->add('website',UrlType::class,array('label' => false))
+            ->add('save', SubmitType::class,array(
+                'label'=>'storebundle.save'
             ))
-            ->add('cancel', ButtonType::class, array(
-                'attr' => array('class' => 'liveEditor_btn_cancel btn btn-warning btn-sm'),
-            ))
-        ;
+            ->add('cancel', ButtonType::class,array(
+                'label'=>'storebundle.cancel'
+            ));
     }
     
     /**

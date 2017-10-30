@@ -20,6 +20,8 @@ class ConfigureStoreMenuListener
         'ICO_EDIT'=>'fa fa-pencil',
         'ICO_DELETE'=>'fa fa-trash',
         'ICO_PDF'=>'fa fa-file-pdf',
+        'ICO_IMPORT'=>'fa fa-upload',
+        'ICO_EXPORT'=>'fa fa-download',
 
 
         'BTN_GENERAL'=>'btn btn-sm',
@@ -29,6 +31,8 @@ class ConfigureStoreMenuListener
         'BTN_EDIT'=>'btn-primary',
         'BTN_DELETE'=>'btn-danger btn-delete',
         'BTN_PDF'=>'btn-primary',
+        'BTN_IMPORT'=>'btn-primary',
+        'BTN_EXPORT'=>'btn-primary',
 
 
     );
@@ -121,6 +125,23 @@ class ConfigureStoreMenuListener
         $this->setAction('new',null,$menu);
         if($id) {
             $entityName = "LilWorksStoreBundle:Text";
+            $entity = $this->em->getRepository($entityName)->find($id);
+
+            $this->setAction('show', $entity, $menu);
+            $this->setAction('edit', $entity, $menu);
+            $this->setAction('delete', $entity, $menu);
+        }
+
+    }
+    public function subscriber($menu,$id){
+
+
+        $this->setAction('index',null,$menu);
+        $this->setAction('import',null,$menu);
+        $this->setAction('export',null,$menu);
+        $this->setAction('new',null,$menu);
+        if($id) {
+            $entityName = "LilWorksStoreBundle:Subscriber";
             $entity = $this->em->getRepository($entityName)->find($id);
 
             $this->setAction('show', $entity, $menu);

@@ -59,7 +59,8 @@ class CustomerController extends Controller
 
         $translator = $this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('customer phonenumbers'));
+        $seoPage->setTitle($translator->trans('stitebundle.htmltitle.customer.phonenumbers'));
+
 
         return $this->render('SiteBundle:Customer:phonenumbers.html.twig', array(
             'form' => $form->createView(),
@@ -118,10 +119,9 @@ class CustomerController extends Controller
         }
 
 
-
         $translator = $this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('customer addresses'));
+        $seoPage->setTitle($translator->trans('stitebundle.htmltitle.customer.addresses'));
 
         return $this->render('SiteBundle:Customer:addresses.html.twig', array(
             'form' => $form->createView(),

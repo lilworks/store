@@ -21,19 +21,17 @@ class ShippedAtType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $builder
-            ->add('shippedAt',DateTimeType::class,array(
-                'label' => false,
-                'required' => true,
-                'attr'=>array('colType'=>'datetime')
+        $builder->add('shippedAt',DateTimeType::class,array(
+            'required' => true,
+            'attr'=>array('colType'=>'datetime'),
+            'label' => false
+        ))
+            ->add('save', SubmitType::class,array(
+                'label'=>'storebundle.save'
             ))
-            ->add('save', SubmitType::class, array(
-            'attr' => array('class' => 'liveEditor_btn_save btn btn-success btn-sm'),
+            ->add('cancel', ButtonType::class,array(
+                'label'=>'storebundle.cancel'
             ))
-            ->add('cancel', ButtonType::class, array(
-                'attr' => array('class' => 'liveEditor_btn_cancel btn btn-warning btn-sm'),
-            ))
-
         ;
     }
     

@@ -20,6 +20,15 @@ class Conversation
      */
     public function updatedTimestamps()
     {
+        $unreaded = 0;
+        foreach($this->getMessages() as $message){
+            if( $message->getIsResponse() !=1  && is_null($message->getReadedAt())){
+                $unreaded+=1;
+            }
+        }
+
+        $this->setUnreaded($unreaded);
+
         if($this->getCreatedAt() == null)
             $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
     }
@@ -66,9 +75,17 @@ class Conversation
      */
     private $isArchived;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="unreaded", type="integer",nullable=true)
+     */
+    private $unreaded;
+
 
     /**
      * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\ConversationMessage", mappedBy="conversation",cascade={"persist","remove"})
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $messages;
 
@@ -273,5 +290,29 @@ class Conversation
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set unreaded
+     *
+     * @param integer $unreaded
+     *
+     * @return Conversation
+     */
+    public function setUnreaded($unreaded)
+    {
+        $this->unreaded = $unreaded;
+
+        return $this;
+    }
+
+    /**
+     * Get unreaded
+     *
+     * @return integer
+     */
+    public function getUnreaded()
+    {
+        return $this->unreaded;
     }
 }

@@ -39,7 +39,7 @@ class CouponType extends AbstractType
 
 
                 $form->add('address', EntityType::class, array(
-                    'label'=>'lilworks.storebundle.address',
+                    'label'=>'storebundle.address',
                     'class'    => 'LilWorksStoreBundle:Address' ,
                     'required' => true ,
                     'mapped'=> true,
@@ -73,7 +73,7 @@ class CouponType extends AbstractType
         $builder
             ->add('customer', EntityType::class, array(
                 'disabled'=>(count($coupon->getOrdersPaymentMethods())>0)?1:0,
-                'label'=>'lilworks.storebundle.customer',
+                'label'=>'storebundle.customer',
                 'class'    => 'LilWorksStoreBundle:Customer' ,
                 'required' => false ,
                 'mapped'=> true,
@@ -91,22 +91,22 @@ class CouponType extends AbstractType
             ))
             #->add('reference')
             ->add('amount',MoneyType::class,array(
-                'label'=>'lilworks.storebundle.coupon.initamount',
+                'label'=>'storebundle.coupon.initamount',
             ))
             ->add('splitable',null,array(
-                'label'=>'lilworks.storebundle.coupon.splitable',
+                'label'=>'storebundle.coupon.splitable',
             ))
             ->add('availableOnline',null,array(
-                'label'=>'lilworks.storebundle.coupon.availableonline',
+                'label'=>'storebundle.coupon.availableonline',
             ))
             ->add('validity',null,array(
-                'label'=>'lilworks.storebundle.coupon.validity',
+                'label'=>'storebundle.coupon.validity',
                 'attr' => ['class' => 'datepicker'],
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yy',
             ))
             ->add('description',null,array(
-                'label'=>'lilworks.storebundle.description',
+                'label'=>'storebundle.description',
                 'attr' => ['class' => 'text-editor'],
             ))
             ;

@@ -37,9 +37,10 @@ class OrderController extends Controller
             10
         );
 
-        $translator = $this->get('translator');
+        $translator=$this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('order') . " | " . $user->getEmail() );
+        $seoPage->setTitle($translator->trans('sitebundle.htmltitle.order'));
+
 
         return $this->render('SiteBundle:Order:index.html.twig',array(
             'user'=>$user,
@@ -97,12 +98,10 @@ class OrderController extends Controller
      */
     public function editAction(Request $request,Order $order){
 
-
-
-
-        $translator = $this->get('translator');
+        $translator=$this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('order') );
+        $seoPage->setTitle($translator->trans('sitebundle.htmltitle.order %reference%') , array('%reference%'=>$order->getReference() ));
+
 
         return $this->render('SiteBundle:Order:edit.html.twig',array(
             'order'=>$order
@@ -115,15 +114,18 @@ class OrderController extends Controller
 
         $paymentService = $this->get('site.payment');
         $paymentMethodsForm = array();
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('order payment') );
+
 
         $paymentMethods = $this->getDoctrine()->getRepository("LilWorksStoreBundle:PaymentMethod")->findBy(array('isPublished'=>1));
         foreach($paymentMethods as $paymentMethod){
             $paymentService->setPaymentMethod($paymentMethod,$order);
             array_push($paymentMethodsForm,$paymentService->getForm());
         }
+
+        $translator=$this->get('translator');
+        $seoPage = $this->get('sonata.seo.page');
+        $seoPage->setTitle($translator->trans('sitebundle.htmltitle.order.pay %reference%') , array('%reference%'=>$order->getReference() ));
+
 
         return $this->render('SiteBundle:Order:pay.html.twig',array(
             'order'=>$order,

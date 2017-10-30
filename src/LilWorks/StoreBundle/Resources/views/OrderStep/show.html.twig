@@ -2,47 +2,22 @@
 
 {% block body %}
     <h1>
-        {% trans %}orderStep{% endtrans %}
+        {{ 'storebundle.orderstep.show %name%'|trans({'%name%':orderStep.name}) }}
     </h1>
-
-    <div class="lilworks_list_showAction">
-        <ul class="list-inline">
-            <li class="list-inline-item">
-                <a href="{{ path('orderstep_index') }}" class="btn btn-info btn-sm">
-                    <i class="fa fa-list"></i> {% trans %}orderStep list{% endtrans %}
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a href="{{ path('orderstep_edit', { 'id': orderStep.id }) }}" class="btn btn-info btn-sm">
-                    <i class="fa fa-pencil "></i> {% trans %}edit{% endtrans %}
-                </a>
-            </li>
-
-            <li class="list-inline-item">
-                {% if  orderStep.ordersOrderSteps|length == 0 %}
-                    <a href="{{ path('orderstep_delete', { 'id': orderStep.id }) }}"  class="btn btn-warning btn-sm" >
-                        <i class="fa fa-trash"></i> {% trans %}delete{% endtrans %}
-                    </a>
-                {% else %}
-                    <del><i class="fa fa-trash"></i></del>
-                {% endif %}
-            </li>
-        </ul>
-    </div>
 
 
     <table class="table table-striped">
         <tbody>
             <tr>
-                <th>{% trans %}id{% endtrans %}</th>
+                <th>{% trans %}storebundle.id{% endtrans %}</th>
                 <td>#{{ orderStep.id }}</td>
             </tr>
             <tr>
-                <th>{% trans %}name{% endtrans %}</th>
+                <th>{% trans %}storebundle.name{% endtrans %}</th>
                 <td>{{ orderStep.name }}</td>
             </tr>
             <tr>
-                <th>{% trans %}description{% endtrans %}</th>
+                <th>{% trans %}storebundle.description{% endtrans %}</th>
                 <td>{{ orderStep.description|raw }}</td>
             </tr>
         </tbody>

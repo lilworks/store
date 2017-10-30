@@ -50,7 +50,7 @@ class AjaxController extends Controller
 
 
 
-        $liveEditor = $this->container->get("lilworks.order.liveEditor");
+        $liveEditor = $this->container->get("order.liveEditor");
         $liveEditor->getForm(
             $eid,
             $entity,

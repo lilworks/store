@@ -60,7 +60,7 @@ class ProductInCategoryFilterType extends AbstractType
 
             $form->add('brand', Filters\EntityFilterType::class, array(
                 'empty_data'=>$brands,
-                'label'    =>  'lilworks.sitebundle.brand',
+                'label'    =>  'sitebundle.brand',
                 'class'    =>  'LilWorksStoreBundle:Brand',
                 'choice_label' => function ( $brand ) use ($productsInBrand){
                     return $brand->getName() . "(".$productsInBrand[$brand->getId()].")" ;
@@ -142,7 +142,7 @@ class ProductInCategoryFilterType extends AbstractType
         $builder
 
             ->add('priceOnline', Filters\NumberRangeFilterType::class,array(
-                'label'=>'lilworks.sitebundle.pricerange',
+                'label'=>'sitebundle.pricerange',
                 'right_number_options'=>array(
                     "data"=>($right)?$right:"0",
                     'condition_operator' => FilterOperands::OPERATOR_LOWER_THAN_EQUAL,
@@ -167,7 +167,7 @@ class ProductInCategoryFilterType extends AbstractType
 
             ))
             ->add('results', ChoiceType::class,array(
-                'label'=>'lilworks.sitebundle.filter.results',
+                'label'=>'sitebundle.filter.results',
                 'apply_filter' => false,
                 'choices'=>array(
                     10=>10,20=>20,30=>30,50=>50,100=>100
@@ -187,10 +187,10 @@ class ProductInCategoryFilterType extends AbstractType
 
             ))*/
             ->add('name', Filters\TextFilterType::class,array(
-                'label'=>'lilworks.sitebundle.productname',
+                'label'=>'sitebundle.productname',
             ))
             ->add('isSecondHand', Filters\BooleanFilterType::class,array(
-                'label'=>'lilworks.sitebundle.issecondhand',
+                'label'=>'sitebundle.issecondhand',
             ));
 
     }

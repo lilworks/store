@@ -43,13 +43,13 @@
     <div class="card">
         <div class="card-header">
             <i class="fa fa-filter" aria-hidden="true"></i>
-            {{ 'lilworks.sitebundle.filter'|trans }}
+            {{ 'sitebundle.filter'|trans }}
         </div>
         <div class="card-block">
             <p class="card-text">
             <form method="get"  class="formFilter">
                 {{ form_rest(formFilter) }}
-                <input type="submit" class="btn btn-sm btn-secondary" name="submit-filter" value="{{ 'lilworks.sitebundle.button.filter'|trans }}" />
+                <input type="submit" class="btn btn-sm btn-secondary" name="submit-filter" value="{{ 'sitebundle.button.filter'|trans }}" />
             </form>
 
         </div>
@@ -84,7 +84,7 @@
                             <div class="dropdown" style="float: right;">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                                    {{ 'lilworks.sitebundle.supercategories' }}
+                                    {{ 'sitebundle.supercategories' }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     {% for supercategorycategory in category.supercategoriesCategories %}

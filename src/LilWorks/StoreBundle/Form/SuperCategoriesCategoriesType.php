@@ -29,7 +29,7 @@ class SuperCategoriesCategoriesType extends AbstractType
                 if($form->getData() && $form->getData()->getCategory()->getId()){
                     $category_id = $form->getData()->getCategory()->getId();
                     $form->add('category', EntityType::class, array(
-                        'label'    => 'lilworks.storebundle.category' ,
+                        'label'    => 'storebundle.category' ,
                         'class'    => 'LilWorksStoreBundle:Category' ,
                         'choice_label' => function ($obj) { return   $obj->getName() ; },
                         'query_builder' => function (EntityRepository $er) use ($category_id){
@@ -52,7 +52,7 @@ class SuperCategoriesCategoriesType extends AbstractType
                         array_push($categoriesAdded,$scc->getCategory()->getId());
                     }
                     $form->add('category', EntityType::class, array(
-                        'label'    => 'lilworks.storebundle.category' ,
+                        'label'    => 'storebundle.category' ,
                         'class'    => 'LilWorksStoreBundle:Category' ,
                         'choice_label' => function ($obj) { return   $obj->getName() ; },
                         'query_builder' => function (EntityRepository $er) use ($categoriesAdded) {
@@ -82,7 +82,7 @@ class SuperCategoriesCategoriesType extends AbstractType
 
             }else{
                     $form->add('category', EntityType::class, array(
-                        'label'    => 'lilworks.storebundle.category' ,
+                        'label'    => 'storebundle.category' ,
                         'class'    => 'LilWorksStoreBundle:Category' ,
                         'choice_label' => function ($obj) { return   $obj->getName() ; },
                         'query_builder' => function (EntityRepository $er) {
@@ -106,7 +106,7 @@ class SuperCategoriesCategoriesType extends AbstractType
             $builder
 
             ->add('pos',null,array(
-                'label'    => 'lilworks.storebundle.pos' ,
+                'label'    => 'storebundle.pos' ,
             ))
 
         ;

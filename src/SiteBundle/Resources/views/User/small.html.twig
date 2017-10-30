@@ -2,7 +2,7 @@
             {% if user is null %}
                 <div class="card">
                     <div class="card-block">
-                        <h5 class="card-title"><i class="fa fa-user" aria-hidden="true"></i>{{ 'lilworks.sitebundle.user.notconnected'|trans }}</h5>
+                        <h5 class="card-title"><i class="fa fa-user" aria-hidden="true"></i>{{ 'sitebundle.user.notconnected'|trans }}</h5>
                         <a class="btn btn-primary btn-sm" href="{{ path('fos_user_security_login') }}"><i class="fa fa-user" aria-hidden="true"></i>{{ 'layout.login'|trans }}</a>
                         <a class="btn btn-primary btn-sm" href="{{ path('fos_user_registration_register') }}"><i class="fa fa-user-o" aria-hidden="true"></i>{{ 'registration.submit'|trans }}</a>
                     </div>

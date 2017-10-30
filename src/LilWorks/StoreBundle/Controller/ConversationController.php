@@ -51,11 +51,7 @@ class ConversationController extends Controller
             $qb = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('LilWorksStoreBundle:Conversation')
                 ->createQueryBuilder('c')
-                ->select('c as conversation','count(cm) as countUnreaded')
                 ->join('c.messages','m')
-                ->innerJoin('LilWorksStoreBundle:ConversationMessage','cm','WITH','cm.conversation = c.id and cm.readedAt IS NULL')
-                ->groupBy('c.id')
-                ->orderBy('m.createdAt','desc')
                 ;
         }
 
@@ -119,9 +115,19 @@ class ConversationController extends Controller
     public function showAction(Conversation $conversation)
     {
 
+        $em = $this->getDoctrine()->getManager();
+
+        foreach($conversation->getMessages() as $message){
+            if($message->getIsResponse() != 1){
+                $message->setReadedAt(new \DateTime());
+                $em->persist($message);
+            }
+        }
+        $em->flush();
+
         $translator = $this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.conversation.show %reference%',array("%reference%"=>$conversation->getReference())));
+        $seoPage->setTitle($translator->trans('storebundle.htmltitle.conversation.show %subject%',array("%subject%"=>$conversation->getConversationSubject())));
 
         return $this->render('LilWorksStoreBundle:Conversation:show.html.twig', array(
             'conversation' => $conversation,

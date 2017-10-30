@@ -12,7 +12,7 @@
     <ul class="list-inline">
         <li class="list-inline-item">
             <a href="{{ path('site_order') }}" class="btn btn-primary btn-sm">
-                <i class="fa fa-list"></i> {% trans %}orders list{% endtrans %}
+                <i class="fa fa-list"></i> {% trans %}sitebundle.order.list{% endtrans %}
             </a>
         </li>
         {% if order.ordersOrderSteps|length > 0 and
@@ -20,14 +20,14 @@
         %}
             <li class="list-inline-item">
                 <a href="{{ path('site_order_pay', { 'id': order.id }) }}" class="btn btn-success btn-sm">
-                    <i class="fa fa-euro"></i> {% trans %}pay{% endtrans %}
+                    <i class="fa fa-euro"></i> {% trans %}sitebundle.order.pay{% endtrans %}
                 </a>
 
             </li>
             <li class="list-inline-item">
 
                 <a href="{{ path('site_order_remove', { 'id': order.id }) }}" class="btn btn-danger btn-sm">
-                    <i class="fa fa-trash"></i> {% trans %}cancel{% endtrans %}
+                    <i class="fa fa-trash"></i> {% trans %}sitebundle.order.cancel{% endtrans %}
                 </a>
 
             </li>
@@ -38,7 +38,7 @@
             <li>
 
                 <a href="{{ path('site_order_pdf', { 'id': order.id }) }}" class="btn btn-primary btn-sm">
-                    <i class="fa fa-file"></i> {% trans %}download pdf{% endtrans %}
+                    <i class="fa fa-file"></i> {% trans %}sitebundle.order.pdf{% endtrans %}
                 </a>
 
             </li>
@@ -48,7 +48,7 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-block">
-                    <h3 class="card-title">{% trans %}order step{% endtrans %}</h3>
+                    <h3 class="card-title">{% trans %}sitebundle.ordersteps{% endtrans %}</h3>
                     <ul class="list-group">
                         {%  for orderOrderStep in order.ordersOrderSteps  %}
                             <li class="list-group-item">{{ orderOrderStep.createdAt|date }} <span class="badge badge-default">{{ orderOrderStep.orderStep.name }}</span></li>
@@ -60,7 +60,7 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-block">
-                    <h3 class="card-title">{% trans %}payment method{% endtrans %}</h3>
+                    <h3 class="card-title">{% trans %}sitebundle.paymentmethods{% endtrans %}</h3>
                     {%  for orderPaymentMethod in order.ordersPaymentMethods  %}
                         <li class="list-group-item">{{ orderPaymentMethod.payedAt|date }}
                             {{ orderPaymentMethod.paymentMethod.name }}
@@ -73,17 +73,17 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-block">
-                    <h3 class="card-title">{% trans %}addresses{% endtrans %}</h3>
+                    <h3 class="card-title">{% trans %}sitebundle.addresses{% endtrans %}</h3>
                     {% if order.shippingAddressString == order.billingAddressString %}
                         <h5>{% trans %}shipping and billing addresses{% endtrans %}</h5>
                     <p class="card-text">{{ order.shippingAddressString }}</p>
                     {% else %}
                         {% if order.shippingAddressString != "" %}
-                            <h5>{% trans %}shipping address{% endtrans %}</h5>
+                            <h5>{% trans %}sitebundle.shippingaddress{% endtrans %}</h5>
                             <p class="card-text">{{ order.shippingAddressString }}</p>
                         {% endif %}
                         {% if order.billingAddressString != "" %}
-                            <h5>{% trans %}billing address{% endtrans %}</h5>
+                            <h5>{% trans %}sitebundle.billingaddress{% endtrans %}</h5>
                             <p class="card-text">{{ order.billingAddressString }}</p>
                         {% endif %}
                     {% endif %}
@@ -96,10 +96,10 @@
     <table class="table table-striped">
 
         <thead>
-        <th>{% trans %}product{% endtrans %}</th>
-        <th>{% trans %}quantity{% endtrans %}</th>
-        <th>{% trans %}price unity{% endtrans %}</th>
-        <th>{% trans %}price{% endtrans %}</th>
+        <th>{% trans %}sitebundle.product{% endtrans %}</th>
+        <th>{% trans %}sitebundle.quantity{% endtrans %}</th>
+        <th>{% trans %}sitebundle.priceunity{% endtrans %}</th>
+        <th>{% trans %}sitebundle.subtot{% endtrans %}</th>
         </thead>
 
         <tbody>
@@ -115,7 +115,7 @@
                     {% if product.product.isSecondHand == 1 %}
                         <span class="alert alert-danger btn-sm" role="alert">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
-                            {% trans %}isSecondHand{% endtrans %}
+                            {% trans %}sitebundle.product.issecondhand{% endtrans %}
                         </span>
                     {% endif %}
                     {{ product.product.warrantiesOnline|warranties|raw }}

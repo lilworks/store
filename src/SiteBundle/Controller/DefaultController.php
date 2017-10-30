@@ -88,6 +88,13 @@ class DefaultController extends Controller
     public function productAction(Product $product){
         $basket = $this->get('site.basket');
         $productService = $this->get('site.product');
+
+
+        $translator = $this->get('translator');
+        $seoPage = $this->get('sonata.seo.page');
+        $seoPage->setTitle($translator->trans('sitebundle.htmltitle.product %product%', array('%product%'=>$product->getBrand()->getName() . " " .$product->getName() )) );
+
+
         return $this->render('SiteBundle:Default:product.html.twig',array(
             'product'=>$product,
             'basket'=>$basket,
@@ -151,10 +158,9 @@ class DefaultController extends Controller
             (isset($productFilter['results'])) ? $productFilter['results'] : 12
         );
 
-
         $translator = $this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('category') . " " . $category->getName());
+        $seoPage->setTitle($translator->trans('sitebundle.htmltitle.category %name%', array('%name%'=>$category->getName() )) );
 
         return $this->render('SiteBundle:Default:category.html.twig',array(
             'category'=>$category,
@@ -203,9 +209,11 @@ class DefaultController extends Controller
             $request->query->getInt('page', 1),
             9
         );
-        $translator = $this->get('translator');
+
+        $translator=$this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('brand') . " " . $brand->getName());
+        $seoPage->setTitle($translator->trans('sitebundle.htmltitle.brand %name%' , array('%name%'=>$brand->getName() )));
+
 
         return $this->render('SiteBundle:Default:brand.html.twig',array(
             'brand'=>$brand,
@@ -257,9 +265,10 @@ class DefaultController extends Controller
             9
         );
 
-        $translator = $this->get('translator');
+        $translator=$this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('supercategory') . " " . $superCategory->getName());
+        $seoPage->setTitle($translator->trans('sitebundle.htmltitle.supercategory %name%', array('%name%'=>$superCategory->getName() )) );
+
 
         return $this->render('SiteBundle:Default:supercategory.html.twig',array(
             'supercategory'=>$superCategory,
@@ -326,9 +335,11 @@ class DefaultController extends Controller
             9
         );
 
-        $translator = $this->get('translator');
+        $translator=$this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('all products'));
+        $seoPage->setTitle($translator->trans('sitebundle.htmltitle.allstore')  );
+
+
 
         return $this->render('SiteBundle:Default:all.html.twig',array(
             'basket'=>$basket,
