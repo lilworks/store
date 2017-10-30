@@ -51,3 +51,9 @@ services:
         tags:
             - { name: lilworks.store.entity.file.cleaner }
         arguments: ['@doctrine.orm.entity_manager','%kernel.root_dir%']
+
+    lilworks.store.entity.tag.cleaner:
+        class: LilWorks\StoreBundle\Service\TagCleaner
+        tags:
+            - { name: lilworks.store.entity.tag.cleaner }
+        arguments: ['@doctrine.orm.entity_manager']

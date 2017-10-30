@@ -1,1 +1,11 @@
-{{ dump(conversation) }}
+{% extends 'baseEmail.html.twig' %}
+
+{% block body %}
+    <h1>
+        {{ 'storebundle.conversationmessage.copyemail.title'|trans }}
+    </h1>
+
+    {{ dump(conversation) }}
+
+
+{% endblock %}

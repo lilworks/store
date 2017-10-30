@@ -36,6 +36,55 @@
     </div>
 
 
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{% trans %}storebundle.action{% endtrans %}</th>
+            <th>{% trans %}storebundle.userorjustemail{% endtrans %}</th>
+            <th>{% trans %}storebundle.conversation.subject{% endtrans %}</th>
+            <th>{% trans %}storebundle.conversation.lastmessage{% endtrans %}</th>
+            <th>{% trans %}storebundle.conversation.messages{% endtrans %}</th>
+            <th>{% trans %}storebundle.conversation.unreaded{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
 
+        {% for rconversation in pagination %}
+            {% set conversation = rconversation["conversation"] %}
+            {{ dump(conversation.id) }}
+            <tr>
+                <td>{#
+                    {% set formatedItems = pagination.items|idinkey %}
+                    {% set menu = knp_menu_get('list', [ conversation.id ] ,{results:formatedItems[conversation.id]   ,target:'conversation'} ) %}
+                    {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
+                    #}
+                </td>
+                <td>
+                    {% if conversation.user.id is defined %}
+                        {% set linkparams = {
+                        0:{icon:'eye',route:path('user_show',{user_id:conversation.user.id})},
+                        1:{icon:'pencil',route:path('user_edit',{user_id:conversation.user.id})}}
+                        %}
+                        {{ conversation.user.username|linkbtn(linkparams)|raw }}
+                        {% else %}
+                        {{ conversation.email }}
+                    {% endif %}
+                </td>
+                <td>
+                    {{ conversation.conversationSubject }}
+                </td>
+                <td>
+                    {{ conversation.messages[0].createdAt|date('d/m/Y H:i') }}
+                </td>
+                <td>
+                    {{ conversation.messages|length }}
+                </td>
+                <td>
+                    {{ rconversation["countUnreaded"] }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

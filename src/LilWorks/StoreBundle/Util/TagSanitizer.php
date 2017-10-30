@@ -9,8 +9,13 @@ class TagSanitizer
      */
     public function sanitize($string)
     {
+        $string = ltrim(rtrim($string));
+        $string = str_replace('  ',' ',$string);
+        $string = str_replace('   ',' ',$string);
+
         $replace = [
-            ' '=>'-', '/' => '+', '\\' => '+', '|' => '+',
+            ' '=>'+', '/' => '+', '\\' => '+', '|' => '+','.'=>'+','('=>'_',')'=>'_',
+            '\''=>'','"'=>'','°'=>'',
             '&lt;' => '', '&gt;' => '', '&#039;' => '', '&amp;' => '',
             '&quot;' => '', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'Ae',
             '&Auml;' => 'A', 'Å' => 'A', 'Ā' => 'A', 'Ą' => 'A', 'Ă' => 'A', 'Æ' => 'Ae',
@@ -59,8 +64,23 @@ class TagSanitizer
         ];
         //$string = preg_replace('/\s+/', '-', $string);
 
-        return strtolower(str_replace(array_keys($replace), $replace, $string));
+        $string = strtolower(str_replace(array_keys($replace), $replace, $string));
 
+
+        $string = str_replace('+++','+',$string);
+        $string = str_replace('+_','_',$string);
+        $string = str_replace('_+','_',$string);
+        $string = str_replace('++++','+',$string);
+           if(
+               substr($string, -1) == "+" ||
+               substr($string, -1) == "_" ||
+               substr($string, -1) == "-"
+           ){
+              $string = substr($string, 0, -1);
+           }
+        $string = str_replace('++','+',$string);
+
+        return $string;
 
     }
 

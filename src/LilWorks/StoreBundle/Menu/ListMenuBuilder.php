@@ -61,6 +61,13 @@ class ListMenuBuilder
         $this->setAction('delete',$menu,$entity->getId());
         return $menu;
     }
+    public function conversation($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        $this->setAction('delete',$menu,$entity->getId());
+        return $menu;
+    }
+
     public function text($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());

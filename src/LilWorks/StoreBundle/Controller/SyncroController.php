@@ -45,7 +45,27 @@ class SyncroController extends Controller
         ));
     }
 
-
+    /**
+     * Clean the picture folder
+     *
+     */
+    public function cleanTagAction(Request $request)
+    {
+        $todo = array(
+            "storebundle.product"=>array("LilWorksStoreBundle:Product","tag"),
+            "storebundle.brand"=>array("LilWorksStoreBundle:Brand","tag"),
+            "storebundle.category"=>array("LilWorksStoreBundle:Category","tag"),
+            "storebundle.supercategory"=>array("LilWorksStoreBundle:SuperCategory","tag"),
+            "storebundle.annonce"=>array("LilWorksStoreBundle:Annonce","tag"),
+        );
+        $done = array();
+        foreach($todo as $k => $cleanparam){
+            $done[$k] = $this->get("lilworks.store.entity.tag.cleaner")->clean($cleanparam[0],$cleanparam[1]);
+        }
+        return $this->render('LilWorksStoreBundle:Syncro:cleanTag.html.twig', array(
+            'done'=>$done
+        ));
+    }
 
 
     public function stockAction()

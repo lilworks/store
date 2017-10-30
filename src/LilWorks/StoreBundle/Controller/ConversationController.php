@@ -40,20 +40,32 @@ class ConversationController extends Controller
             $qb = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('LilWorksStoreBundle:Conversation')
                 ->createQueryBuilder('c')
+                ->join('c.messages','m')
+
             ;
 
             // build the query from the given form object
             $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($formFilter, $qb);
 
         }else{
-            $qb->select('c')->from('LilWorksStoreBundle:Conversation','c');
+            $qb = $this->get('doctrine.orm.entity_manager')
+                ->getRepository('LilWorksStoreBundle:Conversation')
+                ->createQueryBuilder('c')
+                ->select('c as conversation','count(cm) as countUnreaded')
+                ->join('c.messages','m')
+                ->innerJoin('LilWorksStoreBundle:ConversationMessage','cm','WITH','cm.conversation = c.id and cm.readedAt IS NULL')
+                ->groupBy('c.id')
+                ->orderBy('m.createdAt','desc')
+                ;
         }
 
         $paginator  = $this->get('knp_paginator');
+
         $pagination = $paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
-            10
+            10,
+            array('wrap-queries'=>true)
         );
 
         $translator = $this->get('translator');

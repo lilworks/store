@@ -13,6 +13,11 @@ syncro_cleanentityfolder:
     path:     /cleanentityfolder
     defaults: { _controller: "LilWorksStoreBundle:Syncro:cleanEntityFolder" }
     methods:  GET
+syncro_cleantag:
+    path:     /cleantag
+    defaults: { _controller: "LilWorksStoreBundle:Syncro:cleanTag" }
+    methods:  GET
+
 syncro_stock:
     path:     /stock
     defaults: { _controller: "LilWorksStoreBundle:Syncro:stock" }
