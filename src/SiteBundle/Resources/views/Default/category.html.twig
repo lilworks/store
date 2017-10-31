@@ -12,18 +12,8 @@
     {% endblock %}
     {% block javascripts %}
         {{ parent() }}
-
         <script>
             $( document ).ready(function() {
-
-                /*
-                console.log($('.price-range-left'));
-                console.log($('.price-range-left').slider());
-
-                console.log("right slider PASS");
-                $(".price-range-left").slider({});
-                console.log("STOP");
-*/
                 $(".selectpicker").selectpicker();
                 $(".price-range").slider({
                     formatter: function(value) {
@@ -103,38 +93,22 @@
                     {% endif %}
                 </div>
             </div>
-
-
-
-
-
         </div>
         <div class="card-block">
             <div class="card-text">
-
-
-
                 {% if pagination is defined %}
                     <div class="pagination">
                         {{ knp_pagination_render(pagination) }}
-
-
                         <span class="alert alert-info" role="alert" >
-                <i class="fa fa-sort" aria-hidden="true"></i>
-                            {{ knp_pagination_sortable(pagination, 'priceOnline', 'p.priceOnline') }}
-            </span>
+                            <i class="fa fa-sort" aria-hidden="true"></i>
+                            {{ knp_pagination_sortable(pagination, 'sitebundle.priceorder'|trans, 'p.priceOnline') }}
+                        </span>
                     </div>
                 {% endif %}
-
                 <div class="row">
-
-
-
                     {% for product in pagination %}
                         {{ productService.getProduct(product.id)|raw }}
                     {% endfor %}
-
-
                 </div>
 
 

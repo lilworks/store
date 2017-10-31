@@ -42,21 +42,18 @@ services:
             - { name: site.content } # The alias is what is used to retrieve the menu
 
 
-    site.form.pib:
+    site.form.pic:
             class: SiteBundle\Filter\ProductInCategoryFilterType
             arguments: ["@request_stack","@doctrine.orm.entity_manager"]
             tags:
                 - { name: form.type }
-#    site.filter.product_in_category:
-#        class: SiteBundle\Form\BasketType:
-#        arguments: [ "@request_stack" ]
- #       tags: [form.type]
-
-
-#    site.menu_renderer:
-        # The class implements Knp\Menu\Renderer\RendererInterface
-#        class: SiteBundle\Menu\SiteRenderer
-#        arguments: ["kernel.charset%"] # set your own dependencies here
-#        tags:
-            # The alias is what is used to retrieve the menu
-#            - { name: knp_menu.renderer, alias: navbar }
+    site.form.pisc:
+            class: SiteBundle\Filter\ProductInSuperCategoryFilterType
+            arguments: ["@request_stack","@doctrine.orm.entity_manager"]
+            tags:
+                - { name: form.type }
+    site.form.pib:
+                class: SiteBundle\Filter\ProductInBrandFilterType
+                arguments: ["@request_stack","@doctrine.orm.entity_manager"]
+                tags:
+                    - { name: form.type }

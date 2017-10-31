@@ -3,8 +3,6 @@ namespace SiteBundle\Filter;
 
 use AppBundle\Entity\Brand;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 use Doctrine\ORM\Query\Expr;
@@ -54,6 +52,7 @@ class ProductInCategoryFilterType extends AbstractType
             array_push($brands,$brand["id"]);
             $productsInBrand[$brand["id"]]=$brand["countp"];
         }
+
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($brands,$productsInBrand) {
             $eventData = $event->getData();
             $form = $event->getForm();
@@ -83,10 +82,6 @@ class ProductInCategoryFilterType extends AbstractType
 
             ));
         });
-
-
-
-
 
 
 
@@ -173,19 +168,7 @@ class ProductInCategoryFilterType extends AbstractType
                     10=>10,20=>20,30=>30,50=>50,100=>100
                 )
             ))
-            /*
-            ->add('sort', ChoiceType::class,array(
-                'apply_filter' => false,
-                'choices'=>[ 'p.priceOnline'=>'p.priceOnline']
-            ))
-            ->add('direction', ChoiceType::class,array(
-                'apply_filter' => false,
-                'choices'=>[
-                    'asc'=>'asc',
-                    'desc'=>'desc'
-                ]
 
-            ))*/
             ->add('name', Filters\TextFilterType::class,array(
                 'label'=>'sitebundle.productname',
             ))

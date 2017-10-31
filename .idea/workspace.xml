@@ -34,27 +34,100 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="product.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/product.html.twig">
+      <file leaf-file-name="ProductInCategoryFilterType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Filter/ProductInCategoryFilterType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.541666" vertical-offset="1313" max-vertical-offset="2700">
-              <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+            <state vertical-scroll-proportion="-29.041666" vertical-offset="1958" max-vertical-offset="3090">
+              <caret line="177" column="0" selection-start-line="87" selection-start-column="7" selection-end-line="177" selection-end-column="0" />
               <folding>
-                <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <marker date="1509452445000" expanded="true" signature="3464:4189" placeholder="{% if product.docfiles|length &gt; 0 ...%}" />
+                <element signature="e#36#63#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/config/routing.yml">
+      <file leaf-file-name="ProductInSuperCategoryFilterType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Filter/ProductInSuperCategoryFilterType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1470">
-              <caret line="7" column="55" selection-start-line="7" selection-start-column="55" selection-end-line="7" selection-end-column="55" />
+            <state vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="3540">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="28" selection-end-column="5" />
               <folding>
-                <marker date="1509451063000" expanded="true" signature="0:84" placeholder="site_homepage:" />
-                <marker date="1509451063000" expanded="true" signature="135:186" placeholder="defaults:" />
+                <element signature="e#37#64#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/config/services.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-25.576923" vertical-offset="205" max-vertical-offset="960">
+              <caret line="58" column="41" selection-start-line="58" selection-start-column="41" selection-end-line="58" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Controller/DefaultController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.82" vertical-offset="2929" max-vertical-offset="5715">
+              <caret line="239" column="13" selection-start-line="239" selection-start-column="13" selection-end-line="239" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login_content.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Security/login_content.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3712021" vertical-offset="19" max-vertical-offset="900">
+              <caret line="20" column="95" selection-start-line="20" selection-start-column="75" selection-end-line="20" selection-end-column="95" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FOSUserBundle.fr.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/translations/FOSUserBundle.fr.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1380">
+              <caret line="76" column="4" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="register_content.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Registration/register_content.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-15.291667" vertical-offset="338" max-vertical-offset="1095">
+              <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="brand.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/brand.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-23.75" vertical-offset="705" max-vertical-offset="2085">
+              <caret line="85" column="63" selection-start-line="85" selection-start-column="63" selection-end-line="85" selection-end-column="63" />
+              <folding>
+                <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductInBrandFilterType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Filter/ProductInBrandFilterType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-24.375" vertical-offset="315" max-vertical-offset="2505">
+              <caret line="60" column="39" selection-start-line="60" selection-start-column="39" selection-end-line="60" selection-end-column="39" />
+              <folding>
+                <element signature="e#36#63#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -63,74 +136,9 @@
       <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/config/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.807693" vertical-offset="5464" max-vertical-offset="6270">
-              <caret line="383" column="16" selection-start-line="383" selection-start-column="8" selection-end-line="383" selection-end-column="16" />
+            <state vertical-scroll-proportion="-20.038462" vertical-offset="2599" max-vertical-offset="6285">
+              <caret line="208" column="20" selection-start-line="208" selection-start-column="20" selection-end-line="208" selection-end-column="20" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Basket.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Service/Basket.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.5" vertical-offset="6165" max-vertical-offset="8205">
-              <caret line="441" column="30" selection-start-line="441" selection-start-column="30" selection-end-line="441" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SiteExtension.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Twig/SiteExtension.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.5" vertical-offset="300" max-vertical-offset="2970">
-              <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
-              <folding>
-                <marker date="1509453195000" expanded="true" signature="4046:4179" placeholder="..." />
-                <marker date="1509453195000" expanded="true" signature="4326:4429" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="userbasketsmall.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Site/userbasketsmall.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.52443856" vertical-offset="713" max-vertical-offset="1560">
-              <caret line="74" column="121" selection-start-line="74" selection-start-column="64" selection-end-line="74" selection-end-column="121" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Product.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/Product.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.375" vertical-offset="3210" max-vertical-offset="19530">
-              <caret line="247" column="19" selection-start-line="247" selection-start-column="12" selection-end-line="247" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="category.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/category.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="30.333334" vertical-offset="728" max-vertical-offset="2460">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Product/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.125" vertical-offset="0" max-vertical-offset="750">
-              <caret line="29" column="132" selection-start-line="29" selection-start-column="76" selection-end-line="29" selection-end-column="132" />
-              <folding>
-                <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -152,13 +160,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/Ajax/ShippingMethod/DescriptionInternalType.php" />
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/Ajax/ShippingMethod/DescriptionType.php" />
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/Ajax/ShippingMethod/FreeTriggerType.php" />
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/Ajax/ShippingMethod/IsPublishedType.php" />
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/Ajax/ShippingMethod/NameType.php" />
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/Ajax/ShippingMethod/PriceType.php" />
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/Ajax/ShippingMethod/PriorityType.php" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/Ajax/ShippingMethod/TagType.php" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/Ajax/StoreInfo/ValueType.php" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/Ajax/SuperCategory/IsPublishedType.php" />
@@ -175,7 +176,6 @@
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/OrderStep/new.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/User/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/User/new.html.twig" />
-        <option value="$PROJECT_DIR$/src/SiteBundle/Filter/ProductInCategoryFilterType.php" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/User/small.html.twig" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/translations/messages.fr.xlf" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Country/index.html.twig" />
@@ -185,7 +185,6 @@
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/config/config.yml" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/error404.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Registration/register_content.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/ProfileType.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/CustomerType.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/PhoneNumberType.php" />
@@ -196,13 +195,22 @@
         <option value="$PROJECT_DIR$/app/Resources/views/baseFull.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Document/Product.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Document/Page.php" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/src/SiteBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Service/Basket.php" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/product.html.twig" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Twig/SiteExtension.php" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/Site/userbasketsmall.html.twig" />
+        <option value="$PROJECT_DIR$/src/SiteBundle/Filter/ProductInSuperCategoryFilterType.php" />
+        <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/category.html.twig" />
+        <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/supercategory.html.twig" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/src/SiteBundle/Filter/ProductInCategoryFilterType.php" />
+        <option value="$PROJECT_DIR$/src/SiteBundle/Resources/config/services.yml" />
+        <option value="$PROJECT_DIR$/src/SiteBundle/Filter/ProductInBrandFilterType.php" />
+        <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/brand.html.twig" />
+        <option value="$PROJECT_DIR$/src/SiteBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Registration/register_content.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Security/login_content.html.twig" />
       </list>
     </option>
   </component>
@@ -302,6 +310,34 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="storeinfo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="var" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -781,6 +817,62 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SiteBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="image" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SiteBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -830,6 +922,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Type" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SiteBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Filter" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1072,32 +1186,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storeOffline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storeOffline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LilWorks" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StoreBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1375,6 +1463,122 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KnpPaginatorBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pagination" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FOSUserBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FOSUserBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Security" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FOSUserBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Registration" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storeOffline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Form" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1420,8 +1624,8 @@
       <recent name="$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/AppBundle/Filter" />
       <recent name="$PROJECT_DIR$/src/SiteBundle/Resources/public/image" />
+      <recent name="$PROJECT_DIR$/src/AppBundle/Filter" />
       <recent name="$PROJECT_DIR$/src/AppBundle/HttpFoundation/Session" />
       <recent name="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Menu" />
       <recent name="$PROJECT_DIR$/src/LilWorks/StoreBundle" />
@@ -1507,7 +1711,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328125" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1517,7 +1721,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31330472" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31330472" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920793" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1579,121 +1783,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/LiveEditorList/actions.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8137385" vertical-offset="1373" max-vertical-offset="2130">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/RowsEditor/checkbox.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="781">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/RowsEditor/actions.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="781">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/SimpleLiveEditor/col.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.44230768" vertical-offset="345" max-vertical-offset="1125">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/User/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.5576923" vertical-offset="435" max-vertical-offset="1215">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/User/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42307693" vertical-offset="0" max-vertical-offset="780">
-          <caret line="22" column="87" selection-start-line="22" selection-start-column="82" selection-end-line="22" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/User/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.13461539" vertical-offset="105" max-vertical-offset="2025">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/User/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28846154" vertical-offset="0" max-vertical-offset="780">
-          <caret line="15" column="97" selection-start-line="15" selection-start-column="97" selection-end-line="15" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/Session/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="781">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Filter/ProductInCategoryFilterType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="3345">
-          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/User/small.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="390">
-          <caret line="4" column="96" selection-start-line="4" selection-start-column="96" selection-end-line="4" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/translations/messages.fr.xlf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.961538" vertical-offset="28346" max-vertical-offset="49230">
-          <caret line="1907" column="96" selection-start-line="1907" selection-start-column="73" selection-end-line="1907" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Country/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.5" vertical-offset="0" max-vertical-offset="1410">
-          <caret line="36" column="90" selection-start-line="36" selection-start-column="90" selection-end-line="36" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Twig/ProductsExtension.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0454545" vertical-offset="1254" max-vertical-offset="1980">
-          <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
-          <folding>
-            <element signature="e#44#115#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8022388" vertical-offset="0" max-vertical-offset="804">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <marker date="1509384980000" expanded="true" signature="-1:-1" placeholder="parameters:" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.05761844" vertical-offset="0" max-vertical-offset="781">
@@ -1784,14 +1873,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Registration/register_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-40.625" vertical-offset="0" max-vertical-offset="1095">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/ProfileType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.75" vertical-offset="0" max-vertical-offset="675">
@@ -1868,14 +1949,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.416666" vertical-offset="764" max-vertical-offset="5265">
-          <caret line="93" column="8" selection-start-line="93" selection-start-column="8" selection-end-line="101" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/ProfileController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8018494" vertical-offset="638" max-vertical-offset="1470">
@@ -1902,20 +1975,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/category.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="30.333334" vertical-offset="728" max-vertical-offset="2460">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Product/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.125" vertical-offset="0" max-vertical-offset="750">
           <caret line="29" column="132" selection-start-line="29" selection-start-column="76" selection-end-line="29" selection-end-column="132" />
           <folding>
-            <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1941,21 +2006,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.807693" vertical-offset="5464" max-vertical-offset="6270">
-          <caret line="383" column="16" selection-start-line="383" selection-start-column="8" selection-end-line="383" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1470">
           <caret line="7" column="55" selection-start-line="7" selection-start-column="55" selection-end-line="7" selection-end-column="55" />
           <folding>
-            <marker date="1509451063000" expanded="true" signature="0:84" placeholder="site_homepage:" />
-            <marker date="1509451063000" expanded="true" signature="135:186" placeholder="defaults:" />
+            <marker date="1509451063000" expanded="true" signature="-1:-1" placeholder="site_homepage:" />
+            <marker date="1509451063000" expanded="true" signature="-1:-1" placeholder="defaults:" />
           </folding>
         </state>
       </provider>
@@ -1974,7 +2031,7 @@
           <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <marker date="1509452445000" expanded="true" signature="3464:4189" placeholder="{% if product.docfiles|length &gt; 0 ...%}" />
+            <marker date="1509452445000" expanded="true" signature="-1:-1" placeholder="{% if product.docfiles|length &gt; 0 ...%}" />
           </folding>
         </state>
       </provider>
@@ -1984,24 +2041,182 @@
         <state vertical-scroll-proportion="-4.5" vertical-offset="300" max-vertical-offset="2970">
           <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
           <folding>
-            <marker date="1509453195000" expanded="true" signature="4046:4179" placeholder="..." />
-            <marker date="1509453195000" expanded="true" signature="4326:4429" placeholder="..." />
+            <marker date="1509453195000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1509453195000" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/translations/FOSUserBundle.fr.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53125" vertical-offset="868" max-vertical-offset="1380">
-          <caret line="76" column="4" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Site/userbasketsmall.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52443856" vertical-offset="713" max-vertical-offset="1560">
+        <state vertical-scroll-proportion="-16.541666" vertical-offset="713" max-vertical-offset="1560">
           <caret line="74" column="121" selection-start-line="74" selection-start-column="64" selection-end-line="74" selection-end-column="121" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="781">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Filter/CategoriesFilterType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="781">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.384615" vertical-offset="416" max-vertical-offset="1500">
+          <caret line="44" column="12" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="975">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/Category.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.875" vertical-offset="285" max-vertical-offset="5400">
+          <caret line="50" column="39" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/supercategory.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.72" vertical-offset="1324" max-vertical-offset="2145">
+          <caret line="104" column="105" selection-start-line="104" selection-start-column="105" selection-end-line="104" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/category.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.720589" vertical-offset="0" max-vertical-offset="2070">
+          <caret line="103" column="117" selection-start-line="0" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/SuperCategory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.73839664" vertical-offset="15" max-vertical-offset="5085">
+          <caret line="40" column="39" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Entity/SuperCategoriesCategories.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1980">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/public/image/no-picture.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.038462" vertical-offset="2599" max-vertical-offset="6285">
+          <caret line="208" column="20" selection-start-line="208" selection-start-column="20" selection-end-line="208" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Filter/ProductInCategoryFilterType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-29.041666" vertical-offset="1958" max-vertical-offset="3090">
+          <caret line="177" column="0" selection-start-line="87" selection-start-column="7" selection-end-line="177" selection-end-column="0" />
+          <folding>
+            <element signature="e#36#63#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-25.576923" vertical-offset="205" max-vertical-offset="960">
+          <caret line="58" column="41" selection-start-line="58" selection-start-column="41" selection-end-line="58" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Filter/ProductInSuperCategoryFilterType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="3540">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="28" selection-end-column="5" />
+          <folding>
+            <element signature="e#37#64#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Filter/ProductInBrandFilterType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.375" vertical-offset="315" max-vertical-offset="2505">
+          <caret line="60" column="39" selection-start-line="60" selection-start-column="39" selection-end-line="60" selection-end-column="39" />
+          <folding>
+            <element signature="e#36#63#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.82" vertical-offset="2929" max-vertical-offset="5715">
+          <caret line="239" column="13" selection-start-line="239" selection-start-column="13" selection-end-line="239" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/translations/FOSUserBundle.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1380">
+          <caret line="76" column="4" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Registration/register_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.291667" vertical-offset="338" max-vertical-offset="1095">
+          <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/brand.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.75" vertical-offset="705" max-vertical-offset="2085">
+          <caret line="85" column="63" selection-start-line="85" selection-start-column="63" selection-end-line="85" selection-end-column="63" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Security/login_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3712021" vertical-offset="19" max-vertical-offset="900">
+          <caret line="20" column="95" selection-start-line="20" selection-start-column="75" selection-end-line="20" selection-end-column="95" />
           <folding />
         </state>
       </provider>

@@ -1,7 +1,30 @@
 {% extends 'base2col.html.twig' %}
 
 {% block body %}
+    {% block stylsheets %}
+        {{ parent() }}
+        <style>
+            .price-range-disabled{
+                visibility: hidden;
+                height: 0;
+            }
+        </style>
+    {% endblock %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $(".selectpicker").selectpicker();
+                $(".price-range").slider({
+                    formatter: function(value) {
+                        return  value + "€";
+                    }
+                });
+            });
 
+        </script>
+
+    {% endblock %}
 
 
 
@@ -79,7 +102,7 @@
 
             <span class="alert alert-info" role="alert" >
                 <i class="fa fa-sort" aria-hidden="true"></i>
-                {{ knp_pagination_sortable(pagination, 'priceOnline', 'p.priceOnline') }}
+                {{ knp_pagination_sortable(pagination, 'sitebundle.priceorder'|trans, 'p.priceOnline') }}
             </span>
                     </div>
                 {% endif %}
