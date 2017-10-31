@@ -17,11 +17,56 @@ class SiteExtension  extends \Twig_Extension
             new \Twig_SimpleFilter('shippingPrice', array($this, 'shippingPriceFilter')),
             new \Twig_SimpleFilter('addressInline', array($this, 'addressInlineFilter')),
             new \Twig_SimpleFilter('stock', array($this, 'stockFilter')),
+            new \Twig_SimpleFilter('spec', array($this, 'specFilter')),
             new \Twig_SimpleFilter('taxes', array($this, 'taxesFilter')),
             new \Twig_SimpleFilter('warranties', array($this, 'warrantiesFilter')),
             new \Twig_SimpleFilter('totalCalculator', array($this, 'totalCalculatorFilter')),
         );
     }
+    private function formatUnity($v,$unity){
+
+        if($unity == "m"){
+            $unity1 = "m";
+            $unity1000 = "mm";
+        }elseif($unity=='kg'){
+            $unity1 = "kg";
+            $unity1000 = "g";
+        }
+
+        if($v<1){
+            return $v*1000 . $unity1000;
+        }else{
+            return $v . $unity1;
+        }
+    }
+    public function specFilter($product)
+    {
+        $output = "";
+        if(
+            $product->getWidth() ||
+            $product->getLength() ||
+            $product->getHeight()  ||
+            $product->getWeight()
+        ){
+
+            if($product->getWeight()){
+                $output.="<li>" . $this->translator->trans('sitebundle.weigth') .": ". $this->formatUnity($product->getWeight(),'kg') ."</li>" ;
+            }
+            if($product->getHeight()){
+                $output.="<li>" . $this->translator->trans('sitebundle.height') .": ". $this->formatUnity($product->getHeight(),'m') ."</li>" ;
+            }
+            if($product->getLength()){
+                $output.="<li>" . $this->translator->trans('sitebundle.length') .": ". $this->formatUnity($product->getLength(),'m') ."</li>" ;
+            }
+            if($product->getWidth()){
+                $output.="<li>" . $this->translator->trans('sitebundle.width') .": ". $this->formatUnity($product->getWidth(),'m') ."</li>" ;
+            }
+            return "<ul>$output</ul>";
+        }else{
+            return null;
+        }
+    }
+
     public function shippingPriceFilter($sm,$countryId)
     {
         return $sm->getPriceByCountry($countryId);
@@ -71,14 +116,14 @@ class SiteExtension  extends \Twig_Extension
     {
        $output='
        <span class="alert alert-success" role="alert">
-            '.$this->translator->trans("available").'
+            <i class="fa fa-cubes" aria-hidden="true"></i>'.$this->translator->trans("sitebundle.alwaysavailable").'
         </span>
         ';
 
         if($product->getAlwaysAvailable() == 1 ){
             $output='
                <span class="alert alert-success" role="alert">
-                    '.$this->translator->trans("always available").'
+                    '.$this->translator->trans("sitebundle.alwaysavailable").'
                 </span>
                 ';
 
@@ -86,18 +131,14 @@ class SiteExtension  extends \Twig_Extension
             if($quantity > $product->getStock()){
                 $missing = abs($product->getStock() - $quantity);
                 if($product->getLeadTime() > 0){
-                    $output='<span class="alert alert-warning" role="alert">';
-                    $output.='
-
-                            '.$this->translator->transChoice(
+                    $output='<span class="alert alert-warning" role="alert"><i class="fa fa-cubes" aria-hidden="true"></i>';
+                    $output.=$this->translator->transChoice(
                             '{1} missing 1 product|]1,Inf[ missing %count% products',
                             10,
                             array('%count%' => $missing)
                         ) .'
-
                         ';
                     $output.='|
-
                             '.$this->translator->transChoice(
                             '{1} available in 1 day|]1,Inf[ available in %leadTime% days',
                             10,
@@ -107,7 +148,7 @@ class SiteExtension  extends \Twig_Extension
                         ';
                     $output.='</span>';
                 }else{
-                    $output='<span class="alert alert-danger" role="alert">';
+                    $output='<span class="alert alert-danger" role="alert"><i class="fa fa-cubes" aria-hidden="true"></i>';
                     $output.='
 
                             '.$this->translator->transChoice(

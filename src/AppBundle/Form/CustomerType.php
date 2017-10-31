@@ -20,22 +20,24 @@ class CustomerType extends AbstractType
     {
 
         $builder
-            ->add('firstName',null,array(
-                'label'=>'lilworks.storebundle.firstname',
-                'required' => true
-            ))
+
             ->add('lastName',null,array(
                 'required' => true,
-                'label'=>'lilworks.storebundle.lastname'
+                'label'=>'sitebundle.lastname'
             ))
+            ->add('firstName',null,array(
+                'label'=>'sitebundle.firstname',
+                'required' => true
+            ))
+
             ->add('companyName',null,array(
                 'required' => false,
-                'label'=>'lilworks.storebundle.companyname'
+                'label'=>'sitebundle.companyname'
 
             ))
 
             ->add('phonenumbers', CollectionType::class, array(
-                'label'=>'lilworks.storebundle.phonenumbers',
+                'label'=>'sitebundle.phonenumbers',
                 'mapped'=>true,
                 'allow_add'=>true,
                 'required' => true,
@@ -47,7 +49,7 @@ class CustomerType extends AbstractType
 
 
             ->add('addresses', CollectionType::class, array(
-                'label'=>'lilworks.storebundle.addresses',
+                'label'=>'sitebundle.addresses',
                 'mapped'=>true,
                 'allow_add'=>true,
                 'required' => true,

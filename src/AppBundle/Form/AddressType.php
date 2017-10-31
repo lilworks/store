@@ -16,22 +16,22 @@ class AddressType extends AbstractType
     {
         $builder
             ->add('name',null,array(
-                'label'=>'lilworks.storebundle.address.name',
+                'label'=>'sitebundle.address.name',
             ))
             ->add('street',null,array(
-                'label'=>'lilworks.storebundle.address.street',
+                'label'=>'sitebundle.address.street',
             ))
             ->add('complement',null,array(
-                'label'=>'lilworks.storebundle.address.complement',
+                'label'=>'sitebundle.address.complement',
             ))
             ->add('zipCode',null,array(
-                'label'=>'lilworks.storebundle.address.zipcode',
+                'label'=>'sitebundle.address.zipcode',
             ))
             ->add('city',null,array(
-                'label'=>'lilworks.storebundle.address.city',
+                'label'=>'sitebundle.address.city',
             ))
             ->add('country', EntityType::class, array(
-                'label'=>'lilworks.storebundle.address.country',
+                'label'=>'sitebundle.address.country',
                 'class'    => 'LilWorksStoreBundle:Country' ,
                 'choice_label' => function ($obj) { return   $obj->getName() ; },
                 'required' => true ,

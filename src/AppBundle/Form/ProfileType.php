@@ -21,7 +21,7 @@ class ProfileType extends AbstractType
     {
 
         $builder->add('customer', CustomerType::class,array(
-            'label'=>'lilworks.storebundle.customer'
+            'label'=>'sitebundle.customer'
         ));
         $builder->remove('plainPassword');
 

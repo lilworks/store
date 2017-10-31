@@ -10,11 +10,10 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="lil-works">
-
-    {{ sonata_seo_title() }}
-    {{ sonata_seo_metadatas() }}
+    {% block metadata %}
+        {{ sonata_seo_title() }}
+        {{ sonata_seo_metadatas() }}
+    {% endblock metadata %}
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet"

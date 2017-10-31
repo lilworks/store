@@ -91,6 +91,11 @@ class ProfileController extends Controller
             return $response;
         }
 
+        $translator = $this->get('translator');
+        $seoPage = $this->get('sonata.seo.page');
+        $seoPage->setTitle( $seoPage->getTitle(). " - " . $translator->trans('sitebundle.htmltitle.user.edit'));
+
+
         return $this->render('@FOSUser/Profile/edit.html.twig', array(
             'form' => $form->createView(),
             'basket'=>$basket

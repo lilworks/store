@@ -439,7 +439,7 @@ class Basket
         }
 
 
-        if( ! $basket ){
+        if( !isset( $basket )){
             $basket = new BasketEntity();
         }
 

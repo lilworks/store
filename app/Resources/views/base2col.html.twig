@@ -4,17 +4,14 @@
 <head>
     <script src="/assets/vendor/PACE/pace.min.js"></script>
     <link rel="stylesheet" href="/assets/vendor/PACE/themes/red/pace-theme-minimal.css">
-
-
     <link rel="stylesheet" href="/assets/vendor/ekko-lightbox/dist/ekko-lightbox.css">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="lil-works">
-
-    {{ sonata_seo_title() }}
-    {{ sonata_seo_metadatas() }}
+    {% block metadata %}
+        {{ sonata_seo_title() }}
+        {{ sonata_seo_metadatas() }}
+    {% endblock metadata %}
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet"

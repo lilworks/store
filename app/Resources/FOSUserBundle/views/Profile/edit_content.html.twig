@@ -5,7 +5,7 @@
     {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
     <div class="card">
         <div class="card-header">
-            {% trans %}lilworks.storebundle.user{% endtrans %}
+            {% trans %}sitebundle.user{% endtrans %}
         </div>
         <div class="card-block">
             {{ form_row(form.username) }}
@@ -21,7 +21,7 @@
 <div class="col-lg-4">
     <div class="card">
         <div class="card-header">
-            {% trans %}lilworks.storebundle.addresses{% endtrans %}
+            {% trans %}sitebundle.addresses{% endtrans %}
         </div>
         <div class="card-block">
             <ul class="addresses list-inline " id="target" data-prototype="{{ form_widget(form.customer.addresses.vars.prototype)|e('html_attr') }}">
@@ -39,7 +39,7 @@
 <div class="col-lg-4">
     <div class="card">
         <div class="card-header">
-            {% trans %}lilworks.storebundle.phonenumbers{% endtrans %}
+            {% trans %}sitebundle.phonenumbers{% endtrans %}
         </div>
         <div class="card-block">
             <ul class="phonenumbers list-inline " id="target" data-prototype="{{ form_widget(form.customer.phonenumbers.vars.prototype)|e('html_attr') }}">

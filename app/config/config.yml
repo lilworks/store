@@ -7,8 +7,8 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    context: online
-    mode: slave
+    context: offline
+    mode: master
     currency: EUR
 
 framework:
@@ -161,7 +161,7 @@ fos_user:
                 form:
                     type: AppBundle\Form\ProfileType
     from_email:
-        address: youemail@email.com
+        address: '%sender_address%'
         sender_name: You
     service:
         mailer: fos_user.mailer.twig_swift
@@ -323,15 +323,17 @@ vich_uploader:
 
 sonata_seo:
     page:
-        title: StoreOffline
+        title: ferré musique
         metas:
             name:
-                description: StoreOffline
-                keywords: store
+                description: le spécialiste de la guitare à Grenoble depuis 1976
+                keywords: guitare,basse,amplis,réglages,pédale,housse
+                author: lil-works
 cmf_seo:
-    title: seo.title
+    title: "%%content_title%% - ferré musique"
     description: seo.description
     translation_domain: messages
+    original_route_pattern: redirect
 
 #doctrine_migrations:
 #      dir_name: "%kernel.root_dir%/DoctrineMigrations"
@@ -391,7 +393,7 @@ nomaya_social:
             locale:         "fr"
             message:        "Je veux partager ça avec vous"
             text:           "Tweet"
-            via:            "L'Equipe cartedevisitevirtuelle.fr"
+            via:            "L'équipe ferremusique"
             tag:            "ttot"
         googleplus:
             url:            null
@@ -406,6 +408,6 @@ nomaya_social:
         #pinterest:
         #    url:            null
     links:
-        facebook:           "http://www.facebook.com/yann.chauvel"
-        googleplus:         "https://plus.google.com/105931415830389032796"
+        facebook:           "https://www.facebook.com/ferremusique"
+        #googleplus:         "https://plus.google.com/105931415830389032796"
     theme:                  'default' # optional

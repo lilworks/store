@@ -1,6 +1,12 @@
 site_homepage:
     path: /
     defaults: { _controller: SiteBundle:Default:index }
+
+
+site_docfile:
+    path: /docfile/{docfile_id}
+    defaults: { _controller: SiteBundle:Default:docfile }
+
 site_contact:
     path: /contact
     defaults: { _controller: SiteBundle:Default:contact }

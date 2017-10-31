@@ -26,28 +26,28 @@
                     </p>
                     <div class="btn-group" role="group">
                         <a role="button" href="{{ path('fos_user_security_login') }}" class="btn btn-sm btn-secondary ">
-                            <i class="fa fa-user" aria-hidden="true"></i>{{ 'layout.login'|trans }}
+                            <i class="fa fa-user" aria-hidden="true"></i>{{ 'sitebundle.user.login'|trans }}
                         </a>
                         <a  role="button" href="{{ path('fos_user_registration_register') }}" class="btn btn-sm btn-secondary ">
-                            <i class="fa fa-user-o" aria-hidden="true"></i>{{ 'registration.submit'|trans }}
+                            <i class="fa fa-user-o" aria-hidden="true"></i>{{ 'sitebundle.user.register'|trans }}
                         </a>
                     </div>
                 {% else %}
 
                 <p class="card-text">
-                            {{ 'layout.logged_in_as'|trans }}
+                            {{ 'sitebundle.user.logged_in_as %username%'|trans({'%username%':user.username}) }}
                     </p>
 
 
                     <div class="btn-group " role="group">
                         <a role="button" href="{{ path('fos_user_profile_show') }}" class="btn btn-sm btn-secondary">
-                            <i class="fa fa-eye" aria-hidden="true"></i>{{ 'profile.show'|trans }}
+                            <i class="fa fa-eye" aria-hidden="true"></i>{{ 'sitebundle.user.profile.show'|trans }}
                         </a>
                         <a role="button" href="{{ path('fos_user_profile_edit') }}" class="btn btn-sm btn-secondary ">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>{{ 'profile.edit'|trans }}
+                            <i class="fa fa-pencil" aria-hidden="true"></i>{{ 'sitebundle.user.profile.edit'|trans }}
                         </a>
                         <a role="button" href="{{ path('fos_user_security_logout') }}" class="btn btn-sm btn-secondary">
-                            <i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'layout.logout'|trans }}
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'sitebundle.user.logout'|trans }}
                         </a>
                     </div>
                 {% endif %}
@@ -55,34 +55,44 @@
 
             <div class="tab-pane" id="search" role="tabpanel">
                 <h5>{% trans %}sitebundle.globalsearch{% endtrans %}</h5>
-                <script>
-                    function search(o){
-                        $("#search").submit();
-                    }
-                </script>
-                        <div class="input-group">
-                            <form id="search" action="{{ path('site_all') }}" method="get">
-                                <input onclick="search(this);" type="text" name="product_filter[search]" class="form-control" placeholder="...">
-                              <span class="input-group-btn">
-                                <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> {% trans %}sitebundle.button.search{% endtrans %}</button>
-                              </span>
-                            </form>
+                <form id="search" action="{{ path('site_all') }}" method="get">
+                    <div class="input-group col-md-12">
+                    <input id="search" type="text" class="form-control input-sm" placeholder="{{ 'sitebundle.search'|trans }}" />
+                        <span class="input-group-btn">
+                            <button onclick="search(this);" class="btn btn-info btn-sm" type="button">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
 
-                        </div>
+
             </div>
 
             <div class="tab-pane" id="basket" role="tabpanel">
-                {% if basket is defined and basket.basketsProducts|length > 0 %}
+
                 <p class="card-text">
-                {% transchoice  basket.basketsProducts|length %}
-                        {0} basket empty|{1} one product|]1,Inf[ %count% products
-                        {% endtranschoice %}
+                {% transchoice  basket.basketsProducts|length %}{0} basket empty|{1} one product|]1,Inf[ %count% products{% endtranschoice %}
                 </p>
 
                     <a role="button" href="{{ path('site_basket_edit') }}" class="btn btn-sm btn-secondary">
                         <i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'sitebundle.basket.edit'|trans }}
                     </a>
-                {% endif %}
+
+            </div>
+
+            <div class="tab-pane" id="subscribe" role="tabpanel">
+                <h5>{% trans %}sitebundle.subscribe{% endtrans %}</h5>
+                <form id="search" action="{{ path('site_all') }}" method="get">
+                    <div class="input-group col-md-12">
+                        <input id="search" type="text" class="form-control input-sm" placeholder="{{ 'sitebundle.email'|trans }}" />
+                        <span class="input-group-btn">
+                            <button onclick="search(this);" class="btn btn-info btn-sm" type="button">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

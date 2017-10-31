@@ -90,10 +90,15 @@ class DefaultController extends Controller
         $productService = $this->get('site.product');
 
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('sitebundle.htmltitle.product %product%', array('%product%'=>$product->getBrand()->getName() . " " .$product->getName() )) );
 
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle($product->getBrand()->getName() . " " . $product->getName() . " - " . $seoPage->getTitle() )
+            ->addMeta('name', 'description',  preg_replace('!\s+!', ' ',substr(strip_tags($product->getDescription()),0,100)))
+            ->addMeta('property', 'og:title', $product->getBrand()->getName() . " " . $product->getName())
+            ->addMeta('property', 'og:type', 'blog')
+            ->addMeta('property', 'og:description', preg_replace('!\s+!', ' ',substr(strip_tags($product->getDescription()),0,100)))
+        ;
 
         return $this->render('SiteBundle:Default:product.html.twig',array(
             'product'=>$product,

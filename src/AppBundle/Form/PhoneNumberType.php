@@ -15,11 +15,11 @@ class PhoneNumberType extends AbstractType
     {
         $builder
             ->add('phonenumber',null,array(
-                'label'=>'lilworks.storebundle.phonenumber',
+                'label'=>'sitebundle.phonenumber',
                 'required' => true
             ))
             ->add('description',null,array(
-                'label'=>'lilworks.storebundle.description',
+                'label'=>'sitebundle.description',
             ))
         ;
     }
@@ -39,7 +39,7 @@ class PhoneNumberType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'lilworks_storebundle_phoneNumber';
+        return 'lilworks_storebundle_phonenumber';
     }
 
 

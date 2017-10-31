@@ -9,7 +9,7 @@
     <div class="card">
         <div class="card-header">
             <i class="fa fa-user-o" aria-hidden="true"></i>
-            {% trans %}user{% endtrans %}
+            {% trans %}sitebundle.user{% endtrans %}
         </div>
         <div class="card-block">
             {# {{ form_row(form.username) }} #}
@@ -26,7 +26,7 @@
     <div class="card">
         <div class="card-header">
             <i class="fa fa-address-card-o" aria-hidden="true"></i>
-            {% trans %}addresses{% endtrans %}
+            {% trans %}sitebundle.addresses{% endtrans %}
         </div>
         <div class="card-block">
             <ul class="addresses list-inline " id="target" data-prototype="{{ form_widget(form.customer.addresses.vars.prototype)|e('html_attr') }}">
@@ -45,7 +45,7 @@
     <div class="card">
         <div class="card-header">
             <i class="fa fa-phone" aria-hidden="true"></i>
-            {% trans %}phonenumbers{% endtrans %}
+            {% trans %}sitebundle.phonenumbers{% endtrans %}
         </div>
         <div class="card-block">
             <ul class="phonenumbers list-inline " id="target" data-prototype="{{ form_widget(form.customer.phonenumbers.vars.prototype)|e('html_attr') }}">
@@ -64,12 +64,5 @@
 <input type="submit" class="btn btn-primary" value="{{ 'registration.submit'|trans }}" />
 {{ form_end(form) }}
 
-<script>
-    $( function() {
-        //FCE.init('phonenumbers','phonenumbers list-inline','phonenumber list-inline-item');
-        //FCE.init('addresses','addresses list-inline','addresse list-inline-item');
-    } );
-
-</script>
 
 </div>

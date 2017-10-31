@@ -1,92 +1,85 @@
 {% extends 'base2col.html.twig' %}
 
 {% block body %}
+
+    {% block metadata %}
+        {% do cmf_seo_update_metadata(product) %}
+
+        {{ parent() }}
+    {% endblock metadata %}
 <style>
+    .docfileInProduct{
+        margin-top: 8px;
+    }
+    .docfileInProduct .card-text{
+        padding: 5px;
+    }
+    .links{
+        padding: 5px;
+    }
+    .social{
+        padding: 5px;
+    }
+    .warranties{
+        font-size: 14px;
+    }
     .price{
-        font-size: 42px;
+        padding: 5px;
+        font-size: 36px;
+        text-align: center;
+    }
+    .price ul{
+        font-size: 14px;
     }
 </style>
 
-
+    {% set productDisplayStock = product|displayStock('badge',true,true) %}
 
     <div class="col-md-3">
 
         <div class="card">
+
             <div class="card-header">
-                <a class="btn btn-success" href="{{ path('site_basket_add',{id:product.id}) }}">
+                <a class="btn btn-secondary" href="{{ path('site_basket_add',{id:product.id}) }}" style="color: {{ productDisplayStock['basketColor'] }};">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> {% trans %}sitebundle.addtobasket{% endtrans %}
                 </a>
+                {{ productDisplayStock['message']|raw }}
             </div>
-            <div class="card-text">
 
-            <span class="price">
-
-                {{ product.priceOnline|price }}
-            </span>
+            <div class="card-text price">
+                <span>
+                    {{ product.priceOnline|price }}
+                </span>
                 {% if product.taxesOnline|length > 0 %}
-                    <ul class="list list-unstyled">
-                        {% for taxe in product.taxesOnline %}
-                            <li>
-                                {{ taxe.name }}
+                    <ul class="list list-inline">{{ 'sitebundle.pricecontaining'|trans }}:
+                        {% for tax in product.taxesOnline %}
+                            <li class="list-inline-item">
+                                <span  class="badge badge-default">
+                                    {{ tax.name }}
+                                    {% if tax.type == 'VALUE' %}{{ tax.value|price }}{% endif %}
+                                </span>
                             </li>
                         {% endfor %}
                     </ul>
                 {% endif %}
             </div>
 
-
-            <div>
-                <ul class="list-group">
+            {% if product.warrantiesOnline|length > 0 %}
+                <div class="warranties">
+                    <ul>
                     {% for warranty in product.warrantiesOnline  %}
-                        <li class="list-group-item">{{ warranty.name }}</li>
+                        <li>
+                        <span class="badge badge-success">
+                            <i class="fa fa-wrench" aria-hidden="true"></i>
+                            {{ warranty.name }}
+                        </span>
+                        </li>
                     {% endfor %}
-                </ul>
-            </div>
+                    </ul>
+                </div>
+            {% endif %}
 
-            <div >
-                {% if product.isSecondHand == true %}
-                    <div class="alert alert-danger" role="alert">
-                    <span>
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
-                        {% trans %}sitebundle.product.issecondhand{% endtrans %}
-                    </span>
-                    </div>
-                {% elseif product.alwaysAvailable == true %}
-                    <div class="alert alert-success" role="alert">
-                    <span>
-                    <i class="fa fa-cubes" aria-hidden="true"></i>
-                        {% trans %}sitebundle.product.alwaysavailable{% endtrans %}
-                    </span>
-                    </div>
-                {% elseif product.stock > 0 %}
-                    <div class="alert alert-info" role="alert">
-                    <span>
-                    <i class="fa fa-cubes" aria-hidden="true"></i>
-                        {% transchoice product.stock %}
-                        {1} only 1 product left|{2} only 2 products left|]2,Inf[ %count% products left
-                        {% endtranschoice %}
-                    </span>
-                    </div>
-                {% elseif product.stock == 0 and product.leadTime > 0 %}
-                    <div class="alert alert-danger" role="alert">
-                    <span>
-                    <i class="fa fa-cubes" aria-hidden="true"></i>
-                        {% transchoice product.leadTime %}
-                        {1} available in 1 day |]2,Inf[ available in %count% days
-                        {% endtranschoice %}
-                    </span>
-                    </div>
-
-                {% elseif  product.leadTime == 0 %}
-                    <div class="alert alert-success" role="alert">
-                    <span>
-                    <i class="fa fa-cubes" aria-hidden="true"></i>
-                        {% trans %}sitebundle.product.available{% endtrans %}
-                    </span>
-                    </div>
-                {% endif %}
-
-
+            <div class="links">
                 <div class="list-group">
                     <a href="{{ path('site_brand',{tag:product.brand.tag}) }}" class="list-group-item list-group-item-action">
                         <img src="{{ asset('brand/' ~ product.brand.pictureName  ) | imagine_filter('mini') }}" /> {{ product.brand.name }}
@@ -97,19 +90,52 @@
                         </a>
                     {% endfor %}
                 </div>
-
             </div>
+            <div class="card-footer">
+                <small class="text-muted">{{ facebookButton() }}</small>
+            </div>
+
+
         </div>
 
+        {% if product.docfiles|length > 0 %}
+            <div class="card docfileInProduct">
+                <div class="card-header">
+                    <i class="fa fa-file"></i> {{ 'sitebundle.docfiles'|trans }}
+                </div>
+                <div class="card-text">
+                    <div class="list-group">
+                        {% for docfile in product.docfiles %}
+                            <a href="{{ path('site_docfile',{docfile_id:docfile.id}) }}" class="list-group-item list-group-item-action">
+                                {{ docfile.title }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 
+        {% set spec = product|spec %}
+        {% if spec is not null %}
+            <div class="card docfileInProduct">
+                <div class="card-header">
+                    <i class="fa fa-tachometer" aria-hidden="true"></i>
+                    {{ 'sitebundle.specifications'|trans }}
+                </div>
+                <div class="card-text">
+                    {{ spec|raw }}
+                </div>
+            </div>
+        {% endif %}
     </div>
 
 <div class="col-md-9">
-
-
     <div class="card">
         <div class="card-header">
             <h1>
+                {% if product.pictures|length > 0 %}
+                    <img src="{{ asset('product/'~product.pictures[0].pictureName ) | imagine_filter('mini') }}" />
+                {% endif %}
                 {{ product.brand.name ~ ' ' ~ product.name }}
             </h1>
         </div>
@@ -144,5 +170,5 @@
 
 
 </div>
-    {{ socialButtons() }}
+
 {% endblock %}
