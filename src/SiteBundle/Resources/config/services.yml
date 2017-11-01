@@ -57,3 +57,10 @@ services:
                 arguments: ["@request_stack","@doctrine.orm.entity_manager"]
                 tags:
                     - { name: form.type }
+
+    site.form.pia:
+                class: SiteBundle\Filter\ProductInAllFilterType
+                arguments: ["@request_stack","@doctrine.orm.entity_manager"]
+                tags:
+                    - { name: form.type }
+

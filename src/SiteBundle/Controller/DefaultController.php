@@ -24,8 +24,12 @@ class DefaultController extends Controller
         $carrousel = $this->get('site.carrousel')->getCarrousel();
 
         $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('site.htmltitle.home'));
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle($translator->trans('sitebundle.home') . " - " . $seoPage->getTitle() )
+            ->addMeta('property', 'og:title', $translator->trans('sitebundle.contact') . " - " . $seoPage->getTitle())
+        ;
+
 
         return $this->render('SiteBundle:Default:index.html.twig',array(
             'carrousel'=>$carrousel,
@@ -110,8 +114,6 @@ class DefaultController extends Controller
 
     public function categoryAction(Request $request,Category $category){
 
-
-
         $productFilter = $request->get('product_filter');
 
 
@@ -122,8 +124,6 @@ class DefaultController extends Controller
             ProductInCategoryFilterType::class,
             array(
                 'category'=>$category,
-                #'sort_key'=>($productFilter['sort']) ? $productFilter['sortkey'] : null,
-                #'sort_direction'=>($productFilter['sortdirection']) ? $productFilter['sortdirection'] : null,
             )
         );
 
@@ -135,6 +135,8 @@ class DefaultController extends Controller
         $qb
             ->select('p')
             ->leftJoin('p.categories', 'c')
+            ->leftJoin('c.supercategories_categories', 'scc')
+            ->leftJoin('scc.supercategory', 'sc')
             ->leftJoin('p.brand', 'b')
             ->where('c.id = ' . $category->getId())
             ->andWhere('p.isPublished = 1 ')
@@ -145,19 +147,12 @@ class DefaultController extends Controller
 
 
         if ($request->query->has($formFilter->getName())) {
-            // manually bind values from the request
             $formFilter->submit($request->query->get($formFilter->getName()));
-
             $qbUpdater = $this->get('lexik_form_filter.query_builder_updater');
             $qb = $qbUpdater->addFilterConditions($formFilter, $qb);
         }
 
-
-
-
-
         $paginator  = $this->get('knp_paginator');
-
         $pagination = $paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
@@ -168,10 +163,50 @@ class DefaultController extends Controller
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
             ->setTitle($translator->trans('sitebundle.category %name%',array('%name%'=>$category->getName())) . " - " . $seoPage->getTitle() )
+        ;
 
+        $brands = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('LilWorksStoreBundle:Brand')
+            ->createQueryBuilder('b')
+            ->join('b.products','p')
+            ->join('p.categories','c')
+            ->join('c.supercategories_categories','scc')
+            ->join('scc.supercategory','sc')
+            ->where('c.id = :category_id')
+            ->andWhere('p.isPublished = 1')
+            ->andWhere('c.isPublished = 1')
+            ->andWhere('p.priceOnline IS NOT NULL')
+            #->andWhere('COUNT(p)>0')
+            ->orderBy('b.name','asc')
+            ->setParameter('category_id',$category->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+        $supercategories = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('LilWorksStoreBundle:SuperCategory')
+            ->createQueryBuilder('sc')
+            ->join('sc.supercategories_categories','scc')
+            ->join('scc.category','c')
+            ->join('c.products','p')
+            ->join('p.brand','b')
+            ->where('c.id = :category_id')
+            ->andWhere('p.isPublished = 1')
+            ->andWhere('c.isPublished = 1')
+            ->andWhere('p.priceOnline IS NOT NULL')
+            #->andWhere('COUNT(p)>0')
+            ->orderBy('sc.name','asc')
+            ->setParameter('category_id',$category->getId())
+            ->getQuery()
+            ->getResult()
         ;
 
         return $this->render('SiteBundle:Default:category.html.twig',array(
+            'supercategories'=>$supercategories,
+            'brands'=>$brands,
             'category'=>$category,
             'basket'=>$basket,
             'productService'=>$productService,
@@ -198,15 +233,18 @@ class DefaultController extends Controller
         $qb
             ->select('p')
             ->leftJoin('p.brand', 'b')
+            ->leftJoin('p.categories', 'c')
+            ->leftJoin('c.supercategories_categories', 'scc')
+            ->leftJoin('scc.supercategory', 'sc')
             ->where('b.id = ' . $brand->getId())
             ->andWhere('p.isPublished = 1')
+            ->andWhere('c.isPublished = 1')
+            ->andWhere('b.isPublished = 1')
         ;
 
 
         if ($request->query->has($formFilter->getName())) {
-            // manually bind values from the request
             $formFilter->submit($request->query->get($formFilter->getName()));
-
             $qbUpdater = $this->get('lexik_form_filter.query_builder_updater');
             $qb = $qbUpdater->addFilterConditions($formFilter, $qb);
         }
@@ -274,11 +312,15 @@ class DefaultController extends Controller
             ->createQueryBuilder('p');
         $qb
             ->select('p')
+            ->leftJoin('p.brand', 'b')
             ->leftJoin('p.categories', 'c')
             ->leftJoin('c.supercategories_categories', 'scc')
             ->leftJoin('scc.supercategory', 'sc')
             ->where('sc.id = ' . $superCategory->getId())
             ->andWhere('p.isPublished = 1')
+            ->andWhere('c.isPublished = 1')
+            ->andWhere('b.isPublished = 1')
+
         ;
 
 
@@ -304,9 +346,49 @@ class DefaultController extends Controller
 
         ;
 
+        $brands = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('LilWorksStoreBundle:Brand')
+            ->createQueryBuilder('b')
+            ->join('b.products','p')
+            ->join('p.categories','c')
+            ->join('c.supercategories_categories','scc')
+            ->join('scc.supercategory','sc')
+            ->where('sc.id = :supercategory_id')
+            ->andWhere('p.isPublished = 1')
+            ->andWhere('c.isPublished = 1')
+            ->andWhere('p.priceOnline IS NOT NULL')
+            #->andWhere('COUNT(p)>0')
+            ->orderBy('b.name','asc')
+            ->setParameter('supercategory_id',$superCategory->getId())
+            ->getQuery()
+            ->getResult()
+        ;
 
+        $categories = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('LilWorksStoreBundle:Category')
+            ->createQueryBuilder('c')
+            ->join('c.products','p')
+            ->join('p.brand','b')
+            ->join('c.supercategories_categories','scc')
+            ->join('scc.supercategory','sc')
+            ->where('sc.id = :supercategory_id')
+            ->andWhere('p.isPublished = 1')
+            ->andWhere('c.isPublished = 1')
+
+            #->andWhere('COUNT(p)>0')
+            ->orderBy('c.name','asc')
+            ->setParameter('supercategory_id',$superCategory->getId())
+            ->getQuery()
+            ->getResult()
+        ;
         return $this->render('SiteBundle:Default:supercategory.html.twig',array(
             'supercategory'=>$superCategory,
+            'brands'=>$brands,
+            'categories'=>$categories,
             'basket'=>$basket,
             'productService'=>$productService,
             'pagination'=>$pagination,
@@ -318,22 +400,15 @@ class DefaultController extends Controller
 
 
     public function allAction(Request $request){
-        $filterDatas = $request->get('product_filter');
-        $products = $this->getDoctrine()->getRepository('LilWorksStoreBundle:Product')->findForAll($filterDatas['search']);
+       # $filterDatas = $request->get('product_filter');
+       # $products = $this->getDoctrine()->getRepository('LilWorksStoreBundle:Product')->findForAll($filterDatas['search']);
 
-
-        $superCategories = $this->getDoctrine()->getRepository('LilWorksStoreBundle:SuperCategory')->findBy(
-            array(
-                'isPublished'=>1
-            )
-        );
 
         $basket = $this->get('site.basket');
         $productService = $this->get('site.product');
 
         $formFilter = $this->get('form.factory')->create(
-            ProductInAllFilterType::class,
-            array('products'=>$products)
+            ProductInAllFilterType::class
         );
 
 
@@ -348,18 +423,16 @@ class DefaultController extends Controller
             ->leftJoin('c.supercategories_categories', 'scc')
             ->leftJoin('scc.supercategory', 'sc')
             ->leftJoin('p.brand', 'b')
-            //->where('sc.id = ' . $superCategory->getId())
             ->andWhere('p.isPublished = 1')
-
+            ->andWhere('c.isPublished = 1')
+            ->andWhere('b.isPublished = 1')
         ;
 
 
         if ($request->query->has($formFilter->getName())) {
             // manually bind values from the request
             $formFilter->submit($request->query->get($formFilter->getName()));
-
             $qbUpdater = $this->get('lexik_form_filter.query_builder_updater');
-
             $qb = $qbUpdater->addFilterConditions($formFilter, $qb);
         }
 
@@ -374,10 +447,24 @@ class DefaultController extends Controller
         $seoPage = $this->get('sonata.seo.page');
         $seoPage->setTitle($translator->trans('sitebundle.htmltitle.allstore')  );
 
-
+        $categories = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('LilWorksStoreBundle:Category')
+            ->createQueryBuilder('c')
+            ->join('c.products','p')
+            ->join('p.brand','b')
+            ->where('p.isPublished = 1')
+            ->andWhere('c.isPublished = 1')
+            #->andWhere('COUNT(p)>0')
+            ->orderBy('c.name','asc')
+            ->getQuery()
+            ->getResult()
+        ;
 
         return $this->render('SiteBundle:Default:all.html.twig',array(
             'basket'=>$basket,
+            'categories'=>$categories,
             'productService'=>$productService,
             'pagination'=>$pagination,
             'formFilter'=>$formFilter->createView(),

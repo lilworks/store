@@ -29,6 +29,7 @@ class ProductInCategoryFilterType extends AbstractType
     {
 
         $category = $options['data']["category"];
+
         $rbrands = $this->em->createQueryBuilder()
             ->select("b.id as id ,COUNT(p) as countp")
 
@@ -38,51 +39,19 @@ class ProductInCategoryFilterType extends AbstractType
             ->where("p.isPublished = 1")
             ->andWhere('p.priceOnline IS NOT NULL ')
             ->andWhere(':category_id MEMBER OF p.categories')
-
             ->having('COUNT(p)>0')
             ->groupBy('b.id')
-            ->orderBy('p.priceOnline', 'asc')
             ->setParameter('category_id',$category->getId())
             ->getQuery()
             ->getArrayResult()
         ;
+
         $brands = array();
         $productsInBrand = array();
         foreach($rbrands as $brand){
             array_push($brands,$brand["id"]);
             $productsInBrand[$brand["id"]]=$brand["countp"];
         }
-
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($brands,$productsInBrand) {
-            $eventData = $event->getData();
-            $form = $event->getForm();
-
-            $form->add('brand', Filters\EntityFilterType::class, array(
-                'empty_data'=>$brands,
-                'label'    =>  'sitebundle.brand',
-                'class'    =>  'LilWorksStoreBundle:Brand',
-                'choice_label' => function ( $brand ) use ($productsInBrand){
-                    return $brand->getName() . "(".$productsInBrand[$brand->getId()].")" ;
-                },
-                'query_builder' => function (EntityRepository $er) use ($brands) {
-                    return $er->createQueryBuilder('b')
-                        ->where('b.id IN (:ids)')
-                        ->andWhere('b.isPublished = 1')
-                        ->setParameter('ids',$brands)
-                        ;
-                },
-                'expanded'=>true,
-                'multiple'=>true,
-                /*'attr' => array(
-                    'class'=>'form-control',
-                   # 'class'=>'selectpicker form-control',
-                   # 'data-live-search'=>'true',
-                   # 'data-actions-box'=>true
-                )*/
-
-            ));
-        });
-
 
 
         $min = $this->em->createQueryBuilder()
@@ -161,20 +130,47 @@ class ProductInCategoryFilterType extends AbstractType
                 )
 
             ))
+            /*
             ->add('results', ChoiceType::class,array(
                 'label'=>'sitebundle.filter.results',
                 'apply_filter' => false,
                 'choices'=>array(
                     10=>10,20=>20,30=>30,50=>50,100=>100
                 )
-            ))
+            ))*/
 
             ->add('name', Filters\TextFilterType::class,array(
                 'label'=>'sitebundle.productname',
             ))
             ->add('isSecondHand', Filters\BooleanFilterType::class,array(
                 'label'=>'sitebundle.issecondhand',
-            ));
+            ))
+            ->add('brand', Filters\EntityFilterType::class, array(
+                'empty_data'=>$brands,
+                'label'    =>  'sitebundle.brand',
+                'class'    =>  'LilWorksStoreBundle:Brand',
+                'choice_label' => function ( $brand ) use ($productsInBrand){
+                    return $brand->getName() . "(".$productsInBrand[$brand->getId()].")" ;
+                },
+                'query_builder' => function (EntityRepository $er) use ($brands) {
+                    return $er->createQueryBuilder('b')
+                        ->where('b.id IN (:ids)')
+                        ->andWhere('b.isPublished = 1')
+                        ->setParameter('ids',$brands)
+                        ;
+                },
+                'expanded'=>true,
+                'multiple'=>true,
+                'attr' => array(
+                    'class'=>'form-control',
+                    #'class'=>'selectpicker form-control',
+                    #'data-live-search'=>'true',
+                    #'data-actions-box'=>true
+                )
+
+            ))
+
+            ;
 
     }
 

@@ -192,7 +192,7 @@ liip_imagine:
     resolvers:
         default:
             web_path: ~
-    default_image: bundles/site/image/no-picture.png
+    #default_image: /bundles/site/image/no-picture.png
     filter_sets:
         cache: ~
         my_thumb:

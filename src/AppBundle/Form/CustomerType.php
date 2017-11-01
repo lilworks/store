@@ -67,10 +67,17 @@ class CustomerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'validation_groups' => array('registration'),
+           # 'validation_groups' => array('registration'),
             'data_class' => 'LilWorks\StoreBundle\Entity\Customer'
         ));
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'lilworks_storebundle_customer';
+    }
 
 }

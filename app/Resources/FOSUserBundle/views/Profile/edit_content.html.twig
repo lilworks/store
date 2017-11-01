@@ -1,11 +1,14 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+
+
+{{ dump(request) }}
 <div class="row">
 <div class="col-lg-4">
     {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
     <div class="card">
         <div class="card-header">
-            {% trans %}sitebundle.user{% endtrans %}
+            {% trans  from 'messages' %}sitebundle.user{% endtrans %}
         </div>
         <div class="card-block">
             {{ form_row(form.username) }}
@@ -21,7 +24,7 @@
 <div class="col-lg-4">
     <div class="card">
         <div class="card-header">
-            {% trans %}sitebundle.addresses{% endtrans %}
+            {% trans   from 'messages' %}sitebundle.addresses{% endtrans %}
         </div>
         <div class="card-block">
             <ul class="addresses list-inline " id="target" data-prototype="{{ form_widget(form.customer.addresses.vars.prototype)|e('html_attr') }}">
@@ -39,23 +42,26 @@
 <div class="col-lg-4">
     <div class="card">
         <div class="card-header">
-            {% trans %}sitebundle.phonenumbers{% endtrans %}
+            {% trans  from 'messages' %}sitebundle.phonenumbers{% endtrans %}
         </div>
         <div class="card-block">
-            <ul class="phonenumbers list-inline " id="target" data-prototype="{{ form_widget(form.customer.phonenumbers.vars.prototype)|e('html_attr') }}">
-                {% for phonenumber in form.customer.phonenumbers %}
-                    <li class="phonenumber list-inline-item">
-                        {{ form_row(phonenumber) }}
-                    </li>
-                {% endfor %}
-            </ul>
-            {{ form_widget(form.customer.phonenumbers) }}
+
+            {% if form.customer.phonenumbers is defined %}
+                <ul class="phonenumbers list-inline " id="target" data-prototype="{{ form_widget(form.customer.phonenumbers.vars.prototype)|e('html_attr') }}">
+                    {% for phonenumber in form.customer.phonenumbers %}
+                        <li class="phonenumber list-inline-item">
+                            {{ form_row(phonenumber) }}
+                        </li>
+                    {% endfor %}
+                    {{ form_widget( form.customer.phonenumbers ) }}
+                </ul>
+            {% endif %}
         </div>
     </div>
 </div>
 
 
-<input type="submit" class="btn btn-primary" value="{% trans %}edit{% endtrans %}" />
+<input type="submit" class="btn btn-primary" value="{% trans from 'messages' %}sitebundle.button.edit{% endtrans %}" />
 {{ form_end(form) }}
 
 <script>

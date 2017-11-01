@@ -38,6 +38,10 @@ class User extends BaseUser
      */
     private $baskets;
 
+    /**
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\Conversation", mappedBy="user")
+     */
+    private $conversations;
 
     /**
      * One User is One Customer.
@@ -220,5 +224,39 @@ class User extends BaseUser
     public function getSessions()
     {
         return $this->sessions;
+    }
+
+    /**
+     * Add conversation
+     *
+     * @param \LilWorks\StoreBundle\Entity\Conversation $conversation
+     *
+     * @return User
+     */
+    public function addConversation(\LilWorks\StoreBundle\Entity\Conversation $conversation)
+    {
+        $this->conversations[] = $conversation;
+
+        return $this;
+    }
+
+    /**
+     * Remove conversation
+     *
+     * @param \LilWorks\StoreBundle\Entity\Conversation $conversation
+     */
+    public function removeConversation(\LilWorks\StoreBundle\Entity\Conversation $conversation)
+    {
+        $this->conversations->removeElement($conversation);
+    }
+
+    /**
+     * Get conversations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getConversations()
+    {
+        return $this->conversations;
     }
 }

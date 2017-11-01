@@ -19,15 +19,23 @@ class PictureType extends AbstractType
         $builder
 
             ->add('pictureFile',FileType::class,array(
-                'label'=>'lilworks.storebundle.pictures',
+                'label'=>'storebundle.pictures',
                 'required'=>true,
                 "attr" => array(
                     "accept" => "image/*",
                    # "multiple" => "multiple",
                 )
             ))
-            ->add('pos')
-            ->add('description')
+            ->add('pos',null,array(
+                'label'=>'storebundle.picture'
+            ))
+            ->add('description',array(
+                'label'=>'storebundle.picture',
+                'attr'=>array(
+                    'class'=>'editor-text'
+                )
+
+            ))
             ;
     }
     

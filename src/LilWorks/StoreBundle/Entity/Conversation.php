@@ -63,8 +63,8 @@ class Conversation
     private $sendmail;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id" , nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="conversations")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
      */
     private $user;
 

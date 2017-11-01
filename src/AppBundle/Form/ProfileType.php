@@ -21,7 +21,9 @@ class ProfileType extends AbstractType
     {
 
         $builder->add('customer', CustomerType::class,array(
-            'label'=>'sitebundle.customer'
+            'label'=>'sitebundle.customer',
+            'by_reference'=>false,
+
         ));
         $builder->remove('plainPassword');
 
@@ -30,9 +32,6 @@ class ProfileType extends AbstractType
     public function getParent()
     {
         return 'FOS\UserBundle\Form\Type\RegistrationFormType';
-
-        // Or for Symfony < 2.8
-        // return 'fos_user_registration';
     }
 
     /**

@@ -28,7 +28,7 @@ class ConversationMessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        if($this->user === User::class){
+        if($this->user->getId()){
             $conversations = $this->em->getRepository('LilWorksStoreBundle:Conversation')->findByUser($this->user->getId());
             $dataEmail = $this->user->getEmail();
         }else{

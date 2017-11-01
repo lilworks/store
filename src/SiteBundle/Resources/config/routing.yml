@@ -6,7 +6,9 @@ site_homepage:
 site_docfile:
     path: /docfile/{docfile_id}
     defaults: { _controller: SiteBundle:Default:docfile }
-
+site_conversation_show:
+    path: /conversation/{conversation_id}
+    defaults: { _controller: SiteBundle:Conversation:show }
 site_contact:
     path: /contact
     defaults: { _controller: SiteBundle:Default:contact }

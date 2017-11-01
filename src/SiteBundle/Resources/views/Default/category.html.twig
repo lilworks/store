@@ -64,33 +64,59 @@
                     </h3>
                 </div>
                 <div class="col-md-6" >
-                    {% if category.supercategoriesCategories|length>0 %}
-                        {% if category.supercategoriesCategories|length==1 %}
-                            <a class="btn btn-secondary" href="{{ path('site_supercategory',{'tag':category.supercategoriesCategories[0].supercategory.tag}) }}" style="float: right;">
-                                <img src="{{ asset('supercategory/'~category.supercategoriesCategories[0].supercategory.pictureName) | imagine_filter('mini') }}" />
-                                {{ category.supercategoriesCategories[0].supercategory.name }}
+
+                    {% if supercategories|length>0 %}
+                        {% if supercategories|length==1 %}
+                            <a class="btn btn-secondary" href="{{ path('site_supercategory',{'tag':supercategories[0].tag}) }}" style="float: right;">
+                                <img src="{{ asset('supercategory/'~supercategories[0].pictureName) | imagine_filter('mini') }}" />
+                                <i class="fa fa-object-group" aria-hidden="true"></i>
+                                {{ supercategories[0].name }}
                             </a>
                         {% else %}
                             <div class="dropdown" style="float: right;">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                    {{ 'sitebundle.supercategories' }}
+                                    {{ 'sitebundle.supercategories'|trans }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    {% for supercategorycategory in category.supercategoriesCategories %}
-                                        {% set supercategory = supercategorycategory.supercategory %}
-                                        {% if category.isPublished %}
-                                            <a class="dropdown-item" href="{{ path('site_supercategory',{'tag':supercategory.tag}) }}">
-                                                <img src="{{ asset('supercategory/'~supercategory.pictureName) | imagine_filter('mini') }}" />
-                                                {{ supercategory.name }}
-                                            </a>
-                                        {% endif %}
+                                    {% for supercategory in supercategories %}
+                                        <a class="dropdown-item" href="{{ path('site_supercategory',{'tag':supercategory.tag}) }}">
+                                            <img src="{{ asset('brand/'~supercategory.pictureName) | imagine_filter('mini') }}" />
+                                            {{ supercategory.name }}
+                                        </a>
                                     {% endfor %}
 
                                 </div>
                             </div>
                         {% endif %}
                     {% endif %}
+
+                    {% if brands|length>0 %}
+                        {% if brands|length==1 %}
+                            <a class="btn btn-secondary" href="{{ path('site_brand',{'tag':brands[0].tag}) }}" style="float: right;">
+                                <img src="{{ asset('brand/'~brands[0].pictureName) | imagine_filter('mini') }}" />
+                                <i class="fa fa-copyright" aria-hidden="true"></i>
+                                {{ brands[0].name }}
+                            </a>
+                        {% else %}
+                            <div class="dropdown" style="float: right;">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-copyright" aria-hidden="true"></i>
+                                    {{ 'sitebundle.brands'|trans }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    {% for brand in brands %}
+                                            <a class="dropdown-item" href="{{ path('site_brand',{'tag':brand.tag}) }}">
+                                                <img src="{{ asset('brand/'~brand.pictureName) | imagine_filter('mini') }}" />
+                                                {{ brand.name }}
+                                            </a>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+
                 </div>
             </div>
         </div>

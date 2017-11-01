@@ -18,6 +18,7 @@ class PhoneNumberType extends AbstractType
                 'label'=>'sitebundle.phonenumber',
                 'required' => true
             ))
+            
             ->add('description',null,array(
                 'label'=>'sitebundle.description',
             ))
@@ -33,7 +34,6 @@ class PhoneNumberType extends AbstractType
             'data_class' => 'LilWorks\StoreBundle\Entity\PhoneNumber'
         ));
     }
-
     /**
      * {@inheritdoc}
      */
@@ -41,6 +41,7 @@ class PhoneNumberType extends AbstractType
     {
         return 'lilworks_storebundle_phonenumber';
     }
+
 
 
 }

@@ -12,18 +12,8 @@
     {% endblock %}
     {% block javascripts %}
         {{ parent() }}
-
         <script>
             $( document ).ready(function() {
-
-                /*
-                 console.log($('.price-range-left'));
-                 console.log($('.price-range-left').slider());
-
-                 console.log("right slider PASS");
-                 $(".price-range-left").slider({});
-                 console.log("STOP");
-                 */
                 $(".selectpicker").selectpicker();
                 $(".price-range").slider({
                     formatter: function(value) {
@@ -42,15 +32,16 @@
     <div class="col-md-3">
         <div class="card">
             <div class="card-header">
-                {% trans %}sitebundle.filter{% endtrans %}
+                <i class="fa fa-filter" aria-hidden="true"></i>
+                {{ 'sitebundle.filter'|trans }}
             </div>
             <div class="card-block">
                 <p class="card-text">
                 <form method="get"  class="formFilter">
-                    {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value=" {% trans %}sitebundle.button.filter{% endtrans %}" />
+                    {{ form_rest(formFilter) }}
+                    <input type="submit" class="btn btn-sm btn-secondary" name="submit-filter" value="{{ 'sitebundle.button.filter'|trans }}" />
                 </form>
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+
             </div>
         </div>
 
@@ -65,45 +56,54 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h3>
-
+                            {{ 'sitebundle.allstoresearch'|trans }}
                         </h3>
                     </div>
                     <div class="col-md-6" >
+                        {% if categories|length>0 %}
+                            {% if categories|length==1 %}
+                                <a class="btn btn-secondary" href="{{ path('site_category',{'tag':categories[0].tag}) }}" style="float: right;">
+
+                                    <img src="{{ asset('category/'~categories[0].pictureName) | imagine_filter('mini') }}" />
+                                    {{ categories[0].name }}
+                                </a>
+                            {% else %}
+                                <div class="dropdown" style="float: right;">
+                                    <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                        {{ 'sitebundle.categories'|trans }}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        {% for category in categories %}
+                                            <a class="dropdown-item" href="{{ path('site_category',{'tag':category.tag}) }}">
+                                                <img src="{{ asset('category/'~category.pictureName) | imagine_filter('mini') }}" />
+                                                {{ category.name }}
+                                            </a>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
 
                     </div>
                 </div>
-
-
-
-
-
             </div>
             <div class="card-block">
                 <div class="card-text">
-
-
-
                     {% if pagination is defined %}
                         <div class="pagination">
                             {{ knp_pagination_render(pagination) }}
-
-
                             <span class="alert alert-info" role="alert" >
-                <i class="fa fa-sort" aria-hidden="true"></i>
-                                {{ knp_pagination_sortable(pagination, 'priceOnline', 'p.priceOnline') }}
-            </span>
+                            <i class="fa fa-sort" aria-hidden="true"></i>
+                                {{ knp_pagination_sortable(pagination, 'sitebundle.priceorder'|trans, 'p.priceOnline') }}
+                        </span>
                         </div>
                     {% endif %}
-
                     <div class="row">
-
-
-
                         {% for product in pagination %}
                             {{ productService.getProduct(product.id)|raw }}
                         {% endfor %}
-
-
                     </div>
 
 

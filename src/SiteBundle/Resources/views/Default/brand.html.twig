@@ -69,15 +69,14 @@
                         {% if categories|length>0 %}
                             {% if categories|length==1 %}
                                 <a class="btn btn-secondary" href="{{ path('site_category',{'tag':categories[0].tag}) }}" style="float: right;">
-
                                         <img src="{{ asset('category/'~categories[0].pictureName) | imagine_filter('mini') }}" />
                                     {{ categories[0].name }}
                                 </a>
                             {% else %}
                                 <div class="dropdown" style="float: right;">
                                     <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                        {{ 'sitebundle.categories' }}
+                                        <i class="fa fa-bullseye" aria-hidden="true"></i>
+                                        {{ 'sitebundle.categories'|trans }}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         {% for category in categories %}
