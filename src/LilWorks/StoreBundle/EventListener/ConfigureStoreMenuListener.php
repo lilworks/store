@@ -19,9 +19,14 @@ class ConfigureStoreMenuListener
         'ICO_NEW'=>'fa fa-plus',
         'ICO_EDIT'=>'fa fa-pencil',
         'ICO_DELETE'=>'fa fa-trash',
-        'ICO_PDF'=>'fa fa-file-pdf',
+        'ICO_EMPTY'=>'fa fa-share-square-o',
+        'ICO_PDF'=>'fa fa-file-pdf-o',
         'ICO_IMPORT'=>'fa fa-upload',
         'ICO_EXPORT'=>'fa fa-download',
+        'ICO_CLEAN'=>'fa fa-magic',
+        'ICO_DOWNLOAD'=>'fa fa-download',
+        'ICO_BACKUP'=>'fa fa-floppy-o',
+        'ICO_DEVISTOFACTURE'=>'fa fa-sign-language',
 
 
         'BTN_GENERAL'=>'btn btn-sm',
@@ -30,9 +35,14 @@ class ConfigureStoreMenuListener
         'BTN_NEW'=>'btn-primary',
         'BTN_EDIT'=>'btn-primary',
         'BTN_DELETE'=>'btn-danger btn-delete',
+        'BTN_EMPTY'=>'btn-warning btn-empty',
         'BTN_PDF'=>'btn-primary',
         'BTN_IMPORT'=>'btn-primary',
         'BTN_EXPORT'=>'btn-primary',
+        'BTN_CLEAN'=>'btn-warning',
+        'BTN_DOWNLOAD'=>'btn-info',
+        'BTN_BACKUP'=>'btn-success',
+        'BTN_DEVISTOFACTURE'=>'btn-info',
 
 
     );
@@ -63,7 +73,6 @@ class ConfigureStoreMenuListener
 
 
     public function  setAction($action,$entity=null,$menu,$menuName = null,$routeName=null,$routeParam=null){
-
 
         if(!$menuName)
             $menuName=strtolower('storebundle.menu.'.$this->target.'.'.$action);
@@ -103,6 +112,33 @@ class ConfigureStoreMenuListener
 
 
     }
+
+    public function orderproductreturn($menu,$id){
+
+
+        $this->setAction('index',null,$menu);
+
+        if($id) {
+            $entityName = "LilWorksStoreBundle:OrderProductReturn";
+            $entity = $this->em->getRepository($entityName)->find($id);
+/*
+            $orderId = $entity->getOrderProduct()->getOrder()->getId();
+            $menu->addChild($menu, array(
+                'attributes'=>$this->options['curr'],
+                'route' => "order_show",
+                'routeParameters' =>array('order_id'=>$orderId)
+            ));
+*/
+  #          $this->setAction('new',null,$menu);
+  #          $this->setAction('show', $entity, $menu);
+  #          $this->setAction('edit', $entity, $menu);
+  #          $this->setAction('delete', $entity, $menu);
+
+
+        }
+
+    }
+
     public function annonce($menu,$id){
 
 
@@ -128,6 +164,7 @@ class ConfigureStoreMenuListener
             $entity = $this->em->getRepository($entityName)->find($id);
 
             $this->setAction('show', $entity, $menu);
+            $this->setAction('backup', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
             $this->setAction('delete', $entity, $menu);
         }
@@ -144,7 +181,6 @@ class ConfigureStoreMenuListener
             $entityName = "LilWorksStoreBundle:Subscriber";
             $entity = $this->em->getRepository($entityName)->find($id);
 
-            $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
             $this->setAction('delete', $entity, $menu);
         }
@@ -197,7 +233,16 @@ class ConfigureStoreMenuListener
 
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
-            $this->setAction('delete', $entity, $menu);
+
+
+
+            if(
+                count($entity->getProductsOnline())==0 &&
+                count($entity->getProductsOffline())==0 &&
+                count($entity->getOrdersProduct())==0
+            ){
+                $this->setAction('delete', $entity, $menu);
+            }
         }
 
     }
@@ -244,8 +289,12 @@ class ConfigureStoreMenuListener
 
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
+            $this->setAction('download', $entity, $menu);
+
             if(count($entity->getProducts())==0)
                $this->setAction('delete', $entity, $menu);
+            else
+               $this->setAction('empty', $entity, $menu);
         }
 
     }
@@ -262,6 +311,8 @@ class ConfigureStoreMenuListener
             $this->setAction('edit', $entity, $menu);
             if(count($entity->getProducts())==0)
                 $this->setAction('delete', $entity, $menu);
+            else
+                $this->setAction('empty', $entity, $menu);
         }
 
     }
@@ -365,6 +416,10 @@ class ConfigureStoreMenuListener
             $entity = $this->em->getRepository($entityName)->find($id);
             $lastStep = $this->em->getRepository($entityName)->getLastStep($id);
 
+            if($entity->getOrderType()->getTag()=="DEVIS"){
+                $this->setAction('devistofacture', $entity, $menu);
+            }
+
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
             $this->setAction('pdf', $entity, $menu);
@@ -410,6 +465,7 @@ class ConfigureStoreMenuListener
 
 
         $this->setAction('index',null,$menu);
+        $this->setAction('clean',null,$menu);
 
         if($id) {
             $entityName = "LilWorksStoreBundle:Session";

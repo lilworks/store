@@ -42,58 +42,39 @@
         <thead>
             <tr>
                 <th>{% trans %}storebundle.action{% endtrans %}</th>
-                <th>{% trans %}storebundle.ispublished{% endtrans %}</th>
-                <th>{% trans %}storebundle.name{% endtrans %}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'storebundle.pos'|trans, 'a.pos') }}</th>
-                <th>{% trans %}storebundle.url{% endtrans %}</th>
-                <th>{% trans %}storebundle.picture{% endtrans %}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'storebundle.createdat'|trans, 's.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'storebundle.email'|trans, 's.email') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'storebundle.user'|trans, 'u.username') }}</th>
             </tr>
         </thead>
         <tbody>
-        {% set entityName = 'LilWorksStoreBundle:Annonce' %}
 
-
-        {% for annonce in pagination %}
+        {% for subscriber in pagination %}
 
             <tr>
                 <td>
                     {% set formatedItems = pagination.items|idinkey %}
-                    {% set menu = knp_menu_get('list', [ annonce.id ] ,{results:formatedItems[annonce.id]   ,target:'annonce'} ) %}
+                    {% set menu = knp_menu_get('list', [ subscriber.id ] ,{results:formatedItems[subscriber.id],target:'subscriber'} ) %}
                     {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
                 </td>
-
                 <td>
-                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Annonce\\IsPublishedType' %}
-                    {{ simple_live_editor.getCol(formType,entityName,'isPublished',annonce)|raw }}
+                    {{ subscriber.createdAt|date('d/m/Y H:i') }}
                 </td>
                 <td>
-                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Annonce\\NameType' %}
-                    {{ simple_live_editor.getCol(formType,entityName,'name',annonce)|raw }}
+                   {{ subscriber.email }}
                 </td>
                 <td>
-                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Annonce\\PosType' %}
-                    {{ simple_live_editor.getCol(formType,entityName,'pos',annonce)|raw }}
-                </td>
-                <td>
-                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Annonce\\LinkType' %}
-                    {{ simple_live_editor.getCol(formType,entityName,'link',annonce)|raw }}
-                </td>
-
-                <td>
-                    {% if annonce.pictureName %}
-                        <img src="{{ asset('annonce/' ~ annonce.pictureName  ) | imagine_filter('my_thumb') }}" />
-                    {% else %}
-                        <i class="fa fa-circle"></i>
+                    {% if subscriber.user %}
+                        {% set linkparams = {
+                        0:{icon:'eye',route:path('user_show',{user_id:subscriber.user.id})},
+                        1:{icon:'pencil',route:path('user_edit',{user_id:subscriber.user.id})}}
+                        %}
+                        {{ subscriber.user.username|linkbtn(linkparams)|raw }}
                     {% endif %}
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <script>
-        $( window ).on( "load", FF.init() );
-    </script>
-
 
 {% endblock %}

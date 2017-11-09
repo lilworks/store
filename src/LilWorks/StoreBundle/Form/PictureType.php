@@ -7,8 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
-
-
+use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 class PictureType extends AbstractType
 {
     /**
@@ -16,10 +16,11 @@ class PictureType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
 
             ->add('pictureFile',FileType::class,array(
-                'label'=>'storebundle.pictures',
+                'label'=>'storebundle.picture',
                 'required'=>true,
                 "attr" => array(
                     "accept" => "image/*",
@@ -27,16 +28,17 @@ class PictureType extends AbstractType
                 )
             ))
             ->add('pos',null,array(
-                'label'=>'storebundle.picture'
+                'label'=>'storebundle.pos'
             ))
-            ->add('description',array(
-                'label'=>'storebundle.picture',
+            ->add('description',null,array(
+                'label'=>'storebundle.description',
                 'attr'=>array(
                     'class'=>'editor-text'
                 )
 
             ))
             ;
+
     }
     
     /**

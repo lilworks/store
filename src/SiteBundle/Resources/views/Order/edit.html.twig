@@ -1,178 +1,75 @@
-{% extends 'baseUser.html.twig' %}
-
-{% block body %}
-
-    <h1>
-        <i class="fa fa-file-text-o" aria-hidden="true"></i>  {% trans %}order{% endtrans %} {{ order.reference }}
-    </h1>
+{% extends 'SiteBundle:Customer:base.html.twig' %}
+{% block customer %}
 
 
 
 
-    <ul class="list-inline">
-        <li class="list-inline-item">
-            <a href="{{ path('site_order') }}" class="btn btn-primary btn-sm">
-                <i class="fa fa-list"></i> {% trans %}sitebundle.order.list{% endtrans %}
-            </a>
-        </li>
-        {% if order.ordersOrderSteps|length > 0 and
-        order.ordersOrderSteps[0].orderStep.tag == "WAITING_PAYMENT"
-        %}
-            <li class="list-inline-item">
-                <a href="{{ path('site_order_pay', { 'id': order.id }) }}" class="btn btn-success btn-sm">
-                    <i class="fa fa-euro"></i> {% trans %}sitebundle.order.pay{% endtrans %}
-                </a>
 
-            </li>
-            <li class="list-inline-item">
 
-                <a href="{{ path('site_order_remove', { 'id': order.id }) }}" class="btn btn-danger btn-sm">
-                    <i class="fa fa-trash"></i> {% trans %}sitebundle.order.cancel{% endtrans %}
-                </a>
-
-            </li>
-        {% endif %}
-        {% if order.ordersOrderSteps|length > 0 and
-        order.ordersOrderSteps[0].orderStep.tag == "DONE"
-        %}
-            <li>
-
-                <a href="{{ path('site_order_pdf', { 'id': order.id }) }}" class="btn btn-primary btn-sm">
-                    <i class="fa fa-file"></i> {% trans %}sitebundle.order.pdf{% endtrans %}
-                </a>
-
-            </li>
-        {% endif %}
-    </ul>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-block">
-                    <h3 class="card-title">{% trans %}sitebundle.ordersteps{% endtrans %}</h3>
-                    <ul class="list-group">
-                        {%  for orderOrderStep in order.ordersOrderSteps  %}
-                            <li class="list-group-item">{{ orderOrderStep.createdAt|date }} <span class="badge badge-default">{{ orderOrderStep.orderStep.name }}</span></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-handshake-o" aria-hidden="true"></i>
+            {{ 'sitebundle.order.edit %reference%'|trans({'%reference%':order.reference}) }}
         </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-block">
-                    <h3 class="card-title">{% trans %}sitebundle.paymentmethods{% endtrans %}</h3>
-                    {%  for orderPaymentMethod in order.ordersPaymentMethods  %}
-                        <li class="list-group-item">{{ orderPaymentMethod.payedAt|date }}
-                            {{ orderPaymentMethod.paymentMethod.name }}
-                            <span class="badge badge-default">{{ orderPaymentMethod.amount|price }}</span></li>
-                    {% endfor %}
-                </div>
+        <div class="card-block">
+
+
+            <div class="card-text">
+                {% set menuItem = knp_menu_get('usercustomer', ['sitebundle.menu.customer.orders']) %}
+                {{ knp_menu_render(['usercustomer', 'sitebundle.menu.customer.orders'],{template : 'Menu/userCustomerMenu.html.twig'}) }}
             </div>
-        </div>
 
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-block">
-                    <h3 class="card-title">{% trans %}sitebundle.addresses{% endtrans %}</h3>
-                    {% if order.shippingAddressString == order.billingAddressString %}
-                        <h5>{% trans %}shipping and billing addresses{% endtrans %}</h5>
-                    <p class="card-text">{{ order.shippingAddressString }}</p>
-                    {% else %}
-                        {% if order.shippingAddressString != "" %}
-                            <h5>{% trans %}sitebundle.shippingaddress{% endtrans %}</h5>
-                            <p class="card-text">{{ order.shippingAddressString }}</p>
-                        {% endif %}
-                        {% if order.billingAddressString != "" %}
-                            <h5>{% trans %}sitebundle.billingaddress{% endtrans %}</h5>
-                            <p class="card-text">{{ order.billingAddressString }}</p>
-                        {% endif %}
-                    {% endif %}
+            <div class="card-text">
+                {{ form_start(form) }}
+                {{ form_end(form) }}
+                <input type="submit" class="btn btn-sm btn-success" value="{% trans %}sitebundle.button.edit{% endtrans %}" />
+            </div>
 
-                </div>
+            <div  class="card-text">
+
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>{% trans %}sitebundle.createdat{% endtrans %}</th>
+                        <th>{% trans %}sitebundle.updatedat{% endtrans %}</th>
+                        <th>{% trans %}sitebundle.reference{% endtrans %}</th>
+                        <th>{% trans %}sitebundle.tot{% endtrans %}</th>
+                        <th>{% trans %}sitebundle.payed{% endtrans %}</th>
+                        <th>{% trans %}sitebundle.products{% endtrans %}</th>
+                        <th>{% trans %}sitebundle.ordersteps{% endtrans %}</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            {{ order.createdAt|date('d/m/Y H:i') }}
+                        </td>
+
+                        <td>{{ order.updatedAt|date('d/m/Y H:i') }}</td>
+                        <td>{{ order.reference }}</td>
+                        <td>{{ order.tot|price }}</td>
+                        <td>
+                            {% if order.payed == order.tot %}
+                                <span style="color: green;">{{ order.payed|price }}</span>
+                            {% else %}
+                                <span style="color: red;">{{ order.payed|price }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ order.ordersProducts|length }}</td>
+                        <td>
+                            {% if order.ordersOrderSteps|length > 0%}
+                                {{ order.ordersOrderSteps[0].orderStep.name }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
             </div>
         </div>
     </div>
-
-    <table class="table table-striped">
-
-        <thead>
-        <th>{% trans %}sitebundle.product{% endtrans %}</th>
-        <th>{% trans %}sitebundle.quantity{% endtrans %}</th>
-        <th>{% trans %}sitebundle.priceunity{% endtrans %}</th>
-        <th>{% trans %}sitebundle.subtot{% endtrans %}</th>
-        </thead>
-
-        <tbody>
-
-        {%   for product in order.ordersProducts %}
-            <tr>
-                <td>
-                    {% if product.product.pictures[0].pictureName is defined %}
-                        <img src="{{ asset('product/'~product.product.pictures[0].pictureName) | imagine_filter('mini') }}" />
-                    {% endif %}
-                    {{ product.product.brand.name }} {{ product.product.name }}
-
-                    {% if product.product.isSecondHand == 1 %}
-                        <span class="alert alert-danger btn-sm" role="alert">
-                            <i class="fa fa-info-circle" aria-hidden="true"></i>
-                            {% trans %}sitebundle.product.issecondhand{% endtrans %}
-                        </span>
-                    {% endif %}
-                    {{ product.product.warrantiesOnline|warranties|raw }}
-                </td>
-                <td>
-                    {{ product.quantity }}
-
-                </td>
-                <td>
-                    {{ product.product.priceOnline|price }}
-                    {{ product.product.taxesOnline|taxes|raw }}
-                </td>
-                <td>{{ (product.product.priceOnline * product.quantity)|price }}</td>
-            </tr>
-        {% endfor %}
-
-        <tr>
-            <td  colspan="4" >
-                <ul class="list-group">
-                {% for orderShippingMethod in order.ordersRealShippingMethods %}
-                    <li class="list-group-item">
-                        {{  orderShippingMethod.shippingMethod.name }}
-
-                        {{  orderShippingMethod.price|price }}
-
-                        {% for orderProduct in orderShippingMethod.ordersProducts %}
-                            <span class="badge badge-default">{{ orderProduct.name }}</span>
-                        {% endfor %}
-
-                    </li>
-                {% endfor %}
-                </ul>
-            </td>
-        </tr>
-
-        <tr>
-            {% set totals = order.ordersProducts|totalCalculator %}
-            <td class="bg-info" colspan="4" >
-                {% trans %}total: {% endtrans %}
-                <style>
-                    .priceTTC{
-                        font-size: 1.6em;
-                        font-weight: bold;
-                    }
-                    .priceSM{
-                        font-size: 1.8em;
-                        font-weight: bold;
-                    }
-                </style>
-                <div class="priceTTC">{{ totals['ttc']|price }}<sup>TTC</sup></div>
-                <div class="priceHt">{{ totals['ht']|price }}<sup>HT</sup></div>
-
-
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
 
 {% endblock %}

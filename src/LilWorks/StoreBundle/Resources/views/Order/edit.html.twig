@@ -11,7 +11,7 @@
         {{ parent() }}
         <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/tinymce/langs.fr_FR.js') }}"></script>
-        <script src="h{{ asset('assets/vendor/popper.js/dist/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/popper.js/dist/popper.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js') }}" charset="UTF-8"></script>
         <script>
@@ -21,7 +21,7 @@
                 FCE.init('ordersOrderSteps','ordersOrderSteps list-inline','orderOrderStep list-inline-item');
                 FCE.init('ordersPaymentMethods','ordersPaymentMethods list-inline','orderPaymentMethod list-inline-item');
                 initTinyMce.text('.editor-text',['{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}','{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']);
-
+                MT.init('orderTab');
                 $('.datepicker').datepicker({
                     language:'fr',
                     format: "dd/mm/yyyy"
@@ -31,6 +31,7 @@
         </script>
     {% endblock %}
     <h1>
+        <i class="fa fa-file" aria-hidden="true"></i>
         {% trans %}storebundle.order.edit{% endtrans %}
         {% if  order.reference %}
             <span class="badge badge-default">{{ order.reference }}</span>
@@ -38,7 +39,16 @@
         {% if order.customer %}
             <span class="badge badge-default">{{ order.customer.firstName }} {{ order.customer.lastName }} {{ order.customer.companyName }}</span>
         {% endif %}
-        <span class="badge badge-default">{{ order.tot|price }}</span>
+        <span class="badge badge-default">{{ 'storebundle.tot'|trans }}: {{ order.tot|price }}</span>
+        {% if order.orderType.tag != "DEVIS" %}
+        <span class="badge badge-{% if (order.tot - order.payed) == 0 %}success{% elseif (order.tot - order.payed) < 0%}warning{% elseif (order.tot - order.payed) > 0%}danger{% endif %}">
+            {% if (order.tot - order.payed) >= 0   %}
+                {{ 'storebundle.order.resttopay'|trans }}: {{ (order.tot - order.payed)|price }}
+            {% elseif (order.tot - order.payed) < 0%}
+                {{ 'storebundle.order.tomuchpayed'|trans }}: {{ ( - order.tot - order.payed)|price }}
+            {% endif %}
+        </span>
+        {% endif %}
     </h1>
     <div id="content_menu">
         {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.document.portal','storebundle.menu.order'] , {context: 'content'}) %}
@@ -51,7 +61,7 @@
 
 
 
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs" role="tablist" id="orderTab">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
         </li>
@@ -75,7 +85,14 @@
 
     <div class="tab-content">
         <div class="tab-pane active" id="general" role="tabpanel">
+
+            {% if form.reference is defined %}
+                {{ form_row(form.reference) }}
+            {% endif %}
+
+
             {{ form_row(form.orderType) }}
+            {% if form.ordersOrderSteps is defined %}
                 <ul class="ordersOrderSteps list-inline " id="target" data-prototype="{{ form_widget(form.ordersOrderSteps.vars.prototype)|e('html_attr') }}">
                     {% for orderOrderStep in form.ordersOrderSteps %}
                         <li class="orderOrderStep list-inline-item">
@@ -85,6 +102,7 @@
                     {% endfor %}
                 </ul>
             {{ form_widget(form.ordersOrderSteps) }}
+            {% endif %}
         </div>
         <div class="tab-pane" id="customer" role="tabpanel">
             {{ form_row(form.customer) }}

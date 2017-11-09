@@ -2,28 +2,29 @@
 
 {% block body %}
     <h1>
+        <i class="fa fa-flag" aria-hidden="true"></i>
         {% trans %}storebundle.country.index{% endtrans %}
     </h1>
 
     <div class="row">
         <div class="col-md-6">
-
             <div id="content_menu">
                 {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.shipping.portal','storebundle.menu.country'] , {context: 'content'}) %}
                 {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
             </div>
-
         </div>
         <div class="col-md-6">
-            <div class="pagination">
-                {% transchoice pagination.getTotalItemCount %}
-                {0} no result found|{1} found one result|]1,Inf[ found %count% results
-                {% endtranschoice %}
-                {{ knp_pagination_render(pagination) }}
-            </div>
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            {{ knp_pagination_render(pagination) }}
+            {% if formFilter is defined %}
+                <form method="get" action="." class="formFilter">
+                    {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-secondary" name="submit-filter" value="{% trans %}storebundle.button.filter{% endtrans %}" />
+                </form>
+            {% endif %}
         </div>
     </div>
-
 
     <table class="table table-striped">
         <thead>
@@ -71,7 +72,10 @@
                     {% if  country.shippingmethodsCountries|length > 0 %}
                         <ul>
                             {% for shippingMethod in country.shippingmethodsCountries %}
-                                <li>{{ shippingMethod.shippingMethod.name }}</li>
+                                <li>
+                                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('country_shipping_edit',{shippingmethod_country_id:shippingMethod.id}) }}">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>{{ shippingMethod.shippingMethod.name }}</a>
+                                </li>
                             {% endfor %}
                         </ul>
                     {% else %}

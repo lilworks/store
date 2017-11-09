@@ -55,10 +55,7 @@ class CouponController extends Controller
             $request->query->getInt('page', 1),
             10
         );
-
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.coupon.index'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.coupons');
 
         return $this->render('LilWorksStoreBundle:Coupon:index.html.twig', array(
             'pagination' => $pagination,
@@ -73,29 +70,33 @@ class CouponController extends Controller
     public function pdfAction(Request $request, Coupon $coupon)
     {
 
-        if($coupon->getCustomer() && !$coupon->getAddress()){
-            return $this->redirectToRoute('customer_edit', array('_fragment' => 'addresses','id' => $coupon->getCustomer()->getId()));
+        if(! $coupon->getCustomer() ){
+            return $this->redirectToRoute('customer_edit', array('_fragment' => 'addresses','customer_id' => $coupon->getCustomer()->getId()));
         }
-        $filename = $coupon->getReference();
 
+        $em = $this->getDoctrine()->getManager();
+        $textHeader = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-header');
+        $textFooter = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-footer');
 
+        $header = $this->renderView('LilWorksStoreBundle:Pdf:header.html.twig', array(
+            'css'=>$textHeader->getCss(),
+            'text'=>$textHeader->getContent()
+        ));
+
+        $footer = $this->renderView('LilWorksStoreBundle:Pdf:footer.html.twig', array(
+            'css'=>$textFooter->getCss(),
+            'text'=>$textFooter->getContent()
+        ));
 
         $html = $this->renderView('LilWorksStoreBundle:Coupon:pdf.html.twig', array(
             'coupon'  => $coupon,
             'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath(),
         ));
-        $header = $this->renderView('LilWorksStoreBundle:DepositSale:header.html.twig', array(
-            'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath(),
-        ));
-
-        $footer = $this->renderView('LilWorksStoreBundle:DepositSale:footer.html.twig', array(
-            'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath(),
-        ));
-
         $pdf = $this->get('knp_snappy.pdf');
         $pdf->setOption('footer-html', $footer);
         $pdf->setOption('footer-left', "[page]/[topage]");
         $pdf->setOption('header-html', $header);
+        $filename = $coupon->getReference();
 
         return new Response(
             $pdf->getOutputFromHtml($html),
@@ -105,6 +106,9 @@ class CouponController extends Controller
                 'Content-Disposition'   => 'attachment; filename="'.$filename.'"'
             )
         );
+        if($depositSale->getCustomer() && !$depositSale->getAddress()){
+            return $this->redirectToRoute('customer_edit', array('_fragment' => 'addresses','customer_id' => $depositSale->getCustomer()->getId()));
+        }
     }
 
     /**
@@ -125,12 +129,10 @@ class CouponController extends Controller
             $em->persist($coupon);
             $em->flush();
 
-            return $this->redirectToRoute('coupon_show', array('id' => $coupon->getId()));
+            return $this->redirectToRoute('coupon_show', array('coupon_id' => $coupon->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.coupon.new'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.countries');
 
 
         return $this->render('LilWorksStoreBundle:Coupon:new.html.twig', array(
@@ -145,9 +147,7 @@ class CouponController extends Controller
     public function showAction(Coupon $coupon)
     {
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.coupon.show %reference%',array("%reference%"=>$coupon->getReference())));
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array("%name%"=>$coupon->getReference()),'storebundle.prefix.coupons');
 
         return $this->render('LilWorksStoreBundle:Coupon:show.html.twig', array(
             'coupon' => $coupon,
@@ -172,13 +172,10 @@ class CouponController extends Controller
             $em->persist($coupon);
             $em->flush();
 
-            return $this->redirectToRoute('coupon_edit', array('id' => $coupon->getId()));
+            return $this->redirectToRoute('coupon_edit', array('coupon_id' => $coupon->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.coupon.edit %reference%',array("%reference%"=>$coupon->getReference())));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array("%name%"=>$coupon->getReference()),'storebundle.prefix.coupons');
 
         return $this->render('LilWorksStoreBundle:Coupon:edit.html.twig', array(
             'coupon' => $coupon,

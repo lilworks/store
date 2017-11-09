@@ -27,36 +27,42 @@ site_supercategory:
 site_brand:
     path: /brand/{tag}
     defaults: { _controller: SiteBundle:Default:brand }
+
+
 site_order:
     path: /order
     defaults: { _controller: "SiteBundle:Order:index"  }
     methods:  [GET, POST]
 site_order_edit:
-    path: /order/{id}/edit
+    path: /order/{order_id}/edit
     defaults: { _controller: "SiteBundle:Order:edit"  }
     methods:  [GET, POST]
 site_order_remove:
-    path: /order/{id}/remove
+    path: /order/{order_id}/remove
     defaults: { _controller: "SiteBundle:Order:remove"  }
     methods:  [GET, POST]
 site_order_pay:
-    path: /order/{id}/pay
+    path: /order/{order_id}/pay
     defaults: { _controller: "SiteBundle:Order:pay"  }
     methods:  [GET, POST]
-
 site_order_payed:
-    path: /order/{id}/payed
+    path: /order/{order_id}/payed
     defaults: { _controller: "SiteBundle:Order:payed"  }
     methods:  [GET, POST]
 
 site_order_pdf:
-    path: /order/{id}/pdf
+    path: /order/{order_id}/pdf
     defaults: { _controller: "SiteBundle:Order:pdf"  }
     methods:  [GET, POST]
 site_order_show:
-    path: /order/{id}/edit
-    defaults: { _controller: "SiteBundle:Order:edit"  }
+    path: /order/{order_id}/show
+    defaults: { _controller: "SiteBundle:Order:show"  }
     methods:  [GET, POST]
+site_order_delete:
+    path: /order/{order_id}/delete
+    defaults: { _controller: "SiteBundle:Order:delete"  }
+    methods:  [GET, POST]
+
 site_content:
     path: /content/{tag}
     defaults: { _controller: "SiteBundle:Text:content"  }
@@ -77,6 +83,41 @@ site_basket_show:
     path: /basket/show
     defaults: { _controller: SiteBundle:Basket:show }
 
+site_customer:
+    path: /customer
+    defaults: { _controller: SiteBundle:Customer:default }
+
+site_customer_edit:
+    path: /customer/edit
+    defaults: { _controller: SiteBundle:Customer:edit }
+
+site_orders:
+    path: /orders
+    defaults: { _controller: SiteBundle:Order:index }
+
+site_conversations:
+    path: /conversations
+    defaults: { _controller: SiteBundle:Conversation:default }
+site_conversations_remove:
+    path: /conversations/remove/{conversation_id}
+    defaults: { _controller: SiteBundle:Conversation:remove }
+site_conversations_newmessage:
+    path: /conversations/new-message/{conversation_id}
+    defaults: { _controller: SiteBundle:Conversation:newMessage }
+
+site_conversations_new:
+    path: /conversations/new
+    defaults: { _controller: SiteBundle:Conversation:new }
+
+site_subscriber_unsubscribe:
+    path: /unsubscribe/{email}
+    defaults: { _controller: SiteBundle:Subscriber:unsubscribe , email: null }
+
+site_subscriber_subscribe:
+    path: /subscribe/{email}
+    defaults: { _controller: SiteBundle:Subscriber:subscribe , email: null }
+
+
 site_customer_phonenumbers:
     path: /customer/phonenumbers
     defaults: { _controller: SiteBundle:Customer:phonenumbers }
@@ -85,10 +126,12 @@ site_customer_addresses:
     path: /customer/addresses
     defaults: { _controller: SiteBundle:Customer:addresses }
 
-
 site_basket_edit:
     path: /basket/edit
     defaults: { _controller: SiteBundle:Basket:edit }
+site_basket_empty:
+    path: /basket/empty
+    defaults: { _controller: SiteBundle:Basket:empty }
 
 site_basket_order:
     path: /basket/order

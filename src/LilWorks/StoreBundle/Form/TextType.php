@@ -17,17 +17,17 @@ class TextType extends AbstractType
     {
         $builder
             ->add('name',null,array(
-                'label'=>'lilworks.storebundle.text.name',
+                'label'=>'storebundle.text.name',
             ))
             ->add('title',null,array(
-                'label'=>'lilworks.storebundle.text.title',
+                'label'=>'storebundle.text.title',
             ))
             ->add('content',null,array(
-                'label'=>'lilworks.storebundle.text',
+                'label'=>'storebundle.text',
                 'attr' => ['class' => 'editor-text'],
             ))
             ->add('css',null,array(
-                'label'=>'lilworks.storebundle.text.css',
+                'label'=>'storebundle.text.css',
                 'attr' => ['class' => 'editor-css'],
             ))
 

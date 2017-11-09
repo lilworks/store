@@ -1,0 +1,857 @@
+storebundle.menu.storehome: 'accueil site'
+storebundle.menu.customer: clients
+storebundle.menu.customer.index: 'liste des clients'
+storebundle.menu.customer.new: 'nouveau client'
+storebundle.menu.user: utilisateurs
+storebundle.menu.user.index: 'liste des utilisateurs'
+storebundle.menu.user.new: 'nouvel utilisateur'
+storebundle.menu.session: sessions
+storebundle.menu.session.index: 'liste des sessions'
+storebundle.menu.order: devis/factures
+storebundle.menu.order.index: 'liste devis/factures'
+storebundle.menu.order.new: 'nouveau devis/facture'
+storebundle.menu.depositsale: dépôt-vente
+storebundle.menu.coupon: avoirs
+storebundle.menu.coupon.index: 'liste des avoirs'
+storebundle.menu.coupon.new: 'nouvel avoir'
+storebundle.menu.product: articles
+storebundle.menu.product.index: 'liste des articles'
+storebundle.menu.brand: marques
+storebundle.menu.brand.index: 'liste des marques'
+storebundle.menu.brand.new: 'nouvelle marque'
+storebundle.menu.category: catégories
+storebundle.menu.category.index: 'liste des catégories'
+storebundle.menu.category.new: 'nouvelle catégorie'
+storebundle.menu.supercategory: 'groupes de catégories'
+storebundle.menu.supercategory.index: 'liste des groupes de catégories'
+storebundle.menu.supercategory.new: 'nouveau groupe de catégories'
+storebundle.menu.warranty: garanties
+storebundle.menu.warranty.index: 'liste des garanties'
+storebundle.menu.warranty.new: 'nouvelle garantie'
+storebundle.menu.tag: tags
+storebundle.menu.tag.index: 'liste des tags'
+storebundle.menu.tag.new: 'nouveau tag'
+storebundle.menu.docfile: documentation
+storebundle.menu.docfile.index: 'liste des documentations'
+storebundle.menu.docfile.new: 'nouvelle documentation'
+storebundle.menu.paymentmethod: 'moyens de paiement'
+storebundle.menu.paymentmethod.index: 'liste des moyens de paiement'
+storebundle.menu.paymentmethod.new: 'nouveau moyen de paiement'
+storebundle.menu.tax: taxes
+storebundle.menu.tax.index: 'liste des taxes'
+storebundle.menu.tax.new: 'nouvelle taxe'
+storebundle.menu.shippingmethod: 'services de livraison'
+storebundle.menu.shippingmethod.index: 'liste des services de livraison'
+storebundle.menu.shippingmethod.new: 'nouveau service de livraison'
+storebundle.menu.country: pays
+storebundle.menu.country.index: 'liste des pays'
+storebundle.menu.country.new: 'nouveau pays'
+storebundle.menu.text: textes
+storebundle.menu.text.index: 'liste des textes'
+storebundle.menu.text.new: 'nouveau texte'
+storebundle.menu.conversation: conversation
+storebundle.menu.conversation.index: 'liste des conversations'
+storebundle.menu.conversation.new: 'nouvelle conversation'
+storebundle.menu.subscriber: abonnés
+storebundle.menu.subscriber.index: 'liste des abonnés'
+storebundle.menu.subscriber.import: 'importer abonnés'
+storebundle.menu.subscriber.export: 'exporter abonnés'
+storebundle.menu.subscriber.new: 'nouvel abonné'
+storebundle.menu.annonce: annonces
+storebundle.menu.annonce.index: 'liste des annonces'
+storebundle.menu.annonce.new: 'nouvelle annonce'
+storebundle.menu.depositsale.index: 'liste des dépôt-ventes'
+storebundle.menu.depositsale.new: 'nouveau dépôt-vente'
+storebundle.product.notavailable.contactus: 'contactez nous'
+storebundle.product.available: dispo
+storebundle.product.alwaysavailable: 'toujours dispo'
+storebundle.show: voir
+storebundle.edit: modifier
+storebundle.delete: supprimer
+storebundle.empty: vider
+storebundle.menu.product.new: 'nouvel article'
+storebundle.menu.syncro: synchronisations
+storebundle.menu.syncro.index: synchronisation
+storebundle.menu.brand.show: 'voir marque'
+storebundle.menu.brand.delete: 'supprimer marque'
+storebundle.menu.customer.show: 'voir le client'
+storebundle.menu.customer.edit: 'modifier le client'
+sitebundle.search: rechercher
+sitebundle.subscribe: 'abonnement à la newsletter'
+sitebundle.email: email
+sitebundle.pricecontaining: dont
+storebundle.menu.product.show: 'voir l''article'
+sitebundle.warranties: garanties
+sitebundle.alwaysavailable: 'toujours dispo'
+sitebundle.docfiles: documentations
+sitebundle.weigth: poids
+sitebundle.width: largeur
+sitebundle.length: profondeur/épaisseur
+sitebundle.height: hauteur
+sitebundle.specifications: spécifications
+sitebundle.user.logout: déconnection
+sitebundle.user.profile.edit: éditer
+sitebundle.user.profile.show: voir
+'sitebundle.user.logged_in_as %username%': '%username%, vous êtes connecté.'
+sitebundle.user.login: connection
+sitebundle.user.register: enregistrement
+sitebundle.categories: catégories
+sitebundle.category: catégorie
+sitebundle.priceorder: 'classer par prix'
+'sitebundle.category %name%': 'catégorie %name%'
+'sitebundle.supercategory %name%': 'groupe de catégories %name%'
+'{0} basket empty|{1} one product|]1,Inf[ %count% products': '{0} panier vide|{1} 1 article|]1,Inf[ %count% articles'
+'storebundle.product.notavailable.leadtime %leadtime%': 'disponible sous %leadtime% jour(s)'
+sitebundle.supercategories: 'groupes de catégories'
+appbundle.user.login: connection
+sitebundle.firstname: prenom
+sitebundle.lastname: 'nom de famille'
+sitebundle.companyname: entreprise/association
+sitebundle.address.name: 'chez (si different de votre nom)'
+sitebundle.address.street: rue
+sitebundle.address.complement: 'complement d''adresse'
+sitebundle.address.zipcode: 'code postal'
+sitebundle.address.city: ville
+sitebundle.address.country: pays
+sitebundle.phonenumber: téléphone
+sitebundle.description: description
+appbundle.user.register: enregistrement
+appbundle.user.forgot: 'mot de passe oublié'
+appbundle.user.email: 'adresse email'
+'sitebundle.brand %name%': 'marque %name%'
+sitebundle.allstoresearch: 'recherche dans tous le magasin'
+sitebundle.brands: marques
+storebundle.menu.customer.delete: 'supprimer le client'
+sitebundle.user.profile: 'votre profil'
+profile.show.phonenumbers: 'vos numéros de téléphone'
+profile.show.addresses: 'vos adresses'
+profile.show.orders: 'vos commandes'
+profile.show.noorder: 'aucune commande pour l''instant'
+sitebundle.conversations: conversations
+sitebundle.order.noorder: 'aucune commande pour l''instant...'
+sitebundle.orders: commandes
+sitebundle.user.edit: 'modification de votre profil'
+sitebundle.profile.show: 'détails de votre profil'
+sitebundle.conversation.noconversation: 'aucune conversation pour l''instant...'
+sitebundle.htmltitle.user.edit: 'modification de votre profil'
+sitebundle.user: utilisateur
+sitebundle.menu.customer.edit: 'modifier votre profil client'
+sitebundle.menu.user.conversations: 'conversations avec l''équipe ferré'
+sitebundle.menu.user.conversations.new: 'nouvelle conversation'
+sitebundle.menu.user.profile: 'votre profil utilisateur'
+sitebundle.menu.user.subscriber: 'abonnement à la lettre d''information'
+sitebundle.menu.usercustomer: 'votre compte'
+sitebundle.customer.edit: 'modification de votre profil client'
+sitebundle.usernameemail: email/utilisateur
+sitebundle.name: nom
+sitebundle.noorder: 'aucune commande'
+sitebundle.noconversation: 'aucune conversation'
+sitebundle.subscriber: 'inscription lettre information'
+sitebundle.customer.show: 'détails de votre compte'
+sitebundle.conversation.subject: sujet
+sitebundle.conversation.messages: messages
+sitebundle.delete: supprimer
+sitebundle.message.new: 'nouveau message'
+sitebundle.htmltitle.conversations: conversations
+sitebundle.menu.customer.show: 'détails client'
+sitebundle.menu.user.subscribe: 'souscrire à la lettre d''information'
+'{0} no result found|{1} found one result|]1,Inf[ found %count% results': '{0} aucun resultat|{1} 1resultat|]1,Inf[ %count% resultats'
+sitebundle.conversation.from.you: vous
+sitebundle.conversation.from.store: magasin
+sitebundle.conversations.message.new: 'nouveau message'
+sitebundle.menu.conversations: 'liste des conversations'
+sitebundle.menu.conversations.remove: 'supprimer la conversation'
+js.alert.delete.title: supprimer
+js.alert.delete.text: 'Etes vous sûr de vouloir supprimer cette entrée'
+js.alert.yes: oui
+js.alert.no: non
+sitebundle.menu.conversations.new: 'nouvelle conversation'
+sitebundle.menu.user.unsubscribe: 'désabonnez-vous de la la lettre d''information'
+storebundle.menu.session.clean: 'nettoyer les sessions périmées'
+lilworks.filter.open: 'ouvrir le filter'
+lilworks.filter.close: 'fermer le filtre'
+appbundle.session.lifetime: 'validité de la session (seconde)'
+storebundle.pdf: pdf
+storebundle.menu.paymentmethod.edit: 'modification du moyen de paiement'
+storebundle.menu.paymentmethod.show: 'détails du moyen de paiement'
+storebundle.ispublished: 'est publié'
+storebundle.prefix.countries: Pays
+'storebundle.title.show %name%': 'détails %name%'
+"            {0} no result found|{1} found one result|]1,Inf[ found %count% results\n            ": "            {0} no result found|{1} found one result|]1,Inf[ found %count% results\n            "
+actions: actions
+appbundle.action: actions
+appbundle.button.filter: filtrer
+appbundle.customer: client
+appbundle.depositsales: dépôt-vente
+appbundle.email: email
+appbundle.htmltitle.user.index: 'accueil user'
+'appbundle.htmltitle.user.index  %username%': 'appbundle.htmltitle.user.index  %username%'
+'appbundle.htmltitle.user.index %username%': 'appbundle.htmltitle.user.index %username%'
+appbundle.htmltitle.user.new: 'nouvel utilisateur'
+appbundle.lastLogin: 'dernière connection'
+appbundle.orders: commandes
+appbundle.passwordRequestedAt: 'demande de mot de passe'
+appbundle.session.basket.tot: 'valeur total panier'
+appbundle.session.id: 'id de session'
+appbundle.session.index: 'accueil session'
+appbundle.session.lifetimer: appbundle.session.lifetimer
+appbundle.session.time: durée
+appbundle.user: utilisateur
+'appbundle.user.edit %username%': 'modification de l''utilisateur %username%'
+appbundle.user.enabled: actif
+appbundle.user.index: 'accueil utilisateurs'
+appbundle.user.new: 'nouvel utilisateur'
+'appbundle.user.show %username%': 'détails de l''utilisateur %username%'
+appbundle.username: 'nom d''utilisateur'
+lilworks.storebundle.address.city: lilworks.storebundle.address.city
+lilworks.storebundle.address.complement: lilworks.storebundle.address.complement
+lilworks.storebundle.address.country: lilworks.storebundle.address.country
+lilworks.storebundle.address.name: lilworks.storebundle.address.name
+lilworks.storebundle.address.street: lilworks.storebundle.address.street
+lilworks.storebundle.address.zipcode: lilworks.storebundle.address.zipcode
+lilworks.storebundle.addresses: lilworks.storebundle.addresses
+lilworks.storebundle.companyname: lilworks.storebundle.companyname
+lilworks.storebundle.customer: lilworks.storebundle.customer
+lilworks.storebundle.description: lilworks.storebundle.description
+lilworks.storebundle.firstname: lilworks.storebundle.firstname
+lilworks.storebundle.lastname: lilworks.storebundle.lastname
+lilworks.storebundle.phonenumber: lilworks.storebundle.phonenumber
+lilworks.storebundle.phonenumbers: lilworks.storebundle.phonenumbers
+'not set': 'not set'
+selectors: selectors
+storebundle.button.create: storebundle.button.create
+storebundle.button.edit: storebundle.button.edit
+storebundle.customer: storebundle.customer
+storebundle.email: email
+storebundle.username: 'nom d''utilisateur'
+"                        {0} basket empty|{1} one product|]1,Inf[ %count% products\n                        ": '{0} panier vide|{1} 1 article|]1,Inf[ %count% articles'
+"                        {1} available in 1 day |]2,Inf[ available in %count% days\n                        ": '{1} disponible sous 1 jour |]2,Inf[ disponible sous %count% jours'
+"                        {1} only 1 product left|{2} only 2 products left|]2,Inf[ %count% products left\n                        ": '{1}seulement 1 article restant|{2} seulement 2 articles restants|]2,Inf[ %count% articles restants'
+"                    {0} basket empty|{1} one product|]1,Inf[ %count% products\n                    ": '{0} panier vide|{1} 1 article|]1,Inf[ %count% articles'
+"                {0} no product found|{1} found one product|]1,Inf[ found %count% products\n                ": '{0} aucun article|{1} 1 article trouvé|]1,Inf[ %count% articles trouvés'
+"            {0} No order found|{1} found one order|]1,Inf[ found %count% orders\n            ": '{0} aucune commande|{1} 1 commande]1,Inf[ %count% commandes'
+site.conversation.emailsubject: sujet
+site.htmltitle.contact: contact
+site.htmltitle.home: accueil
+sitebundle.action: actions
+sitebundle.addresses: adresses
+sitebundle.addtobasket: 'ajouter au panier'
+sitebundle.basket: panier
+sitebundle.basket.edit: 'editer le panier'
+sitebundle.billingaddress: 'adresse de facturation'
+sitebundle.brand: marques
+sitebundle.button.back: retour
+sitebundle.button.edit: 'sauvegarder les modifications'
+sitebundle.button.filter: filtrer
+sitebundle.button.search: rechercher
+sitebundle.button.send: envoyer
+sitebundle.cancel: annuler
+sitebundle.connexion: sitebundle.connexion
+sitebundle.conversation: conversation
+sitebundle.conversationmessage: message
+sitebundle.conversationmessage.body: 'corps du message'
+sitebundle.conversationmessage.email: email
+sitebundle.conversationmessage.getcopy: 'recevoir une copie'
+sitebundle.conversationmessage.sent: 'message envoyé'
+sitebundle.conversationmessage.subject: 'sujet du message'
+sitebundle.createdat: 'date de création'
+sitebundle.filter: filtrer
+sitebundle.filter.results: 'nombre de resultats'
+sitebundle.globalsearch: 'recherche globale'
+sitebundle.htmltitle.allstore: 'recherche dans tous le magasin'
+sitebundle.htmltitle.basket.edit: 'modification du panier'
+'sitebundle.htmltitle.brand %name%': 'marque %name%'
+'sitebundle.htmltitle.category %name%': 'catégorie %name%'
+sitebundle.htmltitle.order: commande
+'sitebundle.htmltitle.order %reference%': 'commande %reference%'
+'sitebundle.htmltitle.order.pay %reference%': 'payer %reference%'
+'sitebundle.htmltitle.product %product%': 'article %product%'
+'sitebundle.htmltitle.supercategory %name%': 'groupe de catégories %name%'
+sitebundle.issecondhand: occasion
+sitebundle.next: suivant
+sitebundle.order: commande
+sitebundle.order.cancel: annuler
+sitebundle.order.list: 'liste des commandes'
+sitebundle.order.pay: payer
+sitebundle.order.pdf: pdf
+sitebundle.ordersteps: 'étapes de commande'
+sitebundle.pay: payer
+sitebundle.payed: payée
+sitebundle.paymentmethods: paiements
+sitebundle.pdf: pdf
+sitebundle.phonenumbers: téléphones
+sitebundle.previous: précédent
+sitebundle.pricerange: 'plage de prix'
+sitebundle.priceunity: 'prix unitaire'
+sitebundle.product: article
+sitebundle.product.alwaysavailable: 'toujours dispo'
+sitebundle.product.available: dispo
+sitebundle.product.issecondhand: occasion
+sitebundle.productname: article
+sitebundle.productnotfound: 'article non trouvé'
+sitebundle.products: articles
+sitebundle.producttot: 'sous-total article'
+sitebundle.quantity: quantité
+sitebundle.reference: référence
+sitebundle.relatedproducts: 'articles conseillés'
+sitebundle.selectaddressfirst: 'merci de choisir une adresse'
+sitebundle.shippingaddress: 'adresse de livraison'
+sitebundle.shippingmethod: 'service de livraison'
+sitebundle.show: montrer
+sitebundle.subtot: sous-total
+sitebundle.tot: total
+sitebundle.totwithshipping: 'total avec frais de port'
+sitebundle.updatedat: 'date de mise à jour'
+sitebundle.user.notconnected: 'non connecté'
+stitebundle.htmltitle.customer.addresses: adresses
+stitebundle.htmltitle.customer.phonenumbers: téléphones
+lilworks.storebundle.coupon: lilworks.storebundle.coupon
+storebundle.action: action
+storebundle.addresses: adresses
+storebundle.annonce.list: 'liste des annonces'
+storebundle.annonces: annonces
+storebundle.brand: marque
+'storebundle.brand.edit %name%': 'modification de la marque %name%'
+storebundle.brand.list: 'liste des marques'
+storebundle.brand.new: 'nouvelle marque'
+storebundle.brand.productcount: 'nombre d''articles'
+'storebundle.brand.show %name%': 'détails de la marque %name%'
+storebundle.brand.website: 'site internet'
+storebundle.brands: marques
+storebundle.button.filter: filtrer
+storebundle.cancel: annuler
+storebundle.categories: 'groupe de catégories'
+storebundle.category: catégory
+'storebundle.category.edit %name%': 'modification de la catégorie %name%'
+storebundle.category.list: 'liste des catégorie'
+storebundle.category.new: 'nouvel catégorie'
+'storebundle.category.show %name%': 'détails de la catégorie %name%'
+storebundle.companyname: entreprise
+storebundle.conversation: conversation
+storebundle.conversation.lastmessage: 'dernier message'
+storebundle.conversation.list: 'liste des conversations'
+storebundle.conversation.messages: messages
+'storebundle.conversation.show %subject%': 'détails de la conversation %subject%'
+storebundle.conversation.subject: sujet
+storebundle.conversation.unreaded: non-lu
+storebundle.conversationmessages: message
+storebundle.conversationmessages.createdat: 'date d''envoi'
+storebundle.conversationmessages.readedat: 'date de lecture'
+storebundle.countries: pays
+storebundle.country: pays
+storebundle.country.alowedshippingmethods: 'services de livraison autorisés'
+'storebundle.country.edit %name%': 'modification du pays %name%'
+storebundle.country.flag: drapeau
+storebundle.country.index: 'accueil pays'
+storebundle.country.new: 'nouveau pays'
+'storebundle.country.show %name%': 'détails du pays %name%'
+storebundle.coupon: avoir
+storebundle.coupon.availableonline: 'disponible en ligne'
+storebundle.coupon.edit: 'modification d''un avoir'
+storebundle.coupon.initamount: 'montant initial'
+storebundle.coupon.isactive: 'est actif'
+storebundle.coupon.isavailableonline: 'est disponible en ligne'
+storebundle.coupon.issplitable: 'est découpable'
+storebundle.coupon.list: 'liste des avoirs'
+storebundle.coupon.new: 'nouvel avoir'
+storebundle.coupon.paymentmethods: paiements
+storebundle.coupon.restamount: 'montant restant'
+'storebundle.coupon.show %reference%': 'détails de l''avoir %reference%'
+storebundle.coupon.splitable: 'avoir découpable'
+storebundle.coupon.validity: 'date d''expiration'
+storebundle.coupons: avoirs
+storebundle.createdat: 'date de création'
+storebundle.customer.list: 'liste des clients'
+storebundle.customer.new: 'nouveau client'
+storebundle.customer.remoteuser: 'utilisateur distant'
+storebundle.customers: clients
+storebundle.depositsale: dépôt-vente
+storebundle.depositsale.coupon: avoir
+storebundle.depositsale.deposedat: 'date de dépôt'
+storebundle.depositsale.list: 'liste des dépôt-ventes'
+storebundle.depositsale.new: 'nouveau dépôt-vente'
+storebundle.depositsale.pricebuying: 'montant reversé client'
+storebundle.depositsale.priceselling: 'prix de vente'
+storebundle.depositsale.product: article
+storebundle.depositsale.selledat: 'vendu le'
+'storebundle.depositsale.show %reference%': 'détails du dépôt-vente %reference%'
+storebundle.depositsale.status: état
+storebundle.depositsales: dépôt-ventes
+storebundle.description: description
+storebundle.descriptioninternal: 'description interne'
+storebundle.docfile.edit: 'modification d''une documentation'
+storebundle.docfile.list: 'liste des documentations'
+storebundle.docfile.name: nom
+storebundle.docfile.new: 'nouvel documentation'
+'storebundle.docfile.show %name%': 'détails de la documentation %name%'
+storebundle.docfile.title: titre
+storebundle.file: fichier
+storebundle.firstandlastname: 'prénom nom de famille'
+storebundle.firstname: prénom
+'storebundle.htmltitle.annonce.edit %name%': 'modification de l''annonce %name%'
+storebundle.htmltitle.annonce.index: 'accueil annonces'
+storebundle.htmltitle.annonce.new: 'nouvelle annonce'
+'storebundle.htmltitle.annonce.show %name%': 'détails de l''annonce %name%'
+'storebundle.htmltitle.basket.edit %id%': 'modification du panier %id%'
+storebundle.htmltitle.basket.index: 'accueil paniers'
+storebundle.htmltitle.basket.new: 'nouveau panier'
+'storebundle.htmltitle.basket.show %id%': 'détails du panier %id%'
+'storebundle.htmltitle.brand.edit %name%': 'modification de la marque %name%'
+storebundle.htmltitle.brand.index: 'accueil marques'
+storebundle.htmltitle.brand.new: 'nouvelle marque'
+'storebundle.htmltitle.brand.show %name%': 'détails de la marque %name%'
+'storebundle.htmltitle.category.edit %name%': 'modification de la catégorie %name%'
+storebundle.htmltitle.category.index: 'accueil catégories'
+storebundle.htmltitle.category.new: 'nouvelle catégorie'
+'storebundle.htmltitle.category.show %name%': 'détails de la catégorie %name%'
+storebundle.htmltitle.conversation.index: 'accueil conversations'
+storebundle.htmltitle.conversation.new: 'nouvelle conversation'
+'storebundle.htmltitle.conversation.show %subject%': 'détails de la conversation %subject%'
+'storebundle.htmltitle.country.edit %name%': 'modification du pays %name%'
+storebundle.htmltitle.country.index: 'accueil pays'
+storebundle.htmltitle.country.new: 'nouveau pays'
+'storebundle.htmltitle.country.show %name%': 'détails du pays %name%'
+'storebundle.htmltitle.coupon.edit %reference%': 'modification de l''avoir %reference%'
+storebundle.htmltitle.coupon.index: 'accueil avoirs'
+storebundle.htmltitle.coupon.new: 'nouvel avoir'
+'storebundle.htmltitle.coupon.show %reference%': 'détails de l''avoir %reference%'
+'storebundle.htmltitle.customer.edit %name%': 'modification du client %name%'
+storebundle.htmltitle.customer.index: 'accueil clients'
+storebundle.htmltitle.customer.new: 'nouveau client'
+'storebundle.htmltitle.customer.show %name%': 'détails du client %name%'
+'storebundle.htmltitle.depositsale.edit %reference%': 'modification du dépôt-vente %reference%'
+storebundle.htmltitle.depositsale.index: 'accueil dépôt-ventes'
+storebundle.htmltitle.depositsale.new: 'nouveau dépôt-vente'
+'storebundle.htmltitle.depositsale.show %reference%': 'détails du dépôt-vente %reference%'
+'storebundle.htmltitle.docfile.edit %docname%': 'modification de la documentation %docname%'
+storebundle.htmltitle.docfile.index: 'accueil documentations'
+storebundle.htmltitle.docfile.new: 'nouvelle documentation'
+'storebundle.htmltitle.docfile.show %docname%': 'détails de la documentation %docname%'
+'storebundle.htmltitle.order.edit %reference%': 'modification devis/facture %reference%'
+storebundle.htmltitle.order.index: 'accueil devis/facture'
+storebundle.htmltitle.order.new: 'nouveau devis/facture'
+'storebundle.htmltitle.order.show %reference%': 'détails du devis/facture %reference%'
+'storebundle.htmltitle.orderstep.edit %name%': 'modification de l''étape de commande %name%'
+storebundle.htmltitle.orderstep.index: 'accueil étape de commande'
+storebundle.htmltitle.orderstep.new: 'nouvelle étape de commande'
+'storebundle.htmltitle.orderstep.show %name%': 'détails de l''étape de commande %name%'
+'storebundle.htmltitle.paymentmethod.edit %name%': 'modification du moyen de paiement %name%'
+'storebundle.htmltitle.paymentmethod.index ': 'accueil moyens de paiement'
+'storebundle.htmltitle.paymentmethod.new ': 'nouveau moyen de paiement'
+'storebundle.htmltitle.paymentmethod.show %name%': 'détails du moyen de paiement %name%'
+storebundle.htmltitle.portal.config: configurations
+storebundle.htmltitle.portal.document: documents
+storebundle.htmltitle.portal.index: administration
+storebundle.htmltitle.portal.payment: paiements
+storebundle.htmltitle.portal.product: articles
+storebundle.htmltitle.portal.shipping: livraisons
+storebundle.htmltitle.portal.user: utilisateurs
+'storebundle.htmltitle.product.edit %name%': 'modification de l''article %name%'
+storebundle.htmltitle.product.index: 'accueil articles'
+storebundle.htmltitle.product.new: 'nouvel article'
+'storebundle.htmltitle.product.show %name%': 'détails de l''article %name%'
+'storebundle.htmltitle.shippingmethod.edit %name%': 'modification du service de livraison %name%'
+storebundle.htmltitle.shippingmethod.index: 'accueil services de livraison'
+storebundle.htmltitle.shippingmethod.new: 'nouveau service de livraison'
+'storebundle.htmltitle.shippingmethod.show %name%': 'détails du service de livraison %name%'
+'storebundle.htmltitle.storeinfo.edit %tag%': 'modification du parametre site %tag%'
+storebundle.htmltitle.storeinfo.index: 'accueil parametres site'
+storebundle.htmltitle.storeinfo.new: 'nouveau parametre de site'
+'storebundle.htmltitle.storeinfo.show %tag%': 'détails du tag %tag%'
+storebundle.htmltitle.subscriber.index: 'acceuil abonnés'
+storebundle.htmltitle.subscriber.new: 'nouvel abonné'
+'storebundle.htmltitle.subscriber.show %name%': 'détails de l''abonné %name%'
+'storebundle.htmltitle.supercategory.edit %name%': 'modification du groupe de catégories %name%'
+storebundle.htmltitle.supercategory.index: 'accueil groupes de catégories'
+storebundle.htmltitle.supercategory.new: 'nouveau groupe de catégories'
+'storebundle.htmltitle.supercategory.show %name%': 'détails du groupe de catégories %name%'
+storebundle.htmltitle.syncro.index: 'accueil synchronisation'
+storebundle.htmltitle.syncro.stock: 'synchroniser les stocks'
+'storebundle.htmltitle.tag.edit %name%': 'modification du tag %name%'
+storebundle.htmltitle.tag.index: 'accueil tags'
+storebundle.htmltitle.tag.new: 'nouveau tag'
+'storebundle.htmltitle.tag.show %name%': 'détails du tag %name%'
+'storebundle.htmltitle.tax.edit %name%': 'modification du tag %name%'
+storebundle.htmltitle.tax.index: 'accueil tags'
+storebundle.htmltitle.tax.new: 'nouveau tag'
+'storebundle.htmltitle.tax.show %name%': 'détails du tag %name%'
+'storebundle.htmltitle.text.edit %name%': 'modification du texte %name%'
+storebundle.htmltitle.text.index: 'accueil textes'
+storebundle.htmltitle.text.new: 'nouveau texte'
+'storebundle.htmltitle.text.show %name%': 'détails du texte %name%'
+'storebundle.htmltitle.warranty.edit %name%': 'modification de la garantie %name%'
+storebundle.htmltitle.warranty.index: 'accueil garanties'
+storebundle.htmltitle.warranty.new: 'nouvelle garantie'
+'storebundle.htmltitle.warranty.show %name%': 'détails de la garantie %name%'
+storebundle.id: id
+storebundle.idandtag: 'id et tag'
+storebundle.import: importer
+storebundle.initamount: 'valeur initiale'
+storebundle.internaldescription: 'description interne'
+storebundle.isarchived: archivé
+storebundle.issecondhand: occasion
+storebundle.lastname: 'nom de famille'
+storebundle.link: lien
+storebundle.link.backup: sauvegarder
+storebundle.link.backup.apply: 'appliquer la sauvegarde'
+storebundle.link.delete: supprimer
+storebundle.link.edit: éditer
+storebundle.link.list: liste
+storebundle.link.new: nouveau
+storebundle.link.pdf: pdf
+storebundle.link.show: voir
+storebundle.link.showonline: 'voir en ligne'
+storebundle.menu.cat.config.portal: configurations
+storebundle.menu.cat.document.portal: documents
+storebundle.menu.cat.payment.portal: paiments
+storebundle.menu.cat.product.portal: articles
+storebundle.menu.cat.shipping.portal: livraisons
+storebundle.menu.cat.user.portal: utilisateurs
+storebundle.name: nom
+storebundle.no: non
+storebundle.notset: 'non défini'
+storebundle.offline: hors-ligne
+storebundle.order: devis/facture
+storebundle.order.billingaddress: 'adresse facturation'
+storebundle.order.devis.show: 'détails devis'
+storebundle.order.edit: 'modification devis/facture'
+storebundle.order.facture.show: 'détails facture'
+storebundle.order.lastorderstep: 'dernière étape'
+storebundle.order.list: 'liste des devis/factures'
+storebundle.order.new: 'nouveau devis/facture'
+storebundle.order.payed: payé
+storebundle.order.payments: paiements
+storebundle.order.productnotset: 'article non défini'
+storebundle.order.products: articles
+storebundle.order.resttopay: 'reste à payer'
+storebundle.order.seller: vendeur
+storebundle.order.shippingaddress: 'adresse de livraison'
+storebundle.order.shippingmethods: 'adresses de livraisons'
+storebundle.order.show: détails
+storebundle.order.storecomment: 'commentaire magasin'
+storebundle.order.tomuchpayed: 'trop perçu'
+storebundle.order.type: type
+storebundle.order.usercomment: 'commentaire client'
+storebundle.orders: commandes
+storebundle.orderstep: étapes
+'storebundle.orderstep.edit %name%': 'modification de l''étape de commande %name%'
+storebundle.orderstep.index: 'accueil étape de commande'
+storebundle.orderstep.new: 'nouvelle étape de commande'
+'storebundle.orderstep.show %name%': 'détails de l''étape de commande %name%'
+storebundle.paymentmethod.data: parametres
+'storebundle.paymentmethod.edit %name%': 'modification du moyen de paiement %name%'
+storebundle.paymentmethod.list: 'liste des moyens de paiement'
+storebundle.paymentmethod.new: 'nouveau moyen de paiement'
+'storebundle.paymentmethod.show %name%': 'détails du moyen de paiement %name%'
+storebundle.paymentmethods: 'moyens de paiement'
+storebundle.phonenumber: téléphone
+storebundle.phonenumbers: téléphones
+storebundle.picture: image
+storebundle.pictures: images
+storebundle.pos: position
+storebundle.price: prix
+storebundle.pricebuying: 'prix d''achat'
+storebundle.priceonline: 'prix en ligne'
+storebundle.priceperunity: 'prix unitaire'
+storebundle.priceretail: 'prix public conseillé'
+storebundle.product: produit
+storebundle.product.cleanpicturefolder: 'nettoyage des dossiers d''images'
+storebundle.product.cleantag: 'nettoyage des tags'
+storebundle.product.cleantag.done: 'nettoyage des tags términé'
+storebundle.product.docfile: documentation
+storebundle.product.docfiles: documentations
+storebundle.product.edit: 'modification d''un article'
+storebundle.product.height: hauteur
+storebundle.product.isalwaysavailable: 'toujours dispo'
+storebundle.product.isarchived: archivé
+storebundle.product.isrelatedto: 'est associé'
+storebundle.product.isreviewable: 'peur recevoir des commantaires'
+storebundle.product.issecondhand: occasion
+storebundle.product.leadtime: 'délai d''approvisionnement'
+storebundle.product.length: profondeur
+storebundle.product.list: 'liste des articles'
+storebundle.product.new: 'nouvel article'
+storebundle.product.pricebuying: 'prix d''achat'
+storebundle.product.priceoffline: 'prix en magasin'
+storebundle.product.priceonline: 'prix en ligne'
+storebundle.product.priceretail: 'prix public conseillé'
+storebundle.product.relatedproduct: 'produit associé'
+storebundle.product.relatedproducts: 'produits associés'
+storebundle.product.review: avis
+storebundle.product.serialnumber: 'numero de série'
+storebundle.product.shippingmethods: 'services de livraisons'
+storebundle.product.show: 'détails article'
+storebundle.product.spec: storebundle.product.spec
+storebundle.product.specifications: specifications
+storebundle.product.syncro: synchroniser
+storebundle.product.syncro.disconected: 'connection impossible'
+storebundle.product.tags: tags
+storebundle.product.taxesoffline: 'taxes en magasin'
+storebundle.product.taxesonline: 'taxes en ligne'
+storebundle.product.warrantiesoffline: 'garanties en magasin'
+storebundle.product.warrantiesonline: 'garanties en ligne'
+storebundle.product.weight: poids
+storebundle.product.width: largeur
+storebundle.products: articles
+storebundle.productsoffline: 'articles en magasin'
+storebundle.productsonline: 'articles en ligne'
+storebundle.quantity: quantité
+storebundle.realshippingmethods: 'services de livraison'
+storebundle.reference: référence
+storebundle.relatedproducts: 'produits associés'
+storebundle.remoteuser: 'utilisateur distant'
+storebundle.save: sauvegarder
+storebundle.sessions: sessions
+storebundle.shippingmethod: 'service de livraison'
+storebundle.shippingmethod.allowedcountries: 'pays authorisés'
+storebundle.shippingmethod.delay: 'temps de livraison'
+'storebundle.shippingmethod.edit %name%': 'modification du service de livraison %name%'
+storebundle.shippingmethod.freetrigger: 'seuil de gratuité'
+storebundle.shippingmethod.list: 'liste des services de livraison'
+storebundle.shippingmethod.new: 'nouveau service de livraison'
+storebundle.shippingmethod.orderproductcount: 'articles dans les commandes'
+storebundle.shippingmethod.price: prix
+storebundle.shippingmethod.priority: priorité
+storebundle.shippingmethod.productcount: 'nombre d''articles'
+storebundle.shippingmethod.products: articles
+storebundle.shippingmethod.receivedat: 'date de reception'
+storebundle.shippingmethod.shippedat: 'date d''expedition'
+'storebundle.shippingmethod.show %name%': 'détails du service de livraison %name%'
+storebundle.shippingmethods: 'services de livraison'
+storebundle.stock: stock
+storebundle.stocks: stocks
+storebundle.subscriber: abonné
+storebundle.subscriber.list: 'liste des abonnés'
+storebundle.supercategories: 'groupes de catégories'
+storebundle.supercategory: 'groupe de catégories'
+'storebundle.supercategory.edit %name%': 'modification du groupe de catégories %name%'
+storebundle.supercategory.list: 'liste des groupes de catégories'
+storebundle.supercategory.new: 'nouveau groupe de catégories'
+'storebundle.supercategory.show %name%': 'détails du groupe de catégories %name%'
+storebundle.syncro.db: 'synchronisation des bases de données'
+storebundle.syncro.db.nothingtodo: 'rien à faire'
+storebundle.syncro.db.syncronized: synchronisée
+storebundle.syncro.ftp: ftp
+'storebundle.syncro.ftp.alreadyInFiles %count%': '%count% fichiers déjà présents'
+'storebundle.syncro.ftp.uploadedFiles %count%': '%count% fichiers transferés'
+storebundle.syncro.issyncronized: synchronisé
+storebundle.syncro.list: 'liste des synchronisations'
+storebundle.syncro.products.ko: 'non synchronisé'
+storebundle.syncro.syncronize: synchroniser
+storebundle.tab.general: general
+storebundle.tab.more: plus
+storebundle.tag: tag
+'storebundle.tag.edit %name%': 'modification du tag %name%'
+storebundle.tag.list: 'liste des tags'
+storebundle.tag.new: 'nouveau tag'
+'storebundle.tag.show %name%': 'détails du tag %name%'
+storebundle.tags: tags
+storebundle.tax.list: 'liste des tags'
+storebundle.tax.ordersproducts: 'articles dans les commandes'
+storebundle.tax.productsoffline: 'articles hors-ligne'
+storebundle.tax.productsonline: 'articles en ligne'
+'storebundle.tax.show %name%': 'détails de la taxe %name%'
+storebundle.tax.type: type
+storebundle.tax.value: valeur
+storebundle.taxes: taxes
+storebundle.text: texte
+storebundle.text.backup: sauvegarde
+storebundle.text.backup.show: voir
+storebundle.text.backups: sauvegardes
+storebundle.text.current: 'version courante'
+storebundle.text.edit: éditer
+storebundle.text.iscontent: 'est du contenu'
+storebundle.text.list: 'liste des textes'
+storebundle.text.new: 'nouveau texte'
+storebundle.texts: textes
+storebundle.title: titre
+storebundle.tot: total
+storebundle.updatedat: 'date de mise à jour'
+storebundle.url: lien
+storebundle.user: utilisateur
+storebundle.userorjustemail: 'utilisateur ou email'
+storebundle.users: utilisateurs
+storebundle.warranties: garanties
+storebundle.warrantiesoffline: 'garanties hors-ligne'
+storebundle.warrantiesonline: 'garanties en ligne'
+'storebundle.warranty.edit %name%': 'modification de la garantie %name%'
+storebundle.warranty.list: 'liste des garanties'
+storebundle.warranty.new: 'nouvelle garantie'
+storebundle.warranty.orders: commandes
+storebundle.warranty.productsoffline: 'articles hors ligne'
+storebundle.warranty.productsonline: 'articles en ligne'
+'storebundle.warranty.show %name%': 'détails garantie %name%'
+storebundle.website: 'site web'
+'storebundle.weeknum %week%': 'semaine n°%week%'
+storebundle.yes: oui
+0: '10'
+1: '100'
+2: '20'
+3: '30'
+4: '50'
+'Expedited Shipping': 'Expedited Shipping'
+'Priority Shipping': 'Priority Shipping'
+'Standard Shipping': 'Standard Shipping'
+'always available': 'always available'
+available: available
+createdAt: createdAt
+customer: customer
+layout.logged_in_as: layout.logged_in_as
+layout.login: layout.login
+layout.logout: layout.logout
+name: name
+order: order
+orderSteps: orderSteps
+payed: payed
+payment: payment
+'payment rest': 'payment rest'
+price: price
+profile.edit: profile.edit
+profile.show: profile.show
+quantity: quantity
+reference: reference
+registration.submit: registration.submit
+seller: seller
+'shipping and billing addresses': 'shipping and billing addresses'
+shippingMethod: shippingMethod
+sitebundle.register: sitebundle.register
+storeComment: storeComment
+storebundle.conversationmessage.copyemail.title: storebundle.conversationmessage.copyemail.title
+tot: tot
+total: total
+'total: ': 'total: '
+updatedAt: updatedAt
+userComment: userComment
+'your order': 'your order'
+'{1} available in 1 day|]1,Inf[ available in %leadTime% days': '{1} available in 1 day|]1,Inf[ available in %leadTime% days'
+'{1} missing 1 product|]1,Inf[ missing %count% products': '{1} missing 1 product|]1,Inf[ missing %count% products'
+'{1} missing 1 product|]1,Inf[ missing %count% products, please contact us': '{1} missing 1 product|]1,Inf[ missing %count% products, please contact us'
+"                {0} no result found|{1} found one result|]1,Inf[ found %count% results\n                ": "                {0} no result found|{1} found one result|]1,Inf[ found %count% results\n                "
+"            {0} No storeinfo found|{1} found one storeinfo|]1,Inf[ found %count% storeinfos\n            ": "            {0} No storeinfo found|{1} found one storeinfo|]1,Inf[ found %count% storeinfos\n            "
+"            {0} no basket found|{1} found one basket|]1,Inf[ found %count% baskets\n            ": "            {0} no basket found|{1} found one basket|]1,Inf[ found %count% baskets\n            "
+"           {0} no result found|{1} found one result|]1,Inf[ found %count% results\n           ": "           {0} no result found|{1} found one result|]1,Inf[ found %count% results\n           "
+"        {0} no file removed|{1} one file removed|]1,Inf[ %count% files removed\n        ": "        {0} no file removed|{1} one file removed|]1,Inf[ %count% files removed\n        "
+'%': '%'
+action: action
+addresses: addresses
+'appbundle.annonce.edit %name%': 'appbundle.annonce.edit %name%'
+appbundle.annonce.new: appbundle.annonce.new
+'appbundle.annonce.show %name%': 'appbundle.annonce.show %name%'
+'appbundle.customer.edit %name%': 'appbundle.customer.edit %name%'
+'appbundle.customer.show %name%': 'appbundle.customer.show %name%'
+'appbundle.depositsale.edit %reference%': 'appbundle.depositsale.edit %reference%'
+'appbundle.text.show %name%': 'appbundle.text.show %name%'
+'basket list': 'basket list'
+billingAddress: billingAddress
+brand: brand
+'brand edit': 'brand edit'
+'brand list': 'brand list'
+'brand new': 'brand new'
+'category edit': 'category edit'
+'country list': 'country list'
+'country new': 'country new'
+'country show': 'country show'
+create: create
+delete: delete
+description: description
+edit: edit
+flag: flag
+freeTrigger: freeTrigger
+id: id
+'id and tag': 'id and tag'
+ipublished: ipublished
+isPublishedOnline: isPublishedOnline
+lilworks.storebundle.name: lilworks.storebundle.name
+lilworks.storebundle.order.storecomment: lilworks.storebundle.order.storecomment
+lilworks.storebundle.order.usercomment: lilworks.storebundle.order.usercomment
+lilworks.storebundle.paymentmethod: lilworks.storebundle.paymentmethod
+lilworks.storebundle.paymentmethod.amount: lilworks.storebundle.paymentmethod.amount
+lilworks.storebundle.paymentmethod.payedat: lilworks.storebundle.paymentmethod.payedat
+lilworks.storebundle.pictures: lilworks.storebundle.pictures
+lilworks.storebundle.product.alwaysavailable: lilworks.storebundle.product.alwaysavailable
+lilworks.storebundle.product.available: lilworks.storebundle.product.available
+lilworks.storebundle.product.notavailable.contactus: lilworks.storebundle.product.notavailable.contactus
+'lilworks.storebundle.product.notavailable.leadtime %leadtime%': 'lilworks.storebundle.product.notavailable.leadtime %leadtime%'
+lilworks.storebundle.products: lilworks.storebundle.products
+lilworks.storebundle.productsoffline: lilworks.storebundle.productsoffline
+lilworks.storebundle.productsonline: lilworks.storebundle.productsonline
+lilworks.storebundle.remoteuser: lilworks.storebundle.remoteuser
+lilworks.storebundle.tag: lilworks.storebundle.tag
+lilworks.storebundle.tax.type: lilworks.storebundle.tax.type
+lilworks.storebundle.tax.value: lilworks.storebundle.tax.value
+lilworks.storebundle.text: lilworks.storebundle.text
+lilworks.storebundle.text.css: lilworks.storebundle.text.css
+lilworks.storebundle.text.name: lilworks.storebundle.text.name
+lilworks.storebundle.text.title: lilworks.storebundle.text.title
+lilworks.storebundle.user: lilworks.storebundle.user
+'new storeInfo': 'new storeInfo'
+payments: payments
+picture: picture
+pictures: pictures
+products: products
+productsCount: productsCount
+'ratio (%)': 'ratio (%)'
+realShippingMethods: realShippingMethods
+shippingAddress: shippingAddress
+shippingmethods: shippingmethods
+show: show
+'store overview': 'store overview'
+store.name: store.name
+store.tag: store.tag
+'storeInfo edit': 'storeInfo edit'
+'storeInfo list': 'storeInfo list'
+storebundle.address: storebundle.address
+storebundle.address.city: storebundle.address.city
+storebundle.address.complement: storebundle.address.complement
+storebundle.address.country: storebundle.address.country
+storebundle.address.name: storebundle.address.name
+storebundle.address.street: storebundle.address.street
+storebundle.address.zipcode: storebundle.address.zipcode
+storebundle.all: storebundle.all
+storebundle.allarchived: storebundle.allarchived
+storebundle.allpublished: storebundle.allpublished
+storebundle.clean.removefile: storebundle.clean.removefile
+storebundle.docfiletitle: storebundle.docfiletitle
+storebundle.docname: storebundle.docname
+'storebundle.htmltitle.conversation.edit %reference%': 'storebundle.htmltitle.conversation.edit %reference%'
+'storebundle.htmltitle.subscriber.edit %name%': 'storebundle.htmltitle.subscriber.edit %name%'
+storebundle.import.offline: storebundle.import.offline
+storebundle.import.online: storebundle.import.online
+storebundle.menu.cat.index.portal: storebundle.menu.cat.index.portal
+'storebundle.supercategory.tax %name%': 'storebundle.supercategory.tax %name%'
+'storebundle.syncro.ftp.deletedUnusedFiles %count%': 'storebundle.syncro.ftp.deletedUnusedFiles %count%'
+'subscriber edit': 'subscriber edit'
+tag: tag
+user: user
+value: value
+'value (€)': 'value (€)'
+warranties: warranties
+€: €
+storebundle.menu.country.delete: 'supprimer le pays'
+storebundle.country.edit: 'modifier le pays'
+storebundle.menu.country.edit: 'modifier le pays'
+5: '10'
+6: '100'
+7: '20'
+8: '30'
+9: '50'
+10: '10'
+11: '100'
+12: '20'
+13: '30'
+14: '50'
+15: '10'
+16: '100'
+17: '20'
+18: '30'
+19: '50'
+20: '10'
+21: '100'
+22: '20'
+23: '30'
+24: '50'
+25: '10'
+26: '100'
+27: '20'
+28: '30'
+29: '50'

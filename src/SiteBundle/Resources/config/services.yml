@@ -1,16 +1,22 @@
 services:
+
+
     site.carrousel:
         class:     SiteBundle\Controller\CarrouselController
         arguments: ['@templating','@doctrine.orm.entity_manager']
+
     site.product:
         class:     SiteBundle\Controller\ProductController
         arguments: ['@templating','@doctrine.orm.entity_manager']
+
     site.basket:
          class: SiteBundle\Service\Basket
-         arguments: ['@doctrine.orm.entity_manager','@templating',"@request_stack","@security.token_storage","%context%"]
+         arguments: ['@doctrine.orm.entity_manager','@templating',"@request_stack","@security.token_storage","%context%",'@lilworks.store.orderManager']
+
     site.payment:
          class: SiteBundle\Service\Payment
          arguments: ['@doctrine.orm.entity_manager','@templating',"@request_stack","@security.token_storage","%kernel.root_dir%"]
+
     site.twig_extension:
          class: SiteBundle\Twig\SiteExtension
          public: false
@@ -31,9 +37,21 @@ services:
 
     site.menu_builder:
         class: SiteBundle\Menu\MenuBuilder
-        arguments: ["@knp_menu.factory",'@doctrine.orm.entity_manager']
+        arguments: ["@knp_menu.factory",'@doctrine.orm.entity_manager',"@security.token_storage",'@service_container']
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: site } # The alias is what is used to retrieve the menu
+
+    site.menu_builder_user_customer:
+        class: SiteBundle\Menu\MenuBuilder
+        arguments: [ "@knp_menu.factory",'@doctrine.orm.entity_manager',"@security.token_storage",'@service_container']
+        tags:
+            - { name: knp_menu.menu_builder, method: createUserCustomerMenu, alias: usercustomer } # The alias is what is used to retrieve the menu
+
+    site.configure_menu_listener:
+        class: SiteBundle\EventListener\ConfigureSiteMenuListener
+        arguments: ['@doctrine.orm.entity_manager','@request_stack']
+        tags:
+          - { name: kernel.event_listener, event: site.menu_configure, method: onMenuConfigure }
 
     site.content:
         class: SiteBundle\Service\Content
@@ -64,3 +82,9 @@ services:
                 tags:
                     - { name: form.type }
 
+
+    lilworks_site.list_menu_builder:
+        class: SiteBundle\Menu\ListMenuBuilder
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createListMenu, alias: siteList } # The alias is what is used to retrieve the menu

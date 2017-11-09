@@ -171,11 +171,9 @@ class SiteExtension  extends \Twig_Extension
     {
         $output = "";
         if(count($taxes)>0){
-            $output.="<ul class=\"list-group twig-taxes\">";
             foreach($taxes as $taxe){
-                $output.="<li class=\"list-group-item list-group-item-info\">".$taxe->getName()."</li>";
+                $output.="<span class=\"badge badge-default\">".$taxe->getName()."</span>";
             }
-            $output.="</ul>";
         }
         return $output;
     }

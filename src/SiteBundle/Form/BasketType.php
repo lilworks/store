@@ -8,6 +8,7 @@ use LilWorks\StoreBundle\Entity\ShippingMethod;
 use SiteBundle\Form\EventListener\AddShippingMethodListener;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 use Doctrine\ORM\EntityRepository;
-
+use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -36,6 +37,11 @@ class BasketType extends AbstractType
         $this->em = $em;
     }
 
+
+
+
+
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
@@ -49,6 +55,36 @@ class BasketType extends AbstractType
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($customer) {
             $basket = $event->getData();
             $form = $event->getForm();
+
+            if(count($basket->getBasketsProducts())>0){
+                $form->add('empty', SubmitType::class, array(
+                    'label'=>'sitebundle.button.empty',
+                    'attr' => array('class' => 'btn btn-warning'),
+                ));
+                $form
+                    ->add('basketsProducts', CollectionType::class, array(
+                        'label'=>'sitebundle.products',
+                        'mapped'=>true,
+                        'allow_add'=>false,
+                        'required' => false,
+                        'allow_delete' => true,
+                        'delete_empty' => true,
+                        'by_reference' => false,
+                        'constraints' => array(new Valid()),
+                        'entry_type'   => BasketProductType::class
+                    ))
+                ;
+
+
+
+            }else{
+                $form->add('empty', ButtonType::class, array(
+                     'disabled'=>true,
+                    'label'=>'sitebundle.button.empty',
+                    'attr' => array('class' => 'btn btn-warning'),
+                ));
+            }
+
             $totals = $this->basketService->getTotals();
             $shippingMethods = $this->basketService->shippingMethods();
 
@@ -64,11 +100,10 @@ class BasketType extends AbstractType
 
             }
 
-
-
             if ($customer) {
 
                 $form->add('shippingAddress', EntityType::class, array(
+                        'label'=>'sitebundle.shippingaddress',
                         'class'    => 'LilWorksStoreBundle:Address' ,
                         'choice_label' => function ($obj) {
                             $address = "";
@@ -100,6 +135,7 @@ class BasketType extends AbstractType
                     ));
 
                 $form->add('billingAddress', EntityType::class, array(
+                    'label'=>'sitebundle.billingaddress',
                         'class'    => 'LilWorksStoreBundle:Address' ,
                         'choice_label' => function ($obj) {
                             $address = "";
@@ -129,30 +165,7 @@ class BasketType extends AbstractType
                     $selectedShippingAddress = $basket->getShippingAddress() ;
 
                     if($selectedShippingAddress){
-/*
-                        $form->add('realShippingMethods', EntityType::class, array(
-                            'class'    => 'LilWorksStoreBundle:RealShippingMethod' ,
-                            'choice_label' => function ($obj) use ($totals,$selectedShippingAddress) {
-                                if($totals["TTC"]>= $obj->getFreeTriggerByCountry($selectedShippingAddress->getCountry()->getId())){
-                                    return    $obj->getName() . " 0 €"  ;
-                                }else{
-                                    return    $obj->getName() . " " . $obj->getPriceByCountry($selectedShippingAddress->getCountry()->getId())."€ "  ;
-                                }
 
-                            },
-                            'query_builder' => function (EntityRepository $er) use ($arraySm) {
-                                return $er->createQueryBuilder('sm')
-                                    ->where('sm.id IN (:ids)')
-                                    ->setParameter('ids',$arraySm)
-                                    ;
-                            },
-                            'required' => false ,
-                            'mapped'=> true,
-                            'expanded' => true ,
-                            'multiple' => false
-
-                        ));
-*/
                         $choices = array();
                         $choices["retrait magasin"] = null;
 
@@ -182,52 +195,28 @@ class BasketType extends AbstractType
 
                         }
                         $form->add('basketsRealShippingMethods', ChoiceType::class, array(
+                            'label'=>'sitebundle.shippingmethods',
                             'mapped'=>false,
                             'expanded'=>true,
                             'choices'  =>$choices,
                             'data'=>$data
                         ));
 
-
-                        /*
-                        $form->add('basketsRealShippingMethods', CollectionType::class, array(
-                            'mapped'=>true,
-                            'allow_add'=>false,
-                            'required' => false,
-                            'allow_delete' => true,
-                            'delete_empty' => true,
-                            'by_reference' => false,
-                            'entry_type'   => RealShippingMethodType::class
-                        ));*/
                     }
                 $selectedBillingAddress = $basket->getBillingAddress() ;
                 $selectedShippingMethods = $basket->getBasketsRealShippingMethods() ;
-                /*
-                if($selectedShippingMethods || $selectedBillingAddress ){
-                    $form->add('paymentMethod', EntityType::class, array(
-                        'class'    => 'LilWorksStoreBundle:PaymentMethod' ,
-                        'choice_label' => function ($obj) use ($totals) {
-                            $t = $totals["TTC"]+$totals["SM"];
-                            return    $obj->getName() . " ". $t ."€"  ;
-                        },
-                        'query_builder' => function (EntityRepository $er)  {
-                            return $er->createQueryBuilder('pm')
-                                ->where('pm.isPublished = :isPublished')
-                                ->setParameter('isPublished',1)
-                                ;
-                        },
-                        'required' => false ,
-                        'mapped'=> true,
-                        'expanded' => true ,
-                        'multiple' => false
-                    ));
-                }
-                */
-                $selectedPaymentMethod = $basket->getPaymentMethod() ;
 
-                if( count($selectedShippingMethods)>0 || $selectedBillingAddress) {
+
+                if( (count($selectedShippingMethods)>0 || $selectedBillingAddress) && count($basket->getBasketsProducts())>0) {
                     $form->add('order', SubmitType::class, array(
-                        'attr' => array('class' => 'btn btn-success'),
+                        'label'=>'sitebundle.order',
+                        'attr' => array('class' => 'btn btn-danger'),
+                    ));
+                }else{
+                    $form->add('order', SubmitType::class, array(
+                        'disabled'=>true,
+                        'label'=>'sitebundle.order',
+                        'attr' => array('class' => 'btn btn-danger'),
                     ));
                 }
 
@@ -235,25 +224,9 @@ class BasketType extends AbstractType
         });
 
 
-
-        $builder
-            //->addEventSubscriber(new AddShippingMethodListener())
-            ->add('basketsProducts', CollectionType::class, array(
-                'mapped'=>true,
-                'allow_add'=>false,
-                'required' => false,
-                'allow_delete' => true,
-                'delete_empty' => true,
-                'by_reference' => false,
-                'entry_type'   => BasketProductType::class
-            ))
-        ;
-
         $builder->add('update', SubmitType::class, array(
-            'attr' => array('class' => 'btn'),
-        ));
-        $builder->add('empty', SubmitType::class, array(
-            'attr' => array('class' => 'btn btn-warning'),
+            'label'=>'sitebundle.button.update',
+            'attr' => array('class' => 'btn btn-success'),
         ));
 
 

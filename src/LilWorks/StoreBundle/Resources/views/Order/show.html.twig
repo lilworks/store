@@ -2,7 +2,8 @@
 
 {% block body %}
     <h1>
-        {% trans %}storebundle.order.show{% endtrans %}
+        <i class="fa fa-file" aria-hidden="true"></i>
+        {{ 'storebundle.order.show %reference%'|trans({ '%reference%':order.reference }) }}
     </h1>
 
     {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.document.portal','storebundle.menu.order'] , {context: 'content'}) %}
@@ -13,30 +14,20 @@
     <table class="table table-striped">
         <tbody>
             <tr>
-                <th>{% trans %}reference{% endtrans %}</th>
+                <th>{% trans %}storebundle.reference{% endtrans %}</th>
                 <td>{{ order.reference }}</td>
             </tr>
             <tr>
-                <th>{% trans %}createdAt{% endtrans %}</th>
+                <th>{% trans %}storebundle.createdat{% endtrans %}</th>
                 <td>{% if order.createdAt %}{{ order.createdAt|date('Y-m-d H:i') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>{% trans %}updatedAt{% endtrans %}</th>
+                <th>{% trans %}storebundle.updatedat{% endtrans %}</th>
                 <td>{% if order.updatedAt %}{{ order.updatedAt|date('Y-m-d H:i') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>{% trans %}seller{% endtrans %}</th>
-                <td>
-                    {% if order.userAsSeller %}
-                        {{ order.userAsSeller.username }}
-                    {% else %}
-                    <i class="fa fa-circle-thin" style="color: red;"></i>
-                    {% endif %}
-                </td>
             </tr>
 
             <tr>
-                <th>{% trans %}orderSteps{% endtrans %}</th>
+                <th>{% trans %}storebundle.ordersteps{% endtrans %}</th>
                 <td>
                     <ul>
                     {% for orderOrderStep in order.ordersOrderSteps %}
@@ -46,7 +37,7 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}customer{% endtrans %}</th>
+                <th>{% trans %}storebundle.customer{% endtrans %}</th>
                 <td>
                     {% if order.customer %}
                         {{ order.customer.firstName }} {{ order.customer.lastName }} {{ order.customer.companyName }}
@@ -56,7 +47,7 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}shippingAddress{% endtrans %}</th>
+                <th>{% trans %}storebundle.shippingaddress{% endtrans %}</th>
                 <td>
                     {% if order.shippingAddress is defined and order.shippingAddress is not null %}
                         {{ order.shippingAddress|addressInline|raw }}
@@ -64,7 +55,7 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}billingAddress{% endtrans %}</th>
+                <th>{% trans %}storebundle.billingaddress{% endtrans %}</th>
                 <td>
                     {% if order.billingAddress is defined and order.billingAddress is not null %}
                         {{ order.billingAddress|addressInline|raw }}
@@ -72,15 +63,15 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}userComment{% endtrans %}</th>
+                <th>{% trans %}storebundle.usercomment{% endtrans %}</th>
                 <td>{{ order.userComment }}</td>
             </tr>
             <tr>
-                <th>{% trans %}storeComment{% endtrans %}</th>
+                <th>{% trans %}storebundle.storeComment{% endtrans %}</th>
                 <td>{{ order.storeComment }}</td>
             </tr>
             <tr>
-                <th>{% trans %}realShippingMethods{% endtrans %}</th>
+                <th>{% trans %}storebundle.shippingmethods{% endtrans %}</th>
                 <td>
                     {% if  order.ordersRealShippingMethods|length > 0 %}
                         <ul>
@@ -99,7 +90,7 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}total{% endtrans %}</th>
+                <th>{% trans %}storebundle.tot{% endtrans %}</th>
 
                 <td>
                     {% set tot = order.tot|totPriceCalculator(order.ordersProducts)  %}
@@ -110,7 +101,7 @@
             <tr>
                 <th>
                     <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{order_id:order.id})~'#tabs-payments' }}">
-                        <i class="fa fa-pencil"></i>{% trans %}payments{% endtrans %}
+                        <i class="fa fa-pencil"></i>{% trans %}storebundle.paymentmethods{% endtrans %}
                     </a>
                 </th>
                 <td>
@@ -121,10 +112,10 @@
                     {% endfor %}
                     <div>
                         <ul>
-                            <li>{% trans %}payed{% endtrans %}:{{ payed|price }}</li>
+                            <li>{% trans %}storebundle.payed{% endtrans %}:{{ payed|price }}</li>
                             {% set rest = tot['TTC']-payed %}
                             <li>
-                                {% trans %}payment rest{% endtrans %}:
+                                {% trans %}storebundle.resttopay{% endtrans %}:
                                 {% if rest > 0 %}
                                 <span style="color: red;">{{ rest|price }}</span>
                                 {% else %}
@@ -138,7 +129,7 @@
             <tr>
                 <th>
                     <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{order_id:order.id})~'#tabs-products' }}">
-                        <i class="fa fa-pencil"></i>{% trans %}products{% endtrans %}
+                        <i class="fa fa-pencil"></i>{% trans %}storebundle.products{% endtrans %}
                     </a>
                 </th>
                 <td>
@@ -146,14 +137,14 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>{% trans %}id{% endtrans %}</th>
-                                <th>{% trans %}name{% endtrans %}</th>
+                                <th>{% trans %}storebundle.id{% endtrans %}</th>
+                                <th>{% trans %}storebundle.name{% endtrans %}</th>
 
-                                <th>{% trans %}shippingMethod{% endtrans %}</th>
-                                <th>{% trans %}warranties{% endtrans %}</th>
-                                <th>{% trans %}quantity{% endtrans %}</th>
-                                <th>{% trans %}price{% endtrans %}</th>
-                                <th>{% trans %}tot{% endtrans %}</th>
+                                <th>{% trans %}storebundle.shippingmethod{% endtrans %}</th>
+                                <th>{% trans %}storebundle.warranties{% endtrans %}</th>
+                                <th>{% trans %}storebundle.quantity{% endtrans %}</th>
+                                <th>{% trans %}storebundle.price{% endtrans %}</th>
+                                <th>{% trans %}storebundle.tot{% endtrans %}</th>
                             </tr>
                         </thead>
                         <tbody>

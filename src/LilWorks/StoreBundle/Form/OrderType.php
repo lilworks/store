@@ -4,6 +4,7 @@ namespace LilWorks\StoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Tests\Extension\Core\Type\TextTypeTest;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -14,7 +15,10 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 class OrderType extends AbstractType
 {
-
+    private $orderManager;
+    public function __construct($orderManager,$context,$mode){
+        $this->orderManager = $orderManager;
+    }
     /**
      * {@inheritdoc}
      */
@@ -30,7 +34,7 @@ class OrderType extends AbstractType
         }else{
             $disabledOrderType = false;
         }
-
+/*
         if(!$order->getReference()){
             $dataReference = $options["orderUtils"]->setOrder($order)->getNextReference();
         }else{
@@ -38,13 +42,15 @@ class OrderType extends AbstractType
         }
         $haveDoneStep = $options["orderUtils"]->setOrder($order)->haveStep("DONE");
         $lastStep = $options["orderUtils"]->setOrder($order)->getLastStep();
-
+*/
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($customer,$context) {
             $order = $event->getData();
             $form = $event->getForm();
 
             if($customer && count($customer->getAddresses())>0){
+
                 $form->add('ordersRealShippingMethods', CollectionType::class, array(
+                    'label'=>'storebundle.shippingmethods',
                     'entry_options'  => array(
                         'context'  => $context,
                         'shippingAddress'=>($order->getShippingAddress())?$order->getShippingAddress():null
@@ -59,6 +65,7 @@ class OrderType extends AbstractType
                 ));
 
                 $form->add('shippingAddress', EntityType::class, array(
+                    'label'=>'storebundle.shippingaddress',
                     'class'    => 'LilWorksStoreBundle:Address' ,
                     'required' => false ,
                     'mapped'=> true,
@@ -86,6 +93,7 @@ class OrderType extends AbstractType
                     },
                 ));
                 $form->add('billingAddress', EntityType::class, array(
+                    'label'=>'storebundle.billingaddress',
                     'class'    => 'LilWorksStoreBundle:Address' ,
                     'required' => false ,
                     'mapped'=> true,
@@ -113,13 +121,33 @@ class OrderType extends AbstractType
                     },
                 ));
             }
-            $form->add('shippingAddressString');
-            $form->add('billingAddressString');
+
+            $form->add('shippingAddressString',null,array(
+                'label'=>'storebundle.shippingaddressstring',
+            ));
+            $form->add('billingAddressString',null,array(
+                'label'=>'storebundle.billingaddressstring',
+            ));
+            if(!$customer){
+                $form->add('manualFirstName',null,array(
+                    'mapped'=>false,
+                    'label'=>'storebundle.manual.firstname'
+                ))->add('manualLastName',null,array(
+                    'mapped'=>false,
+                    'label'=>'storebundle.manual.lastname'
+                ))->add('manualCompanyName',null,array(
+                    'mapped'=>false,
+                    'label'=>'storebundle.manual.companyname'
+                ))
+
+                ;
+            }
 
         });
 
 
         $builder->add('orderType', EntityType::class, array(
+                'label'=>'storebundle.ordertype',
                 'disabled'=>$disabledOrderType,
                 'class'    => 'LilWorksStoreBundle:OrderType' ,
                 'required' => false ,
@@ -132,28 +160,42 @@ class OrderType extends AbstractType
             ));
 
         $builder->add('customer', EntityType::class, array(
+                'label'=>'storebundle.customer',
                 'class'    => 'LilWorksStoreBundle:Customer' ,
+
+                'choice_label' => function ($obj) {
+                    return   $obj->getFirstName() . " " . $obj->getLastName(). " " . $obj->getCompanyName()  ;
+                },
                 'required' => false ,
                 'mapped'=> true,
                 'expanded' => false ,
                 'multiple' => false,
-                'choice_label' => function ($obj) {
-                    return   $obj->getFirstName() . " " . $obj->getLastName(). " " . $obj->getCompanyName()  ;
-                },
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
             ));
         if($order->getOrderType()){
 
-            $builder->add('ordersOrderSteps', CollectionType::class, array(
-                'mapped'=>true,
-                'allow_add'=>true,
-                'required' => false,
-                'allow_delete' => true,
-                'delete_empty' => true,
-                'by_reference' => false,
-                'entry_type'   => OrdersOrderStepsType::class
-            ));
-            if($order->getOrderType()->getTag() == "FACTURE"){
+            if($order->getOrderType()->getTag() == "FACTURE" || $order->getOrderType()->getTag() == "FACTURE_INTERNET"){
+
+                $builder->add('ordersOrderSteps', CollectionType::class, array(
+                    'label'=>'storebundle.ordersteps',
+                    'entry_options'=>array('order'=>$order),
+                    'mapped'=>true,
+                    'allow_add'=>true,
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_empty' => true,
+                    'by_reference' => false,
+                    'entry_type'   => OrdersOrderStepsType::class
+                ));
+
+
                 $builder->add('ordersPaymentMethods', CollectionType::class, array(
+                    'label'=>'storebundle.paymentmethods',
                     'entry_options'  => array(
                         'context'  => $context,
                     ),
@@ -170,6 +212,7 @@ class OrderType extends AbstractType
         }
 
         $builder->add('ordersProducts', CollectionType::class, array(
+                'label'=>'storebundle.products',
                 'constraints' => array(new Valid()),
                 'mapped'=>true,
                 'allow_add'=>true,
@@ -182,16 +225,32 @@ class OrderType extends AbstractType
                     'orderId'  => $order->getId(),
                     'context'  => $context
                 ),
+
+
             ));
         $builder->add('userComment',null,array(
-                'label'=>'lilworks.storebundle.order.usercomment',
+                'label'=>'storebundle.order.usercomment',
                 'attr' => ['class' => 'text-editor'],
             ));
         $builder->add('storeComment',null,array(
-                'label'=>'lilworks.storebundle.order.storecomment',
+                'label'=>'storebundle.order.storecomment',
                 'attr' => ['class' => 'text-editor'],
             ))
         ;
+        if(!$this->orderManager->isLockByReference($order)){
+            $builder->add('reference',null,array(
+                'label'=>'storebundle.reference',
+                'required'=>false,
+                'help'=>'storebundle.help.reference.leaveblankforauto',
+            ));
+        }else{
+            $builder->add('reference',null,array(
+                'disabled'=>true,
+                'label'=>'storebundle.reference',
+                'required'=>false,
+                'help'=>'storebundle.help.reference.locked',
+            ));
+        }
     }
     
     /**
@@ -203,8 +262,9 @@ class OrderType extends AbstractType
             'data_class' => 'LilWorks\StoreBundle\Entity\Order',
             'context'=>null,
             'cascade_validation' => true,
+            'csrf_protection' => false,
         ));
-        $resolver->setRequired('orderUtils');
+        //$resolver->setRequired('orderUtils');
     }
 
     /**

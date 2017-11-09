@@ -1,4 +1,5 @@
 services:
+
     lilworks_store.supercategories:
         class: LilWorks\StoreBundle\Service\SuperCategories
         arguments: ['@doctrine.orm.entity_manager','@templating', "@service_container"]
@@ -57,3 +58,35 @@ services:
         tags:
             - { name: lilworks.store.entity.tag.cleaner }
         arguments: ['@doctrine.orm.entity_manager']
+
+    lilworks.store.coupon_repository:
+        class:  LilWorks\Store\Bundle\Entity\Repository\CouponRepository
+        factory_service: 'doctrine.orm.default_entity_manager'
+        factory_method:  'getRepository'
+        arguments:
+             - 'LilWorks\Store\Bundle\Entity\Coupon'
+        calls:
+             - [setParams, ['%context%','%mode%']]
+
+    lilworks.store.stockManager:
+        class: LilWorks\StoreBundle\Service\StockManager
+        tags:
+            - { name: lilworks.store.stock.manager }
+        arguments: ['@doctrine.orm.entity_manager','%context%','%mode%']
+
+    lilworks.store.orderManager:
+        class: LilWorks\StoreBundle\Service\OrderManager
+        tags:
+            - { name: lilworks.store.orderstep.manager }
+        arguments: ['@doctrine.orm.entity_manager','@lilworks.store.stockManager','%context%']
+
+    lilworks.form.orderSteps:
+        class: LilWorks\StoreBundle\Form\OrdersOrderStepsType
+        tags:
+            - { name: form.type }
+        arguments: ['@lilworks.store.orderManager','%context%','%mode%']
+    lilworks.form.order:
+        class: LilWorks\StoreBundle\Form\OrderType
+        tags:
+            - { name: form.type }
+        arguments: ['@lilworks.store.orderManager','%context%','%mode%']

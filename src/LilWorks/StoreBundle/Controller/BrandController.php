@@ -53,9 +53,7 @@ class BrandController extends Controller
             10
         );
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.brand.index'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.brands');
 
         return $this->render('LilWorksStoreBundle:Brand:index.html.twig', array(
             'pagination' => $pagination,
@@ -91,9 +89,7 @@ class BrandController extends Controller
             return $this->redirectToRoute('brand_show', array('brand_id' => $brand->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.brand.new'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.brands');
 
         return $this->render('LilWorksStoreBundle:Brand:new.html.twig', array(
             'brand' => $brand,
@@ -107,10 +103,8 @@ class BrandController extends Controller
     public function showAction(Brand $brand)
     {
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.brand.show %name%',array('%name%'=>$brand->getName())));
 
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array('%name%'=>$brand->getName()),'storebundle.prefix.brands');
         return $this->render('LilWorksStoreBundle:Brand:show.html.twig', array(
             'brand' => $brand
         ));
@@ -141,38 +135,14 @@ class BrandController extends Controller
         }
 
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.brand.edit %name%',array('%name%'=>$brand->getName())));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array('%name%'=>$brand->getName()),'storebundle.prefix.brands');
         return $this->render('LilWorksStoreBundle:Brand:edit.html.twig', array(
             'brand' => $brand,
             'form' => $editForm->createView()
         ));
     }
 
-    /*
-    public function emptyAction(Request $request, Brand $brand)
-    {
-        $em = $this->getDoctrine()->getManager();
 
-        foreach($brand->getProducts() as $product){
-            $brand->removeProduct($product);
-            $product->setBrand(null);
-
-        }
-        $em->persist($brand);
-        $em->flush();
-
-        $referer = $request->headers->get('referer');
-        if ( !$referer || is_null($referer) ) {
-            return $this->redirectToRoute('brand_index');
-        } else {
-            return $this->redirect($referer);
-        }
-
-    }
-    */
     /**
      * @ParamConverter("brand", options={"mapping": {"brand_id"   : "id"}})
      */

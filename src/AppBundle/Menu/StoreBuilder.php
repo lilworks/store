@@ -248,7 +248,24 @@ class StoreBuilder implements ContainerAwareInterface
                 array('context'=> $options["context"],  'link'=>$attr[1]['link'],'curr'=>$attr[1]['curr'])
             )
         );
-
+        // level 1
+        $returnMenuCat =  $documentMenuCatPortal->addChild('storebundle.menu.return', array(
+            #'route' => 'user_index',
+            'attributes'=>$attr[1]['curr'],
+            'childrenAttributes'=>$attr[1]['child'],
+            'linkAttributes'=>$attr[1]['link'],
+        ));
+        $returnMenuCat->setAttribute('i','fa fa-hand-scissors-o');
+        $returnMenuCat->setChildrenAttribute('class',$attr[1]['child']['class']);
+        $this->container->get('event_dispatcher')->dispatch(
+            ConfigureStoreMenuEvent::CONFIGURE,
+            new ConfigureStoreMenuEvent( $factory,
+                $returnMenuCat ,
+                'orderproductreturn' ,
+                $this->requestStack->getCurrentRequest()->get('orderproductreturn_id'),
+                array('context'=> $options["context"],  'link'=>$attr[1]['link'],'curr'=>$attr[1]['curr'])
+            )
+        );
         //////// END DOCUMENT
         // level 0
         $productMenuCatPortal = $menu->addChild('storebundle.menu.cat.product.portal', array(

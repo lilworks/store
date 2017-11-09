@@ -11,7 +11,9 @@ class BasketProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('quantity');
+        $builder->add('quantity',null,array(
+            'label'=>'sitebundle.quantity'
+        ));
     }
 
     /**
@@ -29,7 +31,7 @@ class BasketProductType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'sitebundle_customer';
+        return 'sitebundle_basket_product';
     }
 
 }

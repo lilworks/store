@@ -36,10 +36,8 @@ class ShippingMethodController extends Controller
             10,
             array('defaultSortFieldName' => 'sm.priority', 'defaultSortDirection' => 'desc')
         );
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.shippingmethod.index'));
 
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.shippingmethods');
         return $this->render('LilWorksStoreBundle:ShippingMethod:index.html.twig', array(
             'pagination' => $pagination,
             'simple_live_editor'=>$simpleLiveEditor
@@ -67,13 +65,18 @@ class ShippingMethodController extends Controller
                 }
             }
             $em->persist($shippingMethod);
+
+            foreach( $shippingMethod->getTriggers() as $t){
+                $t->setShippingMethod($shippingMethod);
+                $shippingMethod->addTrigger($t);
+                $em->persist($t);
+            }
+
             $em->flush();
             return $this->redirectToRoute('shippingmethod_show', array('shippingmethod_id' => $shippingMethod->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.shippingmethod.new'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.shippingmethods');
 
 
         return $this->render('LilWorksStoreBundle:ShippingMethod:new.html.twig', array(
@@ -89,9 +92,8 @@ class ShippingMethodController extends Controller
     {
         $simpleLiveEditor    = $this->get('app.simpleLiveEditor');
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.shippingmethod.show %name%',array('%name%'=>$shippingMethod->getName())));
+
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array('%name%'=>$shippingMethod->getName()),'storebundle.prefix.shippingmethods');
 
         return $this->render('LilWorksStoreBundle:ShippingMethod:show.html.twig', array(
             'shippingMethod' => $shippingMethod,
@@ -108,13 +110,38 @@ class ShippingMethodController extends Controller
         foreach ($shippingMethod->getProducts() as $p) {
             $originalProducts->add($p);
         }
-
+        $originalTriggers = new ArrayCollection();
+        // Create an ArrayCollection of the current shippingmethodCountry objects in the database
+        foreach ($shippingMethod->getTriggers() as $t) {
+            $originalTriggers->add($t);
+        }
 
         $editForm = $this->createForm('LilWorks\StoreBundle\Form\ShippingMethodType', $shippingMethod);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            foreach ($originalTriggers as $t) {
+
+                if (false === $shippingMethod->getTriggers()->contains($t)) {
+                    $t->setShippingMethod(null);
+                    // if it was a many-to-one relationship, remove the relationship like this
+                    //$shippingmethodCountry->setCountry(null);
+                    //$em->persist($t);
+                    // if you wanted to delete the Tag entirely, you can also do that
+                    $em->remove($t);
+                }
+
+
+            }
+
+            foreach ($shippingMethod->getTriggers() as $triggerFromForm) {
+                $triggerFromForm->setShippingMethod($shippingMethod);
+                $em->persist($triggerFromForm);
+
+            }
+
             foreach($originalProducts as $p){
                 if( false === $shippingMethod->getProducts()->contains($p) ){
                     $p->removeShippingMethod($shippingMethod);
@@ -134,10 +161,7 @@ class ShippingMethodController extends Controller
             return $this->redirectToRoute('shippingmethod_edit', array('shippingmethod_id' => $shippingMethod->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.shippingmethod.edit %name%',array('%name%'=>$shippingMethod->getName())));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array('%name%'=>$shippingMethod->getName()),'storebundle.prefix.shippingmethods');
 
 
         return $this->render('LilWorksStoreBundle:ShippingMethod:edit.html.twig', array(

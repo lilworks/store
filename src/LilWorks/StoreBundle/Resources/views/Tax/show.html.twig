@@ -2,6 +2,7 @@
 
 {% block body %}
     <h1>
+        <i class="fa fa-pie-chart" aria-hidden="true"></i>
         {{ 'storebundle.tax.show %name%'|trans({'%name%':tax.name}) }}
     </h1>
 
@@ -29,48 +30,19 @@
         <tr>
             <th>{% trans %}storebundle.tax.ordersproducts{% endtrans %}</th>
             <td>
-                {% for product in  tax.ordersProducts %}
-                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{order_id: product.order.id}) }}">
-                        {% if product.product is not null %}
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                            {% if product.product.pictures|length > 0 %}
-                                <img src="{{ asset('product/' ~ product.product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
-                            {% endif %}
-                            {{ product.order.reference }} {{ product.name }}
-                        {% else %}
-                            {{ product.name }}
-                        {% endif %}
-                    </a>
-                {% endfor %}
+                {{ tax.ordersProducts|length }}
             </td>
         </tr>
         <tr>
             <th>{% trans %}storebundle.tax.productsoffline{% endtrans %}</th>
             <td>
-                {% for product in tax.productsOffline %}
-                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{product_id: product.id}) }}">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                        {% if product.pictures|length > 0 %}
-                            <img src="{{ asset('product/' ~ product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
-                        {% endif %}
-                        {{ product.brand.name }} {{ product.name }}
-                    </a>
-                {% endfor %}
+                {{ tax.productsOffline|length }}
             </td>
         </tr>
         <tr>
             <th>{% trans %}storebundle.tax.productsonline{% endtrans %}</th>
             <td>
-
-                {% for product in tax.productsOnline %}
-                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{product_id: product.id}) }}">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                        {% if product.pictures|length > 0 %}
-                            <img src="{{ asset('product/' ~ product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
-                        {% endif %}
-                        {{ product.brand.name }} {{ product.name }}
-                    </a>
-                {% endfor %}
+                {{ tax.productsOnline|length }}
             </td>
         </tr>
         </tbody>

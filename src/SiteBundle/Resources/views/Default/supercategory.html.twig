@@ -3,6 +3,7 @@
 {% block body %}
     {% block stylsheets %}
         {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-slider/slider.css') }}" />
         <style>
             .price-range-disabled{
                 visibility: hidden;
@@ -12,6 +13,7 @@
     {% endblock %}
     {% block javascripts %}
         {{ parent() }}
+        <script src="{{ asset('assets/vendor/bootstrap-slider/bootstrap-slider.js') }}"></script>
         <script>
             $( document ).ready(function() {
                 $(".selectpicker").selectpicker();
@@ -32,18 +34,22 @@
 <div class="col-md-3">
     <div class="card">
         <div class="card-header">
+            <i class="fa fa-filter" aria-hidden="true"></i>
             {% trans %}sitebundle.filter{% endtrans %}
         </div>
         <div class="card-block">
-            <p class="card-text">
+            <div class="card-text">
             <form method="get"  class="formFilter">
-                {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}sitebundle.button.filter{% endtrans %}" />
+                <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}sitebundle.button.filter{% endtrans %}" />
+                {{ form_rest(formFilter) }}
+                <input type="submit" class="btn btn-sm btn-primary" name="submit-filter" value="{% trans %}sitebundle.button.filter{% endtrans %}" />
             </form>
-            </p>
+            </div>
         </div>
     </div>
-
 </div>
+
+
 <!-- /.col-lg-3 -->
 <div class="col-md-9">
 

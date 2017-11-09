@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    {% if base_dir is defined %}
+        <link rel="stylesheet"
+              href="{{ base_dir ~ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+    {% else %}
+        <link rel="stylesheet"
+              href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+    {% endif %}
+
+    <style>
+        body{
+            font-size:12px;
+        }
+        .tot{
+            font-size: 15px;;
+        }
+    </style>
+</head>
+<body>
+
+{% set order = orderProductReturn.orderProduct.order %}
+
+    <h1>
+        {{ orderProductReturn.reference }}
+    </h1>
+    <h5>
+        {{ orderProductReturn.returnedAt|date('d/m/Y') }}
+    </h5>
+
+    <div style="text-align: right;">
+        <strong>
+            {{ order.customer.firstName ~ ' ' ~ order.customer.lastName ~ ' ' ~ order.customer.companyName }}
+        </strong>
+        <div>
+        {% if order.billingAddressString is defined and order.billingAddressString is not null and order.billingAddressString != "" %}
+            {{ order.billingAddressString }}
+        {% elseif order.billingAddress is not null %}
+            {{ order.billingAddress|formataddress|raw}}
+        {% endif %}
+        </div>
+    </div>
+
+
+    <table class="table table-striped">
+        <tbody>
+
+        <tr>
+            <th>{% trans %}storebundle.order{% endtrans %}</th>
+            <td>
+                {{ order.reference }}
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>{% trans %}storebundle.product{% endtrans %}</th>
+
+            <td>
+                <sup>{{ orderProductReturn.quantity }}</sup>&frasl;<sub>{{ orderProductReturn.orderProduct.quantity }}</sub>
+
+                {{ orderProductReturn.orderProduct.product.brand.name }} {{ orderProductReturn.orderProduct.product.name }}
+                ({{ orderProductReturn.orderProduct.price|price }})
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans %}storebundle.paymentmethods{% endtrans %}</th>
+            <td>
+                {% for returnPaymentMethod in orderProductReturn.returnsPaymentMethods  %}
+                    {% if returnPaymentMethod.paymentMethod.tag == "COUPON" %}
+                        {{ returnPaymentMethod.coupon.reference }}
+                        {{ returnPaymentMethod.paymentMethod.name }}
+                        {{ returnPaymentMethod.amount|price }}
+                        {% else %}
+                        {{ returnPaymentMethod.paymentMethod.name }}
+                        {{ returnPaymentMethod.amount|price }}
+                    {% endif %}
+
+
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans %}storebundle.description{% endtrans %}</th>
+            <td>{{ orderProductReturn.description|raw }}</td>
+        </tr>
+
+        </tbody>
+    </table>
+</body>
+</html>

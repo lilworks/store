@@ -2,6 +2,7 @@
 
 {% block body %}
     <h1>
+        <i class="fa fa-handshake-o" aria-hidden="true"></i>
         {{ 'appbundle.customer.show %name%'|trans({'%name%': customer.firstName ~ ' ' ~ customer.lastName ~ ' ' ~ customer.companyName }) }}
     </h1>
 

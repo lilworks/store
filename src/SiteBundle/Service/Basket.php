@@ -62,23 +62,42 @@ class ShippingCalculator
         }else{
             $this->_country = self::_DEFAULT_COUNTRY;
         }
-        $shippingMethodsCountries = $this->em->getRepository('LilWorksStoreBundle:Country')
-            ->findOneByTag($this->_country)
-            ->getShippingmethodsCountries()
-        ;
+
 
         $allowedShippingMethod = array();
+
+        if($this->basket->getShippingAddress()){
+        $shippingMethodsCountries = $this->em->getRepository('LilWorksStoreBundle:ShippingMethodsCountries')
+            ->getShippingMethodsByCountry( $this->basket->getShippingAddress()->getCountry());
+        }else{
+            $shippingMethodsCountries = array();
+        }
+
+
+
         foreach($shippingMethodsCountries as $shippingMethodCountrie){
+
+
             array_push($allowedShippingMethod,$shippingMethodCountrie->getShippingMethod()->getId());
             ($shippingMethodCountrie->getPrice()) ? $price= $shippingMethodCountrie->getPrice():$price= $shippingMethodCountrie->getShippingMethod()->getPrice();
             ($shippingMethodCountrie->getFreeTrigger()) ? $freeTrigger=$shippingMethodCountrie->getFreeTrigger():$freeTrigger=$shippingMethodCountrie->getShippingMethod()->getFreeTrigger();
             ($shippingMethodCountrie->getPriority()) ? $priority=$shippingMethodCountrie->getPriority() : $priority=$shippingMethodCountrie->getShippingMethod()->getPriority();
+
+            $shippingMethodPriceValue = $this->em->getRepository('LilWorksStoreBundle:ShippingMethodsCountriesTriggers')
+                        ->getPriceByTot($shippingMethodCountrie,$this->basket->getTot());
+
+
             $this->_shippingMethodsPriced[$shippingMethodCountrie->getShippingMethod()->getId()] = array(
-                "price"=>$price,
-                "freeTrigger"=>$freeTrigger,
-                "priority"=>$priority
+                //"price"=>$price,
+                //"freeTrigger"=>$freeTrigger,
+                "priority"=>$priority,
+                "freeTrigger"=>9999,
+                "price"=>$shippingMethodPriceValue,
             );
+
         }
+
+
 
         foreach($this->basket->getBasketsProducts() as $product){
             $this->_productsInBasketDatas[$product->getProduct()->getId()]=array("q"=>$product->getQuantity(),"pu"=>$product->getProduct()->getPriceOnline(),"price"=>$product->getQuantity()*$product->getProduct()->getPriceOnline());
@@ -163,16 +182,21 @@ class ShippingCalculator
     }
     private function _dispatchProduct( $kCombination,$combination )
     {
+
+
+
         $products = $this->_products;
 
         $price = 0;
         $this->combinations[$kCombination]["datas"] = array();
         $this->combinations[$kCombination]["price"] = $price;
 
+
         foreach($combination as $shippingMethodId){
             $this->combinations[$kCombination]["datas"][$shippingMethodId] = array();
             $this->combinations[$kCombination]["datas"][$shippingMethodId]["products"] = array();
             $amountInShippingMethod = 0;
+
             foreach($this->_shippingMethodsPrioritized[$shippingMethodId] as $productInShippingMethod){
                 $kProduct = array_keys($products,$productInShippingMethod);
                 if(count($kProduct)>0){
@@ -181,8 +205,9 @@ class ShippingCalculator
                     $amountInShippingMethod+=$this->_productsInBasketDatas[$productInShippingMethod]["price"];
                 }
             }
-            $this->combinations[$kCombination]["datas"][$shippingMethodId]["amount"] = $amountInShippingMethod;
-            if($this->combinations[$kCombination]["datas"][$shippingMethodId]["amount"]>=$this->_shippingMethodsPriced[$shippingMethodId]["freeTrigger"]){
+
+
+            if($this->_productsInBasketDatas[$productInShippingMethod]["price"] == 0){
                 $this->combinations[$kCombination]["datas"][$shippingMethodId]["price"] = 0;
                 $this->combinations[$kCombination]["datas"][$shippingMethodId]["freeTrigger"] = true;
             }else{
@@ -192,7 +217,6 @@ class ShippingCalculator
             }
             $this->combinations[$kCombination]["price"]=$price;
         }
-
 
     }
     public function __toString( )
@@ -305,16 +329,18 @@ class Basket
     protected $requestStack;
     protected $em;
     protected $context;
+    protected $orderManager;
     public $shippingCalculator;
 
 
-    public function __construct(\Doctrine\ORM\EntityManager $em  , $templating  ,RequestStack $requestStack,$security,$context)
+    public function __construct(\Doctrine\ORM\EntityManager $em  , $templating  ,RequestStack $requestStack,$security,$context,$orderManager)
     {
         $this->security = $security;
         $this->templating = $templating;
         $this->requestStack = $requestStack;
         $this->em = $em;
         $this->context = $context;
+        $this->orderManager = $orderManager;
         return $this;
     }
 
@@ -398,7 +424,7 @@ class Basket
 
             $orderRealShippingMethod->setOrder($order);
         }
-
+/*
         foreach($basket->getBasketsProducts() as $basketProduct){
             if(!$basketProduct->getBasketRealShippingMethod()){
                 $orderProduct = new OrdersProducts();
@@ -412,6 +438,10 @@ class Basket
                 $order->addOrdersProduct($orderProduct);
             }
         }
+*/
+
+
+        $order=$this->orderManager->setMakeFlush(false)->init($order);
 
         $this->em->persist($order);
         $this->em->remove($basket);
@@ -504,49 +534,86 @@ class Basket
     {
         $request = $this->requestStack->getCurrentRequest();
         $session = $request->getSession();
-        #$session->start();
 
-
-        $basket = $this->em->getRepository('LilWorksStoreBundle:Basket')->findOneByToken($session->getId());
-
-
-        foreach($basket->getBasketsProducts() as $productInBasket){
-            if($productInBasket->getProduct()->getId() === $product->getId()){
-                $productInBasket->setQuantity($productInBasket->getQuantity()-1);
-
-                if(($productInBasket->getQuantity()-1)<=0){
-                    $basket->removeBasketsProduct($productInBasket);
-                    $this->em->remove($productInBasket);
-                }
-            }
+        $sessionDb = $this->em->getRepository('AppBundle:Session')->find($session->getId());
+        $basket =   $sessionDb->getBasket();
+        if( ! $basket ){
+            $basket = $this->createBasket();
         }
 
-        $this->em->persist($basket);
-        #$this->em->flush();
+        if($basket){
+            foreach($basket->getBasketsProducts() as $productInBasket){
+                if($productInBasket->getProduct()->getId() === $product->getId()){
+                    $productInBasket->setQuantity($productInBasket->getQuantity()-1);
+                    if($productInBasket->getQuantity() <= 0){
+                        $this->em->remove($productInBasket);
+                        $basket->removeBasketsProduct($productInBasket);
+                    }else{
+                        $this->em->persist($productInBasket);
+                    }
+                }
+            }
 
-        return true;
+            $this->em->persist($basket);
+            $this->em->flush();
+
+            return true;
+        }
     }
 
     public function deleteProduct(Product $product)
     {
         $request = $this->requestStack->getCurrentRequest();
         $session = $request->getSession();
+
+        $sessionDb = $this->em->getRepository('AppBundle:Session')->find($session->getId());
+        $basket =   $sessionDb->getBasket();
+        if( ! $basket ){
+            $basket = $this->createBasket();
+        }
+
+        if($basket){
+            foreach($basket->getBasketsProducts() as $productInBasket){
+                if($productInBasket->getProduct()->getId() === $product->getId()){
+                    $this->em->remove($productInBasket);
+                    $basket->removeBasketsProduct($productInBasket);
+                }
+            }
+
+            $this->em->persist($basket);
+            $this->em->flush();
+
+            return true;
+        }
+    }
+
+    public function emptyBasket()
+    {
+
+        $request = $this->requestStack->getCurrentRequest();
+        $session = $request->getSession();
         $session->start();
 
 
-        $basket = $this->em->getRepository('LilWorksStoreBundle:Basket')->findOneByToken($session->getId());
+        $basket = $this->em->getRepository('LilWorksStoreBundle:Basket')->createQueryBuilder('b')
+            ->select('b')
+            ->leftJoin('b.token','s')
+            ->where('s.id = :id ')
+            ->setParameter('id',$session->getId())
+            ->getQuery()
+            ->getSingleResult()
+        ;
 
 
         foreach($basket->getBasketsProducts() as $productInBasket){
-            if($productInBasket->getProduct()->getId() === $product->getId()){
-                    $basket->removeBasketsProduct($productInBasket);
-                    $this->em->remove($productInBasket);
-            }
+            $this->em->remove($productInBasket);
+            $basket->removeBasketsProduct($productInBasket);
         }
 
         $this->em->persist($basket);
-       # $this->em->flush();
+        $this->em->flush();
 
         return true;
     }
+
 }

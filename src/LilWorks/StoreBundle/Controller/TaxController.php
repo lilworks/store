@@ -25,9 +25,17 @@ class TaxController extends Controller
 
         $em    = $this->get('doctrine.orm.entity_manager');
         $qb = $em->createQueryBuilder();
-
-        $qb->select('p')
-            ->from('LilWorksStoreBundle:Tax','p')
+/*
+        $qb->select('t as tax , count(pOn) as countPOn, count(pOff) as countPOff, count(op) as countOP')
+            ->from('LilWorksStoreBundle:Tax','t')
+            ->leftJoin('t.productsOnline','pOn')
+            ->leftJoin('t.productsOffline','pOff')
+            ->leftJoin('t.ordersProducts','op')
+            ->groupBy('t.id')
+        ;
+*/
+        $qb->select('t')
+            ->from('LilWorksStoreBundle:Tax','t')
         ;
 
         $paginator  = $this->get('knp_paginator');
@@ -37,9 +45,7 @@ class TaxController extends Controller
             10
         );
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.tax.index'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.taxes');
 
         return $this->render('LilWorksStoreBundle:Tax:index.html.twig', array(
             'pagination' => $pagination,
@@ -82,12 +88,14 @@ class TaxController extends Controller
             $em->persist($tax);
             $em->flush();
 
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'success','message'=>'storebundle.flash.tax.created')
+            ));
+
             return $this->redirectToRoute('tax_show', array('tax_id' => $tax->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.tax.new'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.taxes');
 
         return $this->render('LilWorksStoreBundle:Tax:new.html.twig', array(
             'tax' => $tax,
@@ -100,10 +108,8 @@ class TaxController extends Controller
      */
     public function showAction(Tax $tax)
     {
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.tax.show %name%',array('%name%'=>$tax->getName())));
 
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array('%name%'=>$tax->getName()),'storebundle.prefix.taxes');
         return $this->render('LilWorksStoreBundle:Tax:show.html.twig', array(
             'tax' => $tax,
         ));
@@ -160,13 +166,13 @@ class TaxController extends Controller
                 }
             }
             $em->flush();
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'success','message'=>'storebundle.flash.tax.updated')
+            ));
             return $this->redirectToRoute('tax_edit', array('tax_id' => $tax->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.tax.edit %name%',array('%name%'=>$tax->getName())));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array('%name%'=>$tax->getName()),'storebundle.prefix.taxes');
         return $this->render('LilWorksStoreBundle:Tax:edit.html.twig', array(
             'tax' => $tax,
             'form' => $editForm->createView()
@@ -182,7 +188,9 @@ class TaxController extends Controller
 
         $em->remove($tax);
         $em->flush();
-
+        $this->get('store.flash')->setMessages(array(
+            array('status'=>'success','message'=>'storebundle.flash.tax.deleted')
+        ));
         $referer = $request->headers->get('referer');
         if ( !$referer || is_null($referer) ) {
             return $this->redirectToRoute('tax_index');

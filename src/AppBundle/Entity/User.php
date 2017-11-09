@@ -49,6 +49,10 @@ class User extends BaseUser
      * @Assert\NotBlank(groups={"registration"})
      */
     private $customer;
+    /**
+     * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\Subscriber", mappedBy="user", cascade={"remove","persist"})
+     */
+    private $subscriber;
 
     /**
      * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\Order", mappedBy="userAsSeller")
@@ -258,5 +262,29 @@ class User extends BaseUser
     public function getConversations()
     {
         return $this->conversations;
+    }
+
+    /**
+     * Set subscriber
+     *
+     * @param \LilWorks\StoreBundle\Entity\Subscriber $subscriber
+     *
+     * @return User
+     */
+    public function setSubscriber(\LilWorks\StoreBundle\Entity\Subscriber $subscriber = null)
+    {
+        $this->subscriber = $subscriber;
+
+        return $this;
+    }
+
+    /**
+     * Get subscriber
+     *
+     * @return \LilWorks\StoreBundle\Entity\Subscriber
+     */
+    public function getSubscriber()
+    {
+        return $this->subscriber;
     }
 }

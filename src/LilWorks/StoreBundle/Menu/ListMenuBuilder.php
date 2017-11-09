@@ -13,18 +13,23 @@ class ListMenuBuilder
         'ICO_SHOW'=>'fa fa-eye',
         'ICO_EDIT'=>'fa fa-pencil',
         'ICO_DELETE'=>'fa fa-trash',
-        'ICO_PDF'=>'fa fa-file-pdf',
+        'ICO_PDF'=>'fa fa-file-pdf-o',
         'ICO_EMPTY'=>'fa fa-share-square-o',
         'ICO_RESPOND'=>'fa fa-reply',
+        'ICO_DOWNLOAD'=>'fa fa-download',
+        'ICO_BACKUP'=>'fa fa-floppy-o',
+        'ICO_DEVISTOFACTURE'=>'fa fa-sign-language',
 
         'BTN_GENERAL'=>'btn btn-sm',
         'BTN_SHOW'=>'btn-info',
         'BTN_EDIT'=>'btn-primary',
         'BTN_DELETE'=>'btn-danger btn-delete',
         'BTN_PDF'=>'btn-primary',
-        'BTN_EMPTY'=>'btn-warning  btn-delete',
+        'BTN_EMPTY'=>'btn-warning  btn-empty',
         'BTN_RESPOND'=>'btn-primary',
-
+        'BTN_DOWNLOAD'=>'btn-info',
+        'BTN_BACKUP'=>'btn-success',
+        'BTN_DEVISTOFACTURE'=>'btn-info',
 
     );
 
@@ -58,7 +63,16 @@ class ListMenuBuilder
 
 
     }
+    public function orderproductreturn($entity,$menu){
+        $this->setAction('show',$menu,$entity->getId());
+        $this->setAction('edit',$menu,$entity->getId());
+        $this->setAction('pdf',$menu,$entity->getId());
 
+        if(!$entity->getIsArchived())
+            $this->setAction('delete',$menu,$entity->getId());
+
+        return $menu;
+    }
     public function session($entity,$menu){
         $this->setAction('delete',$menu,$entity->getId());
         return $menu;
@@ -72,7 +86,6 @@ class ListMenuBuilder
         return $menu;
     }
     public function subscriber($entity,$menu){
-        $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
         $this->setAction('delete',$menu,$entity->getId());
         return $menu;
@@ -80,7 +93,8 @@ class ListMenuBuilder
     public function text($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
-        if($entity->getIsContent()){
+        $this->setAction('backup',$menu,$entity->getId());
+        if($entity->getIsContent() == 1){
             $this->setAction('delete',$menu,$entity->getId());
         }
         return $menu;
@@ -108,8 +122,11 @@ class ListMenuBuilder
     public function docfile($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
+        $this->setAction('download',$menu,$entity->getId());
         if(count($entity->getProducts()) == 0)
             $this->setAction('delete',$menu,$entity->getId());
+        else
+            $this->setAction('empty',$menu,$entity->getId());
         return $menu;
     }
     public function tag($entity,$menu){
@@ -117,6 +134,8 @@ class ListMenuBuilder
         $this->setAction('edit',$menu,$entity->getId());
         if(count($entity->getProducts()) == 0){
             $this->setAction('delete',$menu,$entity->getId());
+        }else{
+            $this->setAction('empty',$menu,$entity->getId());
         }
         return $menu;
     }
@@ -183,6 +202,10 @@ class ListMenuBuilder
             $this->setAction('edit',$menu,$entity->getId());
             $this->setAction('delete',$menu,$entity->getId());
 
+        if($entity->getOrderType()->getTag()=="DEVIS"){
+            $this->setAction('devistofacture', $menu, $entity->getId());
+        }
+
         return $menu;
     }
     public function depositsale($entity,$menu){
@@ -215,7 +238,7 @@ class ListMenuBuilder
     public function paymentmethod($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
-        if(count($entity->getOrdersPaymentMethods())==0){
+        if(count($entity->getOrdersPaymentMethods()) ==0 ){
             $this->setAction('delete',$menu,$entity->getId());
         }
         return $menu;

@@ -29,7 +29,7 @@ class TextBackup
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Text", inversedBy="backups" ,cascade={"remove"} )
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Text", inversedBy="backups" ,cascade={"persist"} )
      * @ORM\JoinColumn(name="originalText", referencedColumnName="id",nullable=true)
      */
     private $originalText;

@@ -8,6 +8,15 @@ docfile_show:
     defaults: { _controller: "LilWorksStoreBundle:Docfile:show" }
     methods:  GET
 
+docfile_download:
+    path:     /{docfile_id}/download
+    defaults: { _controller: "LilWorksStoreBundle:Docfile:download" }
+    methods:  GET
+docfile_empty:
+    path:     /{docfile_id}/empty
+    defaults: { _controller: "LilWorksStoreBundle:Docfile:empty" }
+    methods:  GET
+
 docfile_new:
     path:     /new
     defaults: { _controller: "LilWorksStoreBundle:Docfile:new" }

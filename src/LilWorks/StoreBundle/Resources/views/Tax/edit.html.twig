@@ -1,23 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
     {% block javascripts %}
         {{ parent() }}
-        <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/tinymce/langs.fr_FR.js') }}"></script>
         <script>
 
             $( document ).ready(function() {
-                initTinyMce.text('.editor-text',['{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}','{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']);
-                initTinyMce.css('.editor-css');
+                MT.init('taxTab');
             });
-
         </script>
     {% endblock %}
 
     <h1>
-        {{ 'storebundle.supercategory.tax %name%'|trans({'%name%':tax.name}) }}
+        <i class="fa fa-pie-chart" aria-hidden="true"></i>
+        {{ 'storebundle.tax.edit %name%'|trans({'%name%':tax.name}) }}
     </h1>
 
     <div id="content_menu">
@@ -28,18 +24,54 @@
 
     {{ form_start(form) }}
 
-    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
 
-    <div class="row">
-        <div class="row-sm-10 offset-2">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
-            {{ form_end(form) }}
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
+
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#products" role="tab">{% trans %}storebundle.products{% endtrans %}</a>
+        </li>
+    </ul>
+
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="general" role="tabpanel">
+            {{ form_label(form.name) }}
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name) }}
+
+            {{ form_label(form.type) }}
+            {{ form_errors(form.type) }}
+            {{ form_widget(form.type) }}
+
+            {{ form_label(form.value) }}
+            {{ form_errors(form.value) }}
+            {{ form_widget(form.value) }}
+
+        </div>
+        <div class="tab-pane" id="products" role="tabpanel">
+            <div>
+                {{ form_label(form.productsOnline) }}
+                {{ form_errors(form.productsOnline) }}
+                {{ form_widget(form.productsOnline) }}
+            </div>
+            <div>
+                {{ form_label(form.productsOffline) }}
+                {{ form_errors(form.productsOffline) }}
+                {{ form_widget(form.productsOffline) }}
+            </div>
         </div>
     </div>
 
 
+    <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
+
     {{ form_end(form) }}
+
+
 
 {% endblock %}

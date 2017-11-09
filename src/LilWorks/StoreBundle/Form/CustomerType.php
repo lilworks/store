@@ -19,21 +19,21 @@ class CustomerType extends AbstractType
     {
         $builder
             ->add('firstName',null,array(
-                'label'=>'lilworks.storebundle.firstname'
+                'label'=>'storebundle.firstname'
             ))
             ->add('lastName',null,array(
-                'label'=>'lilworks.storebundle.lastname'
+                'label'=>'storebundle.lastname'
             ))
             ->add('companyName',null,array(
-                'label'=>'lilworks.storebundle.companyname'
+                'label'=>'storebundle.companyname'
             ))
             ->add('remoteUser',null,array(
-                'label'=>'lilworks.storebundle.remoteuser'
+                'label'=>'storebundle.remoteuser'
             ))
 
 
             ->add('phonenumbers', CollectionType::class, array(
-                'label'=>'lilworks.storebundle.phonenumbers',
+                'label'=>'storebundle.phonenumbers',
                 'mapped'=>true,
                 'allow_add'=>true,
                 'required' => false,
@@ -45,7 +45,7 @@ class CustomerType extends AbstractType
 
 
             ->add('user', EntityType::class, array(
-                'label'=>'lilworks.storebundle.user',
+                'label'=>'storebundle.user',
                 'class'    => 'AppBundle:User' ,
                 'choice_label' => function ($obj) { return   $obj->getEmail() ." | " .  $obj->getUsername()  ; },
                 'query_builder' => function (EntityRepository $er) {
@@ -55,10 +55,16 @@ class CustomerType extends AbstractType
                 'required' => false ,
                 'mapped'=> true,
                 'expanded' => false ,
-                'multiple' => false
+                'multiple' => false,
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
             ))
             ->add('addresses', CollectionType::class, array(
-                'label'=>'lilworks.storebundle.addresses',
+                'label'=>'storebundle.addresses',
                 'mapped'=>true,
                 'allow_add'=>true,
                 'required' => false,

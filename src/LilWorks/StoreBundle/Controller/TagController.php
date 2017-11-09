@@ -58,9 +58,7 @@ class TagController extends Controller
             10
         );
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.tag.index'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.tags');
 
         return $this->render('LilWorksStoreBundle:Tag:index.html.twig', array(
             'pagination' => $pagination,
@@ -88,14 +86,17 @@ class TagController extends Controller
                     $em->persist($p);
                 }
             }
+            $em->persist($tag);
             $em->flush();
+
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'success','message'=>'storebundle.flash.tag.created')
+            ));
 
             return $this->redirectToRoute('tag_show', array('tag_id' => $tag->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.tag.new'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.tags');
 
         return $this->render('LilWorksStoreBundle:Tag:new.html.twig', array(
             'tag' => $tag,
@@ -109,12 +110,10 @@ class TagController extends Controller
     public function showAction(Tag $tag)
     {
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.tag.show %name%',array('%name%'=>$tag->getName())));
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array('%name%'=>$tag->getName()),'storebundle.prefix.tags');
 
         return $this->render('LilWorksStoreBundle:Tag:show.html.twig', array(
-            'tag' => $tag
+            'tag' => $tag,
         ));
     }
 
@@ -148,20 +147,50 @@ class TagController extends Controller
                 }
             }
             $em->flush();
+
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'success','message'=>'storebundle.flash.tag.edited')
+            ));
+
             return $this->redirectToRoute('tag_edit', array('tag_id' => $tag->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.tag.edit %name%',array('%name%'=>$tag->getName())));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array('%name%'=>$tag->getName()),'storebundle.prefix.tags');
 
         return $this->render('LilWorksStoreBundle:Tag:edit.html.twig', array(
             'tag' => $tag,
             'form' => $editForm->createView()
         ));
     }
+    /**
+     * @ParamConverter("tag", options={"mapping": {"tag_id"   : "id"}})
+     */
+    public function emptyAction(Request $request,Tag $tag)
+    {
 
+        $em = $this->getDoctrine()->getManager();
+
+        foreach($tag->getProducts() as $product){
+            $tag->removeProduct($product);
+            $product->removeTag($tag);
+            $em->persist($product);
+        }
+        $em->persist($tag);
+        $em->flush();
+
+        $this->get('store.flash')->setMessages(array(
+            array('status'=>'success','message'=>'storebundle.flash.tag.empty')
+        ));
+
+        $referer = $request->headers->get('referer');
+        if ( !$referer || is_null($referer) ) {
+            return $this->redirectToRoute('tag_index');
+        } else {
+            return $this->redirect($referer);
+        }
+
+
+    }
     /**
      * @ParamConverter("tag", options={"mapping": {"tag_id"   : "id"}})
      */
@@ -173,7 +202,12 @@ class TagController extends Controller
         $em->flush();
 
         $referer = $request->headers->get('referer');
-        if ( !$referer || is_null($referer) ) {
+
+        $this->get('store.flash')->setMessages(array(
+            array('status'=>'success','message'=>'storebundle.flash.tag.deleted')
+        ));
+
+        if ( !$referer || is_null($referer)  ) {
             return $this->redirectToRoute('tag_index');
         } else {
             return $this->redirect($referer);

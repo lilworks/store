@@ -11,6 +11,7 @@
     {% endblock %}
 
     <h1>
+        <i class="fa fa-pie-chart" aria-hidden="true"></i>
         {% trans %}storebundle.tax.list{% endtrans %}
     </h1>
 
@@ -38,9 +39,11 @@
             <th>{% trans %}storebundle.name{% endtrans %}</th>
             <th>{% trans %}storebundle.tax.value{% endtrans %}</th>
             <th>{% trans %}storebundle.tax.type{% endtrans %}</th>
+            {#
             <th>{% trans %}storebundle.tax.productsoffline{% endtrans %}</th>
             <th>{% trans %}storebundle.tax.productsonline{% endtrans %}</th>
             <th>{% trans %}storebundle.tax.ordersproducts{% endtrans %}</th>
+            #}
         </tr>
         </thead>
         <tbody>
@@ -64,6 +67,7 @@
                     {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\Tax\\TypeType' %}
                     {{ simple_live_editor.getCol(formType,entityName,'type',tax)|raw }}
                 </td>
+                {#
                 <td>
                     {{ tax.productsOnline|length }}
                 </td>
@@ -73,6 +77,7 @@
                 <td>
                     {{ tax.ordersProducts|length }}
                 </td>
+                #}
             </tr>
         {% endfor %}
         </tbody>

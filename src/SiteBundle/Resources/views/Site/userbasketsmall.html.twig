@@ -1,7 +1,15 @@
-<div class="card" style="height: 143px;">
+
+<script>
+    $(function() {
+       MT.init('userbasketsmall');
+    });
+</script>
+
+
+<div class="card" style="height: 143px;" id="userbasketsmall-container">
     <div class="card-block" style="padding: 5px;">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs" role="tablist" id="userbasketsmall">
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#user" role="tab"><i class="fa fa-user" aria-hidden="true"></i></a>
             </li>
@@ -19,7 +27,7 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div class="tab-pane active" id="user" role="tabpanel">
+            <div class="tab-pane" id="user" role="tabpanel" >
                 {% if user is null %}
                     <p class="card-text">
                             {{ 'sitebundle.user.notconnected'|trans }}
@@ -40,10 +48,10 @@
 
 
                     <div class="btn-group " role="group">
-                        <a role="button" href="{{ path('fos_user_profile_show') }}" class="btn btn-sm btn-secondary">
+                        <a role="button" href="{{ path('site_customer') }}" class="btn btn-sm btn-secondary">
                             <i class="fa fa-eye" aria-hidden="true"></i>{{ 'sitebundle.user.profile.show'|trans }}
                         </a>
-                        <a role="button" href="{{ path('fos_user_profile_edit') }}" class="btn btn-sm btn-secondary ">
+                        <a role="button" href="{{ path('site_customer_edit') }}" class="btn btn-sm btn-secondary ">
                             <i class="fa fa-pencil" aria-hidden="true"></i>{{ 'sitebundle.user.profile.edit'|trans }}
                         </a>
                         <a role="button" href="{{ path('fos_user_security_logout') }}" class="btn btn-sm btn-secondary">
@@ -57,9 +65,9 @@
                 <h5>{% trans %}sitebundle.globalsearch{% endtrans %}</h5>
                 <form id="search" action="{{ path('site_all') }}" method="get">
                     <div class="input-group col-md-12">
-                    <input id="search" type="text" class="form-control input-sm" placeholder="{{ 'sitebundle.search'|trans }}" />
+                    <input id="search" type="text" class="form-control input-sm" name="product_filter[name]" placeholder="{{ 'sitebundle.search'|trans }}" />
                         <span class="input-group-btn">
-                            <button onclick="search(this);" class="btn btn-info btn-sm" type="button">
+                            <button onclick="$('#search').submit();" class="btn btn-info btn-sm" type="button">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </span>
@@ -72,27 +80,36 @@
             <div class="tab-pane" id="basket" role="tabpanel">
 
                 <p class="card-text">
-                {% transchoice  basket.basketsProducts|length %}{0} basket empty|{1} one product|]1,Inf[ %count% products{% endtranschoice %}
+                {% transchoice basket.basketsProducts|length %}{0} basket empty|{1} one product|]1,Inf[ %count% products{% endtranschoice %}
                 </p>
-
+                {% if basket.basketsProducts|length > 0 %}
                     <a role="button" href="{{ path('site_basket_edit') }}" class="btn btn-sm btn-secondary">
                         <i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'sitebundle.basket.edit'|trans }}
                     </a>
+                {% endif %}
 
             </div>
 
             <div class="tab-pane" id="subscribe" role="tabpanel">
                 <h5>{% trans %}sitebundle.subscribe{% endtrans %}</h5>
-                <form id="search" action="{{ path('site_all') }}" method="get">
-                    <div class="input-group col-md-12">
-                        <input id="search" type="text" class="form-control input-sm" placeholder="{{ 'sitebundle.email'|trans }}" />
+                {% if user %}
+                    {% if user.subscriber %}
+                        <a role="button" class="btn btn-sm btn-warning" href="{{ path('site_subscriber_unsubscribe') }}">{{ 'sitebundel.unsubscribe'|trans }}</a>
+                    {% else %}
+                        <a role="button" class="btn btn-sm btn-success"  href="{{ path('site_subscriber_subscribe') }}">{{ 'sitebundel.subscribe'|trans }}</a>
+                    {% endif %}
+                {% else %}
+                    <form id="search" action="#" method="get">
+                        <div class="input-group col-md-12">
+                            <input id="search" type="text" class="form-control input-sm" placeholder="{{ 'sitebundle.email'|trans }}" />
                         <span class="input-group-btn">
                             <button onclick="search(this);" class="btn btn-info btn-sm" type="button">
                                 <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                             </button>
                         </span>
-                    </div>
-                </form>
+                        </div>
+                    </form>
+                {% endif %}
             </div>
         </div>
     </div>

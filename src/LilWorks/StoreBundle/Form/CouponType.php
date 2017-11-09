@@ -107,7 +107,7 @@ class CouponType extends AbstractType
             ))
             ->add('description',null,array(
                 'label'=>'storebundle.description',
-                'attr' => ['class' => 'text-editor'],
+                'attr' => ['class' => 'editor-text'],
             ))
             ;
     }

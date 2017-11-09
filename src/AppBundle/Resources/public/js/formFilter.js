@@ -8,11 +8,13 @@ var FF = {
         FF.formFilterHtml = $(".formFilter").html();
         FF.$formFilter.html(this.$openFilterButton);
         FF.setClick();
+
     },
     setClick: function(){
         FF.$openFilterButton.click(function(){
             FF.$formFilter.html(FF.formFilterHtml);
             FF.$formFilter.prepend(FF.$closeFilterButton);
+            $(".selectpicker").selectpicker();
             FF.$closeFilterButton.click(function(){
                 $(this).remove();
                 FF.init();

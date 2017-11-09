@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * DepositSale controller.
  *
@@ -64,39 +64,31 @@ class DepositSaleController extends Controller
     public function pdfAction(Request $request, DepositSale $depositSale)
     {
 
-        if($depositSale->getCustomer() && !$depositSale->getAddress()){
-            return $this->redirectToRoute('customer_edit', array('_fragment' => 'addresses','id' => $depositSale->getCustomer()->getId()));
-        }
-        $filename = $depositSale->getReference();
 
-        $status = strtolower($depositSale->getStatus()->getTag());
+        $em = $this->getDoctrine()->getManager();
+        $textHeader = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-header');
+        $textFooter = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-footer');
 
-        $html = $this->renderView('LilWorksStoreBundle:DepositSale:pdf-'.$status.'.html.twig', array(
+        $header = $this->renderView('LilWorksStoreBundle:Pdf:header.html.twig', array(
+            'css'=>$textHeader->getCss(),
+            'text'=>$textHeader->getContent()
+        ));
+
+        $footer = $this->renderView('LilWorksStoreBundle:Pdf:footer.html.twig', array(
+            'css'=>$textFooter->getCss(),
+            'text'=>$textFooter->getContent()
+        ));
+
+        $html = $this->renderView('LilWorksStoreBundle:DepositSale:pdf-'.strtolower($depositSale->getStatus()->getTag()).'.html.twig', array(
             'depositSale'  => $depositSale,
             'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath(),
         ));
-        $header = $this->renderView('LilWorksStoreBundle:DepositSale:header.html.twig', array(
-            'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath(),
-        ));
-
-        $footer = $this->renderView('LilWorksStoreBundle:DepositSale:footer.html.twig', array(
-            'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath(),
-        ));
-        /*
-                $html = $this->renderView('LilWorksStoreBundle:DepositSale:pdf.html.twig', array(
-                    'depositSale'  => $depositSale,
-                    'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath(),
-                ));
-
-                return $this->renderView('LilWorksStoreBundle:DepositSale:pdf-'.$status.'.html.twig', array(
-                    'depositSale'  => $depositSale,
-                    #'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath(),
-                ));
-        */
         $pdf = $this->get('knp_snappy.pdf');
         $pdf->setOption('footer-html', $footer);
         $pdf->setOption('footer-left', "[page]/[topage]");
         $pdf->setOption('header-html', $header);
+
+        $filename = $depositSale->getReference();
 
         return new Response(
             $pdf->getOutputFromHtml($html),
@@ -106,6 +98,13 @@ class DepositSaleController extends Controller
                 'Content-Disposition'   => 'attachment; filename="'.$filename.'"'
             )
         );
+
+
+        if($depositSale->getCustomer() && !$depositSale->getAddress()){
+            return $this->redirectToRoute('customer_edit', array('_fragment' => 'addresses','customer_id' => $depositSale->getCustomer()->getId()));
+        }
+
+
     }
 
     /**
@@ -138,9 +137,9 @@ class DepositSaleController extends Controller
                 $em->persist($depositSale);
                 $em->flush();
 
-                return $this->redirectToRoute('depositSale_edit', array('id' => $depositSale->getId()));
+                return $this->redirectToRoute('depositsale_edit', array('depositsale_id' => $depositSale->getId()));
             }else{
-                return $this->redirectToRoute('customer_edit', array('id' => $depositSale->getCustomer()->getId()));
+                return $this->redirectToRoute('customer_edit', array('customer_id' => $depositSale->getCustomer()->getId()));
             }
         }
 
@@ -178,18 +177,34 @@ class DepositSaleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $originalDepositSalesPaymentMethods = new ArrayCollection();
+        foreach ($depositSale->getDepositSalesPaymentMethods() as $depositSalePaymentMethod) {
+            $originalDepositSalesPaymentMethods->add($depositSalePaymentMethod);
+        }
 
         $editForm = $this->createForm('LilWorks\StoreBundle\Form\DepositSaleType', $depositSale);
         $editForm->handleRequest($request);
 
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            foreach ($originalDepositSalesPaymentMethods as $depositSalePaymentMethod) {
+                if (false === $depositSale->getDepositSalesPaymentMethods()->contains($depositSalePaymentMethod)) {
+                    $depositSalePaymentMethod->getDepositSale()->removeDepositSalesPaymentMethod($depositSalePaymentMethod);
+                    $em->persist($depositSalePaymentMethod);
+                    $em->remove($depositSalePaymentMethod);
+
+                }
+            }
+            foreach ($depositSale->getDepositSalesPaymentMethods() as $deposilSalePaymentMethodFromForm) {
+                $deposilSalePaymentMethodFromForm->setDepositSale($depositSale);
+                $em->persist($deposilSalePaymentMethodFromForm);
+            }
 
 
             $em->persist($depositSale);
             $em->flush();
 
-            return $this->redirectToRoute('depositSale_edit', array('id' => $depositSale->getId()));
+            return $this->redirectToRoute('depositsale_edit', array('depositsale_id' => $depositSale->getId()));
         }
 
         $translator = $this->get('translator');
@@ -214,7 +229,7 @@ class DepositSaleController extends Controller
 
         $referer = $request->headers->get('referer');
         if ( !$referer || is_null($referer) ) {
-            return $this->redirectToRoute('depositSale_index');
+            return $this->redirectToRoute('depositsale_index');
         } else {
             return $this->redirect($referer);
         }

@@ -73,9 +73,7 @@ class SuperCategoryController extends Controller
             10
         );
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.supercategory.index'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.supercategories');
 
         return $this->render('LilWorksStoreBundle:SuperCategory:index.html.twig', array(
             'pagination' => $pagination,
@@ -115,9 +113,7 @@ class SuperCategoryController extends Controller
             return $this->redirectToRoute('supercategory_show', array('supercategory_id' => $superCategory->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.supercategory.new'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.supercategories');
 
         return $this->render('LilWorksStoreBundle:SuperCategory:new.html.twig', array(
             'superCategory' => $superCategory,
@@ -131,9 +127,7 @@ class SuperCategoryController extends Controller
     public function showAction(Request $request,SuperCategory $superCategory = null)
     {
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.supercategory.show %name%',array('%tag%'=>$superCategory->getName())));
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array('%name%'=>$superCategory->getName()),'storebundle.prefix.supercategories');
 
         return $this->render('LilWorksStoreBundle:SuperCategory:show.html.twig', array(
             'superCategory' => $superCategory
@@ -187,9 +181,7 @@ class SuperCategoryController extends Controller
             return $this->redirectToRoute('supercategory_edit', array('supercategory_id' => $superCategory->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.supercategory.edit %name%',array('%tag%'=>$superCategory->getName())));
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array('%name%'=>$superCategory->getName()),'storebundle.prefix.supercategories');
 
         return $this->render('LilWorksStoreBundle:SuperCategory:edit.html.twig', array(
             'superCategory' => $superCategory,

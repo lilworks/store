@@ -31,7 +31,13 @@
     <script src="{{ asset('bundles/app/js/utils.js') }}"></script>
     <script src="{{ asset('bundles/app/js/alert.js') }}"></script>
     <script src="{{ asset('bundles/app/js/tab.js') }}"></script>
-    <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/memorizeTab.js') }}"></script>
+    {% javascripts
+    'bundles/bazingajstranslation/js/translator.min.js'
+    'js/translations/config.js'
+    'js/translations/*/*.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     <script src="{{ url('bazinga_jstranslation_js') }}"></script>
     <link rel="stylesheet" href="{{ asset('bundles/app/css/simpleLiveEditor.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/lilworksstore/css/store.css') }}">
@@ -40,7 +46,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-social/bootstrap-social.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" />
     <script src="{{ asset('assets/vendor/bootstrap-select/dist/js/bootstrap-select.js') }}"></script>
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <script src="{{ asset('assets/vendor/bootstrap-select/js/i18n/defaults-fr_FR.js') }}"></script>
+
     <link href="{{ asset('bundles/app/image/favicon.png') }}" rel="icon" type="image/png" >
     <script>
         window.paceOptions = {
@@ -85,6 +92,9 @@
             {{ knp_menu_render(side , {template : 'LilWorksStoreBundle:Menu:sideBar.html.twig'}) }}
         </nav>
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <div style="position: absolute; z-index: 99;right: 10px; width: 300px;">
+                {{ store_flash.getMessages|raw }}
+            </div>
             {% block body %}
             {% endblock %}
         </main>

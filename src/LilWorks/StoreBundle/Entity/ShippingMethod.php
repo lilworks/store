@@ -113,6 +113,13 @@ class ShippingMethod
     private $freeTrigger;
 
     /**
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\ShippingMethodsTriggers", mappedBy="shippingMethod",cascade={"persist","remove"})
+     * @ORM\OrderBy({ "trigger" = "ASC"})
+     */
+    private $triggers;
+
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="delay", type="integer",nullable=true)
@@ -200,6 +207,7 @@ class ShippingMethod
         }
         return $this->getFreeTrigger();
     }
+
 
 
     /**
@@ -634,5 +642,39 @@ class ShippingMethod
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * Add trigger
+     *
+     * @param \LilWorks\StoreBundle\Entity\ShippingMethodsTriggers $trigger
+     *
+     * @return ShippingMethod
+     */
+    public function addTrigger(\LilWorks\StoreBundle\Entity\ShippingMethodsTriggers $trigger)
+    {
+        $this->triggers[] = $trigger;
+
+        return $this;
+    }
+
+    /**
+     * Remove trigger
+     *
+     * @param \LilWorks\StoreBundle\Entity\ShippingMethodsTriggers $trigger
+     */
+    public function removeTrigger(\LilWorks\StoreBundle\Entity\ShippingMethodsTriggers $trigger)
+    {
+        $this->triggers->removeElement($trigger);
+    }
+
+    /**
+     * Get triggers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTriggers()
+    {
+        return $this->triggers;
     }
 }

@@ -25,3 +25,15 @@ style:
     methods:  [GET, POST]
     options:
         expose: false
+
+app_ajax_memorizeTab:
+    path: /memorize-tab
+    defaults: { _controller: AppBundle:Ajax:memorizeTab }
+    options:
+         expose: true
+
+app_ajax_memorizedTab:
+    path: /memorized-tab
+    defaults: { _controller: AppBundle:Ajax:memorizedTab }
+    options:
+         expose: true

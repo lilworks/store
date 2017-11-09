@@ -7,7 +7,8 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ShippingMethodsCountriesType extends AbstractType
 {
@@ -16,6 +17,9 @@ class ShippingMethodsCountriesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        $shippingMethodCountry = $builder->getData();
+
         $builder
             ->add('shippingMethod', EntityType::class, array(
                 'label'=>'storebundle.shippingmethod',
@@ -26,16 +30,21 @@ class ShippingMethodsCountriesType extends AbstractType
                 'expanded' => false ,
                 'multiple' => false
             ))
+            ->add('isPublished',null,array(
+                'label'=>'storebundle.ispublished',
+            ))
             ->add('price',MoneyType::class,array(
                 'label'=>'storebundle.price',
                 'required'=>false,
                 'empty_data'=>''
             ))
+            /*
             ->add('freeTrigger',MoneyType::class,array(
                 'label'=>'storebundle.shippingmethod.freetrigger',
                 'required'=>false,
                 'empty_data'=>''
             ))
+            */
             ->add('delay',null,array(
                 'label'=>'storebundle.shippingmethod.delay'
             ))
@@ -44,6 +53,19 @@ class ShippingMethodsCountriesType extends AbstractType
             ))
 
         ;
+        if($shippingMethodCountry && $shippingMethodCountry->getShippingMethod()){
+            $builder->add('triggers', CollectionType::class, array(
+                'constraints' => array(new Valid()),
+                'mapped'=>true,
+                'allow_add'=>true,
+                'required' => false,
+                'allow_delete' => true,
+                'delete_empty' => true,
+                'by_reference' => false,
+                'entry_type'   => ShippingMethodCountryTriggerType::class
+            ))
+            ;
+        }
     }
     
     /**

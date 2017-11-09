@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class ShippingMethodType extends AbstractType
 {
@@ -27,9 +28,9 @@ class ShippingMethodType extends AbstractType
             ->add('price',MoneyType::class,array(
                 'label'=>'storebundle.price'
             ))
-            ->add('freeTrigger',null,array(
+            /*->add('freeTrigger',null,array(
                 'label'=>'storebundle.shippingmethod.freetrigger'
-            ))
+            ))*/
             ->add('priority',null,array(
                 'label'=>'storebundle.shippingmethod.priority'
             ))
@@ -73,6 +74,15 @@ class ShippingMethodType extends AbstractType
                 'data-width'=>"300px"
             )
 
+        ));
+        $builder->add('triggers', CollectionType::class, array(
+            'mapped'=>true,
+            'allow_add'=>true,
+            'required' => false,
+            'allow_delete' => true,
+            'delete_empty' => true,
+            'by_reference' => false,
+            'entry_type'   => ShippingMethodTriggerType::class
         ));
 
     }

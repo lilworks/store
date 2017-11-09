@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+                $( window ).on( "load", FF.init() );
+            });
+        </script>
+    {% endblock %}
+    <h1>
+        <i class="fa fa-hand-scissors-o" aria-hidden="true"></i>
+        {{ 'storebundle.orderproductreturn.list'|trans }}
+    </h1>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div id="content_menu">
+                {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.document.portal','storebundle.menu.return'] , {context: 'content'}) %}
+                {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            {{ knp_pagination_render(pagination) }}
+            {% if formFilter is defined %}
+                <form method="get" action="." class="formFilter">
+                    {{ form_rest(formFilter) }} <input type="submit" class="btn btn-sm btn-secondary" name="submit-filter" value="{% trans %}storebundle.button.filter{% endtrans %}" />
+                </form>
+            {% endif %}
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{% trans %}storebundle.action{% endtrans %}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'storebundle.reference'|trans, 'opr.reference') }}</th>
+            <th>{% trans %}storebundle.product{% endtrans %}</th>
+            <th>{% trans %}storebundle.order{% endtrans %}</th>
+            <th>{% trans %}storebundle.customer{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for orderProductReturn in pagination %}
+
+            <tr>
+                <td>
+                    {% set formatedItems = pagination.items|idinkey %}
+                    {% set menu = knp_menu_get('list', [ orderProductReturn.id ] ,{results:formatedItems[orderProductReturn.id]   ,target:'orderproductreturn'} ) %}
+                    {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
+                </td>
+
+                <td>
+                    {{ orderProductReturn.reference }}
+
+                </td>
+                <td>
+                    <sup>{{ orderProductReturn.quantity }}</sup>&frasl;<sub>{{ orderProductReturn.orderProduct.quantity }}</sub>
+
+                    {{ orderProductReturn.orderProduct.product.brand.name }} {{ orderProductReturn.orderProduct.product.name }}
+                    ({{ orderProductReturn.orderProduct.price|price }})
+
+                </td>
+                <td>
+                    {% if orderProductReturn.orderProduct.order.id is defined %}
+                    {% set linkparams = {
+                    0:{icon:'eye',route:path('order_show',{order_id:orderProductReturn.orderProduct.order.id})},
+                    1:{icon:'pencil',route:path('order_edit',{order_id:orderProductReturn.orderProduct.order.id})}}
+                    %}
+                    {{ orderProductReturn.orderProduct.order.reference |linkbtn(linkparams)|raw }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if orderProductReturn.orderProduct.order.customer is defined %}
+                    {% set linkparams = {
+                    0:{icon:'eye',route:path('customer_show',{customer_id:orderProductReturn.orderProduct.order.customer.id})},
+                    1:{icon:'pencil',route:path('customer_edit',{customer_id:orderProductReturn.orderProduct.order.customer.id})}}
+                    %}
+                    {{ (orderProductReturn.orderProduct.order.customer.firstName ~ ' ' ~  orderProductReturn.orderProduct.order.customer.lastName ~ ' ' ~  orderProductReturn.orderProduct.order.customer.companyName)|linkbtn(linkparams)|raw }}
+                    {% endif %}
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

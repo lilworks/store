@@ -48,6 +48,7 @@ class Annonce
      * @Vich\UploadableField(mapping="annonce_pictures", fileNameProperty="pictureName")
      *
      * @var File
+     *
      */
     private $pictureFile;
 
@@ -69,6 +70,7 @@ class Annonce
      * @var string
      *
      * @ORM\Column(name="name", type="string",length=255,nullable=true)
+     * @Assert\NotBlank()
      */
     private $name;
 

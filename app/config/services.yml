@@ -70,7 +70,7 @@ services:
         public:    false
         arguments:
             - 'mysql:dbname=%database_name%'
-            - { db_username: %database_user%, db_password: %database_password% }
+            - { db_username: database_user%, db_password: database_password% }
 
     session.handler.pdo:
             #class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
@@ -92,3 +92,25 @@ services:
     app.rowsEditor:
             class: AppBundle\Service\RowsEditor
             arguments: ['@service_container','@templating','@doctrine.orm.entity_manager','@request_stack']
+
+
+    store.setSeo:
+        class: LilWorks\StoreBundle\Service\StoreSeoPage
+        arguments: ['@sonata.seo.page','@translator','%context%','%mode%']
+
+    store.flash:
+        class: LilWorks\StoreBundle\Service\Flash
+        arguments: ['@session','@translator']
+
+    site.setSeo:
+        class: SiteBundle\Service\SiteSeoPage
+        arguments: ['@sonata.seo.page','@translator','%context%','%mode%']
+
+    site.flash:
+        class: SiteBundle\Service\Flash
+        arguments: ['@session','@translator']
+
+
+    AppBundle\Form\Extension\HelperTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }

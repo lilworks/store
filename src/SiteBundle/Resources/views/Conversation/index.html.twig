@@ -1,0 +1,86 @@
+{% extends 'SiteBundle:Customer:base.html.twig' %}
+{% block customer %}
+<style>
+    .conversation-in-table{
+        margin: 2px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .conversation-from-admin{
+        background-color: red;
+    }
+    .conversation-from-user{
+        background-color: greenyellow;
+    }
+</style>
+<div class="card">
+    <div class="card-header">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        {{ 'sitebundle.conversations'|trans }}
+    </div>
+    <div class="card-block">
+        <div  class="card-text">
+
+            {% transchoice pagination.getTotalItemCount %}
+            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            {% endtranschoice %}
+            {{ knp_pagination_render(pagination) }}
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>{% trans %}sitebundle.action{% endtrans %}</th>
+                    <th>{% trans %}sitebundle.createdat{% endtrans %}</th>
+                    <th>{% trans %}sitebundle.conversation.subject{% endtrans %}</th>
+                    <th>{% trans %}sitebundle.conversation.messages{% endtrans %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for conversation in pagination %}
+                    <tr>
+                        <td>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a role="button" class="btn btn-sm btn-danger btn-delete" href="{{ path('site_conversations_remove',{conversation_id:conversation.id}) }}">
+                                        <i class="fa fa-trash" aria-hidden="true"></i> {{ 'sitebundle.delete'|trans }}</a>
+                                </li>
+                                <li>
+                                    <a  role="button" class="btn btn-sm btn-info"  href="{{ path('site_conversations_newmessage',{conversation_id:conversation.id}) }}">
+                                        <i class="fa fa-reply" aria-hidden="true"></i> {{ 'sitebundle.message.new'|trans }}</a>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            {{ conversation.createdAt|date('d/m/Y H:i') }}
+                        </td>
+                        <td>
+                            {{ conversation.conversationSubject }}
+                        </td>
+                        <td>
+                            {% for message in  conversation.messages %}
+                                <div class="conversation-in-table {% if message.isResponse %}conversation-from-user{% else %}conversation-from-admin{% endif %}">
+                                    <h5>{{ message.messageSubject }}</h5>
+                                    <p>
+                                        {{ message.createdAt|date('d/m/Y H:i') }}
+                                        {% if message.isResponse %}
+                                            {{ 'sitebundle.conversation.from.store'|trans }}
+                                        {% else %}
+                                            {{ 'sitebundle.conversation.from.you'|trans }}
+                                        {% endif %}
+                                    </p>
+                                    <div>
+                                        {{ message.messageBody }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

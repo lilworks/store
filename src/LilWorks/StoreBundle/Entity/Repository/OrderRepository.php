@@ -40,6 +40,43 @@ class OrderRepository extends \Doctrine\ORM\EntityRepository
             return 1;
         }
     }
+    public function isLastIndex($order,$prefix){
+            if(strstr($order->getReference(), '-' . $prefix)){
+                $explodedRef = explode('-' . $prefix,$order->getReference());
+                $year = $explodedRef[0];
+                $index = intval($explodedRef[1]);
+                $qb = $this->createQueryBuilder('o');
+                $qb
+                    ->select('
+                        SUBSTRING_INDEX(o.reference,:prefixIndice,-1) as indice,
+                        SUBSTRING_INDEX(o.reference,:prefixYear,1) as year
+                        ')
+                    ->where('o.reference like :prefix ')
+                    ->andWhere('o.reference not like :exlcude ')
+                    ->having('indice > :sup')
+                    ->andHaving('year = :year')
+
+                    ->setParameter('sup', $index)
+                    ->setParameter('year', $year)
+                    ->setParameter('exlcude', "%?%")
+                    ->setParameter('prefix', "%$prefix%")
+                    ->setParameter('prefixIndice', $prefix)
+                    ->setParameter('prefixYear', "-".$prefix)
+                    ->setMaxResults(1);
+
+
+                $results = $qb->getQuery()->getScalarResult();
+
+                #var_dump($index,$year,count($results),$qb->getQuery()->getDQL());
+                #die();
+
+                if(count($results)>0)
+                    return false;
+                else
+                    return true;
+            }
+
+    }
 
     public function getLastStep($orderId){
         $qb = $this->createQueryBuilder('o');
@@ -61,6 +98,26 @@ class OrderRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
+    public function haveStep($orderId,$tag){
+        $qb = $this->createQueryBuilder('o');
+        $qb
+            ->select('os.tag')
+            ->join('o.ordersOrderSteps','oos','WITH','oos.order = o.id')
+            ->join('oos.orderStep','os','WITH','os.id = oos.orderStep')
+            ->where('o.id = :order_id')
+            ->andWhere('os.tag = :tag')
+            ->orderBy('oos.createdAt','DESC')
+            ->setParameter('order_id',$orderId)
+            ->setParameter('tag',$tag)
+            ->setMaxResults(1)
+        ;
+        $results = $qb->getQuery()->getScalarResult();
+        if(count($results)>0)
+            return true;
+        else
+            return false;
 
+
+    }
 
 }

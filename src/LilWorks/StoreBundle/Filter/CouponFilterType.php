@@ -33,18 +33,28 @@ class CouponFilterType extends AbstractType
             ))
 
             ->add('customer', Filters\EntityFilterType::class,array(
-            'label'=>'lilworks.storebundle.customer',
+            'label'=>'storebundle.customer',
             'class'=>'LilWorksStoreBundle:Customer',
             'choice_label' => function ($obj) {
-                return   $obj->getFirstName() . " " . $obj->getLastName(). " " . $obj->getCompanyName()  ;
+                return   $obj->getLastName() . " " .$obj->getFirstName() . " " . $obj->getCompanyName()  ;
             },
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('c')
                     ->leftJoin('LilWorksStoreBundle:Coupon','co','WITH','co.customer = c.id')
                     ->where('co.id is not null')
-
+                    ->orderBy('c.lastName','asc')
+                    ->addOrderBy('c.firstName','asc')
                     ;
             },
+                'required' => false ,
+                'expanded' => false ,
+                'multiple' => false,
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
         ))
         ;
 

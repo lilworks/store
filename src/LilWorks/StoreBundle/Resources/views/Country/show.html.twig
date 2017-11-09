@@ -2,6 +2,7 @@
 
 {% block body %}
     <h1>
+        <i class="fa fa-flag" aria-hidden="true"></i>
         {{ 'storebundle.country.show %name%'|trans({'%name%':country.name }) }}
     </h1>
 
@@ -53,10 +54,10 @@
                         <ul class="list-inline">
                             {% for shippingMethod in country.shippingmethodsCountries %}
                                 <li class="list-inline-item page-item product">
-                                    <a href="{{ path('shippingmethod_show',{shippingmethod_id: shippingMethod.shippingMethod.id}) }}" role="button" class="btn btn-secondary btn-sm">
+
+                                    <a href="{{ path('country_shipping_edit',{shippingmethod_country_id: shippingMethod.id}) }}" role="button" class="btn btn-secondary btn-sm">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                         {{ shippingMethod.shippingMethod.name }}
-
                                         {% if shippingMethod.price is not defined or shippingMethod.price is null %}
                                             <span class="shippingmethod-overwrited">
                                                 {{  shippingMethod.shippingMethod.price|price }}
@@ -66,27 +67,19 @@
                                                 {{ shippingMethod.price|price }}
                                             </span>
                                         {% endif %}
-                                        {% if shippingMethod.freeTrigger is not defined or shippingMethod.freeTrigger is null %}
-                                            <span class="shippingmethod-overwrited">
-                                                {% trans %}storebundle.shippingmethod.freetrigger{% endtrans %}: {{ shippingMethod.shippingMethod.freeTrigger|price  }}
-                                            </span>
-                                        {% else %}
-                                            <span class="shippingmethod-default">
-                                                {% trans %}storebundle.shippingmethod.freetrigger{% endtrans %}: {{ shippingMethod.freeTrigger|price  }}
-                                            </span>
-                                        {% endif %}
-                                        {% if shippingMethod.priority is not defined or shippingMethod.priority is null %}
-                                            <span class="shippingmethod-overwrited">
-                                                {% trans %}storebundle.shippingmethod.priority{% endtrans %}: {{ shippingMethod.shippingMethod.priority  }}
-                                            </span>
-                                        {% else %}
-                                            <span class="shippingmethod-default">
-                                                {% trans %}storebundle.shippingmethod.priority{% endtrans %}: {{ shippingMethod.priority  }}
-                                            </span>
-                                        {% endif %}
+
+                                        <ul>
+                                            {% for trigger in shippingMethod.triggers %}
+                                                <li>
+                                                    {{ trigger.trigger|price }} -> {{ trigger.price|price }}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
                                     </a>
                                 </li>
+
                             {% endfor %}
+
                         </ul>
                     {% else %}
                         <i class="fa fa-circle-thin" ></i>

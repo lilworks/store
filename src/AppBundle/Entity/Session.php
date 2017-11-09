@@ -56,7 +56,7 @@ class Session
 
     /**
      * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\Basket", inversedBy="token")
-     * @ORM\JoinColumn(name="basket", referencedColumnName="id")
+     * @ORM\JoinColumn(name="basket", referencedColumnName="id",onDelete="SET NULL")
      */
     private $basket;
 

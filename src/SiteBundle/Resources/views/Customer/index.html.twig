@@ -1,0 +1,79 @@
+{% extends 'SiteBundle:Customer:base.html.twig' %}
+{% block customer %}
+
+
+    <div class="card">
+        <div class="card-header">
+            {{ 'sitebundle.customer.show'|trans }}
+        </div>
+        <div class="card-block">
+            <div  class="card-text">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'sitebundle.usernameemail'|trans }}</th>
+                        <th>{{ 'sitebundle.name'|trans }}</th>
+                        <th>{{ 'sitebundle.companyname'|trans }}</th>
+                        <th>{{ 'sitebundle.phonenumbers'|trans }}</th>
+                        <th>{{ 'sitebundle.addresses'|trans }}</th>
+                        <th>{{ 'sitebundle.orders'|trans }}</th>
+                        <th>{{ 'sitebundle.conversation'|trans }}</th>
+                        <th>{{ 'sitebundle.subscriber'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.customer.firstName ~ ' ' ~  user.customer.lastName  }}</td>
+                        <td>{{  user.customer.companyName }}</td>
+                        <td>
+                            <ul>
+                                {% for phonenumber in user.customer.phonenumbers %}
+                                    <li>{{ phonenumber.phonenumber }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                {% for address in user.customer.addresses %}
+                                    <li>{{ address|formataddress|raw }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            {% if user.customer.orders|length > 0 %}
+                                <ul>
+                                    {% for order in user.customer.orders %}
+                                        <li></li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                {{ 'sitebundle.noorder'|trans }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user.conversations|length > 0 %}
+                                <ul>
+                                    {% for conversation in user.conversations %}
+                                        <li></li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                {{ 'sitebundle.noconversation'|trans }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user.subscriber %}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

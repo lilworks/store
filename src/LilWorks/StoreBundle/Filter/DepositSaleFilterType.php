@@ -15,6 +15,7 @@ class DepositSaleFilterType extends AbstractType
             ->add('reference', Filters\TextFilterType::class,array(
                 'label'=>'storebundle.reference'
             ))
+
             ->add('status', Filters\EntityFilterType::class,array(
                 'label'=>'storebundle.depositsale.status',
                 'class'=>'LilWorksStoreBundle:DepositSaleStatus',
@@ -22,17 +23,29 @@ class DepositSaleFilterType extends AbstractType
                     return   $obj->getName() ;
                 }
             ))
+
             ->add('customer', Filters\EntityFilterType::class,array(
                 'label'=>'storebundle.customer',
                 'class'=>'LilWorksStoreBundle:Customer',
                 'choice_label' => function ($obj) {
-                    return   $obj->getFirstName() . " " . $obj->getLastName(). " " . $obj->getCompanyName()  ;
+                    return   $obj->getLastName() . " " .$obj->getFirstName() . " " . $obj->getCompanyName()  ;
                 },
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
-                        ->leftJoin('LilWorksStoreBundle:DepositSale','ds','WITH','ds.customer = c.id')
-                        ->where('ds.id is not null');
+                        ->leftJoin('c.depositSales','ds')
+                        ->where('ds.id is not null')
+                        ->orderBy('c.lastName','asc')
+                        ->addOrderBy('c.firstName','asc');
                 },
+                'required' => false ,
+                'expanded' => false ,
+                'multiple' => false,
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
             ))
             ->add('product', Filters\EntityFilterType::class,array(
                 'label'=>'storebundle.product',
@@ -43,10 +56,22 @@ class DepositSaleFilterType extends AbstractType
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
                         ->leftJoin('LilWorksStoreBundle:DepositSale','ds','WITH','ds.product = p.id')
+                        ->leftJoin('p.brand','b')
                         ->where('ds.id is not null')
-                        ;
+                        ->orderBy('b.name','asc')
+                        ->addOrderBy('p.name','asc');
                 },
+                'required' => false ,
+                'expanded' => false ,
+                'multiple' => false,
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
             ))
+
 
         ;
 

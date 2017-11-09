@@ -7,7 +7,7 @@ security:
 
     role_hierarchy:
         ROLE_CUSTOMER:    ROLE_USER
-        ROLE_ADMIN:       [ROLE_USER,ROLE_CUSTOMER]
+        ROLE_ADMIN:      [ ROLE_USER , ROLE_CUSTOMER ]
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
@@ -28,10 +28,14 @@ security:
                 anonymous:    true
 
     access_control:
+        - { path: ^/app/ajax, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/change-password, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/customer, role: ROLER_CUSTOMER }
+        #- { path: ^/conversations, role: ROLE_CUSTOMER }
         - { path: ^/order, role: ROLE_CUSTOMER }
         - { path: ^/store/, role: ROLE_ADMIN }
         - { path: ^/app/, role: ROLE_ADMIN }
+        #- { path: ^/translation/, role: ROLE_ADMIN }

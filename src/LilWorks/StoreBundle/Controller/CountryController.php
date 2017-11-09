@@ -3,6 +3,7 @@
 namespace LilWorks\StoreBundle\Controller;
 
 use LilWorks\StoreBundle\Entity\Country;
+use LilWorks\StoreBundle\Entity\ShippingMethodsCountries;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,6 +23,7 @@ class CountryController extends Controller
      */
     public function indexAction(Request $request)
     {
+
         $simpleLiveEditor    = $this->get('app.simpleLiveEditor');
 
         $em    = $this->get('doctrine.orm.entity_manager');
@@ -38,10 +40,8 @@ class CountryController extends Controller
             10
         );
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.country.index'));
 
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.countries');
 
         return $this->render('LilWorksStoreBundle:Country:index.html.twig', array(
             'pagination' => $pagination,
@@ -67,9 +67,7 @@ class CountryController extends Controller
             return $this->redirectToRoute('country_show', array('country_id' => $country->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.country.new'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.countries');
 
         return $this->render('LilWorksStoreBundle:Country:new.html.twig', array(
             'country' => $country,
@@ -82,9 +80,8 @@ class CountryController extends Controller
      */
     public function showAction(Country $country)
     {
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.country.show %name%',array("%name%"=>$country->getName())));
+
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array("%name%"=>$country->getName()),'storebundle.prefix.countries');
 
         return $this->render('LilWorksStoreBundle:Country:show.html.twig', array(
             'country' => $country,
@@ -142,15 +139,65 @@ class CountryController extends Controller
             return $this->redirectToRoute('country_edit', array('country_id' => $country->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.country.edit %name%',array("%name%"=>$country->getName())));
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array("%name%"=>$country->getName()),'storebundle.prefix.countries');
 
         return $this->render('LilWorksStoreBundle:Country:edit.html.twig', array(
             'country' => $country,
             'form' => $editForm->createView()
         ));
     }
+    /**
+     * @ParamConverter("shippingMethodsCountries", options={"mapping": {"shippingmethod_country_id"   : "id"}})
+     */
+    public function shippingMethodAction(Request $request, ShippingMethodsCountries $shippingMethodsCountries)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $originalTriggers = new ArrayCollection();
+        // Create an ArrayCollection of the current shippingmethodCountry objects in the database
+        foreach ($shippingMethodsCountries->getTriggers() as $t) {
+            $originalTriggers->add($t);
+        }
+
+        $editForm = $this->createForm('LilWorks\StoreBundle\Form\ShippingMethodsCountriesType', $shippingMethodsCountries);
+        $editForm->handleRequest($request);
+
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+
+            foreach ($originalTriggers as $t) {
+
+                if (false === $shippingMethodsCountries->getTriggers()->contains($t)) {
+                    $t->setShippingMethodCountry(null);
+                    // if it was a many-to-one relationship, remove the relationship like this
+                    //$shippingmethodCountry->setCountry(null);
+                    //$em->persist($t);
+                    // if you wanted to delete the Tag entirely, you can also do that
+                    $em->remove($t);
+                }
+
+
+            }
+
+            foreach ($shippingMethodsCountries->getTriggers() as $triggerFromForm) {
+                $triggerFromForm->setShippingMethodCountry($shippingMethodsCountries);
+                $em->persist($triggerFromForm);
+
+            }
+
+            $em->flush();
+        }
+
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array("%name%"=>$shippingMethodsCountries->getCountry()->getName()),'storebundle.prefix.countries');
+
+        return $this->render('LilWorksStoreBundle:Country:shippingMethodCountry-edit.html.twig', array(
+            'shippingMethodsCountries' => $shippingMethodsCountries,
+            'form' => $editForm->createView()
+        ));
+    }
+
 
     /**
      * @ParamConverter("country", options={"mapping": {"country_id"   : "id"}})

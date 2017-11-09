@@ -2,6 +2,7 @@
 
 {% block body %}
     <h1>
+        <i class="fa fa-truck" aria-hidden="true"></i>
         {{ 'storebundle.shippingmethod.show %name%'|trans({'%name%':shippingMethod.name}) }}
     </h1>
 
@@ -64,12 +65,26 @@
                 </td>
             </tr>
             <tr>
+                <th>{% trans %}storebundle.triggers{% endtrans %}</th>
+                <td>
+                    <ul class="list list-unstyled">
+                    {% for trigger in shippingMethod.triggers %}
+                        <li>
+                            {{ trigger.trigger|price }} -> {{ trigger.price|price }}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {#
+            <tr>
                 <th>{% trans %}storebundle.shippingmethod.freetrigger{% endtrans %}</th>
                 <td>
                     {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\ShippingMethod\\FreeTriggerType' %}
                     {{ simple_live_editor.getCol(formType,entityName,'freeTrigger',shippingMethod)|raw }}
                 </td>
             </tr>
+            #}
             <tr>
                 <th>{% trans %}storebundle.shippingmethod.allowedcountries{% endtrans %}</th>
                 <td>

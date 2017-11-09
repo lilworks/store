@@ -2,16 +2,10 @@
 namespace SiteBundle\Service;
 
 
-use DoctrineExtensions\Query\Sqlite\Date;
-use LilWorks\StoreBundle\Entity\BasketsProducts;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\Extension\Templating\TemplatingExtension;
-use Symfony\Component\HttpFoundation\RequestStack;
-use LilWorks\StoreBundle\Entity\Product;
-use LilWorks\StoreBundle\Entity\Basket as BasketEntity;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
-use SiteBundle\Service\PaymentMethod\Spplus;
+use SiteBundle\Service\Payment\PaymentInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+
 
 class Payment
 {
@@ -22,7 +16,7 @@ class Payment
     protected $em;
     protected $datas;
     private $rootDir;
-    private $paymentMethod;
+    private $payment;
 
 
     public function __construct(\Doctrine\ORM\EntityManager $em  , $templating  ,RequestStack $requestStack,$security, $rootDir)
@@ -37,19 +31,26 @@ class Payment
     }
 
 
-    public function setPaymentMethod($paymentMethod,$order){
-        $this->datas = $paymentMethod->getDatas();
-        if($this->datas["MODULE_NAME"]){
-            $className = "SiteBundle\\Service\\PaymentMethod\\" . ucfirst($this->datas["MODULE_NAME"]);
-            $this->paymentMethod = new $className($this->datas,$order,$this->rootDir);
+    public function setPayment($payment,$order){
+        $this->datas = $payment->getDatas();
+        if(isset($this->datas["MODULE_NAME"])){
+            $className = "SiteBundle\\Service\\Payment\\" . ucfirst($this->datas["MODULE_NAME"]);
+            $this->payment = new $className($this->datas,$order,$this->rootDir);
         }
+
+        return $this;
     }
+
     public function getForm(){
-        if($this->paymentMethod){
-            return $this->paymentMethod->getForm();
-        }
+        return $this->payment->getForm();
+    }
+    public function getName(){
+        return $this->payment->getName();
+    }
+    public function getText(){
+        return $this->payment->getText();
     }
     public function getRedirection(){
-        return 'https://paiement.systempay.fr/vads-payment/?'.http_build_query($this->paymentMethod->getSendParameters());
+        return $this->payment->getRedirection();
     }
 }

@@ -1,42 +1,28 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="UTF-8">
+{% extends 'LilWorksStoreBundle:Pdf:base.html.twig' %}
 
-    {% if base_dir is defined %}
-    <link rel="stylesheet"
-          href="{{ base_dir ~ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-    {% else %}
-        <link rel="stylesheet"
-              href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-    {% endif %}
-
-</head>
-<body>
+{% block title %}
+<h2>{{ 'storebundle.depositsale.justify'|trans }}: {{ depositSale.reference }}</h2>
+{% endblock %}
 
 
-<h2>Justificatif de dépôt-vente: {{ depositSale.reference }}</h2>
+{% block customer %}
+    <div style="text-align: right">
+        {{ depositSale.customer.firstName }} {{ depositSale.customer.lastName }} {{ depositSale.customer.companyName }}
+        <p>
+            {{ depositSale.address|addressInline }}
+        </p>
+    </div>
+{% endblock %}
 
-
-<div style="text-align: right">
-{{ depositSale.customer.firstName }} {{ depositSale.customer.lastName }} {{ depositSale.customer.companyName }}
-<p>{{ depositSale.address|addressInline }}</p>
-</div>
-
-
+{% block content %}
 <table class="table table-striped">
     <tbody>
 
     <tr>
-        <th>{% trans %}storebundle.product{% endtrans %}</th>
+        <th>{{ 'storebundle.product'|trans }}</th>
         <td>
-            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('product_edit',{id: depositSale.product.id}) }}">
-                <i class="fa fa-pencil" aria-hidden="true"></i>
-                {% if  depositSale.product.pictures|length>0 %}
-                    <img src="{{ asset('product/' ~  depositSale.product.pictures[0].pictureName  ) | imagine_filter('mini') }}" />
-                {% endif %}
+
                 {{ depositSale.product.brand.name }} {{ depositSale.product.name }}
-            </a>
         </td>
     </tr>
     <tr>
@@ -45,18 +31,16 @@
             {{ depositSale.deposedAt|date("d/m/Y") }}
         </td>
     </tr>
+
     <tr>
-        <th>{% trans %}storebundle.depositsale.selledat{% endtrans %}</th>
+        <th>{% trans %}storebundle.depositsale.pricebuying{% endtrans %}</th>
         <td>
-            {% if depositSale.selledAt %}
-                {{ depositSale.selledAt|date("d/m/Y") }}
-            {% else %}
-                <span style="color: red;"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
-            {% endif %}
+            {{ depositSale.priceBuying|price }}
         </td>
     </tr>
+
+
     <tr>
-        <th>{% trans %}storebundle.description{% endtrans %}</th>
         <td>{{ depositSale.description|raw }}</td>
     </tr>
 
@@ -64,5 +48,4 @@
     </tbody>
 </table>
 
-</body>
-</html>
+{% endblock %}

@@ -14,7 +14,9 @@ lil_works_store_subscriber:
 lil_works_store_conversation:
     resource: "@LilWorksStoreBundle/Resources/config/routing/conversation.yml"
     prefix:   /conversation
-
+lil_works_store_orderproductreturn:
+    resource: "@LilWorksStoreBundle/Resources/config/routing/orderproductreturn.yml"
+    prefix:   /orderproductreturn
 lil_works_store_country:
     resource: "@LilWorksStoreBundle/Resources/config/routing/country.yml"
     prefix:   /country

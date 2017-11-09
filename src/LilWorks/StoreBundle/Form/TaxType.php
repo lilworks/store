@@ -18,13 +18,13 @@ class TaxType extends AbstractType
     {
         $builder
             ->add('name',null,array(
-                'label'=>'lilworks.storebundle.name',
+                'label'=>'storebundle.name',
             ))
             ->add('value',null,array(
-                'label'=>'lilworks.storebundle.tax.value',
+                'label'=>'storebundle.tax.value',
             ))
             ->add('type', ChoiceType::class, array(
-                'label'=>'lilworks.storebundle.tax.type',
+                'label'=>'storebundle.tax.type',
                 'choices'  => array(
                     'value (€)' => "VALUE",
                     'ratio (%)' => "RATIO"
@@ -32,9 +32,15 @@ class TaxType extends AbstractType
             ))
 
             ->add('productsOnline', EntityType::class, array(
-                'label'=>'lilworks.storebundle.productsonline',
+                'label'=>'storebundle.productsonline',
                 'class'    => 'LilWorksStoreBundle:Product' ,
-                'choice_label' => function ($obj) { return    $obj->getBrand()->getName() ." ". $obj->getName() ; },
+                'choice_label' => function ($obj) {
+                    $strCat = "";
+                    foreach($obj->getCategories() as $category){
+                        $strCat.= " " . $category->getName();
+                    }
+                    return  $obj->getBrand()->getName() . " " . $obj->getName() . " ($strCat )" ;
+                },
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
                         ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = p.brand')
@@ -54,9 +60,15 @@ class TaxType extends AbstractType
                 )
             ))
             ->add('productsOffline', EntityType::class, array(
-                'label'=>'lilworks.storebundle.productsoffline',
+                'label'=>'storebundle.productsoffline',
                 'class'    => 'LilWorksStoreBundle:Product' ,
-                'choice_label' => function ($obj) { return    $obj->getBrand()->getName() ." ". $obj->getName() ; },
+                'choice_label' => function ($obj) {
+                    $strCat = "";
+                    foreach($obj->getCategories() as $category){
+                        $strCat.= " " . $category->getName();
+                    }
+                    return  $obj->getBrand()->getName() . " " . $obj->getName() . " ($strCat )" ;
+                },
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
                         ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = p.brand')

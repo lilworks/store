@@ -1,0 +1,26 @@
+orderproductreturn_index:
+    path:     /
+    defaults: { _controller: "LilWorksStoreBundle:OrderProductReturn:index" }
+    methods:  GET
+orderproductreturn_new:
+    path:     /{orderproduct_id}/new/
+    defaults: { _controller: "LilWorksStoreBundle:OrderProductReturn:new" }
+    methods:  [GET,POST]
+
+orderproductreturn_show:
+    path:     /{orderproductreturn_id}/show/
+    defaults: { _controller: "LilWorksStoreBundle:OrderProductReturn:show" }
+    methods:  GET
+
+orderproductreturn_pdf:
+    path:     /{orderproductreturn_id}/pdf/
+    defaults: { _controller: "LilWorksStoreBundle:OrderProductReturn:pdf" }
+    methods:  [GET,POST]
+orderproductreturn_edit:
+    path:     /{orderproductreturn_id}/edit/
+    defaults: { _controller: "LilWorksStoreBundle:OrderProductReturn:edit" }
+    methods:  [GET,POST]
+orderproductreturn_delete:
+    path:     /{orderproductreturn_id}/delete/
+    defaults: { _controller: "LilWorksStoreBundle:OrderProductReturn:delete" }
+    methods:  [GET,POST]

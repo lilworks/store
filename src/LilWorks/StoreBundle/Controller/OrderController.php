@@ -52,9 +52,7 @@ class OrderController extends Controller
                 'defaultSortDirection' => 'desc',
             )
         );
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.order.index'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.orders');
 
         return $this->render('LilWorksStoreBundle:Order:index.html.twig', array(
             'pagination' => $pagination,
@@ -72,18 +70,27 @@ class OrderController extends Controller
         $orderType = $em->getRepository("LilWorksStoreBundle:OrderType")->findOneByTag("FACTURE");
         $newOrder = clone $order;
 
-        $newOrder->setCreatedAt(null);
+        $newOrder->setCreatedAt(new \DateTime());
+        $newOrder->setReference(null);
         $newOrder->setUpdatedAt(null);
         $newOrder->setOrderType($orderType);
-        $newOrder->setReference($this->get('lilworks.store.order.utils')->setOrder($newOrder)->getNextReference());
+        #$newOrder->setReference($this->get('lilworks.store.order.utils')->setOrder($newOrder)->getNextReference());
         foreach($order->getOrdersProducts() as $orderProduct){
             $newOrderProduct = clone $orderProduct;
             $newOrderProduct->setOrder($newOrder);
             $newOrder->addOrdersProduct($newOrderProduct);
         }
+        $newOrder=$this->get('lilworks.store.orderManager')->setMakeFlush(false)->init($newOrder);
+
+
         $em->persist($newOrder);
         $em->flush();
-        return $this->redirectToRoute('order_edit', array('id' => $newOrder->getId()));
+
+        $this->get('store.flash')->setMessages(array(
+            array('status'=>'success','message'=>'storebundle.flash.order.devistofacture')
+        ));
+
+        return $this->redirectToRoute('order_edit', array('order_id' => $newOrder->getId()));
     }
 
     /**
@@ -140,8 +147,8 @@ class OrderController extends Controller
 
         $form = $this->createForm('LilWorks\StoreBundle\Form\OrderType', $order,array(
             'context'=>$this->container->getParameter('context'),
-            'orderUtils' => $this->get('lilworks.store.order.utils')
         ));
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -165,19 +172,28 @@ class OrderController extends Controller
                 $em->persist($orderOrderStepFromForm);
             }
 
-            $order->setTot($order->tot());
-            $order->setPayed($order->payed());
             $order->setUserAsSeller($user);
 
+/*
+            $manualCustomer = array(
+                'firstName'=>$form['manualFirstName']->getData(),
+                'lastName'=>$form['manualLastName']->getData(),
+                'companyName'=>$form['manualCompanyName']->getData()
+            );
+            $this->get('lilworks.store.orderManager')->setMakeFlush(false)->setOrder($order,$manualCustomer);*/
+            $order=$this->get('lilworks.store.orderManager')->setMakeFlush(false)->init($order);
             $em->persist($order);
             $em->flush();
 
+            #$this->get('lilworks.store.stockManager')->byOrder($order);
+
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'success','message'=>'storebundle.flash.order.created')
+            ));
             return $this->redirectToRoute('order_edit', array('order_id' => $order->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.order.new'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.orders');
 
         return $this->render('LilWorksStoreBundle:Order:new.html.twig', array(
             'order' => $order,
@@ -197,12 +213,10 @@ class OrderController extends Controller
         else
             $view = "show";
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.order.show %reference%',array('%reference%'=>$order->getReference())));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %reference%',array('%reference%'=>$order->getReference()),'storebundle.prefix.orders');
         return $this->render('LilWorksStoreBundle:Order:'.$view.'.html.twig', array(
-            'order' => $order
+            'order' => $order,
+            'returnsAllowed'=>$this->get('lilworks.store.orderManager')->returnAllowed($order)
         ));
     }
 
@@ -213,7 +227,7 @@ class OrderController extends Controller
     {
 
         $user = $this->getUser();
-        $orderUtils = $this->get('lilworks.store.order.utils') ;
+        //$orderUtils = $this->get('lilworks.store.order.utils') ;
 
         $em = $this->getDoctrine()->getManager();
 
@@ -239,7 +253,7 @@ class OrderController extends Controller
 
         $form = $this->createForm('LilWorks\StoreBundle\Form\OrderType', $order,array(
             'context'=>$this->container->getParameter('context'),
-            'orderUtils' => $orderUtils
+            //'orderUtils' => $orderUtils
         ));
 
         $form->handleRequest($request);
@@ -252,6 +266,7 @@ class OrderController extends Controller
                     $orderPaymentMethod->getOrder()->removeOrdersPaymentMethod($orderPaymentMethod);
                     $em->persist($orderPaymentMethod);
                     $em->remove($orderPaymentMethod);
+
                 }
             }
             foreach ($order->getOrdersPaymentMethods() as $orderPaymentMethodFromForm) {
@@ -265,12 +280,14 @@ class OrderController extends Controller
                     $orderProduct->getOrder()->removeOrdersProduct($orderProduct);
                     $em->persist($orderProduct);
                     $em->remove($orderProduct);
+                    $this->get('lilworks.store.orderManager')->setMakeFlush(false)->restockByOrderProduct($orderProduct);
                 }
             }
             foreach ($order->getOrdersProducts() as $orderProductFromForm) {
                 $orderProductFromForm->setOrder($order);
                 $em->persist($orderProductFromForm);
             }
+
 
             foreach ($originalOrderRealShippingMethods as $orderRealShippingMethod) {
                 if (false === $order->getOrdersRealShippingMethods()->contains($orderRealShippingMethod)) {
@@ -289,7 +306,7 @@ class OrderController extends Controller
                 $em->persist($orderRealShippingMethodFromForm);
             }
 
-
+/*
 
             foreach ($originalOrdersOrderSteps as $orderOrderStep) {
                 if (false === $order->getOrdersOrderSteps()->contains($orderOrderStep)) {
@@ -298,36 +315,42 @@ class OrderController extends Controller
                     $em->remove($orderOrderStep);
                 }
             }
-
+*/
             foreach ($order->getOrdersOrderSteps() as $orderOrderStepFromForm) {
                 $orderOrderStepFromForm->setOrder($order);
                 $em->persist($orderOrderStepFromForm);
             }
+
             $order->setUserAsSeller($user);
-            $order->setTot($order->tot());
-            $order->setPayed($order->payed());
-
-            if(!$order->getReference()){
-                $order->setReference(
-                    $orderUtils->getNextReference($order)
-                );
-            }
-
-            $em->persist($order);
-            $orderUtils->setOrder($order)->manageStock();
 
             $em->flush();
 
+            if(isset($form['manualFirstName'])){
+                $manualCustomer = array(
+                    'firstName'=>$form['manualFirstName']->getData(),
+                    'lastName'=>$form['manualLastName']->getData(),
+                    'companyName'=>$form['manualCompanyName']->getData()
+                );
+            }else{
+                $manualCustomer = array();
+            }
+            ##$this->get('lilworks.store.orderManager')->setMakeFlush(false)->setOrder($order,$manualCustomer);
+            $order=$this->get('lilworks.store.orderManager')->setMakeFlush(false)->init($order);
 
+            $em->persist($order);
+
+            $em->flush();
+
+            $this->get('lilworks.store.stockManager')->byOrder($order);
+
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'success','message'=>'storebundle.flash.order.updated')
+            ));
 
             return $this->redirectToRoute('order_edit', array('order_id' => $order->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.order.edit %reference%',array('%reference%'=>$order->getReference())));
-
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %reference%',array('%reference%'=>$order->getReference()),'storebundle.prefix.orders');
         return $this->render('LilWorksStoreBundle:Order:edit.html.twig', array(
             'order' => $order,
             'form' => $form->createView(),
@@ -341,8 +364,15 @@ class OrderController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $this->get('lilworks.store.orderManager')->setMakeFlush(false)->removeOrder($order);
         $em->remove($order);
         $em->flush();
+
+
+
+        $this->get('store.flash')->setMessages(array(
+            array('status'=>'success','message'=>'storebundle.flash.order.deleted')
+        ));
 
         $referer = $request->headers->get('referer');
         if ( !$referer || is_null($referer) ) {

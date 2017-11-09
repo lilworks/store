@@ -54,9 +54,7 @@ class TextController extends Controller
             10
         );
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.text.index'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.texts');
 
         return $this->render('LilWorksStoreBundle:Text:index.html.twig', array(
             'pagination' => $pagination,
@@ -69,6 +67,9 @@ class TextController extends Controller
      * @ParamConverter("textBackup", options={"mapping": {"textbackup_id"   : "id"}})
      */
     public function backupShowAction(Request $request,TextBackup $textBackup){
+
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.textbackups');
+
         return $this->render('LilWorksStoreBundle:Text:show-backup.html.twig', array(
             'backup' => $textBackup,
             'text' => $textBackup->getOriginalText(),
@@ -82,6 +83,12 @@ class TextController extends Controller
         //$textBackup->getOriginalText()->removeBackup($textBackup);
         $em->remove($textBackup);
         $em->flush();
+        $this->get('store.flash')->setMessages(array(
+            array('status'=>'success','message'=>'storebundle.flash.textbackup.deleted'),
+        ));
+
+
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array('%name%'=>$textBackup->getOriginalText()->getName()),'storebundle.prefix.textbackups');
 
         $referer = $request->headers->get('referer');
         if ( !$referer || is_null($referer) ) {
@@ -115,6 +122,11 @@ class TextController extends Controller
         $em->persist($text);
         $em->flush();
 
+        $this->get('store.flash')->setMessages(array(
+            array('status'=>'success','message'=>'storebundle.flash.text.backuped'),
+            array('status'=>'success','message'=>'storebundle.flash.text.backupapplied'),
+        ));
+
         $referer = $request->headers->get('referer');
         if ( !$referer || is_null($referer) ) {
             return $this->redirectToRoute('text_index');
@@ -137,6 +149,9 @@ class TextController extends Controller
 
         $em->flush();
 
+        $this->get('store.flash')->setMessages(array(
+            array('status'=>'success','message'=>'storebundle.flash.text.emptybackuped')
+        ));
 
         $referer = $request->headers->get('referer');
         if ( !$referer || is_null($referer) ) {
@@ -170,12 +185,8 @@ class TextController extends Controller
         }
 
         $existingBackup = $q->getQuery()->getArrayResult();
-/*
-        $logger = $this->get('logger');
-            $logger->info( $q->getQuery()->getDQL());
-            $logger->addWarning('ExistingBackups:' , $existingBackup)
-        ;
-*/
+
+
         if(count($existingBackup) == 0){
             $backup = new TextBackup();
             $backup->setOriginalText($text);
@@ -185,6 +196,13 @@ class TextController extends Controller
             $text->addBackup($backup);
             $em->persist($backup);
             $em->flush();
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'success','message'=>'storebundle.flash.text.backuped')
+            ));
+        }else{
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'info','message'=>'storebundle.flash.text.notbackuped.alreadysaved')
+            ));
         }
 
 
@@ -214,13 +232,14 @@ class TextController extends Controller
             $em->persist($text);
             $em->flush();
 
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'success','message'=>'storebundle.flash.text.created')
+            ));
+
             return $this->redirectToRoute('text_show', array('text_id' => $text->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.text.new'));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.texts');
         return $this->render('LilWorksStoreBundle:Text:new.html.twig', array(
             'text' => $text,
             'form' => $form->createView(),
@@ -233,10 +252,7 @@ class TextController extends Controller
     public function showAction(Text $text)
     {
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.text.show %name%',array('%name%'=>$text->getName())));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array('%name%'=>$text->getName()),'storebundle.prefix.texts');
         return $this->render('LilWorksStoreBundle:Text:show.html.twig', array(
             'text' => $text
         ));
@@ -255,14 +271,13 @@ class TextController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($text);
             $em->flush();
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'success','message'=>'storebundle.flash.text.updated')
+            ));
             return $this->redirectToRoute('text_edit', array('text_id' => $text->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.text.edit %name%',array('%name%'=>$text->getName())));
-
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array('%name%'=>$text->getName()),'storebundle.prefix.texts');
 
         return $this->render('LilWorksStoreBundle:Text:edit.html.twig', array(
             'text' => $text,
@@ -280,6 +295,14 @@ class TextController extends Controller
         if($text->getIsContent() == 1){
             $em->remove($text);
             $em->flush();
+
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'success','message'=>'storebundle.flash.text.deleted')
+            ));
+        }else{
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'error','message'=>'storebundle.flash.text.notdeleted')
+            ));
         }
         $referer = $request->headers->get('referer');
         if ( !$referer || is_null($referer) ) {

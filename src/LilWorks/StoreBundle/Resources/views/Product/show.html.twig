@@ -2,7 +2,8 @@
 
 {% block body %}
     <h1>
-        {% trans %}storebundle.product.show{% endtrans %}
+        <i class="fa fa-cube" aria-hidden="true"></i>
+        {{ 'storebundle.product.show %name%'|trans({'%name%':product.name}) }}
     </h1>
 
     <div id="content_menu">
@@ -15,14 +16,26 @@
         <tbody>
             <tr>
                 <th>{% trans %}storebundle.idandtag{% endtrans %}</th>
-                <td>#{{ product.id }} {{ product.tag }}
-                    <a href="{{ path('site_product',{tag:product.tag}) }}" target="_blank">{% trans %}storebundle.link.showonline{% endtrans %}</a>
+                <td>
+                    #{{ product.id }} {{ product.tag }}
+                    {% if product.tag is defined %}
+                    {% set linkparams = {
+                    0:{icon:'eye',route:path('site_product',{tag:product.tag})}}
+                    %}
+                    {{ 'storebundle.link.showonline'|trans|linkbtn(linkparams)|raw }}
+                    {% endif %}
                 </td>
             </tr>
             <tr>
                 <th>{% trans %}storebundle.brand{% endtrans %}</th>
                 <td>
-                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('brand_show',{ brand_id:product.brand.id }) }}">{{ product.brand.name }}</a>
+                    {% if product.brand.id is defined %}
+                    {% set linkparams = {
+                    0:{icon:'eye',route:path('brand_show',{brand_id:product.brand.id})},
+                    1:{icon:'pencil',route:path('brand_edit',{brand_id:product.brand.id})}}
+                    %}
+                    {{ product.brand.name|linkbtn(linkparams)|raw }}
+                    {% endif %}
                 </td>
             </tr>
             <tr>
@@ -32,28 +45,45 @@
             <tr>
                 <th>{% trans %}storebundle.categories{% endtrans %}</th>
                 <td>
-                    <ul class="list-inline">
+                    {% if product.categories|length > 0 %}
                     {% for category in product.categories %}
-                        <li class="list-inline-item">
-                            <a role="button" class="btn btn-sm btn-secondary" href="{{ path('category_show',{category_id:category.id }) }}">{{ category.name }}</a>
-                        </li>
+                    {% set linkparams = {
+                    0:{icon:'eye',route:path('category_show',{category_id:category.id})},
+                    1:{icon:'pencil',route:path('category_edit',{category_id:category.id})}}
+                    %}
+                    {{ category.name|linkbtn(linkparams)|raw }}
                     {% endfor %}
-                    </ul>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                {% set productDisplayStock = product|displayStock('badge',true,true) %}
+                <th>{% trans %}storebundle.stock{% endtrans %}</th>
+                <td>
+                    ({{ product.stock }}) {{ productDisplayStock['message']|raw }}
                 </td>
             </tr>
             <tr>
                 <th>{% trans %}storebundle.ispublished{% endtrans %}</th>
                 <td>
-                    {% if product.isPublished %}
-                        <i class="fa fa-check" style="color: green;"></i>
-                    {% else %}
-                        <i class="fa fa-times" style="color: red;"></i>
-                    {% endif %}
+                    {{ product.isPublished|boolean|raw }}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}storebundle.isarchived{% endtrans %}</th>
+                <td>
+                    {{ product.isArchived|boolean|raw }}
+                </td>
+            </tr>
+            <tr>
+                <th>{% trans %}storebundle.issecondhand{% endtrans %}</th>
+                <td>
+                    {{ product.isSecondHand|boolean|raw }}
                 </td>
             </tr>
             <tr>
                 <th>
-                    <i class="fa fa-sitemap" aria-hidden="true"></i>
+                    <i class="fa fa-tag" aria-hidden="true"></i>
                     {% trans %}storebundle.tags{% endtrans %}
                 </th>
                 <td>
@@ -213,14 +243,14 @@
                     {% trans %}storebundle.shippingmethods{% endtrans %}
                 </th>
                 <td>
-                    {% if  product.shippingMethods|length > 0 %}
-                        <ul>
-                            {% for shippingMethod in product.shippingMethods %}
-                                <li>{{ shippingMethod.name }}|{{ shippingMethod.price }}€ (free for {{ shippingMethod.freeTrigger }} €)</li>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        <span class="glyphicon glyphicon-ban-circle"></span>
+                    {% if product.shippingMethods|length > 0 %}
+                    {% for shippingMethod in product.shippingMethods %}
+                            {% set linkparams = {
+                            0:{icon:'eye',route:path('shippingmethod_show',{shippingmethod_id:shippingMethod.id})},
+                            1:{icon:'pencil',route:path('shippingmethod_edit',{shippingmethod_id:shippingMethod.id})}}
+                            %}
+                            {{ shippingMethod.name|linkbtn(linkparams)|raw }}
+                        {% endfor %}
                     {% endif %}
                 </td>
             </tr>
@@ -283,27 +313,12 @@
                 </td>
             </tr>
             <tr>
-                <th>{% trans %}storebundle.product.spec{% endtrans %}</th>
+                <th><i class="fa fa-tachometer" aria-hidden="true"></i>{% trans %}storebundle.product.specifications{% endtrans %}</th>
                 <td>
-                    <ul>
-                        {% if  product.width  %}<li>{% trans %}storebundle.product.width{% endtrans %}: {{ product.width }}</li>{% endif %}
-                        {% if  product.length  %}<li>{% trans %}storebundle.product.length{% endtrans %}: {{ product.length }}</li>{% endif %}
-                        {% if  product.height  %}<li>{% trans %}storebundle.product.height{% endtrans %}: {{ product.height }}</li>{% endif %}
-                        {% if  product.weight  %}<li>{% trans %}storebundle.product.weight{% endtrans %}: {{ product.weight }}</li>{% endif %}
-                        {% if  product.docFiles|length > 0 %}
-                            {% if product.docFiles|length > 0%}
-                            <ul>{% trans %}storebundle.product.docfile{% endtrans %}
-                                {% for file in product.docFiles %}
-                                    <li>
-                                        <a class="btn btn-sm btn-secondary" href="{{ path('docfile_show',{docfile_id:file.id}) }}">{{ file.docName }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                            {% endif %}
-                        {% else %}
-
-                        {% endif %}
-                    </ul>
+                    {% set spec = product|spec %}
+                    {% if spec is not null %}
+                        {{ spec|raw }}
+                    {% endif %}
                 </td>
             </tr>
 

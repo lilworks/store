@@ -12,6 +12,8 @@ class SessionFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+
         $builder
             ->add('id', Filters\TextFilterType::class,array(
                 'label'=>'appbundle.session.id'

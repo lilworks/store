@@ -13,6 +13,11 @@ tag_new:
     defaults: { _controller: "LilWorksStoreBundle:Tag:new" }
     methods:  [GET, POST]
 
+tag_empty:
+    path:     /{tag_id}/empty
+    defaults: { _controller: "LilWorksStoreBundle:Tag:empty" }
+    methods:  [GET, POST]
+
 tag_edit:
     path:     /{tag_id}/edit
     defaults: { _controller: "LilWorksStoreBundle:Tag:edit" }
@@ -21,4 +26,4 @@ tag_edit:
 tag_delete:
     path:     /{tag_id}/delete
     defaults: { _controller: "LilWorksStoreBundle:Tag:delete" }
-    methods:  DELETE
+    methods:  GET

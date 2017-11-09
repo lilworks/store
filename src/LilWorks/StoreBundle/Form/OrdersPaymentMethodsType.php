@@ -31,7 +31,7 @@ class OrdersPaymentMethodsType extends AbstractType
                 $customer = $orderPaymentMethod->getOrder()->getCustomer();
                 if($customer){
                     $form->add('coupon', EntityType::class, array(
-                        'label'=>'lilworks.storebundle.coupon',
+                        'label'=>'storebundle.coupon',
                         'class'    => 'LilWorksStoreBundle:Coupon' ,
                         'required' => false ,
                         'mapped'=> true,
@@ -62,7 +62,7 @@ class OrdersPaymentMethodsType extends AbstractType
 
         $builder
             ->add('paymentMethod', EntityType::class, array(
-                'label'=>'lilworks.storebundle.paymentmethod',
+                'label'=>'storebundle.paymentmethod',
                 'class'    => 'LilWorksStoreBundle:PaymentMethod' ,
                 'choice_label' => function ($obj) { return   $obj->getName() ; },
                 'required' => true ,
@@ -71,17 +71,17 @@ class OrdersPaymentMethodsType extends AbstractType
                 'multiple' => false
         ))
             ->add('payedAt',null,array(
-                'label'=>'lilworks.storebundle.paymentmethod.payedat',
+                'label'=>'storebundle.paymentmethod.payedat',
                 'attr' => ['class' => 'datepicker'],
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yy',
                 'required'=>false
             ))
             ->add('amount',MoneyType::class,array(
-                'label'=>'lilworks.storebundle.paymentmethod.amount',
+                'label'=>'storebundle.paymentmethod.amount',
             ))
             ->add('description',null,array(
-                'label'=>'lilworks.storebundle.description',
+                'label'=>'storebundle.description',
                 'required'=>false
             ));
     }

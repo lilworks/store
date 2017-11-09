@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Doctrine\ORM\EntityRepository;
+
 class ProductType extends AbstractType
 {
 
@@ -82,7 +83,13 @@ class ProductType extends AbstractType
             ->add('relatedProducts', EntityType::class, array(
                 'label'=>'storebundle.product.relatedproducts',
                 'class'    => 'LilWorksStoreBundle:Product' ,
-                'choice_label' => function ($obj) { return  $obj->getBrand()->getName() . " " . $obj->getName() ; },
+                'choice_label' => function ($obj) {
+                    $strCat = "";
+                    foreach($obj->getCategories() as $category){
+                        $strCat.= " " . $category->getName();
+                    }
+                    return  $obj->getBrand()->getName() . " " . $obj->getName() . " ($strCat )" ;
+                },
                 'query_builder' => function (EntityRepository $er) use ($product)  {
                     if($product && $product->getId()>0){
                         return $er->createQueryBuilder('rp')

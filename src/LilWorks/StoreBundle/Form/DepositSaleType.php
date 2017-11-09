@@ -10,8 +10,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-
-
+use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 class DepositSaleType extends AbstractType
 {
     /**
@@ -56,46 +56,49 @@ class DepositSaleType extends AbstractType
                             ;
                     },
                 ));
-                $form->add('coupon', EntityType::class, array(
-                    'label'=>'storebundle.depositsale.coupon',
-                    'class'    => 'LilWorksStoreBundle:Coupon' ,
-                    'required' => false ,
-                    'mapped'=> true,
-                    'expanded' => false ,
-                    'multiple' => false,
-                    'choice_label' => function ($obj) {
-                        return    $obj->getReference();
-                    },
-                    'query_builder' => function (EntityRepository $er) use ($depositSale) {
-                        $q = $er->createQueryBuilder('co')
-                            ->leftJoin('LilWorksStoreBundle:Customer','cu','WITH','cu.id = co.customer')
-                            ->leftJoin('LilWorksStoreBundle:DepositSale','ds','WITH','cu.id = ds.customer AND ds.coupon = co.id')
-                            ->where('cu.id = :customer_id and ds.coupon IS NULL ')
-                            ->setParameter('customer_id',$depositSale->getCustomer()->getId())
-                            ;
 
-                        if($depositSale->getCoupon()){
-                            $q->orWhere('co.id = :coupon_id')
-                                ->setParameter('coupon_id',$depositSale->getCoupon());
-                        }
-                        return $q;
-                    },
-                ));
             }
 
         });
+        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+            $depositSale = $event->getData();
+            $form = $event->getForm();
 
+            if($depositSale->getStatus()->getTag()=="DONE") {
+
+                $form->add('depositSalesPaymentMethods', CollectionType::class, array(
+                    'label' => 'storebundle.paymentmethods',
+                    'entry_options' => array(
+                        'context' => null,
+                    ),
+                    'constraints' => array(new Valid()),
+                    'mapped' => true,
+                    'allow_add' => true,
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_empty' => true,
+                    'by_reference' => false,
+                    'entry_type' => DepositSalesPaymentMethodsType::class
+                ));
+            }
+        });
             $builder
                 ->add('status', EntityType::class, array(
                     'label'=>'storebundle.depositsale.status',
                     'class'    => 'LilWorksStoreBundle:DepositSaleStatus' ,
-                    'required' => false ,
+                    'required' => true ,
                     'mapped'=> true,
                     'expanded' => false ,
                     'multiple' => false,
                     'choice_label' => function ($obj) {
                         return   $obj->getName() ;
                     },
+                    'attr' => array(
+                        'class'=>'selectpicker',
+                        'data-live-search'=>'true',
+                        'data-actions-box'=>true,
+                        'data-width'=>"300px"
+                    )
                 ))
             ->add('customer', EntityType::class, array(
                 'label'=>'storebundle.customer',
@@ -105,31 +108,52 @@ class DepositSaleType extends AbstractType
                 'expanded' => false ,
                 'multiple' => false,
                 'choice_label' => function ($obj) {
-                    return   $obj->getFirstName() . " " . $obj->getLastName(). " " . $obj->getCompanyName()  ;
+                    return    $obj->getLastName(). " " . $obj->getFirstName() . " " . $obj->getCompanyName()  ;
                 },
+                'query_builder' => function (EntityRepository $er)  {
+                    return  $er->createQueryBuilder('c')
+                        ->orderBy('c.lastName', 'ASC')
+                    ;
+
+                },
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
             ))
             ->add('product', EntityType::class, array(
                 'label'=>'storebundle.product',
                 'class'    => 'LilWorksStoreBundle:Product' ,
-                'required' => false ,
+                'required' => true ,
                 'mapped'=> true,
                 'expanded' => false ,
                 'multiple' => false,
                 'choice_label' => function ($obj) {
-                    return   $obj->getBrand()->getName() . " " . $obj->getName() ;
+
+
+                    return   $obj->getBrand()->getName() . " " . $obj->getName() . (!$obj->getDepositSale())?:" (".$obj->getDepositSale()->getReference().")" ;
                 },
                 'query_builder' => function (EntityRepository $er)  {
                     return $er->createQueryBuilder('p')
                         ->leftJoin('p.brand','b')
-                        ->leftJoin('LilWorksStoreBundle:DepositSale','ds','WITH','ds.product = p.id')
+                        ->leftJoin('p.depositSale','ds')
                         ->where('p.isSecondHand = 1')
                         ->andWhere('p.isArchived != 1')
-                        ->andWhere('ds.product IS NULL')
-                        ->orderBy('b.name','asc')
-                        ->addOrderBy('p.name','asc')
+                        #->andWhere('ds.product IS NULL')
+                        ->orderBy('ds.reference','asc')
+                        #->orderBy('b.name','asc')
+                        #->addOrderBy('p.name','asc')
                         ;
 
                 },
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
             ))
 
             ->add('priceBuying',MoneyType::class,array(
@@ -171,7 +195,8 @@ class DepositSaleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'LilWorks\StoreBundle\Entity\DepositSale'
+            'data_class' => 'LilWorks\StoreBundle\Entity\DepositSale',
+            'csrf_protection' => false,
         ));
     }
 

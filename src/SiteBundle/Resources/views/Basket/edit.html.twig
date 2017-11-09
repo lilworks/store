@@ -17,11 +17,16 @@
 
     <div class="btn-group" role="group" aria-label="basket buttons">
         {{ form_row(form.empty) }}
+
         {{ form_row(form.update) }}
+
         {% if form.order is defined %}
             {{ form_row(form.order) }}
         {% endif %}
+
     </div>
+
+    {% if form.basketsProducts is defined %}
 
     <table class="table table-striped">
 
@@ -33,15 +38,15 @@
         </thead>
 
         <tbody>
-        {%   for k,product in form.basketsProducts.vars.data %}
-
+        {% for k,product in form.basketsProducts.vars.data %}
+            {% set productDisplayStock =  product.product|displayStock('badge',true,true) %}
             <tr>
                 <td>
                     {% if product.product.pictures[0].pictureName is defined %}
                         <img src="{{ asset('product/'~product.product.pictures[0].pictureName) | imagine_filter('mini') }}" />
                     {% endif %}
                     {{ product.product.brand.name }} {{ product.product.name }}
-                    {{ product.product|stock(product.quantity)|raw }}
+                    {{ productDisplayStock['message']|raw }}
                     {% if product.product.isSecondHand == 1 %}
                         <span class="alert alert-danger btn-sm" role="alert">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -65,7 +70,7 @@
                     </div>
                 </td>
                 <td>
-                    {{ product.product.priceOnline|price }}
+                    {{ product.product.priceOnline|price }} <br>
                     {{ product.product.taxesOnline|taxes|raw }}
                 </td>
                 <td>{{ (product.product.priceOnline * product.quantity)|price }}</td>
@@ -74,7 +79,7 @@
         <tr>
             {% set totals = basket.basketsProducts|totalCalculator %}
             <td class="bg-info" colspan="4" >
-                {% trans %}total: {% endtrans %}
+                {% trans %}sitebundle.tot{% endtrans %}
                 <style>
                     .priceTTC{
                         font-size: 1.6em;
@@ -99,8 +104,11 @@
         </tr>
         </tbody>
     </table>
-
-
+{% else %}
+    <div class="alert alert-warning" role="alert">
+        {{ 'sitebundle.basket.isempty'|trans }}
+    </div>
+{% endif %}
 
     {% if user is null or basket.user.username is null %}
 

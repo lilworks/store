@@ -3,6 +3,7 @@
 {% block body %}
 
     <h1>
+        <i class="fa fa-credit-card" aria-hidden="true"></i>
         {{ 'storebundle.paymentmethod.show %name%'|trans({'%name%':paymentMethod.name}) }}
     </h1>
 
@@ -38,8 +39,19 @@
                 {{ paymentMethod.description|raw }}
             </td>
         </tr>
+        <tr>
+            <th>{% trans %}storebundle.orderspaymentmethods{% endtrans %}</th>
+            <td>
+                {{ paymentMethod.ordersPaymentMethods|length }}
+            </td>
+        </tr>
 
-
+        <tr>
+            <th>{% trans %}storebundle.description{% endtrans %}</th>
+            <td>
+                {{ paymentMethod.description|raw }}
+            </td>
+        </tr>
 
 
 

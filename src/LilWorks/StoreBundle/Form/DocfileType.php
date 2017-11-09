@@ -29,7 +29,13 @@ class DocfileType extends AbstractType
             ->add('products', EntityType::class, array(
                 'label'=>'storebundle.products',
                 'class'    => 'LilWorksStoreBundle:Product' ,
-                'choice_label' => function ($obj) { return    $obj->getBrand()->getName() ." ". $obj->getName() ; },
+                'choice_label' => function ($obj) {
+                    $strCat = "";
+                    foreach($obj->getCategories() as $category){
+                        $strCat.= " " . $category->getName();
+                    }
+                    return  $obj->getBrand()->getName() . " " . $obj->getName() . " ($strCat )" ;
+                },
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
                         ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = p.brand')

@@ -52,10 +52,11 @@ class DepositSale
     private $address;
 
     /**
-     * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\Coupon")
-     * @ORM\JoinColumn(name="coupon", referencedColumnName="id" , nullable = true)
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods", mappedBy="depositSale" ,cascade={"remove","persist"})
+     * @Assert\Valid()
      */
-    private $coupon;
+    private $depositSalesPaymentMethods;
+
 
     /**
      * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\Product", inversedBy="depositSale")
@@ -129,6 +130,14 @@ class DepositSale
      */
     private $serialNumber;
 
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->depositSalesPaymentMethods = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -333,6 +342,30 @@ class DepositSale
     }
 
     /**
+     * Set serialNumber
+     *
+     * @param string $serialNumber
+     *
+     * @return DepositSale
+     */
+    public function setSerialNumber($serialNumber)
+    {
+        $this->serialNumber = $serialNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get serialNumber
+     *
+     * @return string
+     */
+    public function getSerialNumber()
+    {
+        return $this->serialNumber;
+    }
+
+    /**
      * Set customer
      *
      * @param \LilWorks\StoreBundle\Entity\Customer $customer
@@ -405,27 +438,37 @@ class DepositSale
     }
 
     /**
-     * Set coupon
+     * Add depositSalesPaymentMethod
      *
-     * @param \LilWorks\StoreBundle\Entity\Coupon $coupon
+     * @param \LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods $depositSalesPaymentMethod
      *
      * @return DepositSale
      */
-    public function setCoupon(\LilWorks\StoreBundle\Entity\Coupon $coupon = null)
+    public function addDepositSalesPaymentMethod(\LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods $depositSalesPaymentMethod)
     {
-        $this->coupon = $coupon;
+        $this->depositSalesPaymentMethods[] = $depositSalesPaymentMethod;
 
         return $this;
     }
 
     /**
-     * Get coupon
+     * Remove depositSalesPaymentMethod
      *
-     * @return \LilWorks\StoreBundle\Entity\Coupon
+     * @param \LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods $depositSalesPaymentMethod
      */
-    public function getCoupon()
+    public function removeDepositSalesPaymentMethod(\LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods $depositSalesPaymentMethod)
     {
-        return $this->coupon;
+        $this->depositSalesPaymentMethods->removeElement($depositSalesPaymentMethod);
+    }
+
+    /**
+     * Get depositSalesPaymentMethods
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDepositSalesPaymentMethods()
+    {
+        return $this->depositSalesPaymentMethods;
     }
 
     /**
@@ -450,29 +493,5 @@ class DepositSale
     public function getProduct()
     {
         return $this->product;
-    }
-
-    /**
-     * Set serialNumber
-     *
-     * @param string $serialNumber
-     *
-     * @return DepositSale
-     */
-    public function setSerialNumber($serialNumber)
-    {
-        $this->serialNumber = $serialNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get serialNumber
-     *
-     * @return string
-     */
-    public function getSerialNumber()
-    {
-        return $this->serialNumber;
     }
 }

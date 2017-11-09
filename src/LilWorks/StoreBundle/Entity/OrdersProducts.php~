@@ -23,7 +23,9 @@ class OrdersProducts
      */
     public function preFlush()
     {
-
+        if(!$this->destocking){
+            $this->destocking = 0;
+        }
     }
 
     /**
@@ -46,6 +48,10 @@ class OrdersProducts
     protected $orderRealShippingMethod;
 
 
+    /**
+     * @ORM\OneToOne(targetEntity="LilWorks\StoreBundle\Entity\OrderProductReturn", mappedBy="orderProduct")
+     */
+    private $orderProductReturn;
 
     /**
      * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Order", inversedBy="ordersProducts",cascade={"persist"})
@@ -119,11 +125,13 @@ class OrdersProducts
     private $isSecondHand;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="destocking", type="boolean",nullable=true)
+     * @ORM\Column(name="destocking", type="integer",nullable=true)
      */
     private $destocking;
+
+
 
     /**
      * Constructor
@@ -313,6 +321,30 @@ class OrdersProducts
     }
 
     /**
+     * Set destocking
+     *
+     * @param integer $destocking
+     *
+     * @return OrdersProducts
+     */
+    public function setDestocking($destocking)
+    {
+        $this->destocking = $destocking;
+
+        return $this;
+    }
+
+    /**
+     * Get destocking
+     *
+     * @return integer
+     */
+    public function getDestocking()
+    {
+        return $this->destocking;
+    }
+
+    /**
      * Add tax
      *
      * @param \LilWorks\StoreBundle\Entity\Tax $tax
@@ -368,6 +400,30 @@ class OrdersProducts
     public function getOrderRealShippingMethod()
     {
         return $this->orderRealShippingMethod;
+    }
+
+    /**
+     * Set orderProductReturn
+     *
+     * @param \LilWorks\StoreBundle\Entity\OrderProductReturn $orderProductReturn
+     *
+     * @return OrdersProducts
+     */
+    public function setOrderProductReturn(\LilWorks\StoreBundle\Entity\OrderProductReturn $orderProductReturn = null)
+    {
+        $this->orderProductReturn = $orderProductReturn;
+
+        return $this;
+    }
+
+    /**
+     * Get orderProductReturn
+     *
+     * @return \LilWorks\StoreBundle\Entity\OrderProductReturn
+     */
+    public function getOrderProductReturn()
+    {
+        return $this->orderProductReturn;
     }
 
     /**
@@ -450,29 +506,5 @@ class OrdersProducts
     public function getWarranties()
     {
         return $this->warranties;
-    }
-
-    /**
-     * Set destocking
-     *
-     * @param boolean $destocking
-     *
-     * @return OrdersProducts
-     */
-    public function setDestocking($destocking)
-    {
-        $this->destocking = $destocking;
-
-        return $this;
-    }
-
-    /**
-     * Get destocking
-     *
-     * @return boolean
-     */
-    public function getDestocking()
-    {
-        return $this->destocking;
     }
 }

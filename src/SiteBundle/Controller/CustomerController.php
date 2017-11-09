@@ -4,9 +4,41 @@ namespace SiteBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class CustomerController extends Controller
 {
+
+    public function DefaultAction(Request $request){
+        $user = $this->getUser();
+        if (!is_object($user)) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        return $this->render('SiteBundle:Customer:index.html.twig', array(
+            'user'=>$user
+        ));
+    }
+
+    public function EditAction(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        if (!is_object($user)) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        $form = $this->createForm('SiteBundle\Form\CustomerType', $user->getCustomer());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('site_customer');
+        }
+
+
+        return $this->render('SiteBundle:Customer:edit.html.twig', array(
+            'form'=>$form->createView()
+        ));
+    }
 
     public function PhonenumbersAction(Request $request)
     {

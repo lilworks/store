@@ -2,36 +2,12 @@
 
 {% block body %}
     <h1>
-        {% trans %}storebundle.text.backup.show{% endtrans %}
+        <i class="fa fa-font" aria-hidden="true"></i>
+        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+        {{ 'storebundle.text.backup.show %textname% %backupid%'|trans({'%textname%':text.name,'%backupid%':backup.id}) }}
     </h1>
 
-    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
-        <a href="{{ path('text_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
-        </a>
-        <a href="{{ path('text_show',{ 'id': text.id }) }}" class="btn btn-info btn-sm">
-            <i class="fa fa-eye" aria-hidden="true"></i> {% trans %}storebundle.link.show{% endtrans %}
-        </a>
 
-        <a href="{{ path('text_backup_apply',{id:backup.id}) }}" role="button" class="btn btn-sm btn-warning">
-            <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
-            {% trans %}storebundle.link.backup.apply{% endtrans %}
-        </a>
-            <a href="{{ path('text_backup', { 'id': text.id }) }}" class="btn btn-primary btn-sm">
-                <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                {% trans %}storebundle.link.backup{% endtrans %}
-            </a>
-
-        <a href="{{ path('text_edit', { 'id': text.id }) }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}storebundle.link.edit{% endtrans %}
-        </a>
-
-            {% if text.isContent == 1 %}{% set disabled='' %}{% else %}{% set disabled='disabled' %}{% endif %}
-            <a href="{{ path('text_delete', { 'id': text.id }) }}" class="btn btn-danger btn-sm {{ disabled }}">
-                <i class="fa fa-trash "></i> {% trans %}storebundle.link.delete{% endtrans %}
-            </a>
-
-    </div>
 
     <div class="row">
         <div class="col-sm-6">
@@ -39,9 +15,16 @@
                 <div class="card-header">
                     {% trans %}storebundle.text.current{% endtrans %}
 
+                    {% set linkparams = {
+                    0:{icon:'eye',route:path('text_show',{text_id:text.id})},
+                    1:{icon:'pencil',route:path('text_edit',{text_id:text.id})}}
+                    %}
+                    {{ text.name |linkbtn(linkparams)|raw }}
                 </div>
                 <div class="card-block">
-                    <h4 class="card-title"> {{ text.title }}</h4>
+                    <h4 class="card-title">
+                        {{ text.title }}
+                    </h4>
                     <div class="card-text">
                         <style>
                             {{ text.css|raw }}
@@ -58,10 +41,10 @@
             <div class="card">
                 <div class="card-header">
                     {% trans %}storebundle.text.backup{% endtrans %}
-                    <a href="{{ path('text_backup_apply',{id:backup.id}) }}" role="button" class="btn btn-sm btn-warning">
+                    <a href="{{ path('text_backup_apply',{textbackup_id:backup.id}) }}" role="button" class="btn btn-sm btn-warning">
                         <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
                     </a>
-                    <a href="{{ path('text_backup_delete',{id:backup.id}) }}" role="button" class="btn btn-sm  btn-danger">
+                    <a href="{{ path('text_backup_delete',{textbackup_id:backup.id}) }}" role="button" class="btn btn-sm  btn-danger">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                     <i class="fa fa-floppy-o" aria-hidden="true"></i>

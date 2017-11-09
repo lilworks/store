@@ -3,10 +3,6 @@ subscriber_index:
     defaults: { _controller: "LilWorksStoreBundle:Subscriber:index" }
     methods:  GET
 
-subscriber_show:
-    path:     /{subscriber_id}/show
-    defaults: { _controller: "LilWorksStoreBundle:Subscriber:show" }
-    methods:  GET
 
 subscriber_export:
     path:     /export

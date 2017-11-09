@@ -1,26 +1,171 @@
 <?php
 namespace SiteBundle\Menu;
 
-
-
-
 use Knp\Menu\FactoryInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use SiteBundle\Event\ConfigureSiteMenuEvent;
+#use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+#use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 class MenuBuilder
 {
+
     private $factory;
     private $em;
+    private $token_storage;
+    private $container;
+    private $requestStack;
     /**
      * @param FactoryInterface $factory
      *
      * Add any other dependency you need
      */
-    public function __construct(FactoryInterface $factory,\Doctrine\ORM\EntityManager $em)
+    public function __construct(FactoryInterface $factory,\Doctrine\ORM\EntityManager $em,TokenStorage $token_storage,$container)
     {
+        $this->container = $container;
         $this->factory = $factory;
         $this->em = $em;
+        $this->token_storage = $token_storage;
+        $this->requestStack = $this->container->get('request_stack');
+
+        if(is_object($this->token_storage->getToken()->getUser()))
+            $this->user = $this->token_storage->getToken()->getUser();
     }
 
+
+    public function createUserCustomerMenu(array $options)
+    {
+        $menu = $this->factory->createItem('root');
+        $menu->setExtra('translation_domain','messages');
+        $menu->setAttribute('class','list-unstyled');
+        $menu->setChildrenAttribute('class','list-inline');
+
+        $user = $this->token_storage->getToken()->getUser();
+
+
+        if(is_object($user)){
+
+            $customerShow = $menu->addChild('sitebundle.menu.customer.show', array('route' => 'site_customer'));
+            $customerShow->setAttribute('class','list-inline-item');
+            $customerShow->setLinkAttribute('role','button');
+            $customerShow->setLinkAttribute('class','btn btn-sm btn-secondary');
+            $customerShow->setLinkAttribute('i','fa fa-eye');
+
+            $conversations = $this->em->createQueryBuilder()
+                ->from('LilWorksStoreBundle:Conversation','c')
+                ->select('c')
+                ->leftJoin('c.user','u')
+                ->where('u.id = :user_id')
+                ->orWhere('u.email LIKE :email')
+                ->setParameter('user_id',$user->getId())
+                ->setParameter('email',$user->getEmail())
+                ->getQuery()
+                ->getResult()
+            ;
+            $subscriber = $this->em->createQueryBuilder()
+                ->from('LilWorksStoreBundle:Subscriber','s')
+                ->select('s')
+                ->leftJoin('s.user','u')
+                ->where('u.id = :user_id')
+                ->orWhere('u.email LIKE :email')
+                ->setParameter('user_id',$user->getId())
+                ->setParameter('email',$user->getEmail())
+                ->getQuery()
+                ->getResult()
+            ;
+
+
+            $userEdit = $menu->addChild('sitebundle.menu.user.profile', array('route' => 'fos_user_profile_edit'));
+            $userEdit->setAttribute('class','list-inline-item');
+            $userEdit->setLinkAttribute('role','button');
+            $userEdit->setLinkAttribute('class','btn btn-sm btn-secondary');
+            $userEdit->setLinkAttribute('i','fa fa-user-o');
+
+            if(!is_null($user->getCustomer())){
+                $orders = $this->em->createQueryBuilder()
+                    ->from('LilWorksStoreBundle:Order','o')
+                    ->select('o')
+                    ->leftJoin('o.customer','c')
+                    ->where('c.id = :customer_id')
+                    ->setParameter('customer_id',$user->getCustomer()->getId())
+                    ->getQuery()
+                    ->getResult()
+                ;
+
+
+
+
+
+                $customerEdit = $menu->addChild('sitebundle.menu.customer.edit', array('route' => 'site_customer_edit'));
+                $customerEdit->setAttribute('class','list-inline-item');
+                $customerEdit->setLinkAttribute('role','button');
+                $customerEdit->setLinkAttribute('class','btn btn-sm btn-secondary');
+                $customerEdit->setLinkAttribute('i','fa fa-user-circle-o');
+
+
+
+                if(count($orders)>0){
+                    $orders = $menu->addChild('sitebundle.menu.customer.orders', array('route' => 'site_orders'));
+                    $orders->setAttribute('class','list-inline-item');
+                    $orders->setLinkAttribute('role','button');
+                    $orders->setLinkAttribute('class','btn btn-sm btn-secondary');
+                    $orders->setLinkAttribute('i','fa fa-handshake-o');
+
+                    $this->container->get('event_dispatcher')->dispatch(
+                        ConfigureSiteMenuEvent::CONFIGURE,
+                        new ConfigureSiteMenuEvent( $this->factory,
+                            $orders ,
+                            'orders' ,
+                            $this->requestStack->getCurrentRequest()->get('order_id')
+                        )
+                    );
+
+
+                }else{
+                    $orders = $menu->addChild('sitebundle.menu.customer.orders', array('route' => 'site_orders'));
+                    $orders->setAttribute('class','list-inline-item');
+                    $orders->setLinkAttribute('role','button');
+                    $orders->setLinkAttribute('class','btn btn-sm btn-secondary disabled');
+                    $orders->setLinkAttribute('i','fa fa-handshake-o');
+                }
+
+
+            }
+
+            $conversation = $menu->addChild('sitebundle.menu.user.conversations', array('route' => 'site_conversations'));
+            $conversation->setAttribute('class','list-inline-item');
+            $conversation->setLinkAttribute('role','button');
+            $conversation->setLinkAttribute('class','btn btn-sm btn-secondary');
+            $conversation->setLinkAttribute('i','fa fa-comments-o');
+
+            $this->container->get('event_dispatcher')->dispatch(
+                ConfigureSiteMenuEvent::CONFIGURE,
+                new ConfigureSiteMenuEvent( $this->factory,
+                    $conversation ,
+                    'conversations' ,
+                    $this->requestStack->getCurrentRequest()->get('conversation_id')
+                )
+            );
+
+
+            if(count($subscriber)>0){
+                $subscriber = $menu->addChild('sitebundle.menu.user.subscriber', array('route' => 'site_subscriber_unsubscribe'));
+                $subscriber->setLabel('sitebundle.menu.user.unsubscribe');
+                $subscriber->setLinkAttribute('class','btn btn-sm btn-secondary   btn-unsubscribe');
+            }else{
+                $subscriber = $menu->addChild('sitebundle.menu.user.subscriber', array('route' => 'site_subscriber_subscribe'));
+                $subscriber->setLabel('sitebundle.menu.user.subscribe');
+                $subscriber->setLinkAttribute('class','btn btn-sm btn-secondary btn-subscribe');
+            }
+
+            $subscriber->setAttribute('class','list-inline-item');
+            $subscriber->setLinkAttribute('role','button');
+            $subscriber->setLinkAttribute('i','fa fa-newspaper-o');
+
+        }
+        return $menu;
+
+    }
     public function createMainMenu(array $options)
     {
 
@@ -111,9 +256,6 @@ class MenuBuilder
 
 
             if(in_array($superCategory->getId(),$authorizedSuperCategories)){
-
-
-
 
 
                 if(count($superCategory->getSupercategoriesCategories())==1){

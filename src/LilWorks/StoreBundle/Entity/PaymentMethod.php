@@ -23,6 +23,9 @@ class PaymentMethod
         if($this->updatedAt == null)
             $this->updatedAt = new \DateTime();
 
+        $this->datas["_name"] = $this->name;
+        $this->datas["_text"] = $this->description;
+
     }
     /**
      * @ORM\Id
@@ -31,10 +34,21 @@ class PaymentMethod
      */
     protected $id;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\ReturnsPaymentMethods", mappedBy="paymentMethod" ,cascade={"persist"})
+     */
+    private $returnsPaymentMethods;
+
     /**
      * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\OrdersPaymentMethods", mappedBy="paymentMethod" ,cascade={"persist"})
      */
     private $ordersPaymentMethods;
+
+    /**
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods", mappedBy="paymentMethod" ,cascade={"persist"})
+     */
+    private $depositSalesPaymentMethods;
 
     /**
      * @var string
@@ -131,12 +145,15 @@ class PaymentMethod
         return $this->pictureFile;
     }
     
+
     /**
      * Constructor
      */
     public function __construct()
     {
+        $this->returnsPaymentMethods = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ordersPaymentMethods = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->depositSalesPaymentMethods = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -171,6 +188,54 @@ class PaymentMethod
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set tag
+     *
+     * @param string $tag
+     *
+     * @return PaymentMethod
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Get tag
+     *
+     * @return string
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * Set prefix
+     *
+     * @param string $prefix
+     *
+     * @return PaymentMethod
+     */
+    public function setPrefix($prefix)
+    {
+        $this->prefix = $prefix;
+
+        return $this;
+    }
+
+    /**
+     * Get prefix
+     *
+     * @return string
+     */
+    public function getPrefix()
+    {
+        return $this->prefix;
     }
 
     /**
@@ -294,6 +359,40 @@ class PaymentMethod
     }
 
     /**
+     * Add returnsPaymentMethod
+     *
+     * @param \LilWorks\StoreBundle\Entity\ReturnsPaymentMethods $returnsPaymentMethod
+     *
+     * @return PaymentMethod
+     */
+    public function addReturnsPaymentMethod(\LilWorks\StoreBundle\Entity\ReturnsPaymentMethods $returnsPaymentMethod)
+    {
+        $this->returnsPaymentMethods[] = $returnsPaymentMethod;
+
+        return $this;
+    }
+
+    /**
+     * Remove returnsPaymentMethod
+     *
+     * @param \LilWorks\StoreBundle\Entity\ReturnsPaymentMethods $returnsPaymentMethod
+     */
+    public function removeReturnsPaymentMethod(\LilWorks\StoreBundle\Entity\ReturnsPaymentMethods $returnsPaymentMethod)
+    {
+        $this->returnsPaymentMethods->removeElement($returnsPaymentMethod);
+    }
+
+    /**
+     * Get returnsPaymentMethods
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReturnsPaymentMethods()
+    {
+        return $this->returnsPaymentMethods;
+    }
+
+    /**
      * Add ordersPaymentMethod
      *
      * @param \LilWorks\StoreBundle\Entity\OrdersPaymentMethods $ordersPaymentMethod
@@ -328,50 +427,36 @@ class PaymentMethod
     }
 
     /**
-     * Set tag
+     * Add depositSalesPaymentMethod
      *
-     * @param string $tag
+     * @param \LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods $depositSalesPaymentMethod
      *
      * @return PaymentMethod
      */
-    public function setTag($tag)
+    public function addDepositSalesPaymentMethod(\LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods $depositSalesPaymentMethod)
     {
-        $this->tag = $tag;
+        $this->depositSalesPaymentMethods[] = $depositSalesPaymentMethod;
 
         return $this;
     }
 
     /**
-     * Get tag
+     * Remove depositSalesPaymentMethod
      *
-     * @return string
+     * @param \LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods $depositSalesPaymentMethod
      */
-    public function getTag()
+    public function removeDepositSalesPaymentMethod(\LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods $depositSalesPaymentMethod)
     {
-        return $this->tag;
+        $this->depositSalesPaymentMethods->removeElement($depositSalesPaymentMethod);
     }
 
     /**
-     * Set prefix
+     * Get depositSalesPaymentMethods
      *
-     * @param string $prefix
-     *
-     * @return PaymentMethod
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setPrefix($prefix)
+    public function getDepositSalesPaymentMethods()
     {
-        $this->prefix = $prefix;
-
-        return $this;
-    }
-
-    /**
-     * Get prefix
-     *
-     * @return string
-     */
-    public function getPrefix()
-    {
-        return $this->prefix;
+        return $this->depositSalesPaymentMethods;
     }
 }

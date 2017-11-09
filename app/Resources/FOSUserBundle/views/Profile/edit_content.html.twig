@@ -46,6 +46,7 @@
         </div>
         <div class="card-block">
 
+            {{ dump(form.customer.phonenumbers) }}
             {% if form.customer.phonenumbers is defined %}
                 <ul class="phonenumbers list-inline " id="target" data-prototype="{{ form_widget(form.customer.phonenumbers.vars.prototype)|e('html_attr') }}">
                     {% for phonenumber in form.customer.phonenumbers %}

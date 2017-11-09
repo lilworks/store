@@ -1,266 +1,3440 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-10-30T15:57:13Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
-    <header>
-      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
-      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
-    </header>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext" target-language="fr">
     <body>
-      <trans-unit id="ccdc11b3b3e9331033af4d3c92dc063d73b52bff" resname="            {0} no result found|{1} found one result|]1,Inf[ found %count% results&#10;            ">
-        <source xml:space="preserve">            {0} no result found|{1} found one result|]1,Inf[ found %count% results
-            </source>
-        <target xml:space="preserve">            {0} no result found|{1} found one result|]1,Inf[ found %count% results
-            </target>
-        <jms:reference-file line="31">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
-        <jms:reference-file line="25">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+      <trans-unit id="1" approved="yes">
+        <source><![CDATA[            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            ]]></source>
+        <target><![CDATA[            {0} no result found|{1} found one result|]1,Inf[ found %count% results
+            ]]></target>
       </trans-unit>
-      <trans-unit id="326b426f9ac7a96ed6baf62f8838565416d27df8" resname="actions">
-        <source>actions</source>
-        <target>actions</target>
-        <jms:reference-file line="15">/../../../../../../../.././src/AppBundle/Resources/views/AjaxEditor/index.html.twig</jms:reference-file>
+      <trans-unit id="2" approved="yes">
+        <source><![CDATA[actions]]></source>
+        <target><![CDATA[actions]]></target>
       </trans-unit>
-      <trans-unit id="26e9227fbd62588f7574cd60a086367f6e4e5db3" resname="appbundle.action">
-        <source>appbundle.action</source>
-        <target>appbundle.action</target>
-        <jms:reference-file line="45">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
-        <jms:reference-file line="42">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+      <trans-unit id="3" approved="yes">
+        <source><![CDATA[appbundle.action]]></source>
+        <target><![CDATA[actions]]></target>
       </trans-unit>
-      <trans-unit id="02b0cbc2e2694a9ff861bd01aa21e64596e4b275" resname="appbundle.button.filter">
-        <source>appbundle.button.filter</source>
-        <target>appbundle.button.filter</target>
-        <jms:reference-file line="27">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
-        <jms:reference-file line="32">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+      <trans-unit id="4" approved="yes">
+        <source><![CDATA[appbundle.button.filter]]></source>
+        <target><![CDATA[filtrer]]></target>
       </trans-unit>
-      <trans-unit id="1e8befa0fbe5efee0b1b41e4227e4dbcc6e0e3b8" resname="appbundle.customer">
-        <source>appbundle.customer</source>
-        <target>appbundle.customer</target>
-        <jms:reference-file line="20">/../../../../../../../.././src/AppBundle/Filter/SessionFilterType.php</jms:reference-file>
-        <jms:reference-file line="29">/../../../../../../../.././src/AppBundle/Form/UserType.php</jms:reference-file>
-        <jms:reference-file line="57">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
-        <jms:reference-file line="27">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      <trans-unit id="5" approved="yes">
+        <source><![CDATA[appbundle.customer]]></source>
+        <target><![CDATA[client]]></target>
       </trans-unit>
-      <trans-unit id="51ebabd94e048911ba46e748f7acb219b550eaf3" resname="appbundle.depositsales">
-        <source>appbundle.depositsales</source>
-        <target>appbundle.depositsales</target>
-        <jms:reference-file line="59">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
-        <jms:reference-file line="56">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      <trans-unit id="6" approved="yes">
+        <source><![CDATA[appbundle.depositsales]]></source>
+        <target><![CDATA[dépôt-vente]]></target>
       </trans-unit>
-      <trans-unit id="3a34a1614b21b728592b7befe25e3228f92d62cb" resname="appbundle.email">
-        <source>appbundle.email</source>
-        <target>appbundle.email</target>
-        <jms:reference-file line="23">/../../../../../../../.././src/AppBundle/Form/UserType.php</jms:reference-file>
-        <jms:reference-file line="48">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
-        <jms:reference-file line="19">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      <trans-unit id="7" approved="yes">
+        <source><![CDATA[appbundle.email]]></source>
+        <target><![CDATA[email]]></target>
       </trans-unit>
-      <trans-unit id="71cc59de9c1ac438f26fc7884cea23b7dfa22842" resname="appbundle.htmltitle.user.index">
-        <source>appbundle.htmltitle.user.index</source>
-        <target>appbundle.htmltitle.user.index</target>
-        <jms:reference-file line="58">/../../../../../../../.././src/AppBundle/Controller/UserController.php</jms:reference-file>
+      <trans-unit id="8" approved="yes">
+        <source><![CDATA[appbundle.htmltitle.user.index]]></source>
+        <target><![CDATA[accueil user]]></target>
       </trans-unit>
-      <trans-unit id="c68771df5e9ca8351ed41ea0c5d306d84ede1eba" resname="appbundle.htmltitle.user.index  %username%">
-        <source>appbundle.htmltitle.user.index  %username%</source>
-        <target>appbundle.htmltitle.user.index  %username%</target>
-        <jms:reference-file line="125">/../../../../../../../.././src/AppBundle/Controller/UserController.php</jms:reference-file>
+      <trans-unit id="9" approved="yes">
+        <source><![CDATA[appbundle.htmltitle.user.index  %username%]]></source>
+        <target><![CDATA[appbundle.htmltitle.user.index  %username%]]></target>
       </trans-unit>
-      <trans-unit id="0952b29391fecebaae9f71c7d600931294689e97" resname="appbundle.htmltitle.user.index %username%">
-        <source>appbundle.htmltitle.user.index %username%</source>
-        <target>appbundle.htmltitle.user.index %username%</target>
-        <jms:reference-file line="101">/../../../../../../../.././src/AppBundle/Controller/UserController.php</jms:reference-file>
+      <trans-unit id="10" approved="yes">
+        <source><![CDATA[appbundle.htmltitle.user.index %username%]]></source>
+        <target><![CDATA[appbundle.htmltitle.user.index %username%]]></target>
       </trans-unit>
-      <trans-unit id="3b80c006890024c0115637a2d63f737be8fb3f11" resname="appbundle.htmltitle.user.new">
-        <source>appbundle.htmltitle.user.new</source>
-        <target>appbundle.htmltitle.user.new</target>
-        <jms:reference-file line="85">/../../../../../../../.././src/AppBundle/Controller/UserController.php</jms:reference-file>
+      <trans-unit id="11" approved="yes">
+        <source><![CDATA[appbundle.htmltitle.user.new]]></source>
+        <target><![CDATA[nouvel utilisateur]]></target>
       </trans-unit>
-      <trans-unit id="59608672539d7b795f91796bc6f60c5bcc0831b8" resname="appbundle.lastLogin">
-        <source>appbundle.lastLogin</source>
-        <target>appbundle.lastLogin</target>
-        <jms:reference-file line="53">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+      <trans-unit id="12" approved="yes">
+        <source><![CDATA[appbundle.lastLogin]]></source>
+        <target><![CDATA[dernière connection]]></target>
       </trans-unit>
-      <trans-unit id="64bf7e9b034e32b2651a7176d2f72ced616dcdba" resname="appbundle.orders">
-        <source>appbundle.orders</source>
-        <target>appbundle.orders</target>
-        <jms:reference-file line="58">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
-        <jms:reference-file line="41">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      <trans-unit id="13" approved="yes">
+        <source><![CDATA[appbundle.orders]]></source>
+        <target><![CDATA[commandes]]></target>
       </trans-unit>
-      <trans-unit id="6b7e2c0e4250f9cc768999963e2d2ae38e8c91d6" resname="appbundle.passwordRequestedAt">
-        <source>appbundle.passwordRequestedAt</source>
-        <target>appbundle.passwordRequestedAt</target>
-        <jms:reference-file line="54">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+      <trans-unit id="14" approved="yes">
+        <source><![CDATA[appbundle.passwordRequestedAt]]></source>
+        <target><![CDATA[demande de mot de passe]]></target>
       </trans-unit>
-      <trans-unit id="f0f478cd5cf90997aca0c8d3c0ca1f249cdce7a9" resname="appbundle.session.basket.tot">
-        <source>appbundle.session.basket.tot</source>
-        <target>appbundle.session.basket.tot</target>
-        <jms:reference-file line="48">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+      <trans-unit id="15" approved="yes">
+        <source><![CDATA[appbundle.session.basket.tot]]></source>
+        <target><![CDATA[valeur total panier]]></target>
       </trans-unit>
-      <trans-unit id="ee6235ea689f509efd49573ad35b4defcbc2a105" resname="appbundle.session.id">
-        <source>appbundle.session.id</source>
-        <target>appbundle.session.id</target>
-        <jms:reference-file line="17">/../../../../../../../.././src/AppBundle/Filter/SessionFilterType.php</jms:reference-file>
-        <jms:reference-file line="46">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+      <trans-unit id="16" approved="yes">
+        <source><![CDATA[appbundle.session.id]]></source>
+        <target><![CDATA[id de session]]></target>
       </trans-unit>
-      <trans-unit id="07c50b48751c9dc23b61bcf38a49e772e0911e04" resname="appbundle.session.index">
-        <source>appbundle.session.index</source>
-        <target>appbundle.session.index</target>
-        <jms:reference-file line="15">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+      <trans-unit id="17" approved="yes">
+        <source><![CDATA[appbundle.session.index]]></source>
+        <target><![CDATA[accueil session]]></target>
       </trans-unit>
-      <trans-unit id="6538c795f986e41e636bb8410c59a37f79209be4" resname="appbundle.session.lifetimer">
-        <source>appbundle.session.lifetimer</source>
-        <target>appbundle.session.lifetimer</target>
-        <jms:reference-file line="50">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+      <trans-unit id="18" approved="yes">
+        <source><![CDATA[appbundle.session.lifetimer]]></source>
+        <target><![CDATA[appbundle.session.lifetimer]]></target>
       </trans-unit>
-      <trans-unit id="89dece7ea7ac213658b947740eb96061e046c282" resname="appbundle.session.time">
-        <source>appbundle.session.time</source>
-        <target>appbundle.session.time</target>
-        <jms:reference-file line="49">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+      <trans-unit id="19" approved="yes">
+        <source><![CDATA[appbundle.session.time]]></source>
+        <target><![CDATA[durée]]></target>
       </trans-unit>
-      <trans-unit id="d949c9f54ea02a093c650cbc32c840d4724e770a" resname="appbundle.user">
-        <source>appbundle.user</source>
-        <target>appbundle.user</target>
-        <jms:reference-file line="47">/../../../../../../../.././src/AppBundle/Resources/views/Session/index.html.twig</jms:reference-file>
+      <trans-unit id="20" approved="yes">
+        <source><![CDATA[appbundle.user]]></source>
+        <target><![CDATA[utilisateur]]></target>
       </trans-unit>
-      <trans-unit id="36f90118b160a82b24237a0921516ea0fa7c2d0a" resname="appbundle.user.edit %username%">
-        <source>appbundle.user.edit %username%</source>
-        <target>appbundle.user.edit %username%</target>
-        <jms:reference-file line="6">/../../../../../../../.././src/AppBundle/Resources/views/User/edit.html.twig</jms:reference-file>
+      <trans-unit id="21" approved="yes">
+        <source><![CDATA[appbundle.user.edit %username%]]></source>
+        <target><![CDATA[modification de l'utilisateur %username%]]></target>
       </trans-unit>
-      <trans-unit id="5d680df29eb9ec2513c1213fe20cc5f468b00b6c" resname="appbundle.user.enabled">
-        <source>appbundle.user.enabled</source>
-        <target>appbundle.user.enabled</target>
-        <jms:reference-file line="26">/../../../../../../../.././src/AppBundle/Form/UserType.php</jms:reference-file>
-        <jms:reference-file line="43">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
-        <jms:reference-file line="23">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      <trans-unit id="22" approved="yes">
+        <source><![CDATA[appbundle.user.enabled]]></source>
+        <target><![CDATA[actif]]></target>
       </trans-unit>
-      <trans-unit id="6fb8e0d5e965cf86a7a98c393c04e283ad37f679" resname="appbundle.user.index">
-        <source>appbundle.user.index</source>
-        <target>appbundle.user.index</target>
-        <jms:reference-file line="15">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
+      <trans-unit id="23" approved="yes">
+        <source><![CDATA[appbundle.user.index]]></source>
+        <target><![CDATA[accueil utilisateurs]]></target>
       </trans-unit>
-      <trans-unit id="6cf5bbd72255db930adad44fae5cf794b5f7e03e" resname="appbundle.user.new">
-        <source>appbundle.user.new</source>
-        <target>appbundle.user.new</target>
-        <jms:reference-file line="6">/../../../../../../../.././src/AppBundle/Resources/views/User/new.html.twig</jms:reference-file>
+      <trans-unit id="24" approved="yes">
+        <source><![CDATA[appbundle.user.new]]></source>
+        <target><![CDATA[nouvel utilisateur]]></target>
       </trans-unit>
-      <trans-unit id="cf343e75efdd6f1826cec67680400793ae6af946" resname="appbundle.user.show %username%">
-        <source>appbundle.user.show %username%</source>
-        <target>appbundle.user.show %username%</target>
-        <jms:reference-file line="5">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      <trans-unit id="25" approved="yes">
+        <source><![CDATA[appbundle.user.show %username%]]></source>
+        <target><![CDATA[détails de l'utilisateur %username%]]></target>
       </trans-unit>
-      <trans-unit id="9bc7b95d1393bcff47741a0688ff80de2fb22e22" resname="appbundle.username">
-        <source>appbundle.username</source>
-        <target>appbundle.username</target>
-        <jms:reference-file line="20">/../../../../../../../.././src/AppBundle/Form/UserType.php</jms:reference-file>
-        <jms:reference-file line="47">/../../../../../../../.././src/AppBundle/Resources/views/User/index.html.twig</jms:reference-file>
-        <jms:reference-file line="15">/../../../../../../../.././src/AppBundle/Resources/views/User/show.html.twig</jms:reference-file>
+      <trans-unit id="26" approved="yes">
+        <source><![CDATA[appbundle.username]]></source>
+        <target><![CDATA[nom d'utilisateur]]></target>
       </trans-unit>
-      <trans-unit id="65b45258f65d09cbf82ed5e3f401a7016f37118a" resname="lilworks.storebundle.address.city">
-        <source>lilworks.storebundle.address.city</source>
-        <target>lilworks.storebundle.address.city</target>
-        <jms:reference-file line="31">/../../../../../../../.././src/AppBundle/Form/AddressType.php</jms:reference-file>
+      <trans-unit id="27" approved="yes">
+        <source><![CDATA[lilworks.storebundle.address.city]]></source>
+        <target><![CDATA[lilworks.storebundle.address.city]]></target>
       </trans-unit>
-      <trans-unit id="ee57bcf2bef25f4e81d3c1db771764b2881ba19f" resname="lilworks.storebundle.address.complement">
-        <source>lilworks.storebundle.address.complement</source>
-        <target>lilworks.storebundle.address.complement</target>
-        <jms:reference-file line="25">/../../../../../../../.././src/AppBundle/Form/AddressType.php</jms:reference-file>
+      <trans-unit id="28" approved="yes">
+        <source><![CDATA[lilworks.storebundle.address.complement]]></source>
+        <target><![CDATA[lilworks.storebundle.address.complement]]></target>
       </trans-unit>
-      <trans-unit id="a1d2c235ef779838d0e5da20934c683fa55bf2cc" resname="lilworks.storebundle.address.country">
-        <source>lilworks.storebundle.address.country</source>
-        <target>lilworks.storebundle.address.country</target>
-        <jms:reference-file line="34">/../../../../../../../.././src/AppBundle/Form/AddressType.php</jms:reference-file>
+      <trans-unit id="29" approved="yes">
+        <source><![CDATA[lilworks.storebundle.address.country]]></source>
+        <target><![CDATA[lilworks.storebundle.address.country]]></target>
       </trans-unit>
-      <trans-unit id="aa01a0c5a8589d8ae15f725605aabd0a372c55ba" resname="lilworks.storebundle.address.name">
-        <source>lilworks.storebundle.address.name</source>
-        <target>lilworks.storebundle.address.name</target>
-        <jms:reference-file line="19">/../../../../../../../.././src/AppBundle/Form/AddressType.php</jms:reference-file>
+      <trans-unit id="30" approved="yes">
+        <source><![CDATA[lilworks.storebundle.address.name]]></source>
+        <target><![CDATA[lilworks.storebundle.address.name]]></target>
       </trans-unit>
-      <trans-unit id="00182204d2b178e7cabf8eea769e81f2e49b422d" resname="lilworks.storebundle.address.street">
-        <source>lilworks.storebundle.address.street</source>
-        <target>lilworks.storebundle.address.street</target>
-        <jms:reference-file line="22">/../../../../../../../.././src/AppBundle/Form/AddressType.php</jms:reference-file>
+      <trans-unit id="31" approved="yes">
+        <source><![CDATA[lilworks.storebundle.address.street]]></source>
+        <target><![CDATA[lilworks.storebundle.address.street]]></target>
       </trans-unit>
-      <trans-unit id="ee8f820d4827f124395d71ed0a16b01c46cbc74c" resname="lilworks.storebundle.address.zipcode">
-        <source>lilworks.storebundle.address.zipcode</source>
-        <target>lilworks.storebundle.address.zipcode</target>
-        <jms:reference-file line="28">/../../../../../../../.././src/AppBundle/Form/AddressType.php</jms:reference-file>
+      <trans-unit id="32" approved="yes">
+        <source><![CDATA[lilworks.storebundle.address.zipcode]]></source>
+        <target><![CDATA[lilworks.storebundle.address.zipcode]]></target>
       </trans-unit>
-      <trans-unit id="40e7d9a391684fd1840b9e371fa6edddf3f13af7" resname="lilworks.storebundle.addresses">
-        <source>lilworks.storebundle.addresses</source>
-        <target>lilworks.storebundle.addresses</target>
-        <jms:reference-file line="50">/../../../../../../../.././src/AppBundle/Form/CustomerType.php</jms:reference-file>
+      <trans-unit id="33" approved="yes">
+        <source><![CDATA[lilworks.storebundle.addresses]]></source>
+        <target><![CDATA[lilworks.storebundle.addresses]]></target>
       </trans-unit>
-      <trans-unit id="72714e347e11e4c57fc871472805717c69846172" resname="lilworks.storebundle.companyname">
-        <source>lilworks.storebundle.companyname</source>
-        <target>lilworks.storebundle.companyname</target>
-        <jms:reference-file line="33">/../../../../../../../.././src/AppBundle/Form/CustomerType.php</jms:reference-file>
+      <trans-unit id="34" approved="yes">
+        <source><![CDATA[lilworks.storebundle.companyname]]></source>
+        <target><![CDATA[lilworks.storebundle.companyname]]></target>
       </trans-unit>
-      <trans-unit id="b039cb5b44ef52cc253818cd0e8e065761e2c96a" resname="lilworks.storebundle.customer">
-        <source>lilworks.storebundle.customer</source>
-        <target>lilworks.storebundle.customer</target>
-        <jms:reference-file line="24">/../../../../../../../.././src/AppBundle/Form/ProfileType.php</jms:reference-file>
+      <trans-unit id="35" approved="yes">
+        <source><![CDATA[lilworks.storebundle.customer]]></source>
+        <target><![CDATA[lilworks.storebundle.customer]]></target>
       </trans-unit>
-      <trans-unit id="375926f034c972b2fb2a4681a41b7c5b85950378" resname="lilworks.storebundle.description">
-        <source>lilworks.storebundle.description</source>
-        <target>lilworks.storebundle.description</target>
-        <jms:reference-file line="22">/../../../../../../../.././src/AppBundle/Form/PhoneNumberType.php</jms:reference-file>
+      <trans-unit id="36" approved="yes">
+        <source><![CDATA[lilworks.storebundle.description]]></source>
+        <target><![CDATA[lilworks.storebundle.description]]></target>
       </trans-unit>
-      <trans-unit id="28b8b39dc292d3a87803a8b0a6be03d274e8eba8" resname="lilworks.storebundle.firstname">
-        <source>lilworks.storebundle.firstname</source>
-        <target>lilworks.storebundle.firstname</target>
-        <jms:reference-file line="24">/../../../../../../../.././src/AppBundle/Form/CustomerType.php</jms:reference-file>
+      <trans-unit id="37" approved="yes">
+        <source><![CDATA[lilworks.storebundle.firstname]]></source>
+        <target><![CDATA[lilworks.storebundle.firstname]]></target>
       </trans-unit>
-      <trans-unit id="311b17f4f3da41f4ceaa50f832e69bde33df66f8" resname="lilworks.storebundle.lastname">
-        <source>lilworks.storebundle.lastname</source>
-        <target>lilworks.storebundle.lastname</target>
-        <jms:reference-file line="29">/../../../../../../../.././src/AppBundle/Form/CustomerType.php</jms:reference-file>
+      <trans-unit id="38" approved="yes">
+        <source><![CDATA[lilworks.storebundle.lastname]]></source>
+        <target><![CDATA[lilworks.storebundle.lastname]]></target>
       </trans-unit>
-      <trans-unit id="203741be90aa6ef262eedffdeefdcf33508c61e1" resname="lilworks.storebundle.phonenumber">
-        <source>lilworks.storebundle.phonenumber</source>
-        <target>lilworks.storebundle.phonenumber</target>
-        <jms:reference-file line="18">/../../../../../../../.././src/AppBundle/Form/PhoneNumberType.php</jms:reference-file>
+      <trans-unit id="39" approved="yes">
+        <source><![CDATA[lilworks.storebundle.phonenumber]]></source>
+        <target><![CDATA[lilworks.storebundle.phonenumber]]></target>
       </trans-unit>
-      <trans-unit id="e9b3c9925457588743fe54a85dc4dabd78c10b81" resname="lilworks.storebundle.phonenumbers">
-        <source>lilworks.storebundle.phonenumbers</source>
-        <target>lilworks.storebundle.phonenumbers</target>
-        <jms:reference-file line="38">/../../../../../../../.././src/AppBundle/Form/CustomerType.php</jms:reference-file>
+      <trans-unit id="40" approved="yes">
+        <source><![CDATA[lilworks.storebundle.phonenumbers]]></source>
+        <target><![CDATA[lilworks.storebundle.phonenumbers]]></target>
       </trans-unit>
-      <trans-unit id="ef374c577ee18d782c8ec29e6d1cf434f623b4e1" resname="not set">
-        <source>not set</source>
-        <target>not set</target>
-        <jms:reference-file line="21">/../../../../../../../.././src/AppBundle/Resources/views/AjaxEditor/editableCol.html.twig</jms:reference-file>
-        <jms:reference-file line="246">/../../../../../../../.././src/AppBundle/Resources/views/AjaxEditor/index.html.twig</jms:reference-file>
-        <jms:reference-file line="18">/../../../../../../../.././src/AppBundle/Resources/views/SimpleLiveEditor/col.html.twig</jms:reference-file>
+      <trans-unit id="41" approved="yes">
+        <source><![CDATA[not set]]></source>
+        <target><![CDATA[not set]]></target>
       </trans-unit>
-      <trans-unit id="4526367997387b37f294cb80e8d570d377c93185" resname="selectors">
-        <source>selectors</source>
-        <target>selectors</target>
-        <jms:reference-file line="18">/../../../../../../../.././src/AppBundle/Resources/views/AjaxEditor/index.html.twig</jms:reference-file>
+      <trans-unit id="42" approved="yes">
+        <source><![CDATA[selectors]]></source>
+        <target><![CDATA[selectors]]></target>
       </trans-unit>
-      <trans-unit id="ab9412ffe6e47aa44c34caf7375e52e7766e1ebc" resname="storebundle.button.create">
-        <source>storebundle.button.create</source>
-        <target>storebundle.button.create</target>
-        <jms:reference-file line="16">/../../../../../../../.././src/AppBundle/Resources/views/User/new.html.twig</jms:reference-file>
-        <jms:reference-file line="23">/../../../../../../../.././src/AppBundle/Resources/views/User/new.html.twig</jms:reference-file>
+      <trans-unit id="43" approved="yes">
+        <source><![CDATA[storebundle.button.create]]></source>
+        <target><![CDATA[storebundle.button.create]]></target>
       </trans-unit>
-      <trans-unit id="9d1e3bfda7cd9bf09c7d6acd3088b61f32cd5f9b" resname="storebundle.button.edit">
-        <source>storebundle.button.edit</source>
-        <target>storebundle.button.edit</target>
-        <jms:reference-file line="16">/../../../../../../../.././src/AppBundle/Resources/views/User/edit.html.twig</jms:reference-file>
-        <jms:reference-file line="23">/../../../../../../../.././src/AppBundle/Resources/views/User/edit.html.twig</jms:reference-file>
+      <trans-unit id="44" approved="yes">
+        <source><![CDATA[storebundle.button.edit]]></source>
+        <target><![CDATA[storebundle.button.edit]]></target>
       </trans-unit>
-      <trans-unit id="246f4f0efdb2b94f162a5d0d08a4841190a1c785" resname="storebundle.customer">
-        <source>storebundle.customer</source>
-        <target>storebundle.customer</target>
-        <jms:reference-file line="23">/../../../../../../../.././src/AppBundle/Filter/UserFilterType.php</jms:reference-file>
+      <trans-unit id="45" approved="yes">
+        <source><![CDATA[storebundle.customer]]></source>
+        <target><![CDATA[storebundle.customer]]></target>
       </trans-unit>
-      <trans-unit id="5fb9faee060e790ad658168b2e079fa540fd4a38" resname="storebundle.email">
-        <source>storebundle.email</source>
-        <target>storebundle.email</target>
-        <jms:reference-file line="20">/../../../../../../../.././src/AppBundle/Filter/UserFilterType.php</jms:reference-file>
+      <trans-unit id="46" approved="yes">
+        <source><![CDATA[storebundle.email]]></source>
+        <target><![CDATA[email]]></target>
       </trans-unit>
-      <trans-unit id="20cb2ff1be0e478274b3f5cff079f031c7f3eb3b" resname="storebundle.username">
-        <source>storebundle.username</source>
-        <target>storebundle.username</target>
-        <jms:reference-file line="17">/../../../../../../../.././src/AppBundle/Filter/UserFilterType.php</jms:reference-file>
+      <trans-unit id="47" approved="yes">
+        <source><![CDATA[storebundle.username]]></source>
+        <target><![CDATA[nom d'utilisateur]]></target>
+      </trans-unit>
+      <trans-unit id="48" approved="yes">
+        <source><![CDATA[                        {0} basket empty|{1} one product|]1,Inf[ %count% products
+                        ]]></source>
+        <target><![CDATA[{0} panier vide|{1} 1 article|]1,Inf[ %count% articles]]></target>
+      </trans-unit>
+      <trans-unit id="49" approved="yes">
+        <source><![CDATA[                        {1} available in 1 day |]2,Inf[ available in %count% days
+                        ]]></source>
+        <target><![CDATA[{1} disponible sous 1 jour |]2,Inf[ disponible sous %count% jours]]></target>
+      </trans-unit>
+      <trans-unit id="50" approved="yes">
+        <source><![CDATA[                        {1} only 1 product left|{2} only 2 products left|]2,Inf[ %count% products left
+                        ]]></source>
+        <target><![CDATA[{1}seulement 1 article restant|{2} seulement 2 articles restants|]2,Inf[ %count% articles restants]]></target>
+      </trans-unit>
+      <trans-unit id="51" approved="yes">
+        <source><![CDATA[                    {0} basket empty|{1} one product|]1,Inf[ %count% products
+                    ]]></source>
+        <target><![CDATA[{0} panier vide|{1} 1 article|]1,Inf[ %count% articles]]></target>
+      </trans-unit>
+      <trans-unit id="52" approved="yes">
+        <source><![CDATA[                {0} no product found|{1} found one product|]1,Inf[ found %count% products
+                ]]></source>
+        <target><![CDATA[{0} aucun article|{1} 1 article trouvé|]1,Inf[ %count% articles trouvés]]></target>
+      </trans-unit>
+      <trans-unit id="53" approved="yes">
+        <source><![CDATA[            {0} No order found|{1} found one order|]1,Inf[ found %count% orders
+            ]]></source>
+        <target><![CDATA[{0} aucune commande|{1} 1 commande]1,Inf[ %count% commandes]]></target>
+      </trans-unit>
+      <trans-unit id="54" approved="yes">
+        <source><![CDATA[site.conversation.emailsubject]]></source>
+        <target><![CDATA[sujet]]></target>
+      </trans-unit>
+      <trans-unit id="55" approved="yes">
+        <source><![CDATA[site.htmltitle.contact]]></source>
+        <target><![CDATA[contact]]></target>
+      </trans-unit>
+      <trans-unit id="56" approved="yes">
+        <source><![CDATA[site.htmltitle.home]]></source>
+        <target><![CDATA[accueil]]></target>
+      </trans-unit>
+      <trans-unit id="57" approved="yes">
+        <source><![CDATA[sitebundle.action]]></source>
+        <target><![CDATA[actions]]></target>
+      </trans-unit>
+      <trans-unit id="58" approved="yes">
+        <source><![CDATA[sitebundle.addresses]]></source>
+        <target><![CDATA[adresses]]></target>
+      </trans-unit>
+      <trans-unit id="59" approved="yes">
+        <source><![CDATA[sitebundle.addtobasket]]></source>
+        <target><![CDATA[ajouter au panier]]></target>
+      </trans-unit>
+      <trans-unit id="60" approved="yes">
+        <source><![CDATA[sitebundle.basket]]></source>
+        <target><![CDATA[panier]]></target>
+      </trans-unit>
+      <trans-unit id="61" approved="yes">
+        <source><![CDATA[sitebundle.basket.edit]]></source>
+        <target><![CDATA[editer le panier]]></target>
+      </trans-unit>
+      <trans-unit id="62" approved="yes">
+        <source><![CDATA[sitebundle.billingaddress]]></source>
+        <target><![CDATA[adresse de facturation]]></target>
+      </trans-unit>
+      <trans-unit id="63" approved="yes">
+        <source><![CDATA[sitebundle.brand]]></source>
+        <target><![CDATA[marques]]></target>
+      </trans-unit>
+      <trans-unit id="64" approved="yes">
+        <source><![CDATA[sitebundle.button.back]]></source>
+        <target><![CDATA[retour]]></target>
+      </trans-unit>
+      <trans-unit id="65" approved="yes">
+        <source><![CDATA[sitebundle.button.edit]]></source>
+        <target><![CDATA[sauvegarder les modifications]]></target>
+      </trans-unit>
+      <trans-unit id="66" approved="yes">
+        <source><![CDATA[sitebundle.button.filter]]></source>
+        <target><![CDATA[filtrer]]></target>
+      </trans-unit>
+      <trans-unit id="67" approved="yes">
+        <source><![CDATA[sitebundle.button.search]]></source>
+        <target><![CDATA[rechercher]]></target>
+      </trans-unit>
+      <trans-unit id="68" approved="yes">
+        <source><![CDATA[sitebundle.button.send]]></source>
+        <target><![CDATA[envoyer]]></target>
+      </trans-unit>
+      <trans-unit id="69" approved="yes">
+        <source><![CDATA[sitebundle.cancel]]></source>
+        <target><![CDATA[annuler]]></target>
+      </trans-unit>
+      <trans-unit id="70" approved="yes">
+        <source><![CDATA[sitebundle.connexion]]></source>
+        <target><![CDATA[sitebundle.connexion]]></target>
+      </trans-unit>
+      <trans-unit id="71" approved="yes">
+        <source><![CDATA[sitebundle.conversation]]></source>
+        <target><![CDATA[conversation]]></target>
+      </trans-unit>
+      <trans-unit id="72" approved="yes">
+        <source><![CDATA[sitebundle.conversationmessage]]></source>
+        <target><![CDATA[message]]></target>
+      </trans-unit>
+      <trans-unit id="73" approved="yes">
+        <source><![CDATA[sitebundle.conversationmessage.body]]></source>
+        <target><![CDATA[corps du message]]></target>
+      </trans-unit>
+      <trans-unit id="74" approved="yes">
+        <source><![CDATA[sitebundle.conversationmessage.email]]></source>
+        <target><![CDATA[email]]></target>
+      </trans-unit>
+      <trans-unit id="75" approved="yes">
+        <source><![CDATA[sitebundle.conversationmessage.getcopy]]></source>
+        <target><![CDATA[recevoir une copie]]></target>
+      </trans-unit>
+      <trans-unit id="76" approved="yes">
+        <source><![CDATA[sitebundle.conversationmessage.sent]]></source>
+        <target><![CDATA[message envoyé]]></target>
+      </trans-unit>
+      <trans-unit id="77" approved="yes">
+        <source><![CDATA[sitebundle.conversationmessage.subject]]></source>
+        <target><![CDATA[sujet du message]]></target>
+      </trans-unit>
+      <trans-unit id="78" approved="yes">
+        <source><![CDATA[sitebundle.createdat]]></source>
+        <target><![CDATA[date de création]]></target>
+      </trans-unit>
+      <trans-unit id="79" approved="yes">
+        <source><![CDATA[sitebundle.filter]]></source>
+        <target><![CDATA[filtrer]]></target>
+      </trans-unit>
+      <trans-unit id="80" approved="yes">
+        <source><![CDATA[sitebundle.filter.results]]></source>
+        <target><![CDATA[nombre de resultats]]></target>
+      </trans-unit>
+      <trans-unit id="81" approved="yes">
+        <source><![CDATA[sitebundle.globalsearch]]></source>
+        <target><![CDATA[recherche globale]]></target>
+      </trans-unit>
+      <trans-unit id="82" approved="yes">
+        <source><![CDATA[sitebundle.htmltitle.allstore]]></source>
+        <target><![CDATA[recherche dans tous le magasin]]></target>
+      </trans-unit>
+      <trans-unit id="83" approved="yes">
+        <source><![CDATA[sitebundle.htmltitle.basket.edit]]></source>
+        <target><![CDATA[modification du panier]]></target>
+      </trans-unit>
+      <trans-unit id="84" approved="yes">
+        <source><![CDATA[sitebundle.htmltitle.brand %name%]]></source>
+        <target><![CDATA[marque %name%]]></target>
+      </trans-unit>
+      <trans-unit id="85" approved="yes">
+        <source><![CDATA[sitebundle.htmltitle.category %name%]]></source>
+        <target><![CDATA[catégorie %name%]]></target>
+      </trans-unit>
+      <trans-unit id="86" approved="yes">
+        <source><![CDATA[sitebundle.htmltitle.order]]></source>
+        <target><![CDATA[commande]]></target>
+      </trans-unit>
+      <trans-unit id="87" approved="yes">
+        <source><![CDATA[sitebundle.htmltitle.order %reference%]]></source>
+        <target><![CDATA[commande %reference%]]></target>
+      </trans-unit>
+      <trans-unit id="88" approved="yes">
+        <source><![CDATA[sitebundle.htmltitle.order.pay %reference%]]></source>
+        <target><![CDATA[payer %reference%]]></target>
+      </trans-unit>
+      <trans-unit id="89" approved="yes">
+        <source><![CDATA[sitebundle.htmltitle.product %product%]]></source>
+        <target><![CDATA[article %product%]]></target>
+      </trans-unit>
+      <trans-unit id="90" approved="yes">
+        <source><![CDATA[sitebundle.htmltitle.supercategory %name%]]></source>
+        <target><![CDATA[groupe de catégories %name%]]></target>
+      </trans-unit>
+      <trans-unit id="91" approved="yes">
+        <source><![CDATA[sitebundle.issecondhand]]></source>
+        <target><![CDATA[occasion]]></target>
+      </trans-unit>
+      <trans-unit id="92" approved="yes">
+        <source><![CDATA[sitebundle.next]]></source>
+        <target><![CDATA[suivant]]></target>
+      </trans-unit>
+      <trans-unit id="93" approved="yes">
+        <source><![CDATA[sitebundle.order]]></source>
+        <target><![CDATA[commande]]></target>
+      </trans-unit>
+      <trans-unit id="94" approved="yes">
+        <source><![CDATA[sitebundle.order.cancel]]></source>
+        <target><![CDATA[annuler]]></target>
+      </trans-unit>
+      <trans-unit id="95" approved="yes">
+        <source><![CDATA[sitebundle.order.list]]></source>
+        <target><![CDATA[liste des commandes]]></target>
+      </trans-unit>
+      <trans-unit id="96" approved="yes">
+        <source><![CDATA[sitebundle.order.pay]]></source>
+        <target><![CDATA[payer]]></target>
+      </trans-unit>
+      <trans-unit id="97" approved="yes">
+        <source><![CDATA[sitebundle.order.pdf]]></source>
+        <target><![CDATA[pdf]]></target>
+      </trans-unit>
+      <trans-unit id="98" approved="yes">
+        <source><![CDATA[sitebundle.ordersteps]]></source>
+        <target><![CDATA[étapes de commande]]></target>
+      </trans-unit>
+      <trans-unit id="99" approved="yes">
+        <source><![CDATA[sitebundle.pay]]></source>
+        <target><![CDATA[payer]]></target>
+      </trans-unit>
+      <trans-unit id="100" approved="yes">
+        <source><![CDATA[sitebundle.payed]]></source>
+        <target><![CDATA[payée]]></target>
+      </trans-unit>
+      <trans-unit id="101" approved="yes">
+        <source><![CDATA[sitebundle.paymentmethods]]></source>
+        <target><![CDATA[paiements]]></target>
+      </trans-unit>
+      <trans-unit id="102" approved="yes">
+        <source><![CDATA[sitebundle.pdf]]></source>
+        <target><![CDATA[pdf]]></target>
+      </trans-unit>
+      <trans-unit id="103" approved="yes">
+        <source><![CDATA[sitebundle.phonenumbers]]></source>
+        <target><![CDATA[téléphones]]></target>
+      </trans-unit>
+      <trans-unit id="104" approved="yes">
+        <source><![CDATA[sitebundle.previous]]></source>
+        <target><![CDATA[précédent]]></target>
+      </trans-unit>
+      <trans-unit id="105" approved="yes">
+        <source><![CDATA[sitebundle.pricerange]]></source>
+        <target><![CDATA[plage de prix]]></target>
+      </trans-unit>
+      <trans-unit id="106" approved="yes">
+        <source><![CDATA[sitebundle.priceunity]]></source>
+        <target><![CDATA[prix unitaire]]></target>
+      </trans-unit>
+      <trans-unit id="107" approved="yes">
+        <source><![CDATA[sitebundle.product]]></source>
+        <target><![CDATA[article]]></target>
+      </trans-unit>
+      <trans-unit id="108" approved="yes">
+        <source><![CDATA[sitebundle.product.alwaysavailable]]></source>
+        <target><![CDATA[toujours dispo]]></target>
+      </trans-unit>
+      <trans-unit id="109" approved="yes">
+        <source><![CDATA[sitebundle.product.available]]></source>
+        <target><![CDATA[dispo]]></target>
+      </trans-unit>
+      <trans-unit id="110" approved="yes">
+        <source><![CDATA[sitebundle.product.issecondhand]]></source>
+        <target><![CDATA[occasion]]></target>
+      </trans-unit>
+      <trans-unit id="111" approved="yes">
+        <source><![CDATA[sitebundle.productname]]></source>
+        <target><![CDATA[article]]></target>
+      </trans-unit>
+      <trans-unit id="112" approved="yes">
+        <source><![CDATA[sitebundle.productnotfound]]></source>
+        <target><![CDATA[article non trouvé]]></target>
+      </trans-unit>
+      <trans-unit id="113" approved="yes">
+        <source><![CDATA[sitebundle.products]]></source>
+        <target><![CDATA[articles]]></target>
+      </trans-unit>
+      <trans-unit id="114" approved="yes">
+        <source><![CDATA[sitebundle.producttot]]></source>
+        <target><![CDATA[sous-total article]]></target>
+      </trans-unit>
+      <trans-unit id="115" approved="yes">
+        <source><![CDATA[sitebundle.quantity]]></source>
+        <target><![CDATA[quantité]]></target>
+      </trans-unit>
+      <trans-unit id="116" approved="yes">
+        <source><![CDATA[sitebundle.reference]]></source>
+        <target><![CDATA[référence]]></target>
+      </trans-unit>
+      <trans-unit id="117" approved="yes">
+        <source><![CDATA[sitebundle.relatedproducts]]></source>
+        <target><![CDATA[articles conseillés]]></target>
+      </trans-unit>
+      <trans-unit id="118" approved="yes">
+        <source><![CDATA[sitebundle.selectaddressfirst]]></source>
+        <target><![CDATA[merci de choisir une adresse]]></target>
+      </trans-unit>
+      <trans-unit id="119" approved="yes">
+        <source><![CDATA[sitebundle.shippingaddress]]></source>
+        <target><![CDATA[adresse de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="120" approved="yes">
+        <source><![CDATA[sitebundle.shippingmethod]]></source>
+        <target><![CDATA[service de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="121" approved="yes">
+        <source><![CDATA[sitebundle.show]]></source>
+        <target><![CDATA[montrer]]></target>
+      </trans-unit>
+      <trans-unit id="122" approved="yes">
+        <source><![CDATA[sitebundle.subtot]]></source>
+        <target><![CDATA[sous-total]]></target>
+      </trans-unit>
+      <trans-unit id="123" approved="yes">
+        <source><![CDATA[sitebundle.tot]]></source>
+        <target><![CDATA[total]]></target>
+      </trans-unit>
+      <trans-unit id="124" approved="yes">
+        <source><![CDATA[sitebundle.totwithshipping]]></source>
+        <target><![CDATA[total avec frais de port]]></target>
+      </trans-unit>
+      <trans-unit id="125" approved="yes">
+        <source><![CDATA[sitebundle.updatedat]]></source>
+        <target><![CDATA[date de mise à jour]]></target>
+      </trans-unit>
+      <trans-unit id="126" approved="yes">
+        <source><![CDATA[sitebundle.user.notconnected]]></source>
+        <target><![CDATA[non connecté]]></target>
+      </trans-unit>
+      <trans-unit id="127" approved="yes">
+        <source><![CDATA[stitebundle.htmltitle.customer.addresses]]></source>
+        <target><![CDATA[adresses]]></target>
+      </trans-unit>
+      <trans-unit id="128" approved="yes">
+        <source><![CDATA[stitebundle.htmltitle.customer.phonenumbers]]></source>
+        <target><![CDATA[téléphones]]></target>
+      </trans-unit>
+      <trans-unit id="129" approved="yes">
+        <source><![CDATA[lilworks.storebundle.coupon]]></source>
+        <target><![CDATA[lilworks.storebundle.coupon]]></target>
+      </trans-unit>
+      <trans-unit id="130" approved="yes">
+        <source><![CDATA[storebundle.action]]></source>
+        <target><![CDATA[action]]></target>
+      </trans-unit>
+      <trans-unit id="131" approved="yes">
+        <source><![CDATA[storebundle.addresses]]></source>
+        <target><![CDATA[adresses]]></target>
+      </trans-unit>
+      <trans-unit id="132" approved="yes">
+        <source><![CDATA[storebundle.annonce.list]]></source>
+        <target><![CDATA[liste des annonces]]></target>
+      </trans-unit>
+      <trans-unit id="133" approved="yes">
+        <source><![CDATA[storebundle.annonces]]></source>
+        <target><![CDATA[annonces]]></target>
+      </trans-unit>
+      <trans-unit id="134" approved="yes">
+        <source><![CDATA[storebundle.brand]]></source>
+        <target><![CDATA[marque]]></target>
+      </trans-unit>
+      <trans-unit id="135" approved="yes">
+        <source><![CDATA[storebundle.brand.edit %name%]]></source>
+        <target><![CDATA[modification de la marque %name%]]></target>
+      </trans-unit>
+      <trans-unit id="136" approved="yes">
+        <source><![CDATA[storebundle.brand.list]]></source>
+        <target><![CDATA[liste des marques]]></target>
+      </trans-unit>
+      <trans-unit id="137" approved="yes">
+        <source><![CDATA[storebundle.brand.new]]></source>
+        <target><![CDATA[nouvelle marque]]></target>
+      </trans-unit>
+      <trans-unit id="138" approved="yes">
+        <source><![CDATA[storebundle.brand.productcount]]></source>
+        <target><![CDATA[nombre d'articles]]></target>
+      </trans-unit>
+      <trans-unit id="139" approved="yes">
+        <source><![CDATA[storebundle.brand.show %name%]]></source>
+        <target><![CDATA[détails de la marque %name%]]></target>
+      </trans-unit>
+      <trans-unit id="140" approved="yes">
+        <source><![CDATA[storebundle.brand.website]]></source>
+        <target><![CDATA[site internet]]></target>
+      </trans-unit>
+      <trans-unit id="141" approved="yes">
+        <source><![CDATA[storebundle.brands]]></source>
+        <target><![CDATA[marques]]></target>
+      </trans-unit>
+      <trans-unit id="142" approved="yes">
+        <source><![CDATA[storebundle.button.filter]]></source>
+        <target><![CDATA[filtrer]]></target>
+      </trans-unit>
+      <trans-unit id="143" approved="yes">
+        <source><![CDATA[storebundle.cancel]]></source>
+        <target><![CDATA[annuler]]></target>
+      </trans-unit>
+      <trans-unit id="144" approved="yes">
+        <source><![CDATA[storebundle.categories]]></source>
+        <target><![CDATA[groupe de catégories]]></target>
+      </trans-unit>
+      <trans-unit id="145" approved="yes">
+        <source><![CDATA[storebundle.category]]></source>
+        <target><![CDATA[catégory]]></target>
+      </trans-unit>
+      <trans-unit id="146" approved="yes">
+        <source><![CDATA[storebundle.category.edit %name%]]></source>
+        <target><![CDATA[modification de la catégorie %name%]]></target>
+      </trans-unit>
+      <trans-unit id="147" approved="yes">
+        <source><![CDATA[storebundle.category.list]]></source>
+        <target><![CDATA[liste des catégorie]]></target>
+      </trans-unit>
+      <trans-unit id="148" approved="yes">
+        <source><![CDATA[storebundle.category.new]]></source>
+        <target><![CDATA[nouvel catégorie]]></target>
+      </trans-unit>
+      <trans-unit id="149" approved="yes">
+        <source><![CDATA[storebundle.category.show %name%]]></source>
+        <target><![CDATA[détails de la catégorie %name%]]></target>
+      </trans-unit>
+      <trans-unit id="150" approved="yes">
+        <source><![CDATA[storebundle.companyname]]></source>
+        <target><![CDATA[entreprise]]></target>
+      </trans-unit>
+      <trans-unit id="151" approved="yes">
+        <source><![CDATA[storebundle.conversation]]></source>
+        <target><![CDATA[conversation]]></target>
+      </trans-unit>
+      <trans-unit id="152" approved="yes">
+        <source><![CDATA[storebundle.conversation.lastmessage]]></source>
+        <target><![CDATA[dernier message]]></target>
+      </trans-unit>
+      <trans-unit id="153" approved="yes">
+        <source><![CDATA[storebundle.conversation.list]]></source>
+        <target><![CDATA[liste des conversations]]></target>
+      </trans-unit>
+      <trans-unit id="154" approved="yes">
+        <source><![CDATA[storebundle.conversation.messages]]></source>
+        <target><![CDATA[messages]]></target>
+      </trans-unit>
+      <trans-unit id="155" approved="yes">
+        <source><![CDATA[storebundle.conversation.show %subject%]]></source>
+        <target><![CDATA[détails de la conversation %subject%]]></target>
+      </trans-unit>
+      <trans-unit id="156" approved="yes">
+        <source><![CDATA[storebundle.conversation.subject]]></source>
+        <target><![CDATA[sujet]]></target>
+      </trans-unit>
+      <trans-unit id="157" approved="yes">
+        <source><![CDATA[storebundle.conversation.unreaded]]></source>
+        <target><![CDATA[non-lu]]></target>
+      </trans-unit>
+      <trans-unit id="158" approved="yes">
+        <source><![CDATA[storebundle.conversationmessages]]></source>
+        <target><![CDATA[message]]></target>
+      </trans-unit>
+      <trans-unit id="159" approved="yes">
+        <source><![CDATA[storebundle.conversationmessages.createdat]]></source>
+        <target><![CDATA[date d'envoi]]></target>
+      </trans-unit>
+      <trans-unit id="160" approved="yes">
+        <source><![CDATA[storebundle.conversationmessages.readedat]]></source>
+        <target><![CDATA[date de lecture]]></target>
+      </trans-unit>
+      <trans-unit id="161" approved="yes">
+        <source><![CDATA[storebundle.countries]]></source>
+        <target><![CDATA[pays]]></target>
+      </trans-unit>
+      <trans-unit id="162" approved="yes">
+        <source><![CDATA[storebundle.country]]></source>
+        <target><![CDATA[pays]]></target>
+      </trans-unit>
+      <trans-unit id="163" approved="yes">
+        <source><![CDATA[storebundle.country.alowedshippingmethods]]></source>
+        <target><![CDATA[services de livraison autorisés]]></target>
+      </trans-unit>
+      <trans-unit id="164" approved="yes">
+        <source><![CDATA[storebundle.country.edit %name%]]></source>
+        <target><![CDATA[modification du pays %name%]]></target>
+      </trans-unit>
+      <trans-unit id="165" approved="yes">
+        <source><![CDATA[storebundle.country.flag]]></source>
+        <target><![CDATA[drapeau]]></target>
+      </trans-unit>
+      <trans-unit id="166" approved="yes">
+        <source><![CDATA[storebundle.country.index]]></source>
+        <target><![CDATA[accueil pays]]></target>
+      </trans-unit>
+      <trans-unit id="167" approved="yes">
+        <source><![CDATA[storebundle.country.new]]></source>
+        <target><![CDATA[nouveau pays]]></target>
+      </trans-unit>
+      <trans-unit id="168" approved="yes">
+        <source><![CDATA[storebundle.country.show %name%]]></source>
+        <target><![CDATA[détails du pays %name%]]></target>
+      </trans-unit>
+      <trans-unit id="169" approved="yes">
+        <source><![CDATA[storebundle.coupon]]></source>
+        <target><![CDATA[avoir]]></target>
+      </trans-unit>
+      <trans-unit id="170" approved="yes">
+        <source><![CDATA[storebundle.coupon.availableonline]]></source>
+        <target><![CDATA[disponible en ligne]]></target>
+      </trans-unit>
+      <trans-unit id="171" approved="yes">
+        <source><![CDATA[storebundle.coupon.edit]]></source>
+        <target><![CDATA[modification d'un avoir]]></target>
+      </trans-unit>
+      <trans-unit id="172" approved="yes">
+        <source><![CDATA[storebundle.coupon.initamount]]></source>
+        <target><![CDATA[montant initial]]></target>
+      </trans-unit>
+      <trans-unit id="173" approved="yes">
+        <source><![CDATA[storebundle.coupon.isactive]]></source>
+        <target><![CDATA[est actif]]></target>
+      </trans-unit>
+      <trans-unit id="174" approved="yes">
+        <source><![CDATA[storebundle.coupon.isavailableonline]]></source>
+        <target><![CDATA[est disponible en ligne]]></target>
+      </trans-unit>
+      <trans-unit id="175" approved="yes">
+        <source><![CDATA[storebundle.coupon.issplitable]]></source>
+        <target><![CDATA[est découpable]]></target>
+      </trans-unit>
+      <trans-unit id="176" approved="yes">
+        <source><![CDATA[storebundle.coupon.list]]></source>
+        <target><![CDATA[liste des avoirs]]></target>
+      </trans-unit>
+      <trans-unit id="177" approved="yes">
+        <source><![CDATA[storebundle.coupon.new]]></source>
+        <target><![CDATA[nouvel avoir]]></target>
+      </trans-unit>
+      <trans-unit id="178" approved="yes">
+        <source><![CDATA[storebundle.coupon.paymentmethods]]></source>
+        <target><![CDATA[paiements]]></target>
+      </trans-unit>
+      <trans-unit id="179" approved="yes">
+        <source><![CDATA[storebundle.coupon.restamount]]></source>
+        <target><![CDATA[montant restant]]></target>
+      </trans-unit>
+      <trans-unit id="180" approved="yes">
+        <source><![CDATA[storebundle.coupon.show %reference%]]></source>
+        <target><![CDATA[détails de l'avoir %reference%]]></target>
+      </trans-unit>
+      <trans-unit id="181" approved="yes">
+        <source><![CDATA[storebundle.coupon.splitable]]></source>
+        <target><![CDATA[avoir découpable]]></target>
+      </trans-unit>
+      <trans-unit id="182" approved="yes">
+        <source><![CDATA[storebundle.coupon.validity]]></source>
+        <target><![CDATA[date d'expiration]]></target>
+      </trans-unit>
+      <trans-unit id="183" approved="yes">
+        <source><![CDATA[storebundle.coupons]]></source>
+        <target><![CDATA[avoirs]]></target>
+      </trans-unit>
+      <trans-unit id="184" approved="yes">
+        <source><![CDATA[storebundle.createdat]]></source>
+        <target><![CDATA[date de création]]></target>
+      </trans-unit>
+      <trans-unit id="185" approved="yes">
+        <source><![CDATA[storebundle.customer.list]]></source>
+        <target><![CDATA[liste des clients]]></target>
+      </trans-unit>
+      <trans-unit id="186" approved="yes">
+        <source><![CDATA[storebundle.customer.new]]></source>
+        <target><![CDATA[nouveau client]]></target>
+      </trans-unit>
+      <trans-unit id="187" approved="yes">
+        <source><![CDATA[storebundle.customer.remoteuser]]></source>
+        <target><![CDATA[utilisateur distant]]></target>
+      </trans-unit>
+      <trans-unit id="188" approved="yes">
+        <source><![CDATA[storebundle.customers]]></source>
+        <target><![CDATA[clients]]></target>
+      </trans-unit>
+      <trans-unit id="189" approved="yes">
+        <source><![CDATA[storebundle.depositsale]]></source>
+        <target><![CDATA[dépôt-vente]]></target>
+      </trans-unit>
+      <trans-unit id="190" approved="yes">
+        <source><![CDATA[storebundle.depositsale.coupon]]></source>
+        <target><![CDATA[avoir]]></target>
+      </trans-unit>
+      <trans-unit id="191" approved="yes">
+        <source><![CDATA[storebundle.depositsale.deposedat]]></source>
+        <target><![CDATA[date de dépôt]]></target>
+      </trans-unit>
+      <trans-unit id="192" approved="yes">
+        <source><![CDATA[storebundle.depositsale.list]]></source>
+        <target><![CDATA[liste des dépôt-ventes]]></target>
+      </trans-unit>
+      <trans-unit id="193" approved="yes">
+        <source><![CDATA[storebundle.depositsale.new]]></source>
+        <target><![CDATA[nouveau dépôt-vente]]></target>
+      </trans-unit>
+      <trans-unit id="194" approved="yes">
+        <source><![CDATA[storebundle.depositsale.pricebuying]]></source>
+        <target><![CDATA[montant reversé client]]></target>
+      </trans-unit>
+      <trans-unit id="195" approved="yes">
+        <source><![CDATA[storebundle.depositsale.priceselling]]></source>
+        <target><![CDATA[prix de vente]]></target>
+      </trans-unit>
+      <trans-unit id="196" approved="yes">
+        <source><![CDATA[storebundle.depositsale.product]]></source>
+        <target><![CDATA[article]]></target>
+      </trans-unit>
+      <trans-unit id="197" approved="yes">
+        <source><![CDATA[storebundle.depositsale.selledat]]></source>
+        <target><![CDATA[vendu le]]></target>
+      </trans-unit>
+      <trans-unit id="198" approved="yes">
+        <source><![CDATA[storebundle.depositsale.show %reference%]]></source>
+        <target><![CDATA[détails du dépôt-vente %reference%]]></target>
+      </trans-unit>
+      <trans-unit id="199" approved="yes">
+        <source><![CDATA[storebundle.depositsale.status]]></source>
+        <target><![CDATA[état]]></target>
+      </trans-unit>
+      <trans-unit id="200" approved="yes">
+        <source><![CDATA[storebundle.depositsales]]></source>
+        <target><![CDATA[dépôt-ventes]]></target>
+      </trans-unit>
+      <trans-unit id="201" approved="yes">
+        <source><![CDATA[storebundle.description]]></source>
+        <target><![CDATA[description]]></target>
+      </trans-unit>
+      <trans-unit id="202" approved="yes">
+        <source><![CDATA[storebundle.descriptioninternal]]></source>
+        <target><![CDATA[description interne]]></target>
+      </trans-unit>
+      <trans-unit id="203" approved="yes">
+        <source><![CDATA[storebundle.docfile.edit]]></source>
+        <target><![CDATA[modification d'une documentation]]></target>
+      </trans-unit>
+      <trans-unit id="204" approved="yes">
+        <source><![CDATA[storebundle.docfile.list]]></source>
+        <target><![CDATA[liste des documentations]]></target>
+      </trans-unit>
+      <trans-unit id="205" approved="yes">
+        <source><![CDATA[storebundle.docfile.name]]></source>
+        <target><![CDATA[nom]]></target>
+      </trans-unit>
+      <trans-unit id="206" approved="yes">
+        <source><![CDATA[storebundle.docfile.new]]></source>
+        <target><![CDATA[nouvel documentation]]></target>
+      </trans-unit>
+      <trans-unit id="207" approved="yes">
+        <source><![CDATA[storebundle.docfile.show %name%]]></source>
+        <target><![CDATA[détails de la documentation %name%]]></target>
+      </trans-unit>
+      <trans-unit id="208" approved="yes">
+        <source><![CDATA[storebundle.docfile.title]]></source>
+        <target><![CDATA[titre]]></target>
+      </trans-unit>
+      <trans-unit id="209" approved="yes">
+        <source><![CDATA[storebundle.file]]></source>
+        <target><![CDATA[fichier]]></target>
+      </trans-unit>
+      <trans-unit id="210" approved="yes">
+        <source><![CDATA[storebundle.firstandlastname]]></source>
+        <target><![CDATA[prénom nom de famille]]></target>
+      </trans-unit>
+      <trans-unit id="211" approved="yes">
+        <source><![CDATA[storebundle.firstname]]></source>
+        <target><![CDATA[prénom]]></target>
+      </trans-unit>
+      <trans-unit id="212" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.annonce.edit %name%]]></source>
+        <target><![CDATA[modification de l'annonce %name%]]></target>
+      </trans-unit>
+      <trans-unit id="213" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.annonce.index]]></source>
+        <target><![CDATA[accueil annonces]]></target>
+      </trans-unit>
+      <trans-unit id="214" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.annonce.new]]></source>
+        <target><![CDATA[nouvelle annonce]]></target>
+      </trans-unit>
+      <trans-unit id="215" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.annonce.show %name%]]></source>
+        <target><![CDATA[détails de l'annonce %name%]]></target>
+      </trans-unit>
+      <trans-unit id="216" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.basket.edit %id%]]></source>
+        <target><![CDATA[modification du panier %id%]]></target>
+      </trans-unit>
+      <trans-unit id="217" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.basket.index]]></source>
+        <target><![CDATA[accueil paniers]]></target>
+      </trans-unit>
+      <trans-unit id="218" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.basket.new]]></source>
+        <target><![CDATA[nouveau panier]]></target>
+      </trans-unit>
+      <trans-unit id="219" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.basket.show %id%]]></source>
+        <target><![CDATA[détails du panier %id%]]></target>
+      </trans-unit>
+      <trans-unit id="220" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.brand.edit %name%]]></source>
+        <target><![CDATA[modification de la marque %name%]]></target>
+      </trans-unit>
+      <trans-unit id="221" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.brand.index]]></source>
+        <target><![CDATA[accueil marques]]></target>
+      </trans-unit>
+      <trans-unit id="222" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.brand.new]]></source>
+        <target><![CDATA[nouvelle marque]]></target>
+      </trans-unit>
+      <trans-unit id="223" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.brand.show %name%]]></source>
+        <target><![CDATA[détails de la marque %name%]]></target>
+      </trans-unit>
+      <trans-unit id="224" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.category.edit %name%]]></source>
+        <target><![CDATA[modification de la catégorie %name%]]></target>
+      </trans-unit>
+      <trans-unit id="225" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.category.index]]></source>
+        <target><![CDATA[accueil catégories]]></target>
+      </trans-unit>
+      <trans-unit id="226" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.category.new]]></source>
+        <target><![CDATA[nouvelle catégorie]]></target>
+      </trans-unit>
+      <trans-unit id="227" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.category.show %name%]]></source>
+        <target><![CDATA[détails de la catégorie %name%]]></target>
+      </trans-unit>
+      <trans-unit id="228" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.conversation.index]]></source>
+        <target><![CDATA[accueil conversations]]></target>
+      </trans-unit>
+      <trans-unit id="229" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.conversation.new]]></source>
+        <target><![CDATA[nouvelle conversation]]></target>
+      </trans-unit>
+      <trans-unit id="230" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.conversation.show %subject%]]></source>
+        <target><![CDATA[détails de la conversation %subject%]]></target>
+      </trans-unit>
+      <trans-unit id="231" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.country.edit %name%]]></source>
+        <target><![CDATA[modification du pays %name%]]></target>
+      </trans-unit>
+      <trans-unit id="232" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.country.index]]></source>
+        <target><![CDATA[accueil pays]]></target>
+      </trans-unit>
+      <trans-unit id="233" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.country.new]]></source>
+        <target><![CDATA[nouveau pays]]></target>
+      </trans-unit>
+      <trans-unit id="234" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.country.show %name%]]></source>
+        <target><![CDATA[détails du pays %name%]]></target>
+      </trans-unit>
+      <trans-unit id="235" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.coupon.edit %reference%]]></source>
+        <target><![CDATA[modification de l'avoir %reference%]]></target>
+      </trans-unit>
+      <trans-unit id="236" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.coupon.index]]></source>
+        <target><![CDATA[accueil avoirs]]></target>
+      </trans-unit>
+      <trans-unit id="237" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.coupon.new]]></source>
+        <target><![CDATA[nouvel avoir]]></target>
+      </trans-unit>
+      <trans-unit id="238" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.coupon.show %reference%]]></source>
+        <target><![CDATA[détails de l'avoir %reference%]]></target>
+      </trans-unit>
+      <trans-unit id="239" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.customer.edit %name%]]></source>
+        <target><![CDATA[modification du client %name%]]></target>
+      </trans-unit>
+      <trans-unit id="240" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.customer.index]]></source>
+        <target><![CDATA[accueil clients]]></target>
+      </trans-unit>
+      <trans-unit id="241" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.customer.new]]></source>
+        <target><![CDATA[nouveau client]]></target>
+      </trans-unit>
+      <trans-unit id="242" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.customer.show %name%]]></source>
+        <target><![CDATA[détails du client %name%]]></target>
+      </trans-unit>
+      <trans-unit id="243" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.depositsale.edit %reference%]]></source>
+        <target><![CDATA[modification du dépôt-vente %reference%]]></target>
+      </trans-unit>
+      <trans-unit id="244" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.depositsale.index]]></source>
+        <target><![CDATA[accueil dépôt-ventes]]></target>
+      </trans-unit>
+      <trans-unit id="245" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.depositsale.new]]></source>
+        <target><![CDATA[nouveau dépôt-vente]]></target>
+      </trans-unit>
+      <trans-unit id="246" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.depositsale.show %reference%]]></source>
+        <target><![CDATA[détails du dépôt-vente %reference%]]></target>
+      </trans-unit>
+      <trans-unit id="247" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.docfile.edit %docname%]]></source>
+        <target><![CDATA[modification de la documentation %docname%]]></target>
+      </trans-unit>
+      <trans-unit id="248" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.docfile.index]]></source>
+        <target><![CDATA[accueil documentations]]></target>
+      </trans-unit>
+      <trans-unit id="249" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.docfile.new]]></source>
+        <target><![CDATA[nouvelle documentation]]></target>
+      </trans-unit>
+      <trans-unit id="250" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.docfile.show %docname%]]></source>
+        <target><![CDATA[détails de la documentation %docname%]]></target>
+      </trans-unit>
+      <trans-unit id="251" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.order.edit %reference%]]></source>
+        <target><![CDATA[modification devis/facture %reference%]]></target>
+      </trans-unit>
+      <trans-unit id="252" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.order.index]]></source>
+        <target><![CDATA[accueil devis/facture]]></target>
+      </trans-unit>
+      <trans-unit id="253" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.order.new]]></source>
+        <target><![CDATA[nouveau devis/facture]]></target>
+      </trans-unit>
+      <trans-unit id="254" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.order.show %reference%]]></source>
+        <target><![CDATA[détails du devis/facture %reference%]]></target>
+      </trans-unit>
+      <trans-unit id="255" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.orderstep.edit %name%]]></source>
+        <target><![CDATA[modification de l'étape de commande %name%]]></target>
+      </trans-unit>
+      <trans-unit id="256" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.orderstep.index]]></source>
+        <target><![CDATA[accueil étape de commande]]></target>
+      </trans-unit>
+      <trans-unit id="257" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.orderstep.new]]></source>
+        <target><![CDATA[nouvelle étape de commande]]></target>
+      </trans-unit>
+      <trans-unit id="258" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.orderstep.show %name%]]></source>
+        <target><![CDATA[détails de l'étape de commande %name%]]></target>
+      </trans-unit>
+      <trans-unit id="259" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.paymentmethod.edit %name%]]></source>
+        <target><![CDATA[modification du moyen de paiement %name%]]></target>
+      </trans-unit>
+      <trans-unit id="260" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.paymentmethod.index ]]></source>
+        <target><![CDATA[accueil moyens de paiement]]></target>
+      </trans-unit>
+      <trans-unit id="261" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.paymentmethod.new ]]></source>
+        <target><![CDATA[nouveau moyen de paiement]]></target>
+      </trans-unit>
+      <trans-unit id="262" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.paymentmethod.show %name%]]></source>
+        <target><![CDATA[détails du moyen de paiement %name%]]></target>
+      </trans-unit>
+      <trans-unit id="263" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.portal.config]]></source>
+        <target><![CDATA[configurations]]></target>
+      </trans-unit>
+      <trans-unit id="264" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.portal.document]]></source>
+        <target><![CDATA[documents]]></target>
+      </trans-unit>
+      <trans-unit id="265" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.portal.index]]></source>
+        <target><![CDATA[administration]]></target>
+      </trans-unit>
+      <trans-unit id="266" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.portal.payment]]></source>
+        <target><![CDATA[paiements]]></target>
+      </trans-unit>
+      <trans-unit id="267" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.portal.product]]></source>
+        <target><![CDATA[articles]]></target>
+      </trans-unit>
+      <trans-unit id="268" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.portal.shipping]]></source>
+        <target><![CDATA[livraisons]]></target>
+      </trans-unit>
+      <trans-unit id="269" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.portal.user]]></source>
+        <target><![CDATA[utilisateurs]]></target>
+      </trans-unit>
+      <trans-unit id="270" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.product.edit %name%]]></source>
+        <target><![CDATA[modification de l'article %name%]]></target>
+      </trans-unit>
+      <trans-unit id="271" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.product.index]]></source>
+        <target><![CDATA[accueil articles]]></target>
+      </trans-unit>
+      <trans-unit id="272" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.product.new]]></source>
+        <target><![CDATA[nouvel article]]></target>
+      </trans-unit>
+      <trans-unit id="273" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.product.show %name%]]></source>
+        <target><![CDATA[détails de l'article %name%]]></target>
+      </trans-unit>
+      <trans-unit id="274" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.shippingmethod.edit %name%]]></source>
+        <target><![CDATA[modification du service de livraison %name%]]></target>
+      </trans-unit>
+      <trans-unit id="275" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.shippingmethod.index]]></source>
+        <target><![CDATA[accueil services de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="276" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.shippingmethod.new]]></source>
+        <target><![CDATA[nouveau service de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="277" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.shippingmethod.show %name%]]></source>
+        <target><![CDATA[détails du service de livraison %name%]]></target>
+      </trans-unit>
+      <trans-unit id="278" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.storeinfo.edit %tag%]]></source>
+        <target><![CDATA[modification du parametre site %tag%]]></target>
+      </trans-unit>
+      <trans-unit id="279" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.storeinfo.index]]></source>
+        <target><![CDATA[accueil parametres site]]></target>
+      </trans-unit>
+      <trans-unit id="280" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.storeinfo.new]]></source>
+        <target><![CDATA[nouveau parametre de site]]></target>
+      </trans-unit>
+      <trans-unit id="281" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.storeinfo.show %tag%]]></source>
+        <target><![CDATA[détails du tag %tag%]]></target>
+      </trans-unit>
+      <trans-unit id="282" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.subscriber.index]]></source>
+        <target><![CDATA[acceuil abonnés]]></target>
+      </trans-unit>
+      <trans-unit id="283" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.subscriber.new]]></source>
+        <target><![CDATA[nouvel abonné]]></target>
+      </trans-unit>
+      <trans-unit id="284" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.subscriber.show %name%]]></source>
+        <target><![CDATA[détails de l'abonné %name%]]></target>
+      </trans-unit>
+      <trans-unit id="285" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.supercategory.edit %name%]]></source>
+        <target><![CDATA[modification du groupe de catégories %name%]]></target>
+      </trans-unit>
+      <trans-unit id="286" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.supercategory.index]]></source>
+        <target><![CDATA[accueil groupes de catégories]]></target>
+      </trans-unit>
+      <trans-unit id="287" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.supercategory.new]]></source>
+        <target><![CDATA[nouveau groupe de catégories]]></target>
+      </trans-unit>
+      <trans-unit id="288" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.supercategory.show %name%]]></source>
+        <target><![CDATA[détails du groupe de catégories %name%]]></target>
+      </trans-unit>
+      <trans-unit id="289" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.syncro.index]]></source>
+        <target><![CDATA[accueil synchronisation]]></target>
+      </trans-unit>
+      <trans-unit id="290" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.syncro.stock]]></source>
+        <target><![CDATA[synchroniser les stocks]]></target>
+      </trans-unit>
+      <trans-unit id="291" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.tag.edit %name%]]></source>
+        <target><![CDATA[modification du tag %name%]]></target>
+      </trans-unit>
+      <trans-unit id="292" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.tag.index]]></source>
+        <target><![CDATA[accueil tags]]></target>
+      </trans-unit>
+      <trans-unit id="293" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.tag.new]]></source>
+        <target><![CDATA[nouveau tag]]></target>
+      </trans-unit>
+      <trans-unit id="294" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.tag.show %name%]]></source>
+        <target><![CDATA[détails du tag %name%]]></target>
+      </trans-unit>
+      <trans-unit id="295" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.tax.edit %name%]]></source>
+        <target><![CDATA[modification du tag %name%]]></target>
+      </trans-unit>
+      <trans-unit id="296" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.tax.index]]></source>
+        <target><![CDATA[accueil tags]]></target>
+      </trans-unit>
+      <trans-unit id="297" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.tax.new]]></source>
+        <target><![CDATA[nouveau tag]]></target>
+      </trans-unit>
+      <trans-unit id="298" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.tax.show %name%]]></source>
+        <target><![CDATA[détails du tag %name%]]></target>
+      </trans-unit>
+      <trans-unit id="299" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.text.edit %name%]]></source>
+        <target><![CDATA[modification du texte %name%]]></target>
+      </trans-unit>
+      <trans-unit id="300" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.text.index]]></source>
+        <target><![CDATA[accueil textes]]></target>
+      </trans-unit>
+      <trans-unit id="301" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.text.new]]></source>
+        <target><![CDATA[nouveau texte]]></target>
+      </trans-unit>
+      <trans-unit id="302" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.text.show %name%]]></source>
+        <target><![CDATA[détails du texte %name%]]></target>
+      </trans-unit>
+      <trans-unit id="303" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.warranty.edit %name%]]></source>
+        <target><![CDATA[modification de la garantie %name%]]></target>
+      </trans-unit>
+      <trans-unit id="304" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.warranty.index]]></source>
+        <target><![CDATA[accueil garanties]]></target>
+      </trans-unit>
+      <trans-unit id="305" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.warranty.new]]></source>
+        <target><![CDATA[nouvelle garantie]]></target>
+      </trans-unit>
+      <trans-unit id="306" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.warranty.show %name%]]></source>
+        <target><![CDATA[détails de la garantie %name%]]></target>
+      </trans-unit>
+      <trans-unit id="307" approved="yes">
+        <source><![CDATA[storebundle.id]]></source>
+        <target><![CDATA[id]]></target>
+      </trans-unit>
+      <trans-unit id="308" approved="yes">
+        <source><![CDATA[storebundle.idandtag]]></source>
+        <target><![CDATA[id et tag]]></target>
+      </trans-unit>
+      <trans-unit id="309" approved="yes">
+        <source><![CDATA[storebundle.import]]></source>
+        <target><![CDATA[importer]]></target>
+      </trans-unit>
+      <trans-unit id="310" approved="yes">
+        <source><![CDATA[storebundle.initamount]]></source>
+        <target><![CDATA[valeur initiale]]></target>
+      </trans-unit>
+      <trans-unit id="311" approved="yes">
+        <source><![CDATA[storebundle.internaldescription]]></source>
+        <target><![CDATA[description interne]]></target>
+      </trans-unit>
+      <trans-unit id="312" approved="yes">
+        <source><![CDATA[storebundle.isarchived]]></source>
+        <target><![CDATA[archivé]]></target>
+      </trans-unit>
+      <trans-unit id="313" approved="yes">
+        <source><![CDATA[storebundle.issecondhand]]></source>
+        <target><![CDATA[occasion]]></target>
+      </trans-unit>
+      <trans-unit id="314" approved="yes">
+        <source><![CDATA[storebundle.lastname]]></source>
+        <target><![CDATA[nom de famille]]></target>
+      </trans-unit>
+      <trans-unit id="315" approved="yes">
+        <source><![CDATA[storebundle.link]]></source>
+        <target><![CDATA[lien]]></target>
+      </trans-unit>
+      <trans-unit id="316" approved="yes">
+        <source><![CDATA[storebundle.link.backup]]></source>
+        <target><![CDATA[sauvegarder]]></target>
+      </trans-unit>
+      <trans-unit id="317" approved="yes">
+        <source><![CDATA[storebundle.link.backup.apply]]></source>
+        <target><![CDATA[appliquer la sauvegarde]]></target>
+      </trans-unit>
+      <trans-unit id="318" approved="yes">
+        <source><![CDATA[storebundle.link.delete]]></source>
+        <target><![CDATA[supprimer]]></target>
+      </trans-unit>
+      <trans-unit id="319" approved="yes">
+        <source><![CDATA[storebundle.link.edit]]></source>
+        <target><![CDATA[éditer]]></target>
+      </trans-unit>
+      <trans-unit id="320" approved="yes">
+        <source><![CDATA[storebundle.link.list]]></source>
+        <target><![CDATA[liste]]></target>
+      </trans-unit>
+      <trans-unit id="321" approved="yes">
+        <source><![CDATA[storebundle.link.new]]></source>
+        <target><![CDATA[nouveau]]></target>
+      </trans-unit>
+      <trans-unit id="322" approved="yes">
+        <source><![CDATA[storebundle.link.pdf]]></source>
+        <target><![CDATA[pdf]]></target>
+      </trans-unit>
+      <trans-unit id="323" approved="yes">
+        <source><![CDATA[storebundle.link.show]]></source>
+        <target><![CDATA[voir]]></target>
+      </trans-unit>
+      <trans-unit id="324" approved="yes">
+        <source><![CDATA[storebundle.link.showonline]]></source>
+        <target><![CDATA[voir en ligne]]></target>
+      </trans-unit>
+      <trans-unit id="325" approved="yes">
+        <source><![CDATA[storebundle.menu.cat.config.portal]]></source>
+        <target><![CDATA[configurations]]></target>
+      </trans-unit>
+      <trans-unit id="326" approved="yes">
+        <source><![CDATA[storebundle.menu.cat.document.portal]]></source>
+        <target><![CDATA[documents]]></target>
+      </trans-unit>
+      <trans-unit id="327" approved="yes">
+        <source><![CDATA[storebundle.menu.cat.payment.portal]]></source>
+        <target><![CDATA[paiments]]></target>
+      </trans-unit>
+      <trans-unit id="328" approved="yes">
+        <source><![CDATA[storebundle.menu.cat.product.portal]]></source>
+        <target><![CDATA[articles]]></target>
+      </trans-unit>
+      <trans-unit id="329" approved="yes">
+        <source><![CDATA[storebundle.menu.cat.shipping.portal]]></source>
+        <target><![CDATA[livraisons]]></target>
+      </trans-unit>
+      <trans-unit id="330" approved="yes">
+        <source><![CDATA[storebundle.menu.cat.user.portal]]></source>
+        <target><![CDATA[utilisateurs]]></target>
+      </trans-unit>
+      <trans-unit id="331" approved="yes">
+        <source><![CDATA[storebundle.name]]></source>
+        <target><![CDATA[nom]]></target>
+      </trans-unit>
+      <trans-unit id="332" approved="yes">
+        <source><![CDATA[storebundle.no]]></source>
+        <target><![CDATA[non]]></target>
+      </trans-unit>
+      <trans-unit id="333" approved="yes">
+        <source><![CDATA[storebundle.notset]]></source>
+        <target><![CDATA[non défini]]></target>
+      </trans-unit>
+      <trans-unit id="334" approved="yes">
+        <source><![CDATA[storebundle.offline]]></source>
+        <target><![CDATA[hors-ligne]]></target>
+      </trans-unit>
+      <trans-unit id="335" approved="yes">
+        <source><![CDATA[storebundle.order]]></source>
+        <target><![CDATA[devis/facture]]></target>
+      </trans-unit>
+      <trans-unit id="336" approved="yes">
+        <source><![CDATA[storebundle.order.billingaddress]]></source>
+        <target><![CDATA[adresse facturation]]></target>
+      </trans-unit>
+      <trans-unit id="337" approved="yes">
+        <source><![CDATA[storebundle.order.devis.show]]></source>
+        <target><![CDATA[détails devis]]></target>
+      </trans-unit>
+      <trans-unit id="338" approved="yes">
+        <source><![CDATA[storebundle.order.edit]]></source>
+        <target><![CDATA[modification devis/facture]]></target>
+      </trans-unit>
+      <trans-unit id="339" approved="yes">
+        <source><![CDATA[storebundle.order.facture.show]]></source>
+        <target><![CDATA[détails facture]]></target>
+      </trans-unit>
+      <trans-unit id="340" approved="yes">
+        <source><![CDATA[storebundle.order.lastorderstep]]></source>
+        <target><![CDATA[dernière étape]]></target>
+      </trans-unit>
+      <trans-unit id="341" approved="yes">
+        <source><![CDATA[storebundle.order.list]]></source>
+        <target><![CDATA[liste des devis/factures]]></target>
+      </trans-unit>
+      <trans-unit id="342" approved="yes">
+        <source><![CDATA[storebundle.order.new]]></source>
+        <target><![CDATA[nouveau devis/facture]]></target>
+      </trans-unit>
+      <trans-unit id="343" approved="yes">
+        <source><![CDATA[storebundle.order.payed]]></source>
+        <target><![CDATA[payé]]></target>
+      </trans-unit>
+      <trans-unit id="344" approved="yes">
+        <source><![CDATA[storebundle.order.payments]]></source>
+        <target><![CDATA[paiements]]></target>
+      </trans-unit>
+      <trans-unit id="345" approved="yes">
+        <source><![CDATA[storebundle.order.productnotset]]></source>
+        <target><![CDATA[article non défini]]></target>
+      </trans-unit>
+      <trans-unit id="346" approved="yes">
+        <source><![CDATA[storebundle.order.products]]></source>
+        <target><![CDATA[articles]]></target>
+      </trans-unit>
+      <trans-unit id="347" approved="yes">
+        <source><![CDATA[storebundle.order.resttopay]]></source>
+        <target><![CDATA[reste à payer]]></target>
+      </trans-unit>
+      <trans-unit id="348" approved="yes">
+        <source><![CDATA[storebundle.order.seller]]></source>
+        <target><![CDATA[vendeur]]></target>
+      </trans-unit>
+      <trans-unit id="349" approved="yes">
+        <source><![CDATA[storebundle.order.shippingaddress]]></source>
+        <target><![CDATA[adresse de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="350" approved="yes">
+        <source><![CDATA[storebundle.order.shippingmethods]]></source>
+        <target><![CDATA[adresses de livraisons]]></target>
+      </trans-unit>
+      <trans-unit id="351" approved="yes">
+        <source><![CDATA[storebundle.order.show]]></source>
+        <target><![CDATA[détails]]></target>
+      </trans-unit>
+      <trans-unit id="352" approved="yes">
+        <source><![CDATA[storebundle.order.storecomment]]></source>
+        <target><![CDATA[commentaire magasin]]></target>
+      </trans-unit>
+      <trans-unit id="353" approved="yes">
+        <source><![CDATA[storebundle.order.tomuchpayed]]></source>
+        <target><![CDATA[trop perçu]]></target>
+      </trans-unit>
+      <trans-unit id="354" approved="yes">
+        <source><![CDATA[storebundle.order.type]]></source>
+        <target><![CDATA[type]]></target>
+      </trans-unit>
+      <trans-unit id="355" approved="yes">
+        <source><![CDATA[storebundle.order.usercomment]]></source>
+        <target><![CDATA[commentaire client]]></target>
+      </trans-unit>
+      <trans-unit id="356" approved="yes">
+        <source><![CDATA[storebundle.orders]]></source>
+        <target><![CDATA[commandes]]></target>
+      </trans-unit>
+      <trans-unit id="357" approved="yes">
+        <source><![CDATA[storebundle.orderstep]]></source>
+        <target><![CDATA[étapes]]></target>
+      </trans-unit>
+      <trans-unit id="358" approved="yes">
+        <source><![CDATA[storebundle.orderstep.edit %name%]]></source>
+        <target><![CDATA[modification de l'étape de commande %name%]]></target>
+      </trans-unit>
+      <trans-unit id="359" approved="yes">
+        <source><![CDATA[storebundle.orderstep.index]]></source>
+        <target><![CDATA[accueil étape de commande]]></target>
+      </trans-unit>
+      <trans-unit id="360" approved="yes">
+        <source><![CDATA[storebundle.orderstep.new]]></source>
+        <target><![CDATA[nouvelle étape de commande]]></target>
+      </trans-unit>
+      <trans-unit id="361" approved="yes">
+        <source><![CDATA[storebundle.orderstep.show %name%]]></source>
+        <target><![CDATA[détails de l'étape de commande %name%]]></target>
+      </trans-unit>
+      <trans-unit id="362" approved="yes">
+        <source><![CDATA[storebundle.paymentmethod.data]]></source>
+        <target><![CDATA[parametres]]></target>
+      </trans-unit>
+      <trans-unit id="363" approved="yes">
+        <source><![CDATA[storebundle.paymentmethod.edit %name%]]></source>
+        <target><![CDATA[modification du moyen de paiement %name%]]></target>
+      </trans-unit>
+      <trans-unit id="364" approved="yes">
+        <source><![CDATA[storebundle.paymentmethod.list]]></source>
+        <target><![CDATA[liste des moyens de paiement]]></target>
+      </trans-unit>
+      <trans-unit id="365" approved="yes">
+        <source><![CDATA[storebundle.paymentmethod.new]]></source>
+        <target><![CDATA[nouveau moyen de paiement]]></target>
+      </trans-unit>
+      <trans-unit id="366" approved="yes">
+        <source><![CDATA[storebundle.paymentmethod.show %name%]]></source>
+        <target><![CDATA[détails du moyen de paiement %name%]]></target>
+      </trans-unit>
+      <trans-unit id="367" approved="yes">
+        <source><![CDATA[storebundle.paymentmethods]]></source>
+        <target><![CDATA[moyens de paiement]]></target>
+      </trans-unit>
+      <trans-unit id="368" approved="yes">
+        <source><![CDATA[storebundle.phonenumber]]></source>
+        <target><![CDATA[téléphone]]></target>
+      </trans-unit>
+      <trans-unit id="369" approved="yes">
+        <source><![CDATA[storebundle.phonenumbers]]></source>
+        <target><![CDATA[téléphones]]></target>
+      </trans-unit>
+      <trans-unit id="370" approved="yes">
+        <source><![CDATA[storebundle.picture]]></source>
+        <target><![CDATA[image]]></target>
+      </trans-unit>
+      <trans-unit id="371" approved="yes">
+        <source><![CDATA[storebundle.pictures]]></source>
+        <target><![CDATA[images]]></target>
+      </trans-unit>
+      <trans-unit id="372" approved="yes">
+        <source><![CDATA[storebundle.pos]]></source>
+        <target><![CDATA[position]]></target>
+      </trans-unit>
+      <trans-unit id="373" approved="yes">
+        <source><![CDATA[storebundle.price]]></source>
+        <target><![CDATA[prix]]></target>
+      </trans-unit>
+      <trans-unit id="374" approved="yes">
+        <source><![CDATA[storebundle.pricebuying]]></source>
+        <target><![CDATA[prix d'achat]]></target>
+      </trans-unit>
+      <trans-unit id="375" approved="yes">
+        <source><![CDATA[storebundle.priceonline]]></source>
+        <target><![CDATA[prix en ligne]]></target>
+      </trans-unit>
+      <trans-unit id="376" approved="yes">
+        <source><![CDATA[storebundle.priceperunity]]></source>
+        <target><![CDATA[prix unitaire]]></target>
+      </trans-unit>
+      <trans-unit id="377" approved="yes">
+        <source><![CDATA[storebundle.priceretail]]></source>
+        <target><![CDATA[prix public conseillé]]></target>
+      </trans-unit>
+      <trans-unit id="378" approved="yes">
+        <source><![CDATA[storebundle.product]]></source>
+        <target><![CDATA[produit]]></target>
+      </trans-unit>
+      <trans-unit id="379" approved="yes">
+        <source><![CDATA[storebundle.product.cleanpicturefolder]]></source>
+        <target><![CDATA[nettoyage des dossiers d'images]]></target>
+      </trans-unit>
+      <trans-unit id="380" approved="yes">
+        <source><![CDATA[storebundle.product.cleantag]]></source>
+        <target><![CDATA[nettoyage des tags]]></target>
+      </trans-unit>
+      <trans-unit id="381" approved="yes">
+        <source><![CDATA[storebundle.product.cleantag.done]]></source>
+        <target><![CDATA[nettoyage des tags términé]]></target>
+      </trans-unit>
+      <trans-unit id="382" approved="yes">
+        <source><![CDATA[storebundle.product.docfile]]></source>
+        <target><![CDATA[documentation]]></target>
+      </trans-unit>
+      <trans-unit id="383" approved="yes">
+        <source><![CDATA[storebundle.product.docfiles]]></source>
+        <target><![CDATA[documentations]]></target>
+      </trans-unit>
+      <trans-unit id="384" approved="yes">
+        <source><![CDATA[storebundle.product.edit]]></source>
+        <target><![CDATA[modification d'un article]]></target>
+      </trans-unit>
+      <trans-unit id="385" approved="yes">
+        <source><![CDATA[storebundle.product.height]]></source>
+        <target><![CDATA[hauteur]]></target>
+      </trans-unit>
+      <trans-unit id="386" approved="yes">
+        <source><![CDATA[storebundle.product.isalwaysavailable]]></source>
+        <target><![CDATA[toujours dispo]]></target>
+      </trans-unit>
+      <trans-unit id="387" approved="yes">
+        <source><![CDATA[storebundle.product.isarchived]]></source>
+        <target><![CDATA[archivé]]></target>
+      </trans-unit>
+      <trans-unit id="388" approved="yes">
+        <source><![CDATA[storebundle.product.isrelatedto]]></source>
+        <target><![CDATA[est associé]]></target>
+      </trans-unit>
+      <trans-unit id="389" approved="yes">
+        <source><![CDATA[storebundle.product.isreviewable]]></source>
+        <target><![CDATA[peur recevoir des commantaires]]></target>
+      </trans-unit>
+      <trans-unit id="390" approved="yes">
+        <source><![CDATA[storebundle.product.issecondhand]]></source>
+        <target><![CDATA[occasion]]></target>
+      </trans-unit>
+      <trans-unit id="391" approved="yes">
+        <source><![CDATA[storebundle.product.leadtime]]></source>
+        <target><![CDATA[délai d'approvisionnement]]></target>
+      </trans-unit>
+      <trans-unit id="392" approved="yes">
+        <source><![CDATA[storebundle.product.length]]></source>
+        <target><![CDATA[profondeur]]></target>
+      </trans-unit>
+      <trans-unit id="393" approved="yes">
+        <source><![CDATA[storebundle.product.list]]></source>
+        <target><![CDATA[liste des articles]]></target>
+      </trans-unit>
+      <trans-unit id="394" approved="yes">
+        <source><![CDATA[storebundle.product.new]]></source>
+        <target><![CDATA[nouvel article]]></target>
+      </trans-unit>
+      <trans-unit id="395" approved="yes">
+        <source><![CDATA[storebundle.product.pricebuying]]></source>
+        <target><![CDATA[prix d'achat]]></target>
+      </trans-unit>
+      <trans-unit id="396" approved="yes">
+        <source><![CDATA[storebundle.product.priceoffline]]></source>
+        <target><![CDATA[prix en magasin]]></target>
+      </trans-unit>
+      <trans-unit id="397" approved="yes">
+        <source><![CDATA[storebundle.product.priceonline]]></source>
+        <target><![CDATA[prix en ligne]]></target>
+      </trans-unit>
+      <trans-unit id="398" approved="yes">
+        <source><![CDATA[storebundle.product.priceretail]]></source>
+        <target><![CDATA[prix public conseillé]]></target>
+      </trans-unit>
+      <trans-unit id="399" approved="yes">
+        <source><![CDATA[storebundle.product.relatedproduct]]></source>
+        <target><![CDATA[produit associé]]></target>
+      </trans-unit>
+      <trans-unit id="400" approved="yes">
+        <source><![CDATA[storebundle.product.relatedproducts]]></source>
+        <target><![CDATA[produits associés]]></target>
+      </trans-unit>
+      <trans-unit id="401" approved="yes">
+        <source><![CDATA[storebundle.product.review]]></source>
+        <target><![CDATA[avis]]></target>
+      </trans-unit>
+      <trans-unit id="402" approved="yes">
+        <source><![CDATA[storebundle.product.serialnumber]]></source>
+        <target><![CDATA[numero de série]]></target>
+      </trans-unit>
+      <trans-unit id="403" approved="yes">
+        <source><![CDATA[storebundle.product.shippingmethods]]></source>
+        <target><![CDATA[services de livraisons]]></target>
+      </trans-unit>
+      <trans-unit id="404" approved="yes">
+        <source><![CDATA[storebundle.product.show]]></source>
+        <target><![CDATA[détails article]]></target>
+      </trans-unit>
+      <trans-unit id="405" approved="yes">
+        <source><![CDATA[storebundle.product.spec]]></source>
+        <target><![CDATA[storebundle.product.spec]]></target>
+      </trans-unit>
+      <trans-unit id="406" approved="yes">
+        <source><![CDATA[storebundle.product.specifications]]></source>
+        <target><![CDATA[specifications]]></target>
+      </trans-unit>
+      <trans-unit id="407" approved="yes">
+        <source><![CDATA[storebundle.product.syncro]]></source>
+        <target><![CDATA[synchroniser]]></target>
+      </trans-unit>
+      <trans-unit id="408" approved="yes">
+        <source><![CDATA[storebundle.product.syncro.disconected]]></source>
+        <target><![CDATA[connection impossible]]></target>
+      </trans-unit>
+      <trans-unit id="409" approved="yes">
+        <source><![CDATA[storebundle.product.tags]]></source>
+        <target><![CDATA[tags]]></target>
+      </trans-unit>
+      <trans-unit id="410" approved="yes">
+        <source><![CDATA[storebundle.product.taxesoffline]]></source>
+        <target><![CDATA[taxes en magasin]]></target>
+      </trans-unit>
+      <trans-unit id="411" approved="yes">
+        <source><![CDATA[storebundle.product.taxesonline]]></source>
+        <target><![CDATA[taxes en ligne]]></target>
+      </trans-unit>
+      <trans-unit id="412" approved="yes">
+        <source><![CDATA[storebundle.product.warrantiesoffline]]></source>
+        <target><![CDATA[garanties en magasin]]></target>
+      </trans-unit>
+      <trans-unit id="413" approved="yes">
+        <source><![CDATA[storebundle.product.warrantiesonline]]></source>
+        <target><![CDATA[garanties en ligne]]></target>
+      </trans-unit>
+      <trans-unit id="414" approved="yes">
+        <source><![CDATA[storebundle.product.weight]]></source>
+        <target><![CDATA[poids]]></target>
+      </trans-unit>
+      <trans-unit id="415" approved="yes">
+        <source><![CDATA[storebundle.product.width]]></source>
+        <target><![CDATA[largeur]]></target>
+      </trans-unit>
+      <trans-unit id="416" approved="yes">
+        <source><![CDATA[storebundle.products]]></source>
+        <target><![CDATA[articles]]></target>
+      </trans-unit>
+      <trans-unit id="417" approved="yes">
+        <source><![CDATA[storebundle.productsoffline]]></source>
+        <target><![CDATA[articles en magasin]]></target>
+      </trans-unit>
+      <trans-unit id="418" approved="yes">
+        <source><![CDATA[storebundle.productsonline]]></source>
+        <target><![CDATA[articles en ligne]]></target>
+      </trans-unit>
+      <trans-unit id="419" approved="yes">
+        <source><![CDATA[storebundle.quantity]]></source>
+        <target><![CDATA[quantité]]></target>
+      </trans-unit>
+      <trans-unit id="420" approved="yes">
+        <source><![CDATA[storebundle.realshippingmethods]]></source>
+        <target><![CDATA[services de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="421" approved="yes">
+        <source><![CDATA[storebundle.reference]]></source>
+        <target><![CDATA[référence]]></target>
+      </trans-unit>
+      <trans-unit id="422" approved="yes">
+        <source><![CDATA[storebundle.relatedproducts]]></source>
+        <target><![CDATA[produits associés]]></target>
+      </trans-unit>
+      <trans-unit id="423" approved="yes">
+        <source><![CDATA[storebundle.remoteuser]]></source>
+        <target><![CDATA[utilisateur distant]]></target>
+      </trans-unit>
+      <trans-unit id="424" approved="yes">
+        <source><![CDATA[storebundle.save]]></source>
+        <target><![CDATA[sauvegarder]]></target>
+      </trans-unit>
+      <trans-unit id="425" approved="yes">
+        <source><![CDATA[storebundle.sessions]]></source>
+        <target><![CDATA[sessions]]></target>
+      </trans-unit>
+      <trans-unit id="426" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod]]></source>
+        <target><![CDATA[service de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="427" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.allowedcountries]]></source>
+        <target><![CDATA[pays authorisés]]></target>
+      </trans-unit>
+      <trans-unit id="428" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.delay]]></source>
+        <target><![CDATA[temps de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="429" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.edit %name%]]></source>
+        <target><![CDATA[modification du service de livraison %name%]]></target>
+      </trans-unit>
+      <trans-unit id="430" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.freetrigger]]></source>
+        <target><![CDATA[seuil de gratuité]]></target>
+      </trans-unit>
+      <trans-unit id="431" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.list]]></source>
+        <target><![CDATA[liste des services de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="432" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.new]]></source>
+        <target><![CDATA[nouveau service de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="433" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.orderproductcount]]></source>
+        <target><![CDATA[articles dans les commandes]]></target>
+      </trans-unit>
+      <trans-unit id="434" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.price]]></source>
+        <target><![CDATA[prix]]></target>
+      </trans-unit>
+      <trans-unit id="435" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.priority]]></source>
+        <target><![CDATA[priorité]]></target>
+      </trans-unit>
+      <trans-unit id="436" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.productcount]]></source>
+        <target><![CDATA[nombre d'articles]]></target>
+      </trans-unit>
+      <trans-unit id="437" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.products]]></source>
+        <target><![CDATA[articles]]></target>
+      </trans-unit>
+      <trans-unit id="438" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.receivedat]]></source>
+        <target><![CDATA[date de reception]]></target>
+      </trans-unit>
+      <trans-unit id="439" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.shippedat]]></source>
+        <target><![CDATA[date d'expedition]]></target>
+      </trans-unit>
+      <trans-unit id="440" approved="yes">
+        <source><![CDATA[storebundle.shippingmethod.show %name%]]></source>
+        <target><![CDATA[détails du service de livraison %name%]]></target>
+      </trans-unit>
+      <trans-unit id="441" approved="yes">
+        <source><![CDATA[storebundle.shippingmethods]]></source>
+        <target><![CDATA[services de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="442" approved="yes">
+        <source><![CDATA[storebundle.stock]]></source>
+        <target><![CDATA[stock]]></target>
+      </trans-unit>
+      <trans-unit id="443" approved="yes">
+        <source><![CDATA[storebundle.stocks]]></source>
+        <target><![CDATA[stocks]]></target>
+      </trans-unit>
+      <trans-unit id="444" approved="yes">
+        <source><![CDATA[storebundle.subscriber]]></source>
+        <target><![CDATA[abonné]]></target>
+      </trans-unit>
+      <trans-unit id="445" approved="yes">
+        <source><![CDATA[storebundle.subscriber.list]]></source>
+        <target><![CDATA[liste des abonnés]]></target>
+      </trans-unit>
+      <trans-unit id="446" approved="yes">
+        <source><![CDATA[storebundle.supercategories]]></source>
+        <target><![CDATA[groupes de catégories]]></target>
+      </trans-unit>
+      <trans-unit id="447" approved="yes">
+        <source><![CDATA[storebundle.supercategory]]></source>
+        <target><![CDATA[groupe de catégories]]></target>
+      </trans-unit>
+      <trans-unit id="448" approved="yes">
+        <source><![CDATA[storebundle.supercategory.edit %name%]]></source>
+        <target><![CDATA[modification du groupe de catégories %name%]]></target>
+      </trans-unit>
+      <trans-unit id="449" approved="yes">
+        <source><![CDATA[storebundle.supercategory.list]]></source>
+        <target><![CDATA[liste des groupes de catégories]]></target>
+      </trans-unit>
+      <trans-unit id="450" approved="yes">
+        <source><![CDATA[storebundle.supercategory.new]]></source>
+        <target><![CDATA[nouveau groupe de catégories]]></target>
+      </trans-unit>
+      <trans-unit id="451" approved="yes">
+        <source><![CDATA[storebundle.supercategory.show %name%]]></source>
+        <target><![CDATA[détails du groupe de catégories %name%]]></target>
+      </trans-unit>
+      <trans-unit id="452" approved="yes">
+        <source><![CDATA[storebundle.syncro.db]]></source>
+        <target><![CDATA[synchronisation des bases de données]]></target>
+      </trans-unit>
+      <trans-unit id="453" approved="yes">
+        <source><![CDATA[storebundle.syncro.db.nothingtodo]]></source>
+        <target><![CDATA[rien à faire]]></target>
+      </trans-unit>
+      <trans-unit id="454" approved="yes">
+        <source><![CDATA[storebundle.syncro.db.syncronized]]></source>
+        <target><![CDATA[synchronisée]]></target>
+      </trans-unit>
+      <trans-unit id="455" approved="yes">
+        <source><![CDATA[storebundle.syncro.ftp]]></source>
+        <target><![CDATA[ftp]]></target>
+      </trans-unit>
+      <trans-unit id="456" approved="yes">
+        <source><![CDATA[storebundle.syncro.ftp.alreadyInFiles %count%]]></source>
+        <target><![CDATA[%count% fichiers déjà présents]]></target>
+      </trans-unit>
+      <trans-unit id="457" approved="yes">
+        <source><![CDATA[storebundle.syncro.ftp.uploadedFiles %count%]]></source>
+        <target><![CDATA[%count% fichiers transferés]]></target>
+      </trans-unit>
+      <trans-unit id="458" approved="yes">
+        <source><![CDATA[storebundle.syncro.issyncronized]]></source>
+        <target><![CDATA[synchronisé]]></target>
+      </trans-unit>
+      <trans-unit id="459" approved="yes">
+        <source><![CDATA[storebundle.syncro.list]]></source>
+        <target><![CDATA[liste des synchronisations]]></target>
+      </trans-unit>
+      <trans-unit id="460" approved="yes">
+        <source><![CDATA[storebundle.syncro.products.ko]]></source>
+        <target><![CDATA[non synchronisé]]></target>
+      </trans-unit>
+      <trans-unit id="461" approved="yes">
+        <source><![CDATA[storebundle.syncro.syncronize]]></source>
+        <target><![CDATA[synchroniser]]></target>
+      </trans-unit>
+      <trans-unit id="462" approved="yes">
+        <source><![CDATA[storebundle.tab.general]]></source>
+        <target><![CDATA[general]]></target>
+      </trans-unit>
+      <trans-unit id="463" approved="yes">
+        <source><![CDATA[storebundle.tab.more]]></source>
+        <target><![CDATA[plus]]></target>
+      </trans-unit>
+      <trans-unit id="464" approved="yes">
+        <source><![CDATA[storebundle.tag]]></source>
+        <target><![CDATA[tag]]></target>
+      </trans-unit>
+      <trans-unit id="465" approved="yes">
+        <source><![CDATA[storebundle.tag.edit %name%]]></source>
+        <target><![CDATA[modification du tag %name%]]></target>
+      </trans-unit>
+      <trans-unit id="466" approved="yes">
+        <source><![CDATA[storebundle.tag.list]]></source>
+        <target><![CDATA[liste des tags]]></target>
+      </trans-unit>
+      <trans-unit id="467" approved="yes">
+        <source><![CDATA[storebundle.tag.new]]></source>
+        <target><![CDATA[nouveau tag]]></target>
+      </trans-unit>
+      <trans-unit id="468" approved="yes">
+        <source><![CDATA[storebundle.tag.show %name%]]></source>
+        <target><![CDATA[détails du tag %name%]]></target>
+      </trans-unit>
+      <trans-unit id="469" approved="yes">
+        <source><![CDATA[storebundle.tags]]></source>
+        <target><![CDATA[tags]]></target>
+      </trans-unit>
+      <trans-unit id="470" approved="yes">
+        <source><![CDATA[storebundle.tax.list]]></source>
+        <target><![CDATA[liste des tags]]></target>
+      </trans-unit>
+      <trans-unit id="471" approved="yes">
+        <source><![CDATA[storebundle.tax.ordersproducts]]></source>
+        <target><![CDATA[articles dans les commandes]]></target>
+      </trans-unit>
+      <trans-unit id="472" approved="yes">
+        <source><![CDATA[storebundle.tax.productsoffline]]></source>
+        <target><![CDATA[articles hors-ligne]]></target>
+      </trans-unit>
+      <trans-unit id="473" approved="yes">
+        <source><![CDATA[storebundle.tax.productsonline]]></source>
+        <target><![CDATA[articles en ligne]]></target>
+      </trans-unit>
+      <trans-unit id="474" approved="yes">
+        <source><![CDATA[storebundle.tax.show %name%]]></source>
+        <target><![CDATA[détails de la taxe %name%]]></target>
+      </trans-unit>
+      <trans-unit id="475" approved="yes">
+        <source><![CDATA[storebundle.tax.type]]></source>
+        <target><![CDATA[type]]></target>
+      </trans-unit>
+      <trans-unit id="476" approved="yes">
+        <source><![CDATA[storebundle.tax.value]]></source>
+        <target><![CDATA[valeur]]></target>
+      </trans-unit>
+      <trans-unit id="477" approved="yes">
+        <source><![CDATA[storebundle.taxes]]></source>
+        <target><![CDATA[taxes]]></target>
+      </trans-unit>
+      <trans-unit id="478" approved="yes">
+        <source><![CDATA[storebundle.text]]></source>
+        <target><![CDATA[texte]]></target>
+      </trans-unit>
+      <trans-unit id="479" approved="yes">
+        <source><![CDATA[storebundle.text.backup]]></source>
+        <target><![CDATA[sauvegarde]]></target>
+      </trans-unit>
+      <trans-unit id="480" approved="yes">
+        <source><![CDATA[storebundle.text.backup.show]]></source>
+        <target><![CDATA[voir]]></target>
+      </trans-unit>
+      <trans-unit id="481" approved="yes">
+        <source><![CDATA[storebundle.text.backups]]></source>
+        <target><![CDATA[sauvegardes]]></target>
+      </trans-unit>
+      <trans-unit id="482" approved="yes">
+        <source><![CDATA[storebundle.text.current]]></source>
+        <target><![CDATA[version courante]]></target>
+      </trans-unit>
+      <trans-unit id="483" approved="yes">
+        <source><![CDATA[storebundle.text.edit]]></source>
+        <target><![CDATA[éditer]]></target>
+      </trans-unit>
+      <trans-unit id="484" approved="yes">
+        <source><![CDATA[storebundle.text.iscontent]]></source>
+        <target><![CDATA[est du contenu]]></target>
+      </trans-unit>
+      <trans-unit id="485" approved="yes">
+        <source><![CDATA[storebundle.text.list]]></source>
+        <target><![CDATA[liste des textes]]></target>
+      </trans-unit>
+      <trans-unit id="486" approved="yes">
+        <source><![CDATA[storebundle.text.new]]></source>
+        <target><![CDATA[nouveau texte]]></target>
+      </trans-unit>
+      <trans-unit id="487" approved="yes">
+        <source><![CDATA[storebundle.texts]]></source>
+        <target><![CDATA[textes]]></target>
+      </trans-unit>
+      <trans-unit id="488" approved="yes">
+        <source><![CDATA[storebundle.title]]></source>
+        <target><![CDATA[titre]]></target>
+      </trans-unit>
+      <trans-unit id="489" approved="yes">
+        <source><![CDATA[storebundle.tot]]></source>
+        <target><![CDATA[total]]></target>
+      </trans-unit>
+      <trans-unit id="490" approved="yes">
+        <source><![CDATA[storebundle.updatedat]]></source>
+        <target><![CDATA[date de mise à jour]]></target>
+      </trans-unit>
+      <trans-unit id="491" approved="yes">
+        <source><![CDATA[storebundle.url]]></source>
+        <target><![CDATA[lien]]></target>
+      </trans-unit>
+      <trans-unit id="492" approved="yes">
+        <source><![CDATA[storebundle.user]]></source>
+        <target><![CDATA[utilisateur]]></target>
+      </trans-unit>
+      <trans-unit id="493" approved="yes">
+        <source><![CDATA[storebundle.userorjustemail]]></source>
+        <target><![CDATA[utilisateur ou email]]></target>
+      </trans-unit>
+      <trans-unit id="494" approved="yes">
+        <source><![CDATA[storebundle.users]]></source>
+        <target><![CDATA[utilisateurs]]></target>
+      </trans-unit>
+      <trans-unit id="495" approved="yes">
+        <source><![CDATA[storebundle.warranties]]></source>
+        <target><![CDATA[garanties]]></target>
+      </trans-unit>
+      <trans-unit id="496" approved="yes">
+        <source><![CDATA[storebundle.warrantiesoffline]]></source>
+        <target><![CDATA[garanties hors-ligne]]></target>
+      </trans-unit>
+      <trans-unit id="497" approved="yes">
+        <source><![CDATA[storebundle.warrantiesonline]]></source>
+        <target><![CDATA[garanties en ligne]]></target>
+      </trans-unit>
+      <trans-unit id="498" approved="yes">
+        <source><![CDATA[storebundle.warranty.edit %name%]]></source>
+        <target><![CDATA[modification de la garantie %name%]]></target>
+      </trans-unit>
+      <trans-unit id="499" approved="yes">
+        <source><![CDATA[storebundle.warranty.list]]></source>
+        <target><![CDATA[liste des garanties]]></target>
+      </trans-unit>
+      <trans-unit id="500" approved="yes">
+        <source><![CDATA[storebundle.warranty.new]]></source>
+        <target><![CDATA[nouvelle garantie]]></target>
+      </trans-unit>
+      <trans-unit id="501" approved="yes">
+        <source><![CDATA[storebundle.warranty.orders]]></source>
+        <target><![CDATA[commandes]]></target>
+      </trans-unit>
+      <trans-unit id="502" approved="yes">
+        <source><![CDATA[storebundle.warranty.productsoffline]]></source>
+        <target><![CDATA[articles hors ligne]]></target>
+      </trans-unit>
+      <trans-unit id="503" approved="yes">
+        <source><![CDATA[storebundle.warranty.productsonline]]></source>
+        <target><![CDATA[articles en ligne]]></target>
+      </trans-unit>
+      <trans-unit id="504" approved="yes">
+        <source><![CDATA[storebundle.warranty.show %name%]]></source>
+        <target><![CDATA[détails garantie %name%]]></target>
+      </trans-unit>
+      <trans-unit id="505" approved="yes">
+        <source><![CDATA[storebundle.website]]></source>
+        <target><![CDATA[site web]]></target>
+      </trans-unit>
+      <trans-unit id="506" approved="yes">
+        <source><![CDATA[storebundle.weeknum %week%]]></source>
+        <target><![CDATA[semaine n°%week%]]></target>
+      </trans-unit>
+      <trans-unit id="507" approved="yes">
+        <source><![CDATA[storebundle.yes]]></source>
+        <target><![CDATA[oui]]></target>
+      </trans-unit>
+      <trans-unit id="508" approved="yes">
+        <source><![CDATA[0]]></source>
+        <target><![CDATA[10]]></target>
+      </trans-unit>
+      <trans-unit id="509" approved="yes">
+        <source><![CDATA[1]]></source>
+        <target><![CDATA[100]]></target>
+      </trans-unit>
+      <trans-unit id="510" approved="yes">
+        <source><![CDATA[2]]></source>
+        <target><![CDATA[20]]></target>
+      </trans-unit>
+      <trans-unit id="511" approved="yes">
+        <source><![CDATA[3]]></source>
+        <target><![CDATA[30]]></target>
+      </trans-unit>
+      <trans-unit id="512" approved="yes">
+        <source><![CDATA[4]]></source>
+        <target><![CDATA[50]]></target>
+      </trans-unit>
+      <trans-unit id="513" approved="yes">
+        <source><![CDATA[Expedited Shipping]]></source>
+        <target><![CDATA[Expedited Shipping]]></target>
+      </trans-unit>
+      <trans-unit id="514" approved="yes">
+        <source><![CDATA[Priority Shipping]]></source>
+        <target><![CDATA[Priority Shipping]]></target>
+      </trans-unit>
+      <trans-unit id="515" approved="yes">
+        <source><![CDATA[Standard Shipping]]></source>
+        <target><![CDATA[Standard Shipping]]></target>
+      </trans-unit>
+      <trans-unit id="516" approved="yes">
+        <source><![CDATA[always available]]></source>
+        <target><![CDATA[always available]]></target>
+      </trans-unit>
+      <trans-unit id="517" approved="yes">
+        <source><![CDATA[available]]></source>
+        <target><![CDATA[available]]></target>
+      </trans-unit>
+      <trans-unit id="518" approved="yes">
+        <source><![CDATA[createdAt]]></source>
+        <target><![CDATA[createdAt]]></target>
+      </trans-unit>
+      <trans-unit id="519" approved="yes">
+        <source><![CDATA[customer]]></source>
+        <target><![CDATA[customer]]></target>
+      </trans-unit>
+      <trans-unit id="520" approved="yes">
+        <source><![CDATA[layout.logged_in_as]]></source>
+        <target><![CDATA[layout.logged_in_as]]></target>
+      </trans-unit>
+      <trans-unit id="521" approved="yes">
+        <source><![CDATA[layout.login]]></source>
+        <target><![CDATA[layout.login]]></target>
+      </trans-unit>
+      <trans-unit id="522" approved="yes">
+        <source><![CDATA[layout.logout]]></source>
+        <target><![CDATA[layout.logout]]></target>
+      </trans-unit>
+      <trans-unit id="523" approved="yes">
+        <source><![CDATA[name]]></source>
+        <target><![CDATA[name]]></target>
+      </trans-unit>
+      <trans-unit id="524" approved="yes">
+        <source><![CDATA[order]]></source>
+        <target><![CDATA[order]]></target>
+      </trans-unit>
+      <trans-unit id="525" approved="yes">
+        <source><![CDATA[orderSteps]]></source>
+        <target><![CDATA[orderSteps]]></target>
+      </trans-unit>
+      <trans-unit id="526" approved="yes">
+        <source><![CDATA[payed]]></source>
+        <target><![CDATA[payed]]></target>
+      </trans-unit>
+      <trans-unit id="527" approved="yes">
+        <source><![CDATA[payment]]></source>
+        <target><![CDATA[payment]]></target>
+      </trans-unit>
+      <trans-unit id="528" approved="yes">
+        <source><![CDATA[payment rest]]></source>
+        <target><![CDATA[payment rest]]></target>
+      </trans-unit>
+      <trans-unit id="529" approved="yes">
+        <source><![CDATA[price]]></source>
+        <target><![CDATA[price]]></target>
+      </trans-unit>
+      <trans-unit id="530" approved="yes">
+        <source><![CDATA[profile.edit]]></source>
+        <target><![CDATA[profile.edit]]></target>
+      </trans-unit>
+      <trans-unit id="531" approved="yes">
+        <source><![CDATA[profile.show]]></source>
+        <target><![CDATA[profile.show]]></target>
+      </trans-unit>
+      <trans-unit id="532" approved="yes">
+        <source><![CDATA[quantity]]></source>
+        <target><![CDATA[quantity]]></target>
+      </trans-unit>
+      <trans-unit id="533" approved="yes">
+        <source><![CDATA[reference]]></source>
+        <target><![CDATA[reference]]></target>
+      </trans-unit>
+      <trans-unit id="534" approved="yes">
+        <source><![CDATA[registration.submit]]></source>
+        <target><![CDATA[registration.submit]]></target>
+      </trans-unit>
+      <trans-unit id="535" approved="yes">
+        <source><![CDATA[seller]]></source>
+        <target><![CDATA[seller]]></target>
+      </trans-unit>
+      <trans-unit id="536" approved="yes">
+        <source><![CDATA[shipping and billing addresses]]></source>
+        <target><![CDATA[shipping and billing addresses]]></target>
+      </trans-unit>
+      <trans-unit id="537" approved="yes">
+        <source><![CDATA[shippingMethod]]></source>
+        <target><![CDATA[shippingMethod]]></target>
+      </trans-unit>
+      <trans-unit id="538" approved="yes">
+        <source><![CDATA[sitebundle.register]]></source>
+        <target><![CDATA[sitebundle.register]]></target>
+      </trans-unit>
+      <trans-unit id="539" approved="yes">
+        <source><![CDATA[storeComment]]></source>
+        <target><![CDATA[storeComment]]></target>
+      </trans-unit>
+      <trans-unit id="540" approved="yes">
+        <source><![CDATA[storebundle.conversationmessage.copyemail.title]]></source>
+        <target><![CDATA[storebundle.conversationmessage.copyemail.title]]></target>
+      </trans-unit>
+      <trans-unit id="541" approved="yes">
+        <source><![CDATA[tot]]></source>
+        <target><![CDATA[tot]]></target>
+      </trans-unit>
+      <trans-unit id="542" approved="yes">
+        <source><![CDATA[total]]></source>
+        <target><![CDATA[total]]></target>
+      </trans-unit>
+      <trans-unit id="543" approved="yes">
+        <source><![CDATA[total: ]]></source>
+        <target><![CDATA[total: ]]></target>
+      </trans-unit>
+      <trans-unit id="544" approved="yes">
+        <source><![CDATA[updatedAt]]></source>
+        <target><![CDATA[updatedAt]]></target>
+      </trans-unit>
+      <trans-unit id="545" approved="yes">
+        <source><![CDATA[userComment]]></source>
+        <target><![CDATA[userComment]]></target>
+      </trans-unit>
+      <trans-unit id="546" approved="yes">
+        <source><![CDATA[your order]]></source>
+        <target><![CDATA[your order]]></target>
+      </trans-unit>
+      <trans-unit id="547" approved="yes">
+        <source><![CDATA[{1} available in 1 day|]1,Inf[ available in %leadTime% days]]></source>
+        <target><![CDATA[{1} available in 1 day|]1,Inf[ available in %leadTime% days]]></target>
+      </trans-unit>
+      <trans-unit id="548" approved="yes">
+        <source><![CDATA[{1} missing 1 product|]1,Inf[ missing %count% products]]></source>
+        <target><![CDATA[{1} missing 1 product|]1,Inf[ missing %count% products]]></target>
+      </trans-unit>
+      <trans-unit id="549" approved="yes">
+        <source><![CDATA[{1} missing 1 product|]1,Inf[ missing %count% products, please contact us]]></source>
+        <target><![CDATA[{1} missing 1 product|]1,Inf[ missing %count% products, please contact us]]></target>
+      </trans-unit>
+      <trans-unit id="550" approved="yes">
+        <source><![CDATA[                {0} no result found|{1} found one result|]1,Inf[ found %count% results
+                ]]></source>
+        <target><![CDATA[                {0} no result found|{1} found one result|]1,Inf[ found %count% results
+                ]]></target>
+      </trans-unit>
+      <trans-unit id="551" approved="yes">
+        <source><![CDATA[            {0} No storeinfo found|{1} found one storeinfo|]1,Inf[ found %count% storeinfos
+            ]]></source>
+        <target><![CDATA[            {0} No storeinfo found|{1} found one storeinfo|]1,Inf[ found %count% storeinfos
+            ]]></target>
+      </trans-unit>
+      <trans-unit id="552" approved="yes">
+        <source><![CDATA[            {0} no basket found|{1} found one basket|]1,Inf[ found %count% baskets
+            ]]></source>
+        <target><![CDATA[            {0} no basket found|{1} found one basket|]1,Inf[ found %count% baskets
+            ]]></target>
+      </trans-unit>
+      <trans-unit id="553" approved="yes">
+        <source><![CDATA[           {0} no result found|{1} found one result|]1,Inf[ found %count% results
+           ]]></source>
+        <target><![CDATA[           {0} no result found|{1} found one result|]1,Inf[ found %count% results
+           ]]></target>
+      </trans-unit>
+      <trans-unit id="554" approved="yes">
+        <source><![CDATA[        {0} no file removed|{1} one file removed|]1,Inf[ %count% files removed
+        ]]></source>
+        <target><![CDATA[        {0} no file removed|{1} one file removed|]1,Inf[ %count% files removed
+        ]]></target>
+      </trans-unit>
+      <trans-unit id="555" approved="yes">
+        <source><![CDATA[%]]></source>
+        <target><![CDATA[%]]></target>
+      </trans-unit>
+      <trans-unit id="556" approved="yes">
+        <source><![CDATA[action]]></source>
+        <target><![CDATA[action]]></target>
+      </trans-unit>
+      <trans-unit id="557" approved="yes">
+        <source><![CDATA[addresses]]></source>
+        <target><![CDATA[addresses]]></target>
+      </trans-unit>
+      <trans-unit id="558" approved="yes">
+        <source><![CDATA[appbundle.annonce.edit %name%]]></source>
+        <target><![CDATA[appbundle.annonce.edit %name%]]></target>
+      </trans-unit>
+      <trans-unit id="559" approved="yes">
+        <source><![CDATA[appbundle.annonce.new]]></source>
+        <target><![CDATA[appbundle.annonce.new]]></target>
+      </trans-unit>
+      <trans-unit id="560" approved="yes">
+        <source><![CDATA[appbundle.annonce.show %name%]]></source>
+        <target><![CDATA[appbundle.annonce.show %name%]]></target>
+      </trans-unit>
+      <trans-unit id="561" approved="yes">
+        <source><![CDATA[appbundle.customer.edit %name%]]></source>
+        <target><![CDATA[appbundle.customer.edit %name%]]></target>
+      </trans-unit>
+      <trans-unit id="562" approved="yes">
+        <source><![CDATA[appbundle.customer.show %name%]]></source>
+        <target><![CDATA[appbundle.customer.show %name%]]></target>
+      </trans-unit>
+      <trans-unit id="563" approved="yes">
+        <source><![CDATA[appbundle.depositsale.edit %reference%]]></source>
+        <target><![CDATA[appbundle.depositsale.edit %reference%]]></target>
+      </trans-unit>
+      <trans-unit id="564" approved="yes">
+        <source><![CDATA[appbundle.text.show %name%]]></source>
+        <target><![CDATA[appbundle.text.show %name%]]></target>
+      </trans-unit>
+      <trans-unit id="565" approved="yes">
+        <source><![CDATA[basket list]]></source>
+        <target><![CDATA[basket list]]></target>
+      </trans-unit>
+      <trans-unit id="566" approved="yes">
+        <source><![CDATA[billingAddress]]></source>
+        <target><![CDATA[billingAddress]]></target>
+      </trans-unit>
+      <trans-unit id="567" approved="yes">
+        <source><![CDATA[brand]]></source>
+        <target><![CDATA[brand]]></target>
+      </trans-unit>
+      <trans-unit id="568" approved="yes">
+        <source><![CDATA[brand edit]]></source>
+        <target><![CDATA[brand edit]]></target>
+      </trans-unit>
+      <trans-unit id="569" approved="yes">
+        <source><![CDATA[brand list]]></source>
+        <target><![CDATA[brand list]]></target>
+      </trans-unit>
+      <trans-unit id="570" approved="yes">
+        <source><![CDATA[brand new]]></source>
+        <target><![CDATA[brand new]]></target>
+      </trans-unit>
+      <trans-unit id="571" approved="yes">
+        <source><![CDATA[category edit]]></source>
+        <target><![CDATA[category edit]]></target>
+      </trans-unit>
+      <trans-unit id="572" approved="yes">
+        <source><![CDATA[country list]]></source>
+        <target><![CDATA[country list]]></target>
+      </trans-unit>
+      <trans-unit id="573" approved="yes">
+        <source><![CDATA[country new]]></source>
+        <target><![CDATA[country new]]></target>
+      </trans-unit>
+      <trans-unit id="574" approved="yes">
+        <source><![CDATA[country show]]></source>
+        <target><![CDATA[country show]]></target>
+      </trans-unit>
+      <trans-unit id="575" approved="yes">
+        <source><![CDATA[create]]></source>
+        <target><![CDATA[create]]></target>
+      </trans-unit>
+      <trans-unit id="576" approved="yes">
+        <source><![CDATA[delete]]></source>
+        <target><![CDATA[delete]]></target>
+      </trans-unit>
+      <trans-unit id="577" approved="yes">
+        <source><![CDATA[description]]></source>
+        <target><![CDATA[description]]></target>
+      </trans-unit>
+      <trans-unit id="578" approved="yes">
+        <source><![CDATA[edit]]></source>
+        <target><![CDATA[edit]]></target>
+      </trans-unit>
+      <trans-unit id="579" approved="yes">
+        <source><![CDATA[flag]]></source>
+        <target><![CDATA[flag]]></target>
+      </trans-unit>
+      <trans-unit id="580" approved="yes">
+        <source><![CDATA[freeTrigger]]></source>
+        <target><![CDATA[freeTrigger]]></target>
+      </trans-unit>
+      <trans-unit id="581" approved="yes">
+        <source><![CDATA[id]]></source>
+        <target><![CDATA[id]]></target>
+      </trans-unit>
+      <trans-unit id="582" approved="yes">
+        <source><![CDATA[id and tag]]></source>
+        <target><![CDATA[id and tag]]></target>
+      </trans-unit>
+      <trans-unit id="583" approved="yes">
+        <source><![CDATA[ipublished]]></source>
+        <target><![CDATA[ipublished]]></target>
+      </trans-unit>
+      <trans-unit id="584" approved="yes">
+        <source><![CDATA[isPublishedOnline]]></source>
+        <target><![CDATA[isPublishedOnline]]></target>
+      </trans-unit>
+      <trans-unit id="585" approved="yes">
+        <source><![CDATA[lilworks.storebundle.name]]></source>
+        <target><![CDATA[lilworks.storebundle.name]]></target>
+      </trans-unit>
+      <trans-unit id="586" approved="yes">
+        <source><![CDATA[lilworks.storebundle.order.storecomment]]></source>
+        <target><![CDATA[lilworks.storebundle.order.storecomment]]></target>
+      </trans-unit>
+      <trans-unit id="587" approved="yes">
+        <source><![CDATA[lilworks.storebundle.order.usercomment]]></source>
+        <target><![CDATA[lilworks.storebundle.order.usercomment]]></target>
+      </trans-unit>
+      <trans-unit id="588" approved="yes">
+        <source><![CDATA[lilworks.storebundle.paymentmethod]]></source>
+        <target><![CDATA[lilworks.storebundle.paymentmethod]]></target>
+      </trans-unit>
+      <trans-unit id="589" approved="yes">
+        <source><![CDATA[lilworks.storebundle.paymentmethod.amount]]></source>
+        <target><![CDATA[lilworks.storebundle.paymentmethod.amount]]></target>
+      </trans-unit>
+      <trans-unit id="590" approved="yes">
+        <source><![CDATA[lilworks.storebundle.paymentmethod.payedat]]></source>
+        <target><![CDATA[lilworks.storebundle.paymentmethod.payedat]]></target>
+      </trans-unit>
+      <trans-unit id="591" approved="yes">
+        <source><![CDATA[lilworks.storebundle.pictures]]></source>
+        <target><![CDATA[lilworks.storebundle.pictures]]></target>
+      </trans-unit>
+      <trans-unit id="592" approved="yes">
+        <source><![CDATA[lilworks.storebundle.product.alwaysavailable]]></source>
+        <target><![CDATA[lilworks.storebundle.product.alwaysavailable]]></target>
+      </trans-unit>
+      <trans-unit id="593" approved="yes">
+        <source><![CDATA[lilworks.storebundle.product.available]]></source>
+        <target><![CDATA[lilworks.storebundle.product.available]]></target>
+      </trans-unit>
+      <trans-unit id="594" approved="yes">
+        <source><![CDATA[lilworks.storebundle.product.notavailable.contactus]]></source>
+        <target><![CDATA[lilworks.storebundle.product.notavailable.contactus]]></target>
+      </trans-unit>
+      <trans-unit id="595" approved="yes">
+        <source><![CDATA[lilworks.storebundle.product.notavailable.leadtime %leadtime%]]></source>
+        <target><![CDATA[lilworks.storebundle.product.notavailable.leadtime %leadtime%]]></target>
+      </trans-unit>
+      <trans-unit id="596" approved="yes">
+        <source><![CDATA[lilworks.storebundle.products]]></source>
+        <target><![CDATA[lilworks.storebundle.products]]></target>
+      </trans-unit>
+      <trans-unit id="597" approved="yes">
+        <source><![CDATA[lilworks.storebundle.productsoffline]]></source>
+        <target><![CDATA[lilworks.storebundle.productsoffline]]></target>
+      </trans-unit>
+      <trans-unit id="598" approved="yes">
+        <source><![CDATA[lilworks.storebundle.productsonline]]></source>
+        <target><![CDATA[lilworks.storebundle.productsonline]]></target>
+      </trans-unit>
+      <trans-unit id="599" approved="yes">
+        <source><![CDATA[lilworks.storebundle.remoteuser]]></source>
+        <target><![CDATA[lilworks.storebundle.remoteuser]]></target>
+      </trans-unit>
+      <trans-unit id="600" approved="yes">
+        <source><![CDATA[lilworks.storebundle.tag]]></source>
+        <target><![CDATA[lilworks.storebundle.tag]]></target>
+      </trans-unit>
+      <trans-unit id="601" approved="yes">
+        <source><![CDATA[lilworks.storebundle.tax.type]]></source>
+        <target><![CDATA[lilworks.storebundle.tax.type]]></target>
+      </trans-unit>
+      <trans-unit id="602" approved="yes">
+        <source><![CDATA[lilworks.storebundle.tax.value]]></source>
+        <target><![CDATA[lilworks.storebundle.tax.value]]></target>
+      </trans-unit>
+      <trans-unit id="603" approved="yes">
+        <source><![CDATA[lilworks.storebundle.text]]></source>
+        <target><![CDATA[lilworks.storebundle.text]]></target>
+      </trans-unit>
+      <trans-unit id="604" approved="yes">
+        <source><![CDATA[lilworks.storebundle.text.css]]></source>
+        <target><![CDATA[lilworks.storebundle.text.css]]></target>
+      </trans-unit>
+      <trans-unit id="605" approved="yes">
+        <source><![CDATA[lilworks.storebundle.text.name]]></source>
+        <target><![CDATA[lilworks.storebundle.text.name]]></target>
+      </trans-unit>
+      <trans-unit id="606" approved="yes">
+        <source><![CDATA[lilworks.storebundle.text.title]]></source>
+        <target><![CDATA[lilworks.storebundle.text.title]]></target>
+      </trans-unit>
+      <trans-unit id="607" approved="yes">
+        <source><![CDATA[lilworks.storebundle.user]]></source>
+        <target><![CDATA[lilworks.storebundle.user]]></target>
+      </trans-unit>
+      <trans-unit id="608" approved="yes">
+        <source><![CDATA[new storeInfo]]></source>
+        <target><![CDATA[new storeInfo]]></target>
+      </trans-unit>
+      <trans-unit id="609" approved="yes">
+        <source><![CDATA[payments]]></source>
+        <target><![CDATA[payments]]></target>
+      </trans-unit>
+      <trans-unit id="610" approved="yes">
+        <source><![CDATA[picture]]></source>
+        <target><![CDATA[picture]]></target>
+      </trans-unit>
+      <trans-unit id="611" approved="yes">
+        <source><![CDATA[pictures]]></source>
+        <target><![CDATA[pictures]]></target>
+      </trans-unit>
+      <trans-unit id="612" approved="yes">
+        <source><![CDATA[products]]></source>
+        <target><![CDATA[products]]></target>
+      </trans-unit>
+      <trans-unit id="613" approved="yes">
+        <source><![CDATA[productsCount]]></source>
+        <target><![CDATA[productsCount]]></target>
+      </trans-unit>
+      <trans-unit id="614" approved="yes">
+        <source><![CDATA[ratio (%)]]></source>
+        <target><![CDATA[ratio (%)]]></target>
+      </trans-unit>
+      <trans-unit id="615" approved="yes">
+        <source><![CDATA[realShippingMethods]]></source>
+        <target><![CDATA[realShippingMethods]]></target>
+      </trans-unit>
+      <trans-unit id="616" approved="yes">
+        <source><![CDATA[shippingAddress]]></source>
+        <target><![CDATA[shippingAddress]]></target>
+      </trans-unit>
+      <trans-unit id="617" approved="yes">
+        <source><![CDATA[shippingmethods]]></source>
+        <target><![CDATA[shippingmethods]]></target>
+      </trans-unit>
+      <trans-unit id="618" approved="yes">
+        <source><![CDATA[show]]></source>
+        <target><![CDATA[show]]></target>
+      </trans-unit>
+      <trans-unit id="619" approved="yes">
+        <source><![CDATA[store overview]]></source>
+        <target><![CDATA[store overview]]></target>
+      </trans-unit>
+      <trans-unit id="620" approved="yes">
+        <source><![CDATA[store.name]]></source>
+        <target><![CDATA[store.name]]></target>
+      </trans-unit>
+      <trans-unit id="621" approved="yes">
+        <source><![CDATA[store.tag]]></source>
+        <target><![CDATA[store.tag]]></target>
+      </trans-unit>
+      <trans-unit id="622" approved="yes">
+        <source><![CDATA[storeInfo edit]]></source>
+        <target><![CDATA[storeInfo edit]]></target>
+      </trans-unit>
+      <trans-unit id="623" approved="yes">
+        <source><![CDATA[storeInfo list]]></source>
+        <target><![CDATA[storeInfo list]]></target>
+      </trans-unit>
+      <trans-unit id="624" approved="yes">
+        <source><![CDATA[storebundle.address]]></source>
+        <target><![CDATA[storebundle.address]]></target>
+      </trans-unit>
+      <trans-unit id="625" approved="yes">
+        <source><![CDATA[storebundle.address.city]]></source>
+        <target><![CDATA[storebundle.address.city]]></target>
+      </trans-unit>
+      <trans-unit id="626" approved="yes">
+        <source><![CDATA[storebundle.address.complement]]></source>
+        <target><![CDATA[storebundle.address.complement]]></target>
+      </trans-unit>
+      <trans-unit id="627" approved="yes">
+        <source><![CDATA[storebundle.address.country]]></source>
+        <target><![CDATA[storebundle.address.country]]></target>
+      </trans-unit>
+      <trans-unit id="628" approved="yes">
+        <source><![CDATA[storebundle.address.name]]></source>
+        <target><![CDATA[storebundle.address.name]]></target>
+      </trans-unit>
+      <trans-unit id="629" approved="yes">
+        <source><![CDATA[storebundle.address.street]]></source>
+        <target><![CDATA[storebundle.address.street]]></target>
+      </trans-unit>
+      <trans-unit id="630" approved="yes">
+        <source><![CDATA[storebundle.address.zipcode]]></source>
+        <target><![CDATA[storebundle.address.zipcode]]></target>
+      </trans-unit>
+      <trans-unit id="631" approved="yes">
+        <source><![CDATA[storebundle.all]]></source>
+        <target><![CDATA[storebundle.all]]></target>
+      </trans-unit>
+      <trans-unit id="632" approved="yes">
+        <source><![CDATA[storebundle.allarchived]]></source>
+        <target><![CDATA[storebundle.allarchived]]></target>
+      </trans-unit>
+      <trans-unit id="633" approved="yes">
+        <source><![CDATA[storebundle.allpublished]]></source>
+        <target><![CDATA[storebundle.allpublished]]></target>
+      </trans-unit>
+      <trans-unit id="634" approved="yes">
+        <source><![CDATA[storebundle.clean.removefile]]></source>
+        <target><![CDATA[storebundle.clean.removefile]]></target>
+      </trans-unit>
+      <trans-unit id="635" approved="yes">
+        <source><![CDATA[storebundle.docfiletitle]]></source>
+        <target><![CDATA[storebundle.docfiletitle]]></target>
+      </trans-unit>
+      <trans-unit id="636" approved="yes">
+        <source><![CDATA[storebundle.docname]]></source>
+        <target><![CDATA[storebundle.docname]]></target>
+      </trans-unit>
+      <trans-unit id="637" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.conversation.edit %reference%]]></source>
+        <target><![CDATA[storebundle.htmltitle.conversation.edit %reference%]]></target>
+      </trans-unit>
+      <trans-unit id="638" approved="yes">
+        <source><![CDATA[storebundle.htmltitle.subscriber.edit %name%]]></source>
+        <target><![CDATA[storebundle.htmltitle.subscriber.edit %name%]]></target>
+      </trans-unit>
+      <trans-unit id="639" approved="yes">
+        <source><![CDATA[storebundle.import.offline]]></source>
+        <target><![CDATA[storebundle.import.offline]]></target>
+      </trans-unit>
+      <trans-unit id="640" approved="yes">
+        <source><![CDATA[storebundle.import.online]]></source>
+        <target><![CDATA[storebundle.import.online]]></target>
+      </trans-unit>
+      <trans-unit id="641" approved="yes">
+        <source><![CDATA[storebundle.menu.cat.index.portal]]></source>
+        <target><![CDATA[storebundle.menu.cat.index.portal]]></target>
+      </trans-unit>
+      <trans-unit id="642" approved="yes">
+        <source><![CDATA[storebundle.supercategory.tax %name%]]></source>
+        <target><![CDATA[storebundle.supercategory.tax %name%]]></target>
+      </trans-unit>
+      <trans-unit id="643" approved="yes">
+        <source><![CDATA[storebundle.syncro.ftp.deletedUnusedFiles %count%]]></source>
+        <target><![CDATA[storebundle.syncro.ftp.deletedUnusedFiles %count%]]></target>
+      </trans-unit>
+      <trans-unit id="644" approved="yes">
+        <source><![CDATA[subscriber edit]]></source>
+        <target><![CDATA[subscriber edit]]></target>
+      </trans-unit>
+      <trans-unit id="645" approved="yes">
+        <source><![CDATA[tag]]></source>
+        <target><![CDATA[tag]]></target>
+      </trans-unit>
+      <trans-unit id="646" approved="yes">
+        <source><![CDATA[user]]></source>
+        <target><![CDATA[user]]></target>
+      </trans-unit>
+      <trans-unit id="647" approved="yes">
+        <source><![CDATA[value]]></source>
+        <target><![CDATA[value]]></target>
+      </trans-unit>
+      <trans-unit id="648" approved="yes">
+        <source><![CDATA[value (€)]]></source>
+        <target><![CDATA[value (€)]]></target>
+      </trans-unit>
+      <trans-unit id="649" approved="yes">
+        <source><![CDATA[warranties]]></source>
+        <target><![CDATA[warranties]]></target>
+      </trans-unit>
+      <trans-unit id="650" approved="yes">
+        <source><![CDATA[€]]></source>
+        <target><![CDATA[€]]></target>
+      </trans-unit>
+      <trans-unit id="651" approved="yes">
+        <source><![CDATA[storebundle.menu.storehome]]></source>
+        <target><![CDATA[accueil site]]></target>
+      </trans-unit>
+      <trans-unit id="652" approved="yes">
+        <source><![CDATA[storebundle.menu.customer]]></source>
+        <target><![CDATA[clients]]></target>
+      </trans-unit>
+      <trans-unit id="653" approved="yes">
+        <source><![CDATA[storebundle.menu.customer.index]]></source>
+        <target><![CDATA[liste des clients]]></target>
+      </trans-unit>
+      <trans-unit id="654" approved="yes">
+        <source><![CDATA[storebundle.menu.customer.new]]></source>
+        <target><![CDATA[nouveau client]]></target>
+      </trans-unit>
+      <trans-unit id="655" approved="yes">
+        <source><![CDATA[storebundle.menu.user]]></source>
+        <target><![CDATA[utilisateurs]]></target>
+      </trans-unit>
+      <trans-unit id="656" approved="yes">
+        <source><![CDATA[storebundle.menu.user.index]]></source>
+        <target><![CDATA[liste des utilisateurs]]></target>
+      </trans-unit>
+      <trans-unit id="657" approved="yes">
+        <source><![CDATA[storebundle.menu.user.new]]></source>
+        <target><![CDATA[nouvel utilisateur]]></target>
+      </trans-unit>
+      <trans-unit id="658" approved="yes">
+        <source><![CDATA[storebundle.menu.session]]></source>
+        <target><![CDATA[sessions]]></target>
+      </trans-unit>
+      <trans-unit id="659" approved="yes">
+        <source><![CDATA[storebundle.menu.session.index]]></source>
+        <target><![CDATA[liste des sessions]]></target>
+      </trans-unit>
+      <trans-unit id="660" approved="yes">
+        <source><![CDATA[storebundle.menu.order]]></source>
+        <target><![CDATA[devis/factures]]></target>
+      </trans-unit>
+      <trans-unit id="661" approved="yes">
+        <source><![CDATA[storebundle.menu.order.index]]></source>
+        <target><![CDATA[liste devis/factures]]></target>
+      </trans-unit>
+      <trans-unit id="662" approved="yes">
+        <source><![CDATA[storebundle.menu.order.new]]></source>
+        <target><![CDATA[nouveau devis/facture]]></target>
+      </trans-unit>
+      <trans-unit id="663" approved="yes">
+        <source><![CDATA[storebundle.menu.depositsale]]></source>
+        <target><![CDATA[dépôt-vente]]></target>
+      </trans-unit>
+      <trans-unit id="664" approved="yes">
+        <source><![CDATA[storebundle.menu.coupon]]></source>
+        <target><![CDATA[avoirs]]></target>
+      </trans-unit>
+      <trans-unit id="665" approved="yes">
+        <source><![CDATA[storebundle.menu.coupon.index]]></source>
+        <target><![CDATA[liste des avoirs]]></target>
+      </trans-unit>
+      <trans-unit id="666" approved="yes">
+        <source><![CDATA[storebundle.menu.coupon.new]]></source>
+        <target><![CDATA[nouvel avoir]]></target>
+      </trans-unit>
+      <trans-unit id="667" approved="yes">
+        <source><![CDATA[storebundle.menu.product]]></source>
+        <target><![CDATA[articles]]></target>
+      </trans-unit>
+      <trans-unit id="668" approved="yes">
+        <source><![CDATA[storebundle.menu.product.index]]></source>
+        <target><![CDATA[liste des articles]]></target>
+      </trans-unit>
+      <trans-unit id="669" approved="yes">
+        <source><![CDATA[storebundle.menu.brand]]></source>
+        <target><![CDATA[marques]]></target>
+      </trans-unit>
+      <trans-unit id="670" approved="yes">
+        <source><![CDATA[storebundle.menu.brand.index]]></source>
+        <target><![CDATA[liste des marques]]></target>
+      </trans-unit>
+      <trans-unit id="671" approved="yes">
+        <source><![CDATA[storebundle.menu.brand.new]]></source>
+        <target><![CDATA[nouvelle marque]]></target>
+      </trans-unit>
+      <trans-unit id="672" approved="yes">
+        <source><![CDATA[storebundle.menu.category]]></source>
+        <target><![CDATA[catégories]]></target>
+      </trans-unit>
+      <trans-unit id="673" approved="yes">
+        <source><![CDATA[storebundle.menu.category.index]]></source>
+        <target><![CDATA[liste des catégories]]></target>
+      </trans-unit>
+      <trans-unit id="674" approved="yes">
+        <source><![CDATA[storebundle.menu.category.new]]></source>
+        <target><![CDATA[nouvelle catégorie]]></target>
+      </trans-unit>
+      <trans-unit id="675" approved="yes">
+        <source><![CDATA[storebundle.menu.supercategory]]></source>
+        <target><![CDATA[groupes de catégories]]></target>
+      </trans-unit>
+      <trans-unit id="676" approved="yes">
+        <source><![CDATA[storebundle.menu.supercategory.index]]></source>
+        <target><![CDATA[liste des groupes de catégories]]></target>
+      </trans-unit>
+      <trans-unit id="677" approved="yes">
+        <source><![CDATA[storebundle.menu.supercategory.new]]></source>
+        <target><![CDATA[nouveau groupe de catégories]]></target>
+      </trans-unit>
+      <trans-unit id="678" approved="yes">
+        <source><![CDATA[storebundle.menu.warranty]]></source>
+        <target><![CDATA[garanties]]></target>
+      </trans-unit>
+      <trans-unit id="679" approved="yes">
+        <source><![CDATA[storebundle.menu.warranty.index]]></source>
+        <target><![CDATA[liste des garanties]]></target>
+      </trans-unit>
+      <trans-unit id="680" approved="yes">
+        <source><![CDATA[storebundle.menu.warranty.new]]></source>
+        <target><![CDATA[nouvelle garantie]]></target>
+      </trans-unit>
+      <trans-unit id="681" approved="yes">
+        <source><![CDATA[storebundle.menu.tag]]></source>
+        <target><![CDATA[tags]]></target>
+      </trans-unit>
+      <trans-unit id="682" approved="yes">
+        <source><![CDATA[storebundle.menu.tag.index]]></source>
+        <target><![CDATA[liste des tags]]></target>
+      </trans-unit>
+      <trans-unit id="683" approved="yes">
+        <source><![CDATA[storebundle.menu.tag.new]]></source>
+        <target><![CDATA[nouveau tag]]></target>
+      </trans-unit>
+      <trans-unit id="684" approved="yes">
+        <source><![CDATA[storebundle.menu.docfile]]></source>
+        <target><![CDATA[documentation]]></target>
+      </trans-unit>
+      <trans-unit id="685" approved="yes">
+        <source><![CDATA[storebundle.menu.docfile.index]]></source>
+        <target><![CDATA[liste des documentations]]></target>
+      </trans-unit>
+      <trans-unit id="686" approved="yes">
+        <source><![CDATA[storebundle.menu.docfile.new]]></source>
+        <target><![CDATA[nouvelle documentation]]></target>
+      </trans-unit>
+      <trans-unit id="687" approved="yes">
+        <source><![CDATA[storebundle.menu.paymentmethod]]></source>
+        <target><![CDATA[moyens de paiement]]></target>
+      </trans-unit>
+      <trans-unit id="688" approved="yes">
+        <source><![CDATA[storebundle.menu.paymentmethod.index]]></source>
+        <target><![CDATA[liste des moyens de paiement]]></target>
+      </trans-unit>
+      <trans-unit id="689" approved="yes">
+        <source><![CDATA[storebundle.menu.paymentmethod.new]]></source>
+        <target><![CDATA[nouveau moyen de paiement]]></target>
+      </trans-unit>
+      <trans-unit id="690" approved="yes">
+        <source><![CDATA[storebundle.menu.tax]]></source>
+        <target><![CDATA[taxes]]></target>
+      </trans-unit>
+      <trans-unit id="691" approved="yes">
+        <source><![CDATA[storebundle.menu.tax.index]]></source>
+        <target><![CDATA[liste des taxes]]></target>
+      </trans-unit>
+      <trans-unit id="692" approved="yes">
+        <source><![CDATA[storebundle.menu.tax.new]]></source>
+        <target><![CDATA[nouvelle taxe]]></target>
+      </trans-unit>
+      <trans-unit id="693" approved="yes">
+        <source><![CDATA[storebundle.menu.shippingmethod]]></source>
+        <target><![CDATA[services de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="694" approved="yes">
+        <source><![CDATA[storebundle.menu.shippingmethod.index]]></source>
+        <target><![CDATA[liste des services de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="695" approved="yes">
+        <source><![CDATA[storebundle.menu.shippingmethod.new]]></source>
+        <target><![CDATA[nouveau service de livraison]]></target>
+      </trans-unit>
+      <trans-unit id="696" approved="yes">
+        <source><![CDATA[storebundle.menu.country]]></source>
+        <target><![CDATA[pays]]></target>
+      </trans-unit>
+      <trans-unit id="697" approved="yes">
+        <source><![CDATA[storebundle.menu.country.index]]></source>
+        <target><![CDATA[liste des pays]]></target>
+      </trans-unit>
+      <trans-unit id="698" approved="yes">
+        <source><![CDATA[storebundle.menu.country.new]]></source>
+        <target><![CDATA[nouveau pays]]></target>
+      </trans-unit>
+      <trans-unit id="699" approved="yes">
+        <source><![CDATA[storebundle.menu.text]]></source>
+        <target><![CDATA[textes]]></target>
+      </trans-unit>
+      <trans-unit id="700" approved="yes">
+        <source><![CDATA[storebundle.menu.text.index]]></source>
+        <target><![CDATA[liste des textes]]></target>
+      </trans-unit>
+      <trans-unit id="701" approved="yes">
+        <source><![CDATA[storebundle.menu.text.new]]></source>
+        <target><![CDATA[nouveau texte]]></target>
+      </trans-unit>
+      <trans-unit id="702" approved="yes">
+        <source><![CDATA[storebundle.menu.conversation]]></source>
+        <target><![CDATA[conversation]]></target>
+      </trans-unit>
+      <trans-unit id="703" approved="yes">
+        <source><![CDATA[storebundle.menu.conversation.index]]></source>
+        <target><![CDATA[liste des conversations]]></target>
+      </trans-unit>
+      <trans-unit id="704" approved="yes">
+        <source><![CDATA[storebundle.menu.conversation.new]]></source>
+        <target><![CDATA[nouvelle conversation]]></target>
+      </trans-unit>
+      <trans-unit id="705" approved="yes">
+        <source><![CDATA[storebundle.menu.subscriber]]></source>
+        <target><![CDATA[abonnés]]></target>
+      </trans-unit>
+      <trans-unit id="706" approved="yes">
+        <source><![CDATA[storebundle.menu.subscriber.index]]></source>
+        <target><![CDATA[liste des abonnés]]></target>
+      </trans-unit>
+      <trans-unit id="707" approved="yes">
+        <source><![CDATA[storebundle.menu.subscriber.import]]></source>
+        <target><![CDATA[importer abonnés]]></target>
+      </trans-unit>
+      <trans-unit id="708" approved="yes">
+        <source><![CDATA[storebundle.menu.subscriber.export]]></source>
+        <target><![CDATA[exporter abonnés]]></target>
+      </trans-unit>
+      <trans-unit id="709" approved="yes">
+        <source><![CDATA[storebundle.menu.subscriber.new]]></source>
+        <target><![CDATA[nouvel abonné]]></target>
+      </trans-unit>
+      <trans-unit id="710" approved="yes">
+        <source><![CDATA[storebundle.menu.annonce]]></source>
+        <target><![CDATA[annonces]]></target>
+      </trans-unit>
+      <trans-unit id="711" approved="yes">
+        <source><![CDATA[storebundle.menu.annonce.index]]></source>
+        <target><![CDATA[liste des annonces]]></target>
+      </trans-unit>
+      <trans-unit id="712" approved="yes">
+        <source><![CDATA[storebundle.menu.annonce.new]]></source>
+        <target><![CDATA[nouvelle annonce]]></target>
+      </trans-unit>
+      <trans-unit id="713" approved="yes">
+        <source><![CDATA[storebundle.menu.depositsale.index]]></source>
+        <target><![CDATA[liste des dépôt-ventes]]></target>
+      </trans-unit>
+      <trans-unit id="714" approved="yes">
+        <source><![CDATA[storebundle.menu.depositsale.new]]></source>
+        <target><![CDATA[nouveau dépôt-vente]]></target>
+      </trans-unit>
+      <trans-unit id="715" approved="yes">
+        <source><![CDATA[storebundle.product.notavailable.contactus]]></source>
+        <target><![CDATA[contactez nous]]></target>
+      </trans-unit>
+      <trans-unit id="716" approved="yes">
+        <source><![CDATA[storebundle.product.available]]></source>
+        <target><![CDATA[dispo]]></target>
+      </trans-unit>
+      <trans-unit id="717" approved="yes">
+        <source><![CDATA[storebundle.product.alwaysavailable]]></source>
+        <target><![CDATA[toujours dispo]]></target>
+      </trans-unit>
+      <trans-unit id="718" approved="yes">
+        <source><![CDATA[storebundle.show]]></source>
+        <target><![CDATA[voir]]></target>
+      </trans-unit>
+      <trans-unit id="719" approved="yes">
+        <source><![CDATA[storebundle.edit]]></source>
+        <target><![CDATA[modifier]]></target>
+      </trans-unit>
+      <trans-unit id="720" approved="yes">
+        <source><![CDATA[storebundle.delete]]></source>
+        <target><![CDATA[supprimer]]></target>
+      </trans-unit>
+      <trans-unit id="721" approved="yes">
+        <source><![CDATA[storebundle.empty]]></source>
+        <target><![CDATA[vider]]></target>
+      </trans-unit>
+      <trans-unit id="722" approved="yes">
+        <source><![CDATA[storebundle.menu.product.new]]></source>
+        <target><![CDATA[nouvel article]]></target>
+      </trans-unit>
+      <trans-unit id="723" approved="yes">
+        <source><![CDATA[storebundle.menu.syncro]]></source>
+        <target><![CDATA[synchronisations]]></target>
+      </trans-unit>
+      <trans-unit id="724" approved="yes">
+        <source><![CDATA[storebundle.menu.syncro.index]]></source>
+        <target><![CDATA[synchronisation]]></target>
+      </trans-unit>
+      <trans-unit id="725" approved="yes">
+        <source><![CDATA[storebundle.menu.brand.show]]></source>
+        <target><![CDATA[voir marque]]></target>
+      </trans-unit>
+      <trans-unit id="726" approved="yes">
+        <source><![CDATA[storebundle.menu.brand.delete]]></source>
+        <target><![CDATA[supprimer marque]]></target>
+      </trans-unit>
+      <trans-unit id="727" approved="yes">
+        <source><![CDATA[storebundle.menu.customer.show]]></source>
+        <target><![CDATA[voir le client]]></target>
+      </trans-unit>
+      <trans-unit id="728" approved="yes">
+        <source><![CDATA[storebundle.menu.customer.edit]]></source>
+        <target><![CDATA[modifier le client]]></target>
+      </trans-unit>
+      <trans-unit id="729" approved="yes">
+        <source><![CDATA[sitebundle.search]]></source>
+        <target><![CDATA[rechercher]]></target>
+      </trans-unit>
+      <trans-unit id="730" approved="yes">
+        <source><![CDATA[sitebundle.subscribe]]></source>
+        <target><![CDATA[abonnement à la newsletter]]></target>
+      </trans-unit>
+      <trans-unit id="731" approved="yes">
+        <source><![CDATA[sitebundle.email]]></source>
+        <target><![CDATA[email]]></target>
+      </trans-unit>
+      <trans-unit id="732" approved="yes">
+        <source><![CDATA[sitebundle.pricecontaining]]></source>
+        <target><![CDATA[dont]]></target>
+      </trans-unit>
+      <trans-unit id="733" approved="yes">
+        <source><![CDATA[storebundle.menu.product.show]]></source>
+        <target><![CDATA[voir l'article]]></target>
+      </trans-unit>
+      <trans-unit id="734" approved="yes">
+        <source><![CDATA[sitebundle.warranties]]></source>
+        <target><![CDATA[garanties]]></target>
+      </trans-unit>
+      <trans-unit id="735" approved="yes">
+        <source><![CDATA[sitebundle.alwaysavailable]]></source>
+        <target><![CDATA[toujours dispo]]></target>
+      </trans-unit>
+      <trans-unit id="736" approved="yes">
+        <source><![CDATA[sitebundle.docfiles]]></source>
+        <target><![CDATA[documentations]]></target>
+      </trans-unit>
+      <trans-unit id="737" approved="yes">
+        <source><![CDATA[sitebundle.weigth]]></source>
+        <target><![CDATA[poids]]></target>
+      </trans-unit>
+      <trans-unit id="738" approved="yes">
+        <source><![CDATA[sitebundle.width]]></source>
+        <target><![CDATA[largeur]]></target>
+      </trans-unit>
+      <trans-unit id="739" approved="yes">
+        <source><![CDATA[sitebundle.length]]></source>
+        <target><![CDATA[profondeur/épaisseur]]></target>
+      </trans-unit>
+      <trans-unit id="740" approved="yes">
+        <source><![CDATA[sitebundle.height]]></source>
+        <target><![CDATA[hauteur]]></target>
+      </trans-unit>
+      <trans-unit id="741" approved="yes">
+        <source><![CDATA[sitebundle.specifications]]></source>
+        <target><![CDATA[spécifications]]></target>
+      </trans-unit>
+      <trans-unit id="742" approved="yes">
+        <source><![CDATA[sitebundle.user.logout]]></source>
+        <target><![CDATA[déconnection]]></target>
+      </trans-unit>
+      <trans-unit id="743" approved="yes">
+        <source><![CDATA[sitebundle.user.profile.edit]]></source>
+        <target><![CDATA[éditer]]></target>
+      </trans-unit>
+      <trans-unit id="744" approved="yes">
+        <source><![CDATA[sitebundle.user.profile.show]]></source>
+        <target><![CDATA[voir]]></target>
+      </trans-unit>
+      <trans-unit id="745" approved="yes">
+        <source><![CDATA[sitebundle.user.logged_in_as %username%]]></source>
+        <target><![CDATA[%username%, vous êtes connecté.]]></target>
+      </trans-unit>
+      <trans-unit id="746" approved="yes">
+        <source><![CDATA[sitebundle.user.login]]></source>
+        <target><![CDATA[connection]]></target>
+      </trans-unit>
+      <trans-unit id="747" approved="yes">
+        <source><![CDATA[sitebundle.user.register]]></source>
+        <target><![CDATA[enregistrement]]></target>
+      </trans-unit>
+      <trans-unit id="748" approved="yes">
+        <source><![CDATA[sitebundle.categories]]></source>
+        <target><![CDATA[catégories]]></target>
+      </trans-unit>
+      <trans-unit id="749" approved="yes">
+        <source><![CDATA[sitebundle.category]]></source>
+        <target><![CDATA[catégorie]]></target>
+      </trans-unit>
+      <trans-unit id="750" approved="yes">
+        <source><![CDATA[sitebundle.priceorder]]></source>
+        <target><![CDATA[classer par prix]]></target>
+      </trans-unit>
+      <trans-unit id="751" approved="yes">
+        <source><![CDATA[sitebundle.category %name%]]></source>
+        <target><![CDATA[catégorie %name%]]></target>
+      </trans-unit>
+      <trans-unit id="752" approved="yes">
+        <source><![CDATA[sitebundle.supercategory %name%]]></source>
+        <target><![CDATA[groupe de catégories %name%]]></target>
+      </trans-unit>
+      <trans-unit id="753" approved="yes">
+        <source><![CDATA[{0} basket empty|{1} one product|]1,Inf[ %count% products]]></source>
+        <target><![CDATA[{0} panier vide|{1} 1 article|]1,Inf[ %count% articles]]></target>
+      </trans-unit>
+      <trans-unit id="754" approved="yes">
+        <source><![CDATA[storebundle.product.notavailable.leadtime %leadtime%]]></source>
+        <target><![CDATA[disponible sous %leadtime% jour(s)]]></target>
+      </trans-unit>
+      <trans-unit id="755" approved="yes">
+        <source><![CDATA[sitebundle.supercategories]]></source>
+        <target><![CDATA[groupes de catégories]]></target>
+      </trans-unit>
+      <trans-unit id="756" approved="yes">
+        <source><![CDATA[appbundle.user.login]]></source>
+        <target><![CDATA[connection]]></target>
+      </trans-unit>
+      <trans-unit id="757" approved="yes">
+        <source><![CDATA[sitebundle.firstname]]></source>
+        <target><![CDATA[prenom]]></target>
+      </trans-unit>
+      <trans-unit id="758" approved="yes">
+        <source><![CDATA[sitebundle.lastname]]></source>
+        <target><![CDATA[nom de famille]]></target>
+      </trans-unit>
+      <trans-unit id="759" approved="yes">
+        <source><![CDATA[sitebundle.companyname]]></source>
+        <target><![CDATA[entreprise/association]]></target>
+      </trans-unit>
+      <trans-unit id="760" approved="yes">
+        <source><![CDATA[sitebundle.address.name]]></source>
+        <target><![CDATA[chez (si different de votre nom)]]></target>
+      </trans-unit>
+      <trans-unit id="761" approved="yes">
+        <source><![CDATA[sitebundle.address.street]]></source>
+        <target><![CDATA[rue]]></target>
+      </trans-unit>
+      <trans-unit id="762" approved="yes">
+        <source><![CDATA[sitebundle.address.complement]]></source>
+        <target><![CDATA[complement d'adresse]]></target>
+      </trans-unit>
+      <trans-unit id="763" approved="yes">
+        <source><![CDATA[sitebundle.address.zipcode]]></source>
+        <target><![CDATA[code postal]]></target>
+      </trans-unit>
+      <trans-unit id="764" approved="yes">
+        <source><![CDATA[sitebundle.address.city]]></source>
+        <target><![CDATA[ville]]></target>
+      </trans-unit>
+      <trans-unit id="765" approved="yes">
+        <source><![CDATA[sitebundle.address.country]]></source>
+        <target><![CDATA[pays]]></target>
+      </trans-unit>
+      <trans-unit id="766" approved="yes">
+        <source><![CDATA[sitebundle.phonenumber]]></source>
+        <target><![CDATA[téléphone]]></target>
+      </trans-unit>
+      <trans-unit id="767" approved="yes">
+        <source><![CDATA[sitebundle.description]]></source>
+        <target><![CDATA[description]]></target>
+      </trans-unit>
+      <trans-unit id="768" approved="yes">
+        <source><![CDATA[appbundle.user.register]]></source>
+        <target><![CDATA[enregistrement]]></target>
+      </trans-unit>
+      <trans-unit id="769" approved="yes">
+        <source><![CDATA[appbundle.user.forgot]]></source>
+        <target><![CDATA[mot de passe oublié]]></target>
+      </trans-unit>
+      <trans-unit id="770" approved="yes">
+        <source><![CDATA[appbundle.user.email]]></source>
+        <target><![CDATA[adresse email]]></target>
+      </trans-unit>
+      <trans-unit id="771" approved="yes">
+        <source><![CDATA[sitebundle.brand %name%]]></source>
+        <target><![CDATA[marque %name%]]></target>
+      </trans-unit>
+      <trans-unit id="772" approved="yes">
+        <source><![CDATA[sitebundle.allstoresearch]]></source>
+        <target><![CDATA[recherche dans tous le magasin]]></target>
+      </trans-unit>
+      <trans-unit id="773" approved="yes">
+        <source><![CDATA[sitebundle.brands]]></source>
+        <target><![CDATA[marques]]></target>
+      </trans-unit>
+      <trans-unit id="774" approved="yes">
+        <source><![CDATA[storebundle.menu.customer.delete]]></source>
+        <target><![CDATA[supprimer le client]]></target>
+      </trans-unit>
+      <trans-unit id="775" approved="yes">
+        <source><![CDATA[sitebundle.user.profile]]></source>
+        <target><![CDATA[votre profil]]></target>
+      </trans-unit>
+      <trans-unit id="776" approved="yes">
+        <source><![CDATA[profile.show.phonenumbers]]></source>
+        <target><![CDATA[vos numéros de téléphone]]></target>
+      </trans-unit>
+      <trans-unit id="777" approved="yes">
+        <source><![CDATA[profile.show.addresses]]></source>
+        <target><![CDATA[vos adresses]]></target>
+      </trans-unit>
+      <trans-unit id="778" approved="yes">
+        <source><![CDATA[profile.show.orders]]></source>
+        <target><![CDATA[vos commandes]]></target>
+      </trans-unit>
+      <trans-unit id="779" approved="yes">
+        <source><![CDATA[profile.show.noorder]]></source>
+        <target><![CDATA[aucune commande pour l'instant]]></target>
+      </trans-unit>
+      <trans-unit id="780" approved="yes">
+        <source><![CDATA[sitebundle.conversations]]></source>
+        <target><![CDATA[conversations]]></target>
+      </trans-unit>
+      <trans-unit id="781" approved="yes">
+        <source><![CDATA[sitebundle.order.noorder]]></source>
+        <target><![CDATA[aucune commande pour l'instant...]]></target>
+      </trans-unit>
+      <trans-unit id="782" approved="yes">
+        <source><![CDATA[sitebundle.orders]]></source>
+        <target><![CDATA[commandes]]></target>
+      </trans-unit>
+      <trans-unit id="783" approved="yes">
+        <source><![CDATA[sitebundle.user.edit]]></source>
+        <target><![CDATA[modification de votre profil]]></target>
+      </trans-unit>
+      <trans-unit id="784" approved="yes">
+        <source><![CDATA[sitebundle.profile.show]]></source>
+        <target><![CDATA[détails de votre profil]]></target>
+      </trans-unit>
+      <trans-unit id="785" approved="yes">
+        <source><![CDATA[sitebundle.conversation.noconversation]]></source>
+        <target><![CDATA[aucune conversation pour l'instant...]]></target>
+      </trans-unit>
+      <trans-unit id="786" approved="yes">
+        <source><![CDATA[sitebundle.htmltitle.user.edit]]></source>
+        <target><![CDATA[modification de votre profil]]></target>
+      </trans-unit>
+      <trans-unit id="787" approved="yes">
+        <source><![CDATA[sitebundle.user]]></source>
+        <target><![CDATA[utilisateur]]></target>
+      </trans-unit>
+      <trans-unit id="788" approved="yes">
+        <source><![CDATA[sitebundle.menu.customer.edit]]></source>
+        <target><![CDATA[modifier votre profil client]]></target>
+      </trans-unit>
+      <trans-unit id="789" approved="yes">
+        <source><![CDATA[sitebundle.menu.user.conversations]]></source>
+        <target><![CDATA[conversations avec l'équipe ferré]]></target>
+      </trans-unit>
+      <trans-unit id="790" approved="yes">
+        <source><![CDATA[sitebundle.menu.user.conversations.new]]></source>
+        <target><![CDATA[nouvelle conversation]]></target>
+      </trans-unit>
+      <trans-unit id="791" approved="yes">
+        <source><![CDATA[sitebundle.menu.user.profile]]></source>
+        <target><![CDATA[votre profil utilisateur]]></target>
+      </trans-unit>
+      <trans-unit id="792" approved="yes">
+        <source><![CDATA[sitebundle.menu.user.subscriber]]></source>
+        <target><![CDATA[abonnement à la lettre d'information]]></target>
+      </trans-unit>
+      <trans-unit id="793" approved="yes">
+        <source><![CDATA[sitebundle.menu.usercustomer]]></source>
+        <target><![CDATA[votre compte]]></target>
+      </trans-unit>
+      <trans-unit id="794" approved="yes">
+        <source><![CDATA[sitebundle.customer.edit]]></source>
+        <target><![CDATA[modification de votre profil client]]></target>
+      </trans-unit>
+      <trans-unit id="795" approved="yes">
+        <source><![CDATA[sitebundle.usernameemail]]></source>
+        <target><![CDATA[email/utilisateur]]></target>
+      </trans-unit>
+      <trans-unit id="796" approved="yes">
+        <source><![CDATA[sitebundle.name]]></source>
+        <target><![CDATA[nom]]></target>
+      </trans-unit>
+      <trans-unit id="797" approved="yes">
+        <source><![CDATA[sitebundle.noorder]]></source>
+        <target><![CDATA[aucune commande]]></target>
+      </trans-unit>
+      <trans-unit id="798" approved="yes">
+        <source><![CDATA[sitebundle.noconversation]]></source>
+        <target><![CDATA[aucune conversation]]></target>
+      </trans-unit>
+      <trans-unit id="799" approved="yes">
+        <source><![CDATA[sitebundle.subscriber]]></source>
+        <target><![CDATA[inscription lettre information]]></target>
+      </trans-unit>
+      <trans-unit id="800" approved="yes">
+        <source><![CDATA[sitebundle.customer.show]]></source>
+        <target><![CDATA[détails de votre compte]]></target>
+      </trans-unit>
+      <trans-unit id="801" approved="yes">
+        <source><![CDATA[sitebundle.conversation.subject]]></source>
+        <target><![CDATA[sujet]]></target>
+      </trans-unit>
+      <trans-unit id="802" approved="yes">
+        <source><![CDATA[sitebundle.conversation.messages]]></source>
+        <target><![CDATA[messages]]></target>
+      </trans-unit>
+      <trans-unit id="803" approved="yes">
+        <source><![CDATA[sitebundle.delete]]></source>
+        <target><![CDATA[supprimer]]></target>
+      </trans-unit>
+      <trans-unit id="804" approved="yes">
+        <source><![CDATA[sitebundle.message.new]]></source>
+        <target><![CDATA[nouveau message]]></target>
+      </trans-unit>
+      <trans-unit id="805" approved="yes">
+        <source><![CDATA[sitebundle.htmltitle.conversations]]></source>
+        <target><![CDATA[conversations]]></target>
+      </trans-unit>
+      <trans-unit id="806" approved="yes">
+        <source><![CDATA[sitebundle.menu.customer.show]]></source>
+        <target><![CDATA[détails client]]></target>
+      </trans-unit>
+      <trans-unit id="807" approved="yes">
+        <source><![CDATA[sitebundle.menu.user.subscribe]]></source>
+        <target><![CDATA[souscrire à la lettre d'information]]></target>
+      </trans-unit>
+      <trans-unit id="808" approved="yes">
+        <source><![CDATA[{0} no result found|{1} found one result|]1,Inf[ found %count% results]]></source>
+        <target><![CDATA[{0} aucun resultat|{1} 1resultat|]1,Inf[ %count% resultats]]></target>
+      </trans-unit>
+      <trans-unit id="809" approved="yes">
+        <source><![CDATA[sitebundle.conversation.from.you]]></source>
+        <target><![CDATA[vous]]></target>
+      </trans-unit>
+      <trans-unit id="810" approved="yes">
+        <source><![CDATA[sitebundle.conversation.from.store]]></source>
+        <target><![CDATA[magasin]]></target>
+      </trans-unit>
+      <trans-unit id="811" approved="yes">
+        <source><![CDATA[sitebundle.conversations.message.new]]></source>
+        <target><![CDATA[nouveau message]]></target>
+      </trans-unit>
+      <trans-unit id="812" approved="yes">
+        <source><![CDATA[sitebundle.menu.conversations]]></source>
+        <target><![CDATA[liste des conversations]]></target>
+      </trans-unit>
+      <trans-unit id="813" approved="yes">
+        <source><![CDATA[sitebundle.menu.conversations.remove]]></source>
+        <target><![CDATA[supprimer la conversation]]></target>
+      </trans-unit>
+      <trans-unit id="814" approved="yes">
+        <source><![CDATA[js.alert.delete.title]]></source>
+        <target><![CDATA[supprimer]]></target>
+      </trans-unit>
+      <trans-unit id="815" approved="yes">
+        <source><![CDATA[js.alert.delete.text]]></source>
+        <target><![CDATA[Etes vous sûr de vouloir supprimer cette entrée]]></target>
+      </trans-unit>
+      <trans-unit id="816" approved="yes">
+        <source><![CDATA[js.alert.yes]]></source>
+        <target><![CDATA[oui]]></target>
+      </trans-unit>
+      <trans-unit id="817" approved="yes">
+        <source><![CDATA[js.alert.no]]></source>
+        <target><![CDATA[non]]></target>
+      </trans-unit>
+      <trans-unit id="818" approved="yes">
+        <source><![CDATA[sitebundle.menu.conversations.new]]></source>
+        <target><![CDATA[nouvelle conversation]]></target>
+      </trans-unit>
+      <trans-unit id="819" approved="yes">
+        <source><![CDATA[sitebundle.menu.user.unsubscribe]]></source>
+        <target><![CDATA[désabonnez-vous de la la lettre d'information]]></target>
+      </trans-unit>
+      <trans-unit id="820" approved="yes">
+        <source><![CDATA[storebundle.menu.session.clean]]></source>
+        <target><![CDATA[nettoyer les sessions périmées]]></target>
+      </trans-unit>
+      <trans-unit id="821" approved="yes">
+        <source><![CDATA[lilworks.filter.open]]></source>
+        <target><![CDATA[ouvrir le filter]]></target>
+      </trans-unit>
+      <trans-unit id="822" approved="yes">
+        <source><![CDATA[lilworks.filter.close]]></source>
+        <target><![CDATA[fermer le filtre]]></target>
+      </trans-unit>
+      <trans-unit id="823" approved="yes">
+        <source><![CDATA[appbundle.session.lifetime]]></source>
+        <target><![CDATA[validité de la session (seconde)]]></target>
+      </trans-unit>
+      <trans-unit id="824" approved="yes">
+        <source><![CDATA[storebundle.pdf]]></source>
+        <target><![CDATA[pdf]]></target>
+      </trans-unit>
+      <trans-unit id="825" approved="yes">
+        <source><![CDATA[storebundle.menu.paymentmethod.edit]]></source>
+        <target><![CDATA[modification du moyen de paiement]]></target>
+      </trans-unit>
+      <trans-unit id="826" approved="yes">
+        <source><![CDATA[storebundle.menu.paymentmethod.show]]></source>
+        <target><![CDATA[détails du moyen de paiement]]></target>
+      </trans-unit>
+      <trans-unit id="827" approved="yes">
+        <source><![CDATA[storebundle.ispublished]]></source>
+        <target><![CDATA[est publié]]></target>
+      </trans-unit>
+      <trans-unit id="828" approved="yes">
+        <source><![CDATA[storebundle.prefix.countries]]></source>
+        <target><![CDATA[Pays]]></target>
+      </trans-unit>
+      <trans-unit id="829" approved="yes">
+        <source><![CDATA[storebundle.title.show %name%]]></source>
+        <target><![CDATA[détails %name%]]></target>
+      </trans-unit>
+      <trans-unit id="830" approved="yes">
+        <source><![CDATA[5]]></source>
+        <target><![CDATA[10]]></target>
+      </trans-unit>
+      <trans-unit id="831" approved="yes">
+        <source><![CDATA[6]]></source>
+        <target><![CDATA[100]]></target>
+      </trans-unit>
+      <trans-unit id="832" approved="yes">
+        <source><![CDATA[7]]></source>
+        <target><![CDATA[20]]></target>
+      </trans-unit>
+      <trans-unit id="833" approved="yes">
+        <source><![CDATA[8]]></source>
+        <target><![CDATA[30]]></target>
+      </trans-unit>
+      <trans-unit id="834" approved="yes">
+        <source><![CDATA[9]]></source>
+        <target><![CDATA[50]]></target>
+      </trans-unit>
+      <trans-unit id="835" approved="yes">
+        <source><![CDATA[10]]></source>
+        <target><![CDATA[10]]></target>
+      </trans-unit>
+      <trans-unit id="836" approved="yes">
+        <source><![CDATA[11]]></source>
+        <target><![CDATA[100]]></target>
+      </trans-unit>
+      <trans-unit id="837" approved="yes">
+        <source><![CDATA[12]]></source>
+        <target><![CDATA[20]]></target>
+      </trans-unit>
+      <trans-unit id="838" approved="yes">
+        <source><![CDATA[13]]></source>
+        <target><![CDATA[30]]></target>
+      </trans-unit>
+      <trans-unit id="839" approved="yes">
+        <source><![CDATA[14]]></source>
+        <target><![CDATA[50]]></target>
+      </trans-unit>
+      <trans-unit id="840" approved="yes">
+        <source><![CDATA[15]]></source>
+        <target><![CDATA[10]]></target>
+      </trans-unit>
+      <trans-unit id="841" approved="yes">
+        <source><![CDATA[16]]></source>
+        <target><![CDATA[100]]></target>
+      </trans-unit>
+      <trans-unit id="842" approved="yes">
+        <source><![CDATA[17]]></source>
+        <target><![CDATA[20]]></target>
+      </trans-unit>
+      <trans-unit id="843" approved="yes">
+        <source><![CDATA[18]]></source>
+        <target><![CDATA[30]]></target>
+      </trans-unit>
+      <trans-unit id="844" approved="yes">
+        <source><![CDATA[19]]></source>
+        <target><![CDATA[50]]></target>
+      </trans-unit>
+      <trans-unit id="845" approved="yes">
+        <source><![CDATA[20]]></source>
+        <target><![CDATA[10]]></target>
+      </trans-unit>
+      <trans-unit id="846" approved="yes">
+        <source><![CDATA[21]]></source>
+        <target><![CDATA[100]]></target>
+      </trans-unit>
+      <trans-unit id="847" approved="yes">
+        <source><![CDATA[22]]></source>
+        <target><![CDATA[20]]></target>
+      </trans-unit>
+      <trans-unit id="848" approved="yes">
+        <source><![CDATA[23]]></source>
+        <target><![CDATA[30]]></target>
+      </trans-unit>
+      <trans-unit id="849" approved="yes">
+        <source><![CDATA[24]]></source>
+        <target><![CDATA[50]]></target>
+      </trans-unit>
+      <trans-unit id="850" approved="yes">
+        <source><![CDATA[25]]></source>
+        <target><![CDATA[10]]></target>
+      </trans-unit>
+      <trans-unit id="851" approved="yes">
+        <source><![CDATA[26]]></source>
+        <target><![CDATA[100]]></target>
+      </trans-unit>
+      <trans-unit id="852" approved="yes">
+        <source><![CDATA[27]]></source>
+        <target><![CDATA[20]]></target>
+      </trans-unit>
+      <trans-unit id="853" approved="yes">
+        <source><![CDATA[28]]></source>
+        <target><![CDATA[30]]></target>
+      </trans-unit>
+      <trans-unit id="854" approved="yes">
+        <source><![CDATA[29]]></source>
+        <target><![CDATA[50]]></target>
       </trans-unit>
     </body>
   </file>

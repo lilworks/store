@@ -2,7 +2,8 @@
 
 {% block body %}
     <h1>
-        {{ 'appbundle.text.show %name%'|trans({'%name%': text.name }) }}
+        <i class="fa fa-font" aria-hidden="true"></i>
+        {{ 'storebundle.text.show %name%'|trans({'%name%':text.name}) }}
     </h1>
 
     <div id="content_menu">
@@ -37,9 +38,9 @@
                         <a href="{{ path('text_backup_empty',{ text_id:text.id }) }}" role="button" class="btn btn-sm  btn-warning">
                             <i class="fa fa-share-square-o "  aria-hidden="true"></i>
                         </a>
-                        <ul>
+                        <ul class="list list-unstyled">
                         {% for backup in text.backups %}
-                            <li class="list-inline-item">
+                            <li>
                                 <a href="{{ path('text_backup_show',{textbackup_id:backup.id}) }}" role="button" class="btn btn-sm btn-secondary">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </a>

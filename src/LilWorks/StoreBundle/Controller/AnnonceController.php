@@ -51,9 +51,7 @@ class AnnonceController extends Controller
             10
         );
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.annonce.index'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.annonces');
 
         return $this->render('LilWorksStoreBundle:Annonce:index.html.twig', array(
             'pagination' => $pagination,
@@ -79,11 +77,7 @@ class AnnonceController extends Controller
 
             return $this->redirectToRoute('annonce_show', array('id' => $annonce->getId()));
         }
-
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.annonce.new'));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.annonces');
         return $this->render('LilWorksStoreBundle:Annonce:new.html.twig', array(
             'annonce' => $annonce,
             'form' => $form->createView(),
@@ -98,8 +92,8 @@ class AnnonceController extends Controller
 
         $translator = $this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.annonce.show %name%',array('%name%'=>$annonce->getName())));
 
+        $this->get('store.setSeo')->setTitle('storebundle.title.show',array('%name%'=>$annonce->getName()),'storebundle.prefix.annonces');
         return $this->render('LilWorksStoreBundle:Annonce:show.html.twig', array(
             'annonce' => $annonce
         ));
@@ -120,10 +114,7 @@ class AnnonceController extends Controller
         }
 
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.annonce.edit %name%',array('%name%'=>$annonce->getName())));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit',array('%name%'=>$annonce->getName()),'storebundle.prefix.annonces');
         return $this->render('LilWorksStoreBundle:Annonce:edit.html.twig', array(
             'annonce' => $annonce,
             'form' => $editForm->createView()

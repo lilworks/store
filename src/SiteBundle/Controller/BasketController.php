@@ -15,7 +15,13 @@ use SiteBundle\Form\BasketType;
 class BasketController extends Controller
 {
 
+    public function emptyAction(Request $request)
+    {
+        $this->get('site.basket')->emptyBasket();
 
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
+    }
     public function editAction(Request $request)
     {
 
@@ -68,17 +74,16 @@ class BasketController extends Controller
             $em->persist($basket);
             $em->flush();
 
-            if( $form->get('update')->isClicked())
+            if( $form->get('update')->isClicked()){
+
                 return $this->redirectToRoute('site_basket_edit');
-            if( $form->get('order')->isClicked()){
+            }elseif( $form->get('empty')->isClicked()){
+                return $this->redirectToRoute('site_basket_empty');
+            }elseif( $form->get('order')->isClicked()){
                 $totals = $basketService->getTotals();
-                //$order = $em->getRepository("LilWorksStoreBundle:Basket")->basketToOrder($basket,floatval($totals["TTC"]+$totals["SM"]));
                 $order = $basketService->toOrder();
-                return $this->redirectToRoute('site_order_pay',array('id'=>$order->getId()));
-
+                return $this->redirectToRoute('site_order_pay',array('order_id'=>$order->getId()));
             }
-
-
 
         }
         $translator = $this->get('translator');
@@ -114,14 +119,6 @@ class BasketController extends Controller
     public function addAction(Request $request,Product $product)
     {
         $basketService =$this->get('site.basket');
-        $em =  $this->get('doctrine');
-        $session = $request->getSession();
-        $session->start();
-
-        $sessionDb = $em->getRepository('AppBundle:Session')->find($session->getId());
-        $basket = $sessionDb->getBasket();
-
-
         $basketService->addProduct($product);
 
         $referer = $request->headers->get('referer');
@@ -133,21 +130,10 @@ class BasketController extends Controller
     public function removeAction(Request $request,Product $product)
     {
         $basketService =$this->get('site.basket');
-        $em =  $this->get('doctrine');
-        $session = $request->getSession();
-        $session->start();
-
-
-        $currentRoute = $request->get('_route');
-
-        $basket = $em->getRepository('LilWorksStoreBundle:Basket')->findOneByToken($session->getId());
-
-
         $basketService->removeProduct($product);
 
         $referer = $request->headers->get('referer');
         return $this->redirect($referer);
-
     }
     /**
      * @ParamConverter("get", class="LilWorksStoreBundle:Product", options={"id" = "id"})
@@ -155,16 +141,6 @@ class BasketController extends Controller
     public function deleteAction(Request $request,Product $product)
     {
         $basketService =$this->get('site.basket');
-        $em =  $this->get('doctrine');
-        $session = $request->getSession();
-        $session->start();
-
-
-        $currentRoute = $request->get('_route');
-
-        $basket = $em->getRepository('LilWorksStoreBundle:Basket')->findOneByToken($session->getId());
-
-
         $basketService->deleteProduct($product);
 
         $referer = $request->headers->get('referer');

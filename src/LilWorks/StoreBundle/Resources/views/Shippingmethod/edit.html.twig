@@ -2,9 +2,20 @@
 
 {% block body %}
 
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+
+            $( document ).ready(function() {
+                FCE.init('triggers','triggers list-inline','trigger list-inline-item');
+                MT.init('shippingTab');
+            });
+        </script>
+    {% endblock %}
 
 
     <h1>
+        <i class="fa fa-truck" aria-hidden="true"></i>
         {{ 'storebundle.shippingmethod.edit %name%'|trans({'%name%':shippingMethod.name}) }}
     </h1>
 
@@ -18,9 +29,12 @@
 
     <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
 
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs" role="tablist" id="shippingTab">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#triggers" role="tab">{% trans %}storebundle.triggers{% endtrans %}</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#products" role="tab">{% trans %}storebundle.products{% endtrans %}</a>
@@ -30,16 +44,17 @@
     <div class="tab-content">
         <div class="tab-pane active" id="general" role="tabpanel">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     {{ form_row(form.name) }}
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     {{ form_row(form.price) }}
                 </div>
+                {#
                 <div class="col-lg-4">
                     {{ form_row(form.freeTrigger) }}
                 </div>
-
+                #}
             </div>
             <div class="row">
                 <div class="col-lg-3">
@@ -63,6 +78,18 @@
                     {{ form_row(form.descriptionInternal) }}
                 </div>
             </div>
+        </div>
+        <div class="tab-pane" id="triggers" role="tabpanel">
+            {% if form.triggers is defined %}
+                <ul class="triggers list-inline " id="target" data-prototype="{{ form_widget(form.triggers.vars.prototype)|e('html_attr') }}">
+                    {% for trigger in form.triggers %}
+                        <li class="trigger list-inline-item">
+                            {{ form_row(trigger) }}
+                        </li>
+                    {% endfor %}
+                    {{ form_widget(form.triggers) }}
+                </ul>
+            {% endif %}
         </div>
         <div class="tab-pane" id="products" role="tabpanel">
             {{ form_row(form.products) }}

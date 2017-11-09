@@ -64,9 +64,7 @@ class ProductController extends Controller
             $request->query->getInt('maxItemPerPage', 10)
         );
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.product.index'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.products');
 
 
         return $this->render('LilWorksStoreBundle:Product:index.html.twig', array(
@@ -100,9 +98,7 @@ class ProductController extends Controller
             return $this->redirectToRoute('product_show', array('product_id' => $product->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.product.new'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.products');
 
         return $this->render('LilWorksStoreBundle:Product:new.html.twig', array(
             'product' => $product,
@@ -116,10 +112,7 @@ class ProductController extends Controller
     public function showAction(Product $product)
     {
 
-
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.product.show %name%',array('%name%'=>$product->getBrand()->getName() . " " .$product->getName())));
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array("%name%"=>$product->getName()),'storebundle.prefix.products');
 
         return $this->render('LilWorksStoreBundle:Product:show.html.twig', array(
             'product' => $product,
@@ -163,9 +156,7 @@ class ProductController extends Controller
 
             return $this->redirectToRoute('product_edit', array('product_id' => $product->getId()));
         }
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.product.edit %name%',array('%name%'=>$product->getBrand()->getName() . " " .$product->getName())));
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array("%name%"=>$product->getName()),'storebundle.prefix.products');
 
 
         return $this->render('LilWorksStoreBundle:Product:edit.html.twig', array(

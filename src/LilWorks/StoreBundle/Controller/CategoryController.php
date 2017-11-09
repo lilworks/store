@@ -70,10 +70,7 @@ class CategoryController extends Controller
             $request->query->getInt('maxItemPerPage', 10)
         );
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.category.index'));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.categories');
 
         return $this->render('LilWorksStoreBundle:Category:index.html.twig', array(
             'pagination' => $pagination,
@@ -107,9 +104,7 @@ class CategoryController extends Controller
             return $this->redirectToRoute('category_show', array('category_id' => $category->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.category.new'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.categories');
 
 
         return $this->render('LilWorksStoreBundle:Category:new.html.twig', array(
@@ -124,10 +119,7 @@ class CategoryController extends Controller
     public function showAction(Category $category)
     {
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.category.show %name%',array('%name%'=>$category->getName())));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array('%name%'=>$category->getName()),'storebundle.prefix.categories');
 
         return $this->render('LilWorksStoreBundle:Category:show.html.twig', array(
             'category' => $category
@@ -155,15 +147,7 @@ class CategoryController extends Controller
             return $this->redirectToRoute('category_edit', array('category_id' => $category->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('category edit'));
-
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.category.edit %name%',array('%name%'=>$category->getName())));
-
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array('%name%'=>$category->getName()),'storebundle.prefix.categories');
 
         return $this->render('LilWorksStoreBundle:Category:edit.html.twig', array(
             'category' => $category,

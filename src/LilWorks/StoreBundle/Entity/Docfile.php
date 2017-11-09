@@ -30,6 +30,7 @@ class Docfile
      * @var text
      *
      * @ORM\Column(name="title", type="string",length=255,nullable=true)
+     * @Assert\NotBlank()
      */
     private $title;
     /**

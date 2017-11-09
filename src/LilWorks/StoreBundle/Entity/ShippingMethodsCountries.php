@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="lilworks_shipping_methods_countries")
+ * @ORM\Entity(repositoryClass="LilWorks\StoreBundle\Entity\Repository\ShippingMethodsCountriesRepository")
  */
 class ShippingMethodsCountries
 {
@@ -48,6 +49,10 @@ class ShippingMethodsCountries
     private $freeTrigger;
 
 
+    /**
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\ShippingMethodsCountriesTriggers", mappedBy="shippingMethodCountry")
+     */
+    private $triggers;
 
     /**
      * @var boolean
@@ -249,5 +254,46 @@ class ShippingMethodsCountries
     public function getPriority()
     {
         return $this->priority;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->triggers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add trigger
+     *
+     * @param \LilWorks\StoreBundle\Entity\ShippingMethodsCountriesTriggers $trigger
+     *
+     * @return ShippingMethodsCountries
+     */
+    public function addTrigger(\LilWorks\StoreBundle\Entity\ShippingMethodsCountriesTriggers $trigger)
+    {
+        $this->triggers[] = $trigger;
+
+        return $this;
+    }
+
+    /**
+     * Remove trigger
+     *
+     * @param \LilWorks\StoreBundle\Entity\ShippingMethodsCountriesTriggers $trigger
+     */
+    public function removeTrigger(\LilWorks\StoreBundle\Entity\ShippingMethodsCountriesTriggers $trigger)
+    {
+        $this->triggers->removeElement($trigger);
+    }
+
+    /**
+     * Get triggers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTriggers()
+    {
+        return $this->triggers;
     }
 }

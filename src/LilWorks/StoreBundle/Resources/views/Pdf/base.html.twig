@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    {% if base_dir is defined %}
+        <link rel="stylesheet"
+              href="{{ base_dir ~ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+    {% else %}
+        <link rel="stylesheet"
+              href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+    {% endif %}
+</head>
+<body>
+
+
+
+{% block title %}
+{% endblock %}
+
+{% block date %}
+{% endblock %}
+
+{% block customer %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+
+</body>
+</html>

@@ -20,8 +20,10 @@ class Coupon
     public function preFlush()
     {
         $spent = 0;
-        foreach($this->getOrdersPaymentMethods() as $orderPaymentMethod)
-            $spent+=$orderPaymentMethod->getAmount();
+        if( count($this->getOrdersPaymentMethods())>0 ){
+            foreach($this->getOrdersPaymentMethods() as $orderPaymentMethod)
+                $spent+=$orderPaymentMethod->getAmount();
+        }
 
         if((!$this->splitable || $this->splitable==0) && count($this->getOrdersPaymentMethods())>0)
             $notValidForAmount = true;
@@ -63,10 +65,20 @@ class Coupon
     private $address;
 
     /**
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods", mappedBy="coupon",cascade={"persist"})
+     */
+    private $depositSalesPaymentMethods;
+    
+    /**
      * One Coupon has Many OrderPaymentMethod.
      * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\OrdersPaymentMethods", mappedBy="coupon",cascade={"persist"})
      */
     private $ordersPaymentMethods;
+
+    /**
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\ReturnsPaymentMethods", mappedBy="coupon",cascade={"persist"})
+     */
+    private $returnsPaymentMethods;
 
     /**
      * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Customer", inversedBy="coupons")
@@ -457,5 +469,73 @@ class Coupon
     public function getDescriptionInternal()
     {
         return $this->descriptionInternal;
+    }
+
+    /**
+     * Add returnsPaymentMethod
+     *
+     * @param \LilWorks\StoreBundle\Entity\ReturnsPaymentMethods $returnsPaymentMethod
+     *
+     * @return Coupon
+     */
+    public function addReturnsPaymentMethod(\LilWorks\StoreBundle\Entity\ReturnsPaymentMethods $returnsPaymentMethod)
+    {
+        $this->returnsPaymentMethods[] = $returnsPaymentMethod;
+
+        return $this;
+    }
+
+    /**
+     * Remove returnsPaymentMethod
+     *
+     * @param \LilWorks\StoreBundle\Entity\ReturnsPaymentMethods $returnsPaymentMethod
+     */
+    public function removeReturnsPaymentMethod(\LilWorks\StoreBundle\Entity\ReturnsPaymentMethods $returnsPaymentMethod)
+    {
+        $this->returnsPaymentMethods->removeElement($returnsPaymentMethod);
+    }
+
+    /**
+     * Get returnsPaymentMethods
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReturnsPaymentMethods()
+    {
+        return $this->returnsPaymentMethods;
+    }
+
+    /**
+     * Add depositSalesPaymentMethod
+     *
+     * @param \LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods $depositSalesPaymentMethod
+     *
+     * @return Coupon
+     */
+    public function addDepositSalesPaymentMethod(\LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods $depositSalesPaymentMethod)
+    {
+        $this->depositSalesPaymentMethods[] = $depositSalesPaymentMethod;
+
+        return $this;
+    }
+
+    /**
+     * Remove depositSalesPaymentMethod
+     *
+     * @param \LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods $depositSalesPaymentMethod
+     */
+    public function removeDepositSalesPaymentMethod(\LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods $depositSalesPaymentMethod)
+    {
+        $this->depositSalesPaymentMethods->removeElement($depositSalesPaymentMethod);
+    }
+
+    /**
+     * Get depositSalesPaymentMethods
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDepositSalesPaymentMethods()
+    {
+        return $this->depositSalesPaymentMethods;
     }
 }

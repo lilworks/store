@@ -78,6 +78,9 @@ class AppExtension  extends \Twig_Extension
     }
     public function formataddressFilter($address) {
 
+    if(is_null($address)){
+        return "";
+    }
 
         if($address->getName() && $address->getName() != ""){
             $name = "<span>".$address->getName()."</span>";

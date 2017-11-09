@@ -14,6 +14,40 @@ class ProductFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
+
+
+        $builder
+            ->add('name', Filters\TextFilterType::class,array(
+                'label'=>'storebundle.name'
+            ))
+            ->add('isPublished', Filters\BooleanFilterType::class,array(
+                'label'=>'storebundle.ispublished'
+            ))
+            ->add('isSecondHand', Filters\BooleanFilterType::class,array(
+                'label'=>'storebundle.issecondhand'
+            ))
+            ->add('isArchived', Filters\BooleanFilterType::class,array(
+                'label'=>'storebundle.isarchived'
+            ))
+            ->add('brand', Filters\EntityFilterType::class, array(
+                'label'=>'storebundle.brand',
+                'class'    =>  'LilWorksStoreBundle:Brand',
+                'choice_label' => function ($obj) { return   $obj->getName() ; },
+                'query_builder' => function (EntityRepository $er)  {
+                    return $er->createQueryBuilder('b')
+                        #->leftJoin('b.products','p')
+                        #->where('count(p) > 0')
+                        ->orderBy('b.name','asc')
+                        ;
+                },
+
+                #'attr' => array(
+                #    'class'=>'selectpicker',
+                #    'data-live-search'=>'true',
+                #    'data-actions-box'=>true,
+                #    'data-width'=>"300px"
+                #)
+            ));
         $builder->add('categories', Filters\CollectionAdapterFilterType::class, array(
             'label'=>'storebundle.category',
             'entry_type' => CategoriesFilterType::class,
@@ -28,39 +62,6 @@ class ProductFilterType extends AbstractType
 
             },
         ));
-
-        $builder
-            ->add('name', Filters\TextFilterType::class,array(
-                'label'=>'storebundle.name'
-            ))
-            ->add('isPublished', Filters\BooleanFilterType::class,array(
-                'label'=>'storebundle.ispublished'
-            ))
-            ->add('isSecondHand', Filters\BooleanFilterType::class,array(
-                'label'=>'storebundle.product.issecondhand'
-            ))
-            ->add('isArchived', Filters\BooleanFilterType::class,array(
-                'label'=>'storebundle.product.isarchived'
-            ))
-            ->add('brand', Filters\EntityFilterType::class, array(
-                'label'=>'storebundle.brand',
-                'class'    =>  'LilWorksStoreBundle:Brand',
-                'choice_label' => function ($obj) { return   $obj->getName() ; },
-                'query_builder' => function (EntityRepository $er)  {
-                    return $er->createQueryBuilder('b')
-                        #->leftJoin('b.products','p')
-                        #->where('count(p) > 0')
-                        ->orderBy('b.name','asc')
-                        ;
-                },
-                #'attr' => array(
-                #    'class'=>'selectpicker',
-                #    'data-live-search'=>'true',
-                #    'data-actions-box'=>true,
-                #    'data-width'=>"300px"
-                #)
-            ));
-
     }
 
     public function getBlockPrefix()

@@ -16,10 +16,10 @@ class PhoneNumberType extends AbstractType
     {
         $builder
             ->add('phonenumber',null,array(
-                'label'=>'lilworks.storebundle.phonenumber',
+                'label'=>'sitebundle.phonenumber',
             ))
             ->add('description',null,array(
-                'label'=>'lilworks.storebundle.description',
+                'label'=>'sitebundle.description',
             ))
         ;
     }

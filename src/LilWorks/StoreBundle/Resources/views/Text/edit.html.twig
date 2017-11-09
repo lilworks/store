@@ -17,7 +17,8 @@
     {% endblock %}
 
     <h1>
-        {% trans %}storebundle.text.edit{% endtrans %}
+        <i class="fa fa-font" aria-hidden="true"></i>
+        {{ 'storebundle.text.edit %name%'|trans({'%name%':text.name}) }}
     </h1>
 
     <div id="content_menu">

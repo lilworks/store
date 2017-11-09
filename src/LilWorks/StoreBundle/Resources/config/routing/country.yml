@@ -8,6 +8,11 @@ country_show:
     defaults: { _controller: "LilWorksStoreBundle:Country:show" }
     methods:  GET
 
+country_shipping_edit:
+    path:     /shippingmethod/{shippingmethod_country_id}/edit
+    defaults: { _controller: "LilWorksStoreBundle:Country:shippingMethod" }
+    methods:  [GET, POST]
+
 country_new:
     path:     /new
     defaults: { _controller: "LilWorksStoreBundle:Country:new" }

@@ -18,7 +18,7 @@ class PhoneNumberType extends AbstractType
                 'label'=>'sitebundle.phonenumber',
                 'required' => true
             ))
-            
+
             ->add('description',null,array(
                 'label'=>'sitebundle.description',
             ))

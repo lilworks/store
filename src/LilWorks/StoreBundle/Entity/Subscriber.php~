@@ -19,6 +19,9 @@ class Subscriber
      */
     public function preFlush()
     {
+        if($this->user)
+            $this->email = $this->user->getEmail();
+
         if($this->createdAt == null)
             $this->createdAt = new \DateTime();
 
@@ -33,13 +36,13 @@ class Subscriber
 
     /**
      * @var string
-     * @ORM\Column(name="email", type="string",length=255,nullable=false)
+     * @ORM\Column(name="email", type="string",length=255, unique=true,nullable=true)
      */
     private $email;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id",nullable=true)
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", inversedBy="subscriber")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id" , nullable=true)
      */
     private $user;
 

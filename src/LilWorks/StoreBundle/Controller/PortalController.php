@@ -16,12 +16,9 @@ class PortalController extends Controller
 
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.portal.index'));
 
+        $this->get('store.setSeo')->setTitle('storebundle.title.portal',array(),'storebundle.prefix.store');
         return $this->render('LilWorksStoreBundle:Portal:index.html.twig', array(
             'date'=>new \DateTime()
         ));
@@ -32,9 +29,7 @@ class PortalController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.portal.user'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.portal',array(),'storebundle.prefix.users');
 
         return $this->render('LilWorksStoreBundle:Portal:user.html.twig', array(
             "customersAll"=>$em->getRepository("LilWorksStoreBundle:Customer")->findAll(),
@@ -49,9 +44,7 @@ class PortalController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.portal.document'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.portal',array(),'storebundle.prefix.documents');
 
         return $this->render('LilWorksStoreBundle:Portal:document.html.twig', array(
             "ordersAll"=>$em->getRepository("LilWorksStoreBundle:Order")->findAll(),
@@ -65,9 +58,7 @@ class PortalController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.portal.product'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.portal',array(),'storebundle.prefix.products');
 
         return $this->render('LilWorksStoreBundle:Portal:product.html.twig', array(
             "productsAll"=>$em->getRepository("LilWorksStoreBundle:Product")->findAll(),
@@ -89,9 +80,8 @@ class PortalController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.portal.shipping'));
+
+        $this->get('store.setSeo')->setTitle('storebundle.title.portal',array(),'storebundle.prefix.shippingmethods');
 
         return $this->render('LilWorksStoreBundle:Portal:shipping.html.twig', array(
             "shippingsAll"=>$em->getRepository("LilWorksStoreBundle:ShippingMethod")->findAll(),
@@ -103,9 +93,7 @@ class PortalController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.portal.payment'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.portal',array(),'storebundle.prefix.paymentmethods');
 
         return $this->render('LilWorksStoreBundle:Portal:payment.html.twig', array(
             "paymentsAll"=>$em->getRepository("LilWorksStoreBundle:PaymentMethod")->findAll(),
@@ -123,9 +111,7 @@ class PortalController extends Controller
         $context = $this->getParameter('context');
         $mode = $this->getParameter('mode');
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.portal.config'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.portal',array(),'storebundle.prefix.configurations');
 
         return $this->render('LilWorksStoreBundle:Portal:config.html.twig', array(
             'context'=>$context,

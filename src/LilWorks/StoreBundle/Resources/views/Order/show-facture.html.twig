@@ -2,29 +2,16 @@
 
 {% block body %}
     <h1>
+        <i class="fa fa-file" aria-hidden="true"></i>
         {% trans %}storebundle.order.facture.show{% endtrans %}
         <span class="badge badge-default">{{ order.reference }}</span>
     </h1>
 
 
-    <div class="btn-group btn-group-sm lw-storebundle-action" role="group" aria-label="actions">
-        <a href="{{ path('order_index') }}" class="btn btn-info btn-sm">
-            <i class="fa fa-list" aria-hidden="true"></i> {% trans %}storebundle.link.list{% endtrans %}
-        </a>
-        <a href="{{ path('order_new') }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus" aria-hidden="true"></i> {% trans %}storebundle.link.new{% endtrans %}
-        </a>
-        <a href="{{ path('order_edit', { order_id: order.id }) }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}storebundle.link.edit{% endtrans %}
-        </a>
-        <a href="{{ path('order_pdf',{order_id:order.id}) }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {% trans %}storebundle.link.pdf{% endtrans %}
-        </a>
-        <a href="{{ path('order_delete', { order_id: order.id }) }}"  class="btn btn-danger btn-sm btn-delete" >
-            <i class="fa fa-trash" aria-hidden="true"></i> {% trans %}storebundle.link.delete{% endtrans %}
-        </a>
+    <div id="content_menu">
+        {% set menu = knp_menu_get('AppBundle:StoreBuilder:build', ['storebundle.menu.cat.document.portal','storebundle.menu.order'] , {context: 'content'}) %}
+        {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
     </div>
-
 
     <table class="table table-striped">
         <tbody>
@@ -40,17 +27,6 @@
                 <th>{% trans %}storebundle.updatedat{% endtrans %}</th>
                 <td>{% if order.updatedAt %}{{ order.updatedAt|date('Y-m-d H:i') }}{% endif %}</td>
             </tr>
-            <tr>
-                <th>{% trans %}storebundle.order.seller{% endtrans %}</th>
-                <td>
-                    {% if order.userAsSeller %}
-                        {{ order.userAsSeller.username }}
-                    {% else %}
-                    <i class="fa fa-circle-thin" style="color: red;"></i>
-                    {% endif %}
-                </td>
-            </tr>
-
             <tr>
                 <th>{% trans %}storebundle.orderstep{% endtrans %}</th>
                 <td>
@@ -106,7 +82,7 @@
             </tr>
             <tr>
                 <th>
-                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{id:order.id})~'#paymentmethods' }}">
+                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{order_id:order.id})~'#paymentmethods' }}">
                         <i class="fa fa-pencil"></i>{% trans %}payments{% endtrans %}
                     </a>
                 </th>
@@ -134,7 +110,7 @@
             </tr>
             <tr>
                 <th>
-                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{id:order.id})~'#shippingmethods' }}">
+                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{order_id:order.id})~'#shippingmethods' }}">
                         <i class="fa fa-pencil"></i>{% trans %}storebundle.shippingmethods{% endtrans %}
                     </a>
                 </th>
@@ -159,8 +135,8 @@
 
             <tr>
                 <th>
-                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{id:order.id})~'#products' }}">
-                        <i class="fa fa-pencil"></i>{% trans %}products{% endtrans %}
+                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{order_id:order.id})~'#products' }}">
+                        <i class="fa fa-pencil"></i>{% trans %}storebundle.product{% endtrans %}
                     </a>
                 </th>
                 <td>
@@ -168,6 +144,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>{% trans %}storebundle.action{% endtrans %}</th>
                                 <th>{% trans %}storebundle.id{% endtrans %}</th>
                                 <th>{% trans %}storebundle.product{% endtrans %}</th>
                                 <th>{% trans %}storebundle.shippingmethod{% endtrans %}</th>
@@ -179,7 +156,23 @@
                         </thead>
                         <tbody>
                             {% for product in order.ordersProducts %}
+                                {% set return = product.orderProductReturn %}
                                 <tr>
+                                    <td>
+                                        {% if return is null and returnsAllowed %}
+                                            <a role="button" class="btn btn-sm btn-warning btn-secondary" href="{{ path('orderproductreturn_new',{orderproduct_id:product.id}) }}">
+                                                <i class="fa fa-hand-scissors-o" aria-hidden="true"></i>
+                                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                                {% trans %}storebundle.product.return{% endtrans %}
+                                            </a>
+                                        {% elseif return  %}
+                                            <a role="button" class="btn btn-sm btn-info btn-secondary" href="{{ path('orderproductreturn_show',{orderproductreturn_id:return.id}) }}">
+                                                <i class="fa fa-hand-scissors-o" aria-hidden="true"></i>
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                {% trans %}storebundle.product.return{% endtrans %}
+                                            </a>
+                                        {% endif %}
+                                    </td>
                                     <td>{{ product.product.id }}</td>
                                     <td>{{ product.name }}
                                         {% if product.serialNumber %}

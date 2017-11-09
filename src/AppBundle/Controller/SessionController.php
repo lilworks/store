@@ -6,6 +6,8 @@ use AppBundle\Entity\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Filter\SessionFilterType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * Session controller.
@@ -26,9 +28,8 @@ class SessionController extends Controller
             $filterBuilder = $this->getDoctrine()->getManager()
                 ->getRepository('AppBundle:Session')
                 ->createQueryBuilder('s')
-                ->join('s.basket','b')
+                ->leftJoin('s.basket','b')
             ;
-
 
             $qb = $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($formFilter, $filterBuilder);
 
@@ -36,7 +37,7 @@ class SessionController extends Controller
             $qb = $this->getDoctrine()->getManager()
                 ->getRepository('AppBundle:Session')
                 ->createQueryBuilder('s')
-                ->join('s.basket','b')
+                ->leftJoin('s.basket','b')
 
             ;
         }
@@ -54,15 +55,40 @@ class SessionController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a session entity.
-     *
-     */
-    public function showAction(Session $session)
+    public function cleanAction()
     {
+        $date = new \DateTime();
 
-        return $this->render('AppBundle:Session:show.html.twig', array(
-            'session' => $session,
-        ));
+
+        foreach( $this->getDoctrine()
+            ->getManager()
+            ->createQuery('SELECT s FROM AppBundle:Session s WHERE ( s.time + s.lifetime) < :now')
+            ->setParameter('now',$date->getTimestamp() )
+            ->getResult() as $session ){
+           $this->getDoctrine()->getManager()->remove($session);
+
+        }
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('session_index');
+    }
+    /**
+     * @ParamConverter("session", options={"mapping": {"session_id"   : "id"}})
+     */
+    public function deleteAction(Request $request, Session $session)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($session);
+        $em->flush();
+
+        $referer = $request->headers->get('referer');
+        if ( !$referer || is_null($referer) ) {
+            return $this->redirectToRoute('session_index');
+        } else {
+            return $this->redirect($referer);
+        }
+
     }
 }

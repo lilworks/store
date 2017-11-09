@@ -35,9 +35,7 @@ class PaymentMethodController extends Controller
             10
         );
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.paymentmethod.index '));
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.paymentmethods');
 
         return $this->render('LilWorksStoreBundle:PaymentMethod:index.html.twig', array(
             'pagination' => $pagination,
@@ -63,10 +61,7 @@ class PaymentMethodController extends Controller
             return $this->redirectToRoute('paymentmethod_show', array('paymentmethod_id' => $paymentMethod->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.paymentmethod.new '));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.paymentmethods');
 
         return $this->render('LilWorksStoreBundle:PaymentMethod:new.html.twig', array(
             'paymentMethod' => $paymentMethod,
@@ -81,9 +76,8 @@ class PaymentMethodController extends Controller
     {
         $simpleLiveEditor    = $this->get('app.simpleLiveEditor');
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.paymentmethod.show %name%',array('%name%'=>$paymentMethod->getName())));
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array('%name%'=>$paymentMethod->getName()),'storebundle.prefix.paymentmethods');
+
 
         return $this->render('LilWorksStoreBundle:PaymentMethod:show.html.twig', array(
             'paymentMethod' => $paymentMethod,
@@ -105,9 +99,7 @@ class PaymentMethodController extends Controller
             return $this->redirectToRoute('paymentmethod_edit', array('paymentmethod_id' => $paymentMethod->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.paymentmethod.edit %name%',array('%name%'=>$paymentMethod->getName())));
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array('%name%'=>$paymentMethod->getName()),'storebundle.prefix.paymentmethods');
 
 
         return $this->render('LilWorksStoreBundle:PaymentMethod:edit.html.twig', array(

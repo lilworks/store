@@ -18,12 +18,18 @@ class TagType extends AbstractType
         $builder
 
             ->add('name',null,array(
-                'label'=>'lilworks.storebundle.name',
+                'label'=>'storebundle.name',
             ))
             ->add('products', EntityType::class, array(
-                'label'=>'lilworks.storebundle.products',
+                'label'=>'storebundle.products',
                 'class'    => 'LilWorksStoreBundle:Product' ,
-                'choice_label' => function ($obj) { return    $obj->getBrand()->getName() ." ". $obj->getName() ; },
+                'choice_label' => function ($obj) {
+                    $strCat = "";
+                    foreach($obj->getCategories() as $category){
+                        $strCat.= " " . $category->getName();
+                    }
+                    return  $obj->getBrand()->getName() . " " . $obj->getName() . " ($strCat )" ;
+                },
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
                         ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = p.brand')
@@ -52,6 +58,7 @@ class TagType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'LilWorks\StoreBundle\Entity\Tag',
+            'csrf_protection' => false,
         ));
     }
 

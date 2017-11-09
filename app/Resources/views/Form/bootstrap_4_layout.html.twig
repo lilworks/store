@@ -2,6 +2,8 @@
 
 {# Widgets #}
 
+
+
 {% block form_widget_simple -%}
     {% if type is not defined or 'file' != type %}
         {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) -%}
@@ -181,6 +183,11 @@
     <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-danger{% endif %}">
         {{- form_label(form) -}}
         {{- form_widget(form) -}}
+        {% if form.vars['help'] is defined %}
+            <p class="form-text text-muted">
+                {{ form.vars.help|trans }}
+            </p>
+        {% endif %}
         {{- form_errors(form) -}}
     </div>
 {%- endblock form_row %}

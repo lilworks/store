@@ -11,6 +11,7 @@
     {% endblock %}
 
     <h1>
+        <i class="fa fa-truck" aria-hidden="true"></i>
         {% trans %}storebundle.shippingmethod.list{% endtrans %}
     </h1>
 
@@ -43,7 +44,7 @@
                 <th>{% trans %}storebundle.ispublished{% endtrans %}</th>
                 <th>{% trans %}storebundle.name{% endtrans %}</th>
                 <th>{% trans %}storebundle.price{% endtrans %}</th>
-                <th>{% trans %}storebundle.shippingmethod.freetrigger{% endtrans %}</th>
+                <th>{% trans %}storebundle.triggers{% endtrans %}</th>
                 <th>{{ knp_pagination_sortable(pagination,  'storebundle.shippingmethod.priority'|trans, 'p.priority') }}</th>
                 <th>{% trans %}storebundle.shippingmethod.delay{% endtrans %}</th>
                 <th>{% trans %}storebundle.country{% endtrans %}</th>
@@ -75,8 +76,13 @@
                     {{ simple_live_editor.getCol(formType,entityName,'price',shippingMethod)|raw }}
                 </td>
                 <td>
-                    {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\ShippingMethod\\FreeTriggerType' %}
-                    {{ simple_live_editor.getCol(formType,entityName,'freeTrigger',shippingMethod)|raw }}
+                    <ul class="list list-unstyled">
+                        {% for trigger in shippingMethod.triggers %}
+                            <li>
+                                {{ trigger.trigger|price }} -> {{ trigger.price|price }}
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </td>
                 <td>
                     {% set formType = 'LilWorks\\StoreBundle\\Form\\Ajax\\ShippingMethod\\PriorityType' %}
@@ -89,7 +95,7 @@
                 <td>
                     {% if shippingMethod.shippingmethodsCountries|length > 0  %}
                         {% for shippingmethodCountrie in shippingMethod.shippingmethodsCountries %}
-                            <a href="{{ path('country_show',{id: shippingmethodCountrie.country.id }) }}">
+                            <a href="{{ path('country_show',{country_id: shippingmethodCountrie.country.id }) }}">
                                 <img src="{{ asset('flags/' ~ shippingmethodCountrie.country.flag  )  }}" />
                             </a>
                         {% endfor %}

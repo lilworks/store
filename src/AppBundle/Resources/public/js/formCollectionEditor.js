@@ -60,7 +60,8 @@ var FCE = {
 
         // increase the index with one for the next item
         $collectionHolder.data('index', index + 1);
-        alert($collectionHolder.data('index'));
+
+
         // Display the form in the page in an li, before the "Add a tag" link li
         var $newFormLi = $('<li class="'+this.liClass+'"></li>').append(newForm);
 

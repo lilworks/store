@@ -10,9 +10,27 @@ namespace LilWorks\StoreBundle\Entity\Repository;
  */
 class CouponRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    protected $context;
+    protected $mode;
+
+    /**
+     * Allow limit to be set by parameter, injected by service definition
+     * @param $context
+     * @param $mode
+     */
+    public function setParams($context,$mode) {
+        $this->context = $context;
+        $this->mode = $mode;
+    }
+
+
     public function getNextReference($coupon){
 
         $prefix = $this->getEntityManager()->getRepository("LilWorksStoreBundle:PaymentMethod")->findOneByTag("COUPON")->getPrefix();
+        if($this->context == "online" && $this->mode == "slave")
+            $prefix.="I";
+
         if(!$prefix)
             return null;
 
@@ -36,7 +54,7 @@ class CouponRepository extends \Doctrine\ORM\EntityRepository
             $nextIndex = 1;
         }
 
-        $zeroLeft = 4 - count($nextIndex);
+        $zeroLeft = 5 - strlen(strval($nextIndex));
         for($i=0;$i<$zeroLeft;$i++){
             $nextIndex =  "0" . $nextIndex;
         }

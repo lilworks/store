@@ -22,19 +22,6 @@ class SubscriberController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $rowsLiveEditor      = $this->get('app.rowsEditor')->setActions('LilWorksStoreBundle:Subscriber',array(
-            "delete"=> [ array('products','==',0) ],
-            "empty"=>[ array('products', 'products','>',0) ],
-            "cols"=>array(
-                "isPublished"=> array('boolean', "cond"=>array('products','>',0)),
-            )
-        ));
-
-
-        if ($request->isXMLHttpRequest()) {
-            return new Response($rowsLiveEditor->doTheJob());
-        }
-
 
         $formFilter = $this->get('form.factory')->create(SubscriberFilterType::class);
 
@@ -45,7 +32,8 @@ class SubscriberController extends Controller
             // initialize a query builder
             $filterBuilder = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('LilWorksStoreBundle:Subscriber')
-                ->createQueryBuilder('n')
+                ->createQueryBuilder('s')
+                ->leftJoin('s.user','u')
             ;
 
             // build the query from the given form object
@@ -54,7 +42,8 @@ class SubscriberController extends Controller
         }else{
             $qb = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('LilWorksStoreBundle:Subscriber')
-                ->createQueryBuilder('n')
+                ->createQueryBuilder('s')
+                ->leftJoin('s.user','u')
             ;
         }
 
@@ -72,8 +61,7 @@ class SubscriberController extends Controller
 
         return $this->render('LilWorksStoreBundle:Subscriber:index.html.twig', array(
             'pagination' => $pagination,
-            'formFilter'=>$formFilter->createView(),
-            'rowsLiveEditor'=>$rowsLiveEditor
+            'formFilter'=>$formFilter->createView()
         ));
     }
 
@@ -90,11 +78,6 @@ class SubscriberController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            foreach($subscriber->getProducts() as $product){
-                $product->addSubscriber($subscriber);
-                $em->persist($product);
-            }
-
             $em->persist($subscriber);
             $em->flush();
 
@@ -108,22 +91,6 @@ class SubscriberController extends Controller
         return $this->render('LilWorksStoreBundle:Subscriber:new.html.twig', array(
             'subscriber' => $subscriber,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * @ParamConverter("subscriber", options={"mapping": {"subscriber_id"   : "id"}})
-     */
-    public function showAction(Subscriber $subscriber)
-    {
-
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.subscriber.show %name%',array('%name%'=>$subscriber->getName())));
-
-
-        return $this->render('LilWorksStoreBundle:Subscriber:show.html.twig', array(
-            'subscriber' => $subscriber
         ));
     }
 

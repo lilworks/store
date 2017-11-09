@@ -42,10 +42,12 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     globals:
-        mode: %mode%
-        context: %context%
+        mode: mode%
+        context: context%
         lilworks_store_param_loader: '@lilworks.store.paramLoader'
         js_vars: '@app.js_vars'
+        store_flash: "@store.flash"
+        site_flash: "@site.flash"
     form_themes:
          - Form/bootstrap_4_layout.html.twig
          - LexikFormFilterBundle:Form:form_div_layout.html.twig
@@ -97,7 +99,9 @@ doctrine:
                 dql:
                    string_functions:
                        GROUP_CONCAT: AppBundle\DQL\GroupConcatFunction
+                       SUBSTRING_INDEX: DoctrineExtensions\Query\Mysql\SubstringIndex
                        md5: DoctrineExtensions\Query\Mysql\Md5
+
                 connection: default
                 mappings:
                     LexikTranslationBundle: ~
@@ -258,11 +262,16 @@ knp_snappy:
 
 lexik_translation:
     fallback_locale: [fr]         # (required) default locale(s) to use
-    managed_locales: [fr, en] # (required) locales that the bundle has to manage
+    managed_locales: [fr]   # (required) locales that the bundle has to manage
+    auto_cache_clean: false
     storage:
         type: orm                  # orm | mongodb | propel
         #object_manager: something  # The name of the entity / document manager which uses different connection (see: http://symfony.com/doc/current/cookbook/doctrine/multiple_entity_managers.html)
                                        # When using propel, this can be used to specify the propel connection name
+#    dev_tools:
+#        enable: true
+#        create_missing: true
+#        file_format: yml
 
 vich_uploader:
     db_driver: orm # or mongodb or propel or phpcr
@@ -324,7 +333,7 @@ vich_uploader:
 
 sonata_seo:
     page:
-        title: ferré musique
+        title: Ferré Musique
         metas:
             name:
                 description: le spécialiste de la guitare à Grenoble depuis 1976

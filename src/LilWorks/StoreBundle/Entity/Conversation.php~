@@ -22,7 +22,7 @@ class Conversation
     {
         $unreaded = 0;
         foreach($this->getMessages() as $message){
-            if( !$message->isResponse && is_null($message->getReadedAt())){
+            if( $message->getIsResponse() !=1  && is_null($message->getReadedAt())){
                 $unreaded+=1;
             }
         }
@@ -63,8 +63,8 @@ class Conversation
     private $sendmail;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id" , nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="conversations")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
      */
     private $user;
 
@@ -85,6 +85,7 @@ class Conversation
 
     /**
      * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\ConversationMessage", mappedBy="conversation",cascade={"persist","remove"})
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $messages;
 

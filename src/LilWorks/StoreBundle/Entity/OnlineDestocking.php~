@@ -47,7 +47,12 @@ class OnlineDestocking
 
 
 
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="destocking", type="integer",nullable=true)
+     */
+    private $destocking;
     
 
     /**
@@ -106,5 +111,29 @@ class OnlineDestocking
     public function getOrderProduct()
     {
         return $this->orderProduct;
+    }
+
+    /**
+     * Set destocking
+     *
+     * @param integer $destocking
+     *
+     * @return OnlineDestocking
+     */
+    public function setDestocking($destocking)
+    {
+        $this->destocking = $destocking;
+
+        return $this;
+    }
+
+    /**
+     * Get destocking
+     *
+     * @return integer
+     */
+    public function getDestocking()
+    {
+        return $this->destocking;
     }
 }

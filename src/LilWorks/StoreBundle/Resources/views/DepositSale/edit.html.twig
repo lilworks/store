@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.min.css') }}">
+    {% endblock %}
 
     {% block javascripts %}
         {{ parent() }}
         <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/tinymce/langs.fr_FR.js') }}"></script>
+        <script src="{{ asset('assets/vendor/popper.js/dist/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js') }}" charset="UTF-8"></script>
         <script>
 
             $( document ).ready(function() {
+                MT.init('depositSaleTab');
+                FCE.init('depositSalesPaymentMethods','depositSalesPaymentMethods list-inline','depositSalePaymentMethod list-inline-item');
                 initTinyMce.text('.editor-text',['{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}','{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']);
+                $('.datepicker').datepicker({
+                    language:'fr',
+                    format: "dd/mm/yyyy"
+                });
             });
+
         </script>
     {% endblock %}
     <h1>
-        {{ 'appbundle.depositsale.edit %reference%'|trans({'%reference%': depositSale.reference }) }}
+        <i class="fa fa-gavel" aria-hidden="true"></i>
+        {{ 'appbundle.depositsale.edit %reference%'|trans({'%reference%':depositSale.reference }) }}
     </h1>
 
 
@@ -27,47 +42,76 @@
 
     <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
 
-    <div class="row">
-        <div class="col col-lg-4">
-            {{ form_row(form.status) }}
+
+    <ul class="nav nav-tabs" role="tablist" id="depositSaleTab">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link  {% if depositSale.status.tag !="DONE" %}disabled{% endif %}" data-toggle="tab" href="#paymentmethods" role="tab">{% trans %}storebundle.paymentmethods{% endtrans %}</a>
+        </li>
+    </ul>
+
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="general" role="tabpanel">
+            <div class="row">
+                <div class="col col-lg-4">
+                    {{ form_row(form.status) }}
+                </div>
+                <div class="col col-lg-4">
+                    {{ form_row(form.customer) }}
+                    {% if form.address is defined %}
+                        {{ form_row(form.address) }}
+                    {% endif %}
+                    {% if form.coupon is defined %}
+                        {{ form_row(form.coupon) }}
+                    {% endif %}
+                </div>
+                <div class="col col-lg-4">
+                    {{ form_row(form.product) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-6">
+                    {{ form_row(form.deposedAt) }}
+                </div>
+                <div class="col col-lg-6">
+                    {{ form_row(form.selledAt) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-6">
+                    {{ form_row(form.priceBuying) }}
+                </div>
+                <div class="col col-lg-6">
+                    {{ form_row(form.priceSelling) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-6" >
+                    {{ form_row(form.description) }}
+                </div>
+                <div class="col col-lg-6" >
+                    {{ form_row(form.descriptionInternal) }}
+                </div>
+            </div>
         </div>
-        <div class="col col-lg-4">
-            {{ form_row(form.customer) }}
-            {% if form.address %}
-                {{ form_row(form.address) }}
+        <div class="tab-pane" id="paymentmethods" role="tabpanel">
+            {% if form.depositSalesPaymentMethods is defined %}
+                <ul class="depositSalesPaymentMethods list-inline " id="target" data-prototype="{{ form_widget(form.depositSalesPaymentMethods.vars.prototype)|e('html_attr') }}">
+                    {% for depositSalePaymentMethod in form.depositSalesPaymentMethods %}
+                        <li class="depositSalePaymentMethod list-inline-item">
+                            {{ depositSalePaymentMethod.vars.value.payedAt|date }}
+                            {{ form_row(depositSalePaymentMethod) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {{ form_widget(form.depositSalesPaymentMethods) }}
             {% endif %}
-            {% if form.coupon %}
-                {{ form_row(form.coupon) }}
-            {% endif %}
-        </div>
-        <div class="col col-lg-4">
-            {{ form_row(form.product) }}
         </div>
     </div>
-    <div class="row">
-        <div class="col col-lg-6">
-            {{ form_row(form.deposedAt) }}
-        </div>
-        <div class="col col-lg-6">
-            {{ form_row(form.selledAt) }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col col-lg-6">
-            {{ form_row(form.priceBuying) }}
-        </div>
-        <div class="col col-lg-6">
-            {{ form_row(form.priceSelling) }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col col-lg-6" >
-            {{ form_row(form.description) }}
-        </div>
-        <div class="col col-lg-6" >
-            {{ form_row(form.descriptionInternal) }}
-        </div>
-    </div>
+
 
     <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
     {{ form_end(form) }}

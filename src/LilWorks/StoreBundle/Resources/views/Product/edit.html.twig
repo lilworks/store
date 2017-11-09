@@ -11,13 +11,15 @@
         $( document ).ready(function() {
             initTinyMce.text('.editor-text',['{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}','{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']);
             FCE.init('pictures','pictures list-inline','picture list-inline-item');
+            MT.init('productTab');
         });
     </script>
     {% endblock %}
 
 
     <h1>
-        {% trans %}storebundle.product.edit{% endtrans %}
+        <i class="fa fa-cube" aria-hidden="true"></i>
+        {{ 'storebundle.product.edit %name%'|trans({'%name%':product.name}) }}
     </h1>
 
     <div id="content_menu">
@@ -30,7 +32,7 @@
 
     <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />
 
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs" role="tablist" id="productTab">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
         </li>

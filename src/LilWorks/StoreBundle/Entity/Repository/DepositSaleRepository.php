@@ -34,7 +34,7 @@ class DepositSaleRepository extends \Doctrine\ORM\EntityRepository
             $nextIndex = 1;
         }
 
-        $zeroLeft = 4 - count($nextIndex);
+        $zeroLeft = 5 - strlen(strval($nextIndex));
         for($i=0;$i<$zeroLeft;$i++){
             $nextIndex =  "0" . $nextIndex;
         }

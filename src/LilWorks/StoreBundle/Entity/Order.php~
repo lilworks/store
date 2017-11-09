@@ -30,8 +30,9 @@ class Order
         else
             $this->updatedAt= new \DateTime();
 
-    }
 
+    }
+/*
     public function tot(){
         $tot=0;
 
@@ -58,6 +59,7 @@ class Order
 
         return $payed;
     }
+*/
     /**
      * @ORM\Id
      * @ORM\Column(type="integer",name="id")

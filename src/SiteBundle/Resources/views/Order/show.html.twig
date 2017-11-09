@@ -1,0 +1,114 @@
+{% extends 'SiteBundle:Customer:base.html.twig' %}
+{% block customer %}
+
+
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        <i class="fa fa-handshake-o" aria-hidden="true"></i>
+        {{ 'sitebundle.order.show %reference%'|trans({'%reference%':order.reference}) }}
+    </div>
+    <div class="card-block">
+
+        <div class="card-text">
+            {% set menuItem = knp_menu_get('usercustomer', ['sitebundle.menu.customer.orders']) %}
+            {{ knp_menu_render(['usercustomer', 'sitebundle.menu.customer.orders'],{template : 'Menu/userCustomerMenu.html.twig'}) }}
+        </div>
+
+        <div  class="card-text">
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{% trans %}sitebundle.createdat{% endtrans %}</th>
+            <th>{% trans %}sitebundle.updatedat{% endtrans %}</th>
+            <th>{% trans %}sitebundle.reference{% endtrans %}</th>
+            <th>{% trans %}sitebundle.tot{% endtrans %}</th>
+            <th>{% trans %}sitebundle.payed{% endtrans %}</th>
+            <th>{% trans %}sitebundle.products{% endtrans %}</th>
+            <th>{% trans %}sitebundle.ordersteps{% endtrans %}</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    {{ order.createdAt|date('d/m/Y H:i') }}
+                </td>
+
+                <td>{{ order.updatedAt|date('d/m/Y H:i') }}</td>
+                <td>{{ order.reference }}</td>
+                <td>{{ order.tot|price }}</td>
+                <td>
+                    {% if order.payed == order.tot %}
+                        <span style="color: green;">{{ order.payed|price }}</span>
+                    {% else %}
+                        <span style="color: red;">{{ order.payed|price }}</span>
+                    {% endif %}
+                </td>
+                <td>{{ order.ordersProducts|length }}</td>
+                <td>
+                    {% if order.ordersOrderSteps|length > 0%}
+                        {{ order.ordersOrderSteps[0].orderStep.name }}
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+        </div>
+        <div  class="card-text">
+
+
+            <table class="table table-striped">
+
+                <thead>
+                <th>{% trans %}sitebundle.product{% endtrans %}</th>
+                <th>{% trans %}sitebundle.quantity{% endtrans %}</th>
+                <th>{% trans %}sitebundle.priceunity{% endtrans %}</th>
+                <th>{% trans %}sitebundle.producttot{% endtrans %}</th>
+                </thead>
+
+                <tbody>
+                {% for orderProduct in order.ordersProducts %}
+                    <tr>
+                        <td>
+                            {% if orderProduct.product.pictures[0].pictureName is defined %}
+                                <img src="{{ asset('product/'~orderProduct.product.pictures[0].pictureName) | imagine_filter('mini') }}" />
+                            {% endif %}
+                            {{ orderProduct.product.brand.name }} {{ orderProduct.product.name }}
+
+                            {% if orderProduct.product.isSecondHand == 1 %}
+                                <span class="alert alert-danger btn-sm" role="alert">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    {% trans %}sitebundle.issecondhand{% endtrans %}
+                        </span>
+                            {% endif %}
+                            {{ orderProduct.product.warrantiesOnline|warranties|raw }}
+                        </td>
+                        <td>
+                            {{ orderProduct.quantity }}
+                        </td>
+                        <td>
+                            {{ orderProduct.price|price }} <br>
+                            {{ orderProduct.taxes|taxes|raw }}
+                        </td>
+                        <td>{{ (orderProduct.product.priceOnline * orderProduct.quantity)|price }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

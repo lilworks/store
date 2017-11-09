@@ -14,6 +14,22 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class AjaxController extends Controller
 {
+
+    public function memorizedTabAction(Request $request){
+        $session = $this->get('session');
+        if($session->get('memorizedTabs/'.$request->request->get('tab'))){
+            return new Response($session->get('memorizedTabs/'.$request->request->get('tab')));
+        }
+        return new Response();
+    }
+
+    public function memorizeTabAction(Request $request){
+        $session = $this->get('session');
+        $session->set('memorizedTabs/'.$request->request->get('tab'),$request->request->get('target'));
+        return new Response();
+    }
+
+
     public function postAcceptorAction(Request $request){
         /*******************************************************
          * Only these origins will be allowed to upload images *

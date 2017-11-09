@@ -33,7 +33,7 @@ class Text
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\TextBackup", mappedBy="originalText",cascade={"remove"} )
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\TextBackup", mappedBy="originalText",cascade={"persist","remove"} )
      * @ORM\OrderBy({ "updatedAt" = "DESC"})
      */
     private $backups;

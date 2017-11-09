@@ -1,74 +1,65 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="UTF-8">
+{% extends 'LilWorksStoreBundle:Pdf:base.html.twig' %}
 
-    {% if base_dir is defined %}
-        <link rel="stylesheet"
-              href="{{ base_dir ~ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-    {% else %}
-        <link rel="stylesheet"
-              href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-    {% endif %}
-
-</head>
-<body>
+{% block title %}
+    <h2>{{ 'storebundle.coupon.justify'|trans }}: {{ coupon.reference }}</h2>
+{% endblock %}
 
 
-<h2>facture d'avoir: {{ coupon.reference }}</h2>
+{% block customer %}
+    <div style="text-align: right">
+        {{ coupon.customer.firstName }} {{ coupon.customer.lastName }} {{ coupon.customer.companyName }}
+        {% if coupon.address is defined %}
+            <p>
+                {{ coupon.address|formataddress }}
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}
 
+{% block date %}
+{% endblock %}
 
-<div style="text-align: right">
-    {{ coupon.customer.firstName }} {{ coupon.customer.lastName }} {{ coupon.customer.companyName }}
-    <p>{{ coupon.address|addressInline }}</p>
-</div>
+{% block content %}
+    <table class="table table-striped">
+        <tbody>
 
+        <tr>
+            <th>{% trans %}storebundle.coupon.validity{% endtrans %}</th>
+            <td>{{ coupon.validity|date }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}storebundle.coupon.initamount{% endtrans %}</th>
+            <td>{{ coupon.amount|price }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}storebundle.coupon.restamount{% endtrans %}</th>
+            <td>{{ coupon.getAmountAvailable|price }}</td>
+        </tr>
 
-<table class="table table-striped">
-    <tbody>
+        <tr>
+            <th>{% trans %}storebundle.coupon.isactive{% endtrans %}</th>
+            <td>{{ coupon.isActive|boolean|raw }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}storebundle.coupon.splitable{% endtrans %}</th>
+            <td>{{ coupon.splitable|boolean|raw }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}storebundle.coupon.availableonline{% endtrans %}</th>
+            <td>{{ coupon.availableOnline|boolean|raw }}</td>
+        </tr>
+        {% if coupon.ordersPaymentMethods|length > 0 %}
+        <tr>
 
-    <tr>
-        <th>{% trans %}storebundle.coupon.validity{% endtrans %}</th>
-        <td>{{ coupon.validity|date }}</td>
-    </tr>
-
-    <tr>
-        <th>{% trans %}storebundle.coupon.initamount{% endtrans %}</th>
-        <td>{{ coupon.amount|price }}</td>
-    </tr>
-    <tr>
-        <th>{% trans %}storebundle.coupon.restamount{% endtrans %}</th>
-        <td>{{ coupon.getAmountAvailable|price }}</td>
-    </tr>
-
-    <tr>
-        <th>{% trans %}storebundle.coupon.isactive{% endtrans %}</th>
-        <td>{{ coupon.isActive|boolean|raw }}</td>
-    </tr>
-    <tr>
-        <th>{% trans %}storebundle.coupon.splitable{% endtrans %}</th>
-        <td>{{ coupon.splitable|boolean|raw }}</td>
-    </tr>
-    <tr>
-        <th>{% trans %}storebundle.coupon.availableonline{% endtrans %}</th>
-        <td>{{ coupon.availableOnline|boolean|raw }}</td>
-    </tr>
-    <tr>
-        <th>{% trans %}storebundle.coupon.paymentmethods{% endtrans %}</th>
-        <td>
-            {% if coupon.ordersPaymentMethods|length > 0 %}
+            <th>{% trans %}storebundle.coupon.paymentmethods{% endtrans %}</th>
+            <td>
                 {% for orderPaymentMethod in coupon.ordersPaymentMethods %}
-                    <a role="button" class="btn btn-sm btn-secondary" href="{{ path('order_edit',{id: orderPaymentMethod.order.id}) }}">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>{{ orderPaymentMethod.order.reference }} {{ orderPaymentMethod.amount|price }}
-                    </a>
+                    {{ orderPaymentMethod.order.createdAt|date('d/m/Y') }} {{ orderPaymentMethod.order.reference }}  ({{ orderPaymentMethod.amount|price }})
                 {% endfor %}
-            {% else %}
-                <i class="fa fa-circle" aria-hidden="true"></i>
-            {% endif %}
-        </td>
-    </tr>
-    </tbody>
-</table>
+            </td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
 
-</body>
-</html>
+{% endblock %}

@@ -1,27 +1,37 @@
-{% extends 'baseUser.html.twig' %}
+{% extends 'baseFull.html.twig' %}
 {% block body %}
 
-    <div id="tabs-phonenumbers" class="border-top-0">
-        <h3>{% trans %}sitebundle.phonenumbers{% endtrans %}</h3>
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( function() {
+                FCE.init('phonenumbers','phonenumbers list-inline','phonenumber list-inline-item');
+            } );
+        </script>
+    {% endblock %}
 
-        {{ form_start(form) }}
+    {{ form_start(form) }}
+    <div class="card">
+        <h3 class="card-header">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            {% trans %}sitebundle.phonenumbers{% endtrans %}
+            <input type="submit" class="btn brn-sm btn-secondary" value="{% trans %}sitebundle.button.edit{% endtrans %}" />
+        </h3>
+        <div class="card-block">
 
-        <ul class="phonenumbers list-inline " id="target" data-prototype="{{ form_widget(form.phonenumbers.vars.prototype)|e('html_attr') }}">
-            {% for phonenumber in form.phonenumbers %}
-                <li class="phonenumber list-inline-item">
-                    {{ phonenumber.vars.value.phonenumber }}
-                    {{ form_row(phonenumber) }}
-                </li>
-            {% endfor %}
-        </ul>
-        {{ form_widget(form.phonenumbers) }}
-        <input type="submit" class="btn  btn-primary" value="{% trans %}sitebundle.button.edit{% endtrans %}" />
-        {{ form_end(form) }}
+            <ul class="phonenumbers list-inline " id="target" data-prototype="{{ form_widget(form.phonenumbers.vars.prototype)|e('html_attr') }}">
+                {% for phonenumber in form.phonenumbers %}
+                    <li class="phonenumber list-inline-item">
+                        {{ phonenumber.vars.value.phonenumber }}
+                        {{ form_row(phonenumber) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {{ form_widget(form.phonenumbers) }}
+            <input type="submit" class="btn  btn-primary" value="{% trans %}sitebundle.button.edit{% endtrans %}" />
+            {{ form_end(form) }}
+        </div>
     </div>
-    <script>
-        $( function() {
-            FCE.init('phonenumbers','phonenumbers list-inline','phonenumber list-inline-item');
-        } );
+    {{ form_end(form) }}
 
-    </script>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 {% block body %}
     <h1>
+        <i class="fa fa-gavel" aria-hidden="true"></i>
         {{ 'storebundle.depositsale.show %reference%'|trans({'%reference%':depositSale.reference}) }}
     </h1>
 
@@ -17,6 +18,15 @@
         <tr>
             <th>{% trans %}storebundle.reference{% endtrans %}</th>
             <td>{{ depositSale.reference }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}storebundle.depositsale.status{% endtrans %}</th>
+            <td>{% if  depositSale.status %}
+                <span style="color: {{ depositSale.status.color }};">{{ depositSale.status.name }}</span>
+            {% else %}
+                <span style="color: red;"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+            {% endif %}
+            </td>
         </tr>
         <tr>
             <th>{% trans %}storebundle.customer{% endtrans %}</th>
