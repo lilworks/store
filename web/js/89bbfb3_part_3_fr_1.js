@@ -6,6 +6,8 @@
     t.add("js.alert.unsubscribe.text", "Etes vous sûr de vouloir vous desabonner de la lettre d'information", "messages", "fr");
     t.add("js.alert.subscribe.title", "Lettre d'information", "messages", "fr");
     t.add("js.alert.subscribe.text", "Etes vous sûr de vouloir recevoir la lettre d'information", "messages", "fr");
+    t.add("js.alert.empty.title", "Vider", "messages", "fr");
+    t.add("js.alert.empty.text", "Etes-vous sûr de vouloir supprimer vider entrée?", "messages", "fr");
     t.add("js.alert.delete.title", "Supprimer", "messages", "fr");
     t.add("js.alert.delete.text", "Etes-vous sûr de vouloir supprimer cette entrée?", "messages", "fr");
     t.add("js.alert.yes", "oui", "messages", "fr");

@@ -488,6 +488,16 @@ class Basket
         if( count($this->security->getToken()->getRoles()) > 0){
             $user = $this->security->getToken()->getUser();
             $basket->setUser($user);
+
+            if(is_object($user->getCustomer()) && count($user->getCustomer()->getAddresses())>0){
+                foreach($user->getCustomer()->getAddresses() as $address){
+                    $basket->setShippingAddress($address);
+                    $basket->setBillingAddress($address);
+                    break;
+                }
+            }
+
+
         }
         $this->em->persist($basket);
         $this->em->flush();

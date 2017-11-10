@@ -117,6 +117,9 @@ site_subscriber_subscribe:
     path: /subscribe/{email}
     defaults: { _controller: SiteBundle:Subscriber:subscribe , email: null }
 
+site_subscriber_manual:
+    path: /manual
+    defaults: { _controller: SiteBundle:Subscriber:manual , email: null }
 
 site_customer_phonenumbers:
     path: /customer/phonenumbers

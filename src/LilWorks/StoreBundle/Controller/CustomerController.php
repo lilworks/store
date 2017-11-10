@@ -67,9 +67,7 @@ class CustomerController extends Controller
             array('defaultSortFieldName' => 'c.createdAt', 'defaultSortDirection' => 'desc')
         );
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.customer.index'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.customers');
 
 
         return $this->render('LilWorksStoreBundle:Customer:index.html.twig', array(
@@ -112,9 +110,7 @@ class CustomerController extends Controller
             return $this->redirectToRoute('customer_show', array('customer_id' => $customer->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.customer.new'));
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.customers');
 
         return $this->render('LilWorksStoreBundle:Customer:new.html.twig', array(
             'customer' => $customer,
@@ -129,10 +125,9 @@ class CustomerController extends Controller
     {
 
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.customer.show %name%',array("%name%"=>$customer->getFirstName() . " " . $customer->getLastName() . " " . $customer->getCompanyName() )));
-
+        $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array(
+            "%name%"=>$customer->getLastName() . " " .  $customer->getFirstName()  . " " .  $customer->getCompanyName()
+        ),'storebundle.prefix.customers');
 
         return $this->render('LilWorksStoreBundle:Customer:show.html.twig', array(
             'customer' => $customer,
@@ -199,9 +194,9 @@ class CustomerController extends Controller
             return $this->redirectToRoute('customer_edit', array('id' => $customer->getId()));
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('storebundle.htmltitle.customer.edit %name%',array("%name%"=>$customer->getFirstName() . " " . $customer->getLastName() . " " . $customer->getCompanyName() )));
+        $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array(
+            "%name%"=>$customer->getLastName() . " " .  $customer->getFirstName()  . " " .  $customer->getCompanyName()
+        ),'storebundle.prefix.customers');
 
 
         return $this->render('LilWorksStoreBundle:Customer:edit.html.twig', array(

@@ -117,7 +117,7 @@ class BasketType extends AbstractType
 
                                 $address.=$obj->getZipCode() . " " . $obj->getCity() . ", " . $obj->getCountry()->getName()  ;
                              return    $address;
-                            // return    "lilworks.translations.test"  ;
+
                         },
 
                         'query_builder' => function (EntityRepository $er) use ($customer) {
@@ -125,9 +125,10 @@ class BasketType extends AbstractType
                                 ->leftJoin('LilWorksStoreBundle:Customer', 'c', 'WITH', 'c.id = a.customer')
                                 ->where('c.id = :id')
                                 ->setParameter('id',$customer->getId())
+                                ->orderBy('a.id','desc')
                                 ;
                         },
-                        'required' => false ,
+                        'required' => true ,
                         'mapped'=> true,
                         'expanded' => true ,
                         'multiple' => false,
@@ -155,9 +156,10 @@ class BasketType extends AbstractType
                                 ->leftJoin('LilWorksStoreBundle:Customer', 'c', 'WITH', 'c.id = a.customer')
                                 ->where('c.id = :id')
                                 ->setParameter('id',$customer->getId())
+                                ->orderBy('a.id','desc')
                                 ;
                         },
-                        'required' => false ,
+                        'required' => true ,
                         'mapped'=> true,
                         'expanded' => true ,
                         'multiple' => false

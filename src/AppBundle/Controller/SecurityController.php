@@ -16,6 +16,10 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request)
     {
+        $this->get('site.setSeo')->setTitle('layout.login',array(),'FOSUserBundle');
+
+
+
         $basket = $this->get('site.basket');
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */

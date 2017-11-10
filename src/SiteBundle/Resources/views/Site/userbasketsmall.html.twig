@@ -8,6 +8,7 @@
 
 <div class="card" style="height: 143px;" id="userbasketsmall-container">
     <div class="card-block" style="padding: 5px;">
+
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist" id="userbasketsmall">
             <li class="nav-item">
@@ -22,7 +23,6 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#subscribe" role="tab"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
             </li>
-
         </ul>
 
         <!-- Tab panes -->
@@ -34,10 +34,14 @@
                     </p>
                     <div class="btn-group" role="group">
                         <a role="button" href="{{ path('fos_user_security_login') }}" class="btn btn-sm btn-secondary ">
-                            <i class="fa fa-user" aria-hidden="true"></i>{{ 'sitebundle.user.login'|trans }}
+                            <i class="fa fa-user" aria-hidden="true"></i> {% trans from 'FOSUserBundle'  %}layout.login{% endtrans %}
                         </a>
                         <a  role="button" href="{{ path('fos_user_registration_register') }}" class="btn btn-sm btn-secondary ">
-                            <i class="fa fa-user-o" aria-hidden="true"></i>{{ 'sitebundle.user.register'|trans }}
+                            <i class="fa fa-user-o" aria-hidden="true"></i> {% trans from 'FOSUserBundle'  %}layout.register{% endtrans %}
+                        </a>
+                        <a  role="button" href="{{ path('fos_user_resetting_request') }}" class="btn btn-sm btn-secondary ">
+                            <i class="fa fa-user-md" aria-hidden="true"></i>
+                            {% trans from 'FOSUserBundle'  %}resetting.request.submit{% endtrans %}
                         </a>
                     </div>
                 {% else %}
@@ -49,14 +53,16 @@
 
                     <div class="btn-group " role="group">
                         <a role="button" href="{{ path('site_customer') }}" class="btn btn-sm btn-secondary">
-                            <i class="fa fa-eye" aria-hidden="true"></i>{{ 'sitebundle.user.profile.show'|trans }}
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'sitebundle.user.profile.show'|trans }}
                         </a>
                         <a role="button" href="{{ path('site_customer_edit') }}" class="btn btn-sm btn-secondary ">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>{{ 'sitebundle.user.profile.edit'|trans }}
+                            <i class="fa fa-pencil" aria-hidden="true"></i> {% trans from 'FOSUserBundle'  %}profile.edit.submit{% endtrans %}
                         </a>
+                        {#
                         <a role="button" href="{{ path('fos_user_security_logout') }}" class="btn btn-sm btn-secondary">
-                            <i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'sitebundle.user.logout'|trans }}
+                            <i class="fa fa-sign-out" aria-hidden="true"></i> {% trans from 'FOSUserBundle'  %}layout.logout{% endtrans %}
                         </a>
+                        #}
                     </div>
                 {% endif %}
             </div>
@@ -94,16 +100,16 @@
                 <h5>{% trans %}sitebundle.subscribe{% endtrans %}</h5>
                 {% if user %}
                     {% if user.subscriber %}
-                        <a role="button" class="btn btn-sm btn-warning" href="{{ path('site_subscriber_unsubscribe') }}">{{ 'sitebundel.unsubscribe'|trans }}</a>
+                        <a role="button" class="btn btn-sm btn-warning" href="{{ path('site_subscriber_unsubscribe') }}">{{ 'sitebundle.unsubscribe'|trans }}</a>
                     {% else %}
-                        <a role="button" class="btn btn-sm btn-success"  href="{{ path('site_subscriber_subscribe') }}">{{ 'sitebundel.subscribe'|trans }}</a>
+                        <a role="button" class="btn btn-sm btn-success"  href="{{ path('site_subscriber_subscribe') }}">{{ 'sitebundle.subscribe'|trans }}</a>
                     {% endif %}
                 {% else %}
-                    <form id="search" action="#" method="get">
+                    <form id="search" action="{{ path('site_subscriber_manual') }}" method="POST">
                         <div class="input-group col-md-12">
-                            <input id="search" type="text" class="form-control input-sm" placeholder="{{ 'sitebundle.email'|trans }}" />
+                            <input name="email" type="text" class="form-control input-sm" placeholder="{{ 'sitebundle.email'|trans }}" />
                         <span class="input-group-btn">
-                            <button onclick="search(this);" class="btn btn-info btn-sm" type="button">
+                            <button class="btn btn-info btn-sm" type="button">
                                 <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                             </button>
                         </span>

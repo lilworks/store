@@ -15,6 +15,10 @@ class RegistrationController extends BaseController
 {
     public function registerAction(Request $request)
     {
+
+        $this->get('site.setSeo')->setTitle('registration.submit',array(),'FOSUserBundle');
+
+
         $basket = $this->get('site.basket');
 
         /** @var $formFactory FactoryInterface */

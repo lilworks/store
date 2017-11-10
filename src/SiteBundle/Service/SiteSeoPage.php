@@ -23,7 +23,7 @@ class SiteSeoPage
 
     }
 
-    public function setTitle( $title,$transParam=array(),$prefix = null , $prefixParam=array(),$domain = "messages" ){
+    public function setTitle( $title,$transParam=array(),$domain = "messages" ){
 
         $defaultTitle =  $this->seoPage->getTitle();
         $translatedTitle = $this->translator->trans($title,$transParam,$domain);

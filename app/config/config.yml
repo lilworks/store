@@ -166,7 +166,7 @@ fos_user:
                     type: AppBundle\Form\ProfileType
     from_email:
         address: '%sender_address%'
-        sender_name: You
+        sender_name: %sender_name%
     service:
         mailer: fos_user.mailer.twig_swift
 

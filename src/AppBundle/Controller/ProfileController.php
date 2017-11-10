@@ -54,8 +54,11 @@ class ProfileController extends Controller
      */
     public function editAction(Request $request)
     {
+
+        $this->get('site.setSeo')->setTitle('profile.edit.submit',array(),'FOSUserBundle');
+
+
         $myRequest = $request->request;
-        $em = $this->getDoctrine()->getManager();
 
 
         $basket = $this->get('site.basket');

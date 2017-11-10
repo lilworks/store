@@ -1,0 +1,24 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card text-center">
+            <div class="card-header">
+                <h4 class="card-title">
+                    <i class="fa fa-user-md" aria-hidden="true"></i>
+                    {% trans  %}resetting.request.submit{% endtrans %}
+                </h4>
+            </div>
+            <div class="card-block">
+                <p>
+                    {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
