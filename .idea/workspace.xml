@@ -67,8 +67,8 @@
       <file leaf-file-name="userbasketsmall.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Site/userbasketsmall.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8533686" vertical-offset="314" max-vertical-offset="1905">
-              <caret line="64" column="26" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.4372523" vertical-offset="269" max-vertical-offset="1815">
+              <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -1888,8 +1888,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SiteBundle/Resources/views/Site/userbasketsmall.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8533686" vertical-offset="314" max-vertical-offset="1905">
-          <caret line="64" column="26" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.4372523" vertical-offset="269" max-vertical-offset="1815">
+          <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
           <folding />
         </state>
       </provider>

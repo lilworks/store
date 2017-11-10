@@ -39,10 +39,6 @@
                         <a  role="button" href="{{ path('fos_user_registration_register') }}" class="btn btn-sm btn-secondary ">
                             <i class="fa fa-user-o" aria-hidden="true"></i> {% trans from 'FOSUserBundle'  %}layout.register{% endtrans %}
                         </a>
-                        <a  role="button" href="{{ path('fos_user_resetting_request') }}" class="btn btn-sm btn-secondary ">
-                            <i class="fa fa-user-md" aria-hidden="true"></i>
-                            {% trans from 'FOSUserBundle'  %}resetting.request.submit{% endtrans %}
-                        </a>
                     </div>
                 {% else %}
 
@@ -58,11 +54,9 @@
                         <a role="button" href="{{ path('site_customer_edit') }}" class="btn btn-sm btn-secondary ">
                             <i class="fa fa-pencil" aria-hidden="true"></i> {% trans from 'FOSUserBundle'  %}profile.edit.submit{% endtrans %}
                         </a>
-                        {#
                         <a role="button" href="{{ path('fos_user_security_logout') }}" class="btn btn-sm btn-secondary">
                             <i class="fa fa-sign-out" aria-hidden="true"></i> {% trans from 'FOSUserBundle'  %}layout.logout{% endtrans %}
                         </a>
-                        #}
                     </div>
                 {% endif %}
             </div>
