@@ -7,9 +7,7 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    context: offline
-    mode: master
-    currency: EUR
+
 
 framework:
     #esi:             ~
@@ -253,7 +251,7 @@ knp_snappy:
     temporary_folder: kernel.cache_dir%/snappy
     pdf:
         enabled:    true
-        binary:     /usr/local/bin/wkhtmltopdf
+        binary:     %snappy_binary%
         options:    []
     image:
         enabled:    true
