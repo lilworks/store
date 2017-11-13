@@ -40,8 +40,8 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     globals:
-        mode: mode%
-        context: context%
+        mode: "%mode%"
+        context: "%context%"  
         lilworks_store_param_loader: '@lilworks.store.paramLoader'
         js_vars: '@app.js_vars'
         store_flash: "@store.flash"
