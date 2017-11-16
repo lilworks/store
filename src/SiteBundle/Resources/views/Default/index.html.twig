@@ -6,9 +6,9 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/slick-carousel/slick/slick.css') }}"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/slick-carousel/slick/slick-theme.css') }}"/>
     {% endblock %}
+
     {% block javascripts %}
         {{ parent() }}
-
         <script src="{{ asset('assets/vendor/jquery-migrate/jquery-migrate.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/slick-carousel/slick/slick.min.js') }}"></script>
         <script>
@@ -31,7 +31,7 @@
 
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <div id="custom-search-input" style="padding-top: 5px;">
+            <div id="custom-search-input">
                 <div class="input-group col-md-12">
                     <input id="search" type="text" class="form-control input-sm" placeholder="search" />
                         <span class="input-group-btn">
@@ -43,14 +43,7 @@
             </div>
         </div>
     </div>
-
-
-            {% if  carrousel is defined %}
-                {{ carrousel|raw }}
-            {% endif %}
-
-
-
+    {% if  carrousel is defined %}{{ carrousel|raw }}{% endif %}
     <div class="row" style="text-align: center;">
         <div class="col-lg-4">
             <div class="card card-info">
@@ -76,7 +69,7 @@
     </div>
     <div class="row"  style="text-align: center;">
         <div class="col-lg-12">
-            <div class="card " style="margin-top: 10px;margin-bottom: 10px;">
+            <div class="card" style="margin-top: 10px;margin-bottom: 10px;">
                 <div class="card-block" >
                     {{ render(controller('SiteBundle:Text:Text',{'tag':'home-bottom'})) }}
                 </div>
