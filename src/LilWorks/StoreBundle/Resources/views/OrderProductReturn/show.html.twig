@@ -4,7 +4,7 @@
 
     <h1>
         <i class="fa fa-hand-scissors-o" aria-hidden="true"></i>
-        {{ 'storebundle.orderproductreturn.show %reference%'|trans({'%name%':orderProductReturn.reference}) }}
+        {{ 'storebundle.orderproductreturn.show %reference%'|trans({'%reference%':orderProductReturn.reference}) }}
     </h1>
 
     <div id="content_menu">
@@ -17,6 +17,10 @@
         <tr>
             <th>{% trans %}storebundle.reference{% endtrans %}</th>
             <td>{{ orderProductReturn.reference }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}storebundle.returnedat{% endtrans %}</th>
+            <td>{{ orderProductReturn.returnedAt|date('d/m/Y') }}</td>
         </tr>
         <tr>
             <th>{% trans %}storebundle.order{% endtrans %}</th>

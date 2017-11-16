@@ -39,6 +39,7 @@
         <thead>
         <tr>
             <th>{% trans %}storebundle.action{% endtrans %}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'storebundle.returnedat'|trans, 'opr.returnedAt') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'storebundle.reference'|trans, 'opr.reference') }}</th>
             <th>{% trans %}storebundle.product{% endtrans %}</th>
             <th>{% trans %}storebundle.order{% endtrans %}</th>
@@ -54,10 +55,11 @@
                     {% set menu = knp_menu_get('list', [ orderProductReturn.id ] ,{results:formatedItems[orderProductReturn.id]   ,target:'orderproductreturn'} ) %}
                     {{ knp_menu_render(menu,{template: 'LilWorksStoreBundle:Menu:list.html.twig'}) }}
                 </td>
-
+                <td>
+                    {{ orderProductReturn.returnedAt|date('d/m/Y') }}
+                </td>
                 <td>
                     {{ orderProductReturn.reference }}
-
                 </td>
                 <td>
                     <sup>{{ orderProductReturn.quantity }}</sup>&frasl;<sub>{{ orderProductReturn.orderProduct.quantity }}</sub>

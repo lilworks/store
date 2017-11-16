@@ -1,48 +1,39 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="UTF-8">
-
-    {% if base_dir is defined %}
-        <link rel="stylesheet"
-              href="{{ base_dir ~ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-    {% else %}
-        <link rel="stylesheet"
-              href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-    {% endif %}
-
-    <style>
-        body{
-            font-size:12px;
-        }
-        .tot{
-            font-size: 15px;;
-        }
-    </style>
-</head>
-<body>
+{% extends 'LilWorksStoreBundle:Pdf:base.html.twig' %}
 
 {% set order = orderProductReturn.orderProduct.order %}
 
+
+
+
+{% block title %}
     <h1>
         {{ orderProductReturn.reference }}
     </h1>
     <h5>
         {{ orderProductReturn.returnedAt|date('d/m/Y') }}
     </h5>
+{% endblock %}
 
+
+{% block customer %}
     <div style="text-align: right;">
         <strong>
             {{ order.customer.firstName ~ ' ' ~ order.customer.lastName ~ ' ' ~ order.customer.companyName }}
         </strong>
         <div>
-        {% if order.billingAddressString is defined and order.billingAddressString is not null and order.billingAddressString != "" %}
-            {{ order.billingAddressString }}
-        {% elseif order.billingAddress is not null %}
-            {{ order.billingAddress|formataddress|raw}}
-        {% endif %}
+            {% if order.billingAddressString is defined and order.billingAddressString is not null and order.billingAddressString != "" %}
+                {{ order.billingAddressString }}
+            {% elseif order.billingAddress is not null %}
+                {{ order.billingAddress|formataddress|raw}}
+            {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block content %}
+
+
+
 
 
     <table class="table table-striped">
@@ -83,12 +74,13 @@
                 {% endfor %}
             </td>
         </tr>
-        <tr>
-            <th>{% trans %}storebundle.description{% endtrans %}</th>
-            <td>{{ orderProductReturn.description|raw }}</td>
-        </tr>
 
+        {% if  orderProductReturn.description %}
+            <tr>
+                <th>{% trans %}storebundle.description{% endtrans %}</th>
+                <td>{{ orderProductReturn.description|raw }}</td>
+            </tr>
+        {% endif %}
         </tbody>
     </table>
-</body>
-</html>
+{% endblock %}

@@ -51,8 +51,13 @@ class OrderProductReturnController extends Controller
         $pagination = $paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
-            10
+            10,
+            array(
+                'defaultSortFieldName' => 'opr.returnedAt',
+                'defaultSortDirection' => 'desc',
+            )
         );
+
         $this->get('store.setSeo')->setTitle('storebundle.title.list',array(),'storebundle.prefix.returns');
 
         return $this->render('LilWorksStoreBundle:OrderProductReturn:index.html.twig', array(

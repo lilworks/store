@@ -1,29 +1,11 @@
-<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-
-    <ol class="carousel-indicators">
-        {% set isFirst = 1 %}
+<div id="carousel-container-home">
+    <div class="carousel-home">
         {% for annonce in annonces %}
-            <li data-target="#carouselExampleIndicators" data-slide-to="{{ annonce.pos }}" {% if isFirst == 1 %} class="active" {% endif %}></li>
-            {% set isFirst = 0 %}
-        {% endfor %}
-    </ol>
-
-    <div class="carousel-inner" role="listbox">
-        {% set isFirst = 1 %}
-        {% for annonce in annonces %}
-            <div class="carousel-item {% if isFirst == 1 %} active {% endif %}">
-                <img class="d-block img-fluid" src="{{ asset('annonce/'~annonce.pictureName ) | imagine_filter('annonce') }}" alt="{{ annonce.name }}" />
+            <div>
+                <a href="{% if annonce.link %}{{ annonce.link }}{% else %}#{% endif %}">
+                    <img class="carousel-img-home" src="{{ asset('annonce/'~annonce.pictureName ) | imagine_filter('annonce') }}" alt="{{ annonce.name }}" />
+                </a>
             </div>
-            {% set isFirst = 0 %}
         {% endfor %}
     </div>
-
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">{{ 'sitebundle.previous'|trans }}</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">{{ 'sitebundle.next'|trans }}</span>
-    </a>
 </div>
