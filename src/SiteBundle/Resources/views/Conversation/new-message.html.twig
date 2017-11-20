@@ -1,0 +1,53 @@
+{% extends 'SiteBundle:Customer:base.html.twig' %}
+{% block customer %}
+
+<div class="card">
+    <div class="card-header">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        {{ 'sitebundle.conversations.message.new'|trans }}
+    </div>
+    <div class="card-block">
+
+        <div class="card-text">
+            {% set menuItem = knp_menu_get('usercustomer', ['sitebundle.menu.user.conversations']) %}
+            {{ knp_menu_render(['usercustomer', 'sitebundle.menu.user.conversations'],{template : 'Menu/userCustomerMenu.html.twig'}) }}
+        </div>
+
+        <div  class="card-text">
+            {% if sent == 1 %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ 'sitebundle.conversationmessage.sent'|trans }}
+                </div>
+            {% else %}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            {% endif %}
+
+            {% for message in  conversation.messages %}
+                <div class="conversation-in-table {% if message.isResponse %}conversation-from-user{% else %}conversation-from-admin{% endif %}">
+                    <h5>{{ message.messageSubject }}</h5>
+                    <p>
+                        {{ message.createdAt|date('d/m/Y H:i') }}
+                        {% if message.isResponse %}
+                            {{ 'sitebundle.conversation.from.store'|trans }}
+                        {% else %}
+                            {{ 'sitebundle.conversation.from.you'|trans }}
+                        {% endif %}
+                    </p>
+                    <div>
+                        {{ message.messageBody }}
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

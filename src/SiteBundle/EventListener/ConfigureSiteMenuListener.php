@@ -53,6 +53,7 @@ class ConfigureSiteMenuListener
 
 
         if($this->target == 'conversations'){
+
             $conversationIndex = $menu->addChild('sitebundle.menu.conversations',array('route'=>'site_conversations'));
             $conversationIndex->setAttribute('class','list-inline-item');
             $conversationIndex->setLinkAttribute('role','button');

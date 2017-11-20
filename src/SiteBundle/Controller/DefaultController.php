@@ -23,10 +23,7 @@ class DefaultController extends Controller
         $basket = $this->get('site.basket');
         $carrousel = $this->get('site.carrousel')->getCarrousel();
 
-
-
         $this->get('site.setSeo')->setTitle('sitebundle.home');
-
 
         return $this->render('SiteBundle:Default:index.html.twig',array(
             'carrousel'=>$carrousel,

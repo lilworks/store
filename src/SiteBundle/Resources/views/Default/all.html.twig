@@ -3,7 +3,7 @@
 {% block body %}
     {% block stylsheets %}
         {{ parent() }}
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-slider/slider.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css') }}" />
         <style>
             .price-range-disabled{
                 visibility: hidden;
@@ -13,7 +13,7 @@
     {% endblock %}
     {% block javascripts %}
         {{ parent() }}
-        <script src="{{ asset('assets/vendor/bootstrap-slider/bootstrap-slider.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap-slider/dist/bootstrap-slider.min.js') }}"></script>
         <script>
             $( document ).ready(function() {
                 $(".selectpicker").selectpicker();

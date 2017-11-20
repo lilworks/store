@@ -14,6 +14,10 @@ class CustomerController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+        $this->get('site.setSeo')->setTitle('sitebundle.customer.home');
+
+
+
         return $this->render('SiteBundle:Customer:index.html.twig', array(
             'user'=>$user
         ));

@@ -6,9 +6,7 @@ site_homepage:
 site_docfile:
     path: /docfile/{docfile_id}
     defaults: { _controller: SiteBundle:Default:docfile }
-site_conversation_show:
-    path: /conversation/{conversation_id}
-    defaults: { _controller: SiteBundle:Conversation:show }
+
 site_contact:
     path: /contact
     defaults: { _controller: SiteBundle:Default:contact }
@@ -27,7 +25,6 @@ site_supercategory:
 site_brand:
     path: /brand/{tag}
     defaults: { _controller: SiteBundle:Default:brand }
-
 
 site_order:
     path: /order
@@ -98,13 +95,15 @@ site_orders:
 site_conversations:
     path: /conversations
     defaults: { _controller: SiteBundle:Conversation:default }
+site_conversations_show:
+    path: /conversations/show/{conversation_id}
+    defaults: { _controller: SiteBundle:Conversation:show }
 site_conversations_remove:
     path: /conversations/remove/{conversation_id}
     defaults: { _controller: SiteBundle:Conversation:remove }
 site_conversations_newmessage:
     path: /conversations/new-message/{conversation_id}
     defaults: { _controller: SiteBundle:Conversation:newMessage }
-
 site_conversations_new:
     path: /conversations/new
     defaults: { _controller: SiteBundle:Conversation:new }

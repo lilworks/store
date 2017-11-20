@@ -34,15 +34,60 @@ class ConversationController extends Controller
             array('defaultSortFieldName' => 'c.createdAt', 'defaultSortDirection' => 'desc')
         );
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('sitebundle.htmltitle.conversations'));
 
+        $this->get('site.setSeo')->setTitle('sitebundle.conversations.home');
 
         return $this->render('SiteBundle:Conversation:index.html.twig', array(
             'pagination'=>$pagination
         ));
     }
+
+    /**
+     * @ParamConverter("conversation", options={"mapping": {"conversation_id"   : "id"}})
+     */
+    public function showAction(Request $request,Conversation $conversation){
+
+
+        return $this->render('SiteBundle:Conversation:show.html.twig', array(
+            'conversation'=>$conversation
+        ));
+    }
+
+    public function newAction(Request $request){
+
+        $user = $this->getUser();
+        if (!is_object($user)) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $conversation = new Conversation();
+        $conversationMessage = new ConversationMessage();
+
+        $form = $this->createForm('SiteBundle\Form\ConversationMessageInCustomerType', $conversationMessage);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $conversationMessage->setConversation($conversation);
+            $conversation->addMessage($conversationMessage);
+            $conversation->setConversationSubject($conversationMessage->getMessageSubject());
+            $conversation->setUser($user);
+            $conversation->setEmail($user->getEmail());
+
+            $em->persist($conversation);
+            $em->persist($conversationMessage);
+            $em->flush();
+        }
+
+        $this->get('site.setSeo')->setTitle('sitebundle.htmltitle.conversation.new');
+
+        return $this->render('SiteBundle:Conversation:new.html.twig', array(
+            "form"=>$form->createView(),
+        ));
+    }
+
+
     /**
      * @ParamConverter("conversation", options={"mapping": {"conversation_id"   : "id"}})
      */
@@ -64,17 +109,36 @@ class ConversationController extends Controller
             $sent = true;
         }
 
-        $translator = $this->get('translator');
-        $seoPage = $this->get('sonata.seo.page');
-        $seoPage->setTitle($translator->trans('sitebundle.htmltitle.conversations.message.new'));
+
+        $this->get('site.setSeo')->setTitle('sitebundle.htmltitle.conversations.message.new');
 
 
-        return $this->render('SiteBundle:Conversation:new.html.twig', array(
+        return $this->render('SiteBundle:Conversation:new-message.html.twig', array(
             'conversation'=>$conversation,
             "form"=>$form->createView(),
             'sent'=>$sent
         ));
     }
 
+    /**
+     * @ParamConverter("conversation", options={"mapping": {"conversation_id"   : "id"}})
+     */
+    public function removeAction(Request $request,Conversation $conversation){
+        $user = $this->getUser();
+        if (!is_object($user)  || $conversation->getUser() != $user) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
 
+            $em = $this->getDoctrine()->getEntityManager();
+
+        $em->remove($conversation);
+        $em->flush();
+
+        $this->get('site.flash')->setMessages(array(
+               array('status'=>'error','message'=>'sitebundle.flash.conversation.removed')
+        ));
+
+
+        return $this->redirectToRoute('site_conversations');
+    }
 }

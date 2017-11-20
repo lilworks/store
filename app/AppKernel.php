@@ -28,7 +28,6 @@ class AppKernel extends Kernel
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
-            new Lexik\Bundle\MaintenanceBundle\LexikMaintenanceBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Ijanki\Bundle\FtpBundle\IjankiFtpBundle(),
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),

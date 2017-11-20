@@ -213,3 +213,18 @@ footer{
 #custom-search-input{
     padding-top: 5px;
 }
+
+
+
+
+.conversation-in-table{
+    margin: 2px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.conversation-from-admin{
+    background-color: rgba(80, 80, 212, 0.2);
+}
+.conversation-from-user{
+    background-color: rgba(212, 80, 80, 0.2);
+}

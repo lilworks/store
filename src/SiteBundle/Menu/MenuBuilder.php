@@ -4,8 +4,6 @@ namespace SiteBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use SiteBundle\Event\ConfigureSiteMenuEvent;
-#use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-#use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 class MenuBuilder
 {
@@ -28,7 +26,7 @@ class MenuBuilder
         $this->token_storage = $token_storage;
         $this->requestStack = $this->container->get('request_stack');
 
-        if(is_object($this->token_storage->getToken()->getUser()))
+        if( !is_null($this->token_storage->getToken()) && is_object($this->token_storage->getToken()->getUser()) )
             $this->user = $this->token_storage->getToken()->getUser();
     }
 

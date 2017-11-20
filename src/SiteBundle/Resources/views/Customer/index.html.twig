@@ -6,14 +6,24 @@
         <div class="card-header">
             {{ 'sitebundle.customer.show'|trans }}
         </div>
+
+
         <div class="card-block">
+            <div  class="card-text">
+                <ul class="list list-unstyled">
+                    <li>{{ 'sitebundle.usernameemail'|trans }}: <strong>{{ user.email }}</strong></li>
+                    <li>{{ 'sitebundle.name'|trans }}: <strong>{{ user.customer.firstName ~ ' ' ~  user.customer.lastName  }}</strong></li>
+                    {% if  user.customer.companyName %}
+                        <li>{{ 'sitebundle.companyname'|trans }}: <strong>{{  user.customer.companyName }}</strong></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+
             <div  class="card-text">
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>{{ 'sitebundle.usernameemail'|trans }}</th>
-                        <th>{{ 'sitebundle.name'|trans }}</th>
-                        <th>{{ 'sitebundle.companyname'|trans }}</th>
                         <th>{{ 'sitebundle.phonenumbers'|trans }}</th>
                         <th>{{ 'sitebundle.addresses'|trans }}</th>
                         <th>{{ 'sitebundle.orders'|trans }}</th>
@@ -23,18 +33,15 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.customer.firstName ~ ' ' ~  user.customer.lastName  }}</td>
-                        <td>{{  user.customer.companyName }}</td>
                         <td>
-                            <ul>
+                            <ul class="list list-unstyled">
                                 {% for phonenumber in user.customer.phonenumbers %}
                                     <li>{{ phonenumber.phonenumber }}</li>
                                 {% endfor %}
                             </ul>
                         </td>
                         <td>
-                            <ul>
+                            <ul class="list list-unstyled">
                                 {% for address in user.customer.addresses %}
                                     <li>{{ address|formataddress|raw }}</li>
                                 {% endfor %}
@@ -42,9 +49,15 @@
                         </td>
                         <td>
                             {% if user.customer.orders|length > 0 %}
-                                <ul>
+                                <ul class="list list-unstyled">
                                     {% for order in user.customer.orders %}
-                                        <li></li>
+                                        <li>
+                                            {% set linkparams = {
+                                            0:{icon:'eye',route:path('order_show',{order_id:order.id})},
+                                            1:{icon:'pencil',route:path('order_edit',{order_id:order.id})}}
+                                            %}
+                                            {{ order.reference|linkbtn(linkparams)|raw }}
+                                        </li>
                                     {% endfor %}
                                 </ul>
                             {% else %}
@@ -53,9 +66,15 @@
                         </td>
                         <td>
                             {% if user.conversations|length > 0 %}
-                                <ul>
+                                <ul class="list list-unstyled">
                                     {% for conversation in user.conversations %}
-                                        <li></li>
+                                    <li>
+                                        {% set linkparams = {
+                                        0:{icon:'eye',route:path('conversation_show',{conversation_id:conversation.id})},
+                                        1:{icon:'pencil',route:path('conversation_edit',{conversation_id:conversation.id})}}
+                                        %}
+                                        {{ conversation.conversationSubject|linkbtn(linkparams)|raw }}
+                                    </li>
                                     {% endfor %}
                                 </ul>
                             {% else %}
@@ -64,7 +83,9 @@
                         </td>
                         <td>
                             {% if user.subscriber %}
+                                {{ 1|boolean|raw }}
                             {% else %}
+                                {{ 0|boolean|raw }}
                             {% endif %}
                         </td>
                     </tr>
