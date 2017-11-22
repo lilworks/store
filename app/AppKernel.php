@@ -37,7 +37,7 @@ class AppKernel extends Kernel
             new MessageBundle\MessageBundle(),
             new LilWorks\StoreBundle\LilWorksStoreBundle(),
             new Nomaya\SocialBundle\NomayaSocialBundle(),
-            
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -61,10 +61,11 @@ class DepositSaleType extends AbstractType
 
         });
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+
             $depositSale = $event->getData();
             $form = $event->getForm();
 
-            if($depositSale->getStatus() && $depositSale->getStatus()->getTag()=="DONE") {
+            if( $depositSale->getStatus() && $depositSale->getStatus()->getTag()=="DONE") {
 
                 $form->add('depositSalesPaymentMethods', CollectionType::class, array(
                     'label' => 'storebundle.paymentmethods',

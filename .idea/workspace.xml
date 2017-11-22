@@ -104,11 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppKernel.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AppKernel.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.28533685" vertical-offset="354" max-vertical-offset="1155">
-              <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
+            <state vertical-scroll-proportion="-9.0" vertical-offset="354" max-vertical-offset="1155">
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -119,16 +119,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="5084" max-vertical-offset="5865">
               <caret line="385" column="0" selection-start-line="385" selection-start-column="0" selection-end-line="385" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1511359768000" expanded="true" signature="12528:13620" placeholder="nomaya_social:" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DepositSaleType.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DepositSaleType.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/DepositSaleType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="63.458332" vertical-offset="2378" max-vertical-offset="3135">
-              <caret line="66" column="44" selection-start-line="66" selection-start-column="44" selection-end-line="66" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.44517833" vertical-offset="533" max-vertical-offset="3150">
+              <caret line="67" column="16" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -199,9 +201,9 @@
         <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/category.html.twig" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/brand.html.twig" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/Default/all.html.twig" />
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/DepositSaleType.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
+        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/DepositSaleType.php" />
       </list>
     </option>
   </component>
@@ -977,26 +979,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/DepositSaleType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="63.458332" vertical-offset="2378" max-vertical-offset="3135">
-          <caret line="66" column="44" selection-start-line="66" selection-start-column="44" selection-end-line="66" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5084" max-vertical-offset="5865">
           <caret line="385" column="0" selection-start-line="385" selection-start-column="0" selection-end-line="385" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1511359768000" expanded="true" signature="12528:13620" placeholder="nomaya_social:" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28533685" vertical-offset="354" max-vertical-offset="1155">
-          <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
+        <state vertical-scroll-proportion="-9.0" vertical-offset="354" max-vertical-offset="1155">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/DepositSaleType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44517833" vertical-offset="533" max-vertical-offset="3150">
+          <caret line="67" column="16" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
           <folding />
         </state>
       </provider>
