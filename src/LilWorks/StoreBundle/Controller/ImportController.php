@@ -733,6 +733,8 @@ class ImportController extends Controller
 
         $statementSupercatCat = $connection->prepare("SELECT * FROM boutique_subcats_categories");
         $statementSupercatCat->execute();
+
+
         foreach ($statementSupercatCat->fetchAll() as $supercatCat){
 
             $statementSupercat = $connection->prepare("SELECT * FROM boutique_subcats WHERE sub_id = :id LIMIT 1");
@@ -812,8 +814,23 @@ class ImportController extends Controller
 
         $statement->execute();
         $results = $statement->fetchAll();
+
+        $memoryProduct = array();
+
         foreach($results as $result) {
+            echo "<h1>".$result['art_id']."</h1>";
+            echo $result['art_name'];
+
+
+            $result['art_name']= preg_replace('!\s+!', ' ', trim($result['art_name']));
+
+            if(in_array(strtolower($result['art_name']),$memoryProduct)){
+                $result['art_name'] = $result['art_name'] . " (copy ".$result['art_id'].")";
+            }
+
             $product = $em->getRepository('LilWorksStoreBundle:Product')->findOneByName($result['art_name']);
+
+
             if(!$product) {
                 $product = new Product();
                 $product->setName($result['art_name']);
@@ -890,9 +907,8 @@ class ImportController extends Controller
                     $picture->setProduct($product);
                     $em->persist($picture);
                 }
-
-
                 $em->persist($product);
+                array_push($memoryProduct,strtolower($result['art_name']));
             }
         }
 

@@ -93,7 +93,8 @@ class ShippingMethodType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'LilWorks\StoreBundle\Entity\ShippingMethod'
+            'data_class' => 'LilWorks\StoreBundle\Entity\ShippingMethod',
+            'csrf_protection' => false,
         ));
     }
 

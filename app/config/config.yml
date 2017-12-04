@@ -98,6 +98,7 @@ doctrine:
                    string_functions:
                        GROUP_CONCAT: AppBundle\DQL\GroupConcatFunction
                        SUBSTRING_INDEX: DoctrineExtensions\Query\Mysql\SubstringIndex
+                       IF_ELSE: DoctrineExtensions\Query\Mysql\IfElse
                        md5: DoctrineExtensions\Query\Mysql\Md5
 
                 connection: default
@@ -206,6 +207,10 @@ liip_imagine:
                     quality: 100
                     filters:
                          thumbnail: { size: [32, 32], mode: outbound }
+        supermini:
+                    quality: 100
+                    filters:
+                        thumbnail: { size: [12, 12], mode: outbound }
         category_thumb:
             quality: 100
             filters:

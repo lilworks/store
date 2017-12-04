@@ -22,6 +22,7 @@ class BasketsProducts
      * @var integer
      *
      * @ORM\Column(name="quantity", type="integer" , nullable=true)
+     * @Assert\LessThan(1000)
      */
     private $quantity;
 

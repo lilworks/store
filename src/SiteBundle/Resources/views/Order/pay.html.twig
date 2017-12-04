@@ -2,10 +2,6 @@
 {% block customer %}
 
 
-
-
-
-
 <div class="card">
     <div class="card-header">
         <i class="fa fa-handshake-o" aria-hidden="true"></i>
@@ -69,8 +65,13 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>{% trans %}sitebundle.createdat{% endtrans %}</th>
-                        <th>{% trans %}sitebundle.updatedat{% endtrans %}</th>
+                        <th>
+                            <ul class="list list-unstyled">
+                                <li>{% trans %}sitebundle.createdat{% endtrans %}</li>
+                                <li>{% trans %}sitebundle.updatedat{% endtrans %}</li>
+                            </ul>
+                        </th>
+
                         <th>{% trans %}sitebundle.reference{% endtrans %}</th>
                         <th>{% trans %}sitebundle.tot{% endtrans %}</th>
                         <th>{% trans %}sitebundle.payed{% endtrans %}</th>
@@ -82,12 +83,22 @@
                     <tbody>
                     <tr>
                         <td>
-                            {{ order.createdAt|date('d/m/Y H:i') }}
+                            <ul class="list list-unstyled">
+                                <li>{{ order.createdAt|date('d/m/Y H:i') }}</li>
+                                <li>{{ order.updatedAt|date('d/m/Y H:i') }}</li>
+                            </ul>
                         </td>
-
-                        <td>{{ order.updatedAt|date('d/m/Y H:i') }}</td>
                         <td>{{ order.reference }}</td>
-                        <td>{{ order.tot|price }}</td>
+                        <td>
+                            {{ order.tot|price }}
+                            {% if order.ordersRealShippingMethods|length > 0 %}
+                                {% set totSm = 0 %}
+                                {% for orderRealShippingMethod in order.ordersRealShippingMethods %}
+                                    {% set totSm = totSm + orderRealShippingMethod.price %}
+                                {% endfor %}
+                                ({{ 'sitebundle.tot.containingshippingmethods %price%'|trans({'%price%':totSm}) }})
+                            {% endif %}
+                        </td>
                         <td>
                             {% if order.payed == order.tot %}
                                 <span style="color: green;">{{ order.payed|price }}</span>
@@ -153,7 +164,33 @@
 
 
             </div>
+            {% if order.ordersRealShippingMethods|length > 0 %}
+                <h4 class="card-title">
+                    {{ 'sitebundle.shippingmethods'|trans }}
+                </h4>
+                <div class="card-group">
+                    {% for orderRealShippingMethod in order.ordersRealShippingMethods %}
+                        <div class="card">
+                            {% if orderRealShippingMethod.shippingMethod.pictureName %}
+                                <img class="card-img-top" src="{{ asset('shippingmethod/'~orderRealShippingMethod.shippingMethod.pictureName ) | imagine_filter('mini') }}" >
+                            {% endif %}
+                            <div class="card-block">
+                                <h4 class="card-title">{{ orderRealShippingMethod.shippingMethod.name }} ({{ orderRealShippingMethod.price|price }})</h4>
+                                {% for orderProduct in orderRealShippingMethod.ordersProducts %}
+                                    <p class="card-text">
+                                        {% if orderProduct.product.pictures|length > 0 %}
+                                            <img src="{{ asset('product/'~ orderProduct.product.pictures[0].pictureName ) | imagine_filter('mini') }}" >
+                                        {% endif %}
+                                        {{ orderProduct.product.brand.name }} {{ orderProduct.product.name }}
+                                    </p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
     </div>
+
 
 {% endblock %}

@@ -12,6 +12,7 @@ use LilWorks\StoreBundle\Util\TagSanitizer;
  * @ORM\Entity
  * @ORM\Table(name="lilworks_shipping_method")
  * @ORM\HasLifecycleCallbacks()
+ * @ORM\Entity(repositoryClass="LilWorks\StoreBundle\Entity\Repository\ShippingMethodRepository")
  * @Vich\Uploadable
  */
 class ShippingMethod
@@ -153,6 +154,13 @@ class ShippingMethod
      * @ORM\Column(name="updatedAt", type="datetime",nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isNotReal", type="boolean",nullable=true)
+     */
+    private $isNotReal;
     
     /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
@@ -676,5 +684,29 @@ class ShippingMethod
     public function getTriggers()
     {
         return $this->triggers;
+    }
+
+    /**
+     * Set isNotReal
+     *
+     * @param boolean $isNotReal
+     *
+     * @return ShippingMethod
+     */
+    public function setIsNotReal($isNotReal)
+    {
+        $this->isNotReal = $isNotReal;
+
+        return $this;
+    }
+
+    /**
+     * Get isNotReal
+     *
+     * @return boolean
+     */
+    public function getIsNotReal()
+    {
+        return $this->isNotReal;
     }
 }

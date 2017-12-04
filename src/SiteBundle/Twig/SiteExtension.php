@@ -7,8 +7,13 @@ use Symfony\Component\Translation\TranslatorInterface;
 class SiteExtension  extends \Twig_Extension
 {
     private $translator;
-    public function __construct(TranslatorInterface $translator) {
+    private $em;
+    private $session;
+
+    public function __construct(TranslatorInterface $translator,\Doctrine\ORM\EntityManager $em,$session) {
         $this->translator = $translator;
+        $this->em = $em;
+        $this->session = $session;
     }
     public function getFilters()
     {
@@ -17,12 +22,16 @@ class SiteExtension  extends \Twig_Extension
             new \Twig_SimpleFilter('shippingPrice', array($this, 'shippingPriceFilter')),
             new \Twig_SimpleFilter('addressInline', array($this, 'addressInlineFilter')),
             new \Twig_SimpleFilter('stock', array($this, 'stockFilter')),
+            new \Twig_SimpleFilter('shippingMethod', array($this, 'shippingMethodFilter')),
             new \Twig_SimpleFilter('spec', array($this, 'specFilter')),
             new \Twig_SimpleFilter('taxes', array($this, 'taxesFilter')),
             new \Twig_SimpleFilter('warranties', array($this, 'warrantiesFilter')),
             new \Twig_SimpleFilter('totalCalculator', array($this, 'totalCalculatorFilter')),
         );
     }
+
+
+
     private function formatUnity($v,$unity){
 
         if($unity == "m"){
@@ -187,6 +196,33 @@ class SiteExtension  extends \Twig_Extension
             }
             $output.="</ul>";
         }
+        return $output;
+    }
+
+
+    public function shippingMethodFilter($product)
+    {
+
+        if($this->session->get("defaultCountryId")){
+            $country =  $this->em->getRepository("LilWorksStoreBundle:Country")
+                ->find($this->session->get("defaultCountryId"));
+        }else{
+            $country =  $this->em->getRepository("LilWorksStoreBundle:Country")
+                ->findOneByTag('fr');
+        }
+
+
+        $sms = $this->em->getRepository("LilWorksStoreBundle:ShippingMethod")
+            ->getProductShippingMethods($product->getId(),$country->getId());
+
+        if(count($sms) == 0){
+            $output='<span><i style="color: red;" class="fa fa-truck" aria-hidden="true"></i></span>';
+        }else{
+            $output='<span><i style="color: green;" class="fa fa-truck" aria-hidden="true"></i></span>';
+        }
+
+
+
         return $output;
     }
 }

@@ -189,6 +189,32 @@ class SuperCategoryController extends Controller
         ));
     }
 
+
+    /**
+     * @ParamConverter("superCategory", options={"mapping": {"supercategory_id"   : "id"}})
+     */
+    public function emptyAction(Request $request,SuperCategory $superCategory)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        foreach($superCategory->getSupercategoriesCategories() as $superCategoryCategory){
+
+            $em->remove($superCategoryCategory);
+        }
+
+        $em->flush();
+
+        $referer = $request->headers->get('referer');
+        if ( !$referer || is_null($referer) ) {
+            return $this->redirectToRoute('supercategory_index');
+        } else {
+            return $this->redirect($referer);
+        }
+
+
+    }
+
+
     /**
      * @ParamConverter("superCategory", options={"mapping": {"supercategory_id"   : "id"}})
      */

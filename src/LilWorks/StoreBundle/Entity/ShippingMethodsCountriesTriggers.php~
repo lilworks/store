@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="lilworks_shipping_methods_countries_triggers")
+ * @ORM\Entity(repositoryClass="LilWorks\StoreBundle\Entity\Repository\ShippingMethodsCountriesTriggersRepository")
  */
 class ShippingMethodsCountriesTriggers
 {
@@ -25,6 +26,8 @@ class ShippingMethodsCountriesTriggers
      * @ORM\JoinColumn(name="shippingMethodCountry", referencedColumnName="id")
      */
     private $shippingMethodCountry;
+
+
 
     /**
      * @var float

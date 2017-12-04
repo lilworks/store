@@ -23,6 +23,9 @@ class PaymentMethod
         if($this->updatedAt == null)
             $this->updatedAt = new \DateTime();
 
+        $this->datas["_name"] = $this->name;
+        $this->datas["_text"] = $this->description;
+
     }
     /**
      * @ORM\Id

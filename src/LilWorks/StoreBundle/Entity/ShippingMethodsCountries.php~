@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="lilworks_shipping_methods_countries")
+ * @ORM\Entity(repositoryClass="LilWorks\StoreBundle\Entity\Repository\ShippingMethodsCountriesRepository")
  */
 class ShippingMethodsCountries
 {
@@ -49,7 +50,7 @@ class ShippingMethodsCountries
 
 
     /**
-     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\ShippingMethodsCountriesTriggers", mappedBy="shippingMethodCountry")
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\ShippingMethodsCountriesTriggers", mappedBy="shippingMethodCountry",cascade={"persist","remove"})
      */
     private $triggers;
 

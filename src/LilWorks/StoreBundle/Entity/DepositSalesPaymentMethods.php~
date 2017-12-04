@@ -42,7 +42,7 @@ class DepositSalesPaymentMethods
     protected $depositSale;
 
     /**
-     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\PaymentMethod", inversedBy="ordersPaymentMethods")
+     * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\PaymentMethod", inversedBy="depositSalesPaymentMethods")
      * @ORM\JoinColumn(name="paymentMethod", referencedColumnName="id", nullable=FALSE)
      * @Assert\NotBlank()
      */

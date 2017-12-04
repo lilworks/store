@@ -1,8 +1,10 @@
 
 <script>
+
     $(function() {
        MT.init('userbasketsmall');
     });
+
 </script>
 
 
@@ -77,15 +79,36 @@
 
             </div>
 
-            <div class="tab-pane" id="basket" role="tabpanel">
+            <div class="tab-pane" id="basket"  role="tabpanel">
 
-                <p class="card-text">
-                {% transchoice basket.basketsProducts|length %}{0} basket empty|{1} one product|]1,Inf[ %count% products{% endtranschoice %}
-                </p>
                 {% if basket.basketsProducts|length > 0 %}
-                    <a role="button" href="{{ path('site_basket_edit') }}" class="btn btn-sm btn-secondary">
+                    <span class="totInSmallBasket">{{ 'sitebundle.tot'|trans }}: {{ basket.tot|price }}</span>
+                    <a role="button" href="{{ path('site_basket_edit') }}" class="btn btn-sm btn-secondary buttonToEditBasket">
                         <i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'sitebundle.basket.edit'|trans }}
                     </a>
+                    {% set c = 0 %}
+                    <ul class="basketSmall list-unstyled">
+                    {% for basketProduct in basket.basketsProducts %}
+                        {% set c = c + 1 %}
+                        {% if c <= 2 %}
+                        <li>
+                            {% if basketProduct.product.pictures|length > 0 %}
+                                <img class="card-img"  src="{{ asset('product/'~basketProduct.product.pictures[0].pictureName ) | imagine_filter('supermini') }}" />
+                            {% endif %}
+                            <a href="{{ path('site_product',{tag:basketProduct.product.tag}) }}">{{ basketProduct.product.brand.name ~' '~basketProduct.product.name ~'('~basketProduct.quantity~')' }}</a>
+                        </li>
+                        {% elseif c == 3 %}
+                            {{ 'sitebundle.morexproduct %count%'|trans({'%count%':basket.basketsProducts|length - 2 })  }}
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+
+                {% else %}
+
+                    <div class="alert alert-info" role="alert">
+                        {{ 'sitebundle.basketempty'|trans }}
+                    </div>
+
                 {% endif %}
 
             </div>

@@ -1,4 +1,5 @@
 {% if product is not null %}
+
     {% set productDisplayStock = product|displayStock('badge',true,true) %}
     <div class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
@@ -29,9 +30,9 @@
                     {{ product.priceOnline|price }}
                     <a href="{{ path('site_basket_add',{id:product.id}) }}" style="color: {{ productDisplayStock['basketColor'] }};">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    {{ product|shippingMethod('fr')|raw }}
                 <br>
                 {{ productDisplayStock['message']|raw }}
-
             </div>
         </div>
     </div>

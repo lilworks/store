@@ -228,3 +228,13 @@ footer{
 .conversation-from-user{
     background-color: rgba(212, 80, 80, 0.2);
 }
+
+
+.basketSmall{
+    font-size: 14px;
+}
+.totInSmallBasket{
+    font-weight: 800;
+}
+
+

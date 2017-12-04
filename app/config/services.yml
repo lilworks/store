@@ -28,7 +28,7 @@ services:
 
     app.user_login:
         class: AppBundle\EventListener\LoginListener
-        arguments: ['@service_container','@doctrine.orm.default_entity_manager']
+        arguments: ['@service_container','@doctrine.orm.default_entity_manager','@site.basket']
         tags:
             - { name: kernel.event_subscriber }
 
@@ -114,3 +114,10 @@ services:
     AppBundle\Form\Extension\HelperTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+
+    site.country_listener:
+        class: SiteBundle\EventListener\CountryListener
+        arguments: ['@service_container']
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: setCountry }

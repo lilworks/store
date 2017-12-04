@@ -6,6 +6,8 @@
   "author": "lil-works <lilian@lil-works.com>",
   "license": "MIT",
   "dependencies": {
+    "angular": "^1.6.7",
+    "angularjs-slider": "^6.4.1",
     "bootstrap": "^4.0.0-alpha.6",
     "bootstrap-datepicker": "^1.7.1",
     "bootstrap-select": "^1.12.4",

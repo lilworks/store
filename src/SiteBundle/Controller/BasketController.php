@@ -45,10 +45,21 @@ class BasketController extends Controller
                 $em->remove($v);
             }
 
-            if($form->has("basketsRealShippingMethods") && isset($basketService->shippingCalculator->combinations[$form->get("basketsRealShippingMethods")->getData()])){
-                foreach($basketService->shippingCalculator->combinations[$form->get("basketsRealShippingMethods")->getData()]["datas"] as $smId=>$smToAdd){
+
+
+            if($form->has("basketsRealShippingMethods") && isset($basketService->shippingCalculator->combinationsBeforeOrder[$form->get("basketsRealShippingMethods")->getData()])){
+/*
+                foreach($basketService->shippingCalculator->combinationsBeforeOrder[$form->get("basketsRealShippingMethods")->getData()]["datas"] as $kcomb=>$v){
+                    var_dump($v["shippingMethod"]->getName());
+                }
+                die();
+*/
+
+                foreach($basketService->shippingCalculator->combinationsBeforeOrder[$form->get("basketsRealShippingMethods")->getData()]["datas"] as $smToAdd){
+
                     $basketRealShippingMethod = new BasketsRealShippingMethods();
-                    $basketRealShippingMethod->setShippingMethod($em->getRepository("LilWorksStoreBundle:ShippingMethod")->find($smId));
+                    //$basketRealShippingMethod->setShippingMethod($em->getRepository("LilWorksStoreBundle:ShippingMethod")->find($smId));
+                    $basketRealShippingMethod->setShippingMethod($smToAdd["shippingMethod"]);
                     $basketRealShippingMethod->setBasket($basket);
                     $basketRealShippingMethod->setPrice($smToAdd["price"]);
 
@@ -63,13 +74,16 @@ class BasketController extends Controller
                     }
 
                     $basket->addBasketsRealShippingMethod($basketRealShippingMethod);
-                }
-            }
 
+
+                }
+
+            }
 
 
             $totals = $basketService->getTotals();
             $basket->setTot(floatval($totals["TTC"]+$totals["SM"]));
+
 
             $em->persist($basket);
             $em->flush();
@@ -80,7 +94,6 @@ class BasketController extends Controller
             }elseif( $form->get('empty')->isClicked()){
                 return $this->redirectToRoute('site_basket_empty');
             }elseif( $form->get('order')->isClicked()){
-                $totals = $basketService->getTotals();
                 $order = $basketService->toOrder();
                 return $this->redirectToRoute('site_order_pay',array('order_id'=>$order->getId()));
             }

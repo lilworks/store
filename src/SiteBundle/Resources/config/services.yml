@@ -20,7 +20,7 @@ services:
     site.twig_extension:
          class: SiteBundle\Twig\SiteExtension
          public: false
-         arguments: ['@translator']
+         arguments: ['@translator',"@doctrine.orm.entity_manager","@session"]
          tags:
             - { name: twig.extension }
     site.form.basket:
@@ -88,3 +88,6 @@ services:
         arguments: ["@knp_menu.factory"]
         tags:
             - { name: knp_menu.menu_builder, method: createListMenu, alias: siteList } # The alias is what is used to retrieve the menu
+
+
+

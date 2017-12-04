@@ -4,7 +4,7 @@ namespace LilWorks\StoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use LilWorks\StoreBundle\Util\TagSanitizer;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity
  * @ORM\Table(name="lilworks_product")
@@ -127,14 +127,14 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="tag", type="string",length=100,nullable=false)
+     * @ORM\Column(name="tag", type="string",length=100,nullable=false,unique=true)
      */
     private $tag;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string",length=255,nullable=false)
+     * @ORM\Column(name="name", type="string",length=255,nullable=false,unique=true)
      * @Assert\NotBlank()
      */
     private $name;

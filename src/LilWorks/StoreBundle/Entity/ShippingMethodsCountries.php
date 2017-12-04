@@ -50,7 +50,7 @@ class ShippingMethodsCountries
 
 
     /**
-     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\ShippingMethodsCountriesTriggers", mappedBy="shippingMethodCountry")
+     * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\ShippingMethodsCountriesTriggers", mappedBy="shippingMethodCountry",cascade={"persist","remove"})
      */
     private $triggers;
 

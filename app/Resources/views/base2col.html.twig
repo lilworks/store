@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale|split('_')[0] }}">
+<html lang="{{ app.request.locale|split('_')[0] }}" ng-app>
 <head>
     <script src="/assets/vendor/PACE/pace.min.js"></script>
     <link rel="stylesheet" href="/assets/vendor/PACE/themes/red/pace-theme-minimal.css">
@@ -60,7 +60,7 @@
     <script>
         window.paceOptions = {
             ajax: false,
-            restartOnRequestAfter: false,
+            restartOnRequestAfter: false
         };
     </script>
 </head>
@@ -104,8 +104,14 @@
         <div style="position: absolute; z-index: 99;right: 10px; width: 300px;">
             {{ site_flash.getMessages|raw }}
         </div>
+
+
+
         {% block body %}
         {% endblock %}
+
+
+
     </div>
     <!-- /.row -->
 
@@ -114,6 +120,10 @@
 
 <!-- Footer -->
 <footer class="py-5 bg-inverse">
+
+
+
+
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
@@ -137,6 +147,7 @@
 <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="/assets/vendor/ekko-lightbox/dist/ekko-lightbox.js"></script>
 <script src="/assets/vendor/jquery-confirm2/dist/jquery-confirm.min.js"></script>
+
 <script>
     $(document).on('click', '[data-toggle="lightbox"]', function(event) {
         event.preventDefault();

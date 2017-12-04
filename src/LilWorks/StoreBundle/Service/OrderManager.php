@@ -225,8 +225,8 @@ class OrderManager
         $this->totCalculator();
         $this->payedCalculator();
 
-        echo "<h1>".$this->order->getTot()."</h1>";
-        echo "<h1>".$this->order->getPayed()."</h1>";
+       // echo "<h1>".$this->order->getTot()."</h1>";
+       // echo "<h1>".$this->order->getPayed()."</h1>";
 
 
         if($this->order->getOrderType()->getTag() == "DEVIS"){
@@ -243,7 +243,7 @@ class OrderManager
                 if($this->hasNew){
                     $this->hasNew = $orderOrderStep;
                     $this->em->persist($this->hasNew);
-                    echo "<h1>NEW</h1>";
+                    //echo "<h1>NEW</h1>";
                 }else{
                     $this->em->remove($orderOrderStep);
                     $this->order->removeOrdersOrderStep($orderOrderStep);
@@ -254,7 +254,7 @@ class OrderManager
                     $this->hasDone = $orderOrderStep;
                     $this->hasDone->setOrder($this->order);
                     $this->em->persist($this->hasDone);
-                    echo "<h1>DONE</h1>";
+                    //echo "<h1>DONE</h1>";
                 }else{
                     $this->em->remove($orderOrderStep);
                     $this->order->removeOrdersOrderStep($orderOrderStep);
@@ -264,7 +264,7 @@ class OrderManager
                 if(!$this->hasPayed){
                     $this->hasPayed = $orderOrderStep;
                     $this->em->persist($this->hasPayed);
-                    echo "<h1>PAYED</h1>";
+                    //echo "<h1>PAYED</h1>";
                 }else{
                     $this->em->remove($orderOrderStep);
                     $this->order->removeOrdersOrderStep($orderOrderStep);
@@ -274,7 +274,7 @@ class OrderManager
                 if(!$this->hasPartialPayment){
                     $this->hasPartialPayment = $orderOrderStep;
                     $this->em->persist($this->hasPartialPayment);
-                    echo "<h1>PARTIAL_PAYMENT</h1>";
+                    //echo "<h1>PARTIAL_PAYMENT</h1>";
                 }else{
                     $this->em->remove($orderOrderStep);
                     $this->order->removeOrdersOrderStep($orderOrderStep);
@@ -284,7 +284,7 @@ class OrderManager
                 if(!$this->hasCanceled){
                     $this->hasCanceled = $orderOrderStep;
                     $this->em->persist($this->hasCanceled);
-                    echo "<h1>CANCELED</h1>";
+                    //echo "<h1>CANCELED</h1>";
                     $this->hasCanceled = $orderOrderStep;
                 }else{
                     $this->em->remove($orderOrderStep);
@@ -296,7 +296,7 @@ class OrderManager
                     $this->hasDraft = $orderOrderStep;
                     $this->hasDraft->setOrder($this->order);
                     $this->em->persist($this->hasDraft);
-                    echo "<h1>DRAFT</h1>";
+                    //echo "<h1>DRAFT</h1>";
                     $this->hasDraft = $orderOrderStep;
                 }else{
                     $this->em->remove($orderOrderStep);
@@ -304,24 +304,24 @@ class OrderManager
                 }
             }
         }
-echo "<hr>";
+//echo "<hr>";
 
 
-        var_dump($order->getTot());
-        var_dump($order->getPayed());
+       // var_dump($order->getTot());
+       // var_dump($order->getPayed());
 
         if( floatval($order->getTot()) === floatval($order->getPayed())){
-            echo "<h1>CALCULATOR PAYED</h1>";
+            //echo "<h1>CALCULATOR PAYED</h1>";
             $this->isPayed = true;
         }elseif( $this->order->getPayed() > 0){
-            echo "<h1>CALCULATOR PARTIAL</h1>";
+            //echo "<h1>CALCULATOR PARTIAL</h1>";
             $this->isPartialPayment = true;
         }else{
-            echo "<h1>CALCULATOR DONT SET ANYTHING</h1>";
+            //echo "<h1>CALCULATOR DONT SET ANYTHING</h1>";
         }
 
-        var_dump($this->isPayed);
-        var_dump($this->isPartialPayment);
+       // var_dump($this->isPayed);
+       // var_dump($this->isPartialPayment);
 
         if($this->isPayed && !$this->hasDraft){
             $this->manageStock = true;
@@ -332,7 +332,7 @@ echo "<hr>";
 
 
         if($this->isPartialPayment){
-            echo "<h1>IS PARTIAL</h1>";
+            //echo "<h1>IS PARTIAL</h1>";
             if(! $this->hasPartialPayment){
                 $orderOrderStep = new OrdersOrderSteps();
                 $orderOrderStep->setCreatedAt(new \DateTime());
@@ -343,7 +343,7 @@ echo "<hr>";
                 $this->hasPartialPayment = $orderOrderStep;
             }
             if($this->hasPayed ){
-                echo "<h1>REMOVE THE OLDER PAYED</h1>";
+                //echo "<h1>REMOVE THE OLDER PAYED</h1>";
                 if($this->hasPartialPayment){
                     $this->order->removeOrdersOrderStep($this->hasPayed);
                     $this->em->remove($this->hasPayed);
@@ -351,7 +351,7 @@ echo "<hr>";
                 }
             }
         }elseif($this->isPayed){
-            echo "<h1>IS PAYED</h1>";
+            //echo "<h1>IS PAYED</h1>";
             if(false === $this->hasPayed ){
                 $orderOrderStep = new OrdersOrderSteps();
                 $orderOrderStep->setCreatedAt(new \DateTime());
@@ -369,7 +369,7 @@ echo "<hr>";
                 }
             }
         }else{
-            echo "<h1>NOT PAYED OR PARTIAL</h1>";
+            //echo "<h1>NOT PAYED OR PARTIAL</h1>";
             if($this->hasPartialPayment){
                 $this->order->removeOrdersOrderStep($this->hasPartialPayment);
                 $this->em->remove($this->hasPartialPayment);
@@ -383,7 +383,7 @@ echo "<hr>";
         }
 
         if($this->hasDraft){
-            echo "<h1>HAS DRAFT</h1>";
+            //echo "<h1>HAS DRAFT</h1>";
             if($this->hasDone){
                 $this->order->removeOrdersOrderStep($this->hasDone);
                 $this->em->remove($this->hasDone);
@@ -401,7 +401,7 @@ echo "<hr>";
             }
             $this->noDestocking();
         }elseif($this->hasCanceled){
-            echo "<h1>HAS CANCELED</h1>";
+            //echo "<h1>HAS CANCELED</h1>";
             if($this->hasDone){
                 $this->order->removeOrdersOrderStep($this->hasDone);
                 $this->em->remove($this->hasDone);
@@ -409,10 +409,10 @@ echo "<hr>";
             }
             $this->noDestocking();
         }elseif($this->hasPayed){
-            echo "<h1>HAS PAYED</h1>";
+            //echo "<h1>HAS PAYED</h1>";
             $this->destocking();
         }elseif(!$this->hasNew && count($this->order->getOrdersOrderSteps())==0){
-            echo "<h1>CREATE NEW</h1>";
+            //echo "<h1>CREATE NEW</h1>";
             $orderOrderStep = new OrdersOrderSteps();
             $orderOrderStep->setCreatedAt(new \DateTime());
             $orderOrderStep->setOrderStep($this->em->getRepository("LilWorksStoreBundle:OrderStep")->findOneByTag("NEW"));
@@ -439,7 +439,7 @@ echo "<hr>";
             $orderProduct->setDestocking($orderProduct->getQuantity());
             $this->em->persist($product);
             $this->em->persist($orderProduct);
-            var_dump("Destock" , $toDestock);
+            //var_dump("Destock" , $toDestock);
         }
     }
     public function noDestocking(){
@@ -452,7 +452,7 @@ echo "<hr>";
             $this->em->persist($product);
             $this->em->persist($orderProduct);
 
-            var_dump("Restock" , $toRestock);
+            //var_dump("Restock" , $toRestock);
         }
     }
 

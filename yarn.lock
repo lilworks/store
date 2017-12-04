@@ -55,6 +55,14 @@ ajv@^5.1.0:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
 
+angular@^1.6.7:
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.7.tgz#0f89837dae1776b01ccb1fa2096db0d9373d9897"
+
+angularjs-slider@^6.4.1:
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/angularjs-slider/-/angularjs-slider-6.4.1.tgz#eb5da71314fa61f72124fe72f12fd9913a601d7b"
+
 ansi-regex@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df"
