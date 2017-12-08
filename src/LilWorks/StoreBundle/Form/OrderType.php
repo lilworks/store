@@ -227,6 +227,7 @@ class OrderType extends AbstractType
                 ),
 
 
+
             ));
         $builder->add('userComment',null,array(
                 'label'=>'storebundle.order.usercomment',

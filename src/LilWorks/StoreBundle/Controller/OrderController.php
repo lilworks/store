@@ -32,6 +32,8 @@ class OrderController extends Controller
                 ->getRepository('LilWorksStoreBundle:Order')
                 ->createQueryBuilder('o')
                 ->join('o.customer','c')
+                ->join('o.ordersProducts','op')
+                ->join('op.product','p')
             ;
             $qb = $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($formFilter, $filterBuilder);
         }else{
@@ -39,6 +41,8 @@ class OrderController extends Controller
                 ->getRepository('LilWorksStoreBundle:Order')
                 ->createQueryBuilder('o')
                 ->join('o.customer','c')
+                ->join('o.ordersProducts','op')
+                ->join('op.product','p')
             ;
         }
 

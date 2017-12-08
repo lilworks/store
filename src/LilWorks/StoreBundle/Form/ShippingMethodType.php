@@ -55,7 +55,11 @@ class ShippingMethodType extends AbstractType
             'expanded' => true ,
             'multiple' => true,
             'choice_label' => function ($obj) {
-                return   $obj->getBrand()->getName() . " " . $obj->getName()   ;
+                $strCat = "";
+                foreach($obj->getCategories() as $category){
+                    $strCat.= " " . $category->getName();
+                }
+                return  $obj->getBrand()->getName() . " " . $obj->getName() . " ($strCat )" ;
             },
             'query_builder' => function (EntityRepository $er)  {
                 return $er->createQueryBuilder('p')

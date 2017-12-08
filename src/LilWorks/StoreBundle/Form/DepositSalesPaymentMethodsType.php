@@ -88,8 +88,9 @@ class DepositSalesPaymentMethodsType extends AbstractType
                 ));
             }
         });
-        $builder
 
+        
+        $builder
             ->add('payedAt',null,array(
                 'label'=>'storebundle.paymentmethod.payedat',
                 'attr' => ['class' => 'datepicker'],

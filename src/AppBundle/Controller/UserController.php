@@ -30,8 +30,7 @@ class UserController extends Controller
             $filterBuilder = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('AppBundle:User')
                 ->createQueryBuilder('u')
-                ->innerJoin('LilWorksStoreBundle:Customer','c','with','c.id = u.customer')
-                ->where('c.id is null')
+                ->leftJoin('u.customer','c')
                 ->groupBy('u.id')
             ;
 
@@ -42,6 +41,8 @@ class UserController extends Controller
             $qb = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('AppBundle:User')
                 ->createQueryBuilder('u')
+                ->leftJoin('u.customer','c')
+                ->groupBy('u.id')
                 ;
         }
 

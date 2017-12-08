@@ -71,7 +71,9 @@ class ShippingMethodController extends Controller
                 $shippingMethod->addTrigger($t);
                 $em->persist($t);
             }
-
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'success','message'=>'storebundle.flash.shippingmethod.created')
+            ));
             $em->flush();
             return $this->redirectToRoute('shippingmethod_show', array('shippingmethod_id' => $shippingMethod->getId()));
         }
@@ -126,10 +128,6 @@ class ShippingMethodController extends Controller
 
                 if (false === $shippingMethod->getTriggers()->contains($t)) {
                     $t->setShippingMethod(null);
-                    // if it was a many-to-one relationship, remove the relationship like this
-                    //$shippingmethodCountry->setCountry(null);
-                    //$em->persist($t);
-                    // if you wanted to delete the Tag entirely, you can also do that
                     $em->remove($t);
                 }
 
@@ -158,6 +156,9 @@ class ShippingMethodController extends Controller
             }
             $em->persist($shippingMethod);
             $em->flush();
+            $this->get('store.flash')->setMessages(array(
+                array('status'=>'success','message'=>'storebundle.flash.shippingmethod.updated')
+            ));
             return $this->redirectToRoute('shippingmethod_edit', array('shippingmethod_id' => $shippingMethod->getId()));
         }
 
@@ -176,6 +177,11 @@ class ShippingMethodController extends Controller
     public function deleteAction(Request $request,ShippingMethod $shippingMethod)
     {
         $em = $this->getDoctrine()->getManager();
+
+
+        $this->get('store.flash')->setMessages(array(
+            array('status'=>'success','message'=>'storebundle.flash.shippingmethod.deleted')
+        ));
 
         $em->remove($shippingMethod);
         $em->flush();

@@ -91,12 +91,7 @@ class OrdersProductsType extends AbstractType
                             'mapped'=> true,
                             'expanded' => false ,
                             'multiple' => false,
-                           # 'attr' => array(
-                           #     'class'=>'selectpicker',
-                           #     'data-live-search'=>'true',
-                           #     'data-actions-box'=>true,
-                           #     'data-width'=>"300px"
-                           # )
+
 
                         ))
 
@@ -220,12 +215,12 @@ class OrdersProductsType extends AbstractType
                         'mapped'=> true,
                         'expanded' => false ,
                         'multiple' => false,
-                     #   'attr' => array(
-                     #       'class'=>'selectpicker',
-                     #       'data-live-search'=>'true',
-                     #       'data-actions-box'=>true,
-                     #       'data-width'=>"300px"
-                     #   )
+                        'attr' => array(
+                            'class'=>'selectpicker',
+                            'data-live-search'=>'true',
+                            'data-actions-box'=>true,
+                            'data-width'=>"300px",
+                        )
 
                     ))
 

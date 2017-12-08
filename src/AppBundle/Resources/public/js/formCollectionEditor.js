@@ -34,7 +34,6 @@ var FCE = {
         $addLink.on('click', function(e) {
             // prevent the link from creating a "#" on the URL
             e.preventDefault();
-
             // add a new tag form (see code block below)
             oFCE.addTagForm($collectionHolder, $newLinkLi);
         });
@@ -71,6 +70,9 @@ var FCE = {
 
         $newLinkLi.before($newFormLi);
 
+
+
+
         // handle the removal, just for this example
         $('.remove-tag').click(function(e) {
             e.preventDefault();
@@ -80,11 +82,13 @@ var FCE = {
             return false;
         });
 
+        $('.selectpicker').selectpicker();
 
         $('.datepicker').datepicker({
             language:'fr',
             format: "dd/mm/yyyy"
         });
+
 
 
     },

@@ -237,4 +237,13 @@ footer{
     font-weight: 800;
 }
 
+/* for bootstrap range */
+.nav.progress {
+    position: relative;
+}
 
+#position {
+    position: absolute;
+    margin-top: -2px;
+    left: 0;
+}

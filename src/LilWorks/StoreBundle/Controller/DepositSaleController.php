@@ -68,6 +68,7 @@ class DepositSaleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $textHeader = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-header');
         $textFooter = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-footer');
+        $textCGV = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('cgv_depot-vente');
 
         $header = $this->renderView('LilWorksStoreBundle:Pdf:header.html.twig', array(
             'css'=>$textHeader->getCss(),
@@ -81,6 +82,7 @@ class DepositSaleController extends Controller
 
         $html = $this->renderView('LilWorksStoreBundle:DepositSale:pdf-'.strtolower($depositSale->getStatus()->getTag()).'.html.twig', array(
             'depositSale'  => $depositSale,
+            'CGV'=>$textCGV,
             'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath(),
         ));
         $pdf = $this->get('knp_snappy.pdf');

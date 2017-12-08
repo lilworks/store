@@ -19,7 +19,7 @@ class UserFilterType extends AbstractType
             ->add('email', Filters\TextFilterType::class,array(
                 'label'=>'storebundle.email'
             ))
-            ->add('status', Filters\EntityFilterType::class,array(
+            ->add('customer', Filters\EntityFilterType::class,array(
                 'label'=>'storebundle.customer',
                 'class'=>'LilWorksStoreBundle:Customer',
                 'choice_label' => function ($obj) {

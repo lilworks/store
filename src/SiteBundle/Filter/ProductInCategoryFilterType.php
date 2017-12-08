@@ -106,6 +106,7 @@ class ProductInCategoryFilterType extends AbstractType
         $builder
 
             ->add('priceOnline', Filters\NumberRangeFilterType::class,array(
+                'help'=>$min."€ | ".$max."€",
                 'label'=>'sitebundle.pricerange',
                 'right_number_options'=>array(
                     "data"=>($right)?$right:"0",
