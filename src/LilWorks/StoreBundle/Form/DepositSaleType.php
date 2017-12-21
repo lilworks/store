@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+
 class DepositSaleType extends AbstractType
 {
     /**
@@ -70,7 +71,7 @@ class DepositSaleType extends AbstractType
                 $form->add('depositSalesPaymentMethods', CollectionType::class, array(
                     'label' => 'storebundle.paymentmethods',
                     'entry_options' => array(
-                        'context' => null,
+                        'context' => null
                     ),
                     'constraints' => array(new Valid()),
                     'mapped' => true,

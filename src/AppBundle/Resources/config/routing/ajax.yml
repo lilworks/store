@@ -37,3 +37,47 @@ app_ajax_memorizedTab:
     defaults: { _controller: AppBundle:Ajax:memorizedTab }
     options:
          expose: true
+
+app_ajax_searchChild:
+    path:     /searchChild/{id},{entity},{child},{childEntity},{maxResults},{searchString}
+    defaults: { _controller: "AppBundle:Ajax:searchChild" }
+    methods:  [GET,POST]
+    options:
+        expose: true
+app_ajax_addChild:
+    path:     /addChild/{id},{entity},{child},{childEntity}
+    defaults: { _controller: "AppBundle:Ajax:addChild" }
+    methods:  [GET,POST]
+    options:
+        expose: true
+app_ajax_addAll:
+    path:     /addAll/{id},{entity},{child},{childEntity}
+    defaults: { _controller: "AppBundle:Ajax:addAll" }
+    methods:  [GET,POST]
+    options:
+        expose: true
+app_ajax_removeAll:
+    path:     /removeAll/{id},{entity},{child},{childEntity}
+    defaults: { _controller: "AppBundle:Ajax:removeAll" }
+    methods:  [GET,POST]
+    options:
+        expose: true
+app_ajax_removeChild:
+    path:     /removeChild/{id},{entity},{child},{childEntity}
+    defaults: { _controller: "AppBundle:Ajax:removeChild" }
+    methods:  [GET,POST]
+    options:
+        expose: true
+app_ajax_getCounts:
+    path:     /getCounts/{id},{entity},{child}
+    defaults: { _controller: "AppBundle:Ajax:getCounts" }
+    methods:  [GET,POST]
+    options:
+        expose: true
+app_ajax_searchCurrentChild:
+    path:     /searchCurrentChild/{id},{entity},{child},{childEntity},{maxResults},{searchString}
+    defaults: { _controller: "AppBundle:Ajax:searchCurrentChild" }
+    methods:  [GET,POST]
+    options:
+        expose: true
+

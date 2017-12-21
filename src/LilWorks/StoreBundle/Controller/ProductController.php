@@ -165,6 +165,7 @@ class ProductController extends Controller
         ));
     }
 
+
     /**
      * @ParamConverter("product", options={"mapping": {"product_id"   : "id"}})
      */

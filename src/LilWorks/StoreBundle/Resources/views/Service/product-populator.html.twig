@@ -1,0 +1,80 @@
+
+
+
+
+
+
+<div class="card">
+
+    <div class="card-block">
+
+        <div class="row" id="name-widget" ng-controller="StoreCtrl as ctrl" ng-init="init({{ object.id }},'{{ object.entity }}','{{ object.child }}','{{ object.childEntity }}','{{ object.childMethod }}')">
+            <div class="col-lg-6">
+                <h3>{{ 'storebundle.populate.searchchild'|trans() }}  ([[availableCount]])</h3>
+                <button class="btn btn-sm btn-success" ng-click="myData.addAll(item, $event)">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    {{ 'storebundle.populate.button.addall'|trans() }}
+                </button>
+                <hr>
+                <select ng-model="maxResults" ng-options="maxResult.id as maxResult.name for maxResult in availableMaxResults">
+                    <option value="">{{ 'storebundle.populate.selectmaxresult'|trans() }}</option>
+                </select>
+
+                <input type="text" value="" ng-model="searchString">
+                <button class="btn btn-sm btn-secondary" ng-click="myData.doSearch(item, $event)">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    {{ 'storebundle.populate.button.search'|trans() }}
+                </button>
+                <button class="btn btn-sm btn-success" ng-click="myData.add(item, $event)">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    {{ 'storebundle.populate.button.addselected'|trans() }}
+                </button>
+
+                <br/>
+                <h5><span ng-bind-html="childSearchCountHtml"></span>{{ 'storebundle.populate.found'|trans() }} ([[childSearchCount]])</h5>
+                <label ng-repeat="product in products">
+                    <input
+                            type="checkbox"
+                            name="selectedProducts[]"
+                            value="[[product.id]]"
+                            ng-model="product.selected"
+                            > [[product.name]]
+                </label>
+            </div>
+            <div class="col-lg-6">
+                <h3>{{ 'storebundle.populate.searchcurrent'|trans() }}   ([[currentCount]])</h3>
+
+                <button class="btn btn-sm btn-warning" ng-click="currentData.removeAll(item, $event)">
+                    <i class="fa fa-minus" aria-hidden="true"></i>
+                    {{ 'storebundle.populate.button.removeall'|trans() }}
+                </button>
+                <hr>
+                <select ng-model="currentMaxResults" ng-options="maxResult.id as maxResult.name for maxResult in availableMaxResults">
+                    <option value="">{{ 'storebundle.populate.selectmaxresult'|trans() }}</option>
+                </select>
+
+                <input type="text" value="" ng-model="currentSearchString">
+                <button  class="btn btn-sm btn-secondary"  ng-click="currentData.doSearch(item, $event)">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    {{ 'storebundle.populate.button.search'|trans() }}
+                </button>
+                <button  class="btn btn-sm btn-warning"  ng-click="currentData.remove(item, $event)">
+                    <i class="fa fa-minus" aria-hidden="true"></i>
+                    {{ 'storebundle.populate.button.removeselected'|trans() }}
+                </button>
+                <br/>
+
+                <h5><span ng-bind-html="currentSearchCountHtml"></span>{{ 'storebundle.populate.found'|trans() }} ([[currentSearchCount]])</h5>
+                <label ng-repeat="currentProduct in currentProducts">
+                    <input
+                            type="checkbox"
+                            name="selectedCurrentProducts[]"
+                            value="[[currentProduct.id]]"
+                            ng-model="currentProduct.selected"
+                            > [[currentProduct.name]]
+                </label>
+            </div>
+        </div>
+
+    </div>
+</div>

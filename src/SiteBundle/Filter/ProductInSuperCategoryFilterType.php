@@ -186,6 +186,9 @@ class ProductInSuperCategoryFilterType extends AbstractType
                 'choice_label' => function ( $category ) use ($productsInCategory){
                     return $category->getName() . "(".$productsInCategory[$category->getId()].")" ;
                 },
+                'attr' => array(
+                    'class'=>'form-control',
+                ),
                 'query_builder' => function (EntityRepository $er) use ($categories) {
                     return $er->createQueryBuilder('c')
                         ->where('c.id IN (:ids)')
@@ -207,6 +210,9 @@ class ProductInSuperCategoryFilterType extends AbstractType
                 'choice_label' => function ( $brand ) use ($productsInBrand){
                     return $brand->getName() . "(".$productsInBrand[$brand->getId()].")" ;
                 },
+                'attr' => array(
+                    'class'=>'form-control',
+                ),
                 'query_builder' => function (EntityRepository $er) use ($brands) {
                     return $er->createQueryBuilder('b')
                         ->where('b.id IN (:ids)')

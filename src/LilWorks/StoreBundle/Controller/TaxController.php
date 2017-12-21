@@ -182,6 +182,49 @@ class TaxController extends Controller
     /**
      * @ParamConverter("tax", options={"mapping": {"tax_id"   : "id"}})
      */
+    public function populateOfflineAction(Request $request, Tax $tax)
+    {
+
+        $this->get('store.setSeo')->setTitle('storebundle.title.populate.offline %name%',array('%name%'=>$tax->getName()),'storebundle.prefix.taxes');
+
+        $object = array(
+            'id'=>$tax->getId(),
+            'entity'=>'LilWorksStoreBundle:Tax',
+            'child'=>'productsOffline',
+            'childEntity'=>'LilWorksStoreBundle:Product',
+            'childMethod'=>'taxOffline',
+        );
+
+        return $this->render('LilWorksStoreBundle:Tax:populate-offline.html.twig', array(
+            'tax' => $tax,
+            'object'=>$object
+        ));
+    }
+    /**
+     * @ParamConverter("tax", options={"mapping": {"tax_id"   : "id"}})
+     */
+    public function populateOnlineAction(Request $request, Tax $tax)
+    {
+
+        $this->get('store.setSeo')->setTitle('storebundle.title.populate.online %name%',array('%name%'=>$tax->getName()),'storebundle.prefix.taxes');
+
+        $object = array(
+            'id'=>$tax->getId(),
+            'entity'=>'LilWorksStoreBundle:Tax',
+            'child'=>'productsOnline',
+            'childEntity'=>'LilWorksStoreBundle:Product',
+            'childMethod'=>'taxOnline',
+        );
+
+        return $this->render('LilWorksStoreBundle:Tax:populate-online.html.twig', array(
+            'tax' => $tax,
+            'object'=>$object
+        ));
+    }
+
+    /**
+     * @ParamConverter("tax", options={"mapping": {"tax_id"   : "id"}})
+     */
     public function deleteAction(Request $request,Tax $tax)
     {
         $em = $this->getDoctrine()->getManager();

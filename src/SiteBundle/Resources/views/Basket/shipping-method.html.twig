@@ -1,0 +1,161 @@
+{% extends 'baseFull.html.twig' %}
+
+{% block body %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $('html').bind('keypress', function(e)
+            {
+                if(e.keyCode == 13)
+                {
+                    return false;
+                }
+            });
+        </script>
+
+    {% endblock %}
+    <h1>
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        <i class="fa fa-truck" aria-hidden="true"></i>
+        {% trans %}sitebundle.basket.shippingmethod{% endtrans %}
+    </h1>
+
+
+
+
+
+    {{ form_start(form) }}
+    <a role="button" class="btn btn-secondary" href="{{ path('site_basket_edit') }}">{{ 'sitebundle.basket.edit'|trans }}</a>
+    {{ form_row(form.update) }}
+
+
+
+
+
+
+    <div class="row">
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>{% trans %}sitebundle.shippingaddress{% endtrans %}</h4>
+                </div>
+                <div class="card-block">
+                    {{ form_errors(form.shippingAddress) }}
+                    {{ form_widget(form.shippingAddress) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>{% trans %}sitebundle.billingaddress{% endtrans %}</h4>
+                </div>
+                <div class="card-block">
+                    {{ form_errors(form.billingAddress) }}
+                    {{ form_widget(form.billingAddress) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">
+                    <h4>
+                        <i class="fa fa-truck"></i>
+                        {% trans %}sitebundle.shippingmethod{% endtrans %}
+                    </h4>
+                </div>
+                <div class="card-block">
+                    {% if form.basketsRealShippingMethods is defined %}
+
+                        {% if form.basketsRealShippingMethods.vars.choices|length==0 %}
+                            <div class="alert alert-danger" role="alert">
+                                <i class="fa fa-truck" style="color: red;"></i>
+                                {% trans %}sitebundle.noshippingmethodfound{% endtrans %}
+                            </div>
+                        {% endif %}
+
+                        {{ form_errors(form.basketsRealShippingMethods) }}
+                        {{ form_widget(form.basketsRealShippingMethods) }}
+
+                        {% if form.basketsRealShippingMethods is defined and form.basketsRealShippingMethods.vars.data is not null %}
+                            <div class="card">
+                                <div class="card-header">{% trans %}sitebundle.totwithshipping{% endtrans %}</div>
+                                <div class="card-block priceSM">
+                                    {{ basket.tot|price }}<sup>TTC</sup>
+                                    {% if form.order is defined %}
+                                        {{ form_row(form.order) }}
+                                    {% endif %}
+                                </div>
+
+                            </div>
+
+                        {% endif %}
+                    {% else %}
+                        {% trans %}sitebundle.selectaddressfirst{% endtrans %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+    <table class="table table-striped">
+        <thead>
+        <th>{% trans %}sitebundle.product{% endtrans %}</th>
+        <th>{% trans %}sitebundle.quantity{% endtrans %}</th>
+        <th>{% trans %}sitebundle.priceunity{% endtrans %}</th>
+        <th>{% trans %}sitebundle.producttot{% endtrans %}</th>
+        </thead>
+
+        <tbody>
+            {% for k,product in basket.basketsProducts %}
+                {% set productDisplayStock =  product.product|displayStock('badge',true,true) %}
+                <tr>
+                    <td>
+                        {% if product.product.pictures[0].pictureName is defined %}
+                            <img src="{{ asset('product/'~product.product.pictures[0].pictureName) | imagine_filter('mini') }}" />
+                        {% endif %}
+                        {{ product.product.brand.name }} {{ product.product.name }}
+                        {{ productDisplayStock['message']|raw }}
+                        {% if product.product.isSecondHand == 1 %}
+                            <span class="alert alert-danger btn-sm" role="alert">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                {% trans %}sitebundle.issecondhand{% endtrans %}
+                                </span>
+                        {% endif %}
+                        {{ product.product.warrantiesOnline|warranties|raw }}
+                    </td>
+                    <td>
+                        {{ product.quantity }}
+                    </td>
+                    <td>
+                        {{ product.product.priceOnline|price }} <br>
+                        {{ product.product.taxesOnline|taxes|raw }}
+                    </td>
+                    <td>{{ (product.product.priceOnline * product.quantity)|price }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                {% set totals = basket.basketsProducts|totalCalculator %}
+                <td class="bg-info" colspan="4" >
+                    {% trans %}sitebundle.tot{% endtrans %}
+                    <style>
+                        .priceTTC{
+                            font-size: 1.6em;
+                            font-weight: bold;
+                        }
+                        .priceSM{
+                            font-size: 1.8em;
+                            font-weight: bold;
+                        }
+                    </style>
+                    <div class="priceTTC">{{ totals['ttc']|price }}<sup>TTC</sup></div>
+                    <div class="priceHt">{{ totals['ht']|price }}<sup>HT</sup></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

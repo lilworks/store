@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormEvents;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
 
 class ProductInAllFilterType extends AbstractType
 {
@@ -115,13 +115,35 @@ class ProductInAllFilterType extends AbstractType
                 )
             ))
 */
+                /*
             ->add('name', Filters\TextFilterType::class,array(
                 'label'=>'sitebundle.productname',
             ))
+                */
             ->add('isSecondHand', Filters\BooleanFilterType::class,array(
                 'label'=>'sitebundle.issecondhand',
             ))
+            ->add('search', Filters\TextFilterType::class, array(
+                'label'=>'sitebundle.productname',
+                'mapped' => false,
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                    if (empty($values['value'])) {
+                        return null;
+                    }
 
+                    $values['value'] = str_replace(" ","%",preg_replace('!\s+!', ' ', $values['value']));
+                    $expression = $filterQuery->getExpr()->orX(
+                        $filterQuery->getExpr()->like('CONCAT(b.name,p.name)', ':search'),
+                        $filterQuery->getExpr()->like('CONCAT(p.name,b.name)', ':search')
+                    );
+
+                    $parameters = array('search' => "%".$values['value']."%" );
+
+
+
+                    return $filterQuery->createCondition($expression, $parameters);
+                }
+            ))
             ->add('categories', Filters\EntityFilterType::class, array(
                 'class'    =>  'LilWorksStoreBundle:Category',
                 'expanded'=>true,
@@ -129,7 +151,9 @@ class ProductInAllFilterType extends AbstractType
                 'choice_label' => function ( $category ) {
                     return $category->getName();
                 },
-
+                'attr' => array(
+                    'class'=>'form-control',
+                ),
                 'query_builder' => function (EntityRepository $er)  {
                     return $er->createQueryBuilder('c')
                         #->where('b.id in (:categories)')

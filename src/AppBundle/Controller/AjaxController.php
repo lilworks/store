@@ -15,6 +15,261 @@ use Symfony\Component\HttpFoundation\Response;
 class AjaxController extends Controller
 {
 
+    public function getCountsAction(Request $request)
+    {
+        $entity = $request->get('entity');
+        $child = $request->get('child');
+        $childEntity = $request->get('childEntity');
+        $id = $request->get('id');
+
+        $currentCount =  $this->getDoctrine()->getRepository($entity)->createQueryBuilder('x')
+            ->select('count(c.id) as currentCount')
+            ->leftJoin('x.'.$child , 'c')
+            ->where('x.id = :id')
+            ->andWhere('c.isArchived != 1')
+
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        $totCount =  $this->getDoctrine()->getRepository($childEntity)->createQueryBuilder('x')
+            ->select('count(x.id) as totCount')
+            ->where('x.isArchived != 1')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+
+        return new JsonResponse( array(
+            'currentCount'=>  $currentCount["currentCount"],
+            'availableCount'=>  intval($totCount["totCount"]) - intval($currentCount["currentCount"]),
+        ));
+
+    }
+    public function addAllAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $request->get('entity');
+        $child = $request->get('child');
+        $childEntity = $request->get('childEntity');
+        $childMethod = $request->get('childMethod');
+        $id = $request->get('id');
+
+
+        $resultsCurrents = $this->getDoctrine()->getRepository($entity)->createQueryBuilder('x')
+            ->select('x.id as xId ,c.id as cId')
+            ->leftJoin('x.'.$child , 'c')
+            ->where('x.id = :id')
+            ->andWhere('c.id is not null')
+            ->andWhere('c.isArchived != 1')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getArrayResult()
+        ;
+
+
+        if(count($resultsCurrents)>0){
+            $currents = array();
+            foreach($resultsCurrents as $current){
+                array_push($currents,$current['cId']);
+            }
+        }
+
+
+        $q = $this->getDoctrine()->getRepository($childEntity)->createQueryBuilder('x')
+            ->select('x')
+            ->leftJoin('x.brand','b')
+            ->leftJoin('x.categories','cat')
+            ->where('x.isArchived != 1')
+            ->groupBy('x.id')
+        ;
+
+        if(isset($currents) > 0){
+            $q->andWhere('x.id not in (:currents)')->setParameter('currents', $currents);
+        }
+        $resultsAvailables = $q->getQuery()->getResult();
+
+        $parent =$this->getDoctrine()->getRepository($entity)->find($id);
+        foreach($resultsAvailables as $result){
+            $funcChild = 'add'.ucfirst($childMethod);
+            $result->$funcChild($parent);
+            $em->persist($result);
+        }
+        $em->flush();
+        return new JsonResponse();
+    }
+    public function removeAllAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $childEntity = $request->get('childEntity');
+        $parentEntity = $request->get('entity');
+        $childMethod = $request->get('childMethod');
+        $id = $request->get('id');
+        $child = $request->get('child');
+
+        $objects =  $this->getDoctrine()->getRepository($parentEntity)->createQueryBuilder('x')
+            ->select('x.id as xId ,c.id as cId')
+            ->leftJoin('x.'.$child,'c')
+            ->where('c.isArchived != 1')
+            ->andWhere('x.id = :id')
+            ->setParameter('id',$id)
+            ->groupBy('c.id')
+            ->getQuery()
+            ->getArrayResult()
+        ;
+
+        $parent =$this->getDoctrine()->getRepository($parentEntity)->find($id);
+
+        foreach($objects as $object){
+            $child =$this->getDoctrine()->getRepository($childEntity)->find($object['cId']);
+            $funcChild = 'remove'.ucfirst($childMethod);
+            $child->$funcChild($parent);
+            $em->persist($child);
+        }
+
+        $em->flush();
+        return new JsonResponse();
+    }
+    public function addChildAction(Request $request)
+    {
+       $em = $this->getDoctrine()->getManager();
+
+        $childEntity = $request->get('childEntity');
+        $parentEntity = $request->get('entity');
+
+        $parentId = $request->get('id');
+        $childMethod = $request->get('childMethod');
+        $datas = $request->get('datas');
+
+
+        foreach(json_decode($datas) as $data){
+
+            $child = $em->getRepository($childEntity)->find($data);
+            $parent = $em->getRepository($parentEntity)->find($parentId);
+            $funcChild = 'add'.ucfirst($childMethod);
+            $child->$funcChild($parent);
+            $em->persist($child);
+
+        }
+        $em->flush();
+
+        return new JsonResponse();
+    }
+    public function removeChildAction(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $childEntity = $request->get('childEntity');
+        $parentEntity = $request->get('entity');
+
+        $parentId = $request->get('id');
+        $childMethod = $request->get('childMethod');
+        $datas = $request->get('datas');
+
+
+        foreach(json_decode($datas) as $data){
+
+            $child = $em->getRepository($childEntity)->find($data);
+            $parent = $em->getRepository($parentEntity)->find($parentId);
+            $funcChild = 'remove'.ucfirst($childMethod);
+            $child->$funcChild($parent);
+            $em->persist($child);
+
+        }
+
+        $em->flush();
+
+        return new JsonResponse();
+    }
+    public function searchCurrentChildAction(Request $request)
+    {
+
+        $entity = $request->get('entity');
+        $child = $request->get('child');
+        $childEntity = $request->get('childEntity');
+        $id = $request->get('id');
+        $maxResults = $request->get('maxResults');
+        $searchString = $request->get('searchString');
+
+        $resultsCurrents = $this->getDoctrine()->getRepository($entity)->createQueryBuilder('x')
+            ->select('x.id as id,c.id as cId , b.name as brand , c.name as name , GROUP_CONCAT(ca.name) as categories ,CONCAT(b.name,c.name,GROUP_CONCAT(ca.name)) as searchString')
+            ->leftJoin('x.'.$child , 'c')
+            ->leftJoin('c.brand' , 'b')
+            ->leftJoin('c.categories' , 'ca')
+            ->where('x.id = :id')
+            ->andWhere('c.isArchived != 1')
+            ->having('searchString like :searchString')
+            ->setParameter('id', $id)
+            ->setParameter('searchString', "%".$searchString."%")
+            ->setMaxResults($maxResults)
+            ->groupBy('c.id')
+            ->getQuery()
+            ->getArrayResult()
+        ;
+
+
+
+
+        return new JsonResponse($resultsCurrents);
+    }
+    public function searchChildAction(Request $request){
+
+        $entity = $request->get('entity');
+        $child = $request->get('child');
+        $childEntity = $request->get('childEntity');
+        $id = $request->get('id');
+        $maxResults = $request->get('maxResults');
+        $searchString = $request->get('searchString');
+
+
+        $resultsCurrents = $this->getDoctrine()->getRepository($entity)->createQueryBuilder('x')
+            ->select('x.id as xId ,c.id as cId')
+            ->leftJoin('x.'.$child , 'c')
+            ->where('x.id = :id')
+            ->andWhere('c.id is not null')
+            ->andWhere('c.isArchived != 1')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getArrayResult()
+        ;
+
+
+        if(count($resultsCurrents)>0){
+            $currents = array();
+            foreach($resultsCurrents as $current){
+                array_push($currents,$current['cId']);
+            }
+        }
+
+
+        $q = $this->getDoctrine()->getRepository($childEntity)->createQueryBuilder('x')
+            ->select('x.id as id , b.name as brand , x.name as name , GROUP_CONCAT(cat.name) as categories ,CONCAT(b.name,x.name,GROUP_CONCAT(cat.name)) as searchString')
+            ->leftJoin('x.brand','b')
+            ->leftJoin('x.categories','cat')
+            ->where('x.isArchived != 1')
+
+            #->where('x.id not in (:currents)')
+            ->having('searchString like :searchString')
+            #->setParameter('currents', $currents)
+            ->setParameter('searchString', "%".$searchString."%")
+            ->groupBy('x.id')
+            ->setMaxResults($maxResults)
+           # ->getQuery()
+           # ->getArrayResult()
+        ;
+
+        if(isset($currents) > 0){
+            $q->andWhere('x.id not in (:currents)')->setParameter('currents', $currents);
+        }
+        $resultsAvailables = $q->getQuery()->getArrayResult();
+
+        return new JsonResponse($resultsAvailables);
+
+    }
+
     public function memorizedTabAction(Request $request){
         $session = $this->get('session');
         if($session->get('memorizedTabs/'.$request->request->get('tab'))){

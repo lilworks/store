@@ -19,6 +19,7 @@ class WarrantyType extends AbstractType
             ->add('name',null,array(
                 'label'=>'storebundle.name',
             ))
+            /*
             ->add('productsOnline', EntityType::class, array(
                 'label'=>'storebundle.productsonline',
                 'class'    => 'LilWorksStoreBundle:Product' ,
@@ -73,7 +74,7 @@ class WarrantyType extends AbstractType
                     'data-actions-box'=>true,
                     'data-width'=>"300px"
                 )
-            ))
+            ))*/
             ->add('descriptionPublic',null,array(
                 'label'=>'storebundle.description',
                 'attr' => ['class' => 'editor-text'],

@@ -24,6 +24,7 @@
     <div class="btn-group" role="group" aria-label="basket buttons">
         {{ form_row(form.empty) }}
         {{ form_row(form.update) }}
+        {{ form_row(form.shippingMethod) }}
         {% if form.order is defined %}
             {{ form_row(form.order) }}
         {% endif %}
@@ -93,7 +94,7 @@
                 </style>
                 <div class="priceTTC">{{ totals['ttc']|price }}<sup>TTC</sup></div>
                 <div class="priceHt">{{ totals['ht']|price }}<sup>HT</sup></div>
-                {% if form.shippingMethod is defined and form.shippingMethod.vars.data is not null %}
+                {% if form.basketsRealShippingMethods is defined and form.basketsRealShippingMethods.vars.data is not null %}
                     <div class="card">
                     <div class="card-header">{% trans %}sitebundle.totwithshipping{% endtrans %}</div>
                      <div class="card-block priceSM">
@@ -143,6 +144,7 @@
         </div>
 
     {% else %}
+        {#
         <div class="row">
 
             <div class="col-lg-6">
@@ -168,7 +170,8 @@
                 </div>
             </div>
         </div>
-
+        #}
+{#
         <div class="row">
             <div class="col-lg-12">
                 <div class="card" style="margin-top: 10px;">
@@ -180,14 +183,17 @@
                     </div>
                     <div class="card-block">
                         {% if form.basketsRealShippingMethods is defined %}
+
                             {% if form.basketsRealShippingMethods.vars.data|length==0 %}
                                 <div class="alert alert-danger" role="alert">
                                     <i class="fa fa-truck" style="color: red;"></i>
                                     {% trans %}sitebundle.noshippingmethodfound{% endtrans %}
                                 </div>
                             {% endif %}
+
                             {{ form_errors(form.basketsRealShippingMethods) }}
                             {{ form_widget(form.basketsRealShippingMethods) }}
+
                         {% else %}
                             {% trans %}sitebundle.selectaddressfirst{% endtrans %}
                         {% endif %}
@@ -195,6 +201,7 @@
                 </div>
             </div>
         </div>
+        #}
     {% endif %}
 
 

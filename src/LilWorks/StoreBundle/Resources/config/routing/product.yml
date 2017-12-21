@@ -24,3 +24,4 @@ product_delete:
     path:     /{product_id}/delete
     defaults: { _controller: "LilWorksStoreBundle:Product:delete" }
     methods:  [GET, POST]
+

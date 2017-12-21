@@ -22,3 +22,12 @@ tax_delete:
     path:     /{tax_id}/delete
     defaults: { _controller: "LilWorksStoreBundle:Tax:delete" }
     methods:  [GET, POST]
+tax_populate_offline:
+    path:     /{tax_id}/populate-offline
+    defaults: { _controller: "LilWorksStoreBundle:Tax:populateOffline" }
+    methods:  GET
+
+tax_populate_online:
+    path:     /{tax_id}/populate-online
+    defaults: { _controller: "LilWorksStoreBundle:Tax:populateOnline" }
+    methods:  GET

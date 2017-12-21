@@ -24,6 +24,9 @@ class ShippingMethodsCountriesRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('cid',$country->getId())
         ;
 
+
+
+
         return $qb->getQuery()->getResult();
 
     }

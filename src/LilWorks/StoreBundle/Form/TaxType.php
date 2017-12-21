@@ -30,7 +30,7 @@ class TaxType extends AbstractType
                     'ratio (%)' => "RATIO"
                 ),
             ))
-
+/*
             ->add('productsOnline', EntityType::class, array(
                 'label'=>'storebundle.productsonline',
                 'class'    => 'LilWorksStoreBundle:Product' ,
@@ -86,6 +86,7 @@ class TaxType extends AbstractType
                     'data-width'=>"300px"
                 )
             ))
+*/
         ;
     }
     
@@ -96,7 +97,7 @@ class TaxType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'LilWorks\StoreBundle\Entity\Tax',
-            'csrf_protection' => false,
+          //  'csrf_protection' => false,
         ));
     }
 

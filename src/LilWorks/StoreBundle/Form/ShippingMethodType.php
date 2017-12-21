@@ -47,6 +47,7 @@ class ShippingMethodType extends AbstractType
             ->add('descriptionInternal',null,array(
                 'label'=>'storebundle.descriptioninternal',
             ));
+        /*
         $builder->add('products', EntityType::class, array(
             'label'=>'storebundle.products',
             'class'    => 'LilWorksStoreBundle:Product' ,
@@ -79,6 +80,7 @@ class ShippingMethodType extends AbstractType
             )
 
         ));
+        */
         $builder->add('triggers', CollectionType::class, array(
             'mapped'=>true,
             'allow_add'=>true,

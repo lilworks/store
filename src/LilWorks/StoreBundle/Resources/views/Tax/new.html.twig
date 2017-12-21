@@ -24,9 +24,11 @@
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
         </li>
+        {#
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#products" role="tab">{% trans %}storebundle.products{% endtrans %}</a>
         </li>
+        #}
     </ul>
 
 
@@ -45,6 +47,7 @@
             {{ form_widget(form.value) }}
 
         </div>
+        {#
         <div class="tab-pane" id="products" role="tabpanel">
             <div>
                 {{ form_label(form.productsOnline) }}
@@ -57,6 +60,7 @@
                 {{ form_widget(form.productsOffline) }}
             </div>
         </div>
+        #}
     </div>
 
 

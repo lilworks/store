@@ -19,6 +19,9 @@ class ListMenuBuilder
         'ICO_DOWNLOAD'=>'fa fa-download',
         'ICO_BACKUP'=>'fa fa-floppy-o',
         'ICO_DEVISTOFACTURE'=>'fa fa-sign-language',
+        'ICO_POPULATE'=>'fa fa-plus-square',
+        'ICO_POPULATE_ONLINE'=>'fa fa-plus-square',
+        'ICO_POPULATE_OFFLINE'=>'fa fa-plus-square',
 
         'BTN_GENERAL'=>'btn btn-sm',
         'BTN_SHOW'=>'btn-info',
@@ -30,6 +33,9 @@ class ListMenuBuilder
         'BTN_DOWNLOAD'=>'btn-info',
         'BTN_BACKUP'=>'btn-success',
         'BTN_DEVISTOFACTURE'=>'btn-info',
+        'BTN_POPULATE'=>'btn-primary',
+        'BTN_POPULATE_ONLINE'=>'btn-primary',
+        'BTN_POPULATE_OFFLINE'=>'btn-primary',
 
     );
 
@@ -156,6 +162,8 @@ class ListMenuBuilder
     public function warranty($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
+        $this->setAction('populate_offline',$menu,$entity->getId());
+        $this->setAction('populate_online',$menu,$entity->getId());
         if(
             count($entity->getProductsOffline()) == 0 &&
             count($entity->getProductsOnline()) == 0 &&
@@ -167,6 +175,8 @@ class ListMenuBuilder
     public function tax($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
+        $this->setAction('populate_online',$menu,$entity->getId());
+        $this->setAction('populate_offline',$menu,$entity->getId());
         if(
             count($entity->getProductsOffline()) == 0 &&
             count($entity->getProductsOnline()) == 0 &&
@@ -246,6 +256,7 @@ class ListMenuBuilder
     public function shippingmethod($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
+        $this->setAction('populate',$menu,$entity->getId());
         if(
             count($entity->getShippingmethodsCountries())==0 &&
             count($entity->getOrdersRealShippingMethods())==0 &&

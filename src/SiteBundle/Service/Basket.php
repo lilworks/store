@@ -2,14 +2,11 @@
 namespace SiteBundle\Service;
 
 
-use DoctrineExtensions\Query\Sqlite\Date;
 use LilWorks\StoreBundle\Entity\BasketsProducts;
 use LilWorks\StoreBundle\Entity\Order;
 use LilWorks\StoreBundle\Entity\OrdersOrderSteps;
 use LilWorks\StoreBundle\Entity\OrdersProducts;
-use Proxies\__CG__\LilWorks\StoreBundle\Entity\OrdersRealShippingMethods;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\Extension\Templating\TemplatingExtension;
+use LilWorks\StoreBundle\Entity\OrdersRealShippingMethods;
 use Symfony\Component\HttpFoundation\RequestStack;
 use LilWorks\StoreBundle\Entity\Product;
 use LilWorks\StoreBundle\Entity\Basket as BasketEntity;
@@ -45,7 +42,8 @@ class ShippingCalculator
 
         $this->init();
 
-       # $this->__toString();
+
+
         return $this;
     }
     public function init(){
@@ -63,37 +61,39 @@ class ShippingCalculator
             $this->_country = self::_DEFAULT_COUNTRY;
         }
 
-
         $allowedShippingMethod = array();
 
         if($this->basket->getShippingAddress()){
-        $shippingMethodsCountries = $this->em->getRepository('LilWorksStoreBundle:ShippingMethodsCountries')
-            ->getShippingMethodsByCountry( $this->basket->getShippingAddress()->getCountry());
+            $shippingMethodsCountries = $this->em->getRepository('LilWorksStoreBundle:ShippingMethodsCountries')
+                                        ->getShippingMethodsByCountry( $this->basket->getShippingAddress()->getCountry());
+
+
+
         }else{
             $shippingMethodsCountries = array();
         }
-
 
         foreach($shippingMethodsCountries as $shippingMethodCountrie){
             array_push($allowedShippingMethod,$shippingMethodCountrie->getShippingMethod()->getId());
         }
 
         foreach($this->basket->getBasketsProducts() as $product){
-            $this->_productsInBasketDatas[$product->getProduct()->getId()]=array("q"=>$product->getQuantity(),"pu"=>$product->getProduct()->getPriceOnline(),"price"=>$product->getQuantity()*$product->getProduct()->getPriceOnline());
-            $this->_productsShippingMethods[$product->getProduct()->getId()]=array();
+            $this->_productsInBasketDatas[$product->getProduct()->getId()]=array(
+                "q"=>$product->getQuantity(),
+                "pu"=>$product->getProduct()->getPriceOnline(),
+                "price"=>$product->getQuantity()*$product->getProduct()->getPriceOnline()
+            );
 
+            $this->_productsShippingMethods[$product->getProduct()->getId()]=array();
             if(!in_array($product->getProduct()->getId(),$this->_products))
                 array_push($this->_products,$product->getProduct()->getId());
             foreach($product->getProduct()->getShippingMethods() as $shippingMethod){
                 if(!in_array($shippingMethod->getId(),$this->_shippingMethods) && in_array($shippingMethod->getId(),$allowedShippingMethod)){
                     array_push($this->_shippingMethods,$shippingMethod->getId());
-
                 }
                 array_push($this->_productsShippingMethods[$product->getProduct()->getId()],$shippingMethod->getId());
             }
         }
-
-
 
         foreach($this->_shippingMethodsPriced as $shippingMethodId=>$shippingMethodPriced){
             if(!isset($this->_shippingMethodsPrioritized[$shippingMethodPriced["priority"]])){
@@ -103,9 +103,7 @@ class ShippingCalculator
                 array_push($this->_shippingMethodsPrioritized[$shippingMethodPriced["priority"]],$shippingMethodId);
         }
 
-
         $this->_smPs();
-
 
     }
 
@@ -153,15 +151,14 @@ class ShippingCalculator
         $this->_shippingMethods = $smPsNoPrioritized;
         #$this->_cleanSmsPs();
 
-
         $this->_getSmsComb();
 
 
 
 
         foreach($this->_shippingMethodsCombination as $kCombination=>$combination){
-
             $this->_dispatchProduct($kCombination,$combination);
+
         }
 
 
@@ -209,6 +206,7 @@ class ShippingCalculator
 
 
 
+
         $products = $this->_products;
 
         $price = 0;
@@ -217,15 +215,14 @@ class ShippingCalculator
 
 
 
+
         foreach($combination as $shippingMethodId){
-
-
-
 
 
             $this->combinations[$kCombination]["datas"][$shippingMethodId] = array();
             $this->combinations[$kCombination]["datas"][$shippingMethodId]["products"] = array();
             $this->combinations[$kCombination]["datas"][$shippingMethodId]["shippingMethod"] = $this->em->getRepository("LilWorksStoreBundle:ShippingMethod")->find($shippingMethodId);
+
 
             $amountInShippingMethod = 0;
 
@@ -311,9 +308,13 @@ class ShippingCalculator
     {
         $sms = array();
         $output = array();
+
+
+
         foreach($this->_shippingMethodsPrioritized as $k=>$v){
             array_push($sms,$k);
         }
+
 
         // initialize by adding the empty set
         $results = array(array( ));
@@ -324,6 +325,7 @@ class ShippingCalculator
             }
         }
 
+
         foreach($results as $result){
             if(count($result)>0){
                 $currentCombProductList = array();
@@ -333,6 +335,7 @@ class ShippingCalculator
                             array_push($currentCombProductList,$productHere);
                     }
                 }
+
                 if(count($this->_products) == count($currentCombProductList)){
                     array_push($output,$result);
                 }
@@ -354,6 +357,7 @@ class ShippingCalculator
             if($c>$min)
                 unset($output[$k]);
         }
+
 
 
         $this->_shippingMethodsCombination = $output;
@@ -499,7 +503,6 @@ class Basket
     {
 
         $this->shippingCalculator = new ShippingCalculator($this->em,$this);
-
         return $this->shippingCalculator->combinations;
     }
 
@@ -572,6 +575,14 @@ class Basket
 
         $this->em->flush();
         return $basket;
+    }
+    public function isAllShipped(){
+        $basket  =  $this->getBasket();
+        foreach($basket->getBasketsProducts() as $basketProduct){
+            if(!$basketProduct->getBasketRealShippingMethod())
+                return false;
+        }
+        return true;
     }
     public function addProduct(Product $product)
     {

@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class DepositSalesPaymentMethodsType extends AbstractType
 {
@@ -20,13 +21,19 @@ class DepositSalesPaymentMethodsType extends AbstractType
     {
 
         $context = $options["context"];
+        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) use ($context) {
+            $depositSalePaymentMethod = $event->getData();
+            $form = $event->getForm();
 
+        });
 
+/*
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($context) {
             $depositSalePaymentMethod = $event->getData();
             $form = $event->getForm();
 
-            if(!is_null($depositSalePaymentMethod) && $depositSalePaymentMethod->getDepositSale()->getCustomer()){
+           // if(!is_null($depositSalePaymentMethod) && $depositSalePaymentMethod->getDepositSale()->getCustomer()){
+
                 $customer = $depositSalePaymentMethod->getDepositSale()->getCustomer();
 
                 $form->add('paymentMethod', EntityType::class, array(
@@ -52,14 +59,20 @@ class DepositSalesPaymentMethodsType extends AbstractType
                         }
                     },
                 ));
-            }
+         //   }
 
 
 
         });
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) use ($context) {
+
             $depositSalePaymentMethod = $event->getData();
             $form = $event->getForm();
+
+
+
+
+
 
             if(!is_null($depositSalePaymentMethod) && $depositSalePaymentMethod->getPaymentMethod()->getTag() == "COUPON") {
                 $customer = $depositSalePaymentMethod->getDepositSale()->getCustomer();
@@ -88,9 +101,26 @@ class DepositSalesPaymentMethodsType extends AbstractType
                 ));
             }
         });
+*/
 
-        
+
         $builder
+            ->add('paymentMethod', EntityType::class, array(
+                'label'=>'storebundle.paymentmethod',
+                'class'    => 'LilWorksStoreBundle:PaymentMethod' ,
+                'constraints' => array(new Valid()),
+                'choice_label' => function ($obj) { return   $obj->getName() ; },
+                'required' => true ,
+                'mapped'=> true,
+                'expanded' => false ,
+                'multiple' => false,
+                'choice_label' => function ($obj) {
+                    return    $obj->getName();
+                },
+                'query_builder' => function (EntityRepository $er)  {
+                        return  $er->createQueryBuilder('pm');
+                },
+            ))
             ->add('payedAt',null,array(
                 'label'=>'storebundle.paymentmethod.payedat',
                 'attr' => ['class' => 'datepicker'],

@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormEvents;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
 
 class ProductInCategoryFilterType extends AbstractType
 {
@@ -66,7 +67,7 @@ class ProductInCategoryFilterType extends AbstractType
             ->setParameter('category_id',$category->getId())
             ->getQuery()
             ->setMaxResults(1)
-            ->getResult()
+            ->getOneOrNullResult()
         ;
 
         $max = $this->em->createQueryBuilder()
@@ -81,11 +82,11 @@ class ProductInCategoryFilterType extends AbstractType
             ->setParameter('category_id',$category->getId())
             ->getQuery()
             ->setMaxResults(1)
-            ->getResult()
+            ->getOneOrNullResult()
 
         ;
-        $min = $min[0]['priceOnline']-1;
-        $max = $max[0]['priceOnline']+1;
+        $min = $min['priceOnline']-1;
+        $max = $max['priceOnline']+1;
 
 
         $param = $this->requestStack->getCurrentRequest()->get('product_filter');
@@ -106,7 +107,6 @@ class ProductInCategoryFilterType extends AbstractType
         $builder
 
             ->add('priceOnline', Filters\NumberRangeFilterType::class,array(
-                'help'=>$min."€ | ".$max."€",
                 'label'=>'sitebundle.pricerange',
                 'right_number_options'=>array(
                     "data"=>($right)?$right:"0",
@@ -114,6 +114,7 @@ class ProductInCategoryFilterType extends AbstractType
                     'attr' => array(
                         'class'=>'price-range-disabled',
                         'data-slider-value'=>"$max",
+                        'id'=>'rightNumber'
 
                     )
                 ),
@@ -126,22 +127,33 @@ class ProductInCategoryFilterType extends AbstractType
                         'data-slider-max'=>"$max",
                         'data-slider-step'=>"1",
                         'data-slider-value'=>  "[$left,$right]",
+                        'id'=>'leftNumber'
 
                     )
                 )
 
             ))
-            /*
-            ->add('results', ChoiceType::class,array(
-                'label'=>'sitebundle.filter.results',
-                'apply_filter' => false,
-                'choices'=>array(
-                    10=>10,20=>20,30=>30,50=>50,100=>100
-                )
-            ))*/
 
-            ->add('name', Filters\TextFilterType::class,array(
+            ->add('search', Filters\TextFilterType::class, array(
                 'label'=>'sitebundle.productname',
+                'mapped' => false,
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                    if (empty($values['value'])) {
+                        return null;
+                    }
+
+                    $values['value'] = str_replace(" ","%",preg_replace('!\s+!', ' ', $values['value']));
+                    $expression = $filterQuery->getExpr()->orX(
+                        $filterQuery->getExpr()->like('CONCAT(b.name,p.name)', ':search'),
+                        $filterQuery->getExpr()->like('CONCAT(p.name,b.name)', ':search')
+                    );
+
+                    $parameters = array('search' => "%".$values['value']."%" );
+
+
+
+                    return $filterQuery->createCondition($expression, $parameters);
+                }
             ))
             ->add('isSecondHand', Filters\BooleanFilterType::class,array(
                 'label'=>'sitebundle.issecondhand',

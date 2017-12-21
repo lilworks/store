@@ -337,7 +337,8 @@ class DefaultController extends Controller
             ->andWhere('p.isPublished = 1')
             ->andWhere('c.isPublished = 1')
             ->andWhere('p.priceOnline IS NOT NULL')
-            #->andWhere('COUNT(p)>0')
+            ->groupBy('b')
+            ->having('COUNT(p)>0')
             ->orderBy('b.name','asc')
             ->setParameter('supercategory_id',$superCategory->getId())
             ->getQuery()
@@ -356,7 +357,6 @@ class DefaultController extends Controller
             ->where('sc.id = :supercategory_id')
             ->andWhere('p.isPublished = 1')
             ->andWhere('c.isPublished = 1')
-
             #->andWhere('COUNT(p)>0')
             ->orderBy('c.name','asc')
             ->setParameter('supercategory_id',$superCategory->getId())
@@ -380,8 +380,6 @@ class DefaultController extends Controller
     public function allAction(Request $request){
        # $filterDatas = $request->get('product_filter');
        # $products = $this->getDoctrine()->getRepository('LilWorksStoreBundle:Product')->findForAll($filterDatas['search']);
-
-
 
 
         $basket = $this->get('site.basket');
@@ -435,18 +433,37 @@ class DefaultController extends Controller
             ->join('p.brand','b')
             ->where('p.isPublished = 1')
             ->andWhere('c.isPublished = 1')
-            #->andWhere('COUNT(p)>0')
+            ->andWhere('COUNT(p)>0')
             ->orderBy('c.name','asc')
             ->getQuery()
             ->getResult()
         ;
+        $brands = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('LilWorksStoreBundle:Brand')
+            ->createQueryBuilder('b')
+            ->join('b.products','p')
+            ->join('p.categories','c')
+            ->join('c.supercategories_categories','scc')
+            ->join('scc.supercategory','sc')
 
+            ->andWhere('p.isPublished = 1')
+            ->andWhere('c.isPublished = 1')
+            ->andWhere('p.priceOnline IS NOT NULL')
+            ->andWhere('COUNT(p)>0')
+            ->orderBy('b.name','asc')
+
+            ->getQuery()
+            ->getResult()
+        ;
         return $this->render('SiteBundle:Default:all.html.twig',array(
             'basket'=>$basket,
             'categories'=>$categories,
             'productService'=>$productService,
             'pagination'=>$pagination,
             'formFilter'=>$formFilter->createView(),
+            "brands"=>$brands
         ));
     }
 }

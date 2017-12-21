@@ -79,6 +79,13 @@ site_basket_delete:
 site_basket_show:
     path: /basket/show
     defaults: { _controller: SiteBundle:Basket:show }
+site_basket_shippingMethod:
+    path: /basket/shippingmethod
+    defaults: { _controller: SiteBundle:Basket:shippingMethod }
+
+
+
+
 
 site_customer:
     path: /customer

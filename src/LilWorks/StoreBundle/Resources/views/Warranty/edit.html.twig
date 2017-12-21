@@ -16,6 +16,7 @@
     {% endblock %}
 
     <h1>
+        <i class="fa fa-wrench" aria-hidden="true"></i>
         {{ 'storebundle.warranty.edit %name%'|trans({'%name%':warranty.name}) }}
     </h1>
 
@@ -32,9 +33,11 @@
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
         </li>
+        {#
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#products" role="tab">{% trans %}storebundle.products{% endtrans %}</a>
         </li>
+        #}
     </ul>
 
     <div class="tab-content">
@@ -47,10 +50,12 @@
                 </div>
             </div>
         </div>
+        {#
         <div class="tab-pane" id="products" role="tabpanel">
             {{ form_row(form.productsOnline) }}
             {{ form_row(form.productsOffline) }}
         </div>
+        #}
     </div>
 
     <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />

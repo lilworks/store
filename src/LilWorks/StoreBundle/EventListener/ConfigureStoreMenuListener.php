@@ -27,6 +27,9 @@ class ConfigureStoreMenuListener
         'ICO_DOWNLOAD'=>'fa fa-download',
         'ICO_BACKUP'=>'fa fa-floppy-o',
         'ICO_DEVISTOFACTURE'=>'fa fa-sign-language',
+        'ICO_POPULATE'=>'fa fa-plus-square',
+        'ICO_POPULATE_ONLINE'=>'fa fa-plus-square',
+        'ICO_POPULATE_OFFLINE'=>'fa fa-plus-square',
 
 
         'BTN_GENERAL'=>'btn btn-sm',
@@ -43,6 +46,9 @@ class ConfigureStoreMenuListener
         'BTN_DOWNLOAD'=>'btn-info',
         'BTN_BACKUP'=>'btn-success',
         'BTN_DEVISTOFACTURE'=>'btn-info',
+        'BTN_POPULATE'=>'btn-primary',
+        'BTN_POPULATE_ONLINE'=>'btn-primary',
+        'BTN_POPULATE_OFFLINE'=>'btn-primary',
 
 
     );
@@ -196,6 +202,7 @@ class ConfigureStoreMenuListener
             $entity = $this->em->getRepository($entityName)->find($id);
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
+            $this->setAction('populate', $entity, $menu);
 
             if(
                 count($entity->getProducts())==0 &&
@@ -234,12 +241,15 @@ class ConfigureStoreMenuListener
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
 
+            $this->setAction('populate_online', $entity, $menu);
+            $this->setAction('populate_offline', $entity, $menu);
+
 
 
             if(
                 count($entity->getProductsOnline())==0 &&
                 count($entity->getProductsOffline())==0 &&
-                count($entity->getOrdersProduct())==0
+                count($entity->getOrdersProducts())==0
             ){
                 $this->setAction('delete', $entity, $menu);
             }
@@ -256,6 +266,9 @@ class ConfigureStoreMenuListener
             $entity = $this->em->getRepository($entityName)->find($id);
 
             $this->setAction('show', $entity, $menu);
+            $this->setAction('populate_online', $entity, $menu);
+            $this->setAction('populate_offline', $entity, $menu);
+            $this->setAction('edit', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
 
             if(count($entity->getProductsOnline())==0 && count($entity->getProductsOffline())==0 && count($entity->getOrdersProducts())==0)

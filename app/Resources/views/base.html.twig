@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale|split('_')[0] }}">
+<html lang="{{ app.request.locale|split('_')[0] }}" ng-app="store">
 <head>
     <script src="/assets/vendor/PACE/pace.min.js"></script>
     <link rel="stylesheet" href="/assets/vendor/PACE/themes/red/pace-theme-minimal.css">
@@ -22,6 +22,7 @@
     {% javascripts '@LilWorksStoreBundle/Resources/public/js/*' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
+
     <script src="{{ asset('bundles/app/js/simpleLiveEditor.js') }}"></script>
     <script src="{{ asset('bundles/app/js/rowsEditor.js') }}"></script>
     <script src="{{ asset('bundles/app/js/init-tinymce.js') }}"></script>

@@ -51,7 +51,7 @@ class ProductInBrandFilterType extends AbstractType
             ->setParameter('brand_id',$brand->getId())
             ->getQuery()
             ->setMaxResults(1)
-            ->getResult()
+            ->getOneOrNullResult()
         ;
 
         $max = $this->em->createQueryBuilder()
@@ -66,11 +66,12 @@ class ProductInBrandFilterType extends AbstractType
             ->setParameter('brand_id',$brand->getId())
             ->getQuery()
             ->setMaxResults(1)
-            ->getResult()
+            ->getOneOrNullResult()
 
         ;
-        $min = $min[0]['priceOnline']-1;
-        $max = $max[0]['priceOnline']+1;
+
+        $min = $min['priceOnline']-1;
+        $max = $max['priceOnline']+1;
 
 
         $param = $this->requestStack->getCurrentRequest()->get('product_filter');

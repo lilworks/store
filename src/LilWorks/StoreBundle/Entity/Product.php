@@ -74,7 +74,7 @@ class Product
 
     /**
      * Many Products have Many ShippingMethod.
-     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\ShippingMethod", inversedBy="products")
+     * @ORM\ManyToMany(targetEntity="LilWorks\StoreBundle\Entity\ShippingMethod", inversedBy="products",cascade={})
      * @ORM\JoinTable(name="lilworks_products_shippingMethods")
      */
     private $shippingMethods;

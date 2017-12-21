@@ -98,6 +98,7 @@ doctrine:
                    string_functions:
                        GROUP_CONCAT: AppBundle\DQL\GroupConcatFunction
                        SUBSTRING_INDEX: DoctrineExtensions\Query\Mysql\SubstringIndex
+                       CONCATWS: DoctrineExtensions\Query\Mysql\ConcatWs
                        IF_ELSE: DoctrineExtensions\Query\Mysql\IfElse
                        md5: DoctrineExtensions\Query\Mysql\Md5
 

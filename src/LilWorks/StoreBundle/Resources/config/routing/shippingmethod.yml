@@ -22,3 +22,8 @@ shippingmethod_delete:
     path:     /{shippingmethod_id}/delete
     defaults: { _controller: "LilWorksStoreBundle:ShippingMethod:delete" }
     methods:  [GET, POST]
+
+shippingmethod_populate:
+    path:     /{shippingmethod_id}/populate
+    defaults: { _controller: "LilWorksStoreBundle:ShippingMethod:populate" }
+    methods:  [GET, POST]

@@ -57,7 +57,10 @@ class ShippingMethodController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            foreach( $shippingMethod->getProducts() as $p){
+
+            /*
+
+             foreach( $shippingMethod->getProducts() as $p){
                 if(!$p->getShippingMethods()->contains($shippingMethod)){
                     $p->addShippingMethod($shippingMethod);
                     $shippingMethod->addProduct($p);
@@ -65,12 +68,16 @@ class ShippingMethodController extends Controller
                 }
             }
             $em->persist($shippingMethod);
-
+            */
             foreach( $shippingMethod->getTriggers() as $t){
                 $t->setShippingMethod($shippingMethod);
                 $shippingMethod->addTrigger($t);
                 $em->persist($t);
             }
+
+            $em->persist($shippingMethod);
+
+
             $this->get('store.flash')->setMessages(array(
                 array('status'=>'success','message'=>'storebundle.flash.shippingmethod.created')
             ));
@@ -168,6 +175,28 @@ class ShippingMethodController extends Controller
         return $this->render('LilWorksStoreBundle:ShippingMethod:edit.html.twig', array(
             'shippingMethod' => $shippingMethod,
             'form' => $editForm->createView(),
+        ));
+    }
+
+
+
+    /**
+     * @ParamConverter("shippingMethod", options={"mapping": {"shippingmethod_id"   : "id"}})
+     */
+    public function populateAction(Request $request, ShippingMethod $shippingMethod)
+    {
+
+        $this->get('store.setSeo')->setTitle('storebundle.title.populate %name%',array('%name%'=>$shippingMethod->getName()),'storebundle.prefix.shippingmethods');
+        $object = array(
+            'id'=>$shippingMethod->getId(),
+            'entity'=>'LilWorksStoreBundle:ShippingMethod',
+            'child'=>'products',
+            'childEntity'=>'LilWorksStoreBundle:Product',
+            'childMethod'=>'shippingMethod',
+        );
+        return $this->render('LilWorksStoreBundle:ShippingMethod:populate.html.twig', array(
+            'shippingMethod' => $shippingMethod,
+            'object'=>$object
         ));
     }
 

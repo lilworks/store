@@ -28,7 +28,11 @@ services:
             arguments: ["@security.token_storage","@site.basket","@doctrine.orm.entity_manager"]
             tags:
                 - { name: form.type }
-
+    site.form.basket.shippingmethod:
+            class: SiteBundle\Form\BasketShippingMethodType
+            arguments: ["@security.token_storage","@site.basket","@doctrine.orm.entity_manager"]
+            tags:
+                - { name: form.type }
     site.form.conversation.message:
             class: SiteBundle\Form\ConversationMessageType
             arguments: ["@security.token_storage","@doctrine.orm.entity_manager"]

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\SecurityEvents;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
+
 /**
  * Listener responsible to change the redirection at the end of the password resetting
  */
@@ -38,9 +39,7 @@ class LoginListener implements EventSubscriberInterface
     public function onLogin($event)
     {
 
-        if($user = $event->getAuthenticationToken()->getUser()){
             $this->basketService->setDefaultAddress(true);
-        }
 
     }
 }

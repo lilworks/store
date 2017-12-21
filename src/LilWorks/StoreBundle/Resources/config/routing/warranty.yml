@@ -22,3 +22,12 @@ warranty_delete:
     path:     /{warranty_id}/delete
     defaults: { _controller: "LilWorksStoreBundle:Warranty:delete" }
     methods:  GET
+warranty_populate_offline:
+    path:     /{warranty_id}/populate-offline
+    defaults: { _controller: "LilWorksStoreBundle:Warranty:populateOffline" }
+    methods:  GET
+
+warranty_populate_online:
+    path:     /{warranty_id}/populate-online
+    defaults: { _controller: "LilWorksStoreBundle:Warranty:populateOnline" }
+    methods:  GET
