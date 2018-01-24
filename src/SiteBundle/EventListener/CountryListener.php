@@ -58,8 +58,7 @@ class CountryListener {
         }elseif(isset($userSelectedCountryId)){
             $defaultCountryId = $userSelectedCountryId;
         }elseif(!isset($defaultCountryId)){
-            #$defaultCountryId = $em->getRepository("LilWorksStoreBundle:Country")->findOneByTag('fr')->getId();
-            $defaultCountryId = 1;
+            $defaultCountryId = $em->getRepository("LilWorksStoreBundle:Country")->findOneByTag('fr')->getId();
         }
 
 
