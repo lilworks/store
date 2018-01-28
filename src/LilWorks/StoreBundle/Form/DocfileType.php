@@ -24,7 +24,7 @@ class DocfileType extends AbstractType
                 'required'=>true
             ))
             ->add('title',null,array(
-                'label'=>'storebundle.docfiletitle'
+                'label'=>'storebundle.docfile.title'
             ))
             ->add('products', EntityType::class, array(
                 'label'=>'storebundle.products',
