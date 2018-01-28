@@ -18,3 +18,13 @@ var/sessions/*
 vendor/
 web/bundles/
 web/media/cache
+web/annonce
+web/ajaxupload
+web/brand
+web/category
+web/docfile
+web/paymentmethod
+web/product
+web/shippingmethod
+web/supercategory
+
