@@ -96,7 +96,14 @@ class CouponController extends Controller
         $pdf->setOption('footer-html', $footer);
         $pdf->setOption('footer-left', "[page]/[topage]");
         $pdf->setOption('header-html', $header);
-        $filename = $coupon->getReference(). ".pdf";
+
+
+        if($coupon->getReference() != ""){
+            $filename = $coupon->getReference() . ".pdf";
+        }else{
+            $filename = "coupon_".date('Y-m-d_H-i').".pdf";
+        }
+
 
         return new Response(
             $pdf->getOutputFromHtml($html),

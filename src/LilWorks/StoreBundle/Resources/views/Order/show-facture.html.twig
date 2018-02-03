@@ -157,6 +157,7 @@
                         <tbody>
                             {% for product in order.ordersProducts %}
                                 {% set return = product.orderProductReturn %}
+
                                 <tr>
                                     <td>
                                         {% if return is null and returnsAllowed %}

@@ -19,6 +19,7 @@ class TaxType extends AbstractType
         $builder
             ->add('name',null,array(
                 'label'=>'storebundle.name',
+                'help'=>'storebundle.help.tag.comaseparated'
             ))
             ->add('value',null,array(
                 'label'=>'storebundle.tax.value',

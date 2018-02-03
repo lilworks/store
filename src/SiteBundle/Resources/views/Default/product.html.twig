@@ -23,6 +23,9 @@
     .warranties{
         font-size: 14px;
     }
+    .tags{
+        font-size: 14px;
+    }
     .price{
         padding: 5px;
         font-size: 36px;
@@ -78,6 +81,20 @@
                     </ul>
                 </div>
             {% endif %}
+            {% if product.tags|length > 0 %}
+                <div class="tags">
+                    <ul>
+                        {% for tag in product.tags %}
+                            <li>
+                        <span class="badge badge-success">
+                            <i class="fa fa-tag" aria-hidden="true"></i>
+                            {{ tag.name }}
+                        </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
 
             <div class="links">
                 <div class="list-group">
@@ -97,6 +114,8 @@
 
 
         </div>
+
+
 
         {% if product.docfiles|length > 0 %}
             <div class="card docfileInProduct">

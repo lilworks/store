@@ -90,6 +90,8 @@ class OrderManager
         foreach($this->order->getOrdersOrderSteps() as $orderOrderStep){
             if($orderOrderStep->getOrderStep()->getTag() == "DONE")
                 return true;
+            if($orderOrderStep->getOrderStep()->getTag() == "PAYED")
+                return true;
         }
 
 

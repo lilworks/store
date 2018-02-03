@@ -57,6 +57,28 @@ class ProductInSuperCategoryFilterType extends AbstractType
             $productsInBrand[$brand["id"]]=$brand["countp"];
         }
 
+        $rtags = $this->em->createQueryBuilder()
+            ->select("t.id as id ,COUNT(p) as countp")
+            ->from("LilWorksStoreBundle:Tag","t")
+            ->join("t.products","p")
+            ->join("p.categories","c")
+            ->where("p.isPublished = 1")
+            ->andWhere('p.priceOnline IS NOT NULL ')
+            ->andWhere(':supercategory_id MEMBER OF c.supercategories_categories')
+            ->having('COUNT(p)>0')
+            ->groupBy('t.id')
+            ->setParameter('supercategory_id',$supercategory->getId())
+            ->getQuery()
+            ->getArrayResult()
+        ;
+
+        $tags = array();
+        $productsInTag = array();
+        foreach($rtags as $tag){
+            array_push($tags,$tag["id"]);
+            $productsInTag[$tag["id"]]=$tag["countp"];
+        }
+
         $rcategories = $this->em->createQueryBuilder()
             ->select("c.id as id ,COUNT(p) as countp")
             ->from("LilWorksStoreBundle:Product","p")
@@ -176,8 +198,34 @@ class ProductInSuperCategoryFilterType extends AbstractType
             ))
             ->add('isSecondHand', Filters\BooleanFilterType::class,array(
                 'label'=>'sitebundle.issecondhand',
-            ))
+            ));
+            if(count($tags)>0){
+                $builder
+                    ->add('tags', Filters\EntityFilterType::class, array(
+                        #'empty_data'=>$tags,
+                        'label'    =>  'sitebundle.tag',
+                        'class'    =>  'LilWorksStoreBundle:Tag',
+                        'choice_label' => function ( $tag ) use ($productsInTag){
+                            return $tag->getName() . "(".$productsInTag[$tag->getId()].")" ;
+                        },
+                        'query_builder' => function (EntityRepository $er) use ($tags) {
+                            return $er->createQueryBuilder('t')
+                                ->where('t.id IN (:ids)')
+                                ->setParameter('ids',$tags)
+                                ;
+                        },
+                        'expanded'=>true,
+                        'multiple'=>true,
+                        'attr' => array(
+                            'class'=>'form-control',
+                            #'class'=>'selectpicker form-control',
+                            #'data-live-search'=>'true',
+                            #'data-actions-box'=>true
+                        )
 
+                    ));
+            }
+            $builder
             ->add('categories', Filters\EntityFilterType::class, array(
                 'label'    =>  'sitebundle.category',
                 'class'    =>  'LilWorksStoreBundle:Category',
@@ -197,6 +245,12 @@ class ProductInSuperCategoryFilterType extends AbstractType
                         ->setParameter('ids',$categories)
                         ;
                 },
+                'attr' => array(
+                    'class'=>'form-control',
+                    #'class'=>'selectpicker form-control',
+                    #'data-live-search'=>'true',
+                    #'data-actions-box'=>true
+                )
 
 
 
@@ -221,6 +275,12 @@ class ProductInSuperCategoryFilterType extends AbstractType
                         ->setParameter('ids',$brands)
                         ;
                 },
+                'attr' => array(
+                    'class'=>'form-control',
+                    #'class'=>'selectpicker form-control',
+                    #'data-live-search'=>'true',
+                    #'data-actions-box'=>true
+                )
 
             ))
             ;

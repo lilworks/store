@@ -54,10 +54,10 @@
         </div>
         <div class="tab-pane" id="addresses" role="tabpanel">
             <ul class="addresses list-inline " id="target" data-prototype="{{ form_widget(form.addresses.vars.prototype)|e('html_attr') }}">
-                {% for addresses in form.addresses %}
-                    <li class="addresse list-inline-item">
-                        {{ addresse.vars.value.addresse }}
-                        {{ form_row(addresse) }}
+                {% for address in form.addresses %}
+                    <li class="address list-inline-item">
+                        {#{{ address.vars.value.address }}#}
+                        {{ form_row(address) }}
                     </li>
                 {% endfor %}
             </ul>

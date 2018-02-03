@@ -39,6 +39,29 @@ class ProductInBrandFilterType extends AbstractType
             }
         }
         $categories = array_unique($categories);
+
+        $rtags = $this->em->createQueryBuilder()
+            ->select("t.id as id ,COUNT(p) as countp")
+
+            ->from("LilWorksStoreBundle:Tag","t")
+            ->join("t.products","p")
+            ->where("p.isPublished = 1")
+            ->andWhere('p.priceOnline IS NOT NULL ')
+            ->andWhere('p.brand = :brand_id')
+            ->having('COUNT(p)>0')
+            ->groupBy('t.id')
+            ->setParameter('brand_id',$brand->getId())
+            ->getQuery()
+            ->getArrayResult()
+        ;
+
+        $tags = array();
+        $productsInTag = array();
+        foreach($rtags as $tag){
+            array_push($tags,$tag["id"]);
+            $productsInTag[$tag["id"]]=$tag["countp"];
+        }
+
         $min = $this->em->createQueryBuilder()
             ->select("p.priceOnline")
             ->from("LilWorksStoreBundle:Product","p")
@@ -129,8 +152,36 @@ class ProductInBrandFilterType extends AbstractType
             ))
             ->add('isSecondHand', Filters\BooleanFilterType::class,array(
                 'label'=>'sitebundle.issecondhand',
-            ))
+            ));
 
+
+            if(count($tags)>0){
+                $builder
+                    ->add('tags', Filters\EntityFilterType::class, array(
+                        #'empty_data'=>$tags,
+                        'label'    =>  'sitebundle.tag',
+                        'class'    =>  'LilWorksStoreBundle:Tag',
+                        'choice_label' => function ( $tag ) use ($productsInTag){
+                            return $tag->getName() . "(".$productsInTag[$tag->getId()].")" ;
+                        },
+                        'query_builder' => function (EntityRepository $er) use ($tags) {
+                            return $er->createQueryBuilder('t')
+                                ->where('t.id IN (:ids)')
+                                ->setParameter('ids',$tags)
+                                ;
+                        },
+                        'expanded'=>true,
+                        'multiple'=>true,
+                        'attr' => array(
+                            'class'=>'form-control',
+                            #'class'=>'selectpicker form-control',
+                            #'data-live-search'=>'true',
+                            #'data-actions-box'=>true
+                        )
+
+                    ));
+            }
+        $builder
         ->add('categories', Filters\EntityFilterType::class, array(
                 'class'    =>  'LilWorksStoreBundle:Category',
                 'expanded'=>true,
@@ -146,6 +197,12 @@ class ProductInBrandFilterType extends AbstractType
                         ->setParameter('categories',$categories)
                         ;
                 },
+                'attr' => array(
+                    'class'=>'form-control',
+                    #'class'=>'selectpicker form-control',
+                    #'data-live-search'=>'true',
+                    #'data-actions-box'=>true
+                )
 
             ))
 

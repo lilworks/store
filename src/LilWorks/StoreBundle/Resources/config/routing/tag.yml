@@ -27,3 +27,8 @@ tag_delete:
     path:     /{tag_id}/delete
     defaults: { _controller: "LilWorksStoreBundle:Tag:delete" }
     methods:  GET
+
+tag_populate:
+    path:     /{tag_id}/populate
+    defaults: { _controller: "LilWorksStoreBundle:Tag:populate" }
+    methods:  [GET, POST]

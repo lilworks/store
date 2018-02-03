@@ -316,12 +316,15 @@ class ConfigureStoreMenuListener
 
         $this->setAction('index',null,$menu);
         $this->setAction('new',null,$menu);
+
         if($id) {
             $entityName = "LilWorksStoreBundle:Tag";
             $entity = $this->em->getRepository($entityName)->find($id);
 
             $this->setAction('show', $entity, $menu);
             $this->setAction('edit', $entity, $menu);
+            $this->setAction('populate', $entity, $menu);
+
             if(count($entity->getProducts())==0)
                 $this->setAction('delete', $entity, $menu);
             else

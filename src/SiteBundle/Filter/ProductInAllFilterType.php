@@ -144,6 +144,26 @@ class ProductInAllFilterType extends AbstractType
                     return $filterQuery->createCondition($expression, $parameters);
                 }
             ))
+            ->add('tags', Filters\EntityFilterType::class, array(
+                'class'    =>  'LilWorksStoreBundle:Tag',
+                'expanded'=>true,
+                'multiple'=>true,
+                'choice_label' => function ( $tag ) {
+                    return $tag->getName();
+                },
+                'attr' => array(
+                    'class'=>'form-control',
+                ),
+                'query_builder' => function (EntityRepository $er)  {
+                    return $er->createQueryBuilder('t')
+                        #->where('b.id in (:categories)')
+                        ->orderBy('t.name', 'ASC')
+                        #->setParameter('categories',$categories)
+                        ;
+                },
+
+
+            ))
             ->add('categories', Filters\EntityFilterType::class, array(
                 'class'    =>  'LilWorksStoreBundle:Category',
                 'expanded'=>true,

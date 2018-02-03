@@ -122,14 +122,15 @@ class DepositSaleController extends Controller
         $form = $this->createForm('LilWorks\StoreBundle\Form\DepositSaleType', $depositSale);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+
 
             $depositSale->setReference(
                 $em->getRepository("LilWorksStoreBundle:DepositSale")->getNextReference($depositSale)
             );
 
             if(count($depositSale->getCustomer()->getAddresses())>0){
-
 
                 foreach($depositSale->getCustomer()->getAddresses() as $address){
                     $depositSale->setAddress($address);
@@ -189,6 +190,7 @@ class DepositSaleController extends Controller
 
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
             foreach ($originalDepositSalesPaymentMethods as $depositSalePaymentMethod) {
                 if (false === $depositSale->getDepositSalesPaymentMethods()->contains($depositSalePaymentMethod)) {
                     $depositSalePaymentMethod->getDepositSale()->removeDepositSalesPaymentMethod($depositSalePaymentMethod);

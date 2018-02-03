@@ -13,22 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class DepositSale
 {
-    /**
-     * @Assert\Collection(
-     *     fields = {
-     *         "personal_email" = @Assert\NotBlank(),
-     *     },
-     *     allowMissingFields = true
-     * )
-     */
-    protected $paymentData = array(
-        'amount' => '...',
-    );
 
-    public function setPaymentData($key, $value)
-    {
-        $this->paymentData[$key] = $value;
-    }
 
     /**
      * @ORM\PrePersist
@@ -68,7 +53,6 @@ class DepositSale
 
     /**
      * @ORM\OneToMany(targetEntity="LilWorks\StoreBundle\Entity\DepositSalesPaymentMethods", mappedBy="depositSale" ,cascade={"remove","persist"})
-     * @Assert\Valid()
      */
     private $depositSalesPaymentMethods;
 

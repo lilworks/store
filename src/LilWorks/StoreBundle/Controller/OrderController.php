@@ -126,7 +126,11 @@ class OrderController extends Controller
         $pdf->setOption('footer-left', "[page]/[topage]");
         $pdf->setOption('header-html', $header);
 
-        $filename = $order->getReference() . ".pdf";
+        if($order->getReference() != ""){
+            $filename = $order->getReference() . ".pdf";
+        }else{
+            $filename = "order_".date('Y-m-d_H-i').".pdf";
+        }
 
         return new Response(
             $pdf->getOutputFromHtml($html),
@@ -216,6 +220,7 @@ class OrderController extends Controller
             $view = "show-".strtolower($order->getOrderType()->getTag());
         else
             $view = "show";
+
 
         $this->get('store.setSeo')->setTitle('storebundle.title.show %reference%',array('%reference%'=>$order->getReference()),'storebundle.prefix.orders');
         return $this->render('LilWorksStoreBundle:Order:'.$view.'.html.twig', array(

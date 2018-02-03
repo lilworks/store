@@ -47,6 +47,8 @@
         </tr>
         </thead>
         <tbody>
+
+
         {% for orderProductReturn in pagination %}
 
             <tr>
@@ -61,6 +63,7 @@
                 <td>
                     {{ orderProductReturn.reference }}
                 </td>
+
                 <td>
                     <sup>{{ orderProductReturn.quantity }}</sup>&frasl;<sub>{{ orderProductReturn.orderProduct.quantity }}</sub>
 
@@ -87,8 +90,11 @@
                     {% endif %}
 
                 </td>
+
             </tr>
+
         {% endfor %}
+
         </tbody>
     </table>
 

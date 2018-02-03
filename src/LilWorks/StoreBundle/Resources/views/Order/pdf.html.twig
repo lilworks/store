@@ -26,6 +26,7 @@
         {{ order.reference }}
     </h1>
 
+    {% if  order.customer is defined and order.customer is not null %}
     <div style="text-align: right;">
         <strong>
             {{ order.customer.firstName ~ ' ' ~ order.customer.lastName ~ ' ' ~ order.customer.companyName }}
@@ -38,6 +39,7 @@
         {% endif %}
         </div>
     </div>
+    {% endif %}
 
 
     <table class="table table-striped">

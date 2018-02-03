@@ -20,6 +20,7 @@ class TagType extends AbstractType
             ->add('name',null,array(
                 'label'=>'storebundle.name',
             ))
+            /*
             ->add('products', EntityType::class, array(
                 'label'=>'storebundle.products',
                 'class'    => 'LilWorksStoreBundle:Product' ,
@@ -48,6 +49,7 @@ class TagType extends AbstractType
                     'data-width'=>"300px"
                 )
             ))
+            */
             ;
     }
     

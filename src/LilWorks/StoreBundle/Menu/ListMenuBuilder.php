@@ -138,6 +138,8 @@ class ListMenuBuilder
     public function tag($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
+        $this->setAction('populate',$menu,$entity->getId());
+
         if(count($entity->getProducts()) == 0){
             $this->setAction('delete',$menu,$entity->getId());
         }else{

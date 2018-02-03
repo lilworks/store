@@ -27,8 +27,8 @@ class DepositSaleType extends AbstractType
             $depositSale = $event->getData();
             $form = $event->getForm();
 
-
             if($depositSale->getCustomer()){
+
                 $form->add('address', EntityType::class, array(
                     'label'=>'storebundle.address',
                     'class'    => 'LilWorksStoreBundle:Address' ,
@@ -58,9 +58,11 @@ class DepositSaleType extends AbstractType
                     },
                 ));
 
+
             }
 
         });
+
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
 
             $depositSale = $event->getData();
@@ -84,6 +86,8 @@ class DepositSaleType extends AbstractType
                 ));
             }
         });
+
+
             $builder
                 ->add('status', EntityType::class, array(
                     'label'=>'storebundle.depositsale.status',

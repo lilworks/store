@@ -86,15 +86,6 @@ class DefaultController extends Controller
         $productService = $this->get('site.product');
 
 
-/*
-        $seoPage = $this->container->get('sonata.seo.page');
-        $seoPage
-            ->setTitle($product->getBrand()->getName() . " " . $product->getName() . " - " . $seoPage->getTitle() )
-            ->addMeta('name', 'description',  preg_replace('!\s+!', ' ',substr(strip_tags($product->getDescription()),0,100)))
-            ->addMeta('property', 'og:title', $product->getBrand()->getName() . " " . $product->getName())
-            ->addMeta('property', 'og:description', preg_replace('!\s+!', ' ',substr(strip_tags($product->getDescription()),0,100)))
-        ;
-*/
         $this->get('site.setSeo')->setTitle('sitebundle.product %name%',array('%name%'=>$product->getBrand()->getName() . " " . $product->getName()));
         return $this->render('SiteBundle:Default:product.html.twig',array(
             'product'=>$product,
@@ -129,14 +120,26 @@ class DefaultController extends Controller
             ->leftJoin('c.supercategories_categories', 'scc')
             ->leftJoin('scc.supercategory', 'sc')
             ->leftJoin('p.brand', 'b')
+            ->leftJoin('p.tags', 't')
             ->where('c.id = ' . $category->getId())
             ->andWhere('p.isPublished = 1 ')
             ->andWhere('p.priceOnline is not null ')
             ->andWhere('b.isPublished = 1 ')
 
         ;
+/*
+        $qbUpdater = $this->get('lexik_form_filter.query_builder_updater');
 
+        // set the joins
+        $qbUpdater->setParts(array(
+            '__root__'    => 'p',
+            'e.user'      => 'u',
+            'u.addresses' => 'a',
+        ));
 
+        // then add filter conditions
+        $qbUpdater->addFilterConditions($formFilter, $qb);
+*/
         if ($request->query->has($formFilter->getName())) {
             $formFilter->submit($request->query->get($formFilter->getName()));
             $qbUpdater = $this->get('lexik_form_filter.query_builder_updater');
@@ -433,7 +436,7 @@ class DefaultController extends Controller
             ->join('p.brand','b')
             ->where('p.isPublished = 1')
             ->andWhere('c.isPublished = 1')
-            ->andWhere('COUNT(p)>0')
+            //->andWhere('COUNT(p)>0')
             ->orderBy('c.name','asc')
             ->getQuery()
             ->getResult()
@@ -451,7 +454,7 @@ class DefaultController extends Controller
             ->andWhere('p.isPublished = 1')
             ->andWhere('c.isPublished = 1')
             ->andWhere('p.priceOnline IS NOT NULL')
-            ->andWhere('COUNT(p)>0')
+            //->andWhere('COUNT(p)>0')
             ->orderBy('b.name','asc')
 
             ->getQuery()

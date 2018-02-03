@@ -58,6 +58,8 @@ class WarrantyController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            /*
             foreach( $warranty->getProductsOnline() as $p){
                 if(!$p->getWarrantiesOnline()->contains($warranty)){
                     $p->addWarrantiesOnline($warranty);
@@ -73,11 +75,14 @@ class WarrantyController extends Controller
                     $em->persist($p);
                 }
             }
+            */
+            $em->persist($warranty);
             $em->flush();
 
             $this->get('store.flash')->setMessages(array(
                 array('status'=>'success','message'=>'storebundle.flash.warranty.created')
             ));
+
 
             return $this->redirectToRoute('warranty_show', array('warranty_id' => $warranty->getId()));
         }
@@ -127,6 +132,7 @@ class WarrantyController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            /*
             foreach($originalProductsOnline as $p){
                 if( false === $warranty->getProductsOnline()->contains($p) ){
                     $p->removeWarrantiesOnline($warranty);
@@ -155,6 +161,8 @@ class WarrantyController extends Controller
                     $em->persist($p);
                 }
             }
+            */
+            $em->persist($warranty);
             $em->flush();
 
             $this->get('store.flash')->setMessages(array(

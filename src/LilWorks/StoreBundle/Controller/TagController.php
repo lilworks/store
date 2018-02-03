@@ -79,6 +79,7 @@ class TagController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            /*
             foreach( $tag->getProducts() as $p){
                 if(!$p->getTags()->contains($tag)){
                     $p->addTag($tag);
@@ -86,14 +87,23 @@ class TagController extends Controller
                     $em->persist($p);
                 }
             }
-            $em->persist($tag);
+            */
+            $tags = explode(',',$tag->getName());
+            if(count($tags)>0){
+                foreach($tags as $tagName){
+                    $tag = new Tag();
+                    $tag->setName($tagName);
+                    $em->persist($tag);
+                }
+            }
+
             $em->flush();
 
             $this->get('store.flash')->setMessages(array(
                 array('status'=>'success','message'=>'storebundle.flash.tag.created')
             ));
 
-            return $this->redirectToRoute('tag_show', array('tag_id' => $tag->getId()));
+            return $this->redirectToRoute('tag_index');
         }
 
         $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.tags');
@@ -132,6 +142,7 @@ class TagController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            /*
             foreach($originalProducts as $p){
                 if( false === $tag->getProducts()->contains($p) ){
                     $p->removeWarrantiesOnline($tag);
@@ -146,6 +157,7 @@ class TagController extends Controller
                     $em->persist($p);
                 }
             }
+            */
             $em->flush();
 
             $this->get('store.flash')->setMessages(array(
@@ -162,6 +174,26 @@ class TagController extends Controller
             'form' => $editForm->createView()
         ));
     }
+    /**
+     * @ParamConverter("tag", options={"mapping": {"tag_id"   : "id"}})
+     */
+    public function populateAction(Request $request, Tag $tag)
+    {
+
+        $this->get('store.setSeo')->setTitle('storebundle.title.populate %name%',array('%name%'=>$tag->getName()),'storebundle.prefix.tag');
+        $object = array(
+            'id'=>$tag->getId(),
+            'entity'=>'LilWorksStoreBundle:Tag',
+            'child'=>'products',
+            'childEntity'=>'LilWorksStoreBundle:Product',
+            'childMethod'=>'tag',
+        );
+        return $this->render('LilWorksStoreBundle:Tag:populate.html.twig', array(
+            'tag' => $tag,
+            'object'=>$object
+        ));
+    }
+
     /**
      * @ParamConverter("tag", options={"mapping": {"tag_id"   : "id"}})
      */
@@ -206,6 +238,7 @@ class TagController extends Controller
         $this->get('store.flash')->setMessages(array(
             array('status'=>'success','message'=>'storebundle.flash.tag.deleted')
         ));
+
 
         if ( !$referer || is_null($referer)  ) {
             return $this->redirectToRoute('tag_index');
