@@ -260,7 +260,7 @@ footer{
     font-weight: 100;
     float: left;
     width: 132px;
-    height: 92px;
+    height: 98px;
     padding: 8px;
     margin: 10px;
     background-color: #9999;
@@ -287,7 +287,7 @@ footer{
 .userbasketsmall-btn>h3{
     float: left;
     display: inline;
-    font-size: 18px;
+    font-size: 16px;
     margin-left: 0;
     margin-top: 0;
     margin-bottom: 5px;
