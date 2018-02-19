@@ -1,4 +1,82 @@
 
+<div id="userbasketsmall">
+    <div class="userbasketsmall-btn">
+        <h3><i class="fa fa-user"></i></h3>
+        {% if user is null %}
+            <p class="card-text">
+                {{ 'sitebundle.user.notconnected'|trans }}
+            </p>
+            <div class="btn-group" role="group">
+                <a role="button" href="{{ path('fos_user_security_login') }}" class="btn btn-sm btn-secondary ">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </a>
+                <a  role="button" href="{{ path('fos_user_registration_register') }}" class="btn btn-sm btn-secondary ">
+                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                </a>
+            </div>
+        {% else %}
+            <div class="btn-group " role="group">
+                <a role="button" href="{{ path('site_customer') }}" class="btn btn-sm btn-secondary">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                </a>
+                <a role="button" href="{{ path('site_customer_edit') }}" class="btn btn-sm btn-secondary ">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a role="button" href="{{ path('fos_user_security_logout') }}" class="btn btn-sm btn-secondary">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </a>
+            </div>
+            <p class="card-text">
+                {{ 'sitebundle.user.logged_in_as %username%'|trans({'%username%':user.username}) }}
+            </p>
+        {% endif %}
+    </div>
+    <div class="userbasketsmall-btn">
+        {% if basket.basketsProducts|length > 0 %}
+            <i class="fas fa-shopping-cart"></i>
+            <div class="btn-group " role="group">
+                <a role="button" href="{{ path('site_basket_edit') }}" class="btn btn-sm btn-secondary buttonToEditBasket">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+            </div>
+            </h3>
+            <span class="totInSmallBasket">
+                {% set count = basket.basketsProducts|length %}
+                {% transchoice count %}
+                {1} %count% article|]1,Inf] %count% articles
+                {% endtranschoice %}
+                {{ basket.tot|price }}
+            </span>
+            {% set c = 0 %}
+            <ul class="list-unstyled">
+                {% for basketProduct in basket.basketsProducts %}
+                    {% set c = c + 1 %}
+                    {% if c <= 2 %}
+                        <li>
+                            {#
+                            {% if basketProduct.product.pictures|length > 0 %}
+                                <img class="card-img"  src="{{ asset('product/'~basketProduct.product.pictures[0].pictureName ) | imagine_filter('supermini') }}" />
+                            {% endif %}
+                            #}
+                            <a class="userbasketsmall-a" href="{{ path('site_product',{tag:basketProduct.product.tag}) }}">
+                                {{ basketProduct.product.brand.name ~' '~basketProduct.product.name ~'('~basketProduct.quantity~')' }}
+                            </a>
+                        </li>
+                    {% elseif c == 3 %}
+                        {{ 'sitebundle.morexproduct %count%'|trans({'%count%':basket.basketsProducts|length - 2 })  }}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3>
+                <i class="fa fa-shopping-cart"></i>
+                {{ 'sitebundle.basketempty'|trans }}
+            </h3>
+        {% endif %}
+    </div>
+</div>
+
+{#
 <script>
 
     $(function() {
@@ -137,3 +215,5 @@
         </div>
     </div>
 </div>
+
+#}

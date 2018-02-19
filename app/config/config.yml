@@ -96,6 +96,7 @@ doctrine:
             default:
                 dql:
                    string_functions:
+                       REGEXP: DoctrineExtensions\Query\Mysql\Regexp
                        GROUP_CONCAT: AppBundle\DQL\GroupConcatFunction
                        SUBSTRING_INDEX: DoctrineExtensions\Query\Mysql\SubstringIndex
                        CONCATWS: DoctrineExtensions\Query\Mysql\ConcatWs

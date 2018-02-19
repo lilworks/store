@@ -407,6 +407,7 @@ class DefaultController extends Controller
             ->andWhere('p.isPublished = 1')
             ->andWhere('c.isPublished = 1')
             ->andWhere('b.isPublished = 1')
+            ->groupBy('p,c')
         ;
 
 

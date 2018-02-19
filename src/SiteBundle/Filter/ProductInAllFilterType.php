@@ -61,6 +61,7 @@ class ProductInAllFilterType extends AbstractType
 
         ;
         $min = $min[0]['priceOnline']-1;
+        $min=0;
         $max = $max[0]['priceOnline']+1;
 
 
@@ -131,16 +132,28 @@ class ProductInAllFilterType extends AbstractType
                         return null;
                     }
 
-                    $values['value'] = str_replace(" ","%",preg_replace('!\s+!', ' ', $values['value']));
-                    $expression = $filterQuery->getExpr()->orX(
-                        $filterQuery->getExpr()->like('CONCAT(b.name,p.name)', ':search'),
-                        $filterQuery->getExpr()->like('CONCAT(p.name,b.name)', ':search')
-                    );
+                    $words = explode(' ', $values["value"]);
 
-                    $parameters = array('search' => "%".$values['value']."%" );
+                    $parameters = array();
+                    $filterQueries = array();
+                    if(count($words)>0){
+                        foreach($words as $k=>$word){
+                            $parameters["word$k"] = $word;
+                        }
+                    }else{
+                        $parameters["word0"] = $words;
+                    }
+                    foreach($parameters as $k=>$word){
+                        array_push($filterQueries,
+                            $filterQuery->getExpr()->eq("REGEXP(CONCAT(CONCAT(b.name,'|',p.name),'|',c.name), :$k)", 1)
 
-
-
+                        );
+                    }
+                    $andX = $filterQuery->getExpr()->andX();
+                    foreach($filterQueries as $q) {
+                        $andX->add($q);
+                    }
+                    $expression = $andX;
                     return $filterQuery->createCondition($expression, $parameters);
                 }
             ))
