@@ -2,6 +2,8 @@
 
 namespace LilWorks\StoreBundle\Form;
 
+use LilWorks\StoreBundle\Entity\Picture;
+use LilWorks\StoreBundle\Form\Transformer\PicturesTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
@@ -9,6 +11,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class ProductType extends AbstractType
 {
@@ -21,6 +26,31 @@ class ProductType extends AbstractType
     {
 
         $product = $builder->getData();
+
+
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+
+
+            $product = $event->getData();
+            $form = $event->getForm();
+
+
+
+            foreach($form->get("multiplepictures")->getData() as $manualPicture) {
+                //$product->addPicture();
+                $picture = new Picture();
+                $picture->setPictureFile($manualPicture);
+                $picture->setPictureName($manualPicture->getClientOriginalName());
+                $picture->setProduct($product);
+                $product->addPicture($picture);
+            }
+
+
+
+
+
+
+        });
 
 
         $builder
@@ -196,7 +226,7 @@ class ProductType extends AbstractType
 
             ));
 
-            $builder->add('pictures', CollectionType::class, array(
+        $builder->add('pictures', CollectionType::class, array(
                 'label'=>'storebundle.pictures',
                 'mapped'=>true,
                 'allow_add'=>true,
@@ -206,14 +236,23 @@ class ProductType extends AbstractType
                 'by_reference' => false,
                 'entry_type'   => PictureType::class,
 
-            ));
+        ))
+            #->addModelTransformer(new PicturesTransformer())
+        ;
 
-
-
-
-
-
-
+        $builder
+            ->add('multiplepictures', FileType::class, [
+                'label'=>'storebundle.pictures',
+                'help'=>'storebundle.help.pictures.multiple',
+                'mapped'=>false,
+                'multiple' => true,
+                'required' => false,
+                'attr'     => [
+                    'accept' => 'image/*',
+                    'multiple' => 'multiple'
+                ]
+            ])
+        ;
 
             $builder->add('tags', EntityType::class, array(
                 'label'=>'storebundle.product.tags',
@@ -285,6 +324,7 @@ class ProductType extends AbstractType
                 'label'=>'storebundle.product.isreviewable',
                 'required'=>false
             ))
+
         ;
 
 

@@ -91,6 +91,26 @@ class ProductController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            foreach ($product->getPictures() as $pictureFromForm) {
+                $pictureFromForm->setProduct($product);
+                $em->persist($pictureFromForm);
+            }
+
+
+
+            if(count($product->getDocfiles() )>0){
+                foreach ($product->getDocfiles() as $docfile) {
+                    $docfile->addProduct($product);
+                    $em->persist($docfile);
+                }
+            }
+
+            if(count($product->getTags() )>0){
+                foreach ($product->getTags() as $tag) {
+                    $tag->addProduct($product);
+                    $em->persist($tag);
+                }
+            }
 
             $em->persist($product);
             $em->flush();
@@ -132,10 +152,31 @@ class ProductController extends Controller
             $originalTags->add($tag);
         }
 
+        $originalPictures = new ArrayCollection();
+        foreach ($product->getPictures() as $picture) {
+            $originalPictures->add($picture);
+        }
+
         $editForm = $this->createForm('LilWorks\StoreBundle\Form\ProductType', $product);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+
+            foreach ($originalPictures as $picture) {
+                if (false === $product->getPictures()->contains($picture)) {
+                    $picture->getProduct()->removePicture($picture);
+                    $em->persist($picture);
+                    $em->remove($picture);
+
+                }
+            }
+            foreach ($product->getPictures() as $pictureFromForm) {
+                $pictureFromForm->setProduct($product);
+                $em->persist($pictureFromForm);
+            }
+
+
 
             if(count($product->getDocfiles() )>0){
                 foreach ($product->getDocfiles() as $docfile) {

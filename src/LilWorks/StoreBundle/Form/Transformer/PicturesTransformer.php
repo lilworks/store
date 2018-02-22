@@ -7,18 +7,28 @@ class PicturesTransformer implements DataTransformerInterface
     public function transform($value)
     {
         // TODO: Implement transform() method.
+        echo "TRANSFORMER transform";
+
+        var_dump(count($value->getPictures()));
+
     }
 
     public function reverseTransform($files)
     {
-        $pictures = [];
+        echo "TRANSFORMER reverseTransform";
+        var_dump(get_class($files));
+
+        $attachments = [];
+        /*
         foreach($files as $file){
-            var_dump($file);
-            echo "<hr>";
-            $picture = new Picture();
-            $picture->setPictureFile($file);
-            $pictures[] = $picture;
+            $attachment = new Picture();
+            //$attachment->setFile($file);
+            //$attachments[] = $attachment;
+            var_dump(get_class($file));
         }
-        return $pictures;
+
+        die();
+*/
+        return $attachments;
     }
 }

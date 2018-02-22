@@ -1,14 +1,11 @@
 <?php
-
 namespace LilWorks\StoreBundle\Form;
 
+use LilWorks\StoreBundle\Form\Transformer\PicturesTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Symfony\Component\Validator\Constraints\Valid;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 class PictureType extends AbstractType
 {
     /**
@@ -24,16 +21,17 @@ class PictureType extends AbstractType
                 'required'=>true,
                 "attr" => array(
                     "accept" => "image/*",
-                   # "multiple" => "multiple",
+                   // "multiple" => "multiple",
                 )
             ))
+
             ->add('pos',null,array(
                 'label'=>'storebundle.pos'
             ))
             ->add('description',null,array(
                 'label'=>'storebundle.description',
                 'attr'=>array(
-                    'class'=>'editor-text'
+                    #'class'=>'editor-text'
                 )
 
             ))

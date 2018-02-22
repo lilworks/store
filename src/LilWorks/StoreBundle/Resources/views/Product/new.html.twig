@@ -107,6 +107,11 @@
         <div class="tab-pane" id="pictures" role="tabpanel">
 
             <h3>{% trans %}pictures{% endtrans %}</h3>
+
+            {{ form_row(form.multiplepictures) }}
+            {{ form_row(form.multiplepictures) }}
+            {{ form_row(form.multiplepictures) }}
+
             <ul class="pictures list-inline " id="target" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e('html_attr') }}">
                 {% for picture in form.pictures %}
                     <li class="picture list-inline-item">
@@ -116,6 +121,7 @@
                 {% endfor %}
             </ul>
             {{ form_widget(form.pictures) }}
+
 
         </div>
 
