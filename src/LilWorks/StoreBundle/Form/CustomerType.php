@@ -27,6 +27,9 @@ class CustomerType extends AbstractType
             ->add('companyName',null,array(
                 'label'=>'storebundle.companyname'
             ))
+            ->add('email',null,array(
+                'label'=>'storebundle.email'
+            ))
             ->add('remoteUser',null,array(
                 'label'=>'storebundle.remoteuser'
             ))

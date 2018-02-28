@@ -58,6 +58,7 @@
             {{ form_row(form.firstName) }}
             {{ form_row(form.lastName) }}
             {{ form_row(form.companyName) }}
+            {{ form_row(form.email) }}
         </div>
         <div class="tab-pane" id="addresses" role="tabpanel">
             <ul class="addresses list-inline " id="target" data-prototype="{{ form_widget(form.addresses.vars.prototype)|e('html_attr') }}">
