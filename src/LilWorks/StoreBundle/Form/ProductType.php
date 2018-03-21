@@ -109,7 +109,7 @@ class ProductType extends AbstractType
                 )
 
             ))
-
+/*
             ->add('relatedProducts', EntityType::class, array(
                 'label'=>'storebundle.product.relatedproducts',
                 'class'    => 'LilWorksStoreBundle:Product' ,
@@ -147,7 +147,7 @@ class ProductType extends AbstractType
                     'data-width'=>"300px"
                 )
             ))
-
+*/
 
             ->add('description',null,array(
                 'label'=>'storebundle.description',

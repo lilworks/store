@@ -17,6 +17,10 @@ class CountryListener {
     public function setCountry(Event $event) {
 
         $security_context = $this->container->get('security.token_storage');
+
+        if(is_null($security_context->getToken())){
+           return ;
+        }
         $user = $security_context->getToken()->getUser();
 
 
