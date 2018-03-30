@@ -7,6 +7,7 @@
             FCE.init('realShippingMethods','realShippingMethods list-inline','realShippingMethod list-inline-item');
             FCE.init('ordersOrderSteps','ordersOrderSteps list-inline','orderOrderStep list-inline-item');
             FCE.init('ordersPaymentMethods','ordersPaymentMethods list-inline','orderPaymentMethod list-inline-item');
+
         } );
     </script>
 {% endblock %}
@@ -70,6 +71,20 @@
         </div>
         <div class="tab-pane" id="customer" role="tabpanel">
             {{ form_row(form.customer) }}
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#customerModal">
+                <i class="fa fa-plus"></i>
+                <i class="fa fa-user"></i>
+                {% trans %}storebundle.customer.new{% endtrans %}
+            </button>
+
+
+
+
+
+
+
             {% if form.shippingAddress is defined %}
                 {{ form_row(form.shippingAddress) }}
             {% endif %}
@@ -164,6 +179,6 @@
 
     {{ form_end(form) }}
 
-
+{% include 'LilWorksStoreBundle:customer:ajax-form.html.twig' %}
 
 {% endblock %}

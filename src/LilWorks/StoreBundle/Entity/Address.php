@@ -52,6 +52,7 @@ class Address
      * @var string
      *
      * @ORM\Column(name="street", type="string",length=255,nullable=true)
+     * @Assert\NotBlank()
      */
     private $street;
 
@@ -66,6 +67,7 @@ class Address
      * @var string
      *
      * @ORM\Column(name="zipCode", type="string",nullable=false)
+     * @Assert\NotBlank()
      */
     private $zipCode;
 
@@ -73,6 +75,7 @@ class Address
      * @var string
      *
      * @ORM\Column(name="city", type="string",length=255,nullable=false)
+     * @Assert\NotBlank()
      */
     private $city;
 
@@ -86,6 +89,7 @@ class Address
     /**
      * @ORM\ManyToOne(targetEntity="LilWorks\StoreBundle\Entity\Country", inversedBy="addresses")
      * @ORM\JoinColumn(name="country", referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     protected $country;
 

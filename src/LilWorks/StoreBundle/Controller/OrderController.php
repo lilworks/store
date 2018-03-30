@@ -2,6 +2,7 @@
 
 namespace LilWorks\StoreBundle\Controller;
 
+use LilWorks\StoreBundle\Entity\Customer;
 use LilWorks\StoreBundle\Entity\Order;
 use LilWorks\StoreBundle\Filter\OrderFilterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -173,6 +174,9 @@ class OrderController extends Controller
      */
     public function newAction(Request $request)
     {
+        $formCustomer = $this->createForm('LilWorks\StoreBundle\Form\CustomerType', new Customer());
+
+
         $user = $this->getUser();
 
         $order = new Order();
@@ -231,6 +235,7 @@ class OrderController extends Controller
         return $this->render('LilWorksStoreBundle:Order:new.html.twig', array(
             'order' => $order,
             'form' => $form->createView(),
+            'formCustomer' => $formCustomer->createView(),
         ));
     }
 

@@ -8,20 +8,16 @@
     <orderEntry type="module-library">
       <library name="PHARS">
         <CLASSES>
-          <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar" />
-          <root url="phar://$MODULE_DIR$/vendor/mrjgreen/db-sync/phar-composer.phar" />
-          <root url="phar://$MODULE_DIR$/vendor/mrjgreen/db-sync/db-sync.phar" />
           <root url="phar://$MODULE_DIR$/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar" />
-          <root url="phar://$MODULE_DIR$/vendor/symfony/phpunit-bridge/Tests/DeprecationErrorHandler/deprecation.phar" />
-          <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Bridge/PhpUnit/Tests/DeprecationErrorHandler/deprecation.phar" />
+          <root url="phar://$MODULE_DIR$/vendor/mrjgreen/db-sync/phar-composer.phar" />
+          <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar" />
+          <root url="phar://$MODULE_DIR$/vendor/mrjgreen/db-sync/db-sync.phar" />
         </CLASSES>
         <SOURCES>
-          <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar" />
-          <root url="phar://$MODULE_DIR$/vendor/mrjgreen/db-sync/phar-composer.phar" />
-          <root url="phar://$MODULE_DIR$/vendor/mrjgreen/db-sync/db-sync.phar" />
           <root url="phar://$MODULE_DIR$/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar" />
-          <root url="phar://$MODULE_DIR$/vendor/symfony/phpunit-bridge/Tests/DeprecationErrorHandler/deprecation.phar" />
-          <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Bridge/PhpUnit/Tests/DeprecationErrorHandler/deprecation.phar" />
+          <root url="phar://$MODULE_DIR$/vendor/mrjgreen/db-sync/phar-composer.phar" />
+          <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar" />
+          <root url="phar://$MODULE_DIR$/vendor/mrjgreen/db-sync/db-sync.phar" />
         </SOURCES>
       </library>
     </orderEntry>

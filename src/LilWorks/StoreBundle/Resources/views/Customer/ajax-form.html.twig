@@ -1,0 +1,119 @@
+{% block javascripts %}
+
+    <script>
+        $( function() {
+
+            FCE.init('addresses','addresses list-inline','addresse list-inline-item');
+            FCE.init('phonenumbers','phonenumbers list-inline','phonenumber list-inline-item');
+
+
+            $('#ajax_customer').submit(function(e) {
+
+                e.preventDefault();
+                var url = Routing.generate('lilworks_store_ajax_customer');
+                var formSerialize = $(this).serialize();
+
+                $.post(url, formSerialize, function(response) {
+                    //your callback here
+
+                    $("#lilworks_storebundle_order_customer").append('<option value="'+response.id+'">'+response.firstName+' '+response.lastName+' '+response.companyName+'</option>')
+                    $("#lilworks_storebundle_order_customer").val(response.id);
+                    $("#lilworks_storebundle_order_customer").selectpicker("refresh");
+
+                    $("#customerModal").modal('hide');
+
+
+                }, 'JSON');
+            });
+
+
+        } );
+    </script>
+{% endblock %}
+
+<!-- Modal -->
+<div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="customerModalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="customerModalTitle">
+                    <i class="fa fa-plus"></i>
+                    <i class="fa fa-user"></i>
+                    {% trans %}storebundle.customer.new{% endtrans %}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ form_start(formCustomer, {'attr': {'id': 'ajax_customer'}}) }}
+
+
+
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#customer-general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#addresses" role="tab">{% trans %}storebundle.addresses{% endtrans %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#phonenumbers" role="tab">{% trans %}storebundle.phonenumbers{% endtrans %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#users" role="tab">{% trans %}storebundle.user{% endtrans %}</a>
+                    </li>
+                </ul>
+
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="customer-general" role="tabpanel">
+                        {{ form_row(formCustomer.firstName) }}
+                        {{ form_row(formCustomer.lastName) }}
+                        {{ form_row(formCustomer.companyName) }}
+                        {{ form_row(formCustomer.email) }}
+                    </div>
+                    <div class="tab-pane" id="addresses" role="tabpanel">
+                        <ul class="addresses list-inline " id="target" data-prototype="{{ form_widget(formCustomer.addresses.vars.prototype)|e('html_attr') }}">
+                            {% for address in formCustomer.addresses %}
+                                <li class="address list-inline-item">
+                                    {#{{ address.vars.value.address }}#}
+                                    {{ form_row(address) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        {{ form_widget(formCustomer.addresses) }}
+                    </div>
+                    <div class="tab-pane" id="phonenumbers" role="tabpanel">
+                        <ul class="phonenumbers list-inline " id="target" data-prototype="{{ form_widget(formCustomer.phonenumbers.vars.prototype)|e('html_attr') }}">
+                            {% for phonenumber in formCustomer.phonenumbers %}
+                                <li class="phonenumber list-inline-item">
+                                    {{ phonenumber.vars.value.phonenumber }}
+                                    {{ form_row(phonenumber) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        {{ form_widget(formCustomer.phonenumbers) }}
+                    </div>
+                    <div class="tab-pane" id="users" role="tabpanel">
+                        {{ form_row(formCustomer.remoteUser) }}
+                        {{ form_row(formCustomer.user) }}
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm  btn-secondary" data-dismiss="modal">{% trans %}storebundle.button.close{% endtrans %}</button>
+                {#<button id="customerAjaxButton" type="button" class="btn btn-primary">{% trans %}storebundle.button.create{% endtrans %}</button>#}
+                <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
+            </div>
+            {{ form_end(formCustomer) }}
+        </div>
+    </div>
+</div>

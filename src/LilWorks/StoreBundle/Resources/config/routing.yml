@@ -3,6 +3,12 @@ lilworks_store_homepage:
     path:     /
     defaults: { _controller: LilWorksStoreBundle:Portal:index }
 
+lilworks_store_ajax_customer:
+    path:     /ajax-customer
+    defaults: { _controller: LilWorksStoreBundle:Ajax:ajaxCustomer }
+    options:
+         expose: true
+
 lilworks_flow:
     path:     /flow
     defaults: { _controller: LilWorksStoreBundle:Flow:index }

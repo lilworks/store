@@ -86,6 +86,9 @@ class OrdersProductsType extends AbstractType
                                     $q->where("p.isPublished = 1")
                                         ->andWhere('p.isArchived != 1');
 
+                               // $q->setMaxResults(10);
+
+
                                 return $q;
                             },
                             'required' => false ,
@@ -210,6 +213,7 @@ class OrdersProductsType extends AbstractType
                                 $q->where("p.isPublished = 1")
                                     ->andWhere('p.isArchived != 1');
 
+                            //$q->setMaxResults(10);
                             return $q;
                         },
                         'required' => false ,

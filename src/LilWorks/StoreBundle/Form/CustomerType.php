@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class CustomerType extends AbstractType
 {
@@ -37,6 +38,7 @@ class CustomerType extends AbstractType
 
             ->add('phonenumbers', CollectionType::class, array(
                 'label'=>'storebundle.phonenumbers',
+                'constraints' => array(new Valid()),
                 'mapped'=>true,
                 'allow_add'=>true,
                 'required' => false,
@@ -68,6 +70,7 @@ class CustomerType extends AbstractType
             ))
             ->add('addresses', CollectionType::class, array(
                 'label'=>'storebundle.addresses',
+                'constraints' => array(new Valid()),
                 'mapped'=>true,
                 'allow_add'=>true,
                 'required' => false,
@@ -85,7 +88,8 @@ class CustomerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'LilWorks\StoreBundle\Entity\Customer'
+            'data_class' => 'LilWorks\StoreBundle\Entity\Customer',
+            'cascade_validation' => true,
         ));
     }
 

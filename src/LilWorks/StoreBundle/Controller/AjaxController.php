@@ -3,6 +3,7 @@
 namespace LilWorks\StoreBundle\Controller;
 
 
+use LilWorks\StoreBundle\Entity\Customer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,43 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
  */
 class AjaxController extends Controller
 {
+    public function ajaxCustomerAction(Request $request)
+    {
+        $form = $this->createForm('LilWorks\StoreBundle\Form\CustomerType', new Customer());
+        $formDatas = $request->get('lilworks_storebundle_customer');
 
+        $form->handleRequest($request);
+
+        $customer = $form->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            foreach($customer->getAddresses() as $address){
+                $address->setCustomer($customer);
+            }
+            foreach($customer->getPhonenumbers() as $phonenumber){
+                $phonenumber->setCustomer($customer);
+            }
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($customer);
+            $em->flush();
+
+            return new Response(json_encode(array(
+                'id'=>$customer->getId(),
+                'firstName'=>$customer->getFirstName(),
+                'lastName'=>$customer->getLastName(),
+                'companyName'=>$customer->getCompanyName()
+            )));
+
+        }
+
+
+        return new Response();
+
+
+
+
+    }
     public function styleAction()
     {
         $response = new Response();

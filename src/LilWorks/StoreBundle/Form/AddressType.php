@@ -48,7 +48,8 @@ class AddressType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'LilWorks\StoreBundle\Entity\Address'
+            'data_class' => 'LilWorks\StoreBundle\Entity\Address',
+            'cascade_validation' => true,
         ));
     }
 
