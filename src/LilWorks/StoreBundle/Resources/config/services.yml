@@ -59,14 +59,14 @@ services:
             - { name: lilworks.store.entity.tag.cleaner }
         arguments: ['@doctrine.orm.entity_manager']
 
-    lilworks.store.coupon_repository:
-        class:  LilWorks\Store\Bundle\Entity\Repository\CouponRepository
-        factory_service: 'doctrine.orm.default_entity_manager'
-        factory_method:  'getRepository'
-        arguments:
-             - 'LilWorks\Store\Bundle\Entity\Coupon'
-        calls:
-             - [setParams, ['%context%','%mode%']]
+#    lilworks.store.coupon_repository:
+#        class:  LilWorks\Store\Bundle\Entity\Repository\CouponRepository
+#        factory_service: 'doctrine.orm.default_entity_manager'
+#        factory_method:  'getRepository'
+#        arguments:
+#             - 'LilWorks\Store\Bundle\Entity\Coupon'
+#        calls:
+#            - [setParams, ['%context%','%mode%']]
 
     lilworks.store.stockManager:
         class: LilWorks\StoreBundle\Service\StockManager
@@ -90,3 +90,12 @@ services:
         tags:
             - { name: form.type }
         arguments: ['@lilworks.store.orderManager','%context%','%mode%']
+    lilworks.form.cool.order:
+        class: LilWorks\StoreBundle\Form\CoolOrderType
+        tags:
+            - { name: form.type }
+        arguments: ['@lilworks.store.orderManager','%context%','%mode%']
+
+#    lilworks.form.flow.order:
+#         class: LilWorks\StoreBundle\Form\CreateOrderFlow
+#         parent: craue.form.flow

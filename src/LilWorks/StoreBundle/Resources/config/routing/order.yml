@@ -32,3 +32,8 @@ order_devistofacture:
     path:     /{order_id}/devistofacture
     defaults: { _controller: "LilWorksStoreBundle:Order:devistofacture" }
     methods:  [GET, POST,DELETE]
+
+order_cool:
+    path:     /cool
+    defaults: { _controller: "LilWorksStoreBundle:Order:cool" }
+    methods:  [GET, POST,DELETE]

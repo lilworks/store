@@ -141,7 +141,25 @@ class BrandController extends Controller
             'form' => $editForm->createView()
         ));
     }
+    /**
+     * @ParamConverter("brand", options={"mapping": {"brand_id"   : "id"}})
+     */
+    public function populateAction(Request $request, Brand $brand)
+    {
 
+        $this->get('store.setSeo')->setTitle('storebundle.title.populate %name%',array('%name%'=>$brand->getName()),'storebundle.prefix.brand');
+        $object = array(
+            'id'=>$brand->getId(),
+            'entity'=>'LilWorksStoreBundle:Brand',
+            'child'=>'products',
+            'childEntity'=>'LilWorksStoreBundle:Product',
+            'childMethod'=>'brand',
+        );
+        return $this->render('LilWorksStoreBundle:Brand:populate.html.twig', array(
+            'brand' => $brand,
+            'object'=>$object
+        ));
+    }
 
     /**
      * @ParamConverter("brand", options={"mapping": {"brand_id"   : "id"}})

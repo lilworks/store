@@ -3,6 +3,10 @@ lilworks_store_homepage:
     path:     /
     defaults: { _controller: LilWorksStoreBundle:Portal:index }
 
+lilworks_flow:
+    path:     /flow
+    defaults: { _controller: LilWorksStoreBundle:Flow:index }
+
 lil_works_store_import:
     resource: "@LilWorksStoreBundle/Resources/config/routing/import.yml"
     prefix:   /import

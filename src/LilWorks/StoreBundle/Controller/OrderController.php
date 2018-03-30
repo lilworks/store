@@ -16,7 +16,32 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
  */
 class OrderController extends Controller
 {
-    /**
+
+    public function coolAction(Request $request)
+    {
+        $user = $this->getUser();
+
+        $order = new Order();
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm('LilWorks\StoreBundle\Form\CoolOrderType', $order,array(
+            'context'=>$this->container->getParameter('context'),
+        ));
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $order =  $form->getData();
+            var_dump($order-getId());
+            die();
+        }
+        return $this->render('LilWorksStoreBundle:Order:cool.html.twig', array(
+            'form' => $form->createView(),
+            'order'=>$order
+        ));
+
+    }
+        /**
      * Lists all order entities.
      *
      */

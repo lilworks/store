@@ -78,6 +78,7 @@ class OrdersProductsType extends AbstractType
                             'choice_label' => function ($obj) { return   $obj->getBrand()->getName() . " " . $obj->getName() . " (" . $obj->getStock() .")" ; },
                             'query_builder' => function (EntityRepository $er) use ($context){
                                 $q = $er->createQueryBuilder('p')
+                                    #->select('p.id')
                                     ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = p.brand')
                                     ->where('p.isArchived != 1')
                                     ->orderBy('b.name , p.name', 'ASC');

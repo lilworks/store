@@ -1,15 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            $( document ).ready(function() {
-                $( window ).on( "load", FF.init() );
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $( document ).ready(function() {
+            $( window ).on( "load", FF.init() );
 
-            });
-        </script>
-    {% endblock %}
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+
     <h1>
         <i class="fa fa-file" aria-hidden="true"></i>
         {% trans %}storebundle.order.list{% endtrans %}

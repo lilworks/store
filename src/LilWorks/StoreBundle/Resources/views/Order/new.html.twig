@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
-
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $( function() {
+            FCE.init('products','products list-inline','product list-inline-item');
+            FCE.init('realShippingMethods','realShippingMethods list-inline','realShippingMethod list-inline-item');
+            FCE.init('ordersOrderSteps','ordersOrderSteps list-inline','orderOrderStep list-inline-item');
+            FCE.init('ordersPaymentMethods','ordersPaymentMethods list-inline','orderPaymentMethod list-inline-item');
+        } );
+    </script>
+{% endblock %}
 {% block body %}
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            $( function() {
-                FCE.init('products','products list-inline','product list-inline-item');
-                FCE.init('realShippingMethods','realShippingMethods list-inline','realShippingMethod list-inline-item');
-                FCE.init('ordersOrderSteps','ordersOrderSteps list-inline','orderOrderStep list-inline-item');
-                FCE.init('ordersPaymentMethods','ordersPaymentMethods list-inline','orderPaymentMethod list-inline-item');
-            } );
-        </script>
-    {% endblock %}
+
     <h1>
         <i class="fa fa-file" aria-hidden="true"></i>
         {% trans %}storebundle.order.new{% endtrans %}

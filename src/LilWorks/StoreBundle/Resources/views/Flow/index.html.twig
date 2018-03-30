@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $( document ).ready(function() {
+
+            });
+        </script>
+    {% endblock %}
+
+
+{% endblock %}

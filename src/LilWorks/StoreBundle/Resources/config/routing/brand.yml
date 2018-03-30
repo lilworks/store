@@ -23,3 +23,8 @@ brand_delete:
     path:     /{brand_id}/delete
     defaults: { _controller: "LilWorksStoreBundle:Brand:delete" }
     methods:  [GET, POST]
+
+#brand_populate:
+#    path:     /{brand_id}/populate
+#    defaults: { _controller: "LilWorksStoreBundle:Brand:populate" }
+#    methods:  [GET, POST]

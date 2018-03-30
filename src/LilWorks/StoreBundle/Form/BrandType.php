@@ -34,6 +34,7 @@ class BrandType extends AbstractType
                 'label'=>'storebundle.picture',
                 'required'=>false
             ))
+            /*
             ->add('products', EntityType::class, array(
                 'label'=>'storebundle.products',
                 'class'    => 'LilWorksStoreBundle:Product' ,
@@ -55,6 +56,7 @@ class BrandType extends AbstractType
                     'data-width'=>"300px"
                 )
             ))
+            */
             ->add('description',null,array(
                 'label'=>'storebundle.description',
                 'attr' => ['class' => 'editor-text'],
