@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $( document ).ready(function() {
+            FF.init();
+            RE.init('product_index');
+        });
+    </script>
+{% endblock %}
 {% block body %}
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            $( document ).ready(function() {
-                FF.init();
-                RE.init('product_index');
-            });
-        </script>
-    {% endblock %}
+
     <h1>
         <i class="fa fa-cube" aria-hidden="true"></i>
         {% trans %}storebundle.product.list{% endtrans %}
