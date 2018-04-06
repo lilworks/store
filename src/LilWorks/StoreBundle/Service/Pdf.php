@@ -53,19 +53,19 @@ class Pdf implements ContainerAwareInterface
     public function setContent($vars, $template = null){
         (!$template)?$template='LilWorksStoreBundle:Pdf:content.html.twig':null;
         $this->content = $this->templating->render($template,$vars);
-        $this->content = str_replace('/ajaxupload/', $this->rootDir . '/web' . $this->basePath.'/ajaxupload/',$this->content);
+        $this->content = str_replace('/ajaxupload/', $this->rootDir . '/web/ajaxupload/',$this->content);
     }
 
     public function setHeader($vars, $template = null){
         (!$template)?$template='LilWorksStoreBundle:Pdf:header.html.twig':null;
         $this->header = $this->templating->render($template, $vars);
-        $this->header = str_replace('/ajaxupload/', $this->rootDir . '/web' . $this->basePath.'/ajaxupload/',$this->header);
+        $this->header = str_replace('/ajaxupload/', $this->rootDir . '/web/ajaxupload/',$this->header);
     }
 
     public function setFooter($vars, $template = null){
         (!$template)?$template='LilWorksStoreBundle:Pdf:footer.html.twig':null;
         $this->footer = $this->templating->render($template, $vars);
-        $this->footer = str_replace('/ajaxupload/', $this->rootDir . '/web' . $this->basePath.'/ajaxupload/',$this->footer);
+        $this->footer = str_replace('/ajaxupload/',  $this->rootDir . '/web/ajaxupload/',$this->footer);
     }
 
 }
