@@ -110,7 +110,7 @@ $(document).ready(function() {
         $.post(url, formSerialize, function(response) {
             (!response.companyName)?response.companyName='':null;
             (!response.firstName)?response.firstName='':null;
-            (!response.lastName)?response.companyName='':lastName;
+            (!response.lastName)?response.lastName='':lastName;
             $("#lilworks_storebundle_order_customer").append('<option value="'+response.id+'">'+response.firstName+' '+response.lastName+' '+response.companyName+'</option>')
             $("#lilworks_storebundle_order_customer").val(response.id);
             $("#lilworks_storebundle_order_customer").selectpicker();
