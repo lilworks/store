@@ -1,15 +1,17 @@
 {% extends 'base.html.twig' %}
 
+ {% block javascripts %}
+     {{ parent() }}
+     <script>
+         $( document ).ready(function() {
+             $( window ).on( "load", FF.init() );
+         });
+     </script>
+ {% endblock %}
+
 {% block body %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            $( document ).ready(function() {
-                $( window ).on( "load", FF.init() );
-            });
-        </script>
-    {% endblock %}
+
 
     <h1>
         <i class="fa fa-user" aria-hidden="true"></i>

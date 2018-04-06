@@ -2,19 +2,6 @@
 
 {% block body %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/tinymce/langs.fr_FR.js') }}"></script>
-        <script>
-
-            $( document ).ready(function() {
-                initTinyMce.text('.editor-text',['{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}','{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']);
-            });
-
-        </script>
-    {% endblock %}
-
     <h1>
         <i class="fa fa-wrench" aria-hidden="true"></i>
         {% trans %}storebundle.warranty.new{% endtrans %}

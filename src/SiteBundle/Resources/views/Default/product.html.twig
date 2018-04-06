@@ -1,40 +1,10 @@
 {% extends 'base2col.html.twig' %}
-
-{% block body %}
-
     {% block metadata %}
         {% do cmf_seo_update_metadata(product) %}
-
         {{ parent() }}
     {% endblock metadata %}
-<style>
-    .docfileInProduct{
-        margin-top: 8px;
-    }
-    .docfileInProduct .card-text{
-        padding: 5px;
-    }
-    .links{
-        padding: 5px;
-    }
-    .social{
-        padding: 5px;
-    }
-    .warranties{
-        font-size: 14px;
-    }
-    .tags{
-        font-size: 14px;
-    }
-    .price{
-        padding: 5px;
-        font-size: 36px;
-        text-align: center;
-    }
-    .price ul{
-        font-size: 14px;
-    }
-</style>
+{% block body %}
+
 
     {% set productDisplayStock = product|displayStock('badge',true,true) %}
 
@@ -108,8 +78,9 @@
                     {% endfor %}
                 </div>
             </div>
+
             <div class="card-footer">
-                <small class="text-muted">{{ facebookButton() }}</small>
+                <div id="share"></div>
             </div>
 
 

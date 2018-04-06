@@ -1,17 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/tinymce/langs.fr_FR.js') }}"></script>
-    <script>
 
-        $( document ).ready(function() {
-            initTinyMce.text('.editor-text',['{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}','{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']);
-            FCE.init('pictures','pictures list-inline','picture list-inline-item');
-            MT.init('productTab');
-        });
-    </script>
-{% endblock %}
 {% block body %}
 
 
@@ -127,7 +115,7 @@
 
         <div class="tab-pane" id="more" role="tabpanel">
             {{ form_row(form.isReviewable) }}
-            {#{{ form_row(form.relatedProducts) }}#}
+            {{ form_row(form.relatedProducts) }}
             {{ form_row(form.tags) }}
         </div>
     </div>

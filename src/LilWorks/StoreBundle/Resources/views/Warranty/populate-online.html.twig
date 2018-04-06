@@ -2,14 +2,6 @@
 
 {% block body %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        <script src="{{ asset('assets/vendor/angular/angular.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/angular-sanitize/angular-sanitize.min.js') }}"></script>
-        <script src="{{ asset('bundles/app/js/store.js') }}"></script>
-    {% endblock %}
-
-
     <h1>
         <i class="fa fa-wrench" aria-hidden="true"></i>
         <i class="fa fa-cubes" aria-hidden="true"></i>

@@ -1,14 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            $( document ).ready(function() {
-                $( window ).on( "load", FF.init() );
-            });
-        </script>
-    {% endblock %}
 
     <h1>
         <i class="fa fa-bullhorn" aria-hidden="true"></i>

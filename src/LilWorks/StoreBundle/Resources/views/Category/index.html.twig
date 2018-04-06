@@ -2,18 +2,7 @@
 
 {% block body %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            $( document ).ready(function() {
-                $( window ).on( "load",
-                        FF.init()
-                );
-                RE.init('category_index');
-            });
-        </script>
 
-    {% endblock %}
 
     <h1>
         <i class="fa fa-bullseye" aria-hidden="true"></i>

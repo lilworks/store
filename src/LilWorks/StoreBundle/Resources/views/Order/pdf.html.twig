@@ -1,47 +1,36 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="UTF-8">
+{% extends 'LilWorksStoreBundle:Pdf:base.html.twig' %}
 
-    {% if base_dir is defined %}
-        <link rel="stylesheet"
-              href="{{ base_dir ~ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-    {% else %}
-        <link rel="stylesheet"
-              href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-    {% endif %}
-
-    <style>
-        body{
-            font-size:12px;
-        }
-        .tot{
-            font-size: 15px;;
-        }
-    </style>
-</head>
-<body>
-
+{% block title %}
     <h1>
         {{ order.reference }}
     </h1>
+{% endblock %}
+
+{% block date %}
+    <h3>
+        {{ order.updatedAt| localizeddate('full', 'none', app.request.locale ) }}
+    </h3>
+{% endblock %}
+
+{% block customer %}
 
     {% if  order.customer is defined and order.customer is not null %}
-    <div style="text-align: right;">
-        <strong>
-            {{ order.customer.firstName ~ ' ' ~ order.customer.lastName ~ ' ' ~ order.customer.companyName }}
-        </strong>
-        <div>
-        {% if order.billingAddressString is defined and order.billingAddressString is not null and order.billingAddressString != "" %}
-            {{ order.billingAddressString }}
-        {% elseif order.billingAddress is not null %}
-            {{ order.billingAddress|formataddress|raw}}
-        {% endif %}
+        <div style="text-align: right;">
+            <strong>
+                {{ order.customer.firstName ~ ' ' ~ order.customer.lastName ~ ' ' ~ order.customer.companyName }}
+            </strong>
+            <div>
+                {% if order.billingAddressString is defined and order.billingAddressString is not null and order.billingAddressString != "" %}
+                    {{ order.billingAddressString }}
+                {% elseif order.billingAddress is not null %}
+                    {{ order.billingAddress|formataddress|raw}}
+                {% endif %}
+            </div>
         </div>
-    </div>
     {% endif %}
+{% endblock %}
 
-
+{% block content %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -60,6 +49,10 @@
                         <span class="serialNumber">{{ product.serialNumber }}</span>
                     {% endif %}
 
+                    {% if  product.isSecondHand == 1 %}
+                        <span class="is-secondhand">{% trans %}storebundle.issecondhand{% endtrans %}</span>
+                    {% endif %}
+
                     {% if  product.warranties|length > 0 %}
                         <ul class="list list-unstyled">
                             {% for warranty in product.warranties %}
@@ -69,8 +62,10 @@
                     {% endif %}
 
                     {% if  product.orderRealShippingMethod is not null %}
-                        {{ product.orderRealShippingMethod.shippingMethod.name }} |
-                        {{ product.orderRealShippingMethod.reference }}
+                        {{ product.orderRealShippingMethod.shippingMethod.name }}
+                        {% if  product.orderRealShippingMethod.reference is not null %}
+                            [ {{ product.orderRealShippingMethod.reference }} ]
+                        {% endif %}
                     {% endif %}
 
                 </td>
@@ -81,7 +76,7 @@
                     {% if product.taxes|length > 0 %}
                         <ul class="list list-unstyled">
                             {% for tax in product.taxes %}
-                                <li>{{ tax.name }}</li>
+                                <li>{{ tax.name }} {{ tax.value|price }}</li>
                             {% endfor %}
                         </ul>
                     {% endif %}
@@ -99,18 +94,21 @@
     </table>
 
     <div class="tot">
-        {{ order.tot|price }}
+        Total TTC: {{ order.tot|price }}
     </div>
 
     {% if order.ordersPaymentMethods|length>0 %}
-    <div>
-        <ul>
-        {% for pm in order.ordersPaymentMethods  %}
-            <li>{{ pm.amount|price }}</li>
-        {% endfor %}
-        </ul>
-    </div>
+        <div>
+            <th>{% trans %}storebundle.paymentmethod{% endtrans %}</th>
+            <ul>
+                {% for pm in order.ordersPaymentMethods  %}
+                    <li>{{ pm.paymentMethod.name }} {{ pm.amount|price }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     {% endif %}
+{% endblock %}
 
-</body>
-</html>
+
+
+

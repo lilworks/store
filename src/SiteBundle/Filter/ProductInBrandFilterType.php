@@ -170,13 +170,13 @@ class ProductInBrandFilterType extends AbstractType
                                 ->setParameter('ids',$tags)
                                 ;
                         },
-                        'expanded'=>true,
+                        'expanded'=>false,
                         'multiple'=>true,
                         'attr' => array(
-                            'class'=>'form-control',
-                            #'class'=>'selectpicker form-control',
-                            #'data-live-search'=>'true',
-                            #'data-actions-box'=>true
+                            'class'=>'selectpicker form-control',
+                            'data-live-search'=>'true',
+                            'data-actions-box'=>true,
+                            'data-width'=>"180px"
                         )
 
                     ));
@@ -184,7 +184,7 @@ class ProductInBrandFilterType extends AbstractType
         $builder
         ->add('categories', Filters\EntityFilterType::class, array(
                 'class'    =>  'LilWorksStoreBundle:Category',
-                'expanded'=>true,
+                'expanded'=>false,
                 'multiple'=>true,
                 'choice_label' => function ( $category ) {
                     return $category->getName();
@@ -197,12 +197,12 @@ class ProductInBrandFilterType extends AbstractType
                         ->setParameter('categories',$categories)
                         ;
                 },
-                'attr' => array(
-                    'class'=>'form-control',
-                    #'class'=>'selectpicker form-control',
-                    #'data-live-search'=>'true',
-                    #'data-actions-box'=>true
-                )
+            'attr' => array(
+                'class'=>'selectpicker form-control',
+                'data-live-search'=>'true',
+                'data-actions-box'=>true,
+                'data-width'=>"180px"
+            )
 
             ))
 

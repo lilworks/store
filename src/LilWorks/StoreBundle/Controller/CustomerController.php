@@ -22,7 +22,6 @@ class CustomerController extends Controller
     public function indexAction(Request $request)
     {
 
-
         $simpleLiveEditor    = $this->get('app.simpleLiveEditor');
         $formFilter = $this->get('form.factory')->create(CustomerFilterType::class);
 
@@ -85,8 +84,6 @@ class CustomerController extends Controller
     {
         $customer = new Customer();
         $em = $this->getDoctrine()->getManager();
-
-
 
 
         $form = $this->createForm('LilWorks\StoreBundle\Form\CustomerType', $customer);

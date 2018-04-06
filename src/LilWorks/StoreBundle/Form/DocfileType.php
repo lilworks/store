@@ -26,6 +26,7 @@ class DocfileType extends AbstractType
             ->add('title',null,array(
                 'label'=>'storebundle.docfile.title'
             ))
+            /*
             ->add('products', EntityType::class, array(
                 'label'=>'storebundle.products',
                 'class'    => 'LilWorksStoreBundle:Product' ,
@@ -54,6 +55,7 @@ class DocfileType extends AbstractType
                     'data-width'=>"300px"
                 )
             ))
+            */
             ->add('description',null,array(
                 'label'=>'storebundle.description'
             ))

@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: storeLocal
+    database_user: root
+    database_password: root
+    mailer_transport: smtp
+    mailer_host: mail.gandi.net
+    mailer_user: lilian@lil-works.com
+    mailer_password: ':ccdgdltf:'
+    secret: 745cb6fe984bc5d1fe5a1514f38b329a24a9c311

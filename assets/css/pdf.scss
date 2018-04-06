@@ -1,0 +1,29 @@
+/**/
+
+@import '~bootstrap/dist/css/bootstrap.css';
+body{
+  font-size:12px;
+}
+.tot{
+  font-size: 15px;
+  text-align: right;
+  padding: 25px;
+  margin: 25px;
+  font-weight: bold;
+}
+.is-secondhand{
+  color:orange;
+  font-weight: bold;
+}
+.serialNumber{
+  font-size: 9px;
+  font-style: italic;
+}
+.shipping-method{
+  font-size: 9px;
+  font-style: italic;
+}
+.payment-method{
+  font-size: 9px;
+  font-style: italic;
+}

@@ -195,13 +195,13 @@ class ProductInCategoryFilterType extends AbstractType
                             ->setParameter('ids',$tags)
                             ;
                     },
-                    'expanded'=>true,
+                    'expanded'=>false,
                     'multiple'=>true,
                     'attr' => array(
-                        'class'=>'form-control',
-                        #'class'=>'selectpicker form-control',
-                        #'data-live-search'=>'true',
-                        #'data-actions-box'=>true
+                        'class'=>'selectpicker form-control',
+                        'data-live-search'=>'true',
+                        'data-actions-box'=>true,
+                        'data-width'=>"180px"
                     )
 
                 ));
@@ -221,13 +221,13 @@ class ProductInCategoryFilterType extends AbstractType
                         ->setParameter('ids',$brands)
                         ;
                 },
-                'expanded'=>true,
+                'expanded'=>false,
                 'multiple'=>true,
                 'attr' => array(
-                    'class'=>'form-control',
-                    #'class'=>'selectpicker form-control',
-                    #'data-live-search'=>'true',
-                    #'data-actions-box'=>true
+                    'class'=>'selectpicker form-control',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"180px"
                 )
 
             ))

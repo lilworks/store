@@ -32,6 +32,11 @@ class DefaultController extends Controller
     }
     public function contactAction(Request $request)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addRouteItem("sitebundle.breadcrumb.contact", "site_contact");
+        $breadcrumbs->prependRouteItem("sitebundle.breadcrumb.homepage", "site_homepage");
+
+
         $translator = $this->get('translator');
         $sent = null;
         $basket = $this->get('site.basket');
@@ -82,6 +87,20 @@ class DefaultController extends Controller
 
 
     public function productAction(Product $product){
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addRouteItem("sitebundle.breadcrumb.all", "site_all");
+        $breadcrumbs->addRouteItem($product->getBrand()->getName(), "site_brand",array('tag'=>$product->getBrand()->getTag()));
+        $categories = $product->getCategories();
+        if($categories && isset($categories[0])){
+            $breadcrumbs->addRouteItem($categories[0]->getName(), "site_category",array('tag'=>$categories[0]->getTag()));
+        }
+        $breadcrumbs->addRouteItem($product->getName() , "site_product",array('tag'=>$product->getTag()));
+        $breadcrumbs->prependRouteItem("sitebundle.breadcrumb.homepage", "site_homepage");
+
+
+
+
+
         $basket = $this->get('site.basket');
         $productService = $this->get('site.product');
 
@@ -95,6 +114,11 @@ class DefaultController extends Controller
     }
 
     public function categoryAction(Request $request,Category $category){
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addRouteItem("sitebundle.breadcrumb.all", "site_all");
+        $breadcrumbs->addRouteItem($category->getName(), "site_category",array('tag'=>$category->getTag()));
+        $breadcrumbs->prependRouteItem("sitebundle.breadcrumb.homepage", "site_homepage");
+
 
         $productFilter = $request->get('product_filter');
 
@@ -207,6 +231,11 @@ class DefaultController extends Controller
     }
 
     public function brandAction(Request $request,Brand $brand){
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addRouteItem("sitebundle.breadcrumb.all", "site_all");
+        $breadcrumbs->addRouteItem($brand->getName(), "site_brand",array('tag'=>$brand->getTag()));
+        $breadcrumbs->prependRouteItem("sitebundle.breadcrumb.homepage", "site_homepage");
+
         $basket = $this->get('site.basket');
         $productService = $this->get('site.product');
 
@@ -279,6 +308,12 @@ class DefaultController extends Controller
 
 
     public function supercategoryAction(Request $request,SuperCategory $superCategory){
+
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addRouteItem("sitebundle.breadcrumb.all", "site_all");
+        $breadcrumbs->addRouteItem($superCategory->getName(), "site_supercategory",array('tag'=>$superCategory->getTag()));
+        $breadcrumbs->prependRouteItem("sitebundle.breadcrumb.homepage", "site_homepage");
+
         $basket = $this->get('site.basket');
         $productService = $this->get('site.product');
 
@@ -381,6 +416,9 @@ class DefaultController extends Controller
 
 
     public function allAction(Request $request){
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addRouteItem("sitebundle.breadcrumb.all", "site_all");
+        $breadcrumbs->prependRouteItem("sitebundle.breadcrumb.homepage", "site_homepage");
        # $filterDatas = $request->get('product_filter');
        # $products = $this->getDoctrine()->getRepository('LilWorksStoreBundle:Product')->findForAll($filterDatas['search']);
 

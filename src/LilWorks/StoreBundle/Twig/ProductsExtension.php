@@ -92,7 +92,8 @@ class ProductsExtension  extends \Twig_Extension
 
 
             }
-                $totHt+= $product->getQuantity() * 100 * ( $product->getPrice() - $sumValueTaxes ) /  (100+$sumRatioTaxes);
+               // $totHt+= $product->getQuantity() * 100 * ( $product->getPrice() - $sumValueTaxes ) /  (100+$sumRatioTaxes);
+            $totHt+= $product->getQuantity() * 100 * ( $product->getPrice()  ) /  (100+$sumRatioTaxes);
 
         }
         //$totHt = number_format($totHt, 2,',','') . "€ HT";
@@ -116,8 +117,8 @@ class ProductsExtension  extends \Twig_Extension
                 }
 
             }
-            $totHt+= $product->getQuantity() * 100 * ( $product->getPrice() - $sumValueTaxes ) /  (100+$sumRatioTaxes);
-
+            //$totHt+= $product->getQuantity() * 100 * ( $product->getPrice() - $sumValueTaxes ) /  (100+$sumRatioTaxes);
+        $totHt+= $product->getQuantity() * 100 * ( $product->getPrice() ) /  (100+$sumRatioTaxes);
 
         //$totHt = number_format($totHt, 2,',','') . "€ HT";
         //$tot = number_format($tot, 2,',',''). "€ TTC";

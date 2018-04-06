@@ -1,0 +1,33 @@
+(function (t) {
+// ro
+t.add("translations.invalidate_cache", "Invalidarea memorie cache", "LexikTranslationBundle", "ro");
+t.add("translations.domain", "Domen", "LexikTranslationBundle", "ro");
+t.add("translations.key", "Cheie", "LexikTranslationBundle", "ro");
+t.add("translations.grid_caption", "Lista de traduceri", "LexikTranslationBundle", "ro");
+t.add("translations.cache_removed", "Fi\u0219ierul cache a fost \u0219ters", "LexikTranslationBundle", "ro");
+t.add("translations.new_translation", "Noua traducere", "LexikTranslationBundle", "ro");
+t.add("translations.add_translation", "Ad\u0103uga\u021bi o traducere", "LexikTranslationBundle", "ro");
+t.add("translations.save", "Salveaz\u0103", "LexikTranslationBundle", "ro");
+t.add("translations.save_add", "Salveaz\u0103 \u0219i adaug\u0103", "LexikTranslationBundle", "ro");
+t.add("translations.page_title", "Traduceri", "LexikTranslationBundle", "ro");
+t.add("translations.show_hide_columns", "Arat\u0103 \/ Ascunde coloanele", "LexikTranslationBundle", "ro");
+t.add("translations.toggle_all_columns", "Show\/Hide all columns", "LexikTranslationBundle", "ro");
+t.add("translations.save_row", "Salva\u021bi r\u00e2ndul curent", "LexikTranslationBundle", "ro");
+t.add("translations.successfully_updated", "Traducerea pentru cheie #%id% a fost actualizat\u0103.", "LexikTranslationBundle", "ro");
+t.add("translations.successfully_added", "Traducerea a fost actualizat.", "LexikTranslationBundle", "ro");
+t.add("translations.successfully_deleted", "Translations have been successfully deleted.", "LexikTranslationBundle", "ro");
+t.add("translations.update_failed", "Eroare la actualizarea traducerei pentru cheia #%id%.", "LexikTranslationBundle", "ro");
+t.add("translations.delete_failed", "Failed to delete translations for key #%id%.", "LexikTranslationBundle", "ro");
+t.add("translations.back_to_list", "\u00cenapoi", "LexikTranslationBundle", "ro");
+t.add("translations.all_translations", "All", "LexikTranslationBundle", "ro");
+t.add("translations.no_translations", "No translations", "LexikTranslationBundle", "ro");
+t.add("translations.profiler", "Profiler", "LexikTranslationBundle", "ro");
+t.add("translations.data_source", "Data source", "LexikTranslationBundle", "ro");
+t.add("translations.latest_profiles", "Latest profiles", "LexikTranslationBundle", "ro");
+t.add("translations.profile", "Profile", "LexikTranslationBundle", "ro");
+t.add("overview.page_title", "Overview", "LexikTranslationBundle", "ro");
+t.add("overview.show_grid", "Translation grid", "LexikTranslationBundle", "ro");
+t.add("overview.msg_latest_translation", "Latest translation date: %date% UTC.", "LexikTranslationBundle", "ro");
+t.add("overview.domain", "Domain", "LexikTranslationBundle", "ro");
+t.add("overview.no_stats", "No data to display.", "LexikTranslationBundle", "ro");
+})(Translator);

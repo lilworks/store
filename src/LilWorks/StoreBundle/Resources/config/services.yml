@@ -3,6 +3,12 @@ services:
     lilworks_store.supercategories:
         class: LilWorks\StoreBundle\Service\SuperCategories
         arguments: ['@doctrine.orm.entity_manager','@templating', "@service_container"]
+        public: true
+
+    lilworks_store.pdf:
+        class: LilWorks\StoreBundle\Service\Pdf
+        arguments: ['@doctrine.orm.entity_manager','@templating', "@service_container"]
+        public: true
 
     lilworks_store.list_menu_builder:
         class: LilWorks\StoreBundle\Menu\ListMenuBuilder
@@ -22,6 +28,9 @@ services:
             - { name: form.type }
         arguments: ['@?doctrine']
 
+    LilWorks\StoreBundle\Form\OrdersProductsType:
+        arguments: ['@doctrine.orm.entity_manager']
+        tags: [form.type]
     lilworks.store.paramLoader:
         class: LilWorks\StoreBundle\Service\ParamLoader
         tags:

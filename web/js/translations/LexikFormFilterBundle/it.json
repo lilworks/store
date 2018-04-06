@@ -1,0 +1,3 @@
+{
+    "translations": {"it":{"LexikFormFilterBundle":{"boolean.yes_or_no":"S\u00ec o no","boolean.yes":"S\u00ec","boolean.no":"No","number.equal":"Uguale a","number.greater_than":"Maggiore","number.greater_than_equal":"Maggiore o Uguale","number.lower_than":"Inferiore","number.lower_than_equal":"Inferiore o Uguale","text.starts":"Inizia con","text.ends":"Si conclude","text.equals":"Uguale a","text.both":"Contiene"}}}
+}

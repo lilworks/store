@@ -14,7 +14,8 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class ProductType extends AbstractType
 {
 
@@ -45,11 +46,6 @@ class ProductType extends AbstractType
                 $product->addPicture($picture);
             }
 
-
-
-
-
-
         });
 
 
@@ -58,14 +54,28 @@ class ProductType extends AbstractType
                 'label'=>'storebundle.name',
             #    'validation_groups'=>array('general')
             ))
-            ->add('isPublished',null,array(
+            ->add('isPublished',ChoiceType::class,array(
                 'label'=>'storebundle.ispublished',
+                'expanded'=>true,
+                'choices' => array(
+                    'storebundle.no' => 0,
+                    'storebundle.yes' => 1,
+                ),
             ))
-            ->add('isArchived',null,array(
-                'label'=>'storebundle.isarchived',
+            ->add('isArchived',ChoiceType::class,array(
+                'label'=>'storebundle.isarchived','expanded'=>true,
+                'choices' => array(
+                    'storebundle.no' => 0,
+                    'storebundle.yes' => 1,
+                ),
             ))
-            ->add('isSecondHand',null,array(
+            ->add('isSecondHand',ChoiceType::class,array(
                 'label'=>'storebundle.product.issecondhand',
+                'expanded'=>true,
+                'choices' => array(
+                    'storebundle.no' => 0,
+                    'storebundle.yes' => 1,
+                ),
             ))
             ->add('brand', EntityType::class, array(
                 'label'=>'storebundle.brand',
@@ -109,32 +119,22 @@ class ProductType extends AbstractType
                 )
 
             ))
-/*
+
             ->add('relatedProducts', EntityType::class, array(
-                'label'=>'storebundle.product.relatedproducts',
+                'label'=>'storebundle.product',
                 'class'    => 'LilWorksStoreBundle:Product' ,
-                'choice_label' => function ($obj) {
-                    $strCat = "";
-                    foreach($obj->getCategories() as $category){
-                        $strCat.= " " . $category->getName();
-                    }
-                    return  $obj->getBrand()->getName() . " " . $obj->getName() . " ($strCat )" ;
-                },
-                'query_builder' => function (EntityRepository $er) use ($product)  {
-                    if($product && $product->getId()>0){
-                        return $er->createQueryBuilder('rp')
-                            ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = rp.brand')
-                            ->where('b.id != :id')
-                            ->andWhere('rp.isArchived != 1')
-                            ->setParameter('id',$product->getId())
-                            ->orderBy('b.name','asc')
-                            ;
-                    }
-                    return $er->createQueryBuilder('rp')
-                        ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = rp.brand')
-                        ->where('rp.isArchived != 1')
-                        ->orderBy('b.name','asc')
-                        ;
+                'choice_label' => function ($obj) { return   $obj->getBrand()->getName() . " " . $obj->getName() . " (" . $obj->getStock() .")" ; },
+                'query_builder' => function (EntityRepository $er) {
+                    $q = $er->createQueryBuilder('p')
+                        #->select('p.id')
+                        ->leftJoin('LilWorksStoreBundle:Brand','b','WITH','b.id = p.brand')
+                        ->where('p.isArchived != 1')
+                        ->orderBy('b.name , p.name', 'ASC');
+
+                    //$q->setMaxResults(10);
+
+
+                    return $q;
                 },
                 'required' => false ,
                 'mapped'=> true,
@@ -144,10 +144,10 @@ class ProductType extends AbstractType
                     'class'=>'selectpicker',
                     'data-live-search'=>'true',
                     'data-actions-box'=>true,
-                    'data-width'=>"300px"
+                    'data-width'=>"300px",
                 )
+
             ))
-*/
 
             ->add('description',null,array(
                 'label'=>'storebundle.description',
@@ -168,7 +168,7 @@ class ProductType extends AbstractType
                 'choice_label' => function ($obj) { return   $obj->getName() . ' | ' . $obj->getValue(); },
                 'required' => false ,
                 'mapped'=> true,
-                'expanded' => true ,
+                'expanded' => false ,
                 'multiple' => true
             ))
 
@@ -182,7 +182,7 @@ class ProductType extends AbstractType
                 'choice_label' => function ($obj) { return   $obj->getName() . ' | ' . $obj->getValue(); },
                 'required' => false ,
                 'mapped'=> true,
-                'expanded' => true ,
+                'expanded' => false ,
                 'multiple' => true,
                 'validation_groups'=>array('prices')
             ))
@@ -202,7 +202,7 @@ class ProductType extends AbstractType
                 'choice_label' => function ($obj) { return   $obj->getName();},
                 'required' => false ,
                 'mapped'=> true,
-                'expanded' => true ,
+                'expanded' => false ,
                 'multiple' => true
             ))
 
@@ -212,7 +212,7 @@ class ProductType extends AbstractType
                 'choice_label' => function ($obj) { return   $obj->getName();},
                 'required' => false ,
                 'mapped'=> true,
-                'expanded' => true ,
+                'expanded' => false ,
                 'multiple' => true
             ))
             ->add('shippingMethods', EntityType::class, array(
@@ -221,7 +221,7 @@ class ProductType extends AbstractType
                 'choice_label' => function ($obj) { return   $obj->getName();},
                 'required' => false ,
                 'mapped'=> true,
-                'expanded' => true ,
+                'expanded' => false ,
                 'multiple' => true,
 
             ));
@@ -316,13 +316,21 @@ class ProductType extends AbstractType
                 'label'=>'storebundle.product.leadtime',
                 'required'=>false
             ))
-            ->add('alwaysAvailable',null,array(
+            ->add('alwaysAvailable',ChoiceType::class,array(
                 'label'=>'storebundle.product.isalwaysavailable',
-                'required'=>false
+                'expanded'=>true,
+                'choices' => array(
+                    'storebundle.no' => 0,
+                    'storebundle.yes' => 1,
+                ),
             ))
-            ->add('isReviewable',null,array(
+            ->add('isReviewable',ChoiceType::class,array(
                 'label'=>'storebundle.product.isreviewable',
-                'required'=>false
+                'expanded'=>true,
+                'choices' => array(
+                    'storebundle.no' => 0,
+                    'storebundle.yes' => 1,
+                ),
             ))
 
         ;

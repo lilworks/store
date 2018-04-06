@@ -53,18 +53,25 @@
     {{ form_errors(form) }}
 </div>
 
+{% set data = {'colName':colName,'rowId':rowId} %}
+<div class="sle-col" data-sle-col="{{ data|json_encode()|e('html_attr') }}">
+</div>
+{#
 <script>
-    $("#sle_colValue_{{ colName }}_{{ rowId }}").click(function(){
-        SLE.formColVisibility($(this));
-    });
 
-    $("#sle_form_{{ colName }}_{{ rowId }}").on('submit',function(e){
-        SLE.submitCol($(this),e,$(this).attr('formType'),$(this).attr('entityName'),$(this).attr('colName'),$(this).attr('rowId'));
-    });
 
-    $("#sle_form_{{ colName }}_{{ rowId }}").find(".sle-cancel").on('click',function(){
-        SLE.formColCancel($(this).closest('form').parent());
-    });
+        $("#sle_colValue_{{ colName }}_{{ rowId }}").click(function(){
+            SLE.formColVisibility($(this));
+        });
+
+        $("#sle_form_{{ colName }}_{{ rowId }}").on('submit',function(e){
+            SLE.submitCol($(this),e,$(this).attr('formType'),$(this).attr('entityName'),$(this).attr('colName'),$(this).attr('rowId'));
+        });
+
+        $("#sle_form_{{ colName }}_{{ rowId }}").find(".sle-cancel").on('click',function(){
+            SLE.formColCancel($(this).closest('form').parent());
+        });
 
 
 </script>
+#}

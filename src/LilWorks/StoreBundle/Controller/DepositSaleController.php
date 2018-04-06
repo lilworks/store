@@ -63,6 +63,36 @@ class DepositSaleController extends Controller
      */
     public function pdfAction(Request $request, DepositSale $depositSale)
     {
+        $em = $this->getDoctrine()->getManager();
+        $pdf = $this->get('lilworks_store.pdf');
+        $textHeader = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-header');
+        $pdf->setHeader(array(
+            'css'=>$textHeader->getCss(),
+            'text'=>$textHeader->getContent(),
+        ));
+        $textFooter = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-footer');
+        $pdf->setFooter(array(
+            'css'=>$textFooter->getCss(),
+            'text'=>$textFooter->getContent(),
+        ));
+        $textCGV = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('cgv_depot-vente');
+        $pdf->setContent(array(
+            'depositSale'  => $depositSale,
+            'CGV'=>$textCGV,
+            'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath(),
+        ),'LilWorksStoreBundle:DepositSale:pdf-'.strtolower($depositSale->getStatus()->getTag()).'.html.twig');
+
+
+        $filename = $depositSale->getReference(). ".pdf";
+        return new Response(
+            $pdf->getResponse(),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'attachment; filename="'.$filename.'"'
+            )
+        );
+
 
 
         $em = $this->getDoctrine()->getManager();

@@ -1,5 +1,8 @@
 {% include 'site-header.html.twig' %}
 
+{{ wo_render_breadcrumbs({separator: '>', listId: 'breadcrumbs',itemClass:'list-inline-item',listClass:'breadcrumbs list list-inline'}) }}
+
+
 <!-- Page Content -->
 <div class="container">
     <div class="row" id="content">
@@ -12,4 +15,33 @@
 
 </div>
 <!-- /.container -->
-{% include 'site-footer.html.twig' %}
+
+<!-- Footer -->
+<footer class="py-5 bg-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                {{ render(controller('SiteBundle:Text:Footer')) }}
+            </div>
+            <div class="col-lg-8 footerLinks">
+                {{ render(controller('SiteBundle:Text:Text',{'tag':'footer-links'})) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                {{ render(controller('SiteBundle:Category:All')) }}
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+</footer>
+
+
+{% block javascripts %}
+    <script src="{{ asset('build/app.js') }}"></script>
+
+{% endblock %}
+
+</body>
+</html>

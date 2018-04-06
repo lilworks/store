@@ -1,7 +1,9 @@
 security:
     session_fixation_strategy:  none
-    acl:
-        connection: default
+
+    #acl:
+    #    connection: default
+
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
@@ -16,6 +18,7 @@ security:
 
     firewalls:
             main:
+                logout_on_user_change: true
                 pattern: ^/
                 form_login:
                     provider: fos_userbundle

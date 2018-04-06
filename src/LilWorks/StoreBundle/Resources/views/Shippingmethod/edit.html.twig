@@ -2,16 +2,7 @@
 
 {% block body %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
 
-            $( document ).ready(function() {
-                FCE.init('triggers','triggers list-inline','trigger list-inline-item');
-                MT.init('shippingTab');
-            });
-        </script>
-    {% endblock %}
 
 
     <h1>

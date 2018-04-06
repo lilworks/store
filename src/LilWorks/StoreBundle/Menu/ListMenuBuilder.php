@@ -150,7 +150,9 @@ class ListMenuBuilder
     public function product($entity,$menu){
         $this->setAction('show',$menu,$entity->getId());
         $this->setAction('edit',$menu,$entity->getId());
-        if(count($entity->getOrdersProducts()) == 0 && count($entity->getDepositSale()) == 0)
+        if(
+            $entity->getOrdersProducts() && count($entity->getOrdersProducts()) == 0 &&
+            $entity->getDepositSale() && count($entity->getDepositSale()) == 0)
             $this->setAction('delete',$menu,$entity->getId());
         return $menu;
     }

@@ -4,6 +4,7 @@ services:
     site.carrousel:
         class:     SiteBundle\Controller\CarrouselController
         arguments: ['@templating','@doctrine.orm.entity_manager']
+        public: true
 
     site.product:
         class:     SiteBundle\Controller\ProductController
@@ -12,6 +13,7 @@ services:
     site.basket:
          class: SiteBundle\Service\Basket
          arguments: ['@doctrine.orm.entity_manager','@templating',"@request_stack","@security.token_storage","%context%",'@lilworks.store.orderManager']
+         public: true
 
     site.payment:
          class: SiteBundle\Service\Payment
@@ -23,11 +25,13 @@ services:
          arguments: ['@translator',"@doctrine.orm.entity_manager","@session"]
          tags:
             - { name: twig.extension }
+
     site.form.basket:
             class: SiteBundle\Form\BasketType
             arguments: ["@security.token_storage","@site.basket","@doctrine.orm.entity_manager"]
             tags:
                 - { name: form.type }
+
     site.form.basket.shippingmethod:
             class: SiteBundle\Form\BasketShippingMethodType
             arguments: ["@security.token_storage","@site.basket","@doctrine.orm.entity_manager"]
@@ -44,18 +48,21 @@ services:
         arguments: ["@knp_menu.factory",'@doctrine.orm.entity_manager',"@security.token_storage",'@service_container']
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: site } # The alias is what is used to retrieve the menu
+        public: true
 
     site.menu_builder_user_customer:
         class: SiteBundle\Menu\MenuBuilder
         arguments: [ "@knp_menu.factory",'@doctrine.orm.entity_manager',"@security.token_storage",'@service_container']
         tags:
             - { name: knp_menu.menu_builder, method: createUserCustomerMenu, alias: usercustomer } # The alias is what is used to retrieve the menu
+        public: true
 
     site.configure_menu_listener:
         class: SiteBundle\EventListener\ConfigureSiteMenuListener
         arguments: ['@doctrine.orm.entity_manager','@request_stack']
         tags:
           - { name: kernel.event_listener, event: site.menu_configure, method: onMenuConfigure }
+        public: true
 
     site.content:
         class: SiteBundle\Service\Content
@@ -69,11 +76,13 @@ services:
             arguments: ["@request_stack","@doctrine.orm.entity_manager"]
             tags:
                 - { name: form.type }
+
     site.form.pisc:
             class: SiteBundle\Filter\ProductInSuperCategoryFilterType
             arguments: ["@request_stack","@doctrine.orm.entity_manager"]
             tags:
                 - { name: form.type }
+
     site.form.pib:
                 class: SiteBundle\Filter\ProductInBrandFilterType
                 arguments: ["@request_stack","@doctrine.orm.entity_manager"]
@@ -92,6 +101,6 @@ services:
         arguments: ["@knp_menu.factory"]
         tags:
             - { name: knp_menu.menu_builder, method: createListMenu, alias: siteList } # The alias is what is used to retrieve the menu
-
+        public: true
 
 

@@ -1,20 +1,6 @@
 {% extends 'SiteBundle:Customer:base.html.twig' %}
 
 {% block customer %}
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            $( function() {
-                FCE.init('addresses','addresses list-inline','addresse list-inline-item');
-                FCE.init('phonenumbers','phonenumbers list-inline','phonenumber list-inline-item');
-            } );
-
-        </script>
-    {% endblock %}
-
-
-
-
     <div class="card">
         <div class="card-header">
             <i class="fa fa-user-circle-o" aria-hidden="true"></i>

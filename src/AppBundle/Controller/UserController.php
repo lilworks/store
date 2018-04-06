@@ -91,11 +91,17 @@ class UserController extends Controller
         ));
     }
 
+/*
+ * @ParamConverter("user", converter="app_get_or_redirect_to_list_converter" , options={"repository_method" = "find" , "mapping": {"user_id"   : "id"}})
+ */
     /**
-     * @ParamConverter("user", options={"mapping": {"user_id"   : "id"}})
+     * @ParamConverter("user" , options={ "mapping": {"user_id"   : "id"}})
      */
-    public function showAction(User $user)
+    public function showAction(User $user = null)
     {
+        if(!$user)
+            return $this->redirectToRoute('user_index');
+
 
         $translator = $this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
@@ -109,8 +115,11 @@ class UserController extends Controller
     /**
      * @ParamConverter("user", options={"mapping": {"user_id"   : "id"}})
      */
-    public function editAction(Request $request, User $user)
+    public function editAction(Request $request, User $user = null)
     {
+        if(!$user)
+            return $this->redirectToRoute('user_index');
+
 
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
@@ -137,12 +146,15 @@ class UserController extends Controller
      */
     public function deleteAction(Request $request,User $user)
     {
+
         $em = $this->getDoctrine()->getManager();
 
         $em->remove($user);
         $em->flush();
 
         $referer = $request->headers->get('referer');
+
+
         if ( !$referer || is_null($referer) ) {
             return $this->redirectToRoute('user_index');
         } else {

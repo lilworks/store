@@ -39,7 +39,21 @@ class LoginListener implements EventSubscriberInterface
     public function onLogin($event)
     {
 
-            $this->basketService->setDefaultAddress(true);
+        $this->basketService->setDefaultAddress(true);
+
+        $session = $this->container->get('session');
+        $token = $this->container->get('security.token_storage');
+
+        $session = $this->em->getRepository('AppBundle:Session')->find($session->getId());
+        if( $token->getToken() && $token->getToken()->getUser() && !is_string($token->getToken()->getUser()) ){
+            $user = $this->em->getRepository('AppBundle:User')->find($token->getToken()->getUser()->getId());
+            if(!$session->getUser()){
+                $session->setUser($user);
+                $user->addSession($session);
+                $this->em->persist($session);
+                $this->em->flush();
+            }
+        }
 
     }
 }

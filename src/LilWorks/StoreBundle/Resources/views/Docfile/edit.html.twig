@@ -2,16 +2,6 @@
 
 {% block body %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-
-            $( document ).ready(function() {
-                MT.init('docfileTab');
-            });
-        </script>
-    {% endblock %}
-
 
     <h1>
         <i class="fa fa-book" aria-hidden="true"></i>
@@ -40,7 +30,7 @@
             {{ form_row(form.description) }}
         </div>
         <div class="tab-pane" id="products" role="tabpanel">
-            {{ form_row(form.products) }}
+            {#{{ form_row(form.products) }}#}
         </div>
     </div>
     <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.edit{% endtrans %}" />

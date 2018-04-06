@@ -3,6 +3,11 @@
 {% block title %}
     <h2>{{ 'storebundle.depositsale.done'|trans }}: {{ depositSale.reference }}</h2>
 {% endblock %}
+{% block date %}
+    <h3>
+        {{ depositSale.createdAt| localizeddate('full', 'none', app.request.locale ) }}
+    </h3>
+{% endblock %}
 
 
 {% block customer %}

@@ -1,19 +1,10 @@
 {% extends 'baseFull.html.twig' %}
 
-{% block body %}
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            $('html').bind('keypress', function(e)
-            {
-                if(e.keyCode == 13)
-                {
-                    return false;
-                }
-            });
-        </script>
 
-    {% endblock %}
+
+
+{% block body %}
+
 <h1>
     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
     {% trans %}sitebundle.basket{% endtrans %}

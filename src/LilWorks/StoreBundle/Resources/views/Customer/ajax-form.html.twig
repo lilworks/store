@@ -1,35 +1,3 @@
-{% block javascripts %}
-
-    <script>
-        $( function() {
-
-            FCE.init('addresses','addresses list-inline','addresse list-inline-item');
-            FCE.init('phonenumbers','phonenumbers list-inline','phonenumber list-inline-item');
-
-
-            $('#ajax_customer').submit(function(e) {
-
-                e.preventDefault();
-                var url = Routing.generate('lilworks_store_ajax_customer');
-                var formSerialize = $(this).serialize();
-
-                $.post(url, formSerialize, function(response) {
-                    //your callback here
-
-                    $("#lilworks_storebundle_order_customer").append('<option value="'+response.id+'">'+response.firstName+' '+response.lastName+' '+response.companyName+'</option>')
-                    $("#lilworks_storebundle_order_customer").val(response.id);
-                    $("#lilworks_storebundle_order_customer").selectpicker("refresh");
-
-                    $("#customerModal").modal('hide');
-
-
-                }, 'JSON');
-            });
-
-
-        } );
-    </script>
-{% endblock %}
 
 <!-- Modal -->
 <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="customerModalTitle" aria-hidden="true">

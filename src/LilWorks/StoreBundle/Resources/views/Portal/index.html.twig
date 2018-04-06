@@ -10,7 +10,7 @@
 
     <div>
 
-        {{ date|localizeddate('long', 'none') }}
+       {# {{ date|localizeddate('long', 'none') }}#}
         {{ 'storebundle.weeknum %week%'|trans({'%week%':date|date('W')}) }}
     </div>
 

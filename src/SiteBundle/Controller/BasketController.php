@@ -114,6 +114,14 @@ class BasketController extends Controller
     public function editAction(Request $request)
     {
 
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addRouteItem("sitebundle.breadcrumb.all", "site_all");
+
+        $breadcrumbs->addRouteItem("sitebundle.breadcrumb.basketedit" , "site_basket_edit");
+        $breadcrumbs->prependRouteItem("sitebundle.breadcrumb.homepage", "site_homepage");
+
+
+
         $basketService =  $this->get('site.basket');
         $basket = $this->get('site.basket')->getBasket();
         $user = $this->getUser();

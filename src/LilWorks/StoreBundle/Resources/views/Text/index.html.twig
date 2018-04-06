@@ -2,15 +2,6 @@
 
 {% block body %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            $( document ).ready(function() {
-                $( window ).on( "load", FF.init() );
-            });
-        </script>
-    {% endblock %}
-
     <h1>
         <i class="fa fa-font" aria-hidden="true"></i>
         {% trans %}storebundle.text.list{% endtrans %}

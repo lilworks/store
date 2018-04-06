@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ShippingMethodsCountriesType extends AbstractType
 {
@@ -30,8 +31,12 @@ class ShippingMethodsCountriesType extends AbstractType
                 'expanded' => false ,
                 'multiple' => false
             ))
-            ->add('isPublished',null,array(
+            ->add('isPublished',ChoiceType::class,array(
                 'label'=>'storebundle.ispublished',
+                'choices' => array(
+                    'storebundle.no' => 0,
+                    'storebundle.yes' => 1,
+                ),
             ))
             ->add('price',MoneyType::class,array(
                 'label'=>'storebundle.price',

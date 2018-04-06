@@ -1,14 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            $( function() {
-                FCE.init('shippingmethodsCountries','shippingmethodsCountries list-inline','shippingmethodsCountry list-inline-item');
-            } );
-        </script>
-    {% endblock %}
+
 
     <h1>
         <i class="fa fa-flag" aria-hidden="true"></i>

@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    {% if base_dir is defined %}
+        <link rel="stylesheet" href="{{ base_dir ~ asset('build/pdf.css') }}">
+    {% else %}
+        <link rel="stylesheet" href="{{ asset('build/pdf.css') }}">
+    {% endif %}
+
+</head>
+<body>

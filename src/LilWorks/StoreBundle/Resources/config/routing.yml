@@ -43,9 +43,6 @@ lil_works_store_product:
         resource: "@LilWorksStoreBundle/Resources/config/routing/product.yml"
         prefix:   /product
 
-lil_works_store_info:
-        resource: "@LilWorksStoreBundle/Resources/config/routing/storeinfo.yml"
-        prefix:   /storeinfo
 lil_works_store_shippingmethod:
         resource: "@LilWorksStoreBundle/Resources/config/routing/shippingmethod.yml"
         prefix:   /shippingmethod

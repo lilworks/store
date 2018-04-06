@@ -123,49 +123,44 @@ class OrderController extends Controller
         return $this->redirectToRoute('order_edit', array('order_id' => $newOrder->getId()));
     }
 
+
     /**
      * @ParamConverter("order", options={"mapping": {"order_id"   : "id"}})
      */
     public function pdfAction(Request $request,Order $order)
     {
 
+
         $em = $this->getDoctrine()->getManager();
+        $pdf = $this->get('lilworks_store.pdf');
         $textHeader = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-header');
-        $textFooter = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-footer');
-
-        $header = $this->renderView('LilWorksStoreBundle:Pdf:header.html.twig', array(
+        $pdf->setHeader(array(
             'css'=>$textHeader->getCss(),
-            'text'=>$textHeader->getContent()
+            'text'=>$textHeader->getContent(),
         ));
-
-        $footer = $this->renderView('LilWorksStoreBundle:Pdf:footer.html.twig', array(
+        $textFooter = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-footer');
+        $pdf->setFooter(array(
             'css'=>$textFooter->getCss(),
-            'text'=>$textFooter->getContent()
+            'text'=>$textFooter->getContent(),
         ));
 
-        $html = $this->renderView('LilWorksStoreBundle:Order:pdf.html.twig', array(
+        $pdf->setContent(array(
             'order'  => $order,
+
             'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath(),
-        ));
-        $pdf = $this->get('knp_snappy.pdf');
-        $pdf->setOption('footer-html', $footer);
-        $pdf->setOption('footer-left', "[page]/[topage]");
-        $pdf->setOption('header-html', $header);
+        ),'LilWorksStoreBundle:Order:pdf.html.twig');
 
-        if($order->getReference() != ""){
-            $filename = $order->getReference() . ".pdf";
-        }else{
-            $filename = "order_".date('Y-m-d_H-i').".pdf";
-        }
 
+        $filename = $order->getReference(). ".pdf";
         return new Response(
-            $pdf->getOutputFromHtml($html),
+            $pdf->getResponse(),
             200,
             array(
                 'Content-Type'          => 'application/pdf',
                 'Content-Disposition'   => 'attachment; filename="'.$filename.'"'
             )
         );
+
     }
 
     /**
@@ -265,11 +260,25 @@ class OrderController extends Controller
     public function editAction(Request $request, Order $order)
     {
 
-        $user = $this->getUser();
-        //$orderUtils = $this->get('lilworks.store.order.utils') ;
+        if(!$order)
+            $order = new Order;
 
         $em = $this->getDoctrine()->getManager();
 
+        $user = $this->getUser();
+
+        $formCustomer = $this->createForm('LilWorks\StoreBundle\Form\CustomerType', new Customer());
+
+
+        $form = $this->createForm('LilWorks\StoreBundle\Form\OrderType', $order,array(
+            'context'=>$this->container->getParameter('context'),
+            //'orderUtils' => $orderUtils
+        ));
+
+        $originalOrdersProducts = new ArrayCollection();
+        foreach ($order->getOrdersProducts() as $originalOrderProduct) {
+            $originalOrdersProducts->add($originalOrderProduct);
+        }
         $originalOrderRealShippingMethods = new ArrayCollection();
         foreach ($order->getOrdersRealShippingMethods() as $orderRealShippingMethod) {
             $originalOrderRealShippingMethods->add($orderRealShippingMethod);
@@ -285,19 +294,24 @@ class OrderController extends Controller
             $originalOrdersOrderSteps->add($originalOrderOrderStep);
         }
 
-        $originalOrdersProducts = new ArrayCollection();
-        foreach ($order->getOrdersProducts() as $originalOrderProduct) {
-            $originalOrdersProducts->add($originalOrderProduct);
-        }
-
-        $form = $this->createForm('LilWorks\StoreBundle\Form\OrderType', $order,array(
-            'context'=>$this->container->getParameter('context'),
-            //'orderUtils' => $orderUtils
-        ));
-
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+            foreach ($originalOrdersProducts as $orderProduct) {
+                if (false === $order->getOrdersProducts()->contains($orderProduct)) {
+                    $orderProduct->getOrder()->removeOrdersProduct($orderProduct);
+                    $em->persist($orderProduct);
+                    $em->remove($orderProduct);
+                    $this->get('lilworks.store.orderManager')->setMakeFlush(false)->restockByOrderProduct($orderProduct);
+                }
+            }
+
+            foreach ($order->getOrdersProducts() as $orderProductFromForm) {
+                $orderProductFromForm->setOrder($order);
+                $em->persist($orderProductFromForm);
+            }
 
 
             foreach ($originalOrdersPaymentMethods as $orderPaymentMethod) {
@@ -312,21 +326,6 @@ class OrderController extends Controller
                 $orderPaymentMethodFromForm->setOrder($order);
                 $em->persist($orderPaymentMethodFromForm);
             }
-
-
-            foreach ($originalOrdersProducts as $orderProduct) {
-                if (false === $order->getOrdersProducts()->contains($orderProduct)) {
-                    $orderProduct->getOrder()->removeOrdersProduct($orderProduct);
-                    $em->persist($orderProduct);
-                    $em->remove($orderProduct);
-                    $this->get('lilworks.store.orderManager')->setMakeFlush(false)->restockByOrderProduct($orderProduct);
-                }
-            }
-            foreach ($order->getOrdersProducts() as $orderProductFromForm) {
-                $orderProductFromForm->setOrder($order);
-                $em->persist($orderProductFromForm);
-            }
-
 
             foreach ($originalOrderRealShippingMethods as $orderRealShippingMethod) {
                 if (false === $order->getOrdersRealShippingMethods()->contains($orderRealShippingMethod)) {
@@ -345,54 +344,20 @@ class OrderController extends Controller
                 $em->persist($orderRealShippingMethodFromForm);
             }
 
-/*
-
-            foreach ($originalOrdersOrderSteps as $orderOrderStep) {
-                if (false === $order->getOrdersOrderSteps()->contains($orderOrderStep)) {
-                    $orderOrderStep->getOrder()->removeOrdersOrderStep($orderOrderStep);
-                    $em->persist($orderOrderStep);
-                    $em->remove($orderOrderStep);
-                }
-            }
-*/
-            foreach ($order->getOrdersOrderSteps() as $orderOrderStepFromForm) {
-                $orderOrderStepFromForm->setOrder($order);
-                $em->persist($orderOrderStepFromForm);
-            }
-
-            $order->setUserAsSeller($user);
-
-            $em->flush();
-
-            if(isset($form['manualFirstName'])){
-                $manualCustomer = array(
-                    'firstName'=>$form['manualFirstName']->getData(),
-                    'lastName'=>$form['manualLastName']->getData(),
-                    'companyName'=>$form['manualCompanyName']->getData()
-                );
-            }else{
-                $manualCustomer = array();
-            }
-            ##$this->get('lilworks.store.orderManager')->setMakeFlush(false)->setOrder($order,$manualCustomer);
-            $order=$this->get('lilworks.store.orderManager')->setMakeFlush(false)->init($order);
 
             $em->persist($order);
-
             $em->flush();
-
-            $this->get('lilworks.store.stockManager')->byOrder($order);
-
-            $this->get('store.flash')->setMessages(array(
-                array('status'=>'success','message'=>'storebundle.flash.order.updated')
-            ));
 
             return $this->redirectToRoute('order_edit', array('order_id' => $order->getId()));
         }
+
+
 
         $this->get('store.setSeo')->setTitle('storebundle.title.edit %reference%',array('%reference%'=>$order->getReference()),'storebundle.prefix.orders');
         return $this->render('LilWorksStoreBundle:Order:edit.html.twig', array(
             'order' => $order,
             'form' => $form->createView(),
+            'formCustomer' => $formCustomer->createView(),
         ));
     }
 

@@ -16,6 +16,9 @@ class UserPdoSessionHandler extends PdoSessionHandler
 
         $this->em = $em;
         $this->context = $context;
+
+
+
         parent::__construct($pdo, $dbOptions);
 
     }
@@ -23,8 +26,10 @@ class UserPdoSessionHandler extends PdoSessionHandler
     /**
      * {@inheritDoc}
      */
-    public function write($id, $data)
+/*
+    public function gc($max)
     {
+        var_dump("GC");
         $session = $this->em->getRepository('AppBundle:Session')->find($id);
         if( $this->context->getToken() && $this->context->getToken()->getUser() && !is_string($this->context->getToken()->getUser()) ){
             $user = $this->em->getRepository('AppBundle:User')->find($this->context->getToken()->getUser()->getId());
@@ -40,6 +45,8 @@ class UserPdoSessionHandler extends PdoSessionHandler
             $this->em->persist($session);
             $this->em->flush();
         }
-        parent::write($id,$data);
+
+       parent::gc($max);
     }
+*/
 }

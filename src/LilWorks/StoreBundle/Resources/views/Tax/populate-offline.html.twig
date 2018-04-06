@@ -2,13 +2,6 @@
 
 {% block body %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        <script src="{{ asset('assets/vendor/angular/angular.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/angular-sanitize/angular-sanitize.min.js') }}"></script>
-        <script src="{{ asset('bundles/app/js/store.js') }}"></script>
-    {% endblock %}
-
 
     <h1>
         <i class="fa fa-pie-chart" aria-hidden="true"></i>
@@ -21,6 +14,6 @@
         {{ knp_menu_render(menu , {'template': 'LilWorksStoreBundle:Menu:content.html.twig'}) }}
     </div>
 
-    {% include 'LilWorksStoreBundle:Service:product-populator.html.twig' %}
+        {% include 'LilWorksStoreBundle:Service:product-populator.html.twig' %}
 
 {% endblock %}

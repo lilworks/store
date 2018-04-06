@@ -1,0 +1,33 @@
+(function (t) {
+// fr
+t.add("translations.invalidate_cache", "Invalider le cache", "LexikTranslationBundle", "fr");
+t.add("translations.domain", "Domaine", "LexikTranslationBundle", "fr");
+t.add("translations.key", "Cl\u00e9", "LexikTranslationBundle", "fr");
+t.add("translations.grid_caption", "Liste des traductions", "LexikTranslationBundle", "fr");
+t.add("translations.cache_removed", "Fichiers du cache supprim\u00e9s.", "LexikTranslationBundle", "fr");
+t.add("translations.new_translation", "Nouvelle traduction", "LexikTranslationBundle", "fr");
+t.add("translations.add_translation", "Ajouter une traduction", "LexikTranslationBundle", "fr");
+t.add("translations.save", "Enregistrer", "LexikTranslationBundle", "fr");
+t.add("translations.save_add", "Enregistrer et Ajouter", "LexikTranslationBundle", "fr");
+t.add("translations.page_title", "Traductions", "LexikTranslationBundle", "fr");
+t.add("translations.show_hide_columns", "Afficher\/Masquer des colonnes", "LexikTranslationBundle", "fr");
+t.add("translations.toggle_all_columns", "Afficher\/Masquer toutes les colonnes", "LexikTranslationBundle", "fr");
+t.add("translations.save_row", "Sauvegarder la ligne", "LexikTranslationBundle", "fr");
+t.add("translations.successfully_updated", "Les traductions pour la cl\u00e9 #%id% ont bien \u00e9t\u00e9 mises \u00e0 jour.", "LexikTranslationBundle", "fr");
+t.add("translations.successfully_added", "Traduction ajout\u00e9e avec succ\u00e8s.", "LexikTranslationBundle", "fr");
+t.add("translations.successfully_deleted", "Traduction supprim\u00e9e avec succ\u00e8s.", "LexikTranslationBundle", "fr");
+t.add("translations.update_failed", "Erreur lors de la mise \u00e0 jour des traductions pour la cl\u00e9 #%id%.", "LexikTranslationBundle", "fr");
+t.add("translations.delete_failed", "Erreur lors de la supression pour la cl\u00e9 #%id%.", "LexikTranslationBundle", "fr");
+t.add("translations.back_to_list", "Retour", "LexikTranslationBundle", "fr");
+t.add("translations.all_translations", "Toutes", "LexikTranslationBundle", "fr");
+t.add("translations.no_translations", "Aucune traduction", "LexikTranslationBundle", "fr");
+t.add("translations.profiler", "Profileur", "LexikTranslationBundle", "fr");
+t.add("translations.data_source", "Source de donn\u00e9es", "LexikTranslationBundle", "fr");
+t.add("translations.latest_profiles", "Derniers profils", "LexikTranslationBundle", "fr");
+t.add("translations.profile", "Profil", "LexikTranslationBundle", "fr");
+t.add("overview.page_title", "Aper\u00e7u", "LexikTranslationBundle", "fr");
+t.add("overview.show_grid", "Grille de traductions", "LexikTranslationBundle", "fr");
+t.add("overview.msg_latest_translation", "Date de derni\u00e8re traduction : %date% UTC.", "LexikTranslationBundle", "fr");
+t.add("overview.domain", "Domaine", "LexikTranslationBundle", "fr");
+t.add("overview.no_stats", "Aucune donn\u00e9e.", "LexikTranslationBundle", "fr");
+})(Translator);

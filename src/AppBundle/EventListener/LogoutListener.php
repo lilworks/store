@@ -23,6 +23,7 @@ class LogoutListener  implements LogoutHandlerInterface
 
     public function logout(Request $Request, Response $Response, TokenInterface $Token) {
 
+
         $session_id =  $this->container->get('session')->getId() ;
         $session = $this->em->getRepository('AppBundle:Session')->findOneById($session_id);
         $basket  = $session->getBasket();
@@ -34,6 +35,16 @@ class LogoutListener  implements LogoutHandlerInterface
             #$user->removeBasket($basket);
             $this->em->flush();
         }
+
+        $session = $this->container->get('session');
+
+        $session = $this->em->getRepository('AppBundle:Session')->find($session->getId());
+            if($session->getUser()){
+                $session->getUser()->removeSession($session);
+                $session->setUser(null);
+                $this->em->persist($session);
+                $this->em->flush();
+            }
 
     }
 

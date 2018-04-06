@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class UserType extends AbstractType
 {
     /**
@@ -16,14 +16,22 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username',null,array(
+/*            ->add('username',null,array(
                 'label'=>'appbundle.username'
+            ))*/
+            ->add('password',null,array(
+                'label'=>'appbundle.password'
             ))
             ->add('email',null,array(
                 'label'=>'appbundle.email'
             ))
-            ->add('enabled',null,array(
-                'label'=>'appbundle.user.enabled'
+            ->add('enabled',ChoiceType::class,array(
+                'label'=>'appbundle.user.enabled',
+                'expanded'=>true,
+                'choices' => array(
+                    'storebundle.no' => 0,
+                    'storebundle.yes' => 1,
+                ),
             ))
             ->add('customer', EntityType::class, array(
                 'label'=>'appbundle.customer',

@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Validator\Constraints\Valid;
-
+use Symfony\Component\Form\CallbackTransformer;
 class OrderType extends AbstractType
 {
     private $orderManager;
@@ -213,7 +213,7 @@ class OrderType extends AbstractType
 
         $builder->add('ordersProducts', CollectionType::class, array(
                 'label'=>'storebundle.products',
-                'constraints' => array(new Valid()),
+                //'constraints' => array(new Valid()),
                 'mapped'=>true,
                 'allow_add'=>true,
                 'required' => false,
@@ -228,7 +228,8 @@ class OrderType extends AbstractType
 
 
 
-            ));
+            ))
+        ;
         $builder->add('userComment',null,array(
                 'label'=>'storebundle.order.usercomment',
                 'attr' => ['class' => 'text-editor'],
@@ -262,7 +263,7 @@ class OrderType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'LilWorks\StoreBundle\Entity\Order',
             'context'=>null,
-            'cascade_validation' => true,
+           // 'cascade_validation' => true,
             'csrf_protection' => false,
         ));
         //$resolver->setRequired('orderUtils');

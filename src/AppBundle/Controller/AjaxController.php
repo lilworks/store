@@ -289,7 +289,14 @@ class AjaxController extends Controller
         /*******************************************************
          * Only these origins will be allowed to upload images *
          ******************************************************/
-        $accepted_origins = array("http://storeoffline", "http://localhost", "http://192.168.1.1", "http://example.com");
+        $accepted_origins = array(
+            "http://storeoffline",
+            "http://localhost",
+            "http://192.168.1.1",
+            "http://new2.ferremusique.com",
+            "http://www.ferremusique.com",
+            "http://gestion"
+        );
 
         /*********************************************
          * Change this line to set the upload folder *

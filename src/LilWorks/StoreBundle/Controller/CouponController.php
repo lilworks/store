@@ -4,6 +4,7 @@ namespace LilWorks\StoreBundle\Controller;
 
 
 use LilWorks\StoreBundle\Entity\Coupon;
+use LilWorks\StoreBundle\Entity\Customer;
 use LilWorks\StoreBundle\Filter\CouponFilterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,27 +76,24 @@ class CouponController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
+        $pdf = $this->get('lilworks_store.pdf');
         $textHeader = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-header');
-        $textFooter = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-footer');
-
-        $header = $this->renderView('LilWorksStoreBundle:Pdf:header.html.twig', array(
+        $pdf->setHeader(array(
             'css'=>$textHeader->getCss(),
-            'text'=>$textHeader->getContent()
+            'text'=>$textHeader->getContent(),
         ));
-
-        $footer = $this->renderView('LilWorksStoreBundle:Pdf:footer.html.twig', array(
+        $textFooter = $em->getRepository("LilWorksStoreBundle:Text")->findOneByTag('pdf-footer');
+        $pdf->setFooter(array(
             'css'=>$textFooter->getCss(),
-            'text'=>$textFooter->getContent()
+            'text'=>$textFooter->getContent(),
         ));
 
-        $html = $this->renderView('LilWorksStoreBundle:Coupon:pdf.html.twig', array(
+        $pdf->setContent(array(
             'coupon'  => $coupon,
+
             'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath(),
-        ));
-        $pdf = $this->get('knp_snappy.pdf');
-        $pdf->setOption('footer-html', $footer);
-        $pdf->setOption('footer-left', "[page]/[topage]");
-        $pdf->setOption('header-html', $header);
+        ),'LilWorksStoreBundle:Coupon:pdf.html.twig');
+
 
 
         if($coupon->getReference() != ""){
@@ -106,16 +104,15 @@ class CouponController extends Controller
 
 
         return new Response(
-            $pdf->getOutputFromHtml($html),
+            $pdf->getResponse(),
             200,
             array(
                 'Content-Type'          => 'application/pdf',
                 'Content-Disposition'   => 'attachment; filename="'.$filename.'"'
             )
         );
-        if($depositSale->getCustomer() && !$depositSale->getAddress()){
-            return $this->redirectToRoute('customer_edit', array('_fragment' => 'addresses','customer_id' => $depositSale->getCustomer()->getId()));
-        }
+
+
     }
 
     /**
@@ -124,6 +121,8 @@ class CouponController extends Controller
      */
     public function newAction(Request $request)
     {
+        $formCustomer = $this->createForm('LilWorks\StoreBundle\Form\CustomerType', new Customer());
+
         $coupon = new Coupon();
         $em = $this->getDoctrine()->getManager();
 
@@ -139,12 +138,13 @@ class CouponController extends Controller
             return $this->redirectToRoute('coupon_show', array('coupon_id' => $coupon->getId()));
         }
 
-        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.countries');
+        $this->get('store.setSeo')->setTitle('storebundle.title.new',array(),'storebundle.prefix.coupons');
 
 
         return $this->render('LilWorksStoreBundle:Coupon:new.html.twig', array(
             'coupon' => $coupon,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'formCustomer'=>$formCustomer->createView()
         ));
     }
 
@@ -167,6 +167,8 @@ class CouponController extends Controller
      */
     public function editAction(Request $request, Coupon $coupon)
     {
+        $formCustomer = $this->createForm('LilWorks\StoreBundle\Form\CustomerType', new Customer());
+
         $em = $this->getDoctrine()->getManager();
 
         $editForm = $this->createForm('LilWorks\StoreBundle\Form\CouponType', $coupon);
@@ -186,7 +188,8 @@ class CouponController extends Controller
 
         return $this->render('LilWorksStoreBundle:Coupon:edit.html.twig', array(
             'coupon' => $coupon,
-            'form' => $editForm->createView()
+            'form' => $editForm->createView(),
+            'formCustomer'=>$formCustomer->createView()
         ));
     }
 

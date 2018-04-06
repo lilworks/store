@@ -8,7 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class CountryType extends AbstractType
 {
     /**
@@ -26,8 +27,12 @@ class CountryType extends AbstractType
             ->add('flag',null,array(
                 'label'=>'storebundle.country.flag'
             ))
-            ->add('isPublished',null,array(
-                'label'=>'storebundle.ispublished'
+            ->add('isPublished',ChoiceType::class,array(
+                'label'=>'storebundle.ispublished',
+                'choices' => array(
+                    'storebundle.no' => 0,
+                    'storebundle.yes' => 1,
+                ),
             ))
             ->add('shippingmethodsCountries', CollectionType::class, array(
                 'label'=>'storebundle.country.alowedshippingmethods',
@@ -41,6 +46,7 @@ class CountryType extends AbstractType
             ))
 
         ;
+
     }
     
     /**

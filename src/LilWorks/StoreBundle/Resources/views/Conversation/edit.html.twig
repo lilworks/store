@@ -1,29 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% block stylesheets %}
-        {{ parent() }}
-        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.min.css') }}">
-    {% endblock %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        <script src="{{ asset('assets/vendor/popper.js/dist/popper.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/tinymce/langs.fr_FR.js') }}"></script>
-        <script src="{{ asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js') }}" charset="UTF-8"></script>
-        <script>
-            $( document ).ready(function() {
-                $('.datepicker').datepicker({
-                    language:'fr',
-                    format: "dd/mm/yyyy"
-                });
-
-                initTinyMce.text('.editor-text',['{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}','{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']);
-            });
-        </script>
-    {% endblock %}
 
     <h1>
         {% trans %}storebundle.coupon.edit{% endtrans %}

@@ -1,0 +1,3 @@
+{
+    "translations": {"nl":{"LexikFormFilterBundle":{"boolean.yes_or_no":"Ja of Nee","boolean.yes":"Ja","boolean.no":"Nee","number.equal":"Gelijk","number.greater_than":"Groter dan","number.greater_than_equal":"Groter dan of Gelijk","number.lower_than":"Lager dan","number.lower_than_equal":"Lager dan of Gelijk","text.starts":"Begint met","text.ends":"Eindigt op","text.equals":"Gelijk","text.both":"Bevat"}}}
+}

@@ -1,0 +1,33 @@
+(function (t) {
+// nl
+t.add("translations.invalidate_cache", "Cache leeggooien", "LexikTranslationBundle", "nl");
+t.add("translations.domain", "Domein", "LexikTranslationBundle", "nl");
+t.add("translations.key", "Sleutel", "LexikTranslationBundle", "nl");
+t.add("translations.grid_caption", "Lijst met vertalingen", "LexikTranslationBundle", "nl");
+t.add("translations.cache_removed", "De gecachete bestanden zijn verwijderd.", "LexikTranslationBundle", "nl");
+t.add("translations.new_translation", "Nieuwe vertaling", "LexikTranslationBundle", "nl");
+t.add("translations.add_translation", "Voeg een vertaling toe", "LexikTranslationBundle", "nl");
+t.add("translations.save", "Opslaan", "LexikTranslationBundle", "nl");
+t.add("translations.save_add", "Opslaan en nieuw", "LexikTranslationBundle", "nl");
+t.add("translations.page_title", "Vertalingen", "LexikTranslationBundle", "nl");
+t.add("translations.show_hide_columns", "Kolommen tonen\/verbergen", "LexikTranslationBundle", "nl");
+t.add("translations.toggle_all_columns", "Alle kolomen tonen\/verbergen", "LexikTranslationBundle", "nl");
+t.add("translations.save_row", "Huidige rij opslaan", "LexikTranslationBundle", "nl");
+t.add("translations.successfully_updated", "Vertaling voor sleutel #%id% is succesvol opgeslagen.", "LexikTranslationBundle", "nl");
+t.add("translations.successfully_added", "Vertaling is succesvol toegevoegd.", "LexikTranslationBundle", "nl");
+t.add("translations.successfully_deleted", "Translations have been successfully deleted.", "LexikTranslationBundle", "nl");
+t.add("translations.update_failed", "Fout opgetreden bij vertalen van sleutel #%id%.", "LexikTranslationBundle", "nl");
+t.add("translations.delete_failed", "Failed to delete translations for key #%id%.", "LexikTranslationBundle", "nl");
+t.add("translations.back_to_list", "Terug", "LexikTranslationBundle", "nl");
+t.add("translations.all_translations", "Alle", "LexikTranslationBundle", "nl");
+t.add("translations.no_translations", "No translations", "LexikTranslationBundle", "nl");
+t.add("translations.profiler", "Profiler", "LexikTranslationBundle", "nl");
+t.add("translations.data_source", "Databron", "LexikTranslationBundle", "nl");
+t.add("translations.latest_profiles", "Laatste profiel", "LexikTranslationBundle", "nl");
+t.add("translations.profile", "Profiel", "LexikTranslationBundle", "nl");
+t.add("overview.page_title", "Overzicht", "LexikTranslationBundle", "nl");
+t.add("overview.show_grid", "Translation grid", "LexikTranslationBundle", "nl");
+t.add("overview.msg_latest_translation", "Laatste vertaling is van %date% UTC.", "LexikTranslationBundle", "nl");
+t.add("overview.domain", "Domein", "LexikTranslationBundle", "nl");
+t.add("overview.no_stats", "No data to display.", "LexikTranslationBundle", "nl");
+})(Translator);

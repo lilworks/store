@@ -21,4 +21,4 @@ user_edit:
 user_delete:
     path:     /{user_id}/delete
     defaults: { _controller: "AppBundle:User:delete" }
-    methods:  DELETE
+    methods:  [GET, POST]

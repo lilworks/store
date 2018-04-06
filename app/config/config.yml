@@ -28,6 +28,7 @@ framework:
     session:
         handler_id: session.handler.pdo
         #handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        #handler_id: ~
         cookie_lifetime: 86400
         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
@@ -181,6 +182,7 @@ knp_menu:
     templating: false
     # the renderer to use, list is also available by default
     default_renderer: twig
+
 
 knp_paginator:
     page_range: 10                      # default page range used in pagination control
@@ -350,43 +352,15 @@ cmf_seo:
     translation_domain: messages
     original_route_pattern: redirect
 
-#doctrine_migrations:
-#      dir_name: "%kernel.root_dir%/DoctrineMigrations"
-#      namespace: App\Migrations
-#      table_name: migration_versions
-#      name: Application Migrations
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations
+    organize_migrations: false # Version >= 1.2, possible values are: "BY_YEAR", "BY_YEAR_AND_MONTH", false
+    custom_template: ~ # Version >= 1.2, path to your custom migrations template
 
+white_october_breadcrumbs: ~
 
-
-nomaya_social:
-    buttons:
-        facebook:
-            url:            null
-            locale:         "fr"
-            send:           false
-            width:          300
-            showFaces:      false
-            layout:         "button_count"
-        twitter:
-            url:            null
-            locale:         "fr"
-            message:        "Je veux partager ça avec vous"
-            text:           "Tweet"
-            via:            "L'équipe ferremusique"
-            tag:            "ttot"
-        googleplus:
-            url:            null
-            locale :        "fr"
-            size :          "medium"
-            annotation :    "bubble"
-            width :         300
-        linkedin:
-            url:            null
-            locale:         "fr"
-            counter:        "right"
-        #pinterest:
-        #    url:            null
-    links:
-        facebook:           "https://www.facebook.com/ferremusique"
-        #googleplus:         "https://plus.google.com/105931415830389032796"
-    theme:                  'default' # optional
+lexik_form_filter:
+    condition_pattern: text.contains

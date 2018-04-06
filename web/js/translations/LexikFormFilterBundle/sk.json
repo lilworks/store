@@ -1,0 +1,3 @@
+{
+    "translations": {"sk":{"LexikFormFilterBundle":{"boolean.yes_or_no":"\u00c1no alebo nie","boolean.yes":"\u00c1no","boolean.no":"Nie","number.equal":"Rovn\u00e9","number.greater_than":"V\u00e4\u010d\u0161ie ako","number.greater_than_equal":"V\u00e4\u010d\u0161ie ako alebo rovn\u00e9","number.lower_than":"Men\u0161ie ako","number.lower_than_equal":"Men\u0161ie ako alebo rovn\u00e9","text.starts":"Za\u010d\u00edna na","text.ends":"Kon\u010d\u00ed na","text.equals":"Zhoduje sa","text.both":"Obsahuje"}}}
+}

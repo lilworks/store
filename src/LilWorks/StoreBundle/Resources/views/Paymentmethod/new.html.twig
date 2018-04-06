@@ -2,14 +2,6 @@
 
 {% block body %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            $( function() {
-                MT.init('paymentmethods');
-            } );
-        </script>
-    {% endblock %}
 
     <h1>
         <i class="fa fa-credit-card" aria-hidden="true"></i>

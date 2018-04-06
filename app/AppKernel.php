@@ -36,8 +36,8 @@ class AppKernel extends Kernel
             new SiteBundle\SiteBundle(),
             new MessageBundle\MessageBundle(),
             new LilWorks\StoreBundle\LilWorksStoreBundle(),
-            new Nomaya\SocialBundle\NomayaSocialBundle(),
-            #new Craue\FormFlowBundle\CraueFormFlowBundle()
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

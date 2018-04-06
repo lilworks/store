@@ -1,29 +1,6 @@
 {% extends 'baseFull.html.twig' %}
+
 {% block body %}
-
-    {% block stylsheets %}
-        {{ parent() }}
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/slick-carousel/slick/slick.css') }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/slick-carousel/slick/slick-theme.css') }}"/>
-    {% endblock %}
-
-    {% block javascripts %}
-        {{ parent() }}
-        <script src="{{ asset('assets/vendor/jquery-migrate/jquery-migrate.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/slick-carousel/slick/slick.min.js') }}"></script>
-        <script>
-            $(document).ready(function(){
-                $('.carousel-home').slick({
-                    dots: true,
-                    infinite: true,
-                    speed: 300,
-                    slidesToShow: 1
-                });
-            });
-        </script>
-    {% endblock %}
-
-
     {% if  carrousel is defined %}{{ carrousel|raw }}{% endif %}
     <div class="row" style="text-align: center;">
         <div class="col-lg-4">

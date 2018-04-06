@@ -2,14 +2,7 @@
 
 {% block body %}
     {% set entityName = 'LilWorksStoreBundle:ShippingMethod' %}
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            $( document ).ready(function() {
-                $( window ).on( "load", FF.init() );
-            });
-        </script>
-    {% endblock %}
+
 
     <h1>
         <i class="fa fa-truck" aria-hidden="true"></i>

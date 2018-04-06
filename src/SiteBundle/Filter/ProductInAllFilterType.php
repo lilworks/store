@@ -159,13 +159,16 @@ class ProductInAllFilterType extends AbstractType
             ))
             ->add('tags', Filters\EntityFilterType::class, array(
                 'class'    =>  'LilWorksStoreBundle:Tag',
-                'expanded'=>true,
+                'expanded'=>false,
                 'multiple'=>true,
                 'choice_label' => function ( $tag ) {
                     return $tag->getName();
                 },
                 'attr' => array(
-                    'class'=>'form-control',
+                    'class'=>'selectpicker form-control',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"180px"
                 ),
                 'query_builder' => function (EntityRepository $er)  {
                     return $er->createQueryBuilder('t')
@@ -176,17 +179,16 @@ class ProductInAllFilterType extends AbstractType
                 },
 
 
+
             ))
             ->add('categories', Filters\EntityFilterType::class, array(
                 'class'    =>  'LilWorksStoreBundle:Category',
-                'expanded'=>true,
-                'multiple'=>true,
                 'choice_label' => function ( $category ) {
                     return $category->getName();
                 },
-                'attr' => array(
+                /*'attr' => array(
                     'class'=>'form-control',
-                ),
+                ),*/
                 'query_builder' => function (EntityRepository $er)  {
                     return $er->createQueryBuilder('c')
                         #->where('b.id in (:categories)')
@@ -194,6 +196,14 @@ class ProductInAllFilterType extends AbstractType
                         #->setParameter('categories',$categories)
                         ;
                 },
+                'expanded' => false ,
+                'multiple' => true,
+                'attr' => array(
+                    'class'=>'selectpicker form-control',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"180px"
+                )
 
 
             ))

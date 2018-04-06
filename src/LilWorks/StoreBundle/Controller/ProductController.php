@@ -98,14 +98,14 @@ class ProductController extends Controller
 
 
 
-            if(count($product->getDocfiles() )>0){
+            if($product->getDocfiles()  && count($product->getDocfiles() )>0){
                 foreach ($product->getDocfiles() as $docfile) {
                     $docfile->addProduct($product);
                     $em->persist($docfile);
                 }
             }
 
-            if(count($product->getTags() )>0){
+            if($product->getTags() && count($product->getTags() )>0){
                 foreach ($product->getTags() as $tag) {
                     $tag->addProduct($product);
                     $em->persist($tag);
@@ -151,6 +151,10 @@ class ProductController extends Controller
         foreach ($product->getTags() as $tag) {
             $originalTags->add($tag);
         }
+        $originalRelatedProducts = new ArrayCollection();
+        foreach ($product->getRelatedProducts() as $relatedProduct) {
+            $originalRelatedProducts->add($relatedProduct);
+        }
 
         $originalPictures = new ArrayCollection();
         foreach ($product->getPictures() as $picture) {
@@ -189,6 +193,14 @@ class ProductController extends Controller
                 foreach ($product->getTags() as $tag) {
                     $tag->addProduct($product);
                     $em->persist($tag);
+                }
+            }
+
+
+            if(count($product->getRelatedProducts() )>0){
+                foreach ($product->getRelatedProducts() as $relatedProduct) {
+                    $relatedProduct->addProduct($product);
+                    $em->persist($relatedProduct);
                 }
             }
 

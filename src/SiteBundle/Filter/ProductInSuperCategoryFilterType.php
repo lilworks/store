@@ -214,13 +214,13 @@ class ProductInSuperCategoryFilterType extends AbstractType
                                 ->setParameter('ids',$tags)
                                 ;
                         },
-                        'expanded'=>true,
+                        'expanded'=>false,
                         'multiple'=>true,
                         'attr' => array(
-                            'class'=>'form-control',
-                            #'class'=>'selectpicker form-control',
-                            #'data-live-search'=>'true',
-                            #'data-actions-box'=>true
+                            'class'=>'selectpicker form-control',
+                            'data-live-search'=>'true',
+                            'data-actions-box'=>true,
+                            'data-width'=>"180px"
                         )
 
                     ));
@@ -229,7 +229,7 @@ class ProductInSuperCategoryFilterType extends AbstractType
             ->add('categories', Filters\EntityFilterType::class, array(
                 'label'    =>  'sitebundle.category',
                 'class'    =>  'LilWorksStoreBundle:Category',
-                'expanded'=>true,
+                'expanded'=>false,
                 'multiple'=>true,
                 'choice_label' => function ( $category ) use ($productsInCategory){
                     return $category->getName() . "(".$productsInCategory[$category->getId()].")" ;
@@ -246,10 +246,10 @@ class ProductInSuperCategoryFilterType extends AbstractType
                         ;
                 },
                 'attr' => array(
-                    'class'=>'form-control',
-                    #'class'=>'selectpicker form-control',
-                    #'data-live-search'=>'true',
-                    #'data-actions-box'=>true
+                    'class'=>'selectpicker form-control',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"180px"
                 )
 
 
@@ -259,7 +259,7 @@ class ProductInSuperCategoryFilterType extends AbstractType
             ->add('brand', Filters\EntityFilterType::class, array(
                 'label'    =>  'sitebundle.brand',
                 'class'    =>  'LilWorksStoreBundle:Brand',
-                'expanded'=>true,
+                'expanded'=>false,
                 'multiple'=>true,
                 'choice_label' => function ( $brand ) use ($productsInBrand){
                     return $brand->getName() . "(".$productsInBrand[$brand->getId()].")" ;
@@ -276,12 +276,11 @@ class ProductInSuperCategoryFilterType extends AbstractType
                         ;
                 },
                 'attr' => array(
-                    'class'=>'form-control',
-                    #'class'=>'selectpicker form-control',
-                    #'data-live-search'=>'true',
-                    #'data-actions-box'=>true
+                    'class'=>'selectpicker form-control',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"180px"
                 )
-
             ))
             ;
 
