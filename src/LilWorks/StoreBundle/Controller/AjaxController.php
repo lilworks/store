@@ -36,16 +36,22 @@ class AjaxController extends Controller
             $em->flush();
 
             return new Response(json_encode(array(
-                'id'=>$customer->getId(),
-                'firstName'=>$customer->getFirstName(),
-                'lastName'=>$customer->getLastName(),
-                'companyName'=>$customer->getCompanyName()
+                'success'=>true,
+                'data'=>array(
+                    'id'=>$customer->getId(),
+                    'firstName'=>$customer->getFirstName(),
+                    'lastName'=>$customer->getLastName(),
+                    'companyName'=>$customer->getCompanyName()
+                )
             )));
 
         }
 
 
-        return new Response();
+        return new Response(json_encode(array(
+            'success'=>false,
+            'data'=>array()
+        )));
 
 
 

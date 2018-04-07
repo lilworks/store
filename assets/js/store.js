@@ -103,19 +103,39 @@ $(document).ready(function() {
 
     $('#ajax_customer').submit(function(e) {
 
+        var form = $("#ajax_customer");
+        var spinnerHtml = '<i id="customer-spinner" class="fa fa-cog fa-spin fa-3x fa-fw"></i>';
+
+
+        var btn = $('#ajax-customer-btn-create');
+
+        ($(spinnerHtml)).insertAfter(btn);
+        btn.attr('disabled','disabled');
         e.preventDefault();
         var url = Routing.generate('lilworks_store_ajax_customer');
         var formSerialize = $(this).serialize();
 
         $.post(url, formSerialize, function(response) {
-            (!response.companyName)?response.companyName='':null;
-            (!response.firstName)?response.firstName='':null;
-            (!response.lastName)?response.lastName='':lastName;
-            $("#lilworks_storebundle_order_customer").append('<option value="'+response.id+'">'+response.firstName+' '+response.lastName+' '+response.companyName+'</option>')
-            $("#lilworks_storebundle_order_customer").val(response.id);
-            $("#lilworks_storebundle_order_customer").selectpicker();
-            $("#lilworks_storebundle_order_customer").selectpicker("refresh");
 
+            $("#customer-spinner").remove();
+
+            var data = response.data;
+
+            if(response.success === true){
+                (!data.companyName)?data.companyName='':null;
+                (!data.firstName)?data.firstName='':null;
+                (!data.lastName)?data.lastName='':null;
+                console.log
+                $("#lilworks_storebundle_order_customer").append('<option value="'+data.id+'">'+data.firstName+' '+data.lastName+' '+data.companyName+'</option>')
+                $("#lilworks_storebundle_order_customer").val(data.id);
+                $("#lilworks_storebundle_order_customer").selectpicker();
+                $("#lilworks_storebundle_order_customer").selectpicker("refresh");
+
+            }else{
+                alert("error");
+            }
+
+            btn.attr('disabled',false);
             $("#customerModal").modal('hide');
         }, 'JSON');
     });
