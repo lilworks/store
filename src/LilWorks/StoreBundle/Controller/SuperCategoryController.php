@@ -126,6 +126,8 @@ class SuperCategoryController extends Controller
      */
     public function showAction(Request $request,SuperCategory $superCategory = null)
     {
+        if(!$superCategory)
+            return $this->redirectToRoute('customer_index');
 
         $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array('%name%'=>$superCategory->getName()),'storebundle.prefix.supercategories');
 
@@ -137,8 +139,11 @@ class SuperCategoryController extends Controller
     /**
      * @ParamConverter("superCategory", options={"mapping": {"supercategory_id"   : "id"}})
      */
-    public function editAction(Request $request, SuperCategory $superCategory)
+    public function editAction(Request $request, SuperCategory $superCategory = null)
     {
+
+        if(!$superCategory)
+            return $this->redirectToRoute('customer_index');
 
         $em = $this->getDoctrine()->getManager();
 

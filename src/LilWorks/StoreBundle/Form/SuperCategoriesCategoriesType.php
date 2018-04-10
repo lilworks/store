@@ -44,7 +44,12 @@ class SuperCategoriesCategoriesType extends AbstractType
                         'mapped'=> true,
                         'expanded' => false ,
                         'multiple' => false,
-                        #'attr'=>['disabled'=>'disabled']
+                        'attr' => array(
+                            'class'=>'selectpicker',
+                            'data-live-search'=>'true',
+                            'data-actions-box'=>true,
+                            'data-width'=>"300px"
+                        )
                     ));
                 }else{
                     $categoriesAdded = array();
@@ -73,7 +78,13 @@ class SuperCategoriesCategoriesType extends AbstractType
                         'required' => false ,
                         'mapped'=> true,
                         'expanded' => false ,
-                        'multiple' => false
+                        'multiple' => false,
+                        'attr' => array(
+                            'class'=>'selectpicker',
+                            'data-live-search'=>'true',
+                            'data-actions-box'=>true,
+                            'data-width'=>"300px"
+                        )
 
 
                     ));
@@ -86,15 +97,18 @@ class SuperCategoriesCategoriesType extends AbstractType
                         'class'    => 'LilWorksStoreBundle:Category' ,
                         'choice_label' => function ($obj) { return   $obj->getName() ; },
                         'query_builder' => function (EntityRepository $er) {
-
-                            return $er->createQueryBuilder('c')
-
-                                ;
+                            return $er->createQueryBuilder('c') ;
                         },
                         'required' => false ,
                         'mapped'=> true,
                         'expanded' => false ,
                         'multiple' => false,
+                        'attr' => array(
+                            'class'=>'selectpicker',
+                            'data-live-search'=>'true',
+                            'data-actions-box'=>true,
+                            'data-width'=>"300px"
+                        )
                     ));
 
 

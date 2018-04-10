@@ -89,6 +89,7 @@ $(document).ready(function() {
     FCE.init('phonenumbers','phonenumbers list-inline','phonenumber list-inline-item');
     FCE.init('pictures','pictures list-inline','picture list-inline-item');
     FCE.init('triggers','triggers list-inline','trigger list-inline-item');
+    FCE.init('categories','categories list-inline','category list-inline-item');
 
 
     $('.datepicker').datepicker({

@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class SuperCategoryType extends AbstractType
 {
@@ -25,8 +26,14 @@ class SuperCategoryType extends AbstractType
             ->add('pos',null,array(
                 'label'=>'storebundle.pos'
             ))
-            ->add('isPublished',null,array(
-                'label'=>'storebundle.ispublished'
+            ->add('isPublished',ChoiceType::class,array(
+                'label'=>'storebundle.ispublished',
+                'expanded'=>true,
+                'choices' => array(
+                    'storebundle.no' => 0,
+                    'storebundle.yes' => 1,
+                ),
+                'data'=>1
             ))
             ->add('pictureFile',FileType::class,array(
                 'label'=>'storebundle.picture',

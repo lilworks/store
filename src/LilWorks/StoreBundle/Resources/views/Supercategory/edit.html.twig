@@ -2,21 +2,6 @@
 
 {% block body %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        {{ parent() }}
-        <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/tinymce/langs.fr_FR.js') }}"></script>
-        <script>
-
-            $( document ).ready(function() {
-                initTinyMce.text('.editor-text',['{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}','{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}']);
-                FCE.init('categories','categories list-inline','category list-inline-item');
-            });
-
-        </script>
-    {% endblock %}
-
     <h1>
         <i class="fa fa-object-group" aria-hidden="true"></i>
         {{ 'storebundle.supercategory.edit %name%'|trans({'%name%':superCategory.name}) }}
