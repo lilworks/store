@@ -57,8 +57,8 @@
       <file leaf-file-name="ProductType.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/ProductType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-23.125" vertical-offset="4755" max-vertical-offset="5880">
-              <caret line="367" column="25" selection-start-line="367" selection-start-column="25" selection-end-line="367" selection-end-column="25" />
+            <state vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="6090">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -74,12 +74,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/OrderController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.1994717" vertical-offset="1665" max-vertical-offset="5850">
+            <state vertical-scroll-proportion="69.375" vertical-offset="1665" max-vertical-offset="5850">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BrandType.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/BrandType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.9511229" vertical-offset="0" max-vertical-offset="1515">
+              <caret line="48" column="52" selection-start-line="48" selection-start-column="52" selection-end-line="48" selection-end-column="52" />
+              <folding>
+                <element signature="e#45#85#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -131,7 +143,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Docfile/new.html.twig" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Docfile/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/DocfileType.php" />
         <option value="$PROJECT_DIR$/assets/js/populator.js" />
@@ -180,8 +191,9 @@
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Customer/ajax-form.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/store.js" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/CustomerController.php" />
-        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/ProductType.php" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Pdf/footer.html.twig" />
+        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/ProductType.php" />
+        <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/BrandType.php" />
       </list>
     </option>
   </component>
@@ -1224,13 +1236,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/css/app.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.93839836" vertical-offset="443" max-vertical-offset="5265">
-          <caret line="60" column="1" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SiteBundle/Filter/ProductInBrandFilterType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2340" max-vertical-offset="3210">
@@ -1555,14 +1560,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/ProductType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.125" vertical-offset="4755" max-vertical-offset="5880">
-          <caret line="367" column="25" selection-start-line="367" selection-start-column="25" selection-end-line="367" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/Pdf/header.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="255">
@@ -1589,9 +1586,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/OrderController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.1994717" vertical-offset="1665" max-vertical-offset="5850">
+        <state vertical-scroll-proportion="69.375" vertical-offset="1665" max-vertical-offset="5850">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/ProductType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="6090">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/BrandType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9511229" vertical-offset="0" max-vertical-offset="1515">
+          <caret line="48" column="52" selection-start-line="48" selection-start-column="52" selection-end-line="48" selection-end-column="52" />
+          <folding>
+            <element signature="e#45#85#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

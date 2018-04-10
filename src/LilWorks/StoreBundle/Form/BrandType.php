@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 class BrandType extends AbstractType
 {
     /**
@@ -22,9 +24,15 @@ class BrandType extends AbstractType
                 'required'=>true,
                 'label'=>'storebundle.name',
             ))
-            ->add('isPublished',null,array(
-                #'required'=>true,
+
+            ->add('isPublished',ChoiceType::class,array(
                 'label'=>'storebundle.ispublished',
+                'expanded'=>true,
+                'choices' => array(
+                    'storebundle.no' => 0,
+                    'storebundle.yes' => 1,
+                ),
+                'data'=>1
             ))
             ->add('website',UrlType::class,array(
                 'label'=>'storebundle.brand.website',
@@ -34,7 +42,7 @@ class BrandType extends AbstractType
                 'label'=>'storebundle.picture',
                 'required'=>false
             ))
-            /*
+
             ->add('products', EntityType::class, array(
                 'label'=>'storebundle.products',
                 'class'    => 'LilWorksStoreBundle:Product' ,
@@ -56,7 +64,7 @@ class BrandType extends AbstractType
                     'data-width'=>"300px"
                 )
             ))
-            */
+
             ->add('description',null,array(
                 'label'=>'storebundle.description',
                 'attr' => ['class' => 'editor-text'],
