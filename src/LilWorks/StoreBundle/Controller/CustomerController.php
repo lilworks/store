@@ -118,9 +118,11 @@ class CustomerController extends Controller
     /**
      * @ParamConverter("customer", options={"mapping": {"customer_id"   : "id"}})
      */
-    public function showAction(Customer $customer)
+    public function showAction(Customer $customer = null)
     {
 
+        if(!$customer)
+            return $this->redirectToRoute('customer_index');
 
         $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array(
             "%name%"=>$customer->getLastName() . " " .  $customer->getFirstName()  . " " .  $customer->getCompanyName()

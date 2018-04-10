@@ -61,6 +61,7 @@ class ProductType extends AbstractType
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
                 ),
+                'data'=>1
             ))
             ->add('isArchived',ChoiceType::class,array(
                 'label'=>'storebundle.isarchived','expanded'=>true,
@@ -68,6 +69,7 @@ class ProductType extends AbstractType
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
                 ),
+                'data'=>0
             ))
             ->add('isSecondHand',ChoiceType::class,array(
                 'label'=>'storebundle.product.issecondhand',
@@ -76,6 +78,7 @@ class ProductType extends AbstractType
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
                 ),
+                'data'=>0
             ))
             ->add('brand', EntityType::class, array(
                 'label'=>'storebundle.brand',
@@ -169,7 +172,13 @@ class ProductType extends AbstractType
                 'required' => false ,
                 'mapped'=> true,
                 'expanded' => false ,
-                'multiple' => true
+                'multiple' => true,
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
             ))
 
             ->add('priceOnline',MoneyType::class,array(
@@ -184,7 +193,13 @@ class ProductType extends AbstractType
                 'mapped'=> true,
                 'expanded' => false ,
                 'multiple' => true,
-                'validation_groups'=>array('prices')
+                'validation_groups'=>array('prices'),
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
             ))
 
             ->add('priceBuying',MoneyType::class,array(
@@ -203,7 +218,13 @@ class ProductType extends AbstractType
                 'required' => false ,
                 'mapped'=> true,
                 'expanded' => false ,
-                'multiple' => true
+                'multiple' => true,
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
             ))
 
             ->add('warrantiesOnline', EntityType::class, array(
@@ -213,7 +234,13 @@ class ProductType extends AbstractType
                 'required' => false ,
                 'mapped'=> true,
                 'expanded' => false ,
-                'multiple' => true
+                'multiple' => true,
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
             ))
             ->add('shippingMethods', EntityType::class, array(
                 'label'=>'storebundle.product.shippingmethods',
@@ -223,6 +250,12 @@ class ProductType extends AbstractType
                 'mapped'=> true,
                 'expanded' => false ,
                 'multiple' => true,
+                'attr' => array(
+                    'class'=>'selectpicker',
+                    'data-live-search'=>'true',
+                    'data-actions-box'=>true,
+                    'data-width'=>"300px"
+                )
 
             ));
 
@@ -323,6 +356,7 @@ class ProductType extends AbstractType
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
                 ),
+                'data'=>1
             ))
             ->add('isReviewable',ChoiceType::class,array(
                 'label'=>'storebundle.product.isreviewable',
@@ -331,7 +365,9 @@ class ProductType extends AbstractType
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
                 ),
+                'data'=>0
             ))
+
 
         ;
 
