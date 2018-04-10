@@ -66,11 +66,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SuperCategoriesCategoriesType.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SuperCategoriesCategoriesType.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/SuperCategoriesCategoriesType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.63461536" vertical-offset="180" max-vertical-offset="2250">
+            <state vertical-scroll-proportion="-20.625" vertical-offset="180" max-vertical-offset="2250">
               <caret line="51" column="25" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.scss" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/css/app.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7875354" vertical-offset="4559" max-vertical-offset="5265">
+              <caret line="341" column="15" selection-start-line="341" selection-start-column="15" selection-end-line="341" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -133,7 +143,6 @@
         <option value="$PROJECT_DIR$/app/Resources/views/site-header.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/base2col.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/app.js" />
-        <option value="$PROJECT_DIR$/assets/css/app.scss" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Filter/ProductInAllFilterType.php" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Filter/ProductInBrandFilterType.php" />
         <option value="$PROJECT_DIR$/src/SiteBundle/Filter/ProductInCategoryFilterType.php" />
@@ -156,6 +165,7 @@
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/views/SuperCategory/edit.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/store.js" />
         <option value="$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/SuperCategoriesCategoriesType.php" />
+        <option value="$PROJECT_DIR$/assets/css/app.scss" />
       </list>
     </option>
   </component>
@@ -1232,13 +1242,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="109" max-vertical-offset="1725">
-          <caret line="24" column="31" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Controller/ProductController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="3570">
@@ -1610,8 +1613,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Form/SuperCategoriesCategoriesType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63461536" vertical-offset="180" max-vertical-offset="2250">
+        <state vertical-scroll-proportion="-20.625" vertical-offset="180" max-vertical-offset="2250">
           <caret line="51" column="25" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7875354" vertical-offset="4559" max-vertical-offset="5265">
+          <caret line="341" column="15" selection-start-line="341" selection-start-column="15" selection-end-line="341" selection-end-column="15" />
           <folding />
         </state>
       </provider>
