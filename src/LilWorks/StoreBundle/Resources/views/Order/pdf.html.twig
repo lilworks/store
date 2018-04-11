@@ -43,7 +43,8 @@
         <tbody>
         {% for product in order.ordersProducts %}
             <tr>
-                <td>{{ product.name }}
+                <td>
+                    <strong>{{ product.name }}</strong>
                     {% if product.serialNumber %}
                         <br>
                         <span class="serialNumber">{{ product.serialNumber }}</span>
