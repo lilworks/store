@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.5.1/libexec/bin/yarn.js install bootstrap4.1
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.5.1/libexec/bin/yarn.js run encore --watch
 
 PATH: 
   /Users/lil-works1/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/Applications/MAMP/bin/php/php7.2.1/bin:/opt/ImageMagick/bin:/opt/pkgconfig/bin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin:/Users/lil-works1/.rbenv/bin:/Users/lil-works1/.rbenv/versions/1.9.3-p392/lib/ruby/gems/1.9.1/gems/passenger-5.0.26/bin
@@ -7452,10 +7452,16 @@ Lockfile:
       readable-stream "^2.0.0"
 
 Trace: 
-  Error: `install` has been replaced with `add` to add new dependencies. Run "yarn add bootstrap4.1" instead.
-      at new MessageError (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:186:110)
-      at Object.<anonymous> (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:21987:13)
-      at Generator.next (<anonymous>)
-      at step (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:98:30)
-      at /usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:109:13
-      at <anonymous>
+  Error: Command failed.
+  Exit code: 1
+  Command: sh
+  Arguments: -c /Users/lil-works1/Webdisk/www/symfony-master/storeOffline/node_modules/.bin/encore --watch
+  Directory: /Users/lil-works1/Webdisk/www/symfony-master/storeOffline
+  Output:
+  
+      at ProcessTermError.MessageError (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:186:110)
+      at new ProcessTermError (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:30281:17)
+      at ChildProcess.emit (events.js:127:13)
+      at maybeClose (internal/child_process.js:936:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)
