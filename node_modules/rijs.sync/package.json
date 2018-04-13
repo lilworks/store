@@ -1,0 +1,44 @@
+{
+  "name": "rijs.sync",
+  "version": "2.1.10",
+  "main": "server",
+  "author": "Pedram Emrouznejad (https://github.com/pemrouz)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rijs/sync.git"
+  },
+  "scripts": {
+    "build": "npm run rollup && npm run minify && npm run gzip",
+    "rollup": "rollup -c",
+    "minify": "uglifyjs client.bundle.js -m -c keep_fargs=false > client.min.js",
+    "gzip": "gzip -c client.min.js > client.min.js.gz",
+    "test": "tap *.test.js",
+    "coverage": "tap *.test.js --cov --coverage-report=lcov",
+    "version": "npm run build && git add -A",
+    "postversion": "git push && git push --tags"
+  },
+  "browser": "client",
+  "license": "pemrouz.mit-license.org",
+  "devDependencies": {
+    "puppeteer": "^0.12.0",
+    "rijs": "^0.8.2",
+    "rijs.components": "*",
+    "rijs.core": "*",
+    "rijs.data": "*",
+    "rijs.fn": "*",
+    "rollup-plugin-buble": "^0.16.0",
+    "tap": "^10.7.3",
+    "uglify-es": "^3.2.0",
+    "utilise.emitterify": "^1.3.2"
+  },
+  "dependencies": {
+    "buble": "github:pemrouz/buble",
+    "cryonic": "*",
+    "express": "^4.14.0",
+    "lru_map": "^0.3.3",
+    "platform": "^1.3.4",
+    "utilise": "^2.1.9",
+    "uws": "^8.14.0",
+    "xrs": "^1.1.0"
+  }
+}

@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`general tests for main export-loader func and esprima(the parser) func should return content passed with exports on it 1`] = `
+"
+const Public = 'awsome'
+const notPublic = function(){
+  console.log('this is private because the name is not capitalized!')
+}
+function SoPublic(){
+  console.log('blaaa')
+}
+
+export {
+d,C,bla,ggg,Utilizer,Public,B,D,srivate,Cat
+}"
+`;
+
+exports[`general tests for main export-loader func and esprima(the parser) func should return object with filename, fields to be exported and string of export with fields to add to file content 1`] = `
+Object {
+  "fileName": "/home/yurik/Desktop/export-loader/__tests__/export-loader.js",
+  "finalExports": "export {
+Public,SoPublic
+}",
+  "names": Array [
+    "Public",
+    "SoPublic",
+  ],
+}
+`;

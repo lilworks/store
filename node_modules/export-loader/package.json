@@ -1,0 +1,44 @@
+{
+  "name": "export-loader",
+  "version": "1.0.52",
+  "description": "A webpack loader that allowes to write a Golang style exports.",
+  "main": "dist/bundle.js",
+  "repository": "yuraxdrumz/export-loader",
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "test:publish": "./node_modules/.bin/jest && codecov -t aad07c01-c90e-4b97-8806-7de3e173cde1",
+    "start": "set DEBUG=parser,norequire && webpack",
+    "start:prod": "webpack -p"
+  },
+  "keywords": [
+    "Javscript",
+    "js",
+    "webpack",
+    "no-exports",
+    "exports",
+    "import",
+    "require"
+  ],
+  "author": "Yuri Khomyakov",
+  "license": "ISC",
+  "dependencies": {
+    "esprima": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "debug": "^3.1.0",
+    "jest": "^21.2.1",
+    "pre-commit": "^1.2.2",
+    "source-map-support": "^0.5.0",
+    "webpack": "^3.6.0"
+  },
+  "pre-commit": [
+    "test"
+  ],
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  }
+}

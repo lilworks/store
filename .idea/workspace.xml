@@ -34,10 +34,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NewOrderManager.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NewOrderManager.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Service/NewOrderManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="17.208334" vertical-offset="1148" max-vertical-offset="1905">
+            <state vertical-scroll-proportion="-0.54557467" vertical-offset="1148" max-vertical-offset="1905">
               <caret line="49" column="50" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="50" />
               <folding>
                 <element signature="e#48#88#0#PHP" expanded="true" />
@@ -49,8 +49,8 @@
       <file leaf-file-name="OrderManager.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Service/OrderManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.375" vertical-offset="15" max-vertical-offset="9375">
-              <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="44" />
+            <state vertical-scroll-proportion="-6.06" vertical-offset="897" max-vertical-offset="9375">
+              <caret line="80" column="9" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
               <folding>
                 <element signature="e#48#88#0#PHP" expanded="true" />
               </folding>
@@ -68,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewStockManager.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NewStockManager.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Service/NewStockManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6340819" vertical-offset="0" max-vertical-offset="757">
-              <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+            <state vertical-scroll-proportion="-20.0" vertical-offset="0" max-vertical-offset="705">
+              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding>
                 <element signature="e#48#88#0#PHP" expanded="true" />
               </folding>
@@ -1050,16 +1050,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Service/OrderManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.375" vertical-offset="15" max-vertical-offset="9375">
-          <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="44" />
-          <folding>
-            <element signature="e#48#88#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Resources/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="936" max-vertical-offset="1845">
@@ -1076,20 +1066,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Service/NewOrderManager.php">
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Service/NewStockManager.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="17.208334" vertical-offset="1148" max-vertical-offset="1905">
-          <caret line="49" column="50" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="50" />
+        <state vertical-scroll-proportion="-20.0" vertical-offset="0" max-vertical-offset="705">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding>
             <element signature="e#48#88#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Service/NewStockManager.php">
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Service/OrderManager.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6340819" vertical-offset="0" max-vertical-offset="757">
-          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+        <state vertical-scroll-proportion="-6.06" vertical-offset="897" max-vertical-offset="9375">
+          <caret line="80" column="9" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
+          <folding>
+            <element signature="e#48#88#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LilWorks/StoreBundle/Service/NewOrderManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.54557467" vertical-offset="1148" max-vertical-offset="1905">
+          <caret line="49" column="50" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="50" />
           <folding>
             <element signature="e#48#88#0#PHP" expanded="true" />
           </folding>
