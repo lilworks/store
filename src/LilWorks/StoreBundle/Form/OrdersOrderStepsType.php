@@ -4,6 +4,7 @@ namespace LilWorks\StoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -34,8 +35,13 @@ class OrdersOrderStepsType extends AbstractType
             array_push($allowedStepsTag,$orderStep->getTag());
         }
 
-
-
+        /*
+        if($order->getId()){
+            $builder->add('order',HiddenType::class,array(
+                //'choice_label' => function ($obj) { return   $obj->getId() ; },
+                'data'=>$order->getId()
+            ));
+        }*/
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) use ($orderTypeTag,$allowedStepsTag) {
             $orderOrderStep = $event->getData();
             $form = $event->getForm();

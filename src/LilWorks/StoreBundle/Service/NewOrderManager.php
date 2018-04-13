@@ -42,7 +42,11 @@ class NewOrderManager
         return $this;
     }
 
-
+    public function removeOrder(Order $order)
+    {
+        $this->order = $order;
+        $this->stockManager->restoreOnRemove($this->order);
+    }
     public function reference(){
 
         if(!$this->order->getOrderType())

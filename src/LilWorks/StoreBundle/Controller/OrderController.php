@@ -301,12 +301,26 @@ class OrderController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            foreach ($originalOrdersOrderSteps as $orderOrderStep) {
+                if (false === $order->getOrdersOrderSteps()->contains($orderOrderStep)) {
+                    $orderOrderStep->getOrder()->removeOrdersOrderStep($orderOrderStep);
+                    $em->persist($orderOrderStep);
+                    $em->remove($orderOrderStep);
+                }
+            }
+
+            foreach ($order->getOrdersOrderSteps() as $orderOrderStepFromForm) {
+                $orderOrderStepFromForm->setOrder($order);
+                $em->persist($orderOrderStepFromForm);
+            }
+
+
             foreach ($originalOrdersProducts as $orderProduct) {
                 if (false === $order->getOrdersProducts()->contains($orderProduct)) {
                     $orderProduct->getOrder()->removeOrdersProduct($orderProduct);
                     $em->persist($orderProduct);
                     $em->remove($orderProduct);
-                    $this->get('lilworks.store.orderManager')->setMakeFlush(false)->restockByOrderProduct($orderProduct);
+                    $this->get('lilworks.store.newStockManager')->restockByOrderProduct($orderProduct);
                 }
             }
 
@@ -376,7 +390,9 @@ class OrderController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $this->get('lilworks.store.orderManager')->setMakeFlush(false)->removeOrder($order);
+        //$this->get('lilworks.store.orderManager')->setMakeFlush(false)->removeOrder($order);
+        $this->get('lilworks.store.newOrderManager')->removeOrder($order);
+
         $em->remove($order);
         $em->flush();
 
