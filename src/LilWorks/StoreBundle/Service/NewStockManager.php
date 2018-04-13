@@ -11,6 +11,7 @@ class NewStockManager
     private $em;
     private $context;
     private $mode;
+    private $order;
 
     public function __construct(EntityManagerInterface $em,$context,$mode)
     {
@@ -30,13 +31,46 @@ class NewStockManager
     public function manage(Order $order){
         $order = $this->setOrder($order);
 
+        // if DEVIS nothing to do
+        if($this->order->getOrderType()->getTag() == "DEVIS")
+            return ;
 
-        if( $order->getOrderType()->getTag() == "FACTURE" ||
-            $order->getOrderType()->getTag() == "FACTURE_ONLINE" ){
 
+
+        if( $this->order->getOrderType()->getTag() == "FACTURE" ||
+            $this->order->getOrderType()->getTag() == "FACTURE_ONLINE" ){
+            if( $this->order->getPayed() == $this->order->getTot() ){
+                // Need to destock
+                foreach($this->order->getOrdersProducts() as $orderProduct){
+                    // Product need to exist
+                    if( $orderProduct->getProduct() ){
+                        // first restock what it was destocked
+                        $orderProduct->getProduct()->setStock(
+                            $orderProduct->getProduct()->getStock() +  $orderProduct->getDestocking()
+                        );
+                        $orderProduct->setDestocking(0);
+                        // now destock whole quantity
+                        $orderProduct->setDestocking($orderProduct->getQuantity());
+                        $orderProduct->getProduct()->setStock(
+                            $orderProduct->getProduct()->getStock() - $orderProduct->getQuantity()
+                        );
+                        $this->em->persist($orderProduct->getProduct());
+                        $this->em->persist($orderProduct);
+                    }
+                }
+            }elseif( $this->order->getPayed() != $this->order->getTot() ){
+                //  If products are destoked need to restock
+                foreach($this->order->getOrdersProducts() as $orderProduct){
+                    if( $orderProduct->getProduct()){
+                        $orderProduct->getProduct()->setStock(
+                            $orderProduct->getProduct()->getStock() +  $orderProduct->getDestocking()
+                        );
+                        $orderProduct->setDestocking(0);
+                        $this->em->persist($orderProduct->getProduct());
+                        $this->em->persist($orderProduct);
+                    }
+                }
+            }
         }
-
     }
-
-
 }

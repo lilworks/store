@@ -30,6 +30,9 @@ class NewOrderManager
         $this->payedCalculator();
         $this->manageOrderSteps();
 
+        $this->stockManager->manage($order);
+
+
         return $this->order;
     }
 
@@ -114,7 +117,7 @@ class NewOrderManager
 
         }
 
-        if($newOrderStep)
+        if(isset($newOrderStep))
             $this->em->persist($newOrderStep);
 
     }
