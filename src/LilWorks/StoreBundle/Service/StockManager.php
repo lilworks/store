@@ -43,7 +43,7 @@ class StockManager
         $lastStepTag = $this->em->getRepository("LilWorksStoreBundle:Order")->getLastStep($order->getId());
         $currentSteps = $order->getOrdersOrderSteps();
         foreach($currentSteps as $orderOrderStep){
-            if($orderOrderStep->getOrderStep()->getTag()=="PAYED" || $orderOrderStep->getOrderStep()->getTag()=="DONE"){
+            if($orderOrderStep->getOrderStep()->getTag() == "PAYED" || $orderOrderStep->getOrderStep()->getTag()=="DONE"){
                 $lastStepTag == $orderOrderStep->getOrderStep()->getTag();
                 break;
             }

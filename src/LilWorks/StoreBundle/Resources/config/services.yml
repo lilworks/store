@@ -89,6 +89,17 @@ services:
             - { name: lilworks.store.orderstep.manager }
         arguments: ['@doctrine.orm.entity_manager','@lilworks.store.stockManager','%context%']
 
+    lilworks.store.newOrderManager:
+        class: LilWorks\StoreBundle\Service\NewOrderManager
+        arguments: ['@doctrine.orm.entity_manager','@lilworks.store.newStockManager','%context%']
+
+    lilworks.store.newStockManager:
+        class: LilWorks\StoreBundle\Service\NewStockManager
+        tags:
+            - { name: lilworks.store.new.stock.manager }
+        arguments: ['@doctrine.orm.entity_manager','%context%','%mode%']
+
+
     lilworks.form.orderSteps:
         class: LilWorks\StoreBundle\Form\OrdersOrderStepsType
         tags:
@@ -99,12 +110,8 @@ services:
         tags:
             - { name: form.type }
         arguments: ['@lilworks.store.orderManager','%context%','%mode%']
-    lilworks.form.cool.order:
-        class: LilWorks\StoreBundle\Form\CoolOrderType
-        tags:
-            - { name: form.type }
-        arguments: ['@lilworks.store.orderManager','%context%','%mode%']
-
-#    lilworks.form.flow.order:
-#         class: LilWorks\StoreBundle\Form\CreateOrderFlow
-#         parent: craue.form.flow
+#    lilworks.form.cool.order:
+#        class: LilWorks\StoreBundle\Form\CoolOrderType
+#        tags:
+#            - { name: form.type }
+#        arguments: ['@lilworks.store.orderManager','%context%','%mode%']

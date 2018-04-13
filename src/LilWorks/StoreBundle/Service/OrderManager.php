@@ -227,10 +227,6 @@ class OrderManager
         $this->totCalculator();
         $this->payedCalculator();
 
-       // echo "<h1>".$this->order->getTot()."</h1>";
-       // echo "<h1>".$this->order->getPayed()."</h1>";
-
-
         if($this->order->getOrderType()->getTag() == "DEVIS"){
             $this->reference();
             return $this->order;

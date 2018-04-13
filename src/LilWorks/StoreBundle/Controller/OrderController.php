@@ -213,7 +213,9 @@ class OrderController extends Controller
                 'companyName'=>$form['manualCompanyName']->getData()
             );
             $this->get('lilworks.store.orderManager')->setMakeFlush(false)->setOrder($order,$manualCustomer);*/
-            $order=$this->get('lilworks.store.orderManager')->setMakeFlush(false)->init($order);
+            //$order=$this->get('lilworks.store.orderManager')->setMakeFlush(false)->init($order);
+            $order=$this->get('lilworks.store.newOrderManager')->manage($order);
+
             $em->persist($order);
             $em->flush();
 
@@ -237,9 +239,10 @@ class OrderController extends Controller
     /**
      * @ParamConverter("order", options={"mapping": {"order_id"   : "id"}})
      */
-    public function showAction(Order $order)
+    public function showAction(Order $order = null)
     {
-
+        if(!$order)
+            return $this->redirectToRoute('order_index');
 
         if($order->getOrderType() && ($order->getOrderType()->getTag() == "FACTURE" || $order->getOrderType()->getTag() == "DEVIS"))
             $view = "show-".strtolower($order->getOrderType()->getTag());
@@ -257,11 +260,10 @@ class OrderController extends Controller
     /**
      * @ParamConverter("order", options={"mapping": {"order_id"   : "id"}})
      */
-    public function editAction(Request $request, Order $order)
+    public function editAction(Request $request, Order $order = null)
     {
-
         if(!$order)
-            $order = new Order;
+            return $this->redirectToRoute('order_index');
 
         $em = $this->getDoctrine()->getManager();
 
@@ -343,6 +345,12 @@ class OrderController extends Controller
                 $orderRealShippingMethodFromForm->setOrder($order);
                 $em->persist($orderRealShippingMethodFromForm);
             }
+
+
+
+
+
+            $order=$this->get('lilworks.store.newOrderManager')->manage($order);
 
 
             $em->persist($order);

@@ -129,8 +129,10 @@ class ProductController extends Controller
     /**
      * @ParamConverter("product", options={"mapping": {"product_id"   : "id"}})
      */
-    public function showAction(Product $product)
+    public function showAction(Product $product = null)
     {
+        if(!$product)
+            return $this->redirectToRoute('product_index');
 
         $this->get('store.setSeo')->setTitle('storebundle.title.show %name%',array("%name%"=>$product->getName()),'storebundle.prefix.products');
 
@@ -142,8 +144,11 @@ class ProductController extends Controller
     /**
      * @ParamConverter("product", options={"mapping": {"product_id"   : "id"}})
      */
-    public function editAction(Request $request, Product $product)
+    public function editAction(Request $request, Product $product = null)
     {
+        if(!$product)
+            return $this->redirectToRoute('product_index');
+
         $em = $this->getDoctrine()->getManager();
 
 

@@ -140,7 +140,13 @@ class OrdersProductsType extends AbstractType
                     'expanded' => false ,
                     'multiple' => true ,
                     'choices'=>$this->getTaxChoices(),
-                    'data'=>$orderProduct->getTaxes()
+                    'data'=>$orderProduct->getTaxes(),
+                    'attr' => array(
+                        'class'=>'selectpicker',
+                        'data-live-search'=>'true',
+                        'data-actions-box'=>true,
+                        'data-width'=>"300px"
+                    )
                 ))
                 ->add('warranties', EntityType::class, array(
                     'label'=>'storebundle.warranties',
@@ -158,7 +164,13 @@ class OrdersProductsType extends AbstractType
                     'required' => false ,
                     'mapped'=> true,
                     'expanded' => false ,
-                    'multiple' => true
+                    'multiple' => true,
+                    'attr' => array(
+                        'class'=>'selectpicker',
+                        'data-live-search'=>'true',
+                        'data-actions-box'=>true,
+                        'data-width'=>"300px"
+                    )
                 ))
                 ->add('orderRealShippingMethod', EntityType::class, array(
                     'label'=>'storebundle.shippingmethod',
