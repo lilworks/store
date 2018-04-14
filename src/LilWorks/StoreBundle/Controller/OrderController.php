@@ -390,7 +390,7 @@ class OrderController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        //$this->get('lilworks.store.orderManager')->setMakeFlush(false)->removeOrder($order);
+
         $this->get('lilworks.store.newOrderManager')->removeOrder($order);
 
         $em->remove($order);

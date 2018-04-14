@@ -23,7 +23,6 @@ class Flash
         $this->translator = $translator;
     }
 
-
     public function setMessages($messages){
 
         $this->session->start();

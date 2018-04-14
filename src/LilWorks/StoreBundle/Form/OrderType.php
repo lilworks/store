@@ -128,6 +128,7 @@ class OrderType extends AbstractType
             $form->add('billingAddressString',null,array(
                 'label'=>'storebundle.billingaddressstring',
             ));
+            /*
             if(!$customer){
                 $form->add('manualFirstName',null,array(
                     'mapped'=>false,
@@ -141,7 +142,7 @@ class OrderType extends AbstractType
                 ))
 
                 ;
-            }
+            }*/
 
         });
 
