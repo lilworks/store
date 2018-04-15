@@ -62,7 +62,7 @@ class ProductType extends AbstractType
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
                 ),
-                'data'=>1
+                'empty_data'=>1
             ))
             ->add('isArchived',ChoiceType::class,array(
                 'label'=>'storebundle.isarchived','expanded'=>true,
@@ -70,7 +70,7 @@ class ProductType extends AbstractType
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
                 ),
-                'data'=>0
+                'empty_data'=>0
             ))
             ->add('isSecondHand',ChoiceType::class,array(
                 'label'=>'storebundle.product.issecondhand',
@@ -79,7 +79,7 @@ class ProductType extends AbstractType
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
                 ),
-                'data'=>0
+                'empty_data'=>0
             ))
             ->add('brand', EntityType::class, array(
                 'label'=>'storebundle.brand',
@@ -357,7 +357,7 @@ class ProductType extends AbstractType
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
                 ),
-                'data'=>1
+                'empty_data'=>1
             ))
             ->add('isReviewable',ChoiceType::class,array(
                 'label'=>'storebundle.product.isreviewable',
@@ -366,7 +366,7 @@ class ProductType extends AbstractType
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
                 ),
-                'data'=>0
+                'empty_data'=>0
             ))
 
 
