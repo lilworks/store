@@ -9,7 +9,7 @@ session_clean:
 
 session_delete:
     path:     /{session_id}/detete
-    defaults: { _controller: "AppBundle:Session:show" }
+    defaults: { _controller: "AppBundle:Session:delete" }
     methods:  GET
 
 
