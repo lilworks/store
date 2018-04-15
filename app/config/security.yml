@@ -1,9 +1,6 @@
 security:
     session_fixation_strategy:  none
 
-    #acl:
-    #    connection: default
-
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
@@ -36,9 +33,7 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/change-password, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/customer, role: ROLER_CUSTOMER }
-        #- { path: ^/conversations, role: ROLE_CUSTOMER }
         - { path: ^/order, role: ROLE_CUSTOMER }
         - { path: ^/store/, role: ROLE_ADMIN }
         - { path: ^/app/, role: ROLE_ADMIN }
-        #- { path: ^/translation/, role: ROLE_ADMIN }
+        - { path: ^/translation/, role: ROLE_ADMIN }
