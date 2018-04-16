@@ -78,7 +78,7 @@ var FCE = {
             e.preventDefault();
 
             $(this).parent().remove();
-
+            FCE.paymentAmountCalculator();
             return false;
         });
 
@@ -90,12 +90,29 @@ var FCE = {
         });
 
 
+        //payment_amount
+        $( ".payment_amount" ).change(function() {
+            FCE.paymentAmountCalculator();
+        });
 
     },
 
+    paymentAmountCalculator:function() {
+        if($( "#quickCalculator").length == 0){
+            $( "#paymentmethods" ).append( '<div id="quickCalculator"></div>' );
+        }
+        var tot = 0;
+        $( ".payment_amount" ).each(function( index ) {
+            var formatedVal = $(this).val().replace(",", ".");
+            //tot = Number.parseFloat(tot + formatedVal).toFixed(2);
+            tot += Number(formatedVal);
+        });
+        $("#quickCalculator").text(tot.toFixed(2) + "€");
+    },
     addTagFormDeleteLink:function($formLi) {
 
         var $removeFormA = $('<a href="#" class="remove-tag btn btn-warning btn-sm"><i class="fa fa-minus" ></i></a>');
+
         $formLi.append($removeFormA);
 
         $removeFormA.on('click', function(e) {
@@ -104,6 +121,8 @@ var FCE = {
 
             // remove the li for the tag form
             $formLi.remove();
+
+
         });
     },
 

@@ -76,6 +76,9 @@ require('tinymce/themes/modern/theme.min.js');
 $('#paymentmethods').bind("DOMSubtreeModified",function(){
 
 });
+
+
+
 $(document).ready(function() {
     inittinymce.text('.editor-text');
     inittinymce.css('.editor-css');
