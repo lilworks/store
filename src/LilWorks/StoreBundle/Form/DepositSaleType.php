@@ -167,6 +167,7 @@ class DepositSaleType extends AbstractType
             ))
             ->add('priceSelling',MoneyType::class,array(
                 'label'=>'storebundle.depositsale.priceselling',
+                'required'=>false
             ))
 
             ->add('deposedAt',null,array(
@@ -174,6 +175,7 @@ class DepositSaleType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yy',
                 'label'=>'storebundle.depositsale.deposedat',
+                'help'=>'storebundle.help.reference.leaveblankfornow'
             ))
             ->add('selledAt',null,array(
                 'label'=>'storebundle.depositsale.selledat',

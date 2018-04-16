@@ -114,10 +114,13 @@
 
     {% if order.ordersPaymentMethods|length>0 %}
         <div>
-            <th>{% trans %}storebundle.paymentmethod{% endtrans %}</th>
+            <th>
+                {% if order.ordersPaymentMethods|length == 1 %}{% trans %}storebundle.paymentmethod{% endtrans %}{% endif %}
+                {% if order.ordersPaymentMethods|length > 1 %}{% trans %}storebundle.paymentmethods{% endtrans %}{% endif %}
+            </th>
             <ul>
                 {% for pm in order.ordersPaymentMethods  %}
-                    <li>{{ pm.paymentMethod.name }} {{ pm.amount|price }}</li>
+                    <li> {{ pm.payedAt| localizeddate('full', 'none', app.request.locale ) }} • {{ pm.paymentMethod.name }} {{ pm.amount|price }}</li>
                 {% endfor %}
             </ul>
         </div>

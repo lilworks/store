@@ -57,29 +57,30 @@ class ProductType extends AbstractType
             ))
             ->add('isPublished',ChoiceType::class,array(
                 'label'=>'storebundle.ispublished',
-                'expanded'=>true,
+                'expanded'=>false,
+                'required'=>true,
                 'choices' => array(
-                    'storebundle.no' => 0,
                     'storebundle.yes' => 1,
-                ),
-                'empty_data'=>1
+                    'storebundle.no' => 0,
+                )
             ))
             ->add('isArchived',ChoiceType::class,array(
                 'label'=>'storebundle.isarchived','expanded'=>true,
+                'expanded'=>false,
+                'required'=>true,
                 'choices' => array(
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
-                ),
-                'empty_data'=>0
+                )
             ))
             ->add('isSecondHand',ChoiceType::class,array(
                 'label'=>'storebundle.product.issecondhand',
-                'expanded'=>true,
+                'expanded'=>false,
+                'required'=>true,
                 'choices' => array(
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
-                ),
-                'empty_data'=>0
+                )
             ))
             ->add('brand', EntityType::class, array(
                 'label'=>'storebundle.brand',
@@ -352,13 +353,14 @@ class ProductType extends AbstractType
             ))
             ->add('alwaysAvailable',ChoiceType::class,array(
                 'label'=>'storebundle.product.isalwaysavailable',
-                'expanded'=>true,
+                'expanded'=>false,
+                'required'=>true,
                 'choices' => array(
                     'storebundle.no' => 0,
                     'storebundle.yes' => 1,
-                ),
-                'empty_data'=>1
+                )
             ))
+                /*
             ->add('isReviewable',ChoiceType::class,array(
                 'label'=>'storebundle.product.isreviewable',
                 'expanded'=>true,
@@ -368,7 +370,7 @@ class ProductType extends AbstractType
                 ),
                 'empty_data'=>0
             ))
-
+            */
 
         ;
 

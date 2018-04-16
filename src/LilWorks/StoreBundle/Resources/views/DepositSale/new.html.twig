@@ -20,49 +20,80 @@
     <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
 
 
-    <div class="row">
-        <div class="col col-lg-4">
-            {{ form_row(form.status) }}
-        </div>
-        <div class="col col-lg-4">
-            {{ form_row(form.customer) }}
-            {% if form.address is defined %}
-                {{ form_row(form.address) }}
-            {% endif %}
-            {% if form.coupon is defined %}
-                {{ form_row(form.coupon) }}
-            {% endif %}
-        </div>
-        <div class="col col-lg-4">
-            {{ form_row(form.product) }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col col-lg-6">
-            {{ form_row(form.deposedAt) }}
-        </div>
-        <div class="col col-lg-6">
-            {{ form_row(form.selledAt) }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col col-lg-6">
-            {{ form_row(form.priceBuying) }}
-        </div>
-        <div class="col col-lg-6">
-            {{ form_row(form.priceSelling) }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col col-lg-6" >
-            {{ form_row(form.description) }}
-        </div>
-        <div class="col col-lg-6" >
-            {{ form_row(form.descriptionInternal) }}
-        </div>
-    </div>
 
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">{% trans %}storebundle.tab.general{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#customer" role="tab">{% trans %}storebundle.customer{% endtrans %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#products" role="tab">{% trans %}storebundle.products{% endtrans %}</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link disabled" data-toggle="tab" href="#paymentmethods" role="tab">{% trans %}storebundle.paymentmethods{% endtrans %}</a>
+        </li>
+    </ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="general" role="tabpanel">
+        {{ form_row(form.status) }}
+        <div class="row">
+            <div class="col col-lg-6" >
+                {{ form_row(form.deposedAt) }}
+            </div>
+            <div class="col col-lg-6" >
+                {{ form_row(form.selledAt) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6" >
+                {{ form_row(form.priceBuying) }}
+            </div>
+            <div class="col col-lg-6" >
+                {{ form_row(form.priceSelling) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6" >
+                {{ form_row(form.description) }}
+            </div>
+            <div class="col col-lg-6" >
+                {{ form_row(form.descriptionInternal) }}
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane" id="customer" role="tabpanel">
+        {{ form_row(form.customer) }}
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#customerModal">
+            <i class="fa fa-plus"></i>
+            <i class="fa fa-user"></i>
+            {% trans %}storebundle.customer.new{% endtrans %}
+        </button>
+
+
+
+        {% if form.address is defined %}
+            {{ form_row(form.address) }}
+        {% endif %}
+
+    </div>
+    <div class="tab-pane" id="products" role="tabpanel">
+        {{ form_row(form.product) }}
+    </div>
+    <div class="tab-pane" id="paymentmethods" role="tabpanel">
+        {% if form.coupon is defined %}
+            {{ form_row(form.coupon) }}
+        {% endif %}
+
+    </div>
+</div>
     <input type="submit" class="btn btn-sm btn-success" value="{% trans %}storebundle.button.create{% endtrans %}" />
     {{ form_end(form) }}
+
+    {% include 'LilWorksStoreBundle:Customer:ajax-form.html.twig' %}
 
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace LilWorks\StoreBundle\Controller;
 
+use LilWorks\StoreBundle\Entity\Customer;
 use LilWorks\StoreBundle\Entity\DepositSale;
 use LilWorks\StoreBundle\Filter\DepositSaleFilterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -145,6 +146,8 @@ class DepositSaleController extends Controller
      */
     public function newAction(Request $request)
     {
+        $formCustomer = $this->createForm('LilWorks\StoreBundle\Form\CustomerType', new Customer());
+
         $depositSale = new DepositSale();
         $em = $this->getDoctrine()->getManager();
 
@@ -182,7 +185,8 @@ class DepositSaleController extends Controller
 
         return $this->render('LilWorksStoreBundle:DepositSale:new.html.twig', array(
             'depositSale' => $depositSale,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'formCustomer' => $formCustomer->createView()
         ));
     }
 
@@ -208,6 +212,7 @@ class DepositSaleController extends Controller
      */
     public function editAction(Request $request, DepositSale $depositSale)
     {
+        $formCustomer = $this->createForm('LilWorks\StoreBundle\Form\CustomerType', new Customer());
         $em = $this->getDoctrine()->getManager();
 
         $originalDepositSalesPaymentMethods = new ArrayCollection();
@@ -247,7 +252,8 @@ class DepositSaleController extends Controller
 
         return $this->render('LilWorksStoreBundle:DepositSale:edit.html.twig', array(
             'depositSale' => $depositSale,
-            'form' => $editForm->createView()
+            'form' => $editForm->createView(),
+            'formCustomer' => $formCustomer->createView()
         ));
     }
 

@@ -190,7 +190,7 @@ class CustomerController extends Controller
             $em->persist($customer);
             $em->flush();
 
-            return $this->redirectToRoute('customer_edit', array('id' => $customer->getId()));
+            return $this->redirectToRoute('customer_edit', array('customer_id' => $customer->getId()));
         }
 
         $this->get('store.setSeo')->setTitle('storebundle.title.edit %name%',array(

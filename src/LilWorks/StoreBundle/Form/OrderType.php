@@ -48,7 +48,7 @@ class OrderType extends AbstractType
             $form = $event->getForm();
 
             if($customer && count($customer->getAddresses())>0){
-
+                //var_dump($customer->getAddresses()[0]->getId());
                 $form->add('ordersRealShippingMethods', CollectionType::class, array(
                     'label'=>'storebundle.shippingmethods',
                     'entry_options'  => array(
@@ -91,6 +91,7 @@ class OrderType extends AbstractType
                             ->setParameter('customer_id',$customer->getId())
                             ;
                     },
+                    'empty_data' => $customer->getAddresses()[0]
                 ));
                 $form->add('billingAddress', EntityType::class, array(
                     'label'=>'storebundle.billingaddress',
@@ -99,6 +100,7 @@ class OrderType extends AbstractType
                     'mapped'=> true,
                     'expanded' => false ,
                     'multiple' => false,
+
                     'choice_label' => function ($obj) {
                         $address = "";
                         if($obj->getName())
@@ -119,6 +121,9 @@ class OrderType extends AbstractType
                             ->setParameter('customer_id',$customer->getId())
                             ;
                     },
+                    'empty_data' => $customer->getAddresses()[0]
+
+
                 ));
             }
 

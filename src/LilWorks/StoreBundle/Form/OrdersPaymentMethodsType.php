@@ -79,6 +79,7 @@ class OrdersPaymentMethodsType extends AbstractType
             ))
             ->add('amount',MoneyType::class,array(
                 'label'=>'storebundle.paymentmethod.amount',
+                'attr' => ['class' => 'payment_amount'],
             ))
             ->add('description',null,array(
                 'label'=>'storebundle.description',

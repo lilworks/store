@@ -23,6 +23,8 @@ class DepositSale
     {
         if($this->getCreatedAt() == null)
             $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+        if($this->getDeposedAt() == null)
+            $this->setDeposedAt(new \DateTime(date('Y-m-d H:i:s')));
     }
 
     /**
@@ -65,9 +67,7 @@ class DepositSale
 
     /**
      * @var float
-     *
      * @ORM\Column(name="priceSelling", type="float", nullable=true)
-     * @Assert\GreaterThan(0)
      */
     private $priceSelling;
 
@@ -89,8 +89,7 @@ class DepositSale
     /**
      * @var date
      *
-     * @ORM\Column(name="deposedAt", type="date",nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="deposedAt", type="date",nullable=true)
      */
     private $deposedAt;
 

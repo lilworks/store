@@ -39,6 +39,9 @@ class NewStockManager
 
 
     public function restoreOnRemove(Order $order){
+
+        $this->setOrder($order);
+
         foreach($this->order->getOrdersProducts() as $orderProduct){
             // Product need to exist
             if( $orderProduct->getProduct() ){
